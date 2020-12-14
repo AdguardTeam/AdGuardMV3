@@ -2,7 +2,7 @@ console.log("Background service worker has loaded via Manifest V3.");
 
 const PROTECTION_ENABLED_KEY = 'protectionEnabled';
 
-chrome.runtime.onStartup.addListener(() => {
+chrome.runtime.onInstalled.addListener(() => {
     chrome.storage.local.set({[PROTECTION_ENABLED_KEY]: true});
 });
 
