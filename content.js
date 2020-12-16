@@ -66,6 +66,10 @@ const applyCss = (css) => {
     })
 };
 
-const exampleRule = ['* { background-color: pink }'];
+const tryLoadCssAndScripts = async () => {
+    chrome.runtime.sendMessage({type: 'getCss'}, (response) => {
+        applyCss(response);
+    });
+};
 
-applyCss(exampleRule);
+tryLoadCssAndScripts();

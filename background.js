@@ -27,6 +27,23 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             }
             return true;
         }
+        case 'getCss': {
+            const getCssRules = () => {
+                const exampleRule = ['* { background-color: pink }'];
+
+                /* emulate async call to server */
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        resolve(exampleRule);
+                    }, 1000);
+                });
+            };
+
+            getCssRules().then((rules) => {
+                sendResponse(rules);
+            });
+            return true;
+        }
         default:
             return;
     }
