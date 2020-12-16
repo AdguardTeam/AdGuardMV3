@@ -31,12 +31,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             const getCssRules = () => {
                 const exampleRule = ['* { background-color: pink }'];
 
-                /* emulate async call to server */
-                return new Promise((resolve) => {
-                    setTimeout(() => {
-                        resolve(exampleRule);
-                    }, 1000);
-                });
+                return Promise.resolve(exampleRule);
             };
 
             getCssRules().then((rules) => {
