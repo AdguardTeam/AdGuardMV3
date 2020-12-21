@@ -1,0 +1,31 @@
+{
+    "version": "0.0.1",
+    "manifest_version": 3,
+    "name": "manifestV3",
+    "description": "manifest v3",
+    "permissions": [
+        "activeTab",
+        "storage"
+    ],
+    "host_permissions": [
+        "<all_urls>"
+    ],
+    "action": {
+        "default_title": "Default Title",
+        "default_popup": "popup.html"
+    },
+    "options_page": "options.html",
+    "content_scripts": [
+        {
+            "js": [
+                "content.js"
+            ],
+            "matches": [
+                "*://*/*"
+            ]
+        }
+    ],
+    "background": {
+        "service_worker": "background.js"
+    }
+}
