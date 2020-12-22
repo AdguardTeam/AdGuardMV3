@@ -2,32 +2,79 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-module.exports = {
-  entry: {
-    main: './src/index.js',
-  },
+const BUILD_ENVS = {
+    DEV: 'dev',
+    BETA: 'beta',
+    RELEASE: 'release',
+};
+
+const { BUILD_ENV } = process.env;
+const BROWSER = '';
+
+const IS_DEV = BUILD_ENV === BUILD_ENVS.DEV;
+
+const BUILD_PATH = './build';
+const SRC_PATH = './src';
+const OUTPUT_PATH = BUILD_ENV;
+const BACKGROUND_PATH = path.resolve(__dirname, SRC_PATH, 'background');
+const POPUP_PATH = path.resolve(__dirname, SRC_PATH, 'popup');
+const OPTIONS_PATH = path.resolve(__dirname, SRC_PATH, 'options');
+const CONTENT_SCRIPTS_PATH = path.resolve(__dirname, SRC_PATH, 'content-scripts');
+
+const plugins = [
+    new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: path.resolve(__dirname, './manifest.common.json'),
+                    to: 'manifest.json',
+                },
+            ],
+        },
+    ),
+    new HtmlWebpackPlugin({
+        template: path.join(POPUP_PATH, 'index.html'),
+        filename: 'popup.html',
+        chunks: ['popup'],
+    }),
+    new HtmlWebpackPlugin({
+        template: path.join(OPTIONS_PATH, 'index.html'),
+        filename: 'options.html',
+        chunks: ['options'],
+    }),
+    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin(),
+];
+
+const config = {
+    mode: IS_DEV ? 'development' : 'production',
+    /* FIXME - find out manifest v3 eval policy for different scripts */
+    devtool: false,
+    entry: {
+        background: BACKGROUND_PATH,
+        popup: POPUP_PATH,
+        'content-scripts': CONTENT_SCRIPTS_PATH,
+        options: OPTIONS_PATH,
+    },
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'main.js',
+        path: path.resolve(__dirname, BUILD_PATH, OUTPUT_PATH, BROWSER),
+        filename: '[name].js',
         publicPath: '',
     },
-    mode: 'development',
-    devServer: {
-        contentBase: path.resolve(__dirname, './dist'),
-        open: true,
-        compress: true,
-        port: 8080,
+    resolve: {
+        extensions: ['*', '.js', '.jsx'],
     },
     module: {
         rules: [
             {
-                test: /\.js$/,
-                use: 'babel-loader',
-                exclude: '/node_modules/'
+                test: /\.jsx?$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader',
+                options: {babelrc: true, compact: false},
             },
             {
-                test: /\.(png|svg|jpg|gif|woff(2)?|eot|ttf|otf)$/,
+                test: /\.(png|svg|jpe?g|gif|woff2?|eot|ttf|otf)$/,
                 type: 'asset/resource',
             },
             {
@@ -38,18 +85,14 @@ module.exports = {
                         loader: 'css-loader',
                         options: {
                             importLoaders: 1,
-                        }
+                        },
                     },
                     'postcss-loader',
                 ]
             },
-        ]
+        ],
     },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: './src/index.html',
-        }),
-        new CleanWebpackPlugin(),
-        new MiniCssExtractPlugin(),
-    ]
+    plugins,
 };
+
+module.exports = config;

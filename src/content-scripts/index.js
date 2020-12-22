@@ -18,7 +18,7 @@ const applyCss = (css) => {
     })
 };
 
-const tryLoadCssAndScripts = async () => {
+const tryLoadCssAndScripts = () => {
     chrome.runtime.sendMessage({type: 'getCss'}, (response) => {
         applyCss(response);
     });

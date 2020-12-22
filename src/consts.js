@@ -1,6 +1,6 @@
-const POPUP_MESSAGES = {
+export const POPUP_MESSAGES = {
     getProtectionEnabled: 'getProtectionEnabled',
     setProtectionEnabled: 'setProtectionEnabled',
 };
 
-const PROTECTION_ENABLED_KEY = 'protectionEnabled';
+export const PROTECTION_ENABLED_KEY = 'protectionEnabled';

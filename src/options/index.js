@@ -1,3 +1,5 @@
+import {POPUP_MESSAGES, PROTECTION_ENABLED_KEY} from '../consts.js';
+
 const protection_status = document.querySelector('#protection_status');
 
 chrome.runtime.sendMessage({type: POPUP_MESSAGES.getProtectionEnabled}, (response) => {
