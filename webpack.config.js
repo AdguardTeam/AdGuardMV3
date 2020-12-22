@@ -20,7 +20,7 @@ const updateLocalesMSGName = (content, buildEnv) => {
     const IS_RELEASE = buildEnv === BUILD_ENVS.RELEASE;
 
     if (!IS_RELEASE) {
-        messages.name.message += ` ${capitalize(buildEnv)}`;
+        messages.name.message += ` (${capitalize(buildEnv)})`;
     }
 
     return JSON.stringify(messages, null, 4);
