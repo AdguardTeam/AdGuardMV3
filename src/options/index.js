@@ -1,4 +1,7 @@
-import {POPUP_MESSAGES, PROTECTION_ENABLED_KEY} from '../consts.js';
+import {POPUP_MESSAGES, PROTECTION_ENABLED_KEY} from '../common/constants.js';
+import {translate} from "../common/helpers";
+
+console.log(translate('name'));
 
 const protection_status = document.querySelector('#protection_status');
 

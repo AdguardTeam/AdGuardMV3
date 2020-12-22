@@ -1,8 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ZipWebpackPlugin = require('zip-webpack-plugin');
 
 const BUILD_ENVS = {
     DEV: 'dev',
@@ -11,7 +12,7 @@ const BUILD_ENVS = {
 };
 
 const { BUILD_ENV } = process.env;
-const BROWSER = '';
+const BROWSER = 'chrome';
 
 const IS_DEV = BUILD_ENV === BUILD_ENVS.DEV;
 
@@ -27,8 +28,19 @@ const plugins = [
     new CopyWebpackPlugin({
             patterns: [
                 {
-                    from: path.resolve(__dirname, './manifest.common.json'),
+                    from: 'manifest.common.json',
                     to: 'manifest.json',
+                },
+                {
+                    context: SRC_PATH,
+                    from: 'assets',
+                    to: 'assets',
+                },
+                {
+                    /* TODO update locales in browser on change ?*/
+                    context: SRC_PATH,
+                    from: '_locales',
+                    to: '_locales',
                 },
             ],
         },
@@ -43,9 +55,19 @@ const plugins = [
         filename: 'options.html',
         chunks: ['options'],
     }),
-    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),
 ];
+
+if (IS_DEV) {
+    plugins.push(new CleanWebpackPlugin({
+        cleanAfterEveryBuildPatterns: ['!**/*.json', '!assets/**/*']
+    }))
+} else {
+    plugins.push(new ZipWebpackPlugin({
+        path: '../',
+        filename: `${BROWSER}.zip`,
+    }));
+}
 
 const config = {
     mode: IS_DEV ? 'development' : 'production',
@@ -88,7 +110,7 @@ const config = {
                         },
                     },
                     'postcss-loader',
-                ]
+                ],
             },
         ],
     },
