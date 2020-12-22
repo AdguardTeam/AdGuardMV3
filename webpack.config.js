@@ -11,7 +11,21 @@ const BUILD_ENVS = {
     BETA: 'beta',
     RELEASE: 'release',
 };
-/* FIXME BUILD_ENVS name in browser */
+
+const capitalize = (str) => str.charAt(0)
+    .toUpperCase() + str.slice(1);
+
+const updateLocalesMSGName = (content, buildEnv) => {
+    const messages = JSON.parse(content.toString());
+    const IS_RELEASE = buildEnv === BUILD_ENVS.RELEASE;
+
+    if (!IS_RELEASE) {
+        messages.name.message += ` ${capitalize(buildEnv)}`;
+    }
+
+    return JSON.stringify(messages, null, 4);
+};
+
 const { BUILD_ENV } = process.env;
 const BROWSER = 'chrome';
 
@@ -38,10 +52,10 @@ const plugins = [
                 to: 'assets',
             },
             {
-                /* TODO update locales in browser on change ? */
                 context: SRC_PATH,
                 from: '_locales',
                 to: '_locales',
+                transform: (content) => updateLocalesMSGName(content, BUILD_ENV),
             },
         ],
     }),
@@ -93,7 +107,10 @@ const config = {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
-                options: { babelrc: true, compact: false },
+                options: {
+                    babelrc: true,
+                    compact: false,
+                },
             },
             {
                 test: /\.(png|svg|jpe?g|gif|woff2?|eot|ttf|otf)$/,
