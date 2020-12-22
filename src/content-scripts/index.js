@@ -1,4 +1,4 @@
-console.log("Content script has loaded via Manifest V3.");
+console.log('Content script has loaded via Manifest V3.');
 
 const setStyleContent = (styleEl, cssContent) => {
     styleEl.textContent = cssContent;
@@ -15,11 +15,11 @@ const applyCss = (css) => {
         setStyleContent(styleEl, cssContent);
 
         (document.head || document.documentElement).appendChild(styleEl);
-    })
+    });
 };
 
 const tryLoadCssAndScripts = () => {
-    chrome.runtime.sendMessage({type: 'getCss'}, (response) => {
+    chrome.runtime.sendMessage({ type: 'getCss' }, (response) => {
         applyCss(response);
     });
 };

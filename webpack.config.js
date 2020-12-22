@@ -4,13 +4,14 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ZipWebpackPlugin = require('zip-webpack-plugin');
+const { version } = require('./package.json');
 
 const BUILD_ENVS = {
     DEV: 'dev',
     BETA: 'beta',
     RELEASE: 'release',
 };
-
+/* FIXME BUILD_ENVS name in browser */
 const { BUILD_ENV } = process.env;
 const BROWSER = 'chrome';
 
@@ -26,25 +27,24 @@ const CONTENT_SCRIPTS_PATH = path.resolve(__dirname, SRC_PATH, 'content-scripts'
 
 const plugins = [
     new CopyWebpackPlugin({
-            patterns: [
-                {
-                    from: 'manifest.common.json',
-                    to: 'manifest.json',
-                },
-                {
-                    context: SRC_PATH,
-                    from: 'assets',
-                    to: 'assets',
-                },
-                {
-                    /* TODO update locales in browser on change ?*/
-                    context: SRC_PATH,
-                    from: '_locales',
-                    to: '_locales',
-                },
-            ],
-        },
-    ),
+        patterns: [
+            {
+                from: 'manifest.common.json',
+                to: 'manifest.json',
+            },
+            {
+                context: SRC_PATH,
+                from: 'assets',
+                to: 'assets',
+            },
+            {
+                /* TODO update locales in browser on change ? */
+                context: SRC_PATH,
+                from: '_locales',
+                to: '_locales',
+            },
+        ],
+    }),
     new HtmlWebpackPlugin({
         template: path.join(POPUP_PATH, 'index.html'),
         filename: 'popup.html',
@@ -60,12 +60,12 @@ const plugins = [
 
 if (IS_DEV) {
     plugins.push(new CleanWebpackPlugin({
-        cleanAfterEveryBuildPatterns: ['!**/*.json', '!assets/**/*']
-    }))
+        cleanAfterEveryBuildPatterns: ['!**/*.json', '!assets/**/*'],
+    }));
 } else {
     plugins.push(new ZipWebpackPlugin({
         path: '../',
-        filename: `${BROWSER}.zip`,
+        filename: `${BROWSER}-${version}-${BUILD_ENV}.zip`,
     }));
 }
 
@@ -80,7 +80,7 @@ const config = {
         options: OPTIONS_PATH,
     },
     output: {
-        path: path.resolve(__dirname, BUILD_PATH, OUTPUT_PATH, BROWSER),
+        path: path.resolve(__dirname, BUILD_PATH, OUTPUT_PATH),
         filename: '[name].js',
         publicPath: '',
     },
@@ -93,7 +93,7 @@ const config = {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
-                options: {babelrc: true, compact: false},
+                options: { babelrc: true, compact: false },
             },
             {
                 test: /\.(png|svg|jpe?g|gif|woff2?|eot|ttf|otf)$/,

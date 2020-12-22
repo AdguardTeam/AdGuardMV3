@@ -1,0 +1,121 @@
+{
+    "parser": "babel-eslint",
+    "extends": [
+        "airbnb",
+        "plugin:react/recommended"
+    ],
+    "env": {
+        "browser": true,
+        "node": true,
+        "jest": true
+    },
+    "globals": {
+        "adguard": "readonly"
+    },
+    "settings": {
+        "react": {
+            "pragma": "React",
+            "version": "detect"
+        }
+    },
+    "rules": {
+        "no-shadow": "off",
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [
+                    ".js",
+                    ".jsx"
+                ]
+            }
+        ],
+        "import/no-extraneous-dependencies": 0,
+        "indent": [
+            "error",
+            4,
+            {
+                "SwitchCase": 1,
+                "VariableDeclarator": 1,
+                "outerIIFEBody": 1,
+                // MemberExpression: null,
+                "FunctionDeclaration": {
+                    "parameters": 1,
+                    "body": 1
+                },
+                "FunctionExpression": {
+                    "parameters": 1,
+                    "body": 1
+                },
+                "CallExpression": {
+                    "arguments": 1
+                },
+                "ArrayExpression": 1,
+                "ObjectExpression": 1,
+                "ImportDeclaration": 1,
+                "flatTernaryExpressions": false,
+                "ignoredNodes": [
+                    "JSXElement",
+                    "JSXElement > *",
+                    "JSXAttribute",
+                    "JSXIdentifier",
+                    "JSXNamespacedName",
+                    "JSXMemberExpression",
+                    "JSXSpreadAttribute",
+                    "JSXExpressionContainer",
+                    "JSXOpeningElement",
+                    "JSXClosingElement",
+                    "JSXText",
+                    "JSXEmptyExpression",
+                    "JSXSpreadChild"
+                ],
+                "ignoreComments": false
+            }
+        ],
+        "react/jsx-indent": [
+            "error",
+            4
+        ],
+        "react/jsx-indent-props": [
+            "error",
+            4
+        ],
+        "no-underscore-dangle": "off",
+        "react/destructuring-assignment": [
+            "error",
+            "always",
+            {
+                "ignoreClassFields": true
+            }
+        ],
+        "jsx-a11y/label-has-associated-control": [
+            2,
+            {
+                "labelComponents": [
+                    "label"
+                ],
+                "labelAttributes": [
+                    "htmlFor"
+                ],
+                "controlComponents": [
+                    "input"
+                ]
+            }
+        ],
+        "jsx-a11y/label-has-for": "off",
+        "react/prop-types": "off",
+        // TODO remove this rule when app will grow bigger
+        "class-methods-use-this": "off",
+        "comma-dangle": [
+            "error",
+            {
+                "functions": "never",
+                "arrays": "always-multiline",
+                "exports": "always-multiline",
+                "imports": "always-multiline",
+                "objects": "always-multiline"
+            }
+        ],
+        "import/prefer-default-export": "off",
+        "arrow-body-style": "off"
+    }
+}
