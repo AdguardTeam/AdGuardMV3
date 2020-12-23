@@ -4,12 +4,25 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ZipWebpackPlugin = require('zip-webpack-plugin');
-const { version } = require('./package.json');
+const packageJson = require('./package.json');
 
 const BUILD_ENVS = {
     DEV: 'dev',
     BETA: 'beta',
     RELEASE: 'release',
+};
+
+const updateManifest = (isDev, content) => {
+    const manifest = JSON.parse(content.toString());
+
+    manifest.version = packageJson.version;
+
+    if (isDev) {
+        /* TODO add eval rule e.g. 'unsafe-eval' when manifest v3 docs are released */
+        manifest.content_security_policy = { extension_pages: "script-src 'self'; object-src 'self'" };
+    }
+
+    return JSON.stringify(manifest, null, 4);
 };
 
 const capitalize = (str) => str.charAt(0)
@@ -44,6 +57,7 @@ const plugins = [
             {
                 from: 'manifest.common.json',
                 to: 'manifest.json',
+                transform: (content) => updateManifest(IS_DEV, content),
             },
             {
                 context: SRC_PATH,
@@ -78,13 +92,14 @@ if (IS_DEV) {
 } else {
     plugins.push(new ZipWebpackPlugin({
         path: '../',
-        filename: `${BROWSER}-${version}-${BUILD_ENV}.zip`,
+        filename: `${BROWSER}-${packageJson.version}-${BUILD_ENV}.zip`,
     }));
 }
 
 const config = {
     mode: IS_DEV ? 'development' : 'production',
-    /* FIXME - find out manifest v3 eval policy for different scripts */
+    /* TODO: use 'eval-cheap-module-source-map' for DEV
+        when 'content_security_policy' v3 docs is released and eval is accessible */
     devtool: false,
     entry: {
         background: BACKGROUND_PATH,
