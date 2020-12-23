@@ -26,8 +26,7 @@ const updateLocalesMSGName = (content, buildEnv) => {
     return JSON.stringify(messages, null, 4);
 };
 
-const { BUILD_ENV } = process.env;
-const BROWSER = 'chrome';
+const { BUILD_ENV, BROWSER } = process.env;
 
 const IS_DEV = BUILD_ENV === BUILD_ENVS.DEV;
 
@@ -94,7 +93,7 @@ const config = {
         options: OPTIONS_PATH,
     },
     output: {
-        path: path.resolve(__dirname, BUILD_PATH, OUTPUT_PATH),
+        path: path.resolve(__dirname, BUILD_PATH, OUTPUT_PATH, BROWSER),
         filename: '[name].js',
         publicPath: '',
     },
