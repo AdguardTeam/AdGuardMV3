@@ -6,25 +6,33 @@ import { PROTECTION_ENABLED_KEY } from '../../common/constants';
 import { translate } from '../../common/helpers';
 import sender from '../messaging/sender';
 import getMessageReceiver from '../messaging/reciever';
+import log from '../../common/logger';
 import './index.pcss';
 
 const App = observer(() => {
     const store = React.useContext(rootStore);
     const { protectionEnabled, setProtectionEnabled } = store.settingsStore;
 
-    const onChange = (e) => {
+    const onChange = async (e) => {
         const { checked } = e.target;
 
-        sender.setProtectionEnabled(checked, (response) => {
+        try {
+            const response = await sender.setProtectionEnabled(checked);
             setProtectionEnabled(response[PROTECTION_ENABLED_KEY]);
-        });
+        } catch (err) {
+            log.error(err);
+        }
     };
 
     React.useEffect(() => {
-        sender.getProtectionEnabled((response) => {
-            const { data } = response;
-            setProtectionEnabled(data[PROTECTION_ENABLED_KEY]);
-        });
+        (async () => {
+            try {
+                const response = await sender.getProtectionEnabled();
+                setProtectionEnabled(response[PROTECTION_ENABLED_KEY]);
+            } catch (err) {
+                log.error(err);
+            }
+        })();
 
         const messageHandler = getMessageReceiver(store);
 
