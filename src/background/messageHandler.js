@@ -22,9 +22,14 @@ const messageHandler = (request, sender, sendResponse) => {
             return true;
         }
         case MESSAGES.getCss: {
-            const exampleRules = ['* { background-color: pink }'];
+            chrome.storage.local.get([PROTECTION_ENABLED_KEY], (data) => {
+                const exampleRules = ['* { background-color: pink }'];
 
-            sendResponse(exampleRules);
+                if (data[PROTECTION_ENABLED_KEY]) {
+                    sendResponse(exampleRules);
+                }
+            });
+
             return true;
         }
         default:
