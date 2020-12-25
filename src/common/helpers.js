@@ -1,4 +1,3 @@
-/* global chrome */
 export const promisify = (f) => (...args) => new Promise((resolve, reject) => {
     const callback = (response) => {
         const { lastError } = chrome.runtime;

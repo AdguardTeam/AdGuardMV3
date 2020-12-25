@@ -1,4 +1,3 @@
-/* global chrome */
 import { MESSAGES, PROTECTION_ENABLED_KEY } from '../common/constants';
 import log from '../common/logger';
 
