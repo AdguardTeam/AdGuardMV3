@@ -1,7 +1,7 @@
 import { MESSAGES, PROTECTION_ENABLED_KEY } from '../../common/constants';
 import { sendMessage } from '../../common/helpers';
 
-export default {
+export const sender = {
     setProtectionEnabled: (protectionEnabled) => sendMessage(
         MESSAGES.SET_PROTECTION_ENABLED, {
             [PROTECTION_ENABLED_KEY]: protectionEnabled,

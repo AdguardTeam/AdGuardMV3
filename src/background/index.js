@@ -1,6 +1,6 @@
 import { PROTECTION_ENABLED_KEY } from '../common/constants';
-import messageHandler from './messageHandler';
-import log from '../common/logger';
+import { messageHandler } from './messageHandler';
+import { log } from '../common/logger';
 
 log.debug('Background service worker has loaded via Manifest V3.');
 

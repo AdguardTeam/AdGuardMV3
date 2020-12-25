@@ -1,7 +1,7 @@
 import { MESSAGES, PROTECTION_ENABLED_KEY } from '../common/constants';
-import log from '../common/logger';
+import { log } from '../common/logger';
 
-const messageHandler = (request, sender, sendResponse) => {
+export const messageHandler = (request, sender, sendResponse) => {
     const { type } = request;
 
     switch (type) {
@@ -35,5 +35,3 @@ const messageHandler = (request, sender, sendResponse) => {
         return true;
     }
 };
-
-export default messageHandler;

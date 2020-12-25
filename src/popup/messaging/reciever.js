@@ -1,6 +1,6 @@
 import { MESSAGES, PROTECTION_ENABLED_KEY } from '../../common/constants';
 
-const getMessageReceiver = (rootStore) => {
+export const getMessageReceiver = (rootStore) => {
     const { settingsStore } = rootStore;
 
     return async (message) => {
@@ -16,5 +16,3 @@ const getMessageReceiver = (rootStore) => {
         }
     };
 };
-
-export default getMessageReceiver;

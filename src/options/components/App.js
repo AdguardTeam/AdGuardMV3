@@ -1,14 +1,14 @@
 import { useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
-import rootStore from '../stores';
+import { rootStore } from '../stores';
 import { PROTECTION_ENABLED_KEY } from '../../common/constants';
 import { translate } from '../../common/helpers';
-import sender from '../messaging/sender';
-import getMessageReceiver from '../messaging/reciever';
-import log from '../../common/logger';
+import { sender } from '../messaging/sender';
+import { getMessageReceiver } from '../messaging/reciever';
+import { log } from '../../common/logger';
 import './index.pcss';
 
-const App = observer(() => {
+export const App = observer(() => {
     const store = useContext(rootStore);
     const { protectionEnabled, setProtectionEnabled } = store.settingsStore;
 
@@ -52,5 +52,3 @@ const App = observer(() => {
         </div>
     );
 });
-
-export default App;

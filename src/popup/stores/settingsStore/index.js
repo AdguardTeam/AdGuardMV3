@@ -4,7 +4,7 @@ import {
     makeObservable,
 } from 'mobx';
 
-class SettingsStore {
+export class SettingsStore {
     constructor(rootStore) {
         this.rootStore = rootStore;
         makeObservable(this);
@@ -17,5 +17,3 @@ class SettingsStore {
         this.protectionEnabled = protectionEnabled;
     }
 }
-
-export default SettingsStore;

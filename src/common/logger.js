@@ -23,7 +23,7 @@ const print = (level, method, args) => {
     console[method](formatted, ...args);
 };
 
-const log = {
+export const log = {
     debug(...args) {
         print('DEBUG', 'log', args);
     },
@@ -40,5 +40,3 @@ const log = {
         print('ERROR', 'error', args);
     },
 };
-
-export default log;
