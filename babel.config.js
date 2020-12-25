@@ -14,7 +14,10 @@ module.exports = (api) => {
                     useBuiltIns: 'entry',
                 },
             ],
-            '@babel/preset-react',
+            [
+                '@babel/preset-react',
+                { runtime: 'automatic' },
+            ],
         ],
         plugins: [
             ['@babel/plugin-proposal-decorators', { legacy: true }],

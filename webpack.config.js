@@ -86,14 +86,18 @@ const plugins = [
 ];
 
 if (IS_DEV) {
-    plugins.push(new CleanWebpackPlugin({
-        cleanAfterEveryBuildPatterns: ['!**/*.json', '!assets/**/*'],
-    }));
+    plugins.push(
+        new CleanWebpackPlugin({
+            cleanAfterEveryBuildPatterns: ['!**/*.json', '!assets/**/*'],
+        })
+    );
 } else {
-    plugins.push(new ZipWebpackPlugin({
-        path: '../',
-        filename: `${BROWSER}-${packageJson.version}-${BUILD_ENV}.zip`,
-    }));
+    plugins.push(
+        new ZipWebpackPlugin({
+            path: '../',
+            filename: `${BROWSER}-${packageJson.version}-${BUILD_ENV}.zip`,
+        })
+    );
 }
 
 const config = {

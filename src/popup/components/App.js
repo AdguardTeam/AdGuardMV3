@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
 import rootStore from '../stores';
 import { PROTECTION_ENABLED_KEY } from '../../common/constants';
@@ -9,7 +9,7 @@ import log from '../../common/logger';
 import './index.pcss';
 
 const App = observer(() => {
-    const store = React.useContext(rootStore);
+    const store = useContext(rootStore);
     const { protectionEnabled, setProtectionEnabled } = store.settingsStore;
 
     const onChange = async (e) => {
@@ -23,7 +23,7 @@ const App = observer(() => {
         }
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
         (async () => {
             try {
                 const response = await sender.getProtectionEnabled();
