@@ -5,14 +5,14 @@ import { applyCss } from '../common/helpers';
 log.debug('Content script has loaded via Manifest V3.');
 
 const tryLoadCssAndScripts = async () => {
-    try {
-        const response = await sender.getCss();
-        applyCss(response);
-    } catch (err) {
-        log.error(err);
-    }
+    const response = await sender.getCss();
+    applyCss(response);
 };
 
 (async () => {
-    await tryLoadCssAndScripts();
+    try {
+        await tryLoadCssAndScripts();
+    } catch (err) {
+        log.error(err);
+    }
 })();

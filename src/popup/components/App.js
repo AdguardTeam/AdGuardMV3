@@ -4,7 +4,7 @@ import { rootStore } from '../stores';
 import { PROTECTION_ENABLED_KEY } from '../../common/constants';
 import { translate } from '../../common/helpers';
 import { sender } from '../messaging/sender';
-import { getMessageReceiver } from '../messaging/reciever';
+import { getMessageReceiver } from '../messaging/receiver';
 import { log } from '../../common/logger';
 import './index.pcss';
 

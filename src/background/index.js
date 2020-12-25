@@ -1,5 +1,5 @@
 import { PROTECTION_ENABLED_KEY } from '../common/constants';
-import { messageHandler } from './messageHandler';
+import { messageReceiver } from './messaging/messageReceiver';
 import { log } from '../common/logger';
 
 log.debug('Background service worker has loaded via Manifest V3.');
@@ -8,4 +8,4 @@ chrome.runtime.onInstalled.addListener(() => {
     chrome.storage.local.set({ [PROTECTION_ENABLED_KEY]: true });
 });
 
-chrome.runtime.onMessage.addListener(messageHandler);
+chrome.runtime.onMessage.addListener(messageReceiver);
