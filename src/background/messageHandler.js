@@ -5,11 +5,11 @@ const messageHandler = (request, sender, sendResponse) => {
     const { type } = request;
 
     switch (type) {
-    case MESSAGES.getProtectionEnabled: {
+    case MESSAGES.GET_PROTECTION_ENABLED: {
         chrome.storage.local.get([PROTECTION_ENABLED_KEY], sendResponse);
         return true;
     }
-    case MESSAGES.setProtectionEnabled: {
+    case MESSAGES.SET_PROTECTION_ENABLED: {
         try {
             /* Object { [PROTECTION_ENABLED_KEY]: boolean } */
             const { data } = request;
@@ -20,7 +20,7 @@ const messageHandler = (request, sender, sendResponse) => {
         }
         return true;
     }
-    case MESSAGES.getCss: {
+    case MESSAGES.GET_CSS: {
         chrome.storage.local.get([PROTECTION_ENABLED_KEY], (data) => {
             const exampleRules = ['* { background-color: pink }'];
 

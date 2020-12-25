@@ -8,7 +8,7 @@ export const promisify = (f) => (...args) => new Promise((resolve, reject) => {
         resolve(response);
     };
 
-    f(...[...args, callback]);
+    f(...args, callback);
 });
 
 export const translate = (key) => chrome.i18n.getMessage(key);

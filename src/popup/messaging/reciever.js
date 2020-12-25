@@ -7,7 +7,7 @@ const getMessageReceiver = (rootStore) => {
         const { type, data } = message;
 
         switch (type) {
-        case MESSAGES.setProtectionEnabled: {
+        case MESSAGES.SET_PROTECTION_ENABLED: {
             settingsStore.setProtectionEnabled(data[PROTECTION_ENABLED_KEY]);
             return true;
         }
