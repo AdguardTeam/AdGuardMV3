@@ -9,7 +9,7 @@ try {
         <Provider>
             <App />
         </Provider>,
-        document.getElementById('root')
+        document.getElementById('root'),
     );
 } catch (error) {
     log.error(error);

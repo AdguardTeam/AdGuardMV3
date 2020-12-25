@@ -5,7 +5,7 @@ export default {
     setProtectionEnabled: (protectionEnabled) => sendMessage(
         MESSAGES.setProtectionEnabled, {
             [PROTECTION_ENABLED_KEY]: protectionEnabled,
-        }
+        },
     ),
     getProtectionEnabled: () => sendMessage(MESSAGES.getProtectionEnabled),
 };
