@@ -1,11 +1,13 @@
 import { useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
+
 import { rootStore } from '../stores';
 import { PROTECTION_ENABLED_KEY } from '../../common/constants';
 import { translate } from '../../common/helpers';
 import { sender } from '../messaging/sender';
 import { getMessageReceiver } from '../messaging/receiver';
 import { log } from '../../common/logger';
+
 import './index.pcss';
 
 export const App = observer(() => {
@@ -39,16 +41,19 @@ export const App = observer(() => {
         return () => chrome.runtime.onMessage.removeListener(messageHandler);
     }, []);
 
+    const id = 'protection_status';
+
     return (
         <div>
             <h1 className="h--1">{translate('name')}</h1>
-            <input
-                type="checkbox"
-                id="protection_status"
-                checked={protectionEnabled}
-                onChange={onChange}
-            />
-            <label htmlFor="protection_status" />
+            <label htmlFor={id}>
+                <input
+                    type="checkbox"
+                    id={id}
+                    checked={protectionEnabled}
+                    onChange={onChange}
+                />
+            </label>
         </div>
     );
 });

@@ -1,5 +1,6 @@
 import { createContext } from 'react';
 import { configure } from 'mobx';
+
 import { SettingsStore } from './settingsStore';
 
 // Do not allow property change outside of store actions

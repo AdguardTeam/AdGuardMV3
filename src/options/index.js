@@ -1,7 +1,9 @@
 import ReactDOM from 'react-dom';
 import { Provider } from 'mobx-react';
+
 import { App } from './components/App';
 import { log } from '../common/logger';
+
 import '../common/styles/main.pcss';
 
 try {

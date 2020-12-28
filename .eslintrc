@@ -59,6 +59,25 @@
         "import/prefer-default-export": "off",
         "arrow-body-style": "off",
         "react/jsx-uses-react": "off",
-        "react/react-in-jsx-scope": "off"
+        "react/react-in-jsx-scope": "off",
+        "import/order": [
+            "error",
+            {
+                "groups": [
+                    ["builtin", "external"],
+                    ["parent", "internal", "sibling"],
+                    ["index", "unknown"]
+                ],
+                "pathGroups": [
+                    {
+                        "pattern": "*.pcss",
+                        "group": "unknown",
+                        "patternOptions": { "matchBase": true },
+                        "position": "after"
+                    }
+                ],
+                "newlines-between": "always"
+            }
+        ]
     }
 }

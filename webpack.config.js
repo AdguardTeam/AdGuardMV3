@@ -4,6 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ZipWebpackPlugin = require('zip-webpack-plugin');
+
 const packageJson = require('./package.json');
 
 const BUILD_ENVS = {
