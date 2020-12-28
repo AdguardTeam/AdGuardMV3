@@ -1,11 +1,18 @@
+import { log } from './logger';
+
 export const promisify = (f) => (...args) => new Promise((resolve, reject) => {
-    const callback = (response) => {
+    const callback = (...args) => {
         const { lastError } = chrome.runtime;
         if (lastError) {
             reject(lastError);
             return;
         }
-        resolve(response);
+
+        if (args.length === 1) {
+            resolve(...args);
+        }
+
+        resolve(args);
     };
 
     f(...args, callback);
@@ -13,10 +20,16 @@ export const promisify = (f) => (...args) => new Promise((resolve, reject) => {
 
 export const translate = (key) => chrome.i18n.getMessage(key);
 
-export const sendMessage = (type, data) => promisify(chrome.runtime.sendMessage)({
-    type,
-    data,
-});
+export const sendMessage = (type, data) => {
+    if (!chrome.runtime.sendMessagePromisified) {
+        chrome.runtime.sendMessagePromisified = promisify(chrome.runtime.sendMessage);
+    }
+
+    const message = { type, ...data !== undefined && { data } };
+
+    log.info('Sent message: ', message);
+    return chrome.runtime.sendMessagePromisified(message);
+};
 
 export const applyCss = (css) => {
     if (!css || css.length === 0) {

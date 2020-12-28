@@ -1,10 +1,11 @@
 import { MESSAGES, PROTECTION_ENABLED_KEY } from '../../common/constants';
 import { log } from '../../common/logger';
 
-export const messageReceiver = (request, sender, sendResponse) => {
-    const { type, data } = request;
+export const messageReceiver = (message, sender, sendResponse) => {
+    log.debug('Received message:', message);
+    const { type, data } = message;
 
-    const receiver = {
+    const REQUEST_TYPE_TO_HANDLER_MAP = {
         [MESSAGES.GET_PROTECTION_ENABLED]: () => {
             chrome.storage.local.get([PROTECTION_ENABLED_KEY], sendResponse);
             return true;
@@ -32,5 +33,10 @@ export const messageReceiver = (request, sender, sendResponse) => {
         },
     };
 
-    return receiver[type](data);
+    if (!Object.prototype.hasOwnProperty.call(REQUEST_TYPE_TO_HANDLER_MAP, type)) {
+        log.warn(`There is no such message type ${type}`);
+        return undefined;
+    }
+
+    return REQUEST_TYPE_TO_HANDLER_MAP[type](data);
 };
