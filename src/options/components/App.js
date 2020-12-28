@@ -46,14 +46,14 @@ export const App = observer(() => {
     return (
         <div>
             <h1 className="h--1">{translate('name')}</h1>
-            <label htmlFor={id}>
-                <input
-                    type="checkbox"
-                    id={id}
-                    checked={protectionEnabled}
-                    onChange={onChange}
-                />
-            </label>
+            <input
+                type="checkbox"
+                id={id}
+                checked={protectionEnabled}
+                onChange={onChange}
+            />
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+            <label htmlFor={id} />
         </div>
     );
 });
