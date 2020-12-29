@@ -7,6 +7,10 @@ import { getMessageReceiver } from '../../messaging/receiver';
 import { Icons } from '../ui/Icons';
 import { Header } from '../Header';
 import { Switcher } from '../Switcher';
+import { PageInfo } from '../PageInfo';
+import { Action } from '../Action';
+import { Footer } from '../Footer';
+
 import './index.pcss';
 
 export const App = observer(() => {
@@ -33,9 +37,12 @@ export const App = observer(() => {
             <Icons />
             <Header />
             {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-            <div className={classname}>
+            <main className={classname}>
                 <Switcher />
-            </div>
+                <PageInfo />
+                <Action />
+            </main>
+            <Footer />
         </div>
     );
 });

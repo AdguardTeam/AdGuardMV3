@@ -25,7 +25,6 @@ export const Header = () => {
             </div>
             <div className="popup-header__buttons">
                 <button
-                    className="button"
                     type="button"
                     onClick={handleBlockingModeIconClick}
                     title={translate('context_enable_protection')}
@@ -36,7 +35,6 @@ export const Header = () => {
                     />
                 </button>
                 <button
-                    className="button"
                     type="button"
                     onClick={handleSettingsClick}
                     title={translate('options_settings')}
