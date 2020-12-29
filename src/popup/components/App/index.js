@@ -1,20 +1,17 @@
 import { useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
+import cn from 'classnames';
 
 import { rootStore } from '../../stores';
 import { getMessageReceiver } from '../../messaging/receiver';
 import { Icons } from '../ui/Icons';
 import { Header } from '../Header';
-
+import { Switcher } from '../Switcher';
 import './index.pcss';
 
 export const App = observer(() => {
     const store = useContext(rootStore);
-    const { protectionEnabled, setProtectionEnabled, getProtectionEnabled } = store.settingsStore;
-
-    const onChange = async (e) => {
-        await setProtectionEnabled(e.target.checked);
-    };
+    const { protectionEnabled, getProtectionEnabled } = store.settingsStore;
 
     useEffect(() => {
         (async () => {
@@ -27,20 +24,18 @@ export const App = observer(() => {
         return () => chrome.runtime.onMessage.removeListener(messageHandler);
     }, []);
 
-    const id = 'protection_status';
+    const classname = cn('main', {
+        'main--disabled': !protectionEnabled,
+    });
 
     return (
         <div className="popup">
             <Icons />
             <Header />
-            <input
-                type="checkbox"
-                id={id}
-                checked={protectionEnabled}
-                onChange={onChange}
-            />
             {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-            <label htmlFor={id} />
+            <div className={classname}>
+                <Switcher />
+            </div>
         </div>
     );
 });

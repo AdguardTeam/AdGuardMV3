@@ -64,6 +64,37 @@ export const Icons = () => {
                     />
                 </g>
             </svg>
+
+            <symbol id="checkmark" width="20" height="16">
+                <g transform="translate(-50 -18)" fill="none" fillRule="evenodd">
+                    <path
+                        d="M0 25c0-8.284 6.717-15 15-15h50c8.284 0 15 6.714 15 15 0 8.284-6.717 15-15 15H15C6.716 40 0 33.286 0 25z"
+                        fill="currentColor"
+                    />
+                    <circle fill="#FFF" cx="59" cy="25" r="25" />
+                    <path
+                        stroke="currentColor"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M51.66 25.968l5.568 5.87 10.433-12"
+                    />
+                </g>
+            </symbol>
+
+            <svg id="circle" width="20" height="20">
+                <g fill="none" fillRule="evenodd">
+                    <path
+                        d="M-13 10C-13 1.716-6.283-5 2-5h50c8.284 0 15 6.714 15 15 0 8.284-6.717 15-15 15H2c-8.284 0-15-6.714-15-15z"
+                        fill="currentColor"
+                    />
+                    <circle fill="#FFF" cx="25" cy="25" r="25" transform="translate(-15 -15)" />
+                    <path
+                        d="M10 .5a9.5 9.5 0 100 19 9.5 9.5 0 000-19zm0 3a6.5 6.5 0 110 13 6.5 6.5 0 010-13z"
+                        fill="currentColor"
+                    />
+                </g>
+            </svg>
         </svg>
     );
 };
