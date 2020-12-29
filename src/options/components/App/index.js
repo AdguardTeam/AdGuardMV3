@@ -1,38 +1,23 @@
 import { useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
 
-import { rootStore } from '../stores';
-import { PROTECTION_ENABLED_KEY } from '../../common/constants';
-import { translate } from '../../common/helpers';
-import { sender } from '../messaging/sender';
-import { getMessageReceiver } from '../messaging/receiver';
-import { log } from '../../common/logger';
+import { rootStore } from '../../stores';
+import { translate } from '../../../common/helpers';
+import { getMessageReceiver } from '../../messaging/receiver';
 
 import './index.pcss';
 
 export const App = observer(() => {
     const store = useContext(rootStore);
-    const { protectionEnabled, setProtectionEnabled } = store.settingsStore;
+    const { protectionEnabled, setProtectionEnabled, getProtectionEnabled } = store.settingsStore;
 
     const onChange = async (e) => {
-        const { checked } = e.target;
-
-        try {
-            const response = await sender.setProtectionEnabled(checked);
-            setProtectionEnabled(response[PROTECTION_ENABLED_KEY]);
-        } catch (err) {
-            log.error(err);
-        }
+        await setProtectionEnabled(e.target.checked);
     };
 
     useEffect(() => {
         (async () => {
-            try {
-                const response = await sender.getProtectionEnabled();
-                setProtectionEnabled(response[PROTECTION_ENABLED_KEY]);
-            } catch (err) {
-                log.error(err);
-            }
+            await getProtectionEnabled();
         })();
 
         const messageHandler = getMessageReceiver(store);
