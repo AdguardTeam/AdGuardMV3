@@ -410,6 +410,98 @@ export const Icons = () => {
                     />
                 </g>
             </svg>
+
+            <svg id="option_1" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none" fillRule="evenodd">
+                    <path fill="#000" d="M-322-110h686v554h-686z" />
+                    <path fill="#131313" d="M-38-110h402v554H-38z" />
+                    <path
+                        d="M2 5h16a1 1 0 011 1v8a1 1 0 01-1 1H2a1 1 0 01-1-1V6a1 1 0 011-1zm0 14L18 1"
+                        stroke="#67B279"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1.5"
+                    />
+                </g>
+            </svg>
+
+            <svg id="option_2" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none" fillRule="evenodd">
+                    <path fill="#000" d="M-322-159h686v554h-686z" />
+                    <path fill="#131313" d="M-38-159h402v554H-38z" />
+                    <path
+                        d="M17 1.22H3a2 2 0 00-2 2v9.015a2 2 0 002 2h9.032l4.148 4.339v-4.339H17a2 2 0 002-2V3.22a2 2 0 00-2-2zM10 4.5V8m-.003 2.596c.008 0 .008-.063 0-.192"
+                        stroke="#67B279"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1.5"
+                    />
+                </g>
+            </svg>
+
+            <svg id="option_3" width="18" height="20" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none" fillRule="evenodd">
+                    <path fill="#000" d="M-323-206h686v554h-686z" />
+                    <path fill="#131313" d="M-39-206h402v554H-39z" />
+                    <path
+                        d="M14.392 7.168c.87.699 1.739 1.567 2.608 2.604-2.667 3.333-5.333 5-8 5-.44 0-.879-.045-1.318-.136m-2.51-1.023C4.167 12.954 2.777 11.673 1 9.772 3.667 6.591 6.333 5 9 5c1.072 0 2.143.257 3.215.77m-4.63 5.644a2 2 0 012.66-2.98M1 19L17 1"
+                        stroke="#67B279"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1.5"
+                    />
+                </g>
+            </svg>
+
+            <svg id="option_4" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none" fillRule="evenodd">
+                    <path fill="#000" d="M-322-254h686v554h-686z" />
+                    <path fill="#131313" d="M-38-254h402v554H-38z" />
+                    <path
+                        d="M10 19a9 9 0 100-18 9 9 0 000 18zm2.5-17.5c.275 1.167.493 2.334.654 3.5M17 5a26.16 26.16 0 01-3.746.784 36.405 36.405 0 010 8.434c1.248.164 2.497.425 3.746.782m-3.846 0a38.054 38.054 0 01-.654 3.5m-5 0a38.053 38.053 0 01-.654-3.5M3 15a26.16 26.16 0 013.747-.784 36.178 36.178 0 010-8.433A26.024 26.024 0 013 5h0m3.846 0c.161-1.166.38-2.333.654-3.5h0m0 12.627a24.612 24.612 0 015 0m0-8.254a24.612 24.612 0 01-5 0M1 10h18"
+                        stroke="#67B279"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1.5"
+                    />
+                </g>
+            </svg>
+
+            <svg id="option_5" width="18" height="14" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none" fillRule="evenodd">
+                    <path fill="#000" d="M-323-305h686v554h-686z" />
+                    <path fill="#131313" d="M-39-305h402v554H-39z" />
+                    <path
+                        d="M1 1h16M1 5h12M1 9h16M1 13h8"
+                        stroke="#67B279"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1.5"
+                    />
+                </g>
+            </svg>
+
+            <svg id="option_6" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none" fillRule="evenodd">
+                    <path fill="#000" d="M-323-351h686v554h-686z" />
+                    <path fill="#131313" d="M-39-351h402v554H-39z" />
+                    <path
+                        d="M9 9a4 4 0 100-8 4 4 0 000 8zm-8 8v-1a5 5 0 015-5h6a5 5 0 015 5v1h0"
+                        strokeWidth="1.5"
+                        stroke="#67B279"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    />
+                </g>
+            </svg>
+
+            <svg id="arrow" width="8" height="14" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none" fillRule="evenodd">
+                    <path fill="#000" d="M-592-257H94v554h-686z" />
+                    <path fill="#131313" d="M-308-257H94v554h-402z" />
+                    <path d="M1 13l6-6-6-6" stroke="#888" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" />
+                </g>
+            </svg>
         </svg>
     );
 };

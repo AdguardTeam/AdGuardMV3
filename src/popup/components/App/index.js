@@ -4,7 +4,7 @@ import cn from 'classnames';
 
 import { rootStore } from '../../stores';
 import { getMessageReceiver } from '../../messaging/receiver';
-import { Icons } from '../ui/Icons';
+import { Icons } from '../../../common/components/ui/Icons';
 import { Header } from '../Header';
 import { Switcher } from '../Switcher';
 import { PageInfo } from '../PageInfo';

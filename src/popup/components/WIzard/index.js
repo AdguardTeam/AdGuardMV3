@@ -2,9 +2,9 @@ import './index.pcss';
 import { useContext } from 'react';
 import { observer } from 'mobx-react';
 
-import { rootStore } from '../../stores';
 import { translate } from '../../../common/helpers';
-import { Icon } from '../ui/Icon';
+import { Icon } from '../../../common/components/ui/Icon';
+import { rootStore } from '../../stores';
 
 export const Wizard = observer(() => {
     const { wizardStore } = useContext(rootStore);

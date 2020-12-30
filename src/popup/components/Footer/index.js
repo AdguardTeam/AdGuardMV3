@@ -1,4 +1,4 @@
-import { Icon } from '../ui/Icon';
+import { Icon } from '../../../common/components/ui/Icon';
 
 import './index.pcss';
 

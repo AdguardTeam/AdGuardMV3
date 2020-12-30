@@ -1,10 +1,10 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import cn from 'classnames';
 import { observer } from 'mobx-react';
 
+import { Icon } from '../../../common/components/ui/Icon';
 import { translate } from '../../../common/helpers';
 import { rootStore } from '../../stores';
-import { Icon } from '../ui/Icon';
 
 import './index.pcss';
 
