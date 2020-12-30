@@ -10,12 +10,15 @@ import { Switcher } from '../Switcher';
 import { PageInfo } from '../PageInfo';
 import { Action } from '../Action';
 import { Footer } from '../Footer';
+import { Wizard } from '../WIzard';
 
 import './index.pcss';
 
 export const App = observer(() => {
     const store = useContext(rootStore);
-    const { protectionEnabled, getProtectionEnabled } = store.settingsStore;
+    const { settingsStore, wizardStore } = store;
+    const { protectionEnabled, getProtectionEnabled } = settingsStore;
+    const { displayWizard } = wizardStore;
 
     useEffect(() => {
         (async () => {
@@ -35,14 +38,20 @@ export const App = observer(() => {
     return (
         <div className="popup">
             <Icons />
-            <Header />
-            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-            <main className={classname}>
-                <Switcher />
-                <PageInfo />
-                <Action />
-            </main>
-            <Footer />
+            {displayWizard
+                ? <Wizard />
+                : (
+                    <>
+                        <Header />
+                        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                        <main className={classname}>
+                            <Switcher />
+                            <PageInfo />
+                            <Action />
+                        </main>
+                        <Footer />
+                    </>
+                )}
         </div>
     );
 });

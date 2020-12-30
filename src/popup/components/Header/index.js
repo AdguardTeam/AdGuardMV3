@@ -18,10 +18,7 @@ export const Header = () => {
     return (
         <div className="popup-header">
             <div className="popup-header__logo">
-                <Icon
-                    id="#logo"
-                    className="icon--logo"
-                />
+                <Icon id="logo" className="icon--logo" />
             </div>
             <div className="popup-header__buttons">
                 <button
@@ -29,20 +26,14 @@ export const Header = () => {
                     onClick={handleBlockingModeIconClick}
                     title={translate('context_enable_protection')}
                 >
-                    <Icon
-                        id="#start"
-                        className="icon--button"
-                    />
+                    <Icon id="start" className="icon--button" />
                 </button>
                 <button
                     type="button"
                     onClick={handleSettingsClick}
                     title={translate('options_settings')}
                 >
-                    <Icon
-                        id="#settings"
-                        className="icon--button"
-                    />
+                    <Icon id="settings" className="icon--button" />
                 </button>
             </div>
         </div>

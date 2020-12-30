@@ -2,6 +2,7 @@ import { createContext } from 'react';
 import { configure } from 'mobx';
 
 import { SettingsStore } from './settingsStore';
+import { WizardStore } from './wizardStore';
 
 // Do not allow property change outside of store actions
 configure({ enforceActions: 'observed' });
@@ -9,6 +10,7 @@ configure({ enforceActions: 'observed' });
 class RootStore {
     constructor() {
         this.settingsStore = new SettingsStore(this);
+        this.wizardStore = new WizardStore(this);
     }
 }
 

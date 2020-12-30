@@ -34,7 +34,7 @@ export const Switcher = observer(() => {
         >
             <div className="switcher__center" />
             <div className="switcher__btn">
-                <Icon id={`#${icon}`} className="switcher__icon" />
+                <Icon id={icon} className="switcher__icon" />
             </div>
         </button>
     );

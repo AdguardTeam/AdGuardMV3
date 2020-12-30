@@ -6,7 +6,7 @@ export const Icon = ({
 }) => {
     return (
         <svg className={cn('icon', className)}>
-            <use xlinkHref={id} />
+            <use xlinkHref={`#${id}`} />
         </svg>
     );
 };

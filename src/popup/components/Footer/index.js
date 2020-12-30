@@ -1,3 +1,5 @@
+import { Icon } from '../ui/Icon';
+
 import './index.pcss';
 
 export const Footer = () => {
@@ -10,6 +12,7 @@ export const Footer = () => {
                 &nbsp;
                 Manifest
             </span>
+            <Icon id="chrome_logo" className="logo" />
         </footer>
     );
 };
