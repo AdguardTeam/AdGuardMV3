@@ -1,9 +1,10 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const ZipWebpackPlugin = require('zip-webpack-plugin');
+import path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import ZipWebpackPlugin from 'zip-webpack-plugin';
+import { WebpackPluginInstance } from 'webpack';
 
 const packageJson = require('./package.json');
 
@@ -11,25 +12,34 @@ const BUILD_ENVS = {
     DEV: 'dev',
     BETA: 'beta',
     RELEASE: 'release',
-};
+} as const;
 
-const updateManifest = (isDev, content) => {
+export type BuildEnv = typeof BUILD_ENVS[keyof typeof BUILD_ENVS];
+
+const BROWSERS = {
+    CHROME: 'chrome',
+    EDGE: 'edge',
+} as const;
+
+export type Browser = typeof BROWSERS[keyof typeof BROWSERS];
+
+const updateManifest = (isDev: boolean, content: Buffer) => {
     const manifest = JSON.parse(content.toString());
 
     manifest.version = packageJson.version;
 
     if (isDev) {
-        /* TODO add eval rule e.g. 'unsafe-eval' when manifest v3 docs are released */
+        // TODO add eval rule e.g. 'unsafe-eval' when manifest v3 docs are released
         manifest.content_security_policy = { extension_pages: "script-src 'self'; object-src 'self'" };
     }
 
     return JSON.stringify(manifest, null, 4);
 };
 
-const capitalize = (str) => str.charAt(0)
+const capitalize = (str: string) => str.charAt(0)
     .toUpperCase() + str.slice(1);
 
-const updateLocalesMSGName = (content, buildEnv) => {
+const updateLocalesMSGName = (content: Buffer, buildEnv: BuildEnv) => {
     const messages = JSON.parse(content.toString());
     const IS_RELEASE = buildEnv === BUILD_ENVS.RELEASE;
 
@@ -40,7 +50,10 @@ const updateLocalesMSGName = (content, buildEnv) => {
     return JSON.stringify(messages, null, 4);
 };
 
-const { BUILD_ENV, BROWSER } = process.env;
+const {
+    BUILD_ENV = BUILD_ENVS.DEV,
+    BROWSER = BROWSERS.CHROME,
+}: { BUILD_ENV: BuildEnv, BROWSER: Browser } = process.env;
 
 const IS_DEV = BUILD_ENV === BUILD_ENVS.DEV;
 
@@ -52,7 +65,7 @@ const POPUP_PATH = path.resolve(__dirname, SRC_PATH, 'popup');
 const OPTIONS_PATH = path.resolve(__dirname, SRC_PATH, 'options');
 const CONTENT_SCRIPTS_PATH = path.resolve(__dirname, SRC_PATH, 'content-scripts');
 
-const plugins = [
+const plugins: WebpackPluginInstance[] = [
     new CopyWebpackPlugin({
         patterns: [
             {
@@ -118,17 +131,19 @@ const config = {
         publicPath: '',
     },
     resolve: {
-        extensions: ['*', '.js', '.jsx'],
+        extensions: ['.tsx', '.ts', '.js'],
     },
     module: {
         rules: [
             {
-                test: /\.jsx?$/,
+                test: /\.(ts|js)x?$/,
                 exclude: /node_modules/,
-                loader: 'babel-loader',
-                options: {
-                    babelrc: true,
-                    compact: false,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        babelrc: true,
+                        compact: false,
+                    },
                 },
             },
             {

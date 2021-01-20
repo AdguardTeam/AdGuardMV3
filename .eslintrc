@@ -1,8 +1,10 @@
 {
-    "parser": "babel-eslint",
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "project": "./tsconfig.json"
+    },
     "extends": [
-        "airbnb",
-        "plugin:react/recommended"
+        "airbnb-typescript"
     ],
     "env": {
         "browser": true,
@@ -19,64 +21,14 @@
         }
     },
     "rules": {
-        "no-shadow": "off",
-        "react/jsx-filename-extension": [
-            1,
+        "indent": ["error", 4],
+        "@typescript-eslint/indent": ["error", 4],
+        "import/no-extraneous-dependencies": [
+            "error",
             {
-                "extensions": [
-                    ".js",
-                    ".jsx"
+                "devDependencies": [
+                    "**/*.config.ts"
                 ]
-            }
-        ],
-        "import/no-extraneous-dependencies": 0,
-        "indent": [
-            "error",
-            4,
-            {
-                "SwitchCase": 1
-            }
-        ],
-        "react/jsx-indent": [
-            "error",
-            4
-        ],
-        "react/jsx-indent-props": [
-            "error",
-            4
-        ],
-        "no-underscore-dangle": "off",
-        "react/destructuring-assignment": [
-            "error",
-            "always",
-            {
-                "ignoreClassFields": true
-            }
-        ],
-        "react/prop-types": "off",
-        // TODO remove this rule when app will grow bigger
-        "class-methods-use-this": "off",
-        "import/prefer-default-export": "off",
-        "arrow-body-style": "off",
-        "react/jsx-uses-react": "off",
-        "react/react-in-jsx-scope": "off",
-        "import/order": [
-            "error",
-            {
-                "groups": [
-                    ["builtin", "external"],
-                    ["parent", "internal", "sibling"],
-                    ["index", "unknown"]
-                ],
-                "pathGroups": [
-                    {
-                        "pattern": "*.pcss",
-                        "group": "unknown",
-                        "patternOptions": { "matchBase": true },
-                        "position": "after"
-                    }
-                ],
-                "newlines-between": "always"
             }
         ]
     }
