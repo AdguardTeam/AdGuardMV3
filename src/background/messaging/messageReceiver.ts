@@ -1,5 +1,6 @@
 import { MESSAGE_TYPES, PROTECTION_ENABLED_KEY } from '../../common/constants';
 import { log } from '../../common/logger';
+import { storage } from '../storage';
 
 type MessageType = keyof typeof MESSAGE_TYPES;
 interface Message {
@@ -7,7 +8,7 @@ interface Message {
     data: any;
 }
 
-export const messageReceiver = (
+export const messageReceiver = async (
     message: Message,
     sender: chrome.runtime.MessageSender,
     sendResponse: (...args: any[]) => void,
@@ -18,25 +19,19 @@ export const messageReceiver = (
 
     switch (type) {
         case MESSAGE_TYPES.GET_PROTECTION_ENABLED: {
-            chrome.storage.local.get([PROTECTION_ENABLED_KEY], sendResponse);
-            return true;
+            return storage.get(PROTECTION_ENABLED_KEY);
         }
         case MESSAGE_TYPES.SET_PROTECTION_ENABLED: {
             const { protectionEnabled } = data;
-            chrome.storage.local.set(
-                { [PROTECTION_ENABLED_KEY]: protectionEnabled },
-                sendResponse,
-            );
-            return true;
+            return storage.set(PROTECTION_ENABLED_KEY, protectionEnabled);
         }
         case MESSAGE_TYPES.GET_CSS: {
-            chrome.storage.local.get([PROTECTION_ENABLED_KEY], (data) => {
-                const exampleRules = ['* { background-color: pink }'];
+            const isEnabled = await storage.get(PROTECTION_ENABLED_KEY);
+            const exampleRules = ['* { background-color: pink }'];
 
-                if (data[PROTECTION_ENABLED_KEY]) {
-                    sendResponse(exampleRules);
-                }
-            });
+            if (isEnabled) {
+                sendResponse(exampleRules);
+            }
             return true;
         }
         default: {

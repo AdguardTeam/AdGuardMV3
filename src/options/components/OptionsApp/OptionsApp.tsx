@@ -13,7 +13,8 @@ import { rootStore } from '../../stores';
 import './options-app.pcss';
 
 export const OptionsApp = observer(() => {
-    const { settingsStore } = useContext(rootStore);
+    const rootStoreContext = useContext(rootStore);
+    const { settingsStore } = rootStoreContext;
     const { protectionEnabled, setProtectionEnabled, getProtectionEnabled } = settingsStore;
 
     const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,7 +61,7 @@ export const OptionsApp = observer(() => {
             await getProtectionEnabled();
         })();
 
-        const messageHandler = getMessageReceiver(rootStore);
+        const messageHandler = getMessageReceiver(rootStoreContext);
 
         chrome.runtime.onMessage.addListener(messageHandler);
         return () => chrome.runtime.onMessage.removeListener(messageHandler);
