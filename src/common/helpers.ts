@@ -1,38 +1,22 @@
 import { log } from './logger';
 
-export const promisify = (f) => (...args) => new Promise((resolve, reject) => {
-    const callback = (...args) => {
-        const { lastError } = chrome.runtime;
-        if (lastError) {
-            reject(lastError);
+// FIXME use @adguard/translate
+export const translate = (key: string) => chrome.i18n.getMessage(key);
+
+export const sendMessage = (type: string, data?: any) => new Promise((resolve, reject) => {
+    const message = { type, data };
+    chrome.runtime.sendMessage({ type, data }, (...args) => {
+        if (chrome.runtime.lastError) {
+            reject(chrome.runtime.lastError);
             return;
         }
-
-        if (args.length === 1) {
-            resolve(...args);
-        }
-
-        resolve(args);
-    };
-
-    f(...args, callback);
+        // FIXME make possible log to receive objects
+        log.info('Sent message: ', message);
+        resolve(...args);
+    });
 });
 
-// FIXME use @adguard/translate
-export const translate = (key) => chrome.i18n.getMessage(key);
-
-export const sendMessage = (type: string, data: any) => {
-    if (!chrome.runtime.sendMessagePromisified) {
-        chrome.runtime.sendMessagePromisified = promisify(chrome.runtime.sendMessage);
-    }
-
-    const message = { type, ...data !== undefined && { data } };
-
-    log.info('Sent message: ', message);
-    return chrome.runtime.sendMessagePromisified(message);
-};
-
-export const applyCss = (css) => {
+export const applyCss = (css: string[]) => {
     if (!css || css.length === 0) {
         return;
     }

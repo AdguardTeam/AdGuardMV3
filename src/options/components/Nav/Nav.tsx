@@ -5,14 +5,13 @@ import { translate } from '../../../common/helpers';
 
 import './nav.pcss';
 
-const Nav = ({ closeSidebar }) => (
+const Nav = () => (
     <div className="nav">
         <NavLink
             className="nav__item"
             exact
             activeClassName="nav__item--active"
             to="/"
-            onClick={closeSidebar}
         >
             {translate('options_general_settings')}
         </NavLink>
@@ -20,7 +19,6 @@ const Nav = ({ closeSidebar }) => (
             className="nav__item"
             activeClassName="nav__item--active"
             to="/about"
-            onClick={closeSidebar}
         >
             {translate('options_about')}
         </NavLink>

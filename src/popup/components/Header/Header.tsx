@@ -11,7 +11,7 @@ export const Header = () => {
         window.close();
     };
 
-    const handleSettingsClick = (e) => {
+    const handleSettingsClick = (e: React.SyntheticEvent) => {
         e.preventDefault();
         /* FIXME - openSettingsTab */
         window.close();

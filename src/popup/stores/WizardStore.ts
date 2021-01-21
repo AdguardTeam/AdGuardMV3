@@ -11,6 +11,35 @@ import type { RootStore } from './RootStore';
 const INITIAL_STEP = 1;
 const LAST_STEP = 4;
 
+interface StepInfo {
+    nameKey: string;
+    descriptionKey: string;
+    icon: string;
+}
+
+const stepInfoMap: { [key: number]: StepInfo } = {
+    1: {
+        nameKey: 'popup_steps_experimental_title',
+        descriptionKey: 'popup_steps_experimental_description',
+        icon: 'experiment',
+    },
+    2: {
+        nameKey: 'popup_steps_new_tech_title',
+        descriptionKey: 'popup_steps_new_tech_description',
+        icon: 'new_tech',
+    },
+    3: {
+        nameKey: 'popup_steps_fast_work_title',
+        descriptionKey: 'popup_steps_fast_work_description',
+        icon: 'fast_work',
+    },
+    4: {
+        nameKey: 'popup_steps_v3_manifest_title',
+        descriptionKey: 'popup_steps_v3_manifest_description',
+        icon: 'chrome_logo',
+    },
+};
+
 export class WizardStore {
     public rootStore: RootStore;
 
@@ -19,45 +48,16 @@ export class WizardStore {
         makeObservable(this);
     }
 
-    @observable step = INITIAL_STEP;
+    @observable step: number = INITIAL_STEP;
 
-    @observable displayWizard = true;
+    @observable displayWizard: boolean = true;
 
     @computed get isLastStep() {
         return this.step === LAST_STEP;
     }
 
-    @computed get stepName() {
-        const stepNames = {
-            1: 'experimental',
-            2: 'new_tech',
-            3: 'fast_work',
-            4: 'v3_manifest',
-        };
-
-        return translate(stepNames[this.step]);
-    }
-
-    @computed get stepDescription() {
-        const stepDescriptions = {
-            1: 'experimental_desc',
-            2: 'new_tech_desc',
-            3: 'fast_work_desc',
-            4: 'v3_manifest_desc',
-        };
-
-        return translate(stepDescriptions[this.step]);
-    }
-
-    @computed get stepIconId() {
-        const stepIconId = {
-            1: 'experiment',
-            2: 'new_tech',
-            3: 'fast_work',
-            4: 'chrome_logo',
-        };
-
-        return stepIconId[this.step];
+    @computed get stepInfo() {
+        return stepInfoMap[this.step];
     }
 
     @computed get buttonText() {
@@ -70,7 +70,7 @@ export class WizardStore {
     }
 
     @action
-    setStep = async (step) => {
+    setStep = async (step: number) => {
         this.step = step;
     };
 

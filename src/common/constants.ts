@@ -1,7 +1,7 @@
-export const MESSAGES = {
+export const MESSAGE_TYPES = {
     GET_PROTECTION_ENABLED: 'GET_PROTECTION_ENABLED',
     SET_PROTECTION_ENABLED: 'SET_PROTECTION_ENABLED',
     GET_CSS: 'GET_CSS',
-};
+} as const;
 
-export const PROTECTION_ENABLED_KEY = 'protectionEnabled';
+export const PROTECTION_ENABLED_KEY = 'protection.enabled';

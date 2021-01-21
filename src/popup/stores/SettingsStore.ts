@@ -18,7 +18,7 @@ export class SettingsStore {
         makeObservable(this);
     }
 
-    @observable protectionEnabled = false;
+    @observable protectionEnabled: boolean = false;
 
     @action
     setProtectionEnabled = async (protectionEnabled: boolean) => {

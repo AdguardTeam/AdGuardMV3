@@ -10,7 +10,10 @@ import './wizard.pcss';
 export const Wizard = observer(() => {
     const { wizardStore } = useContext(rootStore);
     const {
-        step, stepName, stepDescription, stepIconId, buttonText, isLastStep,
+        step,
+        stepInfo,
+        buttonText,
+        isLastStep,
         setNextStep,
         skipWizard,
     } = wizardStore;
@@ -28,14 +31,14 @@ export const Wizard = observer(() => {
                 </button>
             </div>
             <div className="wizard__icon">
-                <Icon id={stepIconId} />
+                <Icon id={stepInfo.icon} />
             </div>
             <div className="wizard__info wizard__info--main">
                 {`${step}.`}
                 &nbsp;
-                {stepName}
+                {translate(stepInfo.nameKey)}
             </div>
-            <div className="wizard__info wizard__info--description">{stepDescription}</div>
+            <div className="wizard__info wizard__info--description">{translate(stepInfo.descriptionKey)}</div>
             <button
                 type="button"
                 className="wizard__button"

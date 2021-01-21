@@ -16,7 +16,7 @@ export const OptionsApp = observer(() => {
     const { settingsStore } = useContext(rootStore);
     const { protectionEnabled, setProtectionEnabled, getProtectionEnabled } = settingsStore;
 
-    const onChange = async (e) => {
+    const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         await setProtectionEnabled(e.target.checked);
     };
 
@@ -60,7 +60,7 @@ export const OptionsApp = observer(() => {
             await getProtectionEnabled();
         })();
 
-        const messageHandler = getMessageReceiver(store);
+        const messageHandler = getMessageReceiver(rootStore);
 
         chrome.runtime.onMessage.addListener(messageHandler);
         return () => chrome.runtime.onMessage.removeListener(messageHandler);
@@ -70,8 +70,8 @@ export const OptionsApp = observer(() => {
         <>
             <h1 className="h1">Settings</h1>
             <div className="option__container">
-                {OPTIONS_MAP.map((props) => {
-                    const { iconId, optionName, renderControl } = props;
+                {OPTIONS_MAP.map((option) => {
+                    const { iconId, optionName, renderControl } = option;
 
                     return (
                         <div key={optionName} className="option__item">
@@ -82,7 +82,7 @@ export const OptionsApp = observer(() => {
                             >
                                 {translate(optionName)}
                             </label>
-                            {renderControl(props)}
+                            {renderControl(option)}
                         </div>
                     );
                 })}

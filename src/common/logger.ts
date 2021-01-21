@@ -1,19 +1,33 @@
 // TODO switch to a less verbose level later
 const CURRENT_LEVEL = 'DEBUG';
 
+declare global {
+    interface Console {
+        [key: string]: ConsoleMethod;
+    }
+}
+
 const LEVELS = {
     ERROR: 1,
     WARN: 2,
     INFO: 3,
     DEBUG: 4,
-};
+} as const;
 
-const print = (level, method, args) => {
+type Level = keyof typeof LEVELS;
+
+const CONSOLE_METHODS = {
+    LOG: 'log',
+    INFO: 'info',
+    WARN: 'warn',
+    ERROR: 'error',
+} as const;
+
+type ConsoleMethod = typeof CONSOLE_METHODS[keyof typeof CONSOLE_METHODS];
+
+const print = (level: Level, method: ConsoleMethod, args: string[]) => {
     // check log level
     if (LEVELS[CURRENT_LEVEL] < LEVELS[level]) {
-        return;
-    }
-    if (!args || args.length === 0 || !args[0]) {
         return;
     }
 
@@ -24,19 +38,19 @@ const print = (level, method, args) => {
 };
 
 export const log = {
-    debug(...args) {
+    debug(...args: any[]) {
         print('DEBUG', 'log', args);
     },
 
-    info(...args) {
+    info(...args: any[]) {
         print('INFO', 'info', args);
     },
 
-    warn(...args) {
+    warn(...args: any[]) {
         print('WARN', 'warn', args);
     },
 
-    error(...args) {
+    error(...args: any[]) {
         print('ERROR', 'error', args);
     },
 };

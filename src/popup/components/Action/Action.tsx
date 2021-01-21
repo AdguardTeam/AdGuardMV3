@@ -10,6 +10,7 @@ export const Action = observer(() => {
     const { settingsStore } = useContext(rootStore);
     const { protectionEnabled } = settingsStore;
 
+    // FIXME use placeholder in the translation
     return protectionEnabled
         ? (
             <section className="action-text__container">

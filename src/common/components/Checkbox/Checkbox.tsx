@@ -2,12 +2,27 @@ import React from 'react';
 
 import './checkbox.pcss';
 
-export const Checkbox = ({ id, checked, onChange }) => {
+type CheckboxProps = {
+    id: string;
+    checked: boolean;
+    onChange: () => void;
+};
+
+export const Checkbox = ({ id, checked, onChange }: CheckboxProps) => {
     return (
         <>
-            <input type="checkbox" id={id} className="checkbox__input" checked={checked} onChange={onChange} />
+            <input
+                type="checkbox"
+                id={id}
+                className="checkbox__input"
+                checked={checked}
+                onChange={onChange}
+            />
             {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-            <label htmlFor={id} className="checkbox__label" />
+            <label
+                htmlFor={id}
+                className="checkbox__label"
+            />
         </>
     );
 };

@@ -1,11 +1,10 @@
-import { MESSAGES, PROTECTION_ENABLED_KEY } from '../../common/constants';
+import { MESSAGE_TYPES } from '../../common/constants';
 import { sendMessage } from '../../common/helpers';
 
 export const sender = {
-    setProtectionEnabled: (protectionEnabled) => sendMessage(
-        MESSAGES.SET_PROTECTION_ENABLED, {
-            [PROTECTION_ENABLED_KEY]: protectionEnabled,
-        },
+    setProtectionEnabled: (protectionEnabled: boolean) => sendMessage(
+        MESSAGE_TYPES.SET_PROTECTION_ENABLED,
+        { protectionEnabled },
     ),
-    getProtectionEnabled: () => sendMessage(MESSAGES.GET_PROTECTION_ENABLED),
+    getProtectionEnabled: () => sendMessage(MESSAGE_TYPES.GET_PROTECTION_ENABLED),
 };

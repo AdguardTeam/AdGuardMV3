@@ -1,4 +1,4 @@
-import { MESSAGES, PROTECTION_ENABLED_KEY } from '../../common/constants';
+import { MESSAGE_TYPES, PROTECTION_ENABLED_KEY } from '../../common/constants';
 import { log } from '../../common/logger';
 
 export const getMessageReceiver = (rootStore) => {
@@ -9,7 +9,7 @@ export const getMessageReceiver = (rootStore) => {
         const { type, data } = message;
 
         const REQUEST_TYPE_TO_HANDLER_MAP = {
-            [MESSAGES.SET_PROTECTION_ENABLED]: (data) => {
+            [MESSAGE_TYPES.SET_PROTECTION_ENABLED]: (data) => {
                 settingsStore.setProtectionEnabled(data[PROTECTION_ENABLED_KEY]);
                 return true;
             },

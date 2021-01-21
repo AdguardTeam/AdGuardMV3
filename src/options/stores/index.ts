@@ -7,5 +7,4 @@ configure({ enforceActions: 'observed' });
 
 const StoreContext = createContext(new RootStore());
 
-export const StoreConsumer = StoreContext.Consumer;
 export const rootStore = StoreContext;

@@ -1,27 +1,35 @@
-import { MESSAGES, PROTECTION_ENABLED_KEY } from '../../common/constants';
+import { MESSAGE_TYPES, PROTECTION_ENABLED_KEY } from '../../common/constants';
 import { log } from '../../common/logger';
 
-export const messageReceiver = (message, sender, sendResponse) => {
+type MessageType = keyof typeof MESSAGE_TYPES;
+interface Message {
+    type: MessageType;
+    data: any;
+}
+
+export const messageReceiver = (
+    message: Message,
+    sender: chrome.runtime.MessageSender,
+    sendResponse: (...args: any[]) => void,
+) => {
+    // FIXME make possible to receive objects
     log.debug('Received message:', message);
     const { type, data } = message;
 
-    const REQUEST_TYPE_TO_HANDLER_MAP = {
-        [MESSAGES.GET_PROTECTION_ENABLED]: () => {
+    switch (type) {
+        case MESSAGE_TYPES.GET_PROTECTION_ENABLED: {
             chrome.storage.local.get([PROTECTION_ENABLED_KEY], sendResponse);
             return true;
-        },
-        // FIXME front should know about setting key
-        [MESSAGES.SET_PROTECTION_ENABLED]: (data) => {
-            try {
-                /* Object { [PROTECTION_ENABLED_KEY]: boolean } */
-                chrome.storage.local.set(data);
-                sendResponse(data);
-            } catch (e) {
-                log.error(e);
-            }
+        }
+        case MESSAGE_TYPES.SET_PROTECTION_ENABLED: {
+            const { protectionEnabled } = data;
+            chrome.storage.local.set(
+                { [PROTECTION_ENABLED_KEY]: protectionEnabled },
+                sendResponse,
+            );
             return true;
-        },
-        [MESSAGES.GET_CSS]: () => {
+        }
+        case MESSAGE_TYPES.GET_CSS: {
             chrome.storage.local.get([PROTECTION_ENABLED_KEY], (data) => {
                 const exampleRules = ['* { background-color: pink }'];
 
@@ -29,15 +37,10 @@ export const messageReceiver = (message, sender, sendResponse) => {
                     sendResponse(exampleRules);
                 }
             });
-
             return true;
-        },
-    };
-
-    if (!Object.prototype.hasOwnProperty.call(REQUEST_TYPE_TO_HANDLER_MAP, type)) {
-        log.warn(`There is no such message type ${type}`);
-        return undefined;
+        }
+        default: {
+            throw new Error(`No message handler for type: ${type}`);
+        }
     }
-
-    return REQUEST_TYPE_TO_HANDLER_MAP[type](data);
 };

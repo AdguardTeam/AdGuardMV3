@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Nav } from '../Nav/Nav';
+import { Nav } from '../Nav';
 import { Icon } from '../../../common/components/ui/Icon';
 
 import './sidebar.pcss';
