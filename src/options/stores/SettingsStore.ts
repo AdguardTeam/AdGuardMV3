@@ -23,26 +23,30 @@ export class SettingsStore {
     @action
     setProtectionEnabled = async (protectionEnabled: boolean) => {
         try {
-            const response = await sender.setProtectionEnabled(protectionEnabled);
-
-            runInAction(() => {
-                this.protectionEnabled = response[PROTECTION_ENABLED_KEY];
-            });
+            await sender.setProtectionEnabled(protectionEnabled);
         } catch (err) {
             log.error(err);
+            return;
         }
+
+        runInAction(() => {
+            this.protectionEnabled = protectionEnabled;
+        });
     };
 
     @action
     getProtectionEnabled = async () => {
-        try {
-            const response = await sender.getProtectionEnabled();
+        let isProtectionEnabled = this.protectionEnabled;
 
-            runInAction(() => {
-                this.protectionEnabled = response[PROTECTION_ENABLED_KEY];
-            });
+        try {
+            isProtectionEnabled = await sender.getProtectionEnabled() as boolean;
         } catch (err) {
             log.error(err);
+            return;
         }
+
+        runInAction(() => {
+            this.protectionEnabled = isProtectionEnabled;
+        });
     };
 }
