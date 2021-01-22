@@ -1,4 +1,4 @@
-export class Storage {
+class Storage {
     private storage;
 
     constructor(storage: chrome.storage.LocalStorageArea) {
