@@ -2,6 +2,8 @@ import React from 'react';
 
 import { translator } from '../../../common/translators/translator';
 import { Icon } from '../../../common/components/ui/Icon';
+import { sendMessage } from '../../../common/helpers';
+import { MESSAGE_TYPES } from '../../../common/constants';
 
 import './header.pcss';
 
@@ -11,9 +13,9 @@ export const Header = () => {
         window.close();
     };
 
-    const handleSettingsClick = (e: React.SyntheticEvent) => {
+    const handleSettingsClick = async (e: React.SyntheticEvent) => {
         e.preventDefault();
-        /* FIXME - openSettingsTab */
+        await sendMessage(MESSAGE_TYPES.OPEN_OPTIONS);
         window.close();
     };
 

@@ -53,6 +53,9 @@ export const messageHandler = async (
             const { protectionEnabled } = data;
             return storage.set(PROTECTION_ENABLED_KEY, protectionEnabled);
         }
+        case MESSAGE_TYPES.OPEN_OPTIONS: {
+            return chrome.runtime.openOptionsPage();
+        }
         case MESSAGE_TYPES.GET_CSS: {
             const isEnabled = await storage.get(PROTECTION_ENABLED_KEY);
             if (!isEnabled) {
