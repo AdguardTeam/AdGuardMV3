@@ -5,7 +5,6 @@ import {
     computed,
 } from 'mobx';
 
-import { translate } from '../../common/helpers';
 import type { RootStore } from './RootStore';
 
 const INITIAL_STEP = 1;
@@ -60,12 +59,12 @@ export class WizardStore {
         return stepInfoMap[this.step];
     }
 
-    @computed get buttonText() {
+    @computed get buttonTextKey() {
         switch (this.step) {
             case LAST_STEP:
-                return translate('lets_start');
+                return 'popup_wizard_start_button';
             default:
-                return translate('next');
+                return 'popup_wizard_next_button';
         }
     }
 

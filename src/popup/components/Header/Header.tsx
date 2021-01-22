@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { translate } from '../../../common/helpers';
+import { translator } from '../../../common/translators/translator';
 import { Icon } from '../../../common/components/ui/Icon';
 
 import './header.pcss';
 
 export const Header = () => {
-    const handleBlockingModeIconClick = () => {
+    const handleBlockAdsClick = () => {
         /* FIXME - enable blocking mode */
         window.close();
     };
@@ -25,15 +25,15 @@ export const Header = () => {
             <div className="popup-header__buttons">
                 <button
                     type="button"
-                    onClick={handleBlockingModeIconClick}
-                    title={translate('context_enable_protection')}
+                    onClick={handleBlockAdsClick}
+                    title={translator.getMessage('options_block_ads_on_website')}
                 >
                     <Icon id="start" className="icon--button" />
                 </button>
                 <button
                     type="button"
                     onClick={handleSettingsClick}
-                    title={translate('options_settings')}
+                    title={translator.getMessage('options_open_settings')}
                 >
                     <Icon id="settings" className="icon--button" />
                 </button>

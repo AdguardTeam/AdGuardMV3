@@ -5,7 +5,7 @@ import './checkbox.pcss';
 type CheckboxProps = {
     id: string;
     checked: boolean;
-    onChange: () => void;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const Checkbox = ({ id, checked, onChange }: CheckboxProps) => {

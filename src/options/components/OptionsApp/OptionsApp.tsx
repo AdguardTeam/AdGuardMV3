@@ -2,13 +2,13 @@ import React, { useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
 import { Route, Switch, HashRouter } from 'react-router-dom';
 
-import { translate } from '../../../common/helpers';
 import { Checkbox } from '../../../common/components/Checkbox';
 import { Icon } from '../../../common/components/ui/Icon';
 import { Icons } from '../../../common/components/ui/Icons';
 import { getMessageReceiver } from '../../messaging/receiver';
 import { Sidebar } from '../Sidebar';
 import { rootStore } from '../../stores';
+import { reactTranslator } from '../../../common/translators/reactTranslator';
 
 import './options-app.pcss';
 
@@ -69,7 +69,9 @@ export const OptionsApp = observer(() => {
 
     const Settings = () => (
         <>
-            <h1 className="h1">Settings</h1>
+            <h1 className="h1">
+                {reactTranslator.getMessage('options_settings_title')}
+            </h1>
             <div className="option__container">
                 {OPTIONS_MAP.map((option) => {
                     const { iconId, optionName, renderControl } = option;
@@ -81,7 +83,7 @@ export const OptionsApp = observer(() => {
                                 htmlFor={iconId}
                                 className="option__label"
                             >
-                                {translate(optionName)}
+                                {reactTranslator.getMessage(optionName)}
                             </label>
                             {renderControl(option)}
                         </div>

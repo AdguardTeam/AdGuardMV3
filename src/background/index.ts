@@ -12,8 +12,9 @@ messaging.init();
 
 // FIXME Finish tasks
 //  - Browser-action icons
-//  - use @adguard/translate
 //  - use types checker fork-ts-checker-webpack-plugin
 //  - add husky to run linter before commit
 //  - add husky to run tests before push
 //  - get current tab info to show on popup
+//  - open settings tag from popup
+//  - enable disable blocking from popup

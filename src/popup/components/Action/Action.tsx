@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
 
-import { translate } from '../../../common/helpers';
+import { reactTranslator } from '../../../common/translators/reactTranslator';
 import { rootStore } from '../../stores';
 
 import './action.pcss';
@@ -10,14 +10,23 @@ export const Action = observer(() => {
     const { settingsStore } = useContext(rootStore);
     const { protectionEnabled } = settingsStore;
 
-    // FIXME use placeholder in the translation
-    return protectionEnabled
-        ? (
+    const blockedAdsCount = 354; // TODO replace with real number
+
+    if (protectionEnabled) {
+        return (
             <section className="action-text__container">
-                <h1 className="action-text action-text__bold">354</h1>
+                <h1 className="action-text action-text__bold">{blockedAdsCount}</h1>
                 &nbsp;
-                <h6 className="action-text ">{translate('trackers_and_ad_blockers')}</h6>
+                <h6 className="action-text ">
+                    {reactTranslator.getMessage('options_trackers_and_ad_blockers')}
+                </h6>
             </section>
-        )
-        : <button type="button" className="action-button">{translate('report_site')}</button>;
+        );
+    }
+
+    return (
+        <button type="button" className="action-button">
+            {reactTranslator.getMessage('options_report_site_option')}
+        </button>
+    );
 });

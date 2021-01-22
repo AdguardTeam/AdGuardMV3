@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
 
-import { translate } from '../../../common/helpers';
 import { Icon } from '../../../common/components/ui/Icon';
+import { reactTranslator } from '../../../common/translators/reactTranslator';
 import { rootStore } from '../../stores';
 
 import './wizard.pcss';
@@ -12,22 +12,25 @@ export const Wizard = observer(() => {
     const {
         step,
         stepInfo,
-        buttonText,
         isLastStep,
-        setNextStep,
         skipWizard,
+        setNextStep,
+        buttonTextKey,
     } = wizardStore;
 
+    // TODO add learn more link handler
     return (
         <section className="wizard__container">
             <div className="wizard__header">
-                <button type="button" className="wizard__link">{translate('learn_more')}</button>
+                <button type="button" className="wizard__link">
+                    {reactTranslator.getMessage('popup_learn_more_link')}
+                </button>
                 <button
                     type="button"
                     className="wizard__link"
                     onClick={skipWizard}
                 >
-                    {translate('skip')}
+                    {reactTranslator.getMessage('popup_skip_wizard')}
                 </button>
             </div>
             <div className="wizard__icon">
@@ -36,15 +39,17 @@ export const Wizard = observer(() => {
             <div className="wizard__info wizard__info--main">
                 {`${step}.`}
                 &nbsp;
-                {translate(stepInfo.nameKey)}
+                {reactTranslator.getMessage(stepInfo.nameKey)}
             </div>
-            <div className="wizard__info wizard__info--description">{translate(stepInfo.descriptionKey)}</div>
+            <div className="wizard__info wizard__info--description">
+                {reactTranslator.getMessage(stepInfo.descriptionKey)}
+            </div>
             <button
                 type="button"
                 className="wizard__button"
                 onClick={isLastStep ? skipWizard : setNextStep}
             >
-                {buttonText}
+                {reactTranslator.getMessage(buttonTextKey)}
             </button>
         </section>
     );

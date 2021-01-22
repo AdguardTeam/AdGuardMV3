@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { translate } from '../../../common/helpers';
+import { reactTranslator } from '../../../common/translators/reactTranslator';
 
 import './nav.pcss';
 
@@ -13,14 +13,14 @@ const Nav = () => (
             activeClassName="nav__item--active"
             to="/"
         >
-            {translate('options_general_settings')}
+            {reactTranslator.getMessage('options_nav_link_general')}
         </NavLink>
         <NavLink
             className="nav__item"
             activeClassName="nav__item--active"
             to="/about"
         >
-            {translate('options_about')}
+            {reactTranslator.getMessage('options_nav_link_about')}
         </NavLink>
     </div>
 );

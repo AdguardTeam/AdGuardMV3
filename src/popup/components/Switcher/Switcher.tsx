@@ -3,7 +3,6 @@ import { observer } from 'mobx-react';
 import cn from 'classnames';
 
 import { Icon } from '../../../common/components/ui/Icon';
-import { translate } from '../../../common/helpers';
 import { rootStore } from '../../stores';
 
 import './switcher.pcss';
@@ -30,7 +29,6 @@ export const Switcher = observer(() => {
             type="button"
             className={className}
             onClick={onClick}
-            title={translate('popup_switch_button')}
         >
             <div className="switcher__center" />
             <div className="switcher__btn">

@@ -1,18 +1,17 @@
 import React from 'react';
+
 import { Icon } from '../../../common/components/ui/Icon';
+import { reactTranslator } from '../../../common/translators/reactTranslator';
 
 import './footer.pcss';
 
-// FIXME add to _locales
 export const Footer = () => {
     return (
         <footer className="footer">
             <span className="text text__regular">
-                Works with
-                &nbsp;
-                <span className="text text__bold">V3</span>
-                &nbsp;
-                Manifest
+                {reactTranslator.getMessage('options_works_with_v3', {
+                    span: (payload: string) => <span className="text text__bold">{payload}</span>,
+                })}
             </span>
             <Icon id="chrome_logo" className="logo" />
         </footer>
