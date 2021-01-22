@@ -413,7 +413,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="option_1" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+            <svg id="ad_blocking" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fillRule="evenodd">
                     <path fill="#000" d="M-322-110h686v554h-686z" />
                     <path fill="#131313" d="M-38-110h402v554H-38z" />
@@ -427,7 +427,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="option_2" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+            <svg id="miscellaneous" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fillRule="evenodd">
                     <path fill="#000" d="M-322-159h686v554h-686z" />
                     <path fill="#131313" d="M-38-159h402v554H-38z" />
@@ -441,7 +441,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="option_3" width="18" height="20" xmlns="http://www.w3.org/2000/svg">
+            <svg id="trackers_blocking" width="18" height="20" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fillRule="evenodd">
                     <path fill="#000" d="M-323-206h686v554h-686z" />
                     <path fill="#131313" d="M-39-206h402v554H-39z" />
@@ -455,7 +455,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="option_4" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+            <svg id="languages" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fillRule="evenodd">
                     <path fill="#000" d="M-322-254h686v554h-686z" />
                     <path fill="#131313" d="M-38-254h402v554H-38z" />
@@ -469,7 +469,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="option_5" width="18" height="14" xmlns="http://www.w3.org/2000/svg">
+            <svg id="filters" width="18" height="14" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fillRule="evenodd">
                     <path fill="#000" d="M-323-305h686v554h-686z" />
                     <path fill="#131313" d="M-39-305h402v554H-39z" />
@@ -483,7 +483,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="option_6" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+            <svg id="user_rules" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fillRule="evenodd">
                     <path fill="#000" d="M-323-351h686v554h-686z" />
                     <path fill="#131313" d="M-39-351h402v554H-39z" />

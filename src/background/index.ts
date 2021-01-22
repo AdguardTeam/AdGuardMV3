@@ -18,3 +18,4 @@ messaging.init();
 //  - get current tab info to show on popup
 //  - open settings tag from popup
 //  - enable disable blocking from popup
+//  - add possibility do download/upload messages and validate them
