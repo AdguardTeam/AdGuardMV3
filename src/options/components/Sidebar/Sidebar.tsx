@@ -1,7 +1,7 @@
 import React from 'react';
 
+import { Icon } from 'Common/components/ui/Icon';
 import { Nav } from '../Nav';
-import { Icon } from '../../../common/components/ui/Icon';
 
 import './sidebar.pcss';
 

@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
 
-import { Icon } from '../../../common/components/ui/Icon';
-import { reactTranslator } from '../../../common/translators/reactTranslator';
+import { Icon } from 'Common/components/ui/Icon';
+import { reactTranslator } from 'Common/translators/reactTranslator';
 import { rootStore } from '../../stores';
 
 import './wizard.pcss';

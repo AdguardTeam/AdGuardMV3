@@ -2,9 +2,9 @@ import React, { useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
 import cn from 'classnames';
 
+import { Icons } from 'Common/components/ui/Icons';
 import { rootStore } from '../../stores';
 import { getMessageReceiver } from '../../messaging/receiver';
-import { Icons } from '../../../common/components/ui/Icons';
 import { Header } from '../Header';
 import { Switcher } from '../Switcher';
 import { PageInfo } from '../PageInfo';

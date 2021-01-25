@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Icon } from '../../../common/components/ui/Icon';
-import { reactTranslator } from '../../../common/translators/reactTranslator';
+import { Icon } from 'Common/components/ui/Icon';
+import { reactTranslator } from 'Common/translators/reactTranslator';
 
 import './footer.pcss';
 

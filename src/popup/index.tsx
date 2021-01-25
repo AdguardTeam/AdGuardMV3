@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'mobx-react';
 
+import { log } from 'Common/logger';
 import { PopupApp } from './components/PopupApp';
-import { log } from '../common/logger';
 
-import '../common/styles/main.pcss';
+import 'Common/styles/main.pcss';
 
 try {
     ReactDOM.render(

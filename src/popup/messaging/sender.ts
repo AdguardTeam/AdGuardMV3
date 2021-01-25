@@ -1,5 +1,5 @@
-import { sendMessage } from '../../common/helpers';
-import { MESSAGE_TYPES } from '../../common/constants';
+import { sendMessage } from 'Common/helpers';
+import { MESSAGE_TYPES } from 'Common/constants';
 
 export const sender = {
     setProtectionEnabled: (protectionEnabled: boolean) => sendMessage(

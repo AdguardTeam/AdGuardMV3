@@ -2,17 +2,17 @@ import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
 import cn from 'classnames';
 
-import { Icon } from '../../../common/components/ui/Icon';
+import { Icon } from 'Common/components/ui/Icon';
 import { rootStore } from '../../stores';
 
 import './switcher.pcss';
 
 export const Switcher = observer(() => {
     const { settingsStore } = useContext(rootStore);
-    const { protectionEnabled, setProtectionEnabled } = settingsStore;
+    const { protectionEnabled, toggleProtectionEnabled } = settingsStore;
 
     const onClick = async () => {
-        await setProtectionEnabled(!protectionEnabled);
+        await toggleProtectionEnabled(!protectionEnabled);
     };
 
     const icon = cn({

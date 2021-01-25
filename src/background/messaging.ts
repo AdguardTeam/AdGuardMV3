@@ -1,5 +1,5 @@
-import { MESSAGE_TYPES, PROTECTION_ENABLED_KEY } from '../common/constants';
-import { log } from '../common/logger';
+import { MESSAGE_TYPES, PROTECTION_ENABLED_KEY } from 'Common/constants';
+import { log } from 'Common/logger';
 import { storage } from './storage';
 
 type MessageType = keyof typeof MESSAGE_TYPES;

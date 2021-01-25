@@ -1,17 +1,18 @@
-import { MESSAGE_TYPES, PROTECTION_ENABLED_KEY } from '../../common/constants';
-import { log } from '../../common/logger';
+import { MESSAGE_TYPES } from 'Common/constants';
+import { log } from 'Common/logger';
 import { RootStore } from '../../options/stores/RootStore';
 
 export const getMessageReceiver = (rootStore: RootStore) => {
     const { settingsStore } = rootStore;
 
-    return async (message: any) => {
+    return (message: any) => {
         log.debug('Received message: ', message);
         const { type, data } = message;
 
         switch (type) {
             case MESSAGE_TYPES.SET_PROTECTION_ENABLED: {
-                settingsStore.setProtectionEnabled(data[PROTECTION_ENABLED_KEY]);
+                const { protectionEnabled } = data;
+                settingsStore.setProtectionEnabled(protectionEnabled);
                 break;
             }
             default: {

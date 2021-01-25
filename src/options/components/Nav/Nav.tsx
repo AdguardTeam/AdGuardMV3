@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { reactTranslator } from '../../../common/translators/reactTranslator';
+import { reactTranslator } from 'Common/translators/reactTranslator';
 
 import './nav.pcss';
 

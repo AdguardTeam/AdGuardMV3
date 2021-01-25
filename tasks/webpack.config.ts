@@ -10,6 +10,7 @@ import { Browser, BuildEnv } from './environment';
 import { BROWSERS, BUILD_ENVS } from './constants';
 
 const packageJson = require('../package.json');
+const tsconfig = require('../tsconfig.json');
 
 const updateManifest = (isDev: boolean, content: Buffer) => {
     const manifest = JSON.parse(content.toString());
@@ -119,7 +120,20 @@ const config = {
         publicPath: '',
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.jsx', '.js'],
+        extensions: ['.tsx', '.ts', '.js'],
+        alias: Object.keys(tsconfig.compilerOptions.paths)
+            // Reduce to load aliases from ./tsconfig.json in appropriate for webpack form
+            .reduce((aliases: { [key: string]: string }, key) => {
+                const paths = tsconfig.compilerOptions.paths[key].map((p: string) => p.replace('/*', ''));
+                // eslint-disable-next-line no-param-reassign
+                aliases[key.replace('/*', '')] = path.resolve(
+                    __dirname,
+                    '../',
+                    tsconfig.compilerOptions.baseUrl,
+                    ...paths,
+                );
+                return aliases;
+            }, {}),
     },
     module: {
         rules: [

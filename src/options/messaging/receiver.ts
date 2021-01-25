@@ -1,5 +1,5 @@
-import { MESSAGE_TYPES, PROTECTION_ENABLED_KEY } from '../../common/constants';
-import { log } from '../../common/logger';
+import { MESSAGE_TYPES } from 'Common/constants';
+import { log } from 'Common/logger';
 import type { RootStore } from '../stores/RootStore';
 
 export const getMessageReceiver = (rootStore: RootStore) => {
@@ -11,7 +11,8 @@ export const getMessageReceiver = (rootStore: RootStore) => {
 
         switch (type) {
             case MESSAGE_TYPES.SET_PROTECTION_ENABLED: {
-                settingsStore.setProtectionEnabled(data[PROTECTION_ENABLED_KEY]);
+                const { protectionEnabled } = data;
+                settingsStore.toggleProtectionEnabled(protectionEnabled);
                 break;
             }
             default: {

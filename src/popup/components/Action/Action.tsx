@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
 
-import { reactTranslator } from '../../../common/translators/reactTranslator';
+import { reactTranslator } from 'Common/translators/reactTranslator';
 import { rootStore } from '../../stores';
 
 import './action.pcss';
@@ -24,6 +24,7 @@ export const Action = observer(() => {
         );
     }
 
+    // TODO add click handler for reporting site
     return (
         <button type="button" className="action-button">
             {reactTranslator.getMessage('options_report_site_option')}

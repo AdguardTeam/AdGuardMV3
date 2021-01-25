@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
 import { Route, Switch, HashRouter } from 'react-router-dom';
 
-import { Icons } from '../../../common/components/ui/Icons';
+import { Icons } from 'Common/components/ui/Icons';
 import { getMessageReceiver } from '../../messaging/receiver';
 import { Sidebar } from '../Sidebar';
 import { About } from '../About';

@@ -5,8 +5,7 @@ import {
     runInAction,
 } from 'mobx';
 
-import { PROTECTION_ENABLED_KEY } from '../../common/constants';
-import { log } from '../../common/logger';
+import { log } from 'Common/logger';
 import { sender } from '../messaging/sender';
 import type { RootStore } from './RootStore';
 
@@ -21,7 +20,7 @@ export class SettingsStore {
     @observable protectionEnabled: boolean = false;
 
     @action
-    setProtectionEnabled = async (protectionEnabled: boolean) => {
+    toggleProtectionEnabled = async (protectionEnabled: boolean) => {
         try {
             await sender.setProtectionEnabled(protectionEnabled);
         } catch (err) {
@@ -32,6 +31,11 @@ export class SettingsStore {
         runInAction(() => {
             this.protectionEnabled = protectionEnabled;
         });
+    };
+
+    @action
+    setProtectionEnabled = async (protectionEnabled: boolean) => {
+        this.protectionEnabled = protectionEnabled;
     };
 
     @action

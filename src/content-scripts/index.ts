@@ -1,4 +1,4 @@
-import { log } from '../common/logger';
+import { log } from 'Common/logger';
 import { sender } from './messaging/sender';
 
 log.debug('Content script has loaded via Manifest V3.');

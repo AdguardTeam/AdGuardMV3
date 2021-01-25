@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { translator } from '../../../common/translators/translator';
-import { Icon } from '../../../common/components/ui/Icon';
-import { sendMessage } from '../../../common/helpers';
-import { MESSAGE_TYPES } from '../../../common/constants';
+import { translator } from 'Common/translators/translator';
+import { Icon } from 'Common/components/ui/Icon';
+import { sendMessage } from 'Common/helpers';
+import { MESSAGE_TYPES } from 'Common/constants';
 
 import './header.pcss';
 

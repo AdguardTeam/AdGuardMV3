@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
 
-import { reactTranslator } from '../../../common/translators/reactTranslator';
-import { Icon } from '../../../common/components/ui/Icon';
-import { Checkbox } from '../../../common/components/Checkbox';
+import { reactTranslator } from 'Common/translators/reactTranslator';
+import { Icon } from 'Common/components/ui/Icon';
+import { Checkbox } from 'Common/components/Checkbox';
 import { rootStore } from '../../stores';
 
 interface Option {
@@ -36,14 +36,14 @@ interface ArrowOption {
 export const Settings = observer(() => {
     const { settingsStore } = useContext(rootStore);
 
-    const { setProtectionEnabled, protectionEnabled } = settingsStore;
+    const { toggleProtectionEnabled, protectionEnabled } = settingsStore;
 
     const OPTIONS = {
         AD_BLOCKING: {
             id: 'ad_blocking',
             messageKey: 'options_ad_blocking_option',
             onChange: async (e: React.ChangeEvent<HTMLInputElement>) => {
-                await setProtectionEnabled(e.target.checked);
+                await toggleProtectionEnabled(e.target.checked);
             },
             enabled: protectionEnabled,
         },
