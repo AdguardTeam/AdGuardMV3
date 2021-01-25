@@ -9,7 +9,7 @@ import './header.pcss';
 
 export const Header = () => {
     const handleBlockAdsClick = () => {
-        /* FIXME - enable blocking mode */
+        // TODO - handle block ads click, launching assistant
         window.close();
     };
 

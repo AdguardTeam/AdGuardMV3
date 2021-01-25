@@ -8,7 +8,6 @@ export const sendMessage = (type: string, data?: any) => new Promise((resolve, r
             reject(chrome.runtime.lastError);
             return;
         }
-        // FIXME make possible log to receive objects
         log.info('Sent message: ', message);
         resolve(...args);
     });

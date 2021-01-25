@@ -41,7 +41,6 @@ export const messageHandler = async (
     message: Message,
     sender: chrome.runtime.MessageSender,
 ) => {
-    // FIXME make possible to log objects or another complicated objects like errors
     log.debug('Received message:', message, 'from: ', sender);
     const { type, data } = message;
 

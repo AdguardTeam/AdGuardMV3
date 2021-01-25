@@ -37,6 +37,7 @@ const print = (level: Level, method: ConsoleMethod, args: string[]) => {
     console[method](formatted, ...args);
 };
 
+// TODO make possible to log objects or another complicated objects like errors
 export const log = {
     debug(...args: any[]) {
         print('DEBUG', 'log', args);
