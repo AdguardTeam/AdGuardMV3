@@ -1,0 +1,67 @@
+.sidebar {
+    min-width: 170px;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 248px;
+    transform: translateX(-100%);
+    margin-left: 7.8rem;
+
+    &__menu {
+        display: block;
+        position: fixed;
+        top: 0;
+        height: 40px;
+        width: 100%;
+        background-color: var(--white);
+        font-size: 14px;
+        line-height: 18px;
+    }
+
+    &__logo {
+        margin: 32px 102px 0 37px;
+    }
+
+    &__open-button {
+        margin: 6px 9px;
+        border: 0;
+        background-color: transparent;
+    }
+
+    &__overlay {
+        height: 100%;
+        width: 100%;
+        position: fixed;
+        left: 0;
+        top: 0;
+        overflow-x: hidden;
+        animation-delay: 0.3s;
+    }
+
+    &--open {
+        transform: translateX(0);
+    }
+
+    @media (min-width: 640px) {
+        margin-right: 32px;
+        transform: translateX(0);
+        position: relative;
+
+        &__menu {
+            display: none;
+        }
+
+        &__logo {
+            margin: 0 0 24px 0;
+        }
+
+        &__overlay {
+            display: none;
+        }
+    };
+
+    @media (min-width: 1024px) {
+        margin-right: 64px;
+    };
+}
