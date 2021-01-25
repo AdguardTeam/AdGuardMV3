@@ -13,9 +13,6 @@ messaging.init();
 // TODO tasks
 //  - add about page content
 //  - add info about desktop version
-//  - use types checker fork-ts-checker-webpack-plugin
-//  - add husky to run linter before commit
-//  - add husky to run tests before push
 //  - get current tab info to show on popup
 //  - enable disable blocking from popup
 //  - create project on crowdin, add scripts for download/upload messages and validate them

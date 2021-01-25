@@ -5,6 +5,7 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ZipWebpackPlugin from 'zip-webpack-plugin';
 import { WebpackPluginInstance } from 'webpack';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 import { Browser, BuildEnv } from './environment';
 import { BROWSERS, BUILD_ENVS } from './constants';
@@ -55,6 +56,7 @@ const OPTIONS_PATH = path.resolve(__dirname, SRC_PATH, 'options');
 const CONTENT_SCRIPTS_PATH = path.resolve(__dirname, SRC_PATH, 'content-scripts');
 
 const plugins: WebpackPluginInstance[] = [
+    new ForkTsCheckerWebpackPlugin(),
     new CopyWebpackPlugin({
         patterns: [
             {
