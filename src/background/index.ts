@@ -9,13 +9,3 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 
 messaging.init();
-
-// TODO tasks
-//  - add about page content
-//  - add info about desktop version
-//  - get current tab info to show on popup
-//  - enable disable blocking from popup
-//  - create project on crowdin, add scripts for download/upload messages and validate them
-//  - add possibility to block elements with assistant
-//  - implement report site functionality
-//  - make wizard to show just once after install
