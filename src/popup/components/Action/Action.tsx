@@ -18,7 +18,7 @@ export const Action = observer(() => {
                 <h1 className="action-text action-text__bold">{blockedAdsCount}</h1>
                 &nbsp;
                 <h6 className="action-text ">
-                    {reactTranslator.getMessage('options_trackers_and_ad_blockers')}
+                    {reactTranslator.getMessage('popup_trackers_and_ad_blockers')}
                 </h6>
             </section>
         );
@@ -27,7 +27,7 @@ export const Action = observer(() => {
     // TODO add click handler for reporting site
     return (
         <button type="button" className="action-button">
-            {reactTranslator.getMessage('options_report_site_option')}
+            {reactTranslator.getMessage('popup_report_site_option')}
         </button>
     );
 });

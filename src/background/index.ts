@@ -18,7 +18,7 @@ messaging.init();
 //  - add husky to run tests before push
 //  - get current tab info to show on popup
 //  - enable disable blocking from popup
-//  - add possibility do download/upload messages and validate them
+//  - create project on crowdin, add scripts for download/upload messages and validate them
 //  - add possibility to block elements with assistant
 //  - implement report site functionality
 //  - make wizard to show just once after install
