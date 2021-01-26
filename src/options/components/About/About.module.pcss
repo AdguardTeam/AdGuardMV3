@@ -1,29 +1,3 @@
-.about {
-    line-height: 1.9rem;
-
-    &__section {
-        font-weight: 400;
-        font-size: 1.6rem;
-        color: var(--grayd8);
-        letter-spacing: 0;
-    }
-
-    &__version {
-        margin: 3.2rem 0 0.6rem;
-    }
-}
-
-.read-more {
-    &__section {
-        margin: 2.4rem 0 3.2rem;
-    }
-
-    &__link {
-        display: block;
-        line-height: 1.9rem;
-    }
-}
-
 .link {
     color: var(--green);
 }
@@ -31,16 +5,50 @@
 .heading {
     color: var(--white);
     letter-spacing: 0;
+}
 
-    &__main {
-        font-weight: 500;
-        font-size: 2.4rem;
-        line-height: 2.8rem;
-    }
+.headingMain {
+    composes: heading;
+    font-weight: 500;
+    font-size: 2.4rem;
+    line-height: 2.8rem;
+}
 
-    &__secondary {
-        font-weight: 700;
-        font-size: 1.6rem;
-        line-height: 1.9rem;
-    }
+.headingSecondary {
+    composes: heading;
+    font-weight: 700;
+    font-size: 1.6rem;
+    line-height: 1.9rem;
+}
+
+.container {
+    line-height: 1.9rem;
+}
+
+.title {
+    composes: headingMain;
+    margin: 3.2rem 0 0.6rem;
+}
+
+.section {
+    font-weight: 400;
+    font-size: 1.6rem;
+    color: var(--grayd8);
+    letter-spacing: 0;
+}
+
+.version {
+    composes: headingSecondary;
+    margin: 3.2rem 0 0.6rem;
+}
+
+.readMoreSection {
+    composes: section;
+    margin: 2.4rem 0 3.2rem;
+}
+
+.readMoreLink {
+    composes: link;
+    display: block;
+    line-height: 1.9rem;
 }

@@ -161,7 +161,15 @@ const config = {
                         loader: 'css-loader',
                         options: {
                             importLoaders: 1,
-                            modules: { auto: true },
+                            modules: {
+                                compileType: 'module',
+                                mode: 'local',
+                                auto: true,
+                                exportGlobals: false,
+                                localIdentName: IS_DEV ? '[path][name]__[local]--[hash:base64:5]' : '[hash:base64]',
+                                exportLocalsConvention: 'camelCaseOnly',
+                                exportOnlyLocals: false,
+                            },
                         },
                     },
                     'postcss-loader',
