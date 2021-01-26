@@ -161,6 +161,7 @@ const config = {
                         loader: 'css-loader',
                         options: {
                             importLoaders: 1,
+                            modules: { auto: true },
                         },
                     },
                     'postcss-loader',
