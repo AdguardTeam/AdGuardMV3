@@ -11,3 +11,10 @@ export const MESSAGE_TYPES = {
     DISABLE_WIZARD: 'DISABLE_WIZARD',
     GET_POPUP_DATA: 'GET_POPUP_DATA',
 } as const;
+
+export type MessageType = keyof typeof MESSAGE_TYPES;
+
+export type Message = {
+    type: MessageType;
+    data?: any;
+};

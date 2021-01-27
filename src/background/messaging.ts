@@ -1,13 +1,8 @@
-import { MESSAGE_TYPES, PopupData } from 'Common/constants';
+import { Message, MESSAGE_TYPES, PopupData } from 'Common/constants';
 import { log } from 'Common/logger';
+import { waitFor } from 'Common/helpers';
 import { settings, SETTINGS_NAMES } from './settings';
-
-type MessageType = keyof typeof MESSAGE_TYPES;
-
-interface Message {
-    type: MessageType;
-    data: any;
-}
+import { app } from './app';
 
 interface MessageHandler {
     (message: Message, sender: chrome.runtime.MessageSender): any;
@@ -42,6 +37,11 @@ export const messageHandler = async (
     sender: chrome.runtime.MessageSender,
 ) => {
     log.debug('Received message:', message, 'from: ', sender);
+
+    if (!app.isReady()) {
+        await waitFor(app.isReady);
+    }
+
     const { type, data } = message;
 
     switch (type) {

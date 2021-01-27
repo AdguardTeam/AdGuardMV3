@@ -3,6 +3,7 @@ import { observer } from 'mobx-react';
 import cn from 'classnames';
 
 import { Icons } from 'Common/components/ui/Icons';
+import { log } from 'Common/logger';
 import { rootStore } from '../../stores';
 import { getMessageReceiver } from '../../messaging/receiver';
 import { Header } from '../Header';
@@ -22,7 +23,11 @@ export const PopupApp = observer(() => {
 
     useEffect(() => {
         (async () => {
-            await getPopupData();
+            try {
+                await getPopupData();
+            } catch (e) {
+                log.error(e);
+            }
         })();
 
         const messageHandler = getMessageReceiver(store);
