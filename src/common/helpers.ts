@@ -21,6 +21,11 @@ interface WaitPredicate {
     (): boolean;
 }
 
+/**
+ * Function waits until timeout or predicate returns true
+ * @param predicate
+ * @param maxToWaitMs
+ */
 export const waitFor = (predicate: WaitPredicate, maxToWaitMs: number = 1000) => {
     let intervalId: number;
     const startTime = Date.now();
