@@ -14,13 +14,13 @@ export const About = () => {
             <h3 className={styles.version}>{`${reactTranslator.getMessage('options_about_version')} ${chrome.runtime.getManifest().version}`}</h3>
             <div className={styles.section}>Placeholder</div>
             <div className={styles.readMoreSection}>
-                <a href={READ_MORE_LINK} className={styles.readMoreLink}>{reactTranslator.getMessage('options_about_read_more')}</a>
+                <a href={READ_MORE_LINK} className={styles.readMoreLink} rel="noopener noreferrer" target="_blank">{reactTranslator.getMessage('options_about_read_more')}</a>
             </div>
             <div className={styles.section}>{`2009-${new Date().getFullYear()} AdGuard Software Ltd.`}</div>
             <div className={styles.section}>
                 {reactTranslator.getMessage('options_about_rights_reserved')}
                 &nbsp;
-                <a href={ADGUARD_SITE_LINK} className={styles.link}>adguard.com</a>
+                <a href={ADGUARD_SITE_LINK} className={styles.link} rel="noopener noreferrer" target="_blank">adguard.com</a>
             </div>
         </section>
     );
