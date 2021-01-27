@@ -1,25 +1,24 @@
 import React, { useLayoutEffect, useState } from 'react';
 
 import { reactTranslator } from 'Common/translators/reactTranslator';
-import { storage } from '../../../background/storage';
+import { sender } from '../../messaging/sender';
 
 import styles from './Notice.module.pcss';
 
 // TODO: change link, add to tds
 const COMPARISON_LINK = 'https://adguard.com';
-const STORAGE_KEY_HIDDEN = 'NOTICE_HIDDEN';
 
 const Notice = () => {
-    const [isHidden, setHidden] = useState(true);
+    const [isHidden, setHidden] = useState<boolean>(true);
 
     useLayoutEffect(() => {
         (async () => {
-            setHidden(await storage.get(STORAGE_KEY_HIDDEN));
+            setHidden(await sender.getNoticeHidden());
         })();
     }, []);
 
     const hide = async () => {
-        await storage.set(STORAGE_KEY_HIDDEN, true);
+        await sender.setNoticeHidden(true);
         setHidden(true);
     };
 

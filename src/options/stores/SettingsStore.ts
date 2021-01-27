@@ -41,7 +41,7 @@ export class SettingsStore {
         let isProtectionEnabled = this.protectionEnabled;
 
         try {
-            isProtectionEnabled = await sender.getProtectionEnabled() as boolean;
+            isProtectionEnabled = await sender.getProtectionEnabled();
         } catch (err) {
             log.error(err);
             return;

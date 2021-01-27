@@ -1,13 +1,7 @@
-import { MESSAGE_TYPES, PROTECTION_ENABLED_KEY } from 'Common/constants';
+import { MESSAGE_TYPES, STORAGE_KEYS } from 'Common/constants';
 import { log } from 'Common/logger';
+import { Message } from 'Common/types';
 import { storage } from './storage';
-
-type MessageType = keyof typeof MESSAGE_TYPES;
-
-interface Message {
-    type: MessageType;
-    data: any;
-}
 
 interface MessageHandler {
     (message: Message, sender: chrome.runtime.MessageSender): any;
@@ -46,17 +40,24 @@ export const messageHandler = async (
 
     switch (type) {
         case MESSAGE_TYPES.GET_PROTECTION_ENABLED: {
-            return storage.get(PROTECTION_ENABLED_KEY);
+            return storage.get<boolean>(STORAGE_KEYS.PROTECTION_ENABLED);
         }
         case MESSAGE_TYPES.SET_PROTECTION_ENABLED: {
             const { protectionEnabled } = data;
-            return storage.set(PROTECTION_ENABLED_KEY, protectionEnabled);
+            return storage.set(STORAGE_KEYS.PROTECTION_ENABLED, protectionEnabled);
+        }
+        case MESSAGE_TYPES.GET_NOTICE_HIDDEN: {
+            return storage.get<boolean>(STORAGE_KEYS.NOTICE_HIDDEN);
+        }
+        case MESSAGE_TYPES.SET_NOTICE_HIDDEN: {
+            const { noticeHidden } = data;
+            return storage.set(STORAGE_KEYS.NOTICE_HIDDEN, noticeHidden);
         }
         case MESSAGE_TYPES.OPEN_OPTIONS: {
             return chrome.runtime.openOptionsPage();
         }
         case MESSAGE_TYPES.GET_CSS: {
-            const isEnabled = await storage.get(PROTECTION_ENABLED_KEY);
+            const isEnabled = await storage.get<boolean>(STORAGE_KEYS.PROTECTION_ENABLED);
             if (!isEnabled) {
                 return null;
             }

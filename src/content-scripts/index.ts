@@ -18,7 +18,7 @@ const applyCss = (css: string[]) => {
 };
 
 const tryLoadCssAndScripts = async () => {
-    const response = await sender.getCss() as string[];
+    const response = await sender.getCss();
     applyCss(response);
 };
 

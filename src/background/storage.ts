@@ -1,3 +1,5 @@
+import { StorageKeysType } from '../common/types';
+
 class Storage {
     private storage;
 
@@ -5,9 +7,9 @@ class Storage {
         this.storage = storage;
     }
 
-    get = (key: string): Promise<any> => {
+    get = <T>(key: StorageKeysType): Promise<T> => {
         return new Promise((resolve, reject) => {
-            this.storage.get([key], (result: { [x: string]: any; }) => {
+            this.storage.get([key], (result: { [x: string]: T }) => {
                 if (chrome.runtime.lastError) {
                     reject(chrome.runtime.lastError);
                 }
@@ -16,9 +18,9 @@ class Storage {
         });
     };
 
-    set = (key: string, value: any): Promise<void> => {
+    set = (key: StorageKeysType, value: any): Promise<void> => {
         return new Promise((resolve, reject) => {
-            this.storage.set({ key: value }, () => {
+            this.storage.set({ [key]: value }, () => {
                 if (chrome.runtime.lastError) {
                     reject(chrome.runtime.lastError);
                 }
