@@ -28,14 +28,14 @@ export class SettingsStore {
     getPopupInfo = async () => {
         const activeTab = await getActiveTab();
         runInAction(() => {
-            this.currentUrl = activeTab.url ? activeTab.url : '';
+            this.currentUrl = activeTab.url || '';
         });
     };
 
     @computed
     get currentSite() {
         const urlDetails = getUrlDetails(this.currentUrl);
-        if (urlDetails && urlDetails.domainName) {
+        if (urlDetails?.domainName) {
             return urlDetails.domainName;
         }
         return this.currentUrl;

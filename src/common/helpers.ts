@@ -36,7 +36,7 @@ interface URLInfo extends URL {
  * @param hostname
  */
 const cropHostname = (hostname: string) => {
-    return hostname.startsWith('www.') ? hostname.substring(4) : hostname;
+    return hostname.replace(/^www\./, '');
 };
 
 /**
