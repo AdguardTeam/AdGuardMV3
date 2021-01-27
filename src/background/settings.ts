@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { throttle } from 'lodash';
 
 import { log } from 'Common/logger';
 import { storage } from './storage';
@@ -31,7 +31,7 @@ class Settings {
         log.debug('Settings module loaded successfully');
     };
 
-    private updateStorage = _.throttle(async () => {
+    private updateStorage = throttle(async () => {
         await storage.set(this.SETTINGS_STORAGE_KEY, this.settingsInMemory);
     }, this.SAVE_TO_STORAGE_THROTTLE_TIMEOUT_MS);
 
