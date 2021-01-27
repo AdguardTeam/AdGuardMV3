@@ -1,15 +1,14 @@
 import { settings } from './settings';
 
-export const app = (() => {
-    let isReady = false;
+class App {
+    isAppReady = false;
 
-    const init = async () => {
+    init = async () => {
         await settings.init();
-        isReady = true;
+        this.isAppReady = true;
     };
 
-    return {
-        isReady: () => isReady,
-        init,
-    };
-})();
+    isReady = () => this.isAppReady;
+}
+
+export const app = new App();
