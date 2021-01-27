@@ -8,45 +8,41 @@ export enum SETTINGS_NAMES {
     POPUP_V3_WIZARD_ENABLED = 'popup.v3.wizard.enabled',
 }
 
-export const settings = (() => {
-    const DEFAULT_SETTINGS = {
+class Settings {
+    private DEFAULT_SETTINGS = {
         [SETTINGS_NAMES.FILTERING_ENABLED]: true,
         [SETTINGS_NAMES.POPUP_V3_WIZARD_ENABLED]: true,
     };
 
-    const SETTINGS_STORAGE_KEY = 'settings';
+    private SETTINGS_STORAGE_KEY = 'settings';
 
-    const SAVE_TO_STORAGE_THROTTLE_TIMEOUT_MS = 1000;
+    private SAVE_TO_STORAGE_THROTTLE_TIMEOUT_MS = 1000;
 
-    let settingsInMemory = DEFAULT_SETTINGS;
+    private settingsInMemory = this.DEFAULT_SETTINGS;
 
-    const init = async () => {
+    public init = async () => {
         // TODO consider to make storage synchronous
-        const storedSettings = await storage.get(SETTINGS_STORAGE_KEY);
+        const storedSettings = await storage.get(this.SETTINGS_STORAGE_KEY);
 
         if (storedSettings) {
-            settingsInMemory = { ...settingsInMemory, ...storedSettings };
+            this.settingsInMemory = { ...this.settingsInMemory, ...storedSettings };
         }
 
         log.debug('Settings module loaded successfully');
     };
 
-    const updateStorage = _.throttle(async () => {
-        await storage.set(SETTINGS_STORAGE_KEY, settingsInMemory);
-    }, SAVE_TO_STORAGE_THROTTLE_TIMEOUT_MS);
+    private updateStorage = _.throttle(async () => {
+        await storage.set(this.SETTINGS_STORAGE_KEY, this.settingsInMemory);
+    }, this.SAVE_TO_STORAGE_THROTTLE_TIMEOUT_MS);
 
-    const getSetting = (key: SETTINGS_NAMES) => {
-        return settingsInMemory[key];
+    public getSetting = (key: SETTINGS_NAMES) => {
+        return this.settingsInMemory[key];
     };
 
-    const setSetting = (key: SETTINGS_NAMES, value: any) => {
-        settingsInMemory[key] = value;
-        updateStorage();
+    public setSetting = (key: SETTINGS_NAMES, value: any) => {
+        this.settingsInMemory[key] = value;
+        this.updateStorage();
     };
+}
 
-    return {
-        init,
-        getSetting,
-        setSetting,
-    };
-})();
+export const settings = new Settings();
