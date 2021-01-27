@@ -10,9 +10,9 @@ export const getMessageReceiver = (rootStore: RootStore) => {
         const { type, data } = message;
 
         switch (type) {
-            case MESSAGE_TYPES.SET_PROTECTION_ENABLED: {
+            case MESSAGE_TYPES.SET_FILTERING_ENABLED: {
                 const { protectionEnabled } = data;
-                settingsStore.toggleProtectionEnabled(protectionEnabled);
+                settingsStore.toggleFilteringEnabled(protectionEnabled);
                 break;
             }
             default: {

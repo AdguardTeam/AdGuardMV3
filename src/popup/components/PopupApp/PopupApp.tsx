@@ -17,12 +17,12 @@ import './popup-app.pcss';
 export const PopupApp = observer(() => {
     const store = useContext(rootStore);
     const { settingsStore, wizardStore } = store;
-    const { protectionEnabled, getProtectionEnabled } = settingsStore;
-    const { displayWizard } = wizardStore;
+    const { filteringEnabled, getPopupData, popupDataReady } = settingsStore;
+    const { wizardEnabled } = wizardStore;
 
     useEffect(() => {
         (async () => {
-            await getProtectionEnabled();
+            await getPopupData();
         })();
 
         const messageHandler = getMessageReceiver(store);
@@ -32,13 +32,17 @@ export const PopupApp = observer(() => {
     }, []);
 
     const classname = cn('main', {
-        'main--disabled': !protectionEnabled,
+        'main--disabled': !filteringEnabled,
     });
+
+    if (!popupDataReady) {
+        return <div className="popup">{null}</div>;
+    }
 
     return (
         <div className="popup">
             <Icons />
-            {displayWizard
+            {wizardEnabled
                 ? <Wizard />
                 : (
                     <>

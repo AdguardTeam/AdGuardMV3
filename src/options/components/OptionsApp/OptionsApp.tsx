@@ -14,11 +14,11 @@ import './options-app.pcss';
 export const OptionsApp = observer(() => {
     const rootStoreContext = useContext(rootStore);
     const { settingsStore } = rootStoreContext;
-    const { getProtectionEnabled } = settingsStore;
+    const { getFilteringEnabled } = settingsStore;
 
     useEffect(() => {
         (async () => {
-            await getProtectionEnabled();
+            await getFilteringEnabled();
         })();
 
         const messageHandler = getMessageReceiver(rootStoreContext);

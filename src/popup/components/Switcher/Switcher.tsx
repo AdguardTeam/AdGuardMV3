@@ -9,19 +9,19 @@ import './switcher.pcss';
 
 export const Switcher = observer(() => {
     const { settingsStore } = useContext(rootStore);
-    const { protectionEnabled, toggleProtectionEnabled } = settingsStore;
+    const { filteringEnabled, toggleFilteringEnabled } = settingsStore;
 
     const onClick = async () => {
-        await toggleProtectionEnabled(!protectionEnabled);
+        await toggleFilteringEnabled(!filteringEnabled);
     };
 
     const icon = cn({
-        checkmark: protectionEnabled,
-        circle: !protectionEnabled,
+        checkmark: filteringEnabled,
+        circle: !filteringEnabled,
     });
 
     const className = cn('switcher', {
-        'switcher--disabled': !protectionEnabled,
+        'switcher--disabled': !filteringEnabled,
     });
 
     return (

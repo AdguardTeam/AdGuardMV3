@@ -18,7 +18,7 @@ class Storage {
 
     set = (key: string, value: any): Promise<void> => {
         return new Promise((resolve, reject) => {
-            this.storage.set({ key: value }, () => {
+            this.storage.set({ [key]: value }, () => {
                 if (chrome.runtime.lastError) {
                     reject(chrome.runtime.lastError);
                 }

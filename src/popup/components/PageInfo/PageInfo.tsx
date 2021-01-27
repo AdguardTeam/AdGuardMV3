@@ -8,9 +8,9 @@ import './page-info.pcss';
 
 export const PageInfo = observer(() => {
     const { settingsStore } = useContext(rootStore);
-    const { protectionEnabled } = settingsStore;
+    const { filteringEnabled } = settingsStore;
 
-    const labelKey = protectionEnabled
+    const labelKey = filteringEnabled
         ? 'popup_protection_enabled_status'
         : 'popup_protection_disabled_status';
 

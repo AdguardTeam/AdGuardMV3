@@ -1,6 +1,6 @@
 import { MESSAGE_TYPES } from 'Common/constants';
 import { log } from 'Common/logger';
-import { RootStore } from '../../options/stores/RootStore';
+import { RootStore } from '../stores/RootStore';
 
 export const getMessageReceiver = (rootStore: RootStore) => {
     const { settingsStore } = rootStore;
@@ -10,9 +10,9 @@ export const getMessageReceiver = (rootStore: RootStore) => {
         const { type, data } = message;
 
         switch (type) {
-            case MESSAGE_TYPES.SET_PROTECTION_ENABLED: {
+            case MESSAGE_TYPES.SET_FILTERING_ENABLED: {
                 const { protectionEnabled } = data;
-                settingsStore.setProtectionEnabled(protectionEnabled);
+                settingsStore.setFilteringEnabled(protectionEnabled);
                 break;
             }
             default: {
