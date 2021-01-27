@@ -17,11 +17,12 @@ import './popup-app.pcss';
 export const PopupApp = observer(() => {
     const store = useContext(rootStore);
     const { settingsStore, wizardStore } = store;
-    const { protectionEnabled, getProtectionEnabled } = settingsStore;
+    const { protectionEnabled, getProtectionEnabled, getPopupInfo } = settingsStore;
     const { displayWizard } = wizardStore;
 
     useEffect(() => {
         (async () => {
+            await getPopupInfo();
             await getProtectionEnabled();
         })();
 
