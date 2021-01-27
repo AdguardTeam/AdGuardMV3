@@ -16,6 +16,8 @@ export const settings = (() => {
 
     const SETTINGS_STORAGE_KEY = 'settings';
 
+    const SAVE_TO_STORAGE_THROTTLE_TIMEOUT_MS = 1000;
+
     let settingsInMemory = DEFAULT_SETTINGS;
 
     const init = async () => {
@@ -29,10 +31,9 @@ export const settings = (() => {
         log.debug('Settings module loaded successfully');
     };
 
-    const THROTTLE_TIMEOUT_MS = 1000;
     const updateStorage = _.throttle(async () => {
         await storage.set(SETTINGS_STORAGE_KEY, settingsInMemory);
-    }, THROTTLE_TIMEOUT_MS);
+    }, SAVE_TO_STORAGE_THROTTLE_TIMEOUT_MS);
 
     const getSetting = (key: SETTINGS_NAMES) => {
         return settingsInMemory[key];
