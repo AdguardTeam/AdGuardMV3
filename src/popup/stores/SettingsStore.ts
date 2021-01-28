@@ -7,7 +7,8 @@ import {
 } from 'mobx';
 
 import { log } from 'Common/logger';
-import { getActiveTab, getUrlDetails } from 'Common/helpers';
+import { MESSAGE_TYPES, PopupData } from 'Common/constants';
+import { sendMessage, getActiveTab, getUrlDetails } from 'Common/helpers';
 import { sender } from '../messaging/sender';
 import type { RootStore } from './RootStore';
 
@@ -19,7 +20,11 @@ export class SettingsStore {
         makeObservable(this);
     }
 
-    @observable protectionEnabled: boolean = false;
+    @observable
+    popupDataReady = false;
+
+    @observable
+    filteringEnabled= false;
 
     @observable
     currentUrl: string = '';
@@ -42,37 +47,31 @@ export class SettingsStore {
     }
 
     @action
-    toggleProtectionEnabled = async (protectionEnabled: boolean) => {
+    toggleFilteringEnabled = async (filteringEnabled: boolean) => {
         try {
-            await sender.setProtectionEnabled(protectionEnabled);
+            await sender.setFilteringEnabled(filteringEnabled);
         } catch (err) {
             log.error(err);
             return;
         }
 
         runInAction(() => {
-            this.protectionEnabled = protectionEnabled;
+            this.filteringEnabled = filteringEnabled;
         });
     };
 
     @action
-    setProtectionEnabled = async (protectionEnabled: boolean) => {
-        this.protectionEnabled = protectionEnabled;
+    setFilteringEnabled = async (filteringEnabled: boolean) => {
+        this.filteringEnabled = filteringEnabled;
     };
 
     @action
-    getProtectionEnabled = async () => {
-        let isProtectionEnabled = this.protectionEnabled;
-
-        try {
-            isProtectionEnabled = await sender.getProtectionEnabled();
-        } catch (err) {
-            log.error(err);
-            return;
-        }
-
+    getPopupData = async () => {
+        const popupData = await sendMessage<PopupData>(MESSAGE_TYPES.GET_POPUP_DATA);
         runInAction(() => {
-            this.protectionEnabled = isProtectionEnabled;
+            this.popupDataReady = true;
+            this.filteringEnabled = popupData.filteringEnabled;
+            this.rootStore.wizardStore.setWizardEnabled(popupData.wizardEnabled);
         });
     };
 }

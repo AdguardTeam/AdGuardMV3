@@ -1,13 +1,22 @@
+export interface PopupData {
+    filteringEnabled: boolean,
+    wizardEnabled: boolean,
+}
+
 export const MESSAGE_TYPES = {
-    GET_PROTECTION_ENABLED: 'GET_PROTECTION_ENABLED',
-    SET_PROTECTION_ENABLED: 'SET_PROTECTION_ENABLED',
+    GET_FILTERING_ENABLED: 'GET_FILTERING_ENABLED',
+    SET_FILTERING_ENABLED: 'SET_FILTERING_ENABLED',
     GET_NOTICE_HIDDEN: 'GET_NOTICE_HIDDEN',
     SET_NOTICE_HIDDEN: 'SET_NOTICE_HIDDEN',
     GET_CSS: 'GET_CSS',
     OPEN_OPTIONS: 'OPEN_OPTIONS',
+    DISABLE_WIZARD: 'DISABLE_WIZARD',
+    GET_POPUP_DATA: 'GET_POPUP_DATA',
 } as const;
 
-export const STORAGE_KEYS = {
-    PROTECTION_ENABLED: 'PROTECTION_ENABLED',
-    NOTICE_HIDDEN: 'NOTICE_HIDDEN',
-} as const;
+export type MessageType = keyof typeof MESSAGE_TYPES;
+
+export type Message = {
+    type: MessageType;
+    data?: any;
+};

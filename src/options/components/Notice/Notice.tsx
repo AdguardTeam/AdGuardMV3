@@ -11,8 +11,7 @@ import styles from './Notice.module.pcss';
 const COMPARISON_LINK = 'https://adguard.com';
 
 const Notice = () => {
-    const [isHidden, setHidden] = useState<boolean>(true);
-
+    const [isHidden, setHidden] = useState(true);
     useLayoutEffect(() => {
         (async () => {
             setHidden(await sender.getNoticeHidden());

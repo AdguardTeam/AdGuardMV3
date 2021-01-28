@@ -1,15 +1,19 @@
-import { Message, MessageType } from 'Common/types';
+import { Message, MessageType } from 'Common/constants';
 import { log } from './logger';
 
 export const sendMessage = <T>(type: MessageType, data?: any): Promise<T> => new Promise(
     (resolve, reject) => {
-        const message: Message = { type, data };
-        log.debug('Sending message:', message);
-        chrome.runtime.sendMessage({ type, data }, (...args) => {
+        const message: Message = { type };
+        if (data) {
+            message.data = data;
+        }
+        log.debug('Sent message:', message);
+        chrome.runtime.sendMessage(message, (...args) => {
             if (chrome.runtime.lastError) {
                 reject(chrome.runtime.lastError);
                 return;
             }
+            log.info('Received response on message:', message.type, 'response: ', ...args);
             resolve(...args);
         });
     },

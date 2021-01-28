@@ -1,7 +1,7 @@
-import { MESSAGE_TYPES, STORAGE_KEYS } from 'Common/constants';
+import { Message, MESSAGE_TYPES, PopupData } from 'Common/constants';
 import { log } from 'Common/logger';
-import { Message } from 'Common/types';
-import { storage } from './storage';
+import { settings, SETTINGS_NAMES } from './settings';
+import { app } from './app';
 
 interface MessageHandler {
     (message: Message, sender: chrome.runtime.MessageSender): any;
@@ -36,29 +36,43 @@ export const messageHandler = async (
     sender: chrome.runtime.MessageSender,
 ) => {
     log.debug('Received message:', message, 'from: ', sender);
+
+    await app.init();
+
     const { type, data } = message;
 
     switch (type) {
-        case MESSAGE_TYPES.GET_PROTECTION_ENABLED: {
-            return storage.get<boolean>(STORAGE_KEYS.PROTECTION_ENABLED);
+        case MESSAGE_TYPES.GET_FILTERING_ENABLED: {
+            return settings.getSetting(SETTINGS_NAMES.FILTERING_ENABLED);
         }
-        case MESSAGE_TYPES.SET_PROTECTION_ENABLED: {
-            const { protectionEnabled } = data;
-            return storage.set(STORAGE_KEYS.PROTECTION_ENABLED, protectionEnabled);
+        case MESSAGE_TYPES.SET_FILTERING_ENABLED: {
+            const { filteringEnabled } = data;
+            return settings.setSetting(SETTINGS_NAMES.FILTERING_ENABLED, filteringEnabled);
         }
         case MESSAGE_TYPES.GET_NOTICE_HIDDEN: {
-            return storage.get<boolean>(STORAGE_KEYS.NOTICE_HIDDEN);
+            return settings.getSetting(SETTINGS_NAMES.NOTICE_HIDDEN);
         }
         case MESSAGE_TYPES.SET_NOTICE_HIDDEN: {
             const { noticeHidden } = data;
-            return storage.set(STORAGE_KEYS.NOTICE_HIDDEN, noticeHidden);
+            return settings.setSetting(SETTINGS_NAMES.NOTICE_HIDDEN, noticeHidden);
         }
         case MESSAGE_TYPES.OPEN_OPTIONS: {
             return chrome.runtime.openOptionsPage();
         }
+        case MESSAGE_TYPES.GET_POPUP_DATA: {
+            const filteringEnabled = await settings.getSetting(SETTINGS_NAMES.FILTERING_ENABLED);
+            const wizardEnabled = await settings.getSetting(SETTINGS_NAMES.POPUP_V3_WIZARD_ENABLED);
+            return {
+                filteringEnabled,
+                wizardEnabled,
+            } as PopupData;
+        }
+        case MESSAGE_TYPES.DISABLE_WIZARD: {
+            return settings.setSetting(SETTINGS_NAMES.POPUP_V3_WIZARD_ENABLED, false);
+        }
         case MESSAGE_TYPES.GET_CSS: {
-            const isEnabled = await storage.get<boolean>(STORAGE_KEYS.PROTECTION_ENABLED);
-            if (!isEnabled) {
+            const filteringEnabled = settings.getSetting(SETTINGS_NAMES.FILTERING_ENABLED);
+            if (!filteringEnabled) {
                 return null;
             }
             // example rules

@@ -3,8 +3,11 @@ import {
     observable,
     makeObservable,
     computed,
+    runInAction,
 } from 'mobx';
 
+import { MESSAGE_TYPES } from 'Common/constants';
+import { sendMessage } from 'Common/helpers';
 import type { RootStore } from './RootStore';
 
 const INITIAL_STEP = 1;
@@ -49,7 +52,7 @@ export class WizardStore {
 
     @observable step: number = INITIAL_STEP;
 
-    @observable displayWizard: boolean = true;
+    @observable wizardEnabled: boolean = true;
 
     @computed get isLastStep() {
         return this.step === LAST_STEP;
@@ -69,18 +72,26 @@ export class WizardStore {
     }
 
     @action
-    setStep = async (step: number) => {
+    setStep = (step: number) => {
         this.step = step;
     };
 
     @action
-    setNextStep = async () => {
+    setNextStep = () => {
         this.step += 1;
     };
 
     @action
     skipWizard = async () => {
-        this.displayWizard = false;
-        this.step = INITIAL_STEP;
+        await sendMessage(MESSAGE_TYPES.DISABLE_WIZARD);
+        runInAction(() => {
+            this.wizardEnabled = false;
+            this.step = INITIAL_STEP;
+        });
+    };
+
+    @action
+    setWizardEnabled = (wizardEnabled: boolean) => {
+        this.wizardEnabled = wizardEnabled;
     };
 }

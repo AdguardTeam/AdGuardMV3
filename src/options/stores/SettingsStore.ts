@@ -17,38 +17,38 @@ export class SettingsStore {
         makeObservable(this);
     }
 
-    @observable protectionEnabled = false;
+    @observable filteringEnabled = false;
 
     @action
-    toggleProtectionEnabled = async (protectionEnabled: boolean) => {
+    toggleFilteringEnabled = async (filteringEnabled: boolean) => {
         try {
-            await sender.setProtectionEnabled(protectionEnabled);
+            await sender.setFilteringEnabled(filteringEnabled);
         } catch (err) {
             log.error(err);
             return;
         }
 
-        this.setProtectionEnabled(protectionEnabled);
+        this.setFilteringEnabled(filteringEnabled);
     };
 
     @action
-    setProtectionEnabled = (protectionEnabled: boolean) => {
-        this.protectionEnabled = protectionEnabled;
+    setFilteringEnabled = (filteringEnabled: boolean) => {
+        this.filteringEnabled = filteringEnabled;
     };
 
     @action
-    getProtectionEnabled = async () => {
-        let isProtectionEnabled = this.protectionEnabled;
+    getFilteringEnabled = async () => {
+        let isFilteringEnabled = this.filteringEnabled;
 
         try {
-            isProtectionEnabled = await sender.getProtectionEnabled();
+            isFilteringEnabled = await sender.getFilteringEnabled();
         } catch (err) {
             log.error(err);
             return;
         }
 
         runInAction(() => {
-            this.protectionEnabled = isProtectionEnabled;
+            this.filteringEnabled = isFilteringEnabled;
         });
     };
 }

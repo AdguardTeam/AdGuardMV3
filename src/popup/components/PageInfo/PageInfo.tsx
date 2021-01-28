@@ -8,13 +8,12 @@ import './page-info.pcss';
 
 export const PageInfo = observer(() => {
     const { settingsStore } = useContext(rootStore);
-    const { protectionEnabled, currentSite } = settingsStore;
+    const { filteringEnabled, currentSite } = settingsStore;
 
-    const labelKey = protectionEnabled
+    const labelKey = filteringEnabled
         ? 'popup_protection_enabled_status'
         : 'popup_protection_disabled_status';
 
-    // TODO get real page info
     return (
         <section>
             <h1 className="page-info page-info__main">{currentSite}</h1>

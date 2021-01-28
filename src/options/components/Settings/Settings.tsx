@@ -36,16 +36,16 @@ interface ArrowOption {
 export const Settings = observer(() => {
     const { settingsStore } = useContext(rootStore);
 
-    const { toggleProtectionEnabled, protectionEnabled } = settingsStore;
+    const { toggleFilteringEnabled, filteringEnabled } = settingsStore;
 
     const OPTIONS = {
         AD_BLOCKING: {
             id: 'ad_blocking',
             messageKey: 'options_ad_blocking_option',
             onChange: async (e: React.ChangeEvent<HTMLInputElement>) => {
-                await toggleProtectionEnabled(e.target.checked);
+                await toggleFilteringEnabled(e.target.checked);
             },
-            enabled: protectionEnabled,
+            enabled: filteringEnabled,
         },
         MISCELLANEOUS: {
             id: 'miscellaneous',
