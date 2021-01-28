@@ -9,4 +9,4 @@
 - [ ] create project on crowdin, add scripts for download/upload messages and validate them
 - [ ] add possibility to block elements with assistant
 - [ ] implement report site functionality
-- [ ] make wizard to show just once after install
+- [x] make wizard to show just once after install

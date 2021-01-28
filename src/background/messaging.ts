@@ -1,13 +1,7 @@
-import { MESSAGE_TYPES, PROTECTION_ENABLED_KEY } from 'Common/constants';
+import { Message, MESSAGE_TYPES, PopupData } from 'Common/constants';
 import { log } from 'Common/logger';
-import { storage } from './storage';
-
-type MessageType = keyof typeof MESSAGE_TYPES;
-
-interface Message {
-    type: MessageType;
-    data: any;
-}
+import { settings, SETTINGS_NAMES } from './settings';
+import { app } from './app';
 
 interface MessageHandler {
     (message: Message, sender: chrome.runtime.MessageSender): any;
@@ -42,22 +36,36 @@ export const messageHandler = async (
     sender: chrome.runtime.MessageSender,
 ) => {
     log.debug('Received message:', message, 'from: ', sender);
+
+    await app.init();
+
     const { type, data } = message;
 
     switch (type) {
-        case MESSAGE_TYPES.GET_PROTECTION_ENABLED: {
-            return storage.get(PROTECTION_ENABLED_KEY);
+        case MESSAGE_TYPES.GET_FILTERING_ENABLED: {
+            return settings.getSetting(SETTINGS_NAMES.FILTERING_ENABLED);
         }
-        case MESSAGE_TYPES.SET_PROTECTION_ENABLED: {
-            const { protectionEnabled } = data;
-            return storage.set(PROTECTION_ENABLED_KEY, protectionEnabled);
+        case MESSAGE_TYPES.SET_FILTERING_ENABLED: {
+            const { filteringEnabled } = data;
+            return settings.setSetting(SETTINGS_NAMES.FILTERING_ENABLED, filteringEnabled);
         }
         case MESSAGE_TYPES.OPEN_OPTIONS: {
             return chrome.runtime.openOptionsPage();
         }
+        case MESSAGE_TYPES.GET_POPUP_DATA: {
+            const filteringEnabled = await settings.getSetting(SETTINGS_NAMES.FILTERING_ENABLED);
+            const wizardEnabled = await settings.getSetting(SETTINGS_NAMES.POPUP_V3_WIZARD_ENABLED);
+            return {
+                filteringEnabled,
+                wizardEnabled,
+            } as PopupData;
+        }
+        case MESSAGE_TYPES.DISABLE_WIZARD: {
+            return settings.setSetting(SETTINGS_NAMES.POPUP_V3_WIZARD_ENABLED, false);
+        }
         case MESSAGE_TYPES.GET_CSS: {
-            const isEnabled = await storage.get(PROTECTION_ENABLED_KEY);
-            if (!isEnabled) {
+            const filteringEnabled = settings.getSetting(SETTINGS_NAMES.FILTERING_ENABLED);
+            if (!filteringEnabled) {
                 return null;
             }
             // example rules

@@ -3,6 +3,7 @@ import { observer } from 'mobx-react';
 import cn from 'classnames';
 
 import { Icons } from 'Common/components/ui/Icons';
+import { log } from 'Common/logger';
 import { rootStore } from '../../stores';
 import { getMessageReceiver } from '../../messaging/receiver';
 import { Header } from '../Header';
@@ -17,13 +18,22 @@ import './popup-app.pcss';
 export const PopupApp = observer(() => {
     const store = useContext(rootStore);
     const { settingsStore, wizardStore } = store;
-    const { protectionEnabled, getProtectionEnabled, getPopupInfo } = settingsStore;
-    const { displayWizard } = wizardStore;
+    const {
+        filteringEnabled,
+        getPopupData,
+        popupDataReady,
+        getPopupInfo,
+    } = settingsStore;
+    const { wizardEnabled } = wizardStore;
 
     useEffect(() => {
         (async () => {
-            await getPopupInfo();
-            await getProtectionEnabled();
+            try {
+                await getPopupInfo();
+                await getPopupData();
+            } catch (e) {
+                log.error(e);
+            }
         })();
 
         const messageHandler = getMessageReceiver(store);
@@ -33,13 +43,17 @@ export const PopupApp = observer(() => {
     }, []);
 
     const classname = cn('main', {
-        'main--disabled': !protectionEnabled,
+        'main--disabled': !filteringEnabled,
     });
+
+    if (!popupDataReady) {
+        return <div className="popup">{null}</div>;
+    }
 
     return (
         <div className="popup">
             <Icons />
-            {displayWizard
+            {wizardEnabled
                 ? <Wizard />
                 : (
                     <>
