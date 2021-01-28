@@ -18,12 +18,18 @@ import './popup-app.pcss';
 export const PopupApp = observer(() => {
     const store = useContext(rootStore);
     const { settingsStore, wizardStore } = store;
-    const { filteringEnabled, getPopupData, popupDataReady } = settingsStore;
+    const {
+        filteringEnabled,
+        getPopupData,
+        popupDataReady,
+        getPopupInfo,
+    } = settingsStore;
     const { wizardEnabled } = wizardStore;
 
     useEffect(() => {
         (async () => {
             try {
+                await getPopupInfo();
                 await getPopupData();
             } catch (e) {
                 log.error(e);
