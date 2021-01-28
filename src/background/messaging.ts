@@ -1,6 +1,5 @@
 import { Message, MESSAGE_TYPES, PopupData } from 'Common/constants';
 import { log } from 'Common/logger';
-import { waitFor } from 'Common/helpers';
 import { settings, SETTINGS_NAMES } from './settings';
 import { app } from './app';
 
@@ -38,9 +37,7 @@ export const messageHandler = async (
 ) => {
     log.debug('Received message:', message, 'from: ', sender);
 
-    if (!app.isReady()) {
-        await waitFor(app.isReady);
-    }
+    await app.init();
 
     const { type, data } = message;
 

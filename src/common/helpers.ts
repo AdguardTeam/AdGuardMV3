@@ -17,34 +17,6 @@ export const sendMessage = (type: MessageType, data?: any) => new Promise((resol
     });
 });
 
-interface WaitPredicate {
-    (): boolean;
-}
-
-/**
- * Function waits until timeout or predicate returns true
- * @param predicate
- * @param maxToWaitMs
- */
-export const waitFor = (predicate: WaitPredicate, maxToWaitMs: number = 1000) => {
-    let intervalId: number;
-    const startTime = Date.now();
-    const POLL_INTERVAL_MS = 50;
-
-    return new Promise((resolve, reject) => {
-        intervalId = window.setInterval(() => {
-            if ((startTime + maxToWaitMs) < Date.now()) {
-                clearInterval(intervalId);
-                reject(new Error(`Waiting for ${predicate} stopped by timeout`));
-            }
-            if (predicate()) {
-                clearInterval(intervalId);
-                resolve(true);
-            }
-        }, POLL_INTERVAL_MS);
-    });
-};
-
 export const getActiveTab = (): Promise<chrome.tabs.Tab> => {
     return new Promise((resolve, reject) => {
         chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {

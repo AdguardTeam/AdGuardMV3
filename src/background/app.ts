@@ -4,11 +4,12 @@ class App {
     isAppReady = false;
 
     init = async () => {
+        if (this.isAppReady) {
+            return;
+        }
         await settings.init();
         this.isAppReady = true;
     };
-
-    isReady = () => this.isAppReady;
 }
 
 export const app = new App();
