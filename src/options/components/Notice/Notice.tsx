@@ -1,6 +1,8 @@
 import React, { useLayoutEffect, useState } from 'react';
 
 import { reactTranslator } from 'Common/translators/reactTranslator';
+import { theme } from 'Common/styles';
+import classNames from 'classnames';
 import { sender } from '../../messaging/sender';
 
 import styles from './Notice.module.pcss';
@@ -28,11 +30,11 @@ const Notice = () => {
 
     return (
         <div className={styles.container}>
-            <hr className={styles.noticeHr} />
+            <hr className={classNames(theme.common.hr, styles.noticeHr)} />
             <div className={styles.notice}>{reactTranslator.getMessage('options_notice_program')}</div>
             <a
                 href={COMPARISON_LINK}
-                className={styles.compareLink}
+                className={classNames(theme.common.link, styles.compareLink)}
                 rel="noopener noreferrer"
                 target="_blank"
             >
