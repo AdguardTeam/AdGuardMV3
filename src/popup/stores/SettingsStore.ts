@@ -24,7 +24,7 @@ export class SettingsStore {
     popupDataReady = false;
 
     @observable
-    filteringEnabled= false;
+    filteringEnabled = false;
 
     @observable
     currentUrl: string = '';
