@@ -3,6 +3,7 @@ import { observer } from 'mobx-react';
 import { Route, Switch, HashRouter } from 'react-router-dom';
 
 import { Icons } from 'Common/components/ui/Icons';
+import { log } from 'Common/logger';
 import { getMessageReceiver } from '../../messaging/receiver';
 import { Sidebar } from '../Sidebar';
 import { About } from '../About';
@@ -12,16 +13,20 @@ import { Settings } from '../Settings';
 import './options-app.pcss';
 
 export const OptionsApp = observer(() => {
-    const rootStoreContext = useContext(rootStore);
-    const { settingsStore } = rootStoreContext;
-    const { getFilteringEnabled } = settingsStore;
+    const store = useContext(rootStore);
+    const { settingsStore } = store;
+    const { getOptionsData } = settingsStore;
 
     useEffect(() => {
         (async () => {
-            await getFilteringEnabled();
+            try {
+                await getOptionsData();
+            } catch (e) {
+                log.error(e);
+            }
         })();
 
-        const messageHandler = getMessageReceiver(rootStoreContext);
+        const messageHandler = getMessageReceiver(store);
 
         chrome.runtime.onMessage.addListener(messageHandler);
         return () => chrome.runtime.onMessage.removeListener(messageHandler);

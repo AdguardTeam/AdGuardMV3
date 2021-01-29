@@ -2,12 +2,11 @@ import {
     action,
     observable,
     makeObservable,
-    runInAction,
 } from 'mobx';
 
 import { log } from 'Common/logger';
-import { sender } from '../messaging/sender';
 import type { RootStore } from './RootStore';
+import { sender } from '../messaging/sender';
 
 export class SettingsStore {
     public rootStore: RootStore;
@@ -18,6 +17,8 @@ export class SettingsStore {
     }
 
     @observable filteringEnabled = false;
+
+    @observable noticeHidden = true;
 
     @action
     toggleFilteringEnabled = async (filteringEnabled: boolean) => {
@@ -37,18 +38,18 @@ export class SettingsStore {
     };
 
     @action
-    getFilteringEnabled = async () => {
-        let isFilteringEnabled = this.filteringEnabled;
+    setNoticeHidden = (noticeHidden: boolean) => {
+        this.noticeHidden = noticeHidden;
+    };
 
-        try {
-            isFilteringEnabled = await sender.getFilteringEnabled();
-        } catch (err) {
-            log.error(err);
-            return;
-        }
+    @action
+    getOptionsData = async () => {
+        const {
+            noticeHidden,
+            filteringEnabled,
+        } = await sender.getOptionsData();
 
-        runInAction(() => {
-            this.filteringEnabled = isFilteringEnabled;
-        });
+        this.setFilteringEnabled(filteringEnabled);
+        this.setNoticeHidden(noticeHidden);
     };
 }

@@ -9,7 +9,6 @@ import {
 import { log } from 'Common/logger';
 import { MESSAGE_TYPES, PopupData } from 'Common/constants';
 import { sendMessage, getActiveTab, getUrlDetails } from 'Common/helpers';
-import { sender } from '../messaging/sender';
 import type { RootStore } from './RootStore';
 
 export class SettingsStore {
@@ -30,7 +29,7 @@ export class SettingsStore {
     currentUrl: string = '';
 
     @action
-    getPopupInfo = async () => {
+    getCurrentTabUrl = async () => {
         const activeTab = await getActiveTab();
         runInAction(() => {
             this.currentUrl = activeTab.url || '';
@@ -49,7 +48,7 @@ export class SettingsStore {
     @action
     toggleFilteringEnabled = async (filteringEnabled: boolean) => {
         try {
-            await sender.setFilteringEnabled(filteringEnabled);
+            await sendMessage(MESSAGE_TYPES.SET_FILTERING_ENABLED, { filteringEnabled });
         } catch (err) {
             log.error(err);
             return;
@@ -67,11 +66,14 @@ export class SettingsStore {
 
     @action
     getPopupData = async () => {
-        const popupData = await sendMessage<PopupData>(MESSAGE_TYPES.GET_POPUP_DATA);
+        const {
+            filteringEnabled, wizardEnabled,
+        } = await sendMessage<PopupData>(MESSAGE_TYPES.GET_POPUP_DATA);
+
         runInAction(() => {
             this.popupDataReady = true;
-            this.filteringEnabled = popupData.filteringEnabled;
-            this.rootStore.wizardStore.setWizardEnabled(popupData.wizardEnabled);
+            this.filteringEnabled = filteringEnabled;
+            this.rootStore.wizardStore.setWizardEnabled(wizardEnabled);
         });
     };
 }

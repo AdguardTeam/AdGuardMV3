@@ -50,9 +50,9 @@ export class WizardStore {
         makeObservable(this);
     }
 
-    @observable step: number = INITIAL_STEP;
+    @observable step = INITIAL_STEP;
 
-    @observable wizardEnabled: boolean = true;
+    @observable wizardEnabled = true;
 
     @computed get isLastStep() {
         return this.step === LAST_STEP;

@@ -12,8 +12,12 @@ const ADGUARD_SITE_LINK = 'https://adguard.com';
 export const About = () => {
     return (
         <section className={styles.container}>
-            <h2 className={cn(theme.common.headingMain, styles.title)}>{reactTranslator.getMessage('options_about_title')}</h2>
-            <h3 className={cn(theme.common.headingSecondary, styles.version)}>{`${reactTranslator.getMessage('options_about_version')} ${chrome.runtime.getManifest().version}`}</h3>
+            <h2 className={cn(theme.common.headingMain, styles.title)}>
+                {reactTranslator.getMessage('options_about_title')}
+            </h2>
+            <h3 className={cn(theme.common.headingSecondary, styles.version)}>
+                {`${reactTranslator.getMessage('options_about_version')} ${chrome.runtime.getManifest().version}`}
+            </h3>
             <div className={styles.section}>Placeholder</div>
             <div className={styles.readMoreSection}>
                 <a

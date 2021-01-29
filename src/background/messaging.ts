@@ -1,5 +1,9 @@
 import {
-    Message, MESSAGE_TYPES, OptionsData, PopupData,
+    Message,
+    MESSAGE_TYPES,
+    FilteringState,
+    OptionsData,
+    PopupData,
 } from 'Common/constants';
 import { log } from 'Common/logger';
 import { settings, SETTINGS_NAMES } from './settings';
@@ -44,11 +48,9 @@ export const messageHandler = async (
     const { type, data } = message;
 
     switch (type) {
-        case MESSAGE_TYPES.GET_FILTERING_ENABLED: {
-            return settings.getSetting(SETTINGS_NAMES.FILTERING_ENABLED);
-        }
         case MESSAGE_TYPES.SET_FILTERING_ENABLED: {
-            const { filteringEnabled } = data as { filteringEnabled: boolean };
+            const { filteringEnabled } = data as FilteringState;
+
             return settings.setSetting(SETTINGS_NAMES.FILTERING_ENABLED, filteringEnabled);
         }
         case MESSAGE_TYPES.GET_OPTIONS_DATA: {
@@ -57,9 +59,9 @@ export const messageHandler = async (
             }) as OptionsData;
         }
         case MESSAGE_TYPES.SET_OPTIONS_DATA: {
-            const { noticeHidden } = data as OptionsData;
+            const { noticeHidden } = data as Partial<OptionsData>;
 
-            if (Object.prototype.hasOwnProperty.call(data, 'noticeHidden')) {
+            if (noticeHidden !== undefined) {
                 settings.setSetting(SETTINGS_NAMES.NOTICE_HIDDEN, noticeHidden);
             }
 

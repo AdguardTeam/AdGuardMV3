@@ -1,14 +1,16 @@
-export interface PopupData {
+export interface FilteringState {
     filteringEnabled: boolean,
+}
+
+export interface PopupData extends FilteringState{
     wizardEnabled: boolean,
 }
 
-export interface OptionsData {
+export interface OptionsData extends FilteringState {
     noticeHidden: boolean,
 }
 
 export const MESSAGE_TYPES = {
-    GET_FILTERING_ENABLED: 'GET_FILTERING_ENABLED',
     SET_FILTERING_ENABLED: 'SET_FILTERING_ENABLED',
     GET_OPTIONS_DATA: 'GET_OPTIONS_DATA',
     SET_OPTIONS_DATA: 'SET_OPTIONS_DATA',

@@ -9,7 +9,7 @@ export enum SETTINGS_NAMES {
     NOTICE_HIDDEN = 'notice.hidden',
 }
 
-type SettingsType = { [key: string]: boolean };
+type SettingsType = Record<SETTINGS_NAMES, boolean>;
 
 class Settings {
     private DEFAULT_SETTINGS: SettingsType = {

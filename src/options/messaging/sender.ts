@@ -6,8 +6,7 @@ export const sender = {
         MESSAGE_TYPES.SET_FILTERING_ENABLED,
         { filteringEnabled },
     ),
-    getFilteringEnabled: () => sendMessage<boolean>(MESSAGE_TYPES.GET_FILTERING_ENABLED),
-    setOptionsData: (optionsData: OptionsData) => sendMessage(
+    setOptionsData: (optionsData: Partial<OptionsData>) => sendMessage(
         MESSAGE_TYPES.SET_OPTIONS_DATA,
         optionsData,
     ),
