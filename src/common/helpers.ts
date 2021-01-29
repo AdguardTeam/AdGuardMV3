@@ -1,7 +1,7 @@
 import { Message, MessageType } from 'Common/constants';
 import { log } from './logger';
 
-export const sendMessage = <T>(type: MessageType, data?: any): Promise<T> => new Promise(
+export const sendMessage = <T = void>(type: MessageType, data?: any): Promise<T> => new Promise(
     (resolve, reject) => {
         const message: Message = { type };
         if (data) {

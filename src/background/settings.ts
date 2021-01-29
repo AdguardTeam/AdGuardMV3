@@ -15,10 +15,10 @@ class Settings {
     private DEFAULT_SETTINGS: SettingsType = {
         [SETTINGS_NAMES.FILTERING_ENABLED]: true,
         [SETTINGS_NAMES.POPUP_V3_WIZARD_ENABLED]: true,
-        [SETTINGS_NAMES.NOTICE_HIDDEN]: true,
+        [SETTINGS_NAMES.NOTICE_HIDDEN]: false,
     };
 
-    private SETTINGS_STORAGE_KEY = 'SETTINGS';
+    private SETTINGS_STORAGE_KEY = 'settings';
 
     private SAVE_TO_STORAGE_THROTTLE_TIMEOUT_MS = 1000;
 
@@ -43,7 +43,7 @@ class Settings {
         return this.settingsInMemory[key];
     };
 
-    public setSetting = (key: SETTINGS_NAMES, value: any) => {
+    public setSetting = (key: SETTINGS_NAMES, value: boolean) => {
         this.settingsInMemory[key] = value;
         this.updateStorage();
     };

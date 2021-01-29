@@ -1,4 +1,4 @@
-import { MESSAGE_TYPES } from 'Common/constants';
+import { MESSAGE_TYPES, OptionsData } from 'Common/constants';
 import { sendMessage } from 'Common/helpers';
 
 export const sender = {
@@ -7,9 +7,9 @@ export const sender = {
         { filteringEnabled },
     ),
     getFilteringEnabled: () => sendMessage<boolean>(MESSAGE_TYPES.GET_FILTERING_ENABLED),
-    setNoticeHidden: (noticeHidden: boolean) => sendMessage(
-        MESSAGE_TYPES.SET_NOTICE_HIDDEN,
-        { noticeHidden },
+    setOptionsData: (optionsData: OptionsData) => sendMessage(
+        MESSAGE_TYPES.SET_OPTIONS_DATA,
+        optionsData,
     ),
-    getNoticeHidden: () => sendMessage<boolean>(MESSAGE_TYPES.GET_NOTICE_HIDDEN),
+    getOptionsData: () => sendMessage<OptionsData>(MESSAGE_TYPES.GET_OPTIONS_DATA),
 };

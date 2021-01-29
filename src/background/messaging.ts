@@ -1,4 +1,6 @@
-import { Message, MESSAGE_TYPES, PopupData } from 'Common/constants';
+import {
+    Message, MESSAGE_TYPES, OptionsData, PopupData,
+} from 'Common/constants';
 import { log } from 'Common/logger';
 import { settings, SETTINGS_NAMES } from './settings';
 import { app } from './app';
@@ -46,15 +48,22 @@ export const messageHandler = async (
             return settings.getSetting(SETTINGS_NAMES.FILTERING_ENABLED);
         }
         case MESSAGE_TYPES.SET_FILTERING_ENABLED: {
-            const { filteringEnabled } = data;
+            const { filteringEnabled } = data as { filteringEnabled: boolean };
             return settings.setSetting(SETTINGS_NAMES.FILTERING_ENABLED, filteringEnabled);
         }
-        case MESSAGE_TYPES.GET_NOTICE_HIDDEN: {
-            return settings.getSetting(SETTINGS_NAMES.NOTICE_HIDDEN);
+        case MESSAGE_TYPES.GET_OPTIONS_DATA: {
+            return ({
+                noticeHidden: settings.getSetting(SETTINGS_NAMES.NOTICE_HIDDEN),
+            }) as OptionsData;
         }
-        case MESSAGE_TYPES.SET_NOTICE_HIDDEN: {
-            const { noticeHidden } = data;
-            return settings.setSetting(SETTINGS_NAMES.NOTICE_HIDDEN, noticeHidden);
+        case MESSAGE_TYPES.SET_OPTIONS_DATA: {
+            const { noticeHidden } = data as OptionsData;
+
+            if (Object.prototype.hasOwnProperty.call(data, 'noticeHidden')) {
+                settings.setSetting(SETTINGS_NAMES.NOTICE_HIDDEN, noticeHidden);
+            }
+
+            return undefined;
         }
         case MESSAGE_TYPES.OPEN_OPTIONS: {
             return chrome.runtime.openOptionsPage();
