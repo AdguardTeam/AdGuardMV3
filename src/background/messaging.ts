@@ -1,7 +1,7 @@
 import {
+    FilteringState,
     Message,
     MESSAGE_TYPES,
-    FilteringState,
     OptionsData,
     PopupData,
 } from 'Common/constants';
@@ -59,14 +59,10 @@ export const messageHandler = async (
                 filteringEnabled: settings.getSetting(SETTINGS_NAMES.FILTERING_ENABLED),
             }) as OptionsData;
         }
-        case MESSAGE_TYPES.SET_OPTIONS_DATA: {
-            const { noticeHidden } = data as Partial<OptionsData>;
+        case MESSAGE_TYPES.SET_NOTICE_HIDDEN: {
+            const { noticeHidden } = data as Pick<OptionsData, 'noticeHidden'>;
 
-            if (noticeHidden !== undefined) {
-                settings.setSetting(SETTINGS_NAMES.NOTICE_HIDDEN, noticeHidden);
-            }
-
-            return undefined;
+            return settings.setSetting(SETTINGS_NAMES.NOTICE_HIDDEN, noticeHidden);
         }
         case MESSAGE_TYPES.OPEN_OPTIONS: {
             return chrome.runtime.openOptionsPage();
@@ -74,10 +70,10 @@ export const messageHandler = async (
         case MESSAGE_TYPES.GET_POPUP_DATA: {
             const filteringEnabled = await settings.getSetting(SETTINGS_NAMES.FILTERING_ENABLED);
             const wizardEnabled = await settings.getSetting(SETTINGS_NAMES.POPUP_V3_WIZARD_ENABLED);
-            return {
+            return ({
                 filteringEnabled,
                 wizardEnabled,
-            } as PopupData;
+            }) as PopupData;
         }
         case MESSAGE_TYPES.DISABLE_WIZARD: {
             return settings.setSetting(SETTINGS_NAMES.POPUP_V3_WIZARD_ENABLED, false);

@@ -1,4 +1,4 @@
-import { MESSAGE_TYPES, Message } from 'Common/constants';
+import { MESSAGE_TYPES, Message, FilteringState } from 'Common/constants';
 import { log } from 'Common/logger';
 import { RootStore } from '../stores/RootStore';
 
@@ -11,8 +11,8 @@ export const getMessageReceiver = (rootStore: RootStore) => {
 
         switch (type) {
             case MESSAGE_TYPES.SET_FILTERING_ENABLED: {
-                const { protectionEnabled } = data;
-                await settingsStore.setFilteringEnabled(protectionEnabled);
+                const { filteringEnabled } = data as FilteringState;
+                await settingsStore.setFilteringEnabled(filteringEnabled);
                 break;
             }
             default: {

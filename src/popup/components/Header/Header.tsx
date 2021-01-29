@@ -2,8 +2,7 @@ import React from 'react';
 
 import { translator } from 'Common/translators/translator';
 import { Icon } from 'Common/components/ui/Icon';
-import { sendMessage } from 'Common/helpers';
-import { MESSAGE_TYPES } from 'Common/constants';
+import { sender } from '../../messaging/sender';
 
 import './header.pcss';
 
@@ -15,7 +14,7 @@ export const Header = () => {
 
     const handleSettingsClick = async (e: React.SyntheticEvent) => {
         e.preventDefault();
-        await sendMessage(MESSAGE_TYPES.OPEN_OPTIONS);
+        await sender.openOptions();
         window.close();
     };
 

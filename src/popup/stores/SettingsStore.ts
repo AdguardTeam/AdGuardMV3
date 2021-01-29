@@ -7,9 +7,9 @@ import {
 } from 'mobx';
 
 import { log } from 'Common/logger';
-import { MESSAGE_TYPES, PopupData } from 'Common/constants';
-import { sendMessage, getActiveTab, getUrlDetails } from 'Common/helpers';
+import { getActiveTab, getUrlDetails } from 'Common/helpers';
 import type { RootStore } from './RootStore';
+import { sender } from '../messaging/sender';
 
 export class SettingsStore {
     public rootStore: RootStore;
@@ -48,7 +48,7 @@ export class SettingsStore {
     @action
     toggleFilteringEnabled = async (filteringEnabled: boolean) => {
         try {
-            await sendMessage(MESSAGE_TYPES.SET_FILTERING_ENABLED, { filteringEnabled });
+            await sender.setFilteringEnabled(filteringEnabled);
         } catch (err) {
             log.error(err);
             return;
@@ -68,7 +68,7 @@ export class SettingsStore {
     getPopupData = async () => {
         const {
             filteringEnabled, wizardEnabled,
-        } = await sendMessage<PopupData>(MESSAGE_TYPES.GET_POPUP_DATA);
+        } = await sender.getPopupData();
 
         runInAction(() => {
             this.popupDataReady = true;

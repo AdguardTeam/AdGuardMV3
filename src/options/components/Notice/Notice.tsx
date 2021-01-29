@@ -18,8 +18,12 @@ const Notice = observer(() => {
     const { noticeHidden, setNoticeHidden } = settingsStore;
 
     const hide = async () => {
-        await sender.setOptionsData({ noticeHidden: true });
-        setNoticeHidden((await sender.getOptionsData()).noticeHidden);
+        try {
+            await sender.setNoticeHidden(true);
+            setNoticeHidden(true);
+        } catch (err) {
+            setNoticeHidden(false);
+        }
     };
 
     if (noticeHidden) {

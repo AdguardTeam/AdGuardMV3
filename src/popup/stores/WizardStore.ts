@@ -6,9 +6,8 @@ import {
     runInAction,
 } from 'mobx';
 
-import { MESSAGE_TYPES } from 'Common/constants';
-import { sendMessage } from 'Common/helpers';
 import type { RootStore } from './RootStore';
+import { sender } from '../messaging/sender';
 
 const INITIAL_STEP = 1;
 const LAST_STEP = 4;
@@ -83,7 +82,7 @@ export class WizardStore {
 
     @action
     skipWizard = async () => {
-        await sendMessage(MESSAGE_TYPES.DISABLE_WIZARD);
+        await sender.disableWizard();
         runInAction(() => {
             this.wizardEnabled = false;
             this.step = INITIAL_STEP;
