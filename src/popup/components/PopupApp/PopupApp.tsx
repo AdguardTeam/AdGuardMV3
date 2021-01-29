@@ -22,14 +22,14 @@ export const PopupApp = observer(() => {
         filteringEnabled,
         getPopupData,
         popupDataReady,
-        getPopupInfo,
+        getCurrentTabUrl,
     } = settingsStore;
     const { wizardEnabled } = wizardStore;
 
     useEffect(() => {
         (async () => {
             try {
-                await getPopupInfo();
+                await getCurrentTabUrl();
                 await getPopupData();
             } catch (e) {
                 log.error(e);
@@ -47,7 +47,7 @@ export const PopupApp = observer(() => {
     });
 
     if (!popupDataReady) {
-        return <div className="popup">{null}</div>;
+        return <div className="popup" />;
     }
 
     return (

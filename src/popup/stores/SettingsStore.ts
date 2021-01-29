@@ -7,10 +7,9 @@ import {
 } from 'mobx';
 
 import { log } from 'Common/logger';
-import { MESSAGE_TYPES, PopupData } from 'Common/constants';
-import { sendMessage, getActiveTab, getUrlDetails } from 'Common/helpers';
-import { sender } from '../messaging/sender';
+import { getActiveTab, getUrlDetails } from 'Common/helpers';
 import type { RootStore } from './RootStore';
+import { sender } from '../messaging/sender';
 
 export class SettingsStore {
     public rootStore: RootStore;
@@ -24,13 +23,13 @@ export class SettingsStore {
     popupDataReady = false;
 
     @observable
-    filteringEnabled: boolean = false;
+    filteringEnabled = false;
 
     @observable
     currentUrl: string = '';
 
     @action
-    getPopupInfo = async () => {
+    getCurrentTabUrl = async () => {
         const activeTab = await getActiveTab();
         runInAction(() => {
             this.currentUrl = activeTab.url || '';
@@ -67,11 +66,14 @@ export class SettingsStore {
 
     @action
     getPopupData = async () => {
-        const popupData = await sendMessage(MESSAGE_TYPES.GET_POPUP_DATA) as PopupData;
+        const {
+            filteringEnabled, wizardEnabled,
+        } = await sender.getPopupData();
+
         runInAction(() => {
             this.popupDataReady = true;
-            this.filteringEnabled = popupData.filteringEnabled;
-            this.rootStore.wizardStore.setWizardEnabled(popupData.wizardEnabled);
+            this.filteringEnabled = filteringEnabled;
+            this.rootStore.wizardStore.setWizardEnabled(wizardEnabled);
         });
     };
 }

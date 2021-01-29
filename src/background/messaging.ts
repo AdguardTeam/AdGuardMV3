@@ -1,4 +1,10 @@
-import { Message, MESSAGE_TYPES, PopupData } from 'Common/constants';
+import {
+    FilteringState,
+    Message,
+    MESSAGE_TYPES,
+    OptionsData,
+    PopupData,
+} from 'Common/constants';
 import { log } from 'Common/logger';
 import { settings, SETTINGS_NAMES } from './settings';
 import { app } from './app';
@@ -42,12 +48,21 @@ export const messageHandler = async (
     const { type, data } = message;
 
     switch (type) {
-        case MESSAGE_TYPES.GET_FILTERING_ENABLED: {
-            return settings.getSetting(SETTINGS_NAMES.FILTERING_ENABLED);
-        }
         case MESSAGE_TYPES.SET_FILTERING_ENABLED: {
-            const { filteringEnabled } = data;
+            const { filteringEnabled } = data as FilteringState;
+
             return settings.setSetting(SETTINGS_NAMES.FILTERING_ENABLED, filteringEnabled);
+        }
+        case MESSAGE_TYPES.GET_OPTIONS_DATA: {
+            return ({
+                noticeHidden: settings.getSetting(SETTINGS_NAMES.NOTICE_HIDDEN),
+                filteringEnabled: settings.getSetting(SETTINGS_NAMES.FILTERING_ENABLED),
+            }) as OptionsData;
+        }
+        case MESSAGE_TYPES.SET_NOTICE_HIDDEN: {
+            const { noticeHidden } = data as Pick<OptionsData, 'noticeHidden'>;
+
+            return settings.setSetting(SETTINGS_NAMES.NOTICE_HIDDEN, noticeHidden);
         }
         case MESSAGE_TYPES.OPEN_OPTIONS: {
             return chrome.runtime.openOptionsPage();
@@ -55,10 +70,10 @@ export const messageHandler = async (
         case MESSAGE_TYPES.GET_POPUP_DATA: {
             const filteringEnabled = await settings.getSetting(SETTINGS_NAMES.FILTERING_ENABLED);
             const wizardEnabled = await settings.getSetting(SETTINGS_NAMES.POPUP_V3_WIZARD_ENABLED);
-            return {
+            return ({
                 filteringEnabled,
                 wizardEnabled,
-            } as PopupData;
+            }) as PopupData;
         }
         case MESSAGE_TYPES.DISABLE_WIZARD: {
             return settings.setSetting(SETTINGS_NAMES.POPUP_V3_WIZARD_ENABLED, false);
