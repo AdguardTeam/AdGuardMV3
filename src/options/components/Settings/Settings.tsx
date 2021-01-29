@@ -18,6 +18,7 @@ interface ChangeHandler {
 
 interface CheckboxOption {
     id: string;
+    iconId: string;
     enabled: boolean;
     messageKey: string;
     onChange: ChangeHandler;
@@ -29,6 +30,7 @@ interface ClickHandler {
 
 interface ArrowOption {
     id: string;
+    iconId: string;
     messageKey: string;
     onClick: ClickHandler;
 }
@@ -40,7 +42,9 @@ export const Settings = observer(() => {
 
     const OPTIONS = {
         AD_BLOCKING: {
-            id: 'ad_blocking',
+            // The value of the id attribute must be unique within the HTML document.
+            id: 'ad_blocking_option',
+            iconId: 'ad_blocking',
             messageKey: 'options_ad_blocking_option',
             onChange: async (e: React.ChangeEvent<HTMLInputElement>) => {
                 await toggleFilteringEnabled(e.target.checked);
@@ -48,7 +52,8 @@ export const Settings = observer(() => {
             enabled: filteringEnabled,
         },
         MISCELLANEOUS: {
-            id: 'miscellaneous',
+            id: 'miscellaneous_option',
+            iconId: 'miscellaneous',
             messageKey: 'options_miscellaneous_option',
             onChange: async (e: React.ChangeEvent<HTMLInputElement>) => {
                 // eslint-disable-next-line no-console
@@ -57,7 +62,8 @@ export const Settings = observer(() => {
             enabled: false,
         },
         TRACKERS_BLOCKING: {
-            id: 'trackers_blocking',
+            id: 'trackers_blocking_option',
+            iconId: 'trackers_blocking',
             messageKey: 'options_trackers_blocking_option',
             onChange: async (e: React.ChangeEvent<HTMLInputElement>) => {
                 // eslint-disable-next-line no-console
@@ -66,7 +72,8 @@ export const Settings = observer(() => {
             enabled: false,
         },
         LANGUAGES: {
-            id: 'languages',
+            id: 'languages_option',
+            iconId: 'languages',
             messageKey: 'options_languages_option',
             onClick: () => {
                 // eslint-disable-next-line no-console
@@ -74,7 +81,8 @@ export const Settings = observer(() => {
             },
         },
         FILTERS: {
-            id: 'filters',
+            id: 'filters_option',
+            iconId: 'filters',
             messageKey: 'options_filters_option',
             onClick: () => {
                 // eslint-disable-next-line no-console
@@ -82,7 +90,8 @@ export const Settings = observer(() => {
             },
         },
         USER_RULES: {
-            id: 'user_rules',
+            id: 'user_rules_option',
+            iconId: 'user_rules',
             messageKey: 'options_user_rules_option',
             onClick: () => {
                 // eslint-disable-next-line no-console
@@ -91,12 +100,14 @@ export const Settings = observer(() => {
         },
     };
 
-    const renderArrowOption = ({ id, messageKey, onClick }: ArrowOption) => {
+    const renderArrowOption = ({
+        id, iconId, messageKey, onClick,
+    }: ArrowOption) => {
         return (
             // eslint-disable-next-line max-len
             // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
             <div key={id} className="option__item" onClick={onClick}>
-                <Icon id={id} className="icon--option" />
+                <Icon id={iconId} className="icon--option" />
                 <label
                     htmlFor={id}
                     className="option__label"
@@ -109,11 +120,11 @@ export const Settings = observer(() => {
     };
 
     const renderCheckboxOption = ({
-        id, enabled, messageKey, onChange,
+        id, iconId, enabled, messageKey, onChange,
     }: CheckboxOption) => {
         return (
             <div key={id} className="option__item">
-                <Icon id={id} className="icon--option" />
+                <Icon id={iconId} className="icon--option" />
                 <label
                     htmlFor={id}
                     className="option__label"
@@ -125,18 +136,26 @@ export const Settings = observer(() => {
         );
     };
 
+    const checkboxOptions = [
+        OPTIONS.AD_BLOCKING,
+        OPTIONS.MISCELLANEOUS,
+        OPTIONS.TRACKERS_BLOCKING,
+    ];
+
+    const arrowOptions = [
+        OPTIONS.LANGUAGES,
+        OPTIONS.FILTERS,
+        OPTIONS.USER_RULES,
+    ];
+
     return (
         <>
             <h1 className="h1">
                 {reactTranslator.getMessage('options_settings_title')}
             </h1>
             <div className="option__container">
-                {renderCheckboxOption(OPTIONS.AD_BLOCKING)}
-                {renderCheckboxOption(OPTIONS.MISCELLANEOUS)}
-                {renderCheckboxOption(OPTIONS.TRACKERS_BLOCKING)}
-                {renderArrowOption(OPTIONS.LANGUAGES)}
-                {renderArrowOption(OPTIONS.FILTERS)}
-                {renderArrowOption(OPTIONS.USER_RULES)}
+                {checkboxOptions.map(renderCheckboxOption)}
+                {arrowOptions.map(renderArrowOption)}
             </div>
         </>
     );

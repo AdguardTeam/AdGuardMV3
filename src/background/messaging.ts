@@ -56,6 +56,7 @@ export const messageHandler = async (
         case MESSAGE_TYPES.GET_OPTIONS_DATA: {
             return ({
                 noticeHidden: settings.getSetting(SETTINGS_NAMES.NOTICE_HIDDEN),
+                filteringEnabled: settings.getSetting(SETTINGS_NAMES.FILTERING_ENABLED),
             }) as OptionsData;
         }
         case MESSAGE_TYPES.SET_OPTIONS_DATA: {
