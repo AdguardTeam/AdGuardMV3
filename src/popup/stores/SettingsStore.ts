@@ -29,7 +29,6 @@ export class SettingsStore {
     @observable
     settings: SettingsType = DEFAULT_SETTINGS;
 
-    @action
     getCurrentTabUrl = async () => {
         const activeTab = await getActiveTab();
         runInAction(() => {
@@ -57,6 +56,7 @@ export class SettingsStore {
         this.updateSettingState(key, value);
     };
 
+    @action
     updateSettingState = (key: SETTINGS_NAMES, value: boolean) => {
         this.settings[key] = value;
     };
