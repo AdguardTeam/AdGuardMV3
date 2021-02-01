@@ -8,11 +8,11 @@ import './action.pcss';
 
 export const Action = observer(() => {
     const { settingsStore } = useContext(rootStore);
-    const { filteringEnabled } = settingsStore;
+    const { isFilteringEnabled } = settingsStore;
 
     const blockedAdsCount = 354; // TODO replace with real number
 
-    if (filteringEnabled) {
+    if (isFilteringEnabled) {
         return (
             <section className="action-text__container">
                 <h1 className="action-text action-text__bold">{blockedAdsCount}</h1>
