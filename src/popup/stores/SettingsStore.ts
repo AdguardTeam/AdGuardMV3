@@ -76,7 +76,7 @@ export class SettingsStore {
     };
 
     @computed
-    get isFilteringEnabled() {
+    get filteringEnabled() {
         return this.settings[SETTINGS_NAMES.FILTERING_ENABLED];
     }
 

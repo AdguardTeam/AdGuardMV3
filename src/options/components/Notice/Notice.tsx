@@ -15,13 +15,13 @@ const COMPARISON_LINK = 'https://adguard.com';
 const Notice = observer(() => {
     const store = useContext(rootStore);
     const { settingsStore } = store;
-    const { isNoticeHidden } = settingsStore;
+    const { noticeHidden } = settingsStore;
 
     const hide = async () => {
         await settingsStore.setSetting(SETTINGS_NAMES.NOTICE_HIDDEN, true);
     };
 
-    if (isNoticeHidden) {
+    if (noticeHidden) {
         return null;
     }
 

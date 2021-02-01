@@ -40,12 +40,12 @@ export class SettingsStore {
     };
 
     @computed
-    get isNoticeHidden() {
+    get noticeHidden() {
         return this.settings[SETTINGS_NAMES.NOTICE_HIDDEN];
     }
 
     @computed
-    get isFilteringEnabled() {
+    get filteringEnabled() {
         return this.settings[SETTINGS_NAMES.FILTERING_ENABLED];
     }
 }

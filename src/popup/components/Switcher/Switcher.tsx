@@ -10,19 +10,19 @@ import './switcher.pcss';
 
 export const Switcher = observer(() => {
     const { settingsStore } = useContext(rootStore);
-    const { isFilteringEnabled, setSetting } = settingsStore;
+    const { filteringEnabled, setSetting } = settingsStore;
 
     const onClick = async () => {
-        await setSetting(SETTINGS_NAMES.FILTERING_ENABLED, !isFilteringEnabled);
+        await setSetting(SETTINGS_NAMES.FILTERING_ENABLED, !filteringEnabled);
     };
 
     const icon = cn({
-        checkmark: isFilteringEnabled,
-        circle: !isFilteringEnabled,
+        checkmark: filteringEnabled,
+        circle: !filteringEnabled,
     });
 
     const className = cn('switcher', {
-        'switcher--disabled': !isFilteringEnabled,
+        'switcher--disabled': !filteringEnabled,
     });
 
     return (

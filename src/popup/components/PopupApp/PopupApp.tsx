@@ -20,7 +20,7 @@ export const PopupApp = observer(() => {
     const store = useContext(rootStore);
     const { settingsStore } = store;
     const {
-        isFilteringEnabled,
+        filteringEnabled,
         getPopupData,
         popupDataReady,
         wizardEnabled,
@@ -57,7 +57,7 @@ export const PopupApp = observer(() => {
     }, []);
 
     const classname = cn('main', {
-        'main--disabled': !isFilteringEnabled,
+        'main--disabled': !filteringEnabled,
     });
 
     if (!popupDataReady) {

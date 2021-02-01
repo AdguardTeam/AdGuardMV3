@@ -39,7 +39,7 @@ interface ArrowOption {
 export const Settings = observer(() => {
     const { settingsStore } = useContext(rootStore);
 
-    const { isFilteringEnabled, setSetting } = settingsStore;
+    const { filteringEnabled, setSetting } = settingsStore;
 
     const OPTIONS = {
         AD_BLOCKING: {
@@ -50,7 +50,7 @@ export const Settings = observer(() => {
             onChange: async (e: React.ChangeEvent<HTMLInputElement>) => {
                 await setSetting(SETTINGS_NAMES.FILTERING_ENABLED, e.target.checked);
             },
-            enabled: isFilteringEnabled,
+            enabled: filteringEnabled,
         },
         MISCELLANEOUS: {
             id: 'miscellaneous_option',
