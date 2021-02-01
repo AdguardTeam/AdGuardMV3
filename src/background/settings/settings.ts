@@ -18,7 +18,6 @@ class Settings {
     }
 
     public init = async () => {
-        // TODO consider to hide async nature of the storage, keeping values in the memory
         const storedSettings = await storage.get<SettingsType>(this.SETTINGS_STORAGE_KEY);
 
         if (storedSettings) {
