@@ -5,6 +5,9 @@ type Listener = {
     (...args: any[]): void
 };
 
+/**
+ * Class implementing simple observer pattern
+ */
 export class Notifier<T, U> {
     private listeners: { [key: string]: Listener } = {};
 
