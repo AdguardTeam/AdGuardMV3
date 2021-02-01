@@ -22,15 +22,6 @@ import { lazyGet } from 'Common/utils/lazy';
  */
 export const prefs = (() => {
     const Prefs = {
-
-        get mobile() {
-            return lazyGet(Prefs, 'mobile', () => navigator.userAgent.indexOf('Android') >= 0);
-        },
-
-        get platform() {
-            return lazyGet(Prefs, 'platform', () => (window.chrome ? 'chromium' : 'firefox'));
-        },
-
         get browser() {
             return lazyGet(Prefs, 'browser', () => {
                 let browser;
@@ -52,72 +43,6 @@ export const prefs = (() => {
                 }
                 return browser;
             });
-        },
-
-        get chromeVersion() {
-            return lazyGet(Prefs, 'chromeVersion', () => {
-                const match = /\sChrome\/(\d+)\./.exec(navigator.userAgent);
-                return match === null ? null : Number.parseInt(match[1], 10);
-            });
-        },
-
-        get firefoxVersion() {
-            return lazyGet(Prefs, 'firefoxVersion', () => {
-                const match = /\sFirefox\/(\d+)\./.exec(navigator.userAgent);
-                return match === null ? null : Number.parseInt(match[1], 10);
-            });
-        },
-
-        /**
-         * https://msdn.microsoft.com/ru-ru/library/hh869301(v=vs.85).aspx
-         * @returns {*}
-         */
-        get edgeVersion() {
-            // eslint-disable-next-line consistent-return
-            return lazyGet(Prefs, 'edgeVersion', () => {
-                // @ts-ignore
-                if (this.browser === 'Edge') {
-                    const { userAgent } = navigator;
-                    const i = userAgent.indexOf('Edge/');
-                    if (i < 0) {
-                        return {
-                            rev: 0,
-                            build: 0,
-                        };
-                    }
-                    const version = userAgent.substring(i + 'Edge/'.length);
-                    const parts = version.split('.');
-                    return {
-                        rev: Number.parseInt(parts[0], 10),
-                        build: Number.parseInt(parts[1], 10),
-                    };
-                }
-            });
-        },
-
-        /**
-         * Makes sense in case of FF add-on only
-         */
-        speedupStartup() {
-            return false;
-        },
-
-        get ICONS() {
-            return lazyGet(Prefs, 'ICONS', () => ({
-                ICON_GREEN: {
-                    16: chrome.runtime.getURL('assets/green-16.png'),
-                    19: chrome.runtime.getURL('assets/green-19.png'),
-                    38: chrome.runtime.getURL('assets/green-38.png'),
-                    128: chrome.runtime.getURL('assets/green-128.png'),
-                },
-            }));
-        },
-
-        // interval 60 seconds in Firefox is set so big
-        // due to excessive IO operations on every storage save
-        // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1006
-        get statsSaveInterval() {
-            return this.browser === 'Firefox' ? 1000 * 60 : 1000;
         },
     };
 
