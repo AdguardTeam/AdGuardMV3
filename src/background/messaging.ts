@@ -6,6 +6,7 @@ import {
     PopupData,
 } from 'Common/constants';
 import { log } from 'Common/logger';
+import { getActiveTab, openAbusePage } from 'Common/helpers';
 import { settings, SETTINGS_NAMES } from './settings';
 import { app } from './app';
 
@@ -77,6 +78,19 @@ export const messageHandler = async (
         }
         case MESSAGE_TYPES.DISABLE_WIZARD: {
             return settings.setSetting(SETTINGS_NAMES.POPUP_V3_WIZARD_ENABLED, false);
+        }
+        case MESSAGE_TYPES.REPORT_SITE: {
+            const { url } = await getActiveTab();
+
+            const { version } = chrome.runtime.getManifest();
+            // TODO: set filter ids
+            const filerIds: string[] = [];
+
+            if (url) {
+                await openAbusePage(url, filerIds, version);
+            }
+
+            return null;
         }
         case MESSAGE_TYPES.GET_CSS: {
             const filteringEnabled = settings.getSetting(SETTINGS_NAMES.FILTERING_ENABLED);

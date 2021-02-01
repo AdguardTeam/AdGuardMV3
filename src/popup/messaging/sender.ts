@@ -9,4 +9,5 @@ export const sender = {
     getPopupData: () => sendMessage<PopupData>(MESSAGE_TYPES.GET_POPUP_DATA),
     openOptions: () => sendMessage(MESSAGE_TYPES.OPEN_OPTIONS),
     disableWizard: () => sendMessage(MESSAGE_TYPES.DISABLE_WIZARD),
+    reportSite: () => sendMessage(MESSAGE_TYPES.REPORT_SITE),
 };
