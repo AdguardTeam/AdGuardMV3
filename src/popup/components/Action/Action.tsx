@@ -13,7 +13,7 @@ export const Action = observer(() => {
 
     const blockedAdsCount = 354; // TODO replace with real number
 
-    const onClick = async () => {
+    const reportSiteClickHandler = async () => {
         await sender.reportSite();
     };
 
@@ -29,9 +29,8 @@ export const Action = observer(() => {
         );
     }
 
-    // TODO add click handler for reporting site
     return (
-        <button type="button" className="action-button" onClick={onClick}>
+        <button type="button" className="action-button" onClick={reportSiteClickHandler}>
             {reactTranslator.getMessage('popup_report_site_option')}
         </button>
     );

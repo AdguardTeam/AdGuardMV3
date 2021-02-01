@@ -49,15 +49,19 @@ export const openPage = async (url: string): Promise<void> => {
     await chrome.tabs.create({ url });
 };
 
-export const openAbusePage = (url: string, filterIds: string[], product_version: string) => {
-    const supportedBrowsers = ['Chrome', 'Firefox', 'Opera', 'Safari', 'IE', 'Edge'];
+export const openAbusePage = (url: string, filterIds: string[], productVersion: string) => {
+    const supportedBrowsers = ['Chrome', 'Firefox', 'Opera', 'Safari', 'IE', 'Edge', 'Yandex'];
+
+    const browserUrlParams = (
+        supportedBrowsers.includes(prefs.browser)
+            ? { browser: prefs.browser }
+            : { browser: 'Other', browserDetails: prefs.browser }
+    ) as { browser: string } | { browser: string, browserDetails: string };
 
     const urlParams = {
         product_type: 'Ext',
-        product_version,
-        ...(supportedBrowsers.includes(prefs.browser)
-            ? { browser: prefs.browser }
-            : { browser: 'Other', browserDetails: prefs.browser }),
+        product_version: productVersion,
+        ...browserUrlParams,
         url,
         filters: filterIds.join('.'),
     };
