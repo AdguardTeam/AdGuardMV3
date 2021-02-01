@@ -2,11 +2,13 @@ import {
     action,
     observable,
     makeObservable,
+    runInAction,
+    computed,
 } from 'mobx';
 
-import { log } from 'Common/logger';
 import type { RootStore } from './RootStore';
 import { sender } from '../messaging/sender';
+import { DEFAULT_SETTINGS, SETTINGS_NAMES } from '../../background/settings/settings-constants';
 
 export class SettingsStore {
     public rootStore: RootStore;
@@ -16,40 +18,34 @@ export class SettingsStore {
         makeObservable(this);
     }
 
-    @observable filteringEnabled = false;
+    @observable
+    settings = DEFAULT_SETTINGS;
 
-    @observable noticeHidden = true;
-
-    @action
-    toggleFilteringEnabled = async (filteringEnabled: boolean) => {
-        try {
-            await sender.setFilteringEnabled(filteringEnabled);
-        } catch (err) {
-            log.error(err);
-            return;
-        }
-
-        this.setFilteringEnabled(filteringEnabled);
-    };
-
-    @action
-    setFilteringEnabled = (filteringEnabled: boolean) => {
-        this.filteringEnabled = filteringEnabled;
-    };
-
-    @action
-    setNoticeHidden = (noticeHidden: boolean) => {
-        this.noticeHidden = noticeHidden;
-    };
-
-    @action
     getOptionsData = async () => {
-        const {
-            noticeHidden,
-            filteringEnabled,
-        } = await sender.getOptionsData();
+        const { settings } = await sender.getOptionsData();
 
-        this.setFilteringEnabled(filteringEnabled);
-        this.setNoticeHidden(noticeHidden);
+        runInAction(() => {
+            this.settings = settings;
+        });
     };
+
+    setSetting = async (key: SETTINGS_NAMES, value: boolean) => {
+        await sender.setSetting(key, value);
+        this.updateSettingState(key, value);
+    };
+
+    @action
+    updateSettingState = (key: SETTINGS_NAMES, value: boolean) => {
+        this.settings[key] = value;
+    };
+
+    @computed
+    get isNoticeHidden() {
+        return this.settings[SETTINGS_NAMES.NOTICE_HIDDEN];
+    }
+
+    @computed
+    get isFilteringEnabled() {
+        return this.settings[SETTINGS_NAMES.FILTERING_ENABLED];
+    }
 }

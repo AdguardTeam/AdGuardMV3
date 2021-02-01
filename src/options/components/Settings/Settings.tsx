@@ -5,6 +5,7 @@ import { reactTranslator } from 'Common/translators/reactTranslator';
 import { Icon } from 'Common/components/ui/Icon';
 import { Checkbox } from 'Common/components/Checkbox';
 import { rootStore } from '../../stores';
+import { SETTINGS_NAMES } from '../../../background/settings/settings-constants';
 
 interface Option {
     iconId: string;
@@ -38,7 +39,7 @@ interface ArrowOption {
 export const Settings = observer(() => {
     const { settingsStore } = useContext(rootStore);
 
-    const { toggleFilteringEnabled, filteringEnabled } = settingsStore;
+    const { isFilteringEnabled, setSetting } = settingsStore;
 
     const OPTIONS = {
         AD_BLOCKING: {
@@ -47,9 +48,9 @@ export const Settings = observer(() => {
             iconId: 'ad_blocking',
             messageKey: 'options_ad_blocking_option',
             onChange: async (e: React.ChangeEvent<HTMLInputElement>) => {
-                await toggleFilteringEnabled(e.target.checked);
+                await setSetting(SETTINGS_NAMES.FILTERING_ENABLED, e.target.checked);
             },
-            enabled: filteringEnabled,
+            enabled: isFilteringEnabled,
         },
         MISCELLANEOUS: {
             id: 'miscellaneous_option',

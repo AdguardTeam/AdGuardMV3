@@ -8,8 +8,9 @@ import {
 
 import { log } from 'Common/logger';
 import { getActiveTab, getUrlDetails } from 'Common/helpers';
-import type { RootStore } from './RootStore';
 import { sender } from '../messaging/sender';
+import type { RootStore } from './RootStore';
+import { DEFAULT_SETTINGS, SETTINGS_NAMES, SettingsType } from '../../background/settings/settings-constants';
 
 export class SettingsStore {
     public rootStore: RootStore;
@@ -23,10 +24,10 @@ export class SettingsStore {
     popupDataReady = false;
 
     @observable
-    filteringEnabled = false;
+    currentUrl: string = '';
 
     @observable
-    currentUrl: string = '';
+    settings: SettingsType = DEFAULT_SETTINGS;
 
     @action
     getCurrentTabUrl = async () => {
@@ -45,35 +46,42 @@ export class SettingsStore {
         return this.currentUrl;
     }
 
-    @action
-    toggleFilteringEnabled = async (filteringEnabled: boolean) => {
+    setSetting = async (key: SETTINGS_NAMES, value: boolean) => {
         try {
-            await sender.setFilteringEnabled(filteringEnabled);
-        } catch (err) {
-            log.error(err);
+            await sender.setSetting(key, value);
+        } catch (e) {
+            log.error(e);
             return;
         }
 
-        runInAction(() => {
-            this.filteringEnabled = filteringEnabled;
-        });
+        this.updateSettingState(key, value);
     };
 
-    @action
-    setFilteringEnabled = async (filteringEnabled: boolean) => {
-        this.filteringEnabled = filteringEnabled;
+    updateSettingState = (key: SETTINGS_NAMES, value: boolean) => {
+        this.settings[key] = value;
     };
 
     @action
     getPopupData = async () => {
+        await this.getCurrentTabUrl();
+
         const {
-            filteringEnabled, wizardEnabled,
+            settings,
         } = await sender.getPopupData();
 
         runInAction(() => {
             this.popupDataReady = true;
-            this.filteringEnabled = filteringEnabled;
-            this.rootStore.wizardStore.setWizardEnabled(wizardEnabled);
+            this.settings = settings;
         });
     };
+
+    @computed
+    get filteringEnabled() {
+        return this.settings[SETTINGS_NAMES.FILTERING_ENABLED];
+    }
+
+    @computed
+    get wizardEnabled() {
+        return this.settings[SETTINGS_NAMES.POPUP_V3_WIZARD_ENABLED];
+    }
 }

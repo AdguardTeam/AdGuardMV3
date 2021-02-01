@@ -7,7 +7,7 @@ import { observer } from 'mobx-react';
 
 import styles from './Notice.module.pcss';
 import { rootStore } from '../../stores';
-import { sender } from '../../messaging/sender';
+import { SETTINGS_NAMES } from '../../../background/settings/settings-constants';
 
 // TODO: change link, add to tds
 const COMPARISON_LINK = 'https://adguard.com';
@@ -15,18 +15,13 @@ const COMPARISON_LINK = 'https://adguard.com';
 const Notice = observer(() => {
     const store = useContext(rootStore);
     const { settingsStore } = store;
-    const { noticeHidden, setNoticeHidden } = settingsStore;
+    const { isNoticeHidden } = settingsStore;
 
     const hide = async () => {
-        try {
-            await sender.setNoticeHidden(true);
-            setNoticeHidden(true);
-        } catch (err) {
-            setNoticeHidden(false);
-        }
+        await settingsStore.setSetting(SETTINGS_NAMES.NOTICE_HIDDEN, true);
     };
 
-    if (noticeHidden) {
+    if (isNoticeHidden) {
         return null;
     }
 

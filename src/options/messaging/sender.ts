@@ -1,14 +1,13 @@
 import { MESSAGE_TYPES, OptionsData } from 'Common/constants';
 import { sendMessage } from 'Common/helpers';
+import { SETTINGS_NAMES } from '../../background/settings/settings-constants';
 
-export const sender = {
-    setFilteringEnabled: (filteringEnabled: boolean) => sendMessage(
-        MESSAGE_TYPES.SET_FILTERING_ENABLED,
-        { filteringEnabled },
-    ),
-    setNoticeHidden: (noticeHidden: boolean) => sendMessage(
-        MESSAGE_TYPES.SET_NOTICE_HIDDEN,
-        { noticeHidden },
-    ),
-    getOptionsData: () => sendMessage<OptionsData>(MESSAGE_TYPES.GET_OPTIONS_DATA),
-};
+class Sender {
+    setSetting = (key: SETTINGS_NAMES, value: boolean) => sendMessage(
+        MESSAGE_TYPES.SET_SETTING, { key, value },
+    );
+
+    getOptionsData = () => sendMessage<OptionsData>(MESSAGE_TYPES.GET_OPTIONS_DATA);
+}
+
+export const sender = new Sender();

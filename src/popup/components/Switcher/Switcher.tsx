@@ -4,15 +4,16 @@ import cn from 'classnames';
 
 import { Icon } from 'Common/components/ui/Icon';
 import { rootStore } from '../../stores';
+import { SETTINGS_NAMES } from '../../../background/settings/settings-constants';
 
 import './switcher.pcss';
 
 export const Switcher = observer(() => {
     const { settingsStore } = useContext(rootStore);
-    const { filteringEnabled, toggleFilteringEnabled } = settingsStore;
+    const { filteringEnabled, setSetting } = settingsStore;
 
     const onClick = async () => {
-        await toggleFilteringEnabled(!filteringEnabled);
+        await setSetting(SETTINGS_NAMES.FILTERING_ENABLED, !filteringEnabled);
     };
 
     const icon = cn({

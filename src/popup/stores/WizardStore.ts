@@ -1,13 +1,13 @@
 import {
     action,
-    observable,
-    makeObservable,
     computed,
+    makeObservable,
+    observable,
     runInAction,
 } from 'mobx';
 
 import type { RootStore } from './RootStore';
-import { sender } from '../messaging/sender';
+import { SETTINGS_NAMES } from '../../background/settings/settings-constants';
 
 const INITIAL_STEP = 1;
 const LAST_STEP = 4;
@@ -51,8 +51,6 @@ export class WizardStore {
 
     @observable step = INITIAL_STEP;
 
-    @observable wizardEnabled = true;
-
     @computed get isLastStep() {
         return this.step === LAST_STEP;
     }
@@ -82,15 +80,12 @@ export class WizardStore {
 
     @action
     skipWizard = async () => {
-        await sender.disableWizard();
+        await this.rootStore.settingsStore.setSetting(
+            SETTINGS_NAMES.POPUP_V3_WIZARD_ENABLED,
+            false,
+        );
         runInAction(() => {
-            this.wizardEnabled = false;
             this.step = INITIAL_STEP;
         });
-    };
-
-    @action
-    setWizardEnabled = (wizardEnabled: boolean) => {
-        this.wizardEnabled = wizardEnabled;
     };
 }
