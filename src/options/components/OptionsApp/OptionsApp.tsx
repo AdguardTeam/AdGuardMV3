@@ -5,11 +5,11 @@ import { Route, Switch, HashRouter } from 'react-router-dom';
 import { Icons } from 'Common/components/ui/Icons';
 import { log } from 'Common/logger';
 import { NOTIFIER_EVENTS } from 'Common/constants';
+import { createLongLivedConnection } from 'Common/messaging-utils';
 import { Sidebar } from '../Sidebar';
 import { About } from '../About';
 import { rootStore } from '../../stores';
 import { Settings } from '../Settings';
-import { createLongLivedConnection } from '../../messaging/receiver';
 
 import './options-app.pcss';
 
