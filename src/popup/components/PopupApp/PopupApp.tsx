@@ -4,8 +4,9 @@ import cn from 'classnames';
 
 import { Icons } from 'Common/components/ui/Icons';
 import { log } from 'Common/logger';
+import { NOTIFIER_EVENTS } from 'Common/constants';
+import { createLongLivedConnection } from 'Common/messaging-utils';
 import { rootStore } from '../../stores';
-import { getMessageReceiver } from '../../messaging/receiver';
 import { Header } from '../Header';
 import { Switcher } from '../Switcher';
 import { PageInfo } from '../PageInfo';
@@ -17,29 +18,42 @@ import './popup-app.pcss';
 
 export const PopupApp = observer(() => {
     const store = useContext(rootStore);
-    const { settingsStore, wizardStore } = store;
+    const { settingsStore } = store;
     const {
         filteringEnabled,
         getPopupData,
         popupDataReady,
-        getCurrentTabUrl,
+        wizardEnabled,
     } = settingsStore;
-    const { wizardEnabled } = wizardStore;
 
     useEffect(() => {
         (async () => {
             try {
-                await getCurrentTabUrl();
                 await getPopupData();
             } catch (e) {
                 log.error(e);
             }
         })();
 
-        const messageHandler = getMessageReceiver(store);
+        const events = [
+            NOTIFIER_EVENTS.SETTING_UPDATED,
+        ];
 
-        chrome.runtime.onMessage.addListener(messageHandler);
-        return () => chrome.runtime.onMessage.removeListener(messageHandler);
+        const messageHandler = (message: any) => {
+            const { type, data: [data] } = message;
+
+            switch (type) {
+                case NOTIFIER_EVENTS.SETTING_UPDATED: {
+                    const { key, value } = data;
+                    settingsStore.updateSettingState(key, value);
+                    break;
+                }
+                default:
+                    throw new Error(`Non supported event type: ${type}`);
+            }
+        };
+
+        return createLongLivedConnection(events, messageHandler);
     }, []);
 
     const classname = cn('main', {

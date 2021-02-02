@@ -1,13 +1,12 @@
 import React, { useContext } from 'react';
-
-import { reactTranslator } from 'Common/translators/reactTranslator';
-import { theme } from 'Common/styles';
 import cn from 'classnames';
 import { observer } from 'mobx-react';
 
+import { reactTranslator } from 'Common/translators/reactTranslator';
+import { theme } from 'Common/styles';
+import { SETTINGS_NAMES } from 'Common/settings-constants';
 import styles from './Notice.module.pcss';
 import { rootStore } from '../../stores';
-import { sender } from '../../messaging/sender';
 
 // TODO: change link, add to tds
 const COMPARISON_LINK = 'https://adguard.com';
@@ -15,15 +14,10 @@ const COMPARISON_LINK = 'https://adguard.com';
 const Notice = observer(() => {
     const store = useContext(rootStore);
     const { settingsStore } = store;
-    const { noticeHidden, setNoticeHidden } = settingsStore;
+    const { noticeHidden } = settingsStore;
 
     const hide = async () => {
-        try {
-            await sender.setNoticeHidden(true);
-            setNoticeHidden(true);
-        } catch (err) {
-            setNoticeHidden(false);
-        }
+        await settingsStore.setSetting(SETTINGS_NAMES.NOTICE_HIDDEN, true);
     };
 
     if (noticeHidden) {

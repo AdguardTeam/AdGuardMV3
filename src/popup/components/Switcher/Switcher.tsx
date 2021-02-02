@@ -3,16 +3,17 @@ import { observer } from 'mobx-react';
 import cn from 'classnames';
 
 import { Icon } from 'Common/components/ui/Icon';
+import { SETTINGS_NAMES } from 'Common/settings-constants';
 import { rootStore } from '../../stores';
 
 import './switcher.pcss';
 
 export const Switcher = observer(() => {
     const { settingsStore } = useContext(rootStore);
-    const { filteringEnabled, toggleFilteringEnabled } = settingsStore;
+    const { filteringEnabled, setSetting } = settingsStore;
 
     const onClick = async () => {
-        await toggleFilteringEnabled(!filteringEnabled);
+        await setSetting(SETTINGS_NAMES.FILTERING_ENABLED, !filteringEnabled);
     };
 
     const icon = cn({

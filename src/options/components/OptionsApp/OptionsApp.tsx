@@ -4,7 +4,8 @@ import { Route, Switch, HashRouter } from 'react-router-dom';
 
 import { Icons } from 'Common/components/ui/Icons';
 import { log } from 'Common/logger';
-import { getMessageReceiver } from '../../messaging/receiver';
+import { NOTIFIER_EVENTS } from 'Common/constants';
+import { createLongLivedConnection } from 'Common/messaging-utils';
 import { Sidebar } from '../Sidebar';
 import { About } from '../About';
 import { rootStore } from '../../stores';
@@ -26,10 +27,25 @@ export const OptionsApp = observer(() => {
             }
         })();
 
-        const messageHandler = getMessageReceiver(store);
+        const events = [
+            NOTIFIER_EVENTS.SETTING_UPDATED,
+        ];
 
-        chrome.runtime.onMessage.addListener(messageHandler);
-        return () => chrome.runtime.onMessage.removeListener(messageHandler);
+        const messageHandler = (message: any) => {
+            const { type, data: [data] } = message;
+
+            switch (type) {
+                case NOTIFIER_EVENTS.SETTING_UPDATED: {
+                    const { key, value } = data;
+                    settingsStore.updateSettingState(key, value);
+                    break;
+                }
+                default:
+                    throw new Error(`Non supported event type: ${type}`);
+            }
+        };
+
+        return createLongLivedConnection(events, messageHandler);
     }, []);
 
     return (

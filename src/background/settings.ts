@@ -1,52 +1,49 @@
 import { throttle } from 'lodash';
 
 import { log } from 'Common/logger';
+import { NOTIFIER_EVENTS } from 'Common/constants';
+import { DEFAULT_SETTINGS, SETTINGS_NAMES, SettingsType } from 'Common/settings-constants';
 import { storage } from './storage';
-
-export enum SETTINGS_NAMES {
-    FILTERING_ENABLED = 'filtering.enabled',
-    POPUP_V3_WIZARD_ENABLED = 'popup.v3.wizard.enabled',
-    NOTICE_HIDDEN = 'notice.hidden',
-}
-
-type SettingsType = Record<SETTINGS_NAMES, boolean>;
+import { notifier } from './notifier';
 
 class Settings {
-    private DEFAULT_SETTINGS: SettingsType = {
-        [SETTINGS_NAMES.FILTERING_ENABLED]: true,
-        [SETTINGS_NAMES.POPUP_V3_WIZARD_ENABLED]: true,
-        [SETTINGS_NAMES.NOTICE_HIDDEN]: false,
-    };
-
     private SETTINGS_STORAGE_KEY = 'settings';
 
     private SAVE_TO_STORAGE_THROTTLE_TIMEOUT_MS = 1000;
 
-    private settingsInMemory = this.DEFAULT_SETTINGS;
+    private settings;
+
+    constructor(defaultSettings: SettingsType) {
+        this.settings = defaultSettings;
+    }
 
     public init = async () => {
-        // TODO consider to make storage synchronous
         const storedSettings = await storage.get<SettingsType>(this.SETTINGS_STORAGE_KEY);
 
         if (storedSettings) {
-            this.settingsInMemory = { ...this.settingsInMemory, ...storedSettings };
+            this.settings = { ...this.settings, ...storedSettings };
         }
 
         log.debug('Settings module loaded successfully');
     };
 
     private updateStorage = throttle(async () => {
-        await storage.set(this.SETTINGS_STORAGE_KEY, this.settingsInMemory);
+        await storage.set(this.SETTINGS_STORAGE_KEY, this.settings);
     }, this.SAVE_TO_STORAGE_THROTTLE_TIMEOUT_MS);
 
     public getSetting = (key: SETTINGS_NAMES) => {
-        return this.settingsInMemory[key];
+        return this.settings[key];
+    };
+
+    public getSettings = () => {
+        return this.settings;
     };
 
     public setSetting = (key: SETTINGS_NAMES, value: boolean) => {
-        this.settingsInMemory[key] = value;
+        this.settings[key] = value;
+        notifier.notify(NOTIFIER_EVENTS.SETTING_UPDATED, { key, value });
         this.updateStorage();
     };
 }
 
-export const settings = new Settings();
+export const settings = new Settings(DEFAULT_SETTINGS);

@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { Icon } from 'Common/components/ui/Icon';
 import { Checkbox } from 'Common/components/Checkbox';
+import { SETTINGS_NAMES } from 'Common/settings-constants';
 import { rootStore } from '../../stores';
 
 interface Option {
@@ -38,7 +39,7 @@ interface ArrowOption {
 export const Settings = observer(() => {
     const { settingsStore } = useContext(rootStore);
 
-    const { toggleFilteringEnabled, filteringEnabled } = settingsStore;
+    const { filteringEnabled, setSetting } = settingsStore;
 
     const OPTIONS = {
         AD_BLOCKING: {
@@ -47,7 +48,7 @@ export const Settings = observer(() => {
             iconId: 'ad_blocking',
             messageKey: 'options_ad_blocking_option',
             onChange: async (e: React.ChangeEvent<HTMLInputElement>) => {
-                await toggleFilteringEnabled(e.target.checked);
+                await setSetting(SETTINGS_NAMES.FILTERING_ENABLED, e.target.checked);
             },
             enabled: filteringEnabled,
         },
