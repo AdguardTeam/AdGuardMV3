@@ -5,6 +5,7 @@ import {
     PopupData,
 } from 'Common/constants';
 import { log } from 'Common/logger';
+import { getActiveTab, openAbusePage } from 'Common/helpers';
 import { settings } from './settings';
 import { app } from './app';
 import { notifier } from './notifier';
@@ -65,6 +66,19 @@ export const messageHandler = async (
         case MESSAGE_TYPES.SET_SETTING: {
             const { key, value } = data;
             return settings.setSetting(key, value);
+        }
+        case MESSAGE_TYPES.REPORT_SITE: {
+            const { url } = await getActiveTab();
+
+            const { version } = chrome.runtime.getManifest();
+            // TODO: set filter ids
+            const filerIds: string[] = [];
+
+            if (url) {
+                await openAbusePage(url, filerIds, version);
+            }
+
+            return null;
         }
         case MESSAGE_TYPES.GET_CSS: {
             const filteringEnabled = settings.getSetting(SETTINGS_NAMES.FILTERING_ENABLED);

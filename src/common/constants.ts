@@ -14,6 +14,7 @@ export const MESSAGE_TYPES = {
     GET_CSS: 'GET_CSS',
     OPEN_OPTIONS: 'OPEN_OPTIONS',
     SET_SETTING: 'SET_SETTING',
+    REPORT_SITE: 'REPORT_SITE',
 
     ADD_LONG_LIVED_CONNECTION: 'ADD_LONG_LIVED_CONNECTION',
     NOTIFY_LISTENERS: 'NOTIFY_LISTENERS',
@@ -29,3 +30,5 @@ export type Message = {
 export enum NOTIFIER_EVENTS {
     SETTING_UPDATED = 'event.setting.updated',
 }
+
+export const REPORT_SITE_BASE_URL = 'https://reports.adguard.com/new_issue.html';

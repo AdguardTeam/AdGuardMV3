@@ -11,6 +11,8 @@ class Sender {
         MESSAGE_TYPES.SET_SETTING,
         { key, value },
     );
+
+    reportSite = () => sendMessage(MESSAGE_TYPES.REPORT_SITE);
 }
 
 export const sender = new Sender();
