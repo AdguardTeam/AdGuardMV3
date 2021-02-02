@@ -3,8 +3,8 @@ import { throttle } from 'lodash';
 import { log } from 'Common/logger';
 import { NOTIFIER_EVENTS } from 'Common/constants';
 import { DEFAULT_SETTINGS, SETTINGS_NAMES, SettingsType } from 'Common/settings-constants';
-import { storage } from '../storage';
-import { notifier } from '../notifier';
+import { storage } from './storage';
+import { notifier } from './notifier';
 
 class Settings {
     private SETTINGS_STORAGE_KEY = 'settings';
