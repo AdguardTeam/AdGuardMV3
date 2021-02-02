@@ -1,6 +1,6 @@
 import { sendMessage } from 'Common/helpers';
 import { MESSAGE_TYPES, PopupData } from 'Common/constants';
-import { SETTINGS_NAMES } from '../../background/settings/settings-constants';
+import { SETTINGS_NAMES } from 'Common/settings-constants';
 
 class Sender {
     getPopupData = () => sendMessage<PopupData>(MESSAGE_TYPES.GET_POPUP_DATA);

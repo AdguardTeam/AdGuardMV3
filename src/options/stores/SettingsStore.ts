@@ -6,9 +6,9 @@ import {
     computed,
 } from 'mobx';
 
+import { DEFAULT_SETTINGS, SETTINGS_NAMES } from 'Common/settings-constants';
 import type { RootStore } from './RootStore';
 import { sender } from '../messaging/sender';
-import { DEFAULT_SETTINGS, SETTINGS_NAMES } from '../../background/settings/settings-constants';
 
 export class SettingsStore {
     public rootStore: RootStore;

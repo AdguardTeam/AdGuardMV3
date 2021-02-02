@@ -1,6 +1,6 @@
 import { MESSAGE_TYPES, OptionsData } from 'Common/constants';
 import { sendMessage } from 'Common/helpers';
-import { SETTINGS_NAMES } from '../../background/settings/settings-constants';
+import { SETTINGS_NAMES } from 'Common/settings-constants';
 
 class Sender {
     setSetting = (key: SETTINGS_NAMES, value: boolean) => sendMessage(

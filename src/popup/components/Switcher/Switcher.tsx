@@ -3,8 +3,8 @@ import { observer } from 'mobx-react';
 import cn from 'classnames';
 
 import { Icon } from 'Common/components/ui/Icon';
+import { SETTINGS_NAMES } from 'Common/settings-constants';
 import { rootStore } from '../../stores';
-import { SETTINGS_NAMES } from '../../../background/settings/settings-constants';
 
 import './switcher.pcss';
 

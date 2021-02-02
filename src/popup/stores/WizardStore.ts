@@ -6,8 +6,8 @@ import {
     runInAction,
 } from 'mobx';
 
+import { SETTINGS_NAMES } from 'Common/settings-constants';
 import type { RootStore } from './RootStore';
-import { SETTINGS_NAMES } from '../../background/settings/settings-constants';
 
 const INITIAL_STEP = 1;
 const LAST_STEP = 4;

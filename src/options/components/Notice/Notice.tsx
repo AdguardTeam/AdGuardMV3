@@ -1,13 +1,12 @@
 import React, { useContext } from 'react';
-
-import { reactTranslator } from 'Common/translators/reactTranslator';
-import { theme } from 'Common/styles';
 import cn from 'classnames';
 import { observer } from 'mobx-react';
 
+import { reactTranslator } from 'Common/translators/reactTranslator';
+import { theme } from 'Common/styles';
+import { SETTINGS_NAMES } from 'Common/settings-constants';
 import styles from './Notice.module.pcss';
 import { rootStore } from '../../stores';
-import { SETTINGS_NAMES } from '../../../background/settings/settings-constants';
 
 // TODO: change link, add to tds
 const COMPARISON_LINK = 'https://adguard.com';

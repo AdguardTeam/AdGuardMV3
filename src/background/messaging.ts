@@ -6,10 +6,10 @@ import {
 } from 'Common/constants';
 import { log } from 'Common/logger';
 import { getActiveTab, openAbusePage } from 'Common/helpers';
+import { SETTINGS_NAMES } from 'Common/settings-constants';
 import { settings } from './settings';
 import { app } from './app';
 import { notifier } from './notifier';
-import { SETTINGS_NAMES } from './settings/settings-constants';
 
 interface MessageHandler {
     (message: Message, sender: chrome.runtime.MessageSender): any;

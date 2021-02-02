@@ -8,9 +8,13 @@ import {
 
 import { log } from 'Common/logger';
 import { getActiveTab, getUrlDetails } from 'Common/helpers';
+import {
+    DEFAULT_SETTINGS,
+    SETTINGS_NAMES,
+    SettingsType,
+} from 'Common/settings-constants';
 import { sender } from '../messaging/sender';
 import type { RootStore } from './RootStore';
-import { DEFAULT_SETTINGS, SETTINGS_NAMES, SettingsType } from '../../background/settings/settings-constants';
 
 export class SettingsStore {
     public rootStore: RootStore;
