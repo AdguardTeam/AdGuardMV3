@@ -18,7 +18,9 @@ const LOCALES_DIR = path.resolve(__dirname, LOCALES_RELATIVE_PATH);
 // eslint-disable-next-line import/no-extraneous-dependencies
 const FormData = require('form-data');
 
-const prepare = (locale) => {
+type preparedDataType = { headers: { [key: string]: string }, formData: FormData, url: string };
+
+const prepare = (locale: string): preparedDataType => {
     const formData = new FormData();
     // Use 'chrome' format type for Browser Extensions
     // https://support.crowdin.com/file-formats/chrome-json/
@@ -28,15 +30,15 @@ const prepare = (locale) => {
     formData.append('filename', LOCALE_DATA_FILENAME);
     formData.append('project', PROJECT_ID);
     formData.append('file', fs.createReadStream(path.join(LOCALES_DIR, `${locale}/${LOCALE_DATA_FILENAME}`)));
-    const headers = {
+    const headers: { [key: string]: string } = {
         ...formData.getHeaders(),
     };
     return { formData, url: LOCALES_UPLOAD_URL, headers };
 };
 
-const uploadLocale = async (locale) => {
+const uploadLocale = async (locale: string) => {
     const { url, formData, headers } = prepare(locale);
-    const response = await axios.post(url, formData, { headers });
+    const response = await axios.post<FormData>(url, formData, { headers });
     return response.data;
 };
 

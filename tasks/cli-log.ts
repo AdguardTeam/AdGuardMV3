@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import chalk from 'chalk';
 
-const info = (text) => {
+const info = (text?: string) => {
     if (text) {
         console.log(text);
     } else {
@@ -9,7 +9,7 @@ const info = (text) => {
     }
 };
 
-const success = (text) => {
+const success = (text?: string) => {
     if (text) {
         console.log(chalk.green.bgBlack(text));
     } else {
@@ -17,7 +17,7 @@ const success = (text) => {
     }
 };
 
-const warning = (text) => {
+const warning = (text?: string) => {
     if (text) {
         console.log(chalk.black.bgYellowBright(text));
     } else {
@@ -25,7 +25,7 @@ const warning = (text) => {
     }
 };
 
-const warningRed = (text) => {
+const warningRed = (text?: string) => {
     if (text) {
         console.log(chalk.bold.yellow.bgRed(text));
     } else {
@@ -33,7 +33,7 @@ const warningRed = (text) => {
     }
 };
 
-const error = (text) => {
+const error = (text?: string) => {
     if (text) {
         console.log(chalk.bold.yellow.bgRed(text));
         throw new Error(text);

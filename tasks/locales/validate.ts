@@ -5,28 +5,21 @@ import { cliLog } from '../cli-log';
 import {
     BASE_LOCALE,
     LANGUAGES,
-    LOCALES_RELATIVE_PATH,
     LOCALE_DATA_FILENAME,
+    LOCALES_RELATIVE_PATH,
     REQUIRED_LOCALES,
     THRESHOLD_PERCENTAGE,
 } from './locales-constants';
 import { areArraysEqual, getLocaleTranslations } from '../helpers';
+import { translationResultType } from '../constants';
 
 const LOCALES = Object.keys(LANGUAGES);
 const LOCALES_DIR = path.resolve(__dirname, LOCALES_RELATIVE_PATH);
 
 /**
- * @typedef Result
- * @property {string} locale
- * @property {string} level % of translated
- * @property {Array} untranslatedStrings
- */
-
-/**
  * Logs translations readiness
- * @param {Result[]} results
  */
-const printTranslationsResults = (results) => {
+const printTranslationsResults = (results: translationResultType[]) => {
     cliLog.info('Translations readiness:');
     results.forEach((res) => {
         const record = `${res.locale} -- ${res.level}%`;
@@ -43,12 +36,10 @@ const printTranslationsResults = (results) => {
 
 /**
  * Checks locales translations readiness
- * @param {string[]} locales - list of locales
- * @param {boolean} [isInfo=false] flag for info script
- * @returns {Result[]} array of object with such properties:
- * locale, level of translation readiness and untranslated strings array
  */
-export const checkTranslations = async (locales, isInfo = false) => {
+export const checkTranslations = async (
+    locales: string[], isInfo: boolean = false,
+): Promise<translationResultType[]> => {
     const baseLocaleTranslations = await getLocaleTranslations(
         LOCALES_DIR, BASE_LOCALE, LOCALE_DATA_FILENAME,
     );
@@ -65,7 +56,7 @@ export const checkTranslations = async (locales, isInfo = false) => {
         const strictLevel = ((localeMessagesCount / baseMessagesCount) * 100);
         const level = Math.round((strictLevel + Number.EPSILON) * 100) / 100;
 
-        const untranslatedStrings = [];
+        const untranslatedStrings: string[] = [];
         baseMessages.forEach((baseStr) => {
             if (!localeMessages.includes(baseStr)) {
                 untranslatedStrings.push(baseStr);

@@ -8,27 +8,28 @@ import querystring from 'querystring';
 import { cliLog } from '../cli-log';
 
 import {
-    PROJECT_ID,
+    API_URL,
     BASE_LOCALE,
     LANGUAGES,
-    LOCALE_PAIRS,
-    API_URL,
-    LOCALES_RELATIVE_PATH,
     LOCALE_DATA_FILENAME,
+    LOCALE_PAIRS,
+    LOCALES_RELATIVE_PATH,
     PERSISTENT_MESSAGES,
+    PROJECT_ID,
 } from './locales-constants';
 import { chunkArray, getLocaleTranslations } from '../helpers';
+import { localeDataType, localeMessageType, localeUrlType } from '../constants';
 
 const LOCALES_DOWNLOAD_URL = `${API_URL}/download`;
 const LOCALES_DIR = path.resolve(__dirname, LOCALES_RELATIVE_PATH);
 
 const LOCALES = Object.keys(LANGUAGES);
 
-const downloadMessagesByUrl = async (url) => {
+const downloadMessagesByUrl = async (url: string) => {
     let response;
     try {
         cliLog.info(`Downloading url: ${url}...`);
-        response = await axios.get(url, { responseType: 'arraybuffer' });
+        response = await axios.get<Buffer>(url, { responseType: 'arraybuffer' });
         cliLog.info(`Downloaded: ${url}`);
     } catch (e) {
         let errorMessage;
@@ -40,10 +41,10 @@ const downloadMessagesByUrl = async (url) => {
         }
         cliLog.error(`Error occurred: ${errorMessage}, while downloading: ${url}`);
     }
-    return response.data;
+    return response?.data as Buffer;
 };
 
-const getQueryString = (lang) => {
+const getQueryString = (lang: string) => {
     const options = {
         language: lang,
         filename: LOCALE_DATA_FILENAME,
@@ -53,10 +54,14 @@ const getQueryString = (lang) => {
     return querystring.stringify(options);
 };
 
-const promiseBatchMap = async (arr, batchSize, handler) => {
-    const batches = chunkArray(arr, batchSize);
+const promiseBatchMap = async (
+    arr: localeUrlType[],
+    batchSize: number,
+    handler: (localeUrlPair: localeUrlType) => Promise<localeDataType>,
+): Promise<localeDataType[]> => {
+    const batches: localeUrlType[][] = chunkArray(arr, batchSize);
 
-    const result = [];
+    const result: localeDataType[][] = [];
 
     // eslint-disable-next-line no-restricted-syntax
     for (const batch of batches) {
@@ -66,11 +71,11 @@ const promiseBatchMap = async (arr, batchSize, handler) => {
         result.push(data);
     }
 
-    return result.flat(Infinity);
+    return result.flat(1);
 };
 
-const downloadLocales = async (locales) => {
-    const localeUrlPairs = locales.map((locale) => {
+const downloadLocales = async (locales: string[]) => {
+    const localeUrlPairs = locales.map((locale: string): localeUrlType => {
         const crowdinLocale = LOCALE_PAIRS[locale] || locale;
         const downloadUrl = `${LOCALES_DOWNLOAD_URL}?${getQueryString(crowdinLocale)}`;
         return { locale, url: downloadUrl };
@@ -78,16 +83,18 @@ const downloadLocales = async (locales) => {
 
     // Decrease this value if you encounter error:
     // "Maximum number of concurrent requests for this endpoint is reached"
+    // https://support.crowdin.com/api/api-integration-setup/#rate-limits
     const LOCALES_DOWNLOAD_BATCH_SIZE = 20;
 
-    return promiseBatchMap(localeUrlPairs, LOCALES_DOWNLOAD_BATCH_SIZE, async (localeUrlPair) => {
-        const { locale, url } = localeUrlPair;
-        const data = await downloadMessagesByUrl(url);
-        return { locale, data };
-    });
+    return promiseBatchMap(localeUrlPairs, LOCALES_DOWNLOAD_BATCH_SIZE,
+        async (localeUrlPair) => {
+            const { locale, url } = localeUrlPair;
+            const data = await downloadMessagesByUrl(url);
+            return { locale, data };
+        });
 };
 
-const saveFile = async (filePath, data) => {
+const saveFile = async (filePath: string, data: Buffer) => {
     try {
         await fs.promises.writeFile(filePath, data);
     } catch (e) {
@@ -95,7 +102,7 @@ const saveFile = async (filePath, data) => {
     }
 };
 
-const saveLocales = async (localeDataPairs) => {
+const saveLocales = async (localeDataPairs: localeDataType[]) => {
     const promises = localeDataPairs.map((localeDataPair) => {
         const { locale, data } = localeDataPair;
         const localeFilePath = path.join(LOCALES_DIR, locale, LOCALE_DATA_FILENAME);
@@ -111,11 +118,12 @@ const saveLocales = async (localeDataPairs) => {
 
 /**
  * Checks messages for required locales, if doesn't find them, then adds from baseMessages
- * @param {string} locale - locale
- * @param {Object} messages - locale messages
- * @param {Object} baseMessages - base locale messages
  */
-const checkRequiredFields = (locale, messages, baseMessages) => {
+const checkRequiredFields = (
+    locale: string,
+    messages: localeMessageType,
+    baseMessages: localeMessageType,
+) => {
     const requiredFields = PERSISTENT_MESSAGES;
     const resultMessages = { ...messages };
     requiredFields.forEach((requiredField) => {
@@ -145,7 +153,7 @@ const validateRequiredFields = async () => {
     });
 };
 
-export const downloadAndSave = async (locales) => {
+export const downloadAndSave = async (locales: string[]) => {
     const localeDataPairs = await downloadLocales(locales);
     await saveLocales(localeDataPairs);
     await validateRequiredFields();

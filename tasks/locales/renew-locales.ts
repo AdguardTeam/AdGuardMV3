@@ -5,6 +5,7 @@ import _ from 'lodash';
 
 import { cliLog } from '../cli-log';
 import { getLocaleTranslations } from '../helpers';
+import { localeMessageType } from '../constants';
 
 import {
     BASE_LOCALE,
@@ -32,11 +33,10 @@ const configuration = {
 
 /**
  * Promise wrapper for writing in file
- *
- * @param {string} filename
- * @param {*} body
  */
-const writeInFile = (filename, body) => {
+const writeInFile = (
+    filename: string, body: { [key: string]: { [key: string]: string } } | string,
+) => {
     if (typeof body !== 'string') {
         // eslint-disable-next-line no-param-reassign
         body = JSON.stringify(body, null, 4);
@@ -46,13 +46,10 @@ const writeInFile = (filename, body) => {
 
 /**
  * Finds files paths within directory corresponding to filesReg
- * @param {string} directory
- * @param {string} filesReg
- * @returns {Promise<*>}
  */
-const findFilesPaths = async (directory, filesReg) => {
+const findFilesPaths = async (directory: string, filesReg: string) => {
     const filterRegexp = new RegExp(filesReg);
-    const walk = async (dir, filePaths = []) => {
+    const walk = async (dir: string, filePaths: string[] = []) => {
         const files = await fs.readdir(dir);
 
         for (const file of files) {
@@ -71,7 +68,7 @@ const findFilesPaths = async (directory, filesReg) => {
     return walk(directory);
 };
 
-const getFilesPathsList = async (targets, filesReg) => {
+const getFilesPathsList = async (targets: string[], filesReg: string) => {
     const filesListsPromises = targets.map(async (directory) => {
         return findFilesPaths(directory, filesReg);
     });
@@ -84,13 +81,15 @@ const getFilesPathsList = async (targets, filesReg) => {
         });
 };
 
-const filterMessages = (messages, content) => {
+const filterMessages = (messages: string[], content: Buffer) => {
     return messages.filter((message) => {
         return content.indexOf(message) > -1;
     });
 };
 
-const chooseMessagesFromFiles = async (messageKeys, targets, filesReg) => {
+const chooseMessagesFromFiles = async (
+    messageKeys: string[], targets: string[], filesReg: string,
+) => {
     const filesPaths = await getFilesPathsList(targets, filesReg);
     const filteredMessages = filesPaths.map(async (filePath) => {
         const fileContent = await fs.readFile(filePath);
@@ -99,7 +98,7 @@ const chooseMessagesFromFiles = async (messageKeys, targets, filesReg) => {
     return Promise
         .all(filteredMessages)
         .then((messages) => {
-            return [...messages.reduce((unique, messageArray) => {
+            return [...messages.reduce((unique: Set<string>, messageArray: string[]) => {
                 return new Set([...unique, ...messageArray]);
             }, new Set())];
         });
@@ -136,7 +135,7 @@ export const renewLocales = async () => {
 
     chooseMessagesFromFiles(oldKeys, targets, filesReg)
         .then((chosenKeys) => {
-            const result = {};
+            const result: localeMessageType = {};
             const resultMessages = _.uniq([...chosenKeys, ...persistedMessages]);
             resultMessages.forEach((key) => {
                 result[key] = source[key];

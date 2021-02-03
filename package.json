@@ -15,11 +15,11 @@
         "watch": "BUILD_ENV=dev yarn build:chrome --watch",
         "ci:increment": "yarn version --patch --no-git-tag-version",
         "test": "jest",
-        "locales:download": "babel-node tasks/locales.js download",
-        "locales:upload": "babel-node tasks/locales.js upload",
-        "locales:renew": "babel-node tasks/locales.js renew",
-        "locales:validate": "babel-node tasks/locales.js validate",
-        "locales:info": "babel-node tasks/locales.js info",
+        "locales:download": "ts-node --log-error tasks/locales.ts download",
+        "locales:upload": "ts-node --log-error  tasks/locales.ts upload",
+        "locales:renew": "ts-node --log-error  tasks/locales.ts renew",
+        "locales:validate": "ts-node --log-error  tasks/locales.ts validate",
+        "locales:info": "ts-node --log-error  tasks/locales.ts info",
         "test:watch": "jest --watch"
     },
     "husky": {
@@ -43,7 +43,6 @@
     },
     "devDependencies": {
         "@babel/core": "^7.12.10",
-        "@babel/node": "^7.12.10",
         "@babel/plugin-proposal-class-properties": "^7.12.1",
         "@babel/plugin-proposal-decorators": "^7.12.12",
         "@babel/plugin-transform-runtime": "^7.12.10",

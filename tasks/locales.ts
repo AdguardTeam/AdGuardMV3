@@ -15,7 +15,7 @@ import {
 
 const LOCALES = Object.keys(LANGUAGES);
 
-const download = async (locales) => {
+const download = async (locales: string[]) => {
     try {
         await downloadAndSave(locales);
         cliLog.success('Download was successful');
@@ -47,7 +47,7 @@ const renew = async () => {
     }
 };
 
-const validate = async (locales) => {
+const validate = async (locales: string[]) => {
     try {
         await checkTranslations(locales);
     } catch (e) {
@@ -56,7 +56,7 @@ const validate = async (locales) => {
     }
 };
 
-const summary = async (isInfo) => {
+const summary = async (isInfo: boolean) => {
     try {
         await checkTranslations(LOCALES, isInfo);
     } catch (e) {
