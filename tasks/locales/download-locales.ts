@@ -18,14 +18,14 @@ import {
     PROJECT_ID,
 } from './locales-constants';
 import { chunkArray, getLocaleTranslations } from '../helpers';
-import { localeDataType, localeMessageType, localeUrlType } from '../constants';
+import { localeDataType, localeMessageType, localeUrlType } from './constants';
 
 const LOCALES_DOWNLOAD_URL = `${API_URL}/download`;
 const LOCALES_DIR = path.resolve(__dirname, LOCALES_RELATIVE_PATH);
 
 const LOCALES = Object.keys(LANGUAGES);
 
-const downloadMessagesByUrl = async (url: string) => {
+const downloadMessagesByUrl = async (url: string): Promise<Buffer> => {
     let response;
     try {
         cliLog.info(`Downloading url: ${url}...`);
@@ -41,6 +41,7 @@ const downloadMessagesByUrl = async (url: string) => {
         }
         cliLog.error(`Error occurred: ${errorMessage}, while downloading: ${url}`);
     }
+    // TODO: handle undefined
     return response?.data as Buffer;
 };
 

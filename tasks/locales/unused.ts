@@ -18,10 +18,8 @@ const SRC_DIR = path.resolve(__dirname, SRC_RELATIVE_PATH);
 
 /**
  * Checks file extension is it one of source files
- * @param {string} filePath path to file
- * @returns {boolean}
  */
-const canContainLocalesStrings = (filePath) => {
+const canContainLocalesStrings = (filePath: string) => {
     let isSrcFile = false;
     for (let i = 0; i < SRC_FILENAME_EXTENSIONS.length; i += 1) {
         isSrcFile = filePath.endsWith(SRC_FILENAME_EXTENSIONS[i]) || isSrcFile;
@@ -36,11 +34,8 @@ const canContainLocalesStrings = (filePath) => {
 
 /**
  * Collects contents of source files in given directory
- * @param {string} dirPath path to dir
- * @param {Array} [contents=[]] result acc
- * @returns {Array}
  */
-const getSrcFilesContents = (dirPath, contents = []) => {
+const getSrcFilesContents = (dirPath: string, contents: string[] = []) => {
     fs.readdirSync(dirPath).forEach((file) => {
         const fullPath = path.join(dirPath, file);
         if (fs.lstatSync(fullPath).isDirectory()) {
@@ -64,11 +59,11 @@ export const checkUnusedMessages = async () => {
     // TODO: fix script to search locales in React translations
     const filesContents = getSrcFilesContents(SRC_DIR);
 
-    const isPresentInFile = (message, file) => {
+    const isPresentInFile = (message: string, file: string) => {
         return file.includes(`'${message}'`) || file.includes(`"${message}"`);
     };
 
-    const isMessageUsed = (message) => {
+    const isMessageUsed = (message: string) => {
         return !PERSISTENT_MESSAGES.includes(message)
             && !filesContents.some((file) => isPresentInFile(message, file));
     };

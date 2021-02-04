@@ -28,7 +28,7 @@ const {
 /**
  * We use this pairs because we have different locale codes in the crowdin and the extension
  */
-const LOCALE_PAIRS: { [key: string]: string | undefined } = {
+const LOCALE_PAIRS: { [key: string]: string } = {
     /**
      * Norvegian language locale code in Crowdin is 'no'
      * Chrome recognizes both locale code 'nb' and 'no',

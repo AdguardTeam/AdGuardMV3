@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { localeMessageType, localeUrlType } from './constants';
+import { localeMessageType, localeUrlType } from './locales/constants';
 
 // TODO refactor using slice
 export const chunkArray = (arr: localeUrlType[], size: number) => arr

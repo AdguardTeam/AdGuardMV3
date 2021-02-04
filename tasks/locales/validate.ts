@@ -11,7 +11,7 @@ import {
     THRESHOLD_PERCENTAGE,
 } from './locales-constants';
 import { areArraysEqual, getLocaleTranslations } from '../helpers';
-import { translationResultType } from '../constants';
+import { translationResultType } from './constants';
 
 const LOCALES = Object.keys(LANGUAGES);
 const LOCALES_DIR = path.resolve(__dirname, LOCALES_RELATIVE_PATH);

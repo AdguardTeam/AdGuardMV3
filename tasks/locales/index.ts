@@ -1,19 +1,19 @@
 /* eslint-disable no-console */
 import { program } from 'commander';
-import { downloadAndSave } from './locales/download-locales';
-import { uploadLocales } from './locales/upload-locales';
-import { renewLocales } from './locales/renew-locales';
-import { checkTranslations } from './locales/validate';
-import { checkUnusedMessages } from './locales/unused';
+import { downloadAndSave } from './download-locales';
+import { uploadLocales } from './upload-locales';
+import { renewLocales } from './renew-locales';
+import { checkTranslations } from './validate';
+import { checkUnusedMessages } from './unused';
 
-import { cliLog } from './cli-log';
+import { cliLog } from '../cli-log';
 
 import {
     LANGUAGES,
     REQUIRED_LOCALES,
-} from './locales/locales-constants';
+} from './locales-constants';
 
-const LOCALES = Object.keys(LANGUAGES);
+const Index = Object.keys(LANGUAGES);
 
 const download = async (locales: string[]) => {
     try {
@@ -58,7 +58,7 @@ const validate = async (locales: string[]) => {
 
 const summary = async (isInfo: boolean) => {
     try {
-        await checkTranslations(LOCALES, isInfo);
+        await checkTranslations(Index, isInfo);
     } catch (e) {
         cliLog.error(e.message);
         process.exit(1);
@@ -79,7 +79,7 @@ program
     .description('Downloads messages from localization service')
     .option('-l,--locales [list...]', 'specific list of space-separated locales')
     .action((opts) => {
-        const locales = opts.locales && opts.locales.length > 0 ? opts.locales : LOCALES;
+        const locales = opts.locales && opts.locales.length > 0 ? opts.locales : Index;
         download(locales);
     });
 
@@ -106,7 +106,7 @@ program
             locales = opts.locales;
         } else {
             // defaults to validate all locales
-            locales = LOCALES;
+            locales = Index;
         }
         validate(locales);
     });

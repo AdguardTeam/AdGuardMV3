@@ -5,7 +5,6 @@ import _ from 'lodash';
 
 import { cliLog } from '../cli-log';
 import { getLocaleTranslations } from '../helpers';
-import { localeMessageType } from '../constants';
 
 import {
     BASE_LOCALE,
@@ -15,6 +14,7 @@ import {
     SRC_FILENAME_EXTENSIONS,
     PERSISTENT_MESSAGES,
 } from './locales-constants';
+import { localeMessageType } from './constants';
 
 const LOCALES_DIR = path.resolve(__dirname, LOCALES_RELATIVE_PATH);
 const SRC_DIR = path.resolve(__dirname, SRC_RELATIVE_PATH);
@@ -108,7 +108,7 @@ const chooseMessagesFromFiles = async (
  * Initialization of search process
  */
 export const renewLocales = async () => {
-    let { targets } = configuration;
+    const { targets } = configuration;
     const {
         src,
         output = 'result.json',
@@ -122,10 +122,6 @@ export const renewLocales = async () => {
 
     if (!targets || !targets.length) {
         throw new Error('No target directories');
-    }
-
-    if (typeof targets === 'string') {
-        targets = [targets];
     }
 
     const source = await getLocaleTranslations(
