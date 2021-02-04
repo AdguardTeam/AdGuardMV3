@@ -7,7 +7,7 @@
 - [x] get current tab info to show on popup
 - [ ] enable disable blocking from popup
 - [ ] create project on crowdin, add scripts for download/upload messages and validate them
-- [ ] add possibility to block elements with assistant
+- [x] add possibility to block elements with assistant
 - [x] implement report site functionality
 - [x] make wizard to show just once after install
 - [x] make wizard to show just once after install

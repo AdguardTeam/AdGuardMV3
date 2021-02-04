@@ -8,7 +8,6 @@ import './header.pcss';
 
 export const Header = () => {
     const handleBlockAdsClick = async () => {
-        // TODO - handle block ads click, launching assistant
         await sender.openAssistant();
         window.close();
     };
