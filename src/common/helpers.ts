@@ -11,16 +11,34 @@ export const sendMessage = <T = void>(type: MessageType, data?: any): Promise<T>
             message.data = data;
         }
         log.debug('Sent message:', message);
-        chrome.runtime.sendMessage(message, (...args) => {
+        chrome.runtime.sendMessage(message, (response) => {
             if (chrome.runtime.lastError) {
-                reject(chrome.runtime.lastError);
+                reject(chrome.runtime.lastError.message);
                 return;
             }
-            log.info('Received response on message:', message.type, 'response: ', ...args);
-            resolve(...args);
+            log.info('Received response on message:', message.type, 'response: ', response);
+            resolve(response);
         });
     },
 );
+
+export const sendMessageToTab = (tabId: number, type: MessageType, data?: any) => {
+    const message: Message = { type };
+    if (data) {
+        message.data = data;
+    }
+    return new Promise((resolve, reject) => {
+        log.debug(`Sent to tabId: "${tabId}" message:`, message);
+        chrome.tabs.sendMessage(tabId, message, (response) => {
+            if (chrome.runtime.lastError) {
+                reject(chrome.runtime.lastError.message);
+                return;
+            }
+            log.info(`From ${tabId} received response: `, response, 'on message:', message.type);
+            resolve(response);
+        });
+    });
+};
 
 export const getActiveTab = (): Promise<chrome.tabs.Tab> => {
     return new Promise((resolve, reject) => {

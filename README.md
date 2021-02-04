@@ -13,3 +13,5 @@
 - [x] make wizard to show just once after install
 - [ ] set filter ids on site report
 
+## Permissions required
+- `scripting` - this permission is required in order to inject assistant script only in the pages required

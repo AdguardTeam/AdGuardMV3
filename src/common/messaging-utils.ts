@@ -5,15 +5,17 @@ import { log } from 'Common/logger';
 
 /**
  * Creates long lived connections between popup and background page
+ * @param identifier
  * @param events
  * @param callback
  * @returns {function}
  */
 export const createLongLivedConnection = (
+    identifier: string,
     events: NOTIFIER_EVENTS[],
     callback: (message: Message) => void,
 ) => {
-    const port = chrome.runtime.connect({ name: `options_${nanoid()}` });
+    const port = chrome.runtime.connect({ name: `${identifier}_${nanoid()}` });
 
     port.postMessage({ type: MESSAGE_TYPES.ADD_LONG_LIVED_CONNECTION, data: { events } });
 

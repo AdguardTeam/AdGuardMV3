@@ -5,11 +5,12 @@ import {
     PopupData,
 } from 'Common/constants';
 import { log } from 'Common/logger';
-import { getActiveTab, openAbusePage } from 'Common/helpers';
+import { getActiveTab, openAbusePage, sendMessageToTab } from 'Common/helpers';
 import { SETTINGS_NAMES } from 'Common/settings-constants';
 import { settings } from './settings';
 import { app } from './app';
 import { notifier } from './notifier';
+import { scripting } from './scripting';
 
 interface MessageHandler {
     (message: Message, sender: chrome.runtime.MessageSender): any;
@@ -42,6 +43,7 @@ const messageHandlerWrapper = (messageHandler: MessageHandler) => (
 export const messageHandler = async (
     message: Message,
     sender: chrome.runtime.MessageSender,
+    // eslint-disable-next-line consistent-return
 ) => {
     log.debug('Received message:', message, 'from: ', sender);
 
@@ -79,6 +81,24 @@ export const messageHandler = async (
             }
 
             return null;
+        }
+        case MESSAGE_TYPES.OPEN_ASSISTANT: {
+            const { tab } = data;
+            try {
+                await sendMessageToTab(tab.id, MESSAGE_TYPES.START_ASSISTANT);
+            } catch (e) {
+                // if assistant wasn't injected yet sendMessageToTab will throw an error
+                await scripting.executeScript(tab.id, { file: 'assistant.js' });
+                await sendMessageToTab(tab.id, MESSAGE_TYPES.START_ASSISTANT);
+            }
+            break;
+        }
+        case MESSAGE_TYPES.ADD_USER_RULE: {
+            const { ruleText } = data;
+            // TODO implement user rules add user rule method
+            // eslint-disable-next-line no-console
+            console.log(ruleText);
+            break;
         }
         case MESSAGE_TYPES.GET_CSS: {
             const filteringEnabled = settings.getSetting(SETTINGS_NAMES.FILTERING_ENABLED);
