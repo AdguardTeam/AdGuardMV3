@@ -17,7 +17,15 @@ const LOCALES = Object.keys(LANGUAGES);
 const LOCALES_DIR = path.resolve(__dirname, LOCALES_RELATIVE_PATH);
 
 /**
+ * @typedef Result
+ * @property locale
+ * @property level - % of translated
+ * @property untranslatedStrings
+ */
+
+/**
  * Logs translations readiness
+ * @param {Result[]} results
  */
 const printTranslationsResults = (results: translationResultType[]) => {
     cliLog.info('Translations readiness:');
@@ -36,6 +44,8 @@ const printTranslationsResults = (results: translationResultType[]) => {
 
 /**
  * Checks locales translations readiness
+ * @param locales - list of locales
+ * @param isInfo - flag for info script
  */
 export const checkTranslations = async (
     locales: string[], isInfo: boolean = false,

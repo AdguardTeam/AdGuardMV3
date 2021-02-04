@@ -111,6 +111,9 @@ const saveLocales = async (localeDataPairs: localeDataType[]) => {
 
 /**
  * Checks messages for required locales, if doesn't find them, then adds from baseMessages
+ * @param locale - locale
+ * @param messages - locale messages
+ * @param baseMessages - base locale messages
  */
 const checkRequiredFields = (
     locale: string,

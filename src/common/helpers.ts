@@ -1,7 +1,6 @@
 import { Message, MessageType, REPORT_SITE_BASE_URL } from 'Common/constants';
 import { prefs } from 'Common/prefs';
 import { log } from './logger';
-import { getUrlWithQueryString } from '../../tasks/helpers';
 
 export const sendMessage = <T = void>(type: MessageType, data?: any): Promise<T> => new Promise(
     (resolve, reject) => {
@@ -40,6 +39,13 @@ export const openPage = async (url: string): Promise<void> => {
         throw new Error(`Open page requires url, received, ${url}`);
     }
     await chrome.tabs.create({ url });
+};
+
+// Keep in sync with the same function in tasks helpers
+export const getUrlWithQueryString = (url: string, params: { [key: string]: string }) => {
+    const searchParams = new URLSearchParams(params);
+
+    return `${url}?${searchParams.toString()}`;
 };
 
 export const openAbusePage = (url: string, filterIds: string[], productVersion: string) => {

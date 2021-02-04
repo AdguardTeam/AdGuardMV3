@@ -13,7 +13,7 @@ import {
     REQUIRED_LOCALES,
 } from './locales-constants';
 
-const Index = Object.keys(LANGUAGES);
+const LOCALES = Object.keys(LANGUAGES);
 
 const download = async (locales: string[]) => {
     try {
@@ -58,7 +58,7 @@ const validate = async (locales: string[]) => {
 
 const summary = async (isInfo: boolean) => {
     try {
-        await checkTranslations(Index, isInfo);
+        await checkTranslations(LOCALES, isInfo);
     } catch (e) {
         cliLog.error(e.message);
         process.exit(1);
@@ -78,8 +78,8 @@ program
     .command('download')
     .description('Downloads messages from localization service')
     .option('-l,--locales [list...]', 'specific list of space-separated locales')
-    .action((opts) => {
-        const locales = opts.locales && opts.locales.length > 0 ? opts.locales : Index;
+    .action((opts: { locales: string[] }) => {
+        const locales = opts.locales && opts.locales.length > 0 ? opts.locales : LOCALES;
         download(locales);
     });
 
@@ -98,7 +98,9 @@ program
     .description('Validates translations')
     .option('-R,--min', 'for only our required locales')
     .option('-l,--locales [list...]', 'for specific list of space-separated locales')
-    .action((opts) => {
+    .action((opts: { locales: string[], min: boolean }) => {
+        console.log(opts);
+
         let locales;
         if (opts.min) {
             locales = REQUIRED_LOCALES;
@@ -106,7 +108,7 @@ program
             locales = opts.locales;
         } else {
             // defaults to validate all locales
-            locales = Index;
+            locales = LOCALES;
         }
         validate(locales);
     });
@@ -116,7 +118,7 @@ program
     .description('Shows locales info')
     .option('-s,--summary', 'for all locales translations readiness')
     .option('-N,--unused', 'for unused base-lang strings')
-    .action((opts) => {
+    .action((opts: { locales: string[], unused: boolean, summary: boolean }) => {
         const IS_INFO = true;
         if (opts.summary) {
             summary(IS_INFO);

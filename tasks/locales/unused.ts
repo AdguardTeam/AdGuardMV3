@@ -18,6 +18,7 @@ const SRC_DIR = path.resolve(__dirname, SRC_RELATIVE_PATH);
 
 /**
  * Checks file extension is it one of source files
+ * @param filePath path to file
  */
 const canContainLocalesStrings = (filePath: string) => {
     let isSrcFile = false;
@@ -34,6 +35,8 @@ const canContainLocalesStrings = (filePath: string) => {
 
 /**
  * Collects contents of source files in given directory
+ * @param dirPath path to dir
+ * @param result acc
  */
 const getSrcFilesContents = (dirPath: string, contents: string[] = []) => {
     fs.readdirSync(dirPath).forEach((file) => {
