@@ -1,8 +1,7 @@
-import {
-    Message, MessageType, REPORT_SITE_BASE_URL,
-} from 'Common/constants';
+import { Message, MessageType, REPORT_SITE_BASE_URL } from 'Common/constants';
 import { prefs } from 'Common/prefs';
 import { log } from './logger';
+import { getUrlWithQueryString } from '../../tasks/helpers';
 
 export const sendMessage = <T = void>(type: MessageType, data?: any): Promise<T> => new Promise(
     (resolve, reject) => {
@@ -36,12 +35,6 @@ export const getActiveTab = (): Promise<chrome.tabs.Tab> => {
     });
 };
 
-export const getPathWithQueryString = (path: string, params: { [key: string]: string }) => {
-    const searchParams = new URLSearchParams(params);
-
-    return `${path}?${searchParams.toString()}`;
-};
-
 export const openPage = async (url: string): Promise<void> => {
     if (!url) {
         throw new Error(`Open page requires url, received, ${url}`);
@@ -66,7 +59,7 @@ export const openAbusePage = (url: string, filterIds: string[], productVersion: 
         filters: filterIds.join('.'),
     };
 
-    const abuseUrl = getPathWithQueryString(REPORT_SITE_BASE_URL, urlParams);
+    const abuseUrl = getUrlWithQueryString(REPORT_SITE_BASE_URL, urlParams);
 
     return openPage(abuseUrl);
 };

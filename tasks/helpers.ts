@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import { localeMessageType, localeUrlType } from './locales/constants';
 
-// TODO refactor using slice
 export const chunkArray = (arr: localeUrlType[], size: number) => arr
     .reduce((chunks: localeUrlType[][], el: localeUrlType, idx: number) => {
         if (idx % size === 0) {
@@ -40,4 +39,10 @@ export const areArraysEqual = <T>(arr1: T[], arr2: T[]): boolean => {
         }
     }
     return true;
+};
+
+export const getUrlWithQueryString = (url: string, params: { [key: string]: string }) => {
+    const searchParams = new URLSearchParams(params);
+
+    return `${url}?${searchParams.toString()}`;
 };

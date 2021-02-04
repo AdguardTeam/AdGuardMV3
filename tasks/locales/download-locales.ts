@@ -4,7 +4,6 @@
 import axios from 'axios';
 import path from 'path';
 import fs from 'fs';
-import querystring from 'querystring';
 import { cliLog } from '../cli-log';
 
 import {
@@ -17,7 +16,7 @@ import {
     PERSISTENT_MESSAGES,
     PROJECT_ID,
 } from './locales-constants';
-import { chunkArray, getLocaleTranslations } from '../helpers';
+import { chunkArray, getLocaleTranslations, getUrlWithQueryString } from '../helpers';
 import { localeDataType, localeMessageType, localeUrlType } from './constants';
 
 const LOCALES_DOWNLOAD_URL = `${API_URL}/download`;
@@ -25,12 +24,12 @@ const LOCALES_DIR = path.resolve(__dirname, LOCALES_RELATIVE_PATH);
 
 const LOCALES = Object.keys(LANGUAGES);
 
-const downloadMessagesByUrl = async (url: string): Promise<Buffer> => {
-    let response;
+const downloadMessagesByUrl = async (url: string): Promise<Buffer> | never => {
     try {
         cliLog.info(`Downloading url: ${url}...`);
-        response = await axios.get<Buffer>(url, { responseType: 'arraybuffer' });
+        const response = await axios.get<Buffer>(url, { responseType: 'arraybuffer' });
         cliLog.info(`Downloaded: ${url}`);
+        return response.data;
     } catch (e) {
         let errorMessage;
         if (e.response && e.response.data) {
@@ -40,19 +39,8 @@ const downloadMessagesByUrl = async (url: string): Promise<Buffer> => {
             errorMessage = e.message;
         }
         cliLog.error(`Error occurred: ${errorMessage}, while downloading: ${url}`);
+        throw errorMessage;
     }
-    // TODO: handle undefined
-    return response?.data as Buffer;
-};
-
-const getQueryString = (lang: string) => {
-    const options = {
-        language: lang,
-        filename: LOCALE_DATA_FILENAME,
-        project: PROJECT_ID,
-    };
-    // TODO: refactor with new URLSearchParams(options).toString();
-    return querystring.stringify(options);
 };
 
 const promiseBatchMap = async (
@@ -78,7 +66,11 @@ const promiseBatchMap = async (
 const downloadLocales = async (locales: string[]) => {
     const localeUrlPairs = locales.map((locale: string): localeUrlType => {
         const crowdinLocale = LOCALE_PAIRS[locale] || locale;
-        const downloadUrl = `${LOCALES_DOWNLOAD_URL}?${getQueryString(crowdinLocale)}`;
+        const downloadUrl = getUrlWithQueryString(LOCALES_DOWNLOAD_URL, {
+            language: crowdinLocale,
+            filename: LOCALE_DATA_FILENAME,
+            project: PROJECT_ID,
+        });
         return { locale, url: downloadUrl };
     });
 
