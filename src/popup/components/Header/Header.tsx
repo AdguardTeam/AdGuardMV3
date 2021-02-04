@@ -7,8 +7,9 @@ import { sender } from '../../messaging/sender';
 import './header.pcss';
 
 export const Header = () => {
-    const handleBlockAdsClick = () => {
+    const handleBlockAdsClick = async () => {
         // TODO - handle block ads click, launching assistant
+        await sender.openAssistant();
         window.close();
     };
 

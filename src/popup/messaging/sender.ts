@@ -1,4 +1,4 @@
-import { sendMessage } from 'Common/helpers';
+import { getActiveTab, sendMessage } from 'Common/helpers';
 import { MESSAGE_TYPES, PopupData } from 'Common/constants';
 import { SETTINGS_NAMES } from 'Common/settings-constants';
 
@@ -13,6 +13,11 @@ class Sender {
     );
 
     reportSite = () => sendMessage(MESSAGE_TYPES.REPORT_SITE);
+
+    openAssistant = async () => {
+        const currentTab = await getActiveTab();
+        return sendMessage(MESSAGE_TYPES.OPEN_ASSISTANT, { tab: currentTab });
+    };
 }
 
 export const sender = new Sender();

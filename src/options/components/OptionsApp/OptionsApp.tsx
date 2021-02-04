@@ -45,7 +45,7 @@ export const OptionsApp = observer(() => {
             }
         };
 
-        return createLongLivedConnection(events, messageHandler);
+        return createLongLivedConnection('options', events, messageHandler);
     }, []);
 
     return (

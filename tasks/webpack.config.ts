@@ -54,6 +54,7 @@ const BACKGROUND_PATH = path.resolve(__dirname, SRC_PATH, 'background');
 const POPUP_PATH = path.resolve(__dirname, SRC_PATH, 'popup');
 const OPTIONS_PATH = path.resolve(__dirname, SRC_PATH, 'options');
 const CONTENT_SCRIPTS_PATH = path.resolve(__dirname, SRC_PATH, 'content-scripts');
+const ASSISTANT_PATH = path.resolve(CONTENT_SCRIPTS_PATH, 'assistant');
 
 const plugins: WebpackPluginInstance[] = [
     new ForkTsCheckerWebpackPlugin(),
@@ -113,8 +114,10 @@ const config = {
     entry: {
         background: BACKGROUND_PATH,
         popup: POPUP_PATH,
-        'content-scripts': CONTENT_SCRIPTS_PATH,
         options: OPTIONS_PATH,
+        // content-scripts
+        'content-scripts': CONTENT_SCRIPTS_PATH,
+        assistant: ASSISTANT_PATH,
     },
     output: {
         path: path.resolve(__dirname, BUILD_PATH, OUTPUT_PATH, BROWSER),
