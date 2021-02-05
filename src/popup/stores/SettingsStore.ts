@@ -7,12 +7,13 @@ import {
 } from 'mobx';
 
 import { log } from 'Common/logger';
-import { getActiveTab, getUrlDetails } from 'Common/helpers';
+import { getUrlDetails } from 'Common/helpers';
 import {
     DEFAULT_SETTINGS,
     SETTINGS_NAMES,
     SettingsType,
 } from 'Common/settings-constants';
+import { tabUtils } from 'Common/tab-utils';
 import { sender } from '../messaging/sender';
 import type { RootStore } from './RootStore';
 
@@ -34,7 +35,7 @@ export class SettingsStore {
     settings: SettingsType = DEFAULT_SETTINGS;
 
     getCurrentTabUrl = async () => {
-        const activeTab = await getActiveTab();
+        const activeTab = await tabUtils.getActiveTab();
         runInAction(() => {
             this.currentUrl = activeTab.url || '';
         });

@@ -1,4 +1,15 @@
-const executeScript = async (tabId: number, options: any) => {
+interface ExecuteScriptOptions {
+    file: string,
+}
+
+/**
+ * Promisified version of browser api method scripting.executeScript, with adjusted options
+ *
+ * API description: https://developer.chrome.com/docs/extensions/reference/scripting/#method-executeScript
+ * @param tabId
+ * @param options
+ */
+const executeScript = async (tabId: number, options: ExecuteScriptOptions) => {
     const { file } = options;
 
     const executeScriptOptions = {

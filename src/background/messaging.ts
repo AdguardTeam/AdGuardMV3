@@ -5,8 +5,8 @@ import {
     PopupData,
 } from 'Common/constants';
 import { log } from 'Common/logger';
-import { getActiveTab, openAbusePage, sendMessageToTab } from 'Common/helpers';
 import { SETTINGS_NAMES } from 'Common/settings-constants';
+import { tabUtils } from 'Common/tab-utils';
 import { settings } from './settings';
 import { app } from './app';
 import { notifier } from './notifier';
@@ -35,7 +35,7 @@ const messageHandlerWrapper = (messageHandler: MessageHandler) => (
 };
 
 /**
- * Message handler used to receive messages and send responses back on background page
+ * Message handler used to receive messages and send responses back on background service worker
  * from content-script, popup, option or another pages of extension
  * @param message
  * @param sender
@@ -70,14 +70,14 @@ export const messageHandler = async (
             return settings.setSetting(key, value);
         }
         case MESSAGE_TYPES.REPORT_SITE: {
-            const { url } = await getActiveTab();
+            const { url } = await tabUtils.getActiveTab();
 
             const { version } = chrome.runtime.getManifest();
             // TODO: set filter ids
             const filerIds: string[] = [];
 
             if (url) {
-                await openAbusePage(url, filerIds, version);
+                await tabUtils.openAbusePage(url, filerIds, version);
             }
 
             return null;
@@ -85,11 +85,11 @@ export const messageHandler = async (
         case MESSAGE_TYPES.OPEN_ASSISTANT: {
             const { tab } = data;
             try {
-                await sendMessageToTab(tab.id, MESSAGE_TYPES.START_ASSISTANT);
+                await tabUtils.sendMessageToTab(tab.id, MESSAGE_TYPES.START_ASSISTANT);
             } catch (e) {
                 // if assistant wasn't injected yet sendMessageToTab will throw an error
                 await scripting.executeScript(tab.id, { file: 'assistant.js' });
-                await sendMessageToTab(tab.id, MESSAGE_TYPES.START_ASSISTANT);
+                await tabUtils.sendMessageToTab(tab.id, MESSAGE_TYPES.START_ASSISTANT);
             }
             break;
         }

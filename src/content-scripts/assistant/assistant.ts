@@ -6,7 +6,6 @@ import { sendMessage } from 'Common/helpers';
 const init = () => {
     let assistant: any;
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         if (message.type === MESSAGE_TYPES.START_ASSISTANT) {
             if (typeof assistant === 'undefined') {
