@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { program } from 'commander';
 import { downloadAndSave } from './download-locales';
 import { uploadLocales } from './upload-locales';
@@ -99,8 +98,6 @@ program
     .option('-R,--min', 'for only our required locales')
     .option('-l,--locales [list...]', 'for specific list of space-separated locales')
     .action((opts: { locales: string[], min: boolean }) => {
-        console.log(opts);
-
         let locales;
         if (opts.min) {
             locales = REQUIRED_LOCALES;
