@@ -16,10 +16,11 @@ export const sendMessage = <T = void>(type: MessageType, data?: any): Promise<T>
     },
 );
 
-export const getPathWithQueryString = (path: string, params: { [key: string]: string }) => {
+// Keep in sync with the same function in tasks helpers
+export const getUrlWithQueryString = (url: string, params: { [key: string]: string }) => {
     const searchParams = new URLSearchParams(params);
 
-    return `${path}?${searchParams.toString()}`;
+    return `${url}?${searchParams.toString()}`;
 };
 
 interface URLInfo extends URL {

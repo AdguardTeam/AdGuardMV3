@@ -6,7 +6,7 @@ import {
 } from 'Common/constants';
 import { log } from 'Common/logger';
 import { prefs } from 'Common/prefs';
-import { getPathWithQueryString } from 'Common/helpers';
+import { getUrlWithQueryString } from 'Common/helpers';
 import { scripting } from '../background/scripting';
 
 class TabUtils {
@@ -64,7 +64,7 @@ class TabUtils {
             filters: filterIds.join('.'),
         };
 
-        const abuseUrl = getPathWithQueryString(REPORT_SITE_BASE_URL, urlParams);
+        const abuseUrl = getUrlWithQueryString(REPORT_SITE_BASE_URL, urlParams);
 
         return this.openPage(abuseUrl);
     };
