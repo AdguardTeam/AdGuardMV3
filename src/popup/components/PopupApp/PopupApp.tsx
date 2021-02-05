@@ -53,7 +53,7 @@ export const PopupApp = observer(() => {
             }
         };
 
-        return createLongLivedConnection(events, messageHandler);
+        return createLongLivedConnection('popup', events, messageHandler);
     }, []);
 
     const classname = cn('main', {
