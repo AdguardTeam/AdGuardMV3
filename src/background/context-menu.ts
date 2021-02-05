@@ -1,6 +1,7 @@
 import { throttle } from 'lodash';
 import { nanoid } from 'nanoid';
 
+import { tabUtils } from 'Common/tab-utils';
 import { contextMenus } from './context-menus';
 
 enum CONTEXT_MENU_ITEMS {
@@ -24,9 +25,10 @@ const CONTEXT_MENU_MAP = {
         title: CONTEXT_MENU_ITEMS.DISABLE_FILTERING_ON_SITE,
     },
     [CONTEXT_MENU_ITEMS.BLOCK_ADS_ON_SITE]: {
-        action: () => {
-            // FIXME add working actions
-            console.log(CONTEXT_MENU_ITEMS.BLOCK_ADS_ON_SITE);
+        action: async (tabId?: number) => {
+            if (tabId) {
+                await tabUtils.openAssistant(tabId);
+            }
         },
         title: CONTEXT_MENU_ITEMS.BLOCK_ADS_ON_SITE,
     },
@@ -98,14 +100,17 @@ const updateContextMenu = (() => {
 const UPDATE_WAIT_TIMEOUT_MS = 500;
 const updateContextMenuThrottled = throttle(updateContextMenu, UPDATE_WAIT_TIMEOUT_MS);
 
-const contextMenuClickHandler = (info: chrome.contextMenus.OnClickData) => {
+const contextMenuClickHandler = (
+    info: chrome.contextMenus.OnClickData,
+    tab: chrome.tabs.Tab | undefined,
+) => {
     const contextMenu = CONTEXT_MENU_MAP[info?.menuItemId as CONTEXT_MENU_ITEMS];
 
     if (!contextMenu) {
         return;
     }
 
-    contextMenu.action();
+    contextMenu.action(tab?.id);
 };
 
 const init = () => {

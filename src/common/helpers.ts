@@ -1,5 +1,4 @@
 import { Message, MessageType } from 'Common/constants';
-import { log } from './logger';
 
 export const sendMessage = <T = void>(type: MessageType, data?: any): Promise<T> => new Promise(
     (resolve, reject) => {
@@ -7,13 +6,11 @@ export const sendMessage = <T = void>(type: MessageType, data?: any): Promise<T>
         if (data) {
             message.data = data;
         }
-        log.debug('Sent message:', message);
         chrome.runtime.sendMessage(message, (response) => {
             if (chrome.runtime.lastError) {
                 reject(chrome.runtime.lastError.message);
                 return;
             }
-            log.info('Received response on message:', message.type, 'response: ', response);
             resolve(response);
         });
     },

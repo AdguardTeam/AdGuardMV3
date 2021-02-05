@@ -1,7 +1,13 @@
-import { Message, MessageType, REPORT_SITE_BASE_URL } from 'Common/constants';
+import {
+    Message,
+    MESSAGE_TYPES,
+    MessageType,
+    REPORT_SITE_BASE_URL,
+} from 'Common/constants';
 import { log } from 'Common/logger';
 import { prefs } from 'Common/prefs';
 import { getPathWithQueryString } from 'Common/helpers';
+import { scripting } from '../background/scripting';
 
 class TabUtils {
     getActiveTab = (): Promise<chrome.tabs.Tab> => {
@@ -24,13 +30,11 @@ class TabUtils {
             message.data = data;
         }
         return new Promise((resolve, reject) => {
-            log.debug(`Sent to tabId: "${tabId}" message:`, message);
             chrome.tabs.sendMessage(tabId, message, (response) => {
                 if (chrome.runtime.lastError) {
                     reject(chrome.runtime.lastError.message);
                     return;
                 }
-                log.info(`From ${tabId} received response: `, response, 'on message:', message.type);
                 resolve(response);
             });
         });
@@ -63,6 +67,33 @@ class TabUtils {
         const abuseUrl = getPathWithQueryString(REPORT_SITE_BASE_URL, urlParams);
 
         return this.openPage(abuseUrl);
+    };
+
+    /**
+     * Sends message to assistant by tab id in order to activate it.
+     * If no answer received tries to inject assistant script and send message again.
+     * @param tabId
+     */
+    openAssistantWithInject = async (tabId: number) => {
+        try {
+            await this.sendMessageToTab(tabId, MESSAGE_TYPES.START_ASSISTANT);
+        } catch (e) {
+            // if assistant wasn't injected yet sendMessageToTab will throw an error
+            await scripting.executeScript(tabId, { file: 'assistant.js' });
+            await this.sendMessageToTab(tabId, MESSAGE_TYPES.START_ASSISTANT);
+        }
+    };
+
+    /**
+     * Launches assistant context by tab id
+     * @param tabId
+     */
+    openAssistant = async (tabId: number) => {
+        try {
+            await this.openAssistantWithInject(tabId);
+        } catch (e) {
+            log.error(e);
+        }
     };
 }
 
