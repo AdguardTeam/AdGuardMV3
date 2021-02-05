@@ -9,30 +9,16 @@ export const sendMessage = <T = void>(type: MessageType, data?: any): Promise<T>
             message.data = data;
         }
         log.debug('Sent message:', message);
-        chrome.runtime.sendMessage(message, (...args) => {
+        chrome.runtime.sendMessage(message, (response) => {
             if (chrome.runtime.lastError) {
-                reject(chrome.runtime.lastError);
+                reject(chrome.runtime.lastError.message);
                 return;
             }
-            log.info('Received response on message:', message.type, 'response: ', ...args);
-            resolve(...args);
+            log.info('Received response on message:', message.type, 'response: ', response);
+            resolve(response);
         });
     },
 );
-
-export const getActiveTab = (): Promise<chrome.tabs.Tab> => {
-    return new Promise((resolve, reject) => {
-        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-            const error = chrome.runtime.lastError;
-            if (error) {
-                reject(error);
-            }
-
-            const [tab] = tabs;
-            resolve(tab);
-        });
-    });
-};
 
 export const openPage = async (url: string): Promise<void> => {
     if (!url) {
