@@ -12,6 +12,7 @@ import {
     DEFAULT_SETTINGS,
     SETTINGS_NAMES,
     SettingsType,
+    SettingsValueType,
 } from 'Common/settings-constants';
 import { tabUtils } from 'Common/tab-utils';
 import { sender } from '../messaging/sender';
@@ -50,7 +51,7 @@ export class SettingsStore {
         return this.currentUrl;
     }
 
-    setSetting = async (key: SETTINGS_NAMES, value: boolean) => {
+    setSetting = async (key: SETTINGS_NAMES, value: SettingsValueType) => {
         try {
             await sender.setSetting(key, value);
         } catch (e) {
@@ -62,7 +63,7 @@ export class SettingsStore {
     };
 
     @action
-    updateSettingState = (key: SETTINGS_NAMES, value: boolean) => {
+    updateSettingState = (key: SETTINGS_NAMES, value: SettingsValueType) => {
         this.settings[key] = value;
     };
 
@@ -88,5 +89,15 @@ export class SettingsStore {
     @computed
     get wizardEnabled() {
         return this.settings[SETTINGS_NAMES.POPUP_V3_WIZARD_ENABLED];
+    }
+
+    @computed
+    get protectionEnabled() {
+        return this.settings[SETTINGS_NAMES.PROTECTION_ENABLED];
+    }
+
+    @computed
+    get protectionPausedTimeout() {
+        return this.settings[SETTINGS_NAMES.PROTECTION_PAUSED_TIMEOUT];
     }
 }

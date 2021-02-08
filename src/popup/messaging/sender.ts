@@ -1,6 +1,6 @@
 import { sendMessage } from 'Common/helpers';
 import { MESSAGE_TYPES, PopupData } from 'Common/constants';
-import { SETTINGS_NAMES } from 'Common/settings-constants';
+import { SETTINGS_NAMES, SettingsValueType } from 'Common/settings-constants';
 import { tabUtils } from 'Common/tab-utils';
 
 /**
@@ -22,7 +22,7 @@ class Sender {
      * @param key
      * @param value
      */
-    setSetting = (key: SETTINGS_NAMES, value: boolean) => sendMessage(
+    setSetting = (key: SETTINGS_NAMES, value: SettingsValueType) => sendMessage(
         MESSAGE_TYPES.SET_SETTING,
         { key, value },
     );

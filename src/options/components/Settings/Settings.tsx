@@ -155,6 +155,7 @@ export const Settings = observer(() => {
                 {reactTranslator.getMessage('options_settings_title')}
             </h1>
             <div className="option__container">
+                {/* @ts-ignore FIXME */}
                 {checkboxOptions.map(renderCheckboxOption)}
                 {arrowOptions.map(renderArrowOption)}
             </div>

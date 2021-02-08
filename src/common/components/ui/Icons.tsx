@@ -504,6 +504,54 @@ export const Icons = () => {
                     <path d="M1 13l6-6-6-6" stroke="#888" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" />
                 </g>
             </svg>
+
+            <svg id="crumbs" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <filter x="-75%" y="-34.5%" width="256.6%" height="188.4%" filterUnits="objectBoundingBox" id="a">
+                        <feMorphology radius=".5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1" />
+                        <feOffset dy="2" in="shadowSpreadOuter1" result="shadowOffsetOuter1" />
+                        <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1" />
+                        <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1" />
+                        <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0" in="shadowBlurOuter1" />
+                    </filter>
+                    <path id="b" d="M0 14.04V0l10 10.08-4.452.153 3.38 6.487L6.8 18l-3.585-6.858z" />
+                </defs>
+                <g fill="none" fillRule="evenodd">
+                    <path fill="#131313" d="M-290-21H30v480h-320z" />
+                    <g fill="#000" transform="translate(-3 12)">
+                        <use filter="url(#a)" />
+                        <use stroke="#F6F4F4" />
+                    </g>
+                    <path
+                        d="M2 11a1 1 0 110 2 1 1 0 010-2zm0-5a1 1 0 110 2 1 1 0 010-2zm0-5a1 1 0 110 2 1 1 0 010-2z"
+                        stroke="#A4A4A4"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1.5"
+                        transform="translate(10, 4)"
+                    />
+                </g>
+            </svg>
+
+            <svg id="disabled-logo" width="68" height="68" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none" fillRule="evenodd">
+                    <path fill="#131313" d="M-125-112h320v480h-320z" />
+                    <g style={{ mixBlendMode: 'luminosity' }}>
+                        <path
+                            d="M34 0C23.371 0 10.552 2.438 0 7.805 0 19.395-.146 48.27 34 68 68.144 48.27 68 19.395 68 7.805 57.446 2.438 44.627 0 34 0z"
+                            fill="#68BC71"
+                        />
+                        <path
+                            d="M34 0v68C.878 48.862.021 21.12 0 8.894v-1.09C10.553 2.439 23.372 0 34 0z"
+                            fill="#67B279"
+                        />
+                        <path
+                            d="M33.7 43.714l19.729-26.14c-1.446-1.14-2.714-.335-3.412.287l-.026.002-16.45 16.823-6.197-7.332c-2.957-3.359-6.976-.797-7.915-.12L33.7 43.714"
+                            fill="#FFF"
+                        />
+                    </g>
+                </g>
+            </svg>
         </svg>
     );
 };
