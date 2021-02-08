@@ -47,7 +47,7 @@ class TabUtils {
         await chrome.tabs.create({ url });
     };
 
-    openAbusePage = (url: string, filterIds: string[], productVersion: string) => {
+    openAbusePage = (url: string) => {
         const supportedBrowsers = ['Chrome', 'Firefox', 'Opera', 'Safari', 'IE', 'Edge', 'Yandex'];
 
         const browserUrlParams = (
@@ -56,12 +56,17 @@ class TabUtils {
                 : { browser: 'Other', browserDetails: prefs.browser }
         ) as { browser: string } | { browser: string, browserDetails: string };
 
+        const { version } = chrome.runtime.getManifest();
+
+        // TODO: get enabled filters ids
+        const filtersIds: string[] = [];
+
         const urlParams = {
             product_type: 'Ext',
-            product_version: productVersion,
+            product_version: version,
             ...browserUrlParams,
             url,
-            filters: filterIds.join('.'),
+            filters: filtersIds.join('.'),
         };
 
         const abuseUrl = getUrlWithQueryString(REPORT_SITE_BASE_URL, urlParams);
@@ -94,6 +99,21 @@ class TabUtils {
         } catch (e) {
             log.error(e);
         }
+    };
+
+    openOptionsPage = () => {
+        return chrome.runtime.openOptionsPage();
+    };
+
+    reloadTab = (tabId: number) => {
+        return new Promise<void>((resolve, reject) => {
+            chrome.tabs.reload(tabId, {}, () => {
+                if (chrome.runtime.lastError) {
+                    reject(chrome.runtime.lastError.message);
+                }
+                resolve();
+            });
+        });
     };
 }
 

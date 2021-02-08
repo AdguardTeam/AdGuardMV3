@@ -44,6 +44,18 @@ class Settings {
         notifier.notify(NOTIFIER_EVENTS.SETTING_UPDATED, { key, value });
         this.updateStorage();
     };
+
+    public enableFiltering = () => {
+        this.setSetting(SETTINGS_NAMES.FILTERING_ENABLED, true);
+    };
+
+    public disableFiltering = () => {
+        this.setSetting(SETTINGS_NAMES.FILTERING_ENABLED, false);
+    };
+
+    public filteringEnabled = () => {
+        return this.settings[SETTINGS_NAMES.FILTERING_ENABLED];
+    };
 }
 
 export const settings = new Settings(DEFAULT_SETTINGS);

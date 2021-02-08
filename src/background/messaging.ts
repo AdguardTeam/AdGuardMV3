@@ -53,7 +53,7 @@ export const messageHandler = async (
             }) as OptionsData;
         }
         case MESSAGE_TYPES.OPEN_OPTIONS: {
-            return chrome.runtime.openOptionsPage();
+            return tabUtils.openOptionsPage();
         }
         case MESSAGE_TYPES.GET_POPUP_DATA: {
             return {
@@ -67,12 +67,8 @@ export const messageHandler = async (
         case MESSAGE_TYPES.REPORT_SITE: {
             const { url } = await tabUtils.getActiveTab();
 
-            const { version } = chrome.runtime.getManifest();
-            // TODO: set filter ids
-            const filerIds: string[] = [];
-
             if (url) {
-                await tabUtils.openAbusePage(url, filerIds, version);
+                await tabUtils.openAbusePage(url);
             }
 
             return null;

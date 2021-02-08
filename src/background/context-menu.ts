@@ -2,16 +2,21 @@ import { throttle } from 'lodash';
 import { nanoid } from 'nanoid';
 
 import { tabUtils } from 'Common/tab-utils';
+import { NOTIFIER_EVENTS } from 'Common/constants';
 import { contextMenus } from './context-menus';
+import { settings } from './settings';
+import { notifier } from './notifier';
+
+type Tab = chrome.tabs.Tab;
 
 enum CONTEXT_MENU_ITEMS {
-    // FIXME add enabling filtering
     DISABLE_FILTERING_ON_SITE = 'context_menu_disable_filtering_on_site',
+    ENABLE_FILTERING_ON_SITE = 'context_menu_enable_filtering_on_site',
     BLOCK_ADS_ON_SITE = 'context_menu_block_ads_on_site',
     REPORT_AN_ISSUE = 'context_menu_report_an_issue',
     OPEN_OPTIONS = 'context_menu_open_options',
-    // FIXME add enabling blocking
-    PAUSE_BLOCKING = 'context_menu_pause_blocking',
+    DISABLE_BLOCKING = 'context_menu_disable_blocking',
+    ENABLE_BLOCKING = 'context_menu_enable_blocking',
 }
 
 // TODO translate context menu items, when this issue would be resolved
@@ -24,34 +29,52 @@ const CONTEXT_MENU_MAP = {
         },
         title: CONTEXT_MENU_ITEMS.DISABLE_FILTERING_ON_SITE,
     },
+    [CONTEXT_MENU_ITEMS.ENABLE_FILTERING_ON_SITE]: {
+        action: () => {
+            // FIXME add working actions
+            console.log(CONTEXT_MENU_ITEMS.ENABLE_FILTERING_ON_SITE);
+        },
+        title: CONTEXT_MENU_ITEMS.ENABLE_FILTERING_ON_SITE,
+    },
     [CONTEXT_MENU_ITEMS.BLOCK_ADS_ON_SITE]: {
-        action: async (tabId?: number) => {
-            if (tabId) {
-                await tabUtils.openAssistant(tabId);
+        action: async (tab?: Tab) => {
+            if (tab?.id) {
+                await tabUtils.openAssistant(tab.id);
             }
         },
         title: CONTEXT_MENU_ITEMS.BLOCK_ADS_ON_SITE,
     },
     [CONTEXT_MENU_ITEMS.REPORT_AN_ISSUE]: {
-        action: () => {
-            // FIXME add working actions
-            console.log(CONTEXT_MENU_ITEMS.REPORT_AN_ISSUE);
+        action: async (tab?: Tab) => {
+            if (tab?.url) {
+                await tabUtils.openAbusePage(tab.url);
+            }
         },
         title: CONTEXT_MENU_ITEMS.REPORT_AN_ISSUE,
     },
     [CONTEXT_MENU_ITEMS.OPEN_OPTIONS]: {
-        action: () => {
-            // FIXME add working actions
-            console.log(CONTEXT_MENU_ITEMS.OPEN_OPTIONS);
+        action: async () => {
+            await tabUtils.openOptionsPage();
         },
         title: CONTEXT_MENU_ITEMS.OPEN_OPTIONS,
     },
-    [CONTEXT_MENU_ITEMS.PAUSE_BLOCKING]: {
-        action: () => {
-            // FIXME add working actions
-            console.log(CONTEXT_MENU_ITEMS.PAUSE_BLOCKING);
+    [CONTEXT_MENU_ITEMS.DISABLE_BLOCKING]: {
+        action: async (tab?: Tab) => {
+            settings.disableFiltering();
+            if (tab?.id) {
+                await tabUtils.reloadTab(tab.id);
+            }
         },
-        title: CONTEXT_MENU_ITEMS.PAUSE_BLOCKING,
+        title: CONTEXT_MENU_ITEMS.DISABLE_BLOCKING,
+    },
+    [CONTEXT_MENU_ITEMS.ENABLE_BLOCKING]: {
+        action: async (tab?: Tab) => {
+            settings.enableFiltering();
+            if (tab?.id) {
+                await tabUtils.reloadTab(tab.id);
+            }
+        },
+        title: CONTEXT_MENU_ITEMS.ENABLE_BLOCKING,
     },
 };
 
@@ -74,13 +97,21 @@ const addSeparator = async () => {
 };
 
 const addContextMenu = async () => {
+    const isBlockingEnabled = settings.filteringEnabled();
+
+    // TODO handle site specific filtering when it will be ready
     await addMenuItem(CONTEXT_MENU_ITEMS.DISABLE_FILTERING_ON_SITE);
     await addSeparator();
     await addMenuItem(CONTEXT_MENU_ITEMS.BLOCK_ADS_ON_SITE);
     await addMenuItem(CONTEXT_MENU_ITEMS.REPORT_AN_ISSUE);
     await addSeparator();
     await addMenuItem(CONTEXT_MENU_ITEMS.OPEN_OPTIONS);
-    await addMenuItem(CONTEXT_MENU_ITEMS.PAUSE_BLOCKING);
+
+    if (isBlockingEnabled) {
+        await addMenuItem(CONTEXT_MENU_ITEMS.DISABLE_BLOCKING);
+    } else {
+        await addMenuItem(CONTEXT_MENU_ITEMS.ENABLE_BLOCKING);
+    }
 };
 
 const updateContextMenu = (() => {
@@ -110,13 +141,16 @@ const contextMenuClickHandler = (
         return;
     }
 
-    contextMenu.action(tab?.id);
+    contextMenu.action(tab);
 };
 
 const init = () => {
     chrome.contextMenus.onClicked.addListener(contextMenuClickHandler);
     chrome.tabs.onUpdated.addListener(updateContextMenuThrottled);
     chrome.tabs.onActivated.addListener(updateContextMenuThrottled);
+    notifier.addEventListener(NOTIFIER_EVENTS.SETTING_UPDATED, () => {
+        updateContextMenuThrottled();
+    });
 
     updateContextMenuThrottled();
 };
