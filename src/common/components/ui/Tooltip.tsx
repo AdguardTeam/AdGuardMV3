@@ -5,22 +5,27 @@ import { usePopperTooltip } from 'react-popper-tooltip';
 import { Icon } from 'Common/components/ui/Icon';
 import styles from './Tooltip.module.pcss';
 
-type IProps = { iconId: string, className?: string, children: JSX.Element };
+type IProps = { iconId: string, className?: string, children: JSX.Element, disabled: boolean };
 
-const Tooltip = ({ iconId, className, children }: IProps) => {
+const Tooltip = ({
+    iconId, className, children, disabled,
+}: IProps) => {
     const {
         getTooltipProps,
         setTooltipRef,
         setTriggerRef,
         visible,
-    } = usePopperTooltip({ trigger: 'click', placement: 'bottom-start' });
+    } = usePopperTooltip({
+        trigger: 'click', placement: 'bottom-start', interactive: true, defaultVisible: false,
+    });
 
+    /* TODO: close on option click */
     return (
-        <div className="App">
-            <button type="button" ref={setTriggerRef} className={className}>
-                <Icon id={iconId} className="icon--button iconCrumbs" />
+        <>
+            <button type="button" ref={setTriggerRef} className={className} disabled={disabled}>
+                <Icon id={iconId} className="icon--button" />
             </button>
-            {visible && (
+            {!disabled && visible && (
                 <div
                     ref={setTooltipRef}
                     {...getTooltipProps({ className: styles.tooltip })}
@@ -28,7 +33,7 @@ const Tooltip = ({ iconId, className, children }: IProps) => {
                     {children}
                 </div>
             )}
-        </div>
+        </>
     );
 };
 

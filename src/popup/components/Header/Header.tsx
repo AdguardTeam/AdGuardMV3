@@ -1,17 +1,19 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
+import cn from 'classnames';
 import { translator } from 'Common/translators/translator';
 import { Icon } from 'Common/components/ui/Icon';
 import { Tooltip } from 'Common/components/ui/Tooltip';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { SETTINGS_NAMES } from 'Common/settings-constants';
 import { sender } from '../../messaging/sender';
-import styles from './Header.module.pcss';
 import { rootStore } from '../../stores';
+
+import styles from './Header.module.pcss';
 
 export const Header = observer(() => {
     const { settingsStore } = useContext(rootStore);
-    const { setSetting } = settingsStore;
+    const { setSetting, protectionEnabled } = settingsStore;
 
     const handleBlockAdsClick = async () => {
         await sender.openAssistant();
@@ -36,9 +38,13 @@ export const Header = observer(() => {
         }, 1000);
     };
 
+    const className = cn(styles.popupHeader, {
+        [styles.popupHeaderDisabled]: !protectionEnabled,
+    });
+
     // TODO: align icons
     return (
-        <div className={styles.popupHeader}>
+        <div className={className}>
             <div className={styles.popupHeaderLogo}>
                 <Icon id="logo" className="icon--logo" />
             </div>
@@ -48,6 +54,7 @@ export const Header = observer(() => {
                     type="button"
                     onClick={handleBlockAdsClick}
                     title={translator.getMessage('options_block_ads_on_website')}
+                    disabled={!protectionEnabled}
                 >
                     <Icon id="start" className="icon--button" />
                 </button>
@@ -56,33 +63,34 @@ export const Header = observer(() => {
                     type="button"
                     onClick={handleSettingsClick}
                     title={translator.getMessage('options_open_settings')}
+                    disabled={!protectionEnabled}
                 >
                     <Icon id="settings" className="icon--button" />
                 </button>
-                <Tooltip iconId="crumbs" className={styles.popupHeaderButton}>
-                    <ul>
-                        {/* eslint-disable-next-line max-len */}
-                        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
-                        <li
+                <Tooltip iconId="crumbs" className={styles.popupHeaderButton} disabled={!protectionEnabled}>
+                    <div>
+                        <button
+                            type="button"
                             className={styles.item}
                             onClick={onPauseProtectionClick}
                         >
                             {reactTranslator.getMessage('popup_settings_pause_protection')}
-                        </li>
-                        {/* eslint-disable-next-line max-len */}
-                        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
-                        <li
+                        </button>
+                        <button
+                            type="button"
                             className={styles.item}
                             onClick={onPauseProtectionTimeoutClick}
                         >
                             {reactTranslator.getMessage('popup_settings_pause_for_30_seconds')}
-                        </li>
-                        <li
+                        </button>
+                        <button
+                            type="button"
                             className={styles.item}
+                            disabled
                         >
                             {reactTranslator.getMessage('popup_settings_disable_for_30_seconds')}
-                        </li>
-                    </ul>
+                        </button>
+                    </div>
                 </Tooltip>
             </div>
         </div>
