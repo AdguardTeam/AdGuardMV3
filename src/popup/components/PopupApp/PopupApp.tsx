@@ -31,6 +31,8 @@ export const PopupApp = observer(() => {
         protectionEnabled,
         setSetting,
         protectionPausedTimeout,
+        setProtectionPausedTimer,
+        resetProtectionPausedTimeout,
     } = settingsStore;
 
     useEffect(() => {
@@ -53,6 +55,10 @@ export const PopupApp = observer(() => {
                 case NOTIFIER_EVENTS.SETTING_UPDATED: {
                     const { key, value } = data;
                     settingsStore.updateSettingState(key, value);
+                    if (key === SETTINGS_NAMES.GLOBAL_FILTERING_PAUSED_UNTIL
+                        && value > Date.now()) {
+                        setProtectionPausedTimer();
+                    }
                     break;
                 }
                 default:
@@ -74,6 +80,7 @@ export const PopupApp = observer(() => {
 
     const onEnableProtectionClick = async () => {
         await setSetting(SETTINGS_NAMES.PROTECTION_ENABLED, true);
+        resetProtectionPausedTimeout();
     };
 
     return (
@@ -85,7 +92,7 @@ export const PopupApp = observer(() => {
                     <>
                         <Header />
                         <main className={className}>
-                            {protectionEnabled
+                            {protectionEnabled && protectionPausedTimeout <= 0
                                 ? (
                                     <>
                                         <Switcher />
@@ -98,7 +105,11 @@ export const PopupApp = observer(() => {
                                         <div><Icon id="disabled-logo" className={styles.logo} /></div>
                                         <section className={styles.section}>
                                             <h1 className={cn(theme.common.pageInfoMain, styles.pageInfoMain)}>{reactTranslator.getMessage('popup_protection_is_paused')}</h1>
-                                            <h6 className={theme.common.pageInfoAdditional}>{reactTranslator.getMessage('popup_protection_will_be_resumed_after_x_sec', { count: protectionPausedTimeout })}</h6>
+                                            {protectionPausedTimeout > 0 && (
+                                                <h6 className={theme.common.pageInfoAdditional}>
+                                                    {reactTranslator.getMessage('popup_protection_will_be_resumed_after_x_sec', { count: protectionPausedTimeout })}
+                                                </h6>
+                                            )}
                                         </section>
                                         <button type="button" className={`${styles.buttonGreen} action-button`} onClick={onEnableProtectionClick}>
                                             {reactTranslator.getMessage('popup_protection_resume_now')}

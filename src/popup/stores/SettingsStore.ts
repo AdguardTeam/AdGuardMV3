@@ -30,10 +30,16 @@ export class SettingsStore {
     popupDataReady = false;
 
     @observable
-    currentUrl: string = '';
+    currentUrl = '';
 
     @observable
     settings: SettingsType = DEFAULT_SETTINGS;
+
+    @observable
+    protectionPausedTimerId = 0;
+
+    @observable
+    protectionPausedTimeout = 0;
 
     getCurrentTabUrl = async () => {
         const activeTab = await tabUtils.getActiveTab();
@@ -75,6 +81,10 @@ export class SettingsStore {
             settings,
         } = await sender.getPopupData();
 
+        if (this.settings[SETTINGS_NAMES.GLOBAL_FILTERING_PAUSED_UNTIL] < Date.now()) {
+            this.setProtectionPausedTimer();
+        }
+
         runInAction(() => {
             this.popupDataReady = true;
             this.settings = settings;
@@ -97,7 +107,30 @@ export class SettingsStore {
     }
 
     @computed
-    get protectionPausedTimeout() {
-        return this.settings[SETTINGS_NAMES.PROTECTION_PAUSED_TIMEOUT];
+    get globalFilteringPausedUntil() {
+        return this.settings[SETTINGS_NAMES.GLOBAL_FILTERING_PAUSED_UNTIL] as number;
     }
+
+    @action
+    setProtectionPausedTimer = () => {
+        runInAction(() => {
+            this.protectionPausedTimerId = window.setInterval(() => {
+                runInAction(() => {
+                    this.protectionPausedTimeout = Math.ceil(
+                        (this.globalFilteringPausedUntil - Date.now()) / 1000,
+                    );
+                });
+
+                if (this.protectionPausedTimeout <= 0) {
+                    this.resetProtectionPausedTimeout();
+                }
+            }, 1000);
+        });
+    };
+
+    @action
+    resetProtectionPausedTimeout = () => {
+        clearTimeout(this.protectionPausedTimerId);
+        this.protectionPausedTimeout = 0;
+    };
 }

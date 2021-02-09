@@ -39,6 +39,10 @@ class Sender {
         const currentTab = await tabUtils.getActiveTab();
         return sendMessage(MESSAGE_TYPES.OPEN_ASSISTANT, { tab: currentTab });
     };
+
+    pauseGlobalFiltering = (
+        pausedUntil: number,
+    ) => sendMessage(MESSAGE_TYPES.PAUSE_GLOBAL_FILTERING, { pausedUntil });
 }
 
 export const sender = new Sender();

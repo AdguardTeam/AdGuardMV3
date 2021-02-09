@@ -39,7 +39,7 @@ class Settings {
         return this.settings;
     };
 
-    public setSetting = (key: SETTINGS_NAMES, value: boolean) => {
+    public setSetting = (key: SETTINGS_NAMES, value: any) => {
         this.settings[key] = value;
         notifier.notify(NOTIFIER_EVENTS.SETTING_UPDATED, { key, value });
         this.updateStorage();

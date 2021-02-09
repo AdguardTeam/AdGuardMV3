@@ -65,6 +65,11 @@ export const messageHandler = async (
                 settings: settings.getSettings(),
             } as PopupData;
         }
+        case MESSAGE_TYPES.PAUSE_GLOBAL_FILTERING: {
+            const { pausedUntil } = data;
+            settings.setSetting(SETTINGS_NAMES.GLOBAL_FILTERING_PAUSED_UNTIL, pausedUntil);
+            return pausedUntil;
+        }
         case MESSAGE_TYPES.SET_SETTING: {
             const { key, value } = data;
             return settings.setSetting(key, value);
@@ -102,11 +107,13 @@ export const messageHandler = async (
         }
         case MESSAGE_TYPES.GET_CSS: {
             const filteringEnabled = settings.getSetting(SETTINGS_NAMES.FILTERING_ENABLED);
-            if (!filteringEnabled) {
-                return null;
+            const protectionEnabled = settings.getSetting(SETTINGS_NAMES.PROTECTION_ENABLED);
+            if (filteringEnabled && protectionEnabled) {
+                // example rules
+                return ['* { background-color: pink }'];
             }
-            // example rules
-            return ['* { background-color: pink }'];
+
+            return null;
         }
         default: {
             throw new Error(`No message handler for type: ${type}`);

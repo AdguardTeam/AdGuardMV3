@@ -13,7 +13,10 @@ import styles from './Header.module.pcss';
 
 export const Header = observer(() => {
     const { settingsStore } = useContext(rootStore);
-    const { setSetting, protectionEnabled } = settingsStore;
+    const {
+        protectionEnabled,
+        protectionPausedTimeout,
+    } = settingsStore;
 
     const handleBlockAdsClick = async () => {
         await sender.openAssistant();
@@ -27,19 +30,17 @@ export const Header = observer(() => {
     };
 
     const onPauseProtectionClick = async () => {
-        await setSetting(SETTINGS_NAMES.PROTECTION_ENABLED, false);
+        await sender.setSetting(SETTINGS_NAMES.PROTECTION_ENABLED, false);
     };
 
     const onPauseProtectionTimeoutClick = async () => {
-        await setSetting(SETTINGS_NAMES.PROTECTION_ENABLED, false);
-        setInterval(async () => {
-            await setSetting(SETTINGS_NAMES.PROTECTION_PAUSED_TIMEOUT,
-                settingsStore.protectionPausedTimeout as number - 1);
-        }, 1000);
+        await sender.pauseGlobalFiltering(Date.now() + 30000);
     };
 
+    const protectionDisabled = !protectionEnabled || protectionPausedTimeout > 0;
+
     const className = cn(styles.popupHeader, {
-        [styles.popupHeaderDisabled]: !protectionEnabled,
+        [styles.popupHeaderDisabled]: protectionDisabled,
     });
 
     // TODO: align icons
@@ -54,7 +55,7 @@ export const Header = observer(() => {
                     type="button"
                     onClick={handleBlockAdsClick}
                     title={translator.getMessage('options_block_ads_on_website')}
-                    disabled={!protectionEnabled}
+                    disabled={protectionDisabled}
                 >
                     <Icon id="start" className="icon--button" />
                 </button>
@@ -63,11 +64,11 @@ export const Header = observer(() => {
                     type="button"
                     onClick={handleSettingsClick}
                     title={translator.getMessage('options_open_settings')}
-                    disabled={!protectionEnabled}
+                    disabled={protectionDisabled}
                 >
                     <Icon id="settings" className="icon--button" />
                 </button>
-                <Tooltip iconId="crumbs" className={styles.popupHeaderButton} disabled={!protectionEnabled}>
+                <Tooltip iconId="crumbs" className={styles.popupHeaderButton} disabled={protectionDisabled}>
                     <div>
                         <button
                             type="button"

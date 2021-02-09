@@ -12,10 +12,12 @@ import styles from './Footer.module.pcss';
 
 export const Footer = observer(() => {
     const { settingsStore } = useContext(rootStore);
-    const { protectionEnabled } = settingsStore;
+    const { protectionEnabled, protectionPausedTimeout } = settingsStore;
+
+    const protectionDisabled = !protectionEnabled || protectionPausedTimeout > 0;
 
     const className = cn(styles.footer, {
-        [styles.footerDisabled]: !protectionEnabled,
+        [styles.footerDisabled]: protectionDisabled,
     });
 
     return (
