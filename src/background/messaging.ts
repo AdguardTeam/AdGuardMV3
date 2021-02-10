@@ -10,7 +10,6 @@ import { tabUtils } from 'Common/tab-utils';
 import { settings } from './settings';
 import { app } from './app';
 import { notifier } from './notifier';
-import { scripting } from './scripting';
 
 interface MessageHandler {
     (message: Message, sender: chrome.runtime.MessageSender): any;
@@ -38,15 +37,11 @@ const messageHandlerWrapper = (messageHandler: MessageHandler) => (
  * Message handler used to receive messages and send responses back on background service worker
  * from content-script, popup, option or another pages of extension
  * @param message
- * @param sender
  */
 export const messageHandler = async (
     message: Message,
-    sender: chrome.runtime.MessageSender,
     // eslint-disable-next-line consistent-return
 ) => {
-    log.debug('Received message:', message, 'from: ', sender);
-
     await app.init();
 
     const { type, data } = message;
@@ -58,7 +53,7 @@ export const messageHandler = async (
             }) as OptionsData;
         }
         case MESSAGE_TYPES.OPEN_OPTIONS: {
-            return chrome.runtime.openOptionsPage();
+            return tabUtils.openOptionsPage();
         }
         case MESSAGE_TYPES.GET_POPUP_DATA: {
             return {
@@ -77,25 +72,15 @@ export const messageHandler = async (
         case MESSAGE_TYPES.REPORT_SITE: {
             const { url } = await tabUtils.getActiveTab();
 
-            const { version } = chrome.runtime.getManifest();
-            // TODO: set filter ids
-            const filerIds: string[] = [];
-
             if (url) {
-                await tabUtils.openAbusePage(url, filerIds, version);
+                await tabUtils.openAbusePage(url);
             }
 
             return null;
         }
         case MESSAGE_TYPES.OPEN_ASSISTANT: {
             const { tab } = data;
-            try {
-                await tabUtils.sendMessageToTab(tab.id, MESSAGE_TYPES.START_ASSISTANT);
-            } catch (e) {
-                // if assistant wasn't injected yet sendMessageToTab will throw an error
-                await scripting.executeScript(tab.id, { file: 'assistant.js' });
-                await tabUtils.sendMessageToTab(tab.id, MESSAGE_TYPES.START_ASSISTANT);
-            }
+            await tabUtils.openAssistant(tab.id);
             break;
         }
         case MESSAGE_TYPES.ADD_USER_RULE: {

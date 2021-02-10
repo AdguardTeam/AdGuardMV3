@@ -9,9 +9,8 @@ declare global {
 
 const LEVELS = {
     ERROR: 1,
-    WARN: 2,
-    INFO: 3,
-    DEBUG: 4,
+    INFO: 2,
+    DEBUG: 3,
 } as const;
 
 type Level = keyof typeof LEVELS;
@@ -19,7 +18,6 @@ type Level = keyof typeof LEVELS;
 const CONSOLE_METHODS = {
     LOG: 'log',
     INFO: 'info',
-    WARN: 'warn',
     ERROR: 'error',
 } as const;
 
@@ -45,10 +43,6 @@ export const log = {
 
     info(...args: any[]) {
         print('INFO', 'info', args);
-    },
-
-    warn(...args: any[]) {
-        print('WARN', 'warn', args);
     },
 
     error(...args: any[]) {
