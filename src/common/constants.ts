@@ -35,3 +35,5 @@ export enum NOTIFIER_EVENTS {
 }
 
 export const REPORT_SITE_BASE_URL = 'https://reports.adguard.com/new_issue.html';
+
+export const GLOBAL_FILTERING_PAUSE_TIMEOUT = 30000;

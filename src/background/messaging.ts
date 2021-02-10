@@ -67,7 +67,7 @@ export const messageHandler = async (
             switch (key as SETTINGS_NAMES) {
                 case SETTINGS_NAMES.FILTERING_ENABLED:
                 case SETTINGS_NAMES.PROTECTION_ENABLED:
-                case SETTINGS_NAMES.GLOBAL_FILTERING_PAUSED_UNTIL: {
+                case SETTINGS_NAMES.GLOBAL_FILTERING_PAUSE_EXPIRES: {
                     await tabUtils.reloadActiveTab();
                     break;
                 }
@@ -103,7 +103,7 @@ export const messageHandler = async (
             const filteringEnabled = settings.getSetting(SETTINGS_NAMES.FILTERING_ENABLED);
             const protectionEnabled = settings.getSetting(SETTINGS_NAMES.PROTECTION_ENABLED);
             const globalFilteringPausedUntil = settings.getSetting(
-                SETTINGS_NAMES.GLOBAL_FILTERING_PAUSED_UNTIL,
+                SETTINGS_NAMES.GLOBAL_FILTERING_PAUSE_EXPIRES,
             );
 
             if (

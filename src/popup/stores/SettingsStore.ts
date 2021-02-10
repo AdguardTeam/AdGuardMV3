@@ -77,11 +77,9 @@ export class SettingsStore {
     getPopupData = async () => {
         await this.getCurrentTabUrl();
 
-        const {
-            settings,
-        } = await sender.getPopupData();
+        const { settings } = await sender.getPopupData();
 
-        if (this.settings[SETTINGS_NAMES.GLOBAL_FILTERING_PAUSED_UNTIL] < Date.now()) {
+        if (settings[SETTINGS_NAMES.GLOBAL_FILTERING_PAUSE_EXPIRES] > Date.now()) {
             this.setProtectionPausedTimer();
         }
 
@@ -107,17 +105,20 @@ export class SettingsStore {
     }
 
     @computed
-    get globalFilteringPausedUntil() {
-        return this.settings[SETTINGS_NAMES.GLOBAL_FILTERING_PAUSED_UNTIL] as number;
+    get globalFilteringPauseExpires() {
+        return this.settings[SETTINGS_NAMES.GLOBAL_FILTERING_PAUSE_EXPIRES] as number;
     }
 
     @action
     setProtectionPausedTimer = () => {
+        if (this.protectionPausedTimerId) {
+            return;
+        }
         runInAction(() => {
             this.protectionPausedTimerId = window.setInterval(() => {
                 runInAction(() => {
                     this.protectionPausedTimeout = Math.ceil(
-                        (this.globalFilteringPausedUntil - Date.now()) / 1000,
+                        (this.globalFilteringPauseExpires - Date.now()) / 1000,
                     );
                 });
 
@@ -129,8 +130,10 @@ export class SettingsStore {
     };
 
     @action
-    resetProtectionPausedTimeout = () => {
+    resetProtectionPausedTimeout = async () => {
         clearTimeout(this.protectionPausedTimerId);
+        this.protectionPausedTimerId = 0;
         this.protectionPausedTimeout = 0;
+        await sender.setSetting(SETTINGS_NAMES.GLOBAL_FILTERING_PAUSE_EXPIRES, 0);
     };
 }

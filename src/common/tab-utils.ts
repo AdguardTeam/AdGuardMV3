@@ -117,10 +117,10 @@ class TabUtils {
     };
 
     reloadActiveTab = async () => {
-        const { id } = await this.getActiveTab();
+        const tab = await this.getActiveTab();
 
-        if (id) {
-            await this.reloadTab(id);
+        if (tab?.id) {
+            await this.reloadTab(tab.id);
         }
     };
 }

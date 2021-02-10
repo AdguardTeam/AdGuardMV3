@@ -55,14 +55,24 @@ export const PopupApp = observer(() => {
                 case NOTIFIER_EVENTS.SETTING_UPDATED: {
                     const { key, value } = data;
                     settingsStore.updateSettingState(key, value);
-                    if (key === SETTINGS_NAMES.GLOBAL_FILTERING_PAUSED_UNTIL
-                        && value > Date.now()) {
-                        setProtectionPausedTimer();
+
+                    switch (key as SETTINGS_NAMES) {
+                        case SETTINGS_NAMES.GLOBAL_FILTERING_PAUSE_EXPIRES: {
+                            if (value > Date.now()) {
+                                setProtectionPausedTimer();
+                            }
+                            break;
+                        }
+                        default: {
+                            break;
+                        }
                     }
                     break;
                 }
-                default:
+
+                default: {
                     throw new Error(`Non supported event type: ${type}`);
+                }
             }
         };
 
@@ -79,8 +89,12 @@ export const PopupApp = observer(() => {
     }
 
     const onEnableProtectionClick = async () => {
-        await setSetting(SETTINGS_NAMES.PROTECTION_ENABLED, true);
-        resetProtectionPausedTimeout();
+        if (protectionPausedTimeout > 0) {
+            await setSetting(SETTINGS_NAMES.GLOBAL_FILTERING_PAUSE_EXPIRES, 0);
+            await resetProtectionPausedTimeout();
+        } else {
+            await setSetting(SETTINGS_NAMES.PROTECTION_ENABLED, true);
+        }
     };
 
     return (

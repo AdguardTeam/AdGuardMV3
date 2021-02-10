@@ -6,6 +6,7 @@ import { Icon } from 'Common/components/ui/Icon';
 import { Tooltip } from 'Common/components/ui/Tooltip';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { SETTINGS_NAMES } from 'Common/settings-constants';
+import { GLOBAL_FILTERING_PAUSE_TIMEOUT } from 'Common/constants';
 import { sender } from '../../messaging/sender';
 import { rootStore } from '../../stores';
 
@@ -34,7 +35,10 @@ export const Header = observer(() => {
     };
 
     const onPauseProtectionTimeoutClick = async () => {
-        await sender.setSetting(SETTINGS_NAMES.GLOBAL_FILTERING_PAUSED_UNTIL, Date.now() + 30000);
+        await sender.setSetting(
+            SETTINGS_NAMES.GLOBAL_FILTERING_PAUSE_EXPIRES,
+            Date.now() + GLOBAL_FILTERING_PAUSE_TIMEOUT,
+        );
     };
 
     const protectionDisabled = !protectionEnabled || protectionPausedTimeout > 0;
