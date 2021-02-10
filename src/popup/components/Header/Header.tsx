@@ -16,7 +16,7 @@ export const Header = observer(() => {
     const { settingsStore } = useContext(rootStore);
     const {
         protectionEnabled,
-        protectionPausedTimeout,
+        protectionPausedTimer,
     } = settingsStore;
 
     const handleBlockAdsClick = async () => {
@@ -41,7 +41,7 @@ export const Header = observer(() => {
         );
     };
 
-    const protectionDisabled = !protectionEnabled || protectionPausedTimeout > 0;
+    const protectionDisabled = !protectionEnabled || protectionPausedTimer > 0;
 
     const className = cn(styles.popupHeader, {
         [styles.popupHeaderDisabled]: protectionDisabled,
@@ -86,14 +86,14 @@ export const Header = observer(() => {
                             className={styles.item}
                             onClick={onPauseProtectionTimeoutClick}
                         >
-                            {reactTranslator.getMessage('popup_settings_pause_protection_temporarily')}
+                            {reactTranslator.getMessage('popup_settings_pause_protection_temporarily', { count: GLOBAL_FILTERING_PAUSE_TIMEOUT / 1000 })}
                         </button>
                         <button
                             type="button"
                             className={styles.item}
                             disabled
                         >
-                            {reactTranslator.getMessage('popup_settings_disable_site_temporarily')}
+                            {reactTranslator.getMessage('popup_settings_disable_site_temporarily', { count: GLOBAL_FILTERING_PAUSE_TIMEOUT / 1000 })}
                         </button>
                     </div>
                 </Tooltip>

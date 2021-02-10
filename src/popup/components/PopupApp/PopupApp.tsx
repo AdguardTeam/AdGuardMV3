@@ -30,7 +30,7 @@ export const PopupApp = observer(() => {
         wizardEnabled,
         protectionEnabled,
         setSetting,
-        protectionPausedTimeout,
+        protectionPausedTimer,
         setProtectionPausedTimer,
         resetProtectionPausedTimeout,
     } = settingsStore;
@@ -89,7 +89,7 @@ export const PopupApp = observer(() => {
     }
 
     const onEnableProtectionClick = async () => {
-        if (protectionPausedTimeout > 0) {
+        if (protectionPausedTimer > 0) {
             await setSetting(SETTINGS_NAMES.GLOBAL_FILTERING_PAUSE_EXPIRES, 0);
             await resetProtectionPausedTimeout();
         } else {
@@ -106,7 +106,7 @@ export const PopupApp = observer(() => {
                     <>
                         <Header />
                         <main className={className}>
-                            {protectionEnabled && protectionPausedTimeout <= 0
+                            {protectionEnabled && protectionPausedTimer <= 0
                                 ? (
                                     <>
                                         <Switcher />
@@ -119,9 +119,9 @@ export const PopupApp = observer(() => {
                                         <div><Icon id="disabled-logo" className={styles.logo} /></div>
                                         <section className={styles.section}>
                                             <h1 className={cn(theme.common.pageInfoMain, styles.pageInfoMain)}>{reactTranslator.getMessage('popup_protection_is_paused')}</h1>
-                                            {protectionPausedTimeout > 0 && (
+                                            {protectionPausedTimer > 0 && (
                                                 <h6 className={theme.common.pageInfoAdditional}>
-                                                    {reactTranslator.getMessage('popup_protection_will_be_resumed_after', { count: protectionPausedTimeout })}
+                                                    {reactTranslator.getMessage('popup_protection_will_be_resumed_after', { count: protectionPausedTimer })}
                                                 </h6>
                                             )}
                                         </section>

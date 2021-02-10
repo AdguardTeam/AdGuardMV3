@@ -15,6 +15,7 @@ import {
     SettingsValueType,
 } from 'Common/settings-constants';
 import { tabUtils } from 'Common/tab-utils';
+import { GLOBAL_FILTERING_PAUSE_TIMEOUT } from 'Common/constants';
 import { sender } from '../messaging/sender';
 import type { RootStore } from './RootStore';
 
@@ -39,7 +40,7 @@ export class SettingsStore {
     protectionPausedTimerId = 0;
 
     @observable
-    protectionPausedTimeout = 0;
+    currentDate = 0;
 
     getCurrentTabUrl = async () => {
         const activeTab = await tabUtils.getActiveTab();
@@ -47,6 +48,17 @@ export class SettingsStore {
             this.currentUrl = activeTab.url || '';
         });
     };
+
+    @computed
+    get protectionPausedTimer() {
+        // FIXME tick logic
+        const maxTimer = GLOBAL_FILTERING_PAUSE_TIMEOUT / 1000;
+        const timer = Math.ceil(
+            (this.settings[SETTINGS_NAMES
+                .GLOBAL_FILTERING_PAUSE_EXPIRES] as number - this.currentDate) / 1000,
+        );
+        return timer > maxTimer ? maxTimer : timer;
+    }
 
     @computed
     get currentSite() {
@@ -66,6 +78,11 @@ export class SettingsStore {
         }
 
         this.updateSettingState(key, value);
+    };
+
+    @action
+    setProtectionPausedTimerId = (protectionPausedTimerId: number) => {
+        this.protectionPausedTimerId = protectionPausedTimerId;
     };
 
     @action
@@ -104,36 +121,30 @@ export class SettingsStore {
         return this.settings[SETTINGS_NAMES.PROTECTION_ENABLED];
     }
 
-    @computed
-    get globalFilteringPauseExpires() {
-        return this.settings[SETTINGS_NAMES.GLOBAL_FILTERING_PAUSE_EXPIRES] as number;
-    }
+    @action
+    tick = () => {
+        this.currentDate = Date.now();
+    };
 
     @action
     setProtectionPausedTimer = () => {
         if (this.protectionPausedTimerId) {
             return;
         }
-        runInAction(() => {
-            this.protectionPausedTimerId = window.setInterval(() => {
-                runInAction(() => {
-                    this.protectionPausedTimeout = Math.ceil(
-                        (this.globalFilteringPauseExpires - Date.now()) / 1000,
-                    );
-                });
 
-                if (this.protectionPausedTimeout <= 0) {
-                    this.resetProtectionPausedTimeout();
-                }
-            }, 1000);
-        });
+        this.setProtectionPausedTimerId(window.setInterval(async () => {
+            this.tick();
+            if (this.protectionPausedTimer === 0) {
+                await this.resetProtectionPausedTimeout();
+            }
+        }, 1000));
     };
 
     @action
     resetProtectionPausedTimeout = async () => {
         clearTimeout(this.protectionPausedTimerId);
-        this.protectionPausedTimerId = 0;
-        this.protectionPausedTimeout = 0;
+        this.setProtectionPausedTimerId(0);
+        this.tick();
         await sender.setSetting(SETTINGS_NAMES.GLOBAL_FILTERING_PAUSE_EXPIRES, 0);
     };
 }
