@@ -34,7 +34,7 @@ export const Header = observer(() => {
     };
 
     const onPauseProtectionTimeoutClick = async () => {
-        await sender.pauseGlobalFiltering(Date.now() + 30000);
+        await sender.setSetting(SETTINGS_NAMES.GLOBAL_FILTERING_PAUSED_UNTIL, Date.now() + 30000);
     };
 
     const protectionDisabled = !protectionEnabled || protectionPausedTimeout > 0;

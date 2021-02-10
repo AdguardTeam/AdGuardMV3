@@ -60,14 +60,23 @@ export const messageHandler = async (
                 settings: settings.getSettings(),
             } as PopupData;
         }
-        case MESSAGE_TYPES.PAUSE_GLOBAL_FILTERING: {
-            const { pausedUntil } = data;
-            settings.setSetting(SETTINGS_NAMES.GLOBAL_FILTERING_PAUSED_UNTIL, pausedUntil);
-            return pausedUntil;
-        }
         case MESSAGE_TYPES.SET_SETTING: {
             const { key, value } = data;
-            return settings.setSetting(key, value);
+            settings.setSetting(key, value);
+
+            switch (key as SETTINGS_NAMES) {
+                case SETTINGS_NAMES.FILTERING_ENABLED:
+                case SETTINGS_NAMES.PROTECTION_ENABLED:
+                case SETTINGS_NAMES.GLOBAL_FILTERING_PAUSED_UNTIL: {
+                    await tabUtils.reloadActiveTab();
+                    break;
+                }
+                default: {
+                    break;
+                }
+            }
+
+            break;
         }
         case MESSAGE_TYPES.REPORT_SITE: {
             const { url } = await tabUtils.getActiveTab();
@@ -93,7 +102,15 @@ export const messageHandler = async (
         case MESSAGE_TYPES.GET_CSS: {
             const filteringEnabled = settings.getSetting(SETTINGS_NAMES.FILTERING_ENABLED);
             const protectionEnabled = settings.getSetting(SETTINGS_NAMES.PROTECTION_ENABLED);
-            if (filteringEnabled && protectionEnabled) {
+            const globalFilteringPausedUntil = settings.getSetting(
+                SETTINGS_NAMES.GLOBAL_FILTERING_PAUSED_UNTIL,
+            );
+
+            if (
+                filteringEnabled
+                && protectionEnabled
+                && globalFilteringPausedUntil <= Date.now()
+            ) {
                 // example rules
                 return ['* { background-color: pink }'];
             }
