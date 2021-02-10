@@ -107,7 +107,7 @@ export const PopupApp = observer(() => {
                                             <h1 className={cn(theme.common.pageInfoMain, styles.pageInfoMain)}>{reactTranslator.getMessage('popup_protection_is_paused')}</h1>
                                             {protectionPausedTimeout > 0 && (
                                                 <h6 className={theme.common.pageInfoAdditional}>
-                                                    {reactTranslator.getMessage('popup_protection_will_be_resumed_after_x_sec', { count: protectionPausedTimeout })}
+                                                    {reactTranslator.getMessage('popup_protection_will_be_resumed_after', { count: protectionPausedTimeout })}
                                                 </h6>
                                             )}
                                         </section>

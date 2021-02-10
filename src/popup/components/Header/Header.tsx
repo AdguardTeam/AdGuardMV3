@@ -82,14 +82,14 @@ export const Header = observer(() => {
                             className={styles.item}
                             onClick={onPauseProtectionTimeoutClick}
                         >
-                            {reactTranslator.getMessage('popup_settings_pause_for_30_seconds')}
+                            {reactTranslator.getMessage('popup_settings_pause_protection_temporarily')}
                         </button>
                         <button
                             type="button"
                             className={styles.item}
                             disabled
                         >
-                            {reactTranslator.getMessage('popup_settings_disable_for_30_seconds')}
+                            {reactTranslator.getMessage('popup_settings_disable_site_temporarily')}
                         </button>
                     </div>
                 </Tooltip>
