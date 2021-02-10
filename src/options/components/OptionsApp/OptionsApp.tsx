@@ -12,6 +12,7 @@ import { rootStore } from '../../stores';
 import { Settings } from '../Settings';
 
 import './options-app.pcss';
+import { Filters } from '../Filters';
 
 export const OptionsApp = observer(() => {
     const store = useContext(rootStore);
@@ -57,6 +58,7 @@ export const OptionsApp = observer(() => {
                     <Switch>
                         <Route path="/" exact component={Settings} />
                         <Route path="/about" component={About} />
+                        <Route path="/filters" component={Filters} />
                         <Route />
                     </Switch>
                 </div>

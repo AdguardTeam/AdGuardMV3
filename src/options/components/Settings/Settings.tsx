@@ -42,33 +42,43 @@ export const Settings = observer(() => {
     const { filteringEnabled, setSetting } = settingsStore;
 
     const OPTIONS = {
-        AD_BLOCKING: {
-            // The value of the id attribute must be unique within the HTML document.
-            id: 'ad_blocking_option',
-            iconId: 'ad_blocking',
-            messageKey: 'options_ad_blocking_option',
+        BLOCK_ADS: {
+            // NOTE! The value of the id attribute must be unique within the HTML document.
+            id: 'block_ads_option',
+            iconId: 'block_ads',
+            messageKey: 'options_block_ads_option',
             onChange: async (e: React.ChangeEvent<HTMLInputElement>) => {
                 await setSetting(SETTINGS_NAMES.FILTERING_ENABLED, e.target.checked);
             },
             enabled: filteringEnabled,
         },
-        MISCELLANEOUS: {
-            id: 'miscellaneous_option',
-            iconId: 'miscellaneous',
-            messageKey: 'options_miscellaneous_option',
+        BLOCK_ANNOYANCES: {
+            id: 'block_annoyances_option',
+            iconId: 'annoyances',
+            messageKey: 'options_block_annoyances_option',
             onChange: async (e: React.ChangeEvent<HTMLInputElement>) => {
                 // eslint-disable-next-line no-console
-                console.log('miscellaneous', e);
+                console.log('annoyances', e);
             },
             enabled: false,
         },
-        TRACKERS_BLOCKING: {
-            id: 'trackers_blocking_option',
-            iconId: 'trackers_blocking',
-            messageKey: 'options_trackers_blocking_option',
+        BLOCK_TRACKERS: {
+            id: 'block_trackers_option',
+            iconId: 'block_trackers',
+            messageKey: 'options_block_trackers_option',
             onChange: async (e: React.ChangeEvent<HTMLInputElement>) => {
                 // eslint-disable-next-line no-console
-                console.log('trackers_blocking', e);
+                console.log('block_trackers', e);
+            },
+            enabled: false,
+        },
+        BLOCK_SOCIAL_WIDGETS: {
+            id: 'block_social_widgets_option',
+            iconId: 'social_widgets',
+            messageKey: 'options_block_social_widgets_option',
+            onChange: async (e: React.ChangeEvent<HTMLInputElement>) => {
+                // eslint-disable-next-line no-console
+                console.log('block_trackers', e);
             },
             enabled: false,
         },
@@ -81,13 +91,13 @@ export const Settings = observer(() => {
                 console.log('languages clicked');
             },
         },
-        FILTERS: {
-            id: 'filters_option',
-            iconId: 'filters',
-            messageKey: 'options_filters_option',
+        CUSTOM_FILTERS: {
+            id: 'custom_filters',
+            iconId: 'custom_filters_icon',
+            messageKey: 'options_custom_filters_option',
             onClick: () => {
-                // eslint-disable-next-line no-console
-                console.log('filters');
+                // TODO open custom filters group
+                console.log('custom_filters');
             },
         },
         USER_RULES: {
@@ -138,14 +148,15 @@ export const Settings = observer(() => {
     };
 
     const checkboxOptions = [
-        OPTIONS.AD_BLOCKING,
-        OPTIONS.MISCELLANEOUS,
-        OPTIONS.TRACKERS_BLOCKING,
+        OPTIONS.BLOCK_ADS,
+        OPTIONS.BLOCK_ANNOYANCES,
+        OPTIONS.BLOCK_TRACKERS,
+        OPTIONS.BLOCK_SOCIAL_WIDGETS,
     ];
 
     const arrowOptions = [
         OPTIONS.LANGUAGES,
-        OPTIONS.FILTERS,
+        OPTIONS.CUSTOM_FILTERS,
         OPTIONS.USER_RULES,
     ];
 
