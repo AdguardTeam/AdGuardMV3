@@ -15,7 +15,6 @@ import {
     SettingsValueType,
 } from 'Common/settings-constants';
 import { tabUtils } from 'Common/tab-utils';
-import { GLOBAL_FILTERING_PAUSE_TIMEOUT } from 'Common/constants';
 import { sender } from '../messaging/sender';
 import type { RootStore } from './RootStore';
 
@@ -51,13 +50,15 @@ export class SettingsStore {
 
     @computed
     get protectionPausedTimer() {
-        // FIXME tick logic
-        const maxTimer = GLOBAL_FILTERING_PAUSE_TIMEOUT / 1000;
-        const timer = Math.ceil(
+        return Math.ceil(
             (this.settings[SETTINGS_NAMES
                 .GLOBAL_FILTERING_PAUSE_EXPIRES] as number - this.currentDate) / 1000,
         );
-        return timer > maxTimer ? maxTimer : timer;
+    }
+
+    @computed
+    get protectionPaused() {
+        return !!this.currentDate && this.protectionPausedTimer > 0;
     }
 
     @computed
@@ -134,7 +135,7 @@ export class SettingsStore {
 
         this.setProtectionPausedTimerId(window.setInterval(async () => {
             this.tick();
-            if (this.protectionPausedTimer === 0) {
+            if (!this.protectionPausedTimer) {
                 await this.resetProtectionPausedTimeout();
             }
         }, 1000));

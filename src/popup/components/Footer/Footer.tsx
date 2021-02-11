@@ -11,9 +11,9 @@ import styles from './Footer.module.pcss';
 
 export const Footer = observer(() => {
     const { settingsStore } = useContext(rootStore);
-    const { protectionEnabled, protectionPausedTimer } = settingsStore;
+    const { protectionEnabled, protectionPaused } = settingsStore;
 
-    const protectionDisabled = !protectionEnabled || protectionPausedTimer > 0;
+    const protectionDisabled = !protectionEnabled || protectionPaused;
 
     const className = cn(styles.footer, {
         [styles.footerDisabled]: protectionDisabled,

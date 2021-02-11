@@ -17,7 +17,7 @@ export const Header = observer(() => {
     const { settingsStore } = useContext(rootStore);
     const {
         protectionEnabled,
-        protectionPausedTimer,
+        protectionPaused,
     } = settingsStore;
 
     const handleBlockAdsClick = async () => {
@@ -43,7 +43,7 @@ export const Header = observer(() => {
         );
     };
 
-    const protectionDisabled = !protectionEnabled || protectionPausedTimer > 0;
+    const protectionDisabled = !protectionEnabled || protectionPaused;
 
     const className = cn(styles.popupHeader, {
         [styles.popupHeaderDisabled]: protectionDisabled,

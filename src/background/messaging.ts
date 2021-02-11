@@ -56,9 +56,13 @@ export const messageHandler = async (
             return tabUtils.openOptionsPage();
         }
         case MESSAGE_TYPES.GET_POPUP_DATA: {
-            return {
-                settings: settings.getSettings(),
-            } as PopupData;
+            const popupSettings = settings.getSettings();
+
+            if (popupSettings[SETTINGS_NAMES.GLOBAL_FILTERING_PAUSE_EXPIRES] < Date.now()) {
+                settings.setSetting(SETTINGS_NAMES.GLOBAL_FILTERING_PAUSE_EXPIRES, 0);
+            }
+
+            return { settings: popupSettings } as PopupData;
         }
         case MESSAGE_TYPES.SET_SETTING: {
             const { key, value } = data;
@@ -68,7 +72,7 @@ export const messageHandler = async (
                 case SETTINGS_NAMES.FILTERING_ENABLED:
                 case SETTINGS_NAMES.PROTECTION_ENABLED:
                 case SETTINGS_NAMES.GLOBAL_FILTERING_PAUSE_EXPIRES: {
-                    /* TODO do not reload options page */
+                    /* TODO do not reload options page, find out reloading logic */
                     await tabUtils.reloadActiveTab();
                     break;
                 }

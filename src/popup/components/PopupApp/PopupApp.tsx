@@ -30,6 +30,7 @@ export const PopupApp = observer(() => {
         wizardEnabled,
         protectionEnabled,
         setSetting,
+        protectionPaused,
         protectionPausedTimer,
         setProtectionPausedTimer,
         resetProtectionPausedTimeout,
@@ -89,7 +90,7 @@ export const PopupApp = observer(() => {
     }
 
     const onEnableProtectionClick = async () => {
-        if (protectionPausedTimer > 0) {
+        if (protectionPaused) {
             await setSetting(SETTINGS_NAMES.GLOBAL_FILTERING_PAUSE_EXPIRES, 0);
             await resetProtectionPausedTimeout();
         } else {
@@ -106,7 +107,7 @@ export const PopupApp = observer(() => {
                     <>
                         <Header />
                         <main className={className}>
-                            {protectionEnabled && protectionPausedTimer <= 0
+                            {protectionEnabled && !protectionPaused
                                 ? (
                                     <>
                                         <Switcher />
@@ -124,7 +125,7 @@ export const PopupApp = observer(() => {
                                         </div>
                                         <section className={styles.section}>
                                             <h1 className={cn(theme.common.pageInfoMain, styles.pageInfoMain)}>{reactTranslator.getMessage('popup_protection_is_paused')}</h1>
-                                            {protectionPausedTimer > 0 && (
+                                            {protectionPaused && (
                                                 <h6 className={theme.common.pageInfoAdditional}>
                                                     {reactTranslator.getMessage('popup_protection_will_be_resumed_after', { count: protectionPausedTimer })}
                                                 </h6>
