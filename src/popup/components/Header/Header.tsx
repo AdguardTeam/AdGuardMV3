@@ -7,6 +7,7 @@ import { Tooltip } from 'Common/components/ui/Tooltip';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { SETTINGS_NAMES } from 'Common/settings-constants';
 import { GLOBAL_FILTERING_PAUSE_TIMEOUT } from 'Common/constants';
+import { ICON_ID } from 'Common/components/ui/Icons';
 import { sender } from '../../messaging/sender';
 import { rootStore } from '../../stores';
 
@@ -52,7 +53,7 @@ export const Header = observer(() => {
     return (
         <div className={className}>
             <div className={styles.popupHeaderLogo}>
-                <Icon id="logo" className="icon--logo" />
+                <Icon id={ICON_ID.LOGO} />
             </div>
             <div className={styles.popupHeaderButtons}>
                 <button
@@ -62,7 +63,7 @@ export const Header = observer(() => {
                     title={translator.getMessage('options_block_ads_on_website')}
                     disabled={protectionDisabled}
                 >
-                    <Icon id="start" className="icon--button" />
+                    <Icon id={ICON_ID.START} />
                 </button>
                 <button
                     className={styles.popupHeaderButton}
@@ -71,9 +72,13 @@ export const Header = observer(() => {
                     title={translator.getMessage('options_open_settings')}
                     disabled={protectionDisabled}
                 >
-                    <Icon id="settings" className="icon--button" />
+                    <Icon id={ICON_ID.SETTINGS} />
                 </button>
-                <Tooltip iconId="crumbs" className={styles.popupHeaderButton} disabled={protectionDisabled}>
+                <Tooltip
+                    iconId={ICON_ID.CRUMBS}
+                    className={styles.popupHeaderButton}
+                    disabled={protectionDisabled}
+                >
                     <div>
                         <button
                             type="button"

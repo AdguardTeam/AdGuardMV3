@@ -1,11 +1,10 @@
 import React, { useContext } from 'react';
-
-import { Icon } from 'Common/components/ui/Icon';
-import { reactTranslator } from 'Common/translators/reactTranslator';
-
 import { observer } from 'mobx-react';
 import cn from 'classnames';
+import { Icon } from 'Common/components/ui/Icon';
+import { reactTranslator } from 'Common/translators/reactTranslator';
 import { theme } from 'Common/styles';
+import { ICON_ID } from 'Common/components/ui/Icons';
 import { rootStore } from '../../stores';
 
 import styles from './Footer.module.pcss';
@@ -31,7 +30,7 @@ export const Footer = observer(() => {
                     ),
                 })}
             </span>
-            <Icon id="chrome_logo" className={styles.footerLogo} />
+            <Icon id={ICON_ID.CHROME_LOGO} className={styles.footerLogo} />
         </footer>
     );
 });

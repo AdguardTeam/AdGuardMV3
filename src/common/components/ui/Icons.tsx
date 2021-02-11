@@ -1,12 +1,56 @@
 import React from 'react';
+import iconStyles from './Icons.module.pcss';
 
-import './Icons.pcss';
-// TODO css module from Icons.pcss
+export enum ICON_ID {
+    START = 'START',
+    PAUSE = 'PAUSE',
+    SETTINGS = 'SETTINGS',
+    LOGO = 'LOGO',
+    CHECKMARK = 'CHECKMARK',
+    CIRCLE = 'CIRCLE',
+    EXPERIMENT = 'EXPERIMENT',
+    NEW_TECH = 'NEW_TECH',
+    FAST_WORK = 'FAST_WORK',
+    CHROME_LOGO = 'CHROME_LOGO',
+    AD_BLOCKING = 'AD_BLOCKING',
+    MISCELLANEOUS = 'MISCELLANEOUS',
+    TRACKERS_BLOCKING = 'TRACKERS_BLOCKING',
+    LANGUAGES = 'LANGUAGES',
+    FILTERS = 'FILTERS',
+    USER_RULES = 'USER_RULES',
+    ARROW = 'ARROW',
+    CRUMBS = 'CRUMBS',
+    DISABLED_LOGO = 'DISABLED_LOGO',
+}
+
+export type IconIdType = keyof typeof ICON_ID;
+
+export const ICON_ID_CLASS_MAP: Record<ICON_ID, string> = {
+    [ICON_ID.START]: iconStyles.iconButton,
+    [ICON_ID.PAUSE]: iconStyles.icon,
+    [ICON_ID.SETTINGS]: iconStyles.iconButton,
+    [ICON_ID.LOGO]: iconStyles.iconLogo,
+    [ICON_ID.CHECKMARK]: iconStyles.iconLogo,
+    [ICON_ID.CIRCLE]: iconStyles.icon,
+    [ICON_ID.EXPERIMENT]: iconStyles.icon,
+    [ICON_ID.NEW_TECH]: iconStyles.icon,
+    [ICON_ID.FAST_WORK]: iconStyles.icon,
+    [ICON_ID.CHROME_LOGO]: iconStyles.icon,
+    [ICON_ID.AD_BLOCKING]: iconStyles.iconOption,
+    [ICON_ID.MISCELLANEOUS]: iconStyles.iconOption,
+    [ICON_ID.TRACKERS_BLOCKING]: iconStyles.iconOption,
+    [ICON_ID.LANGUAGES]: iconStyles.iconOption,
+    [ICON_ID.FILTERS]: iconStyles.iconOption,
+    [ICON_ID.USER_RULES]: iconStyles.iconOption,
+    [ICON_ID.ARROW]: iconStyles.iconOption,
+    [ICON_ID.CRUMBS]: iconStyles.iconButton,
+    [ICON_ID.DISABLED_LOGO]: iconStyles.icon,
+};
 
 export const Icons = () => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" className="hidden">
-            <svg id="start" width="24" height="26">
+            <svg id={ICON_ID.START} width="24" height="26">
                 <g
                     stroke="#C23814"
                     strokeWidth="1.5"
@@ -20,7 +64,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="pause" width="24" height="26">
+            <svg id={ICON_ID.PAUSE} width="24" height="26">
                 <g
                     stroke="#A4A4A4"
                     strokeWidth="1.5"
@@ -34,7 +78,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="settings" width="22" height="22">
+            <svg id={ICON_ID.SETTINGS} width="22" height="22">
                 <g fill="none" fillRule="evenodd">
                     <path fill="#131313" d="M-281-17H39v480h-320z" />
                     <path
@@ -47,7 +91,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="logo" width="108" height="24">
+            <svg id={ICON_ID.LOGO} width="108" height="24">
                 <g fill="none" fillRule="evenodd">
                     <path
                         fill="#FFF"
@@ -68,7 +112,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <symbol id="checkmark" width="20" height="16">
+            <symbol id={ICON_ID.CHECKMARK} width="20" height="16">
                 <g transform="translate(-50 -18)" fill="none" fillRule="evenodd">
                     <path
                         d="M0 25c0-8.284 6.717-15 15-15h50c8.284 0 15 6.714 15 15 0 8.284-6.717 15-15 15H15C6.716 40 0 33.286 0 25z"
@@ -85,7 +129,7 @@ export const Icons = () => {
                 </g>
             </symbol>
 
-            <svg id="circle" width="20" height="20">
+            <svg id={ICON_ID.CIRCLE} width="20" height="20">
                 <g fill="none" fillRule="evenodd">
                     <path
                         d="M-13 10C-13 1.716-6.283-5 2-5h50c8.284 0 15 6.714 15 15 0 8.284-6.717 15-15 15H2c-8.284 0-15-6.714-15-15z"
@@ -99,7 +143,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="experiment" width="90" height="94" xmlns="http://www.w3.org/2000/svg">
+            <svg id={ICON_ID.EXPERIMENT} width="90" height="94" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <linearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="a">
                         <stop stopColor="#2B2B2B" offset="0%" />
@@ -203,7 +247,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="new_tech" width="100" height="104" xmlns="http://www.w3.org/2000/svg">
+            <svg id={ICON_ID.NEW_TECH} width="100" height="104" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <linearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="a">
                         <stop stopColor="#2B2B2B" offset="0%" />
@@ -279,7 +323,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="fast_work" width="104" height="104" xmlns="http://www.w3.org/2000/svg">
+            <svg id={ICON_ID.FAST_WORK} width="104" height="104" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <linearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="a">
                         <stop stopColor="#2B2B2B" offset="0%" />
@@ -373,7 +417,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="chrome_logo" width="94" height="94" xmlns="http://www.w3.org/2000/svg">
+            <svg id={ICON_ID.CHROME_LOGO} width="94" height="94" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="a">
                         <stop stopColor="#2B2B2B" offset="0%" />
@@ -414,7 +458,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="ad_blocking" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+            <svg id={ICON_ID.AD_BLOCKING} width="20" height="20" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fillRule="evenodd">
                     <path fill="#000" d="M-322-110h686v554h-686z" />
                     <path fill="#131313" d="M-38-110h402v554H-38z" />
@@ -428,7 +472,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="miscellaneous" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+            <svg id={ICON_ID.MISCELLANEOUS} width="20" height="20" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fillRule="evenodd">
                     <path fill="#000" d="M-322-159h686v554h-686z" />
                     <path fill="#131313" d="M-38-159h402v554H-38z" />
@@ -442,7 +486,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="trackers_blocking" width="18" height="20" xmlns="http://www.w3.org/2000/svg">
+            <svg id={ICON_ID.TRACKERS_BLOCKING} width="18" height="20" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fillRule="evenodd">
                     <path fill="#000" d="M-323-206h686v554h-686z" />
                     <path fill="#131313" d="M-39-206h402v554H-39z" />
@@ -456,7 +500,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="languages" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+            <svg id={ICON_ID.LANGUAGES} width="20" height="20" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fillRule="evenodd">
                     <path fill="#000" d="M-322-254h686v554h-686z" />
                     <path fill="#131313" d="M-38-254h402v554H-38z" />
@@ -470,7 +514,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="filters" width="18" height="14" xmlns="http://www.w3.org/2000/svg">
+            <svg id={ICON_ID.FILTERS} width="18" height="14" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fillRule="evenodd">
                     <path fill="#000" d="M-323-305h686v554h-686z" />
                     <path fill="#131313" d="M-39-305h402v554H-39z" />
@@ -484,7 +528,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="user_rules" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+            <svg id={ICON_ID.USER_RULES} width="18" height="18" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fillRule="evenodd">
                     <path fill="#000" d="M-323-351h686v554h-686z" />
                     <path fill="#131313" d="M-39-351h402v554H-39z" />
@@ -498,7 +542,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="arrow" width="8" height="14" xmlns="http://www.w3.org/2000/svg">
+            <svg id={ICON_ID.ARROW} width="8" height="14" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fillRule="evenodd">
                     <path fill="#000" d="M-592-257H94v554h-686z" />
                     <path fill="#131313" d="M-308-257H94v554h-402z" />
@@ -506,7 +550,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="crumbs" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+            <svg id={ICON_ID.CRUMBS} width="24" height="24" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <filter x="-75%" y="-34.5%" width="256.6%" height="188.4%" filterUnits="objectBoundingBox" id="a">
                         <feMorphology radius=".5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1" />
@@ -534,7 +578,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="disabled-logo" width="68" height="68" xmlns="http://www.w3.org/2000/svg">
+            <svg id={ICON_ID.DISABLED_LOGO} width="68" height="68" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fillRule="evenodd">
                     <path fill="#131313" d="M-125-112h320v480h-320z" />
                     <g style={{ mixBlendMode: 'luminosity' }}>

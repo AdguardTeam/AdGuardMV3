@@ -4,10 +4,11 @@ import { usePopperTooltip } from 'react-popper-tooltip';
 
 import { Icon } from 'Common/components/ui/Icon';
 import useOutsideClick from 'Common/hooks/useOutsideClick';
+import { IconIdType } from 'Common/components/ui/Icons';
 import styles from './Tooltip.module.pcss';
 
 type IProps = {
-    iconId: string,
+    iconId: IconIdType,
     className?: string,
     children: JSX.Element,
     disabled: boolean,
@@ -50,7 +51,7 @@ const Tooltip = ({
                 disabled={disabled}
                 onClick={open}
             >
-                <Icon id={iconId} className="icon--button" />
+                <Icon id={iconId} />
             </button>
             {!disabled && visible && (
                 <div

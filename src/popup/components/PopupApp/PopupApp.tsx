@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
 import cn from 'classnames';
 
-import { Icons } from 'Common/components/ui/Icons';
+import { ICON_ID, Icons } from 'Common/components/ui/Icons';
 import { log } from 'Common/logger';
 import { NOTIFIER_EVENTS } from 'Common/constants';
 import { createLongLivedConnection } from 'Common/messaging-utils';
@@ -116,7 +116,12 @@ export const PopupApp = observer(() => {
                                 )
                                 : (
                                     <>
-                                        <div><Icon id="disabled-logo" className={styles.logo} /></div>
+                                        <div>
+                                            <Icon
+                                                id={ICON_ID.DISABLED_LOGO}
+                                                className={styles.logo}
+                                            />
+                                        </div>
                                         <section className={styles.section}>
                                             <h1 className={cn(theme.common.pageInfoMain, styles.pageInfoMain)}>{reactTranslator.getMessage('popup_protection_is_paused')}</h1>
                                             {protectionPausedTimer > 0 && (
