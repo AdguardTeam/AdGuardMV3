@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './Icons.pcss';
+// TODO css module from Icons.pcss
 
 export const Icons = () => {
     return (

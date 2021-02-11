@@ -37,6 +37,7 @@ export const Header = observer(() => {
     const onPauseProtectionTimeoutClick = async () => {
         await sender.setSetting(
             SETTINGS_NAMES.GLOBAL_FILTERING_PAUSE_EXPIRES,
+            // TODO: reload page when timer is out and popup is closed
             Date.now() + GLOBAL_FILTERING_PAUSE_TIMEOUT,
         );
     };
