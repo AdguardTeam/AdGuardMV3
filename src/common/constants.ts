@@ -6,6 +6,7 @@ export interface PopupData {
 
 export interface OptionsData {
     settings: SettingsType
+    filters: Filter[]
 }
 
 export enum MESSAGE_TYPES {
@@ -18,6 +19,8 @@ export enum MESSAGE_TYPES {
     OPEN_ASSISTANT = 'OPEN_ASSISTANT',
     START_ASSISTANT = 'START_ASSISTANT',
     ADD_USER_RULE = 'ADD_USER_RULE',
+    ENABLE_FILTER = 'ENABLE_FILTER',
+    DISABLE_FILTER = 'DISABLE_FILTER',
 
     ADD_LONG_LIVED_CONNECTION = 'ADD_LONG_LIVED_CONNECTION',
     NOTIFY_LISTENERS = 'NOTIFY_LISTENERS',

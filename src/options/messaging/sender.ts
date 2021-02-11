@@ -19,6 +19,14 @@ class Sender {
      * Retrieves options data from background service worker
      */
     getOptionsData = () => sendMessage<OptionsData>(MESSAGE_TYPES.GET_OPTIONS_DATA);
+
+    enableFilter = (filterId: number): Promise<Filter[]> => {
+        return sendMessage(MESSAGE_TYPES.ENABLE_FILTER, { filterId });
+    };
+
+    disableFilter = (filterId: number): Promise<Filter[]> => {
+        return sendMessage(MESSAGE_TYPES.DISABLE_FILTER, { filterId });
+    };
 }
 
 export const sender = new Sender();

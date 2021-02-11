@@ -10,6 +10,7 @@ import { tabUtils } from 'Common/tab-utils';
 import { settings } from './settings';
 import { app } from './app';
 import { notifier } from './notifier';
+import { filters } from './filter';
 
 interface MessageHandler {
     (message: Message, sender: chrome.runtime.MessageSender): any;
@@ -48,9 +49,12 @@ export const messageHandler = async (
 
     switch (type) {
         case MESSAGE_TYPES.GET_OPTIONS_DATA: {
-            return ({
+            const optionsData: OptionsData = {
                 settings: settings.getSettings(),
-            }) as OptionsData;
+                filters: filters.getFilters(),
+            };
+
+            return optionsData;
         }
         case MESSAGE_TYPES.OPEN_OPTIONS: {
             return tabUtils.openOptionsPage();
@@ -92,6 +96,12 @@ export const messageHandler = async (
             }
             // example rules
             return ['* { background-color: pink }'];
+        }
+        case MESSAGE_TYPES.ENABLE_FILTER: {
+            return filters.enableFilter(data.filterId);
+        }
+        case MESSAGE_TYPES.DISABLE_FILTER: {
+            return filters.disableFilter(data.filterId);
         }
         default: {
             throw new Error(`No message handler for type: ${type}`);

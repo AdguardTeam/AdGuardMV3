@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
+import { useHistory } from 'react-router-dom';
 
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { Icon } from 'Common/components/ui/Icon';
@@ -38,6 +39,7 @@ interface ArrowOption {
 
 export const Settings = observer(() => {
     const { settingsStore } = useContext(rootStore);
+    const history = useHistory();
 
     const { filteringEnabled, setSetting } = settingsStore;
 
@@ -96,8 +98,7 @@ export const Settings = observer(() => {
             iconId: 'custom_filters_icon',
             messageKey: 'options_custom_filters_option',
             onClick: () => {
-                // TODO open custom filters group
-                console.log('custom_filters');
+                history.push('/filters?groupId=0');
             },
         },
         USER_RULES: {

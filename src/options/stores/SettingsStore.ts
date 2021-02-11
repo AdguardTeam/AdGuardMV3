@@ -7,6 +7,7 @@ import {
 } from 'mobx';
 
 import { DEFAULT_SETTINGS, SETTINGS_NAMES } from 'Common/settings-constants';
+import { log } from 'Common/logger';
 import type { RootStore } from './RootStore';
 import { sender } from '../messaging/sender';
 
@@ -21,11 +22,48 @@ export class SettingsStore {
     @observable
     settings = DEFAULT_SETTINGS;
 
+    @observable
+    filters: Filter[] = [];
+
+    @action
+    updateFilterState = (filterId: number, filterProps: Partial<Filter>) => {
+        const filter = this.filters.find((f) => f.id === filterId);
+        if (!filter) {
+            throw new Error('filterId should be in the list of filters');
+        }
+        const idx = this.filters.indexOf(filter);
+        const updatedFilter = { ...filter, ...filterProps };
+        this.filters.splice(idx, 1, updatedFilter);
+    };
+
+    @action
+    enableFilter = async (filterId: number) => {
+        this.updateFilterState(filterId, { enabled: true });
+        try {
+            await sender.enableFilter(filterId);
+        } catch (e) {
+            log.debug(e.message);
+            this.updateFilterState(filterId, { enabled: false });
+        }
+    };
+
+    @action
+    disableFilter = async (filterId: number) => {
+        this.updateFilterState(filterId, { enabled: false });
+        try {
+            await sender.disableFilter(filterId);
+        } catch (e) {
+            log.debug(e.message);
+            this.updateFilterState(filterId, { enabled: true });
+        }
+    };
+
     getOptionsData = async () => {
-        const { settings } = await sender.getOptionsData();
+        const { settings, filters } = await sender.getOptionsData();
 
         runInAction(() => {
             this.settings = settings;
+            this.filters = filters;
         });
     };
 
