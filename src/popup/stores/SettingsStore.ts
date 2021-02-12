@@ -34,7 +34,6 @@ export class SettingsStore {
     @observable
     settings: SettingsType = DEFAULT_SETTINGS;
 
-    @observable
     protectionPausedTimerId = 0;
 
     @observable
@@ -81,7 +80,6 @@ export class SettingsStore {
         this.updateSettingState(key, value);
     };
 
-    @action
     setProtectionPausedTimerId = (protectionPausedTimerId: number) => {
         this.protectionPausedTimerId = protectionPausedTimerId;
     };
