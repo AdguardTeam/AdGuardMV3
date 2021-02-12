@@ -53,7 +53,7 @@ const Tooltip = ({
             >
                 <Icon id={iconId} />
             </button>
-            {!disabled && visible && (
+            {visible && (
                 <div
                     ref={setTooltipRef}
                     {...getTooltipProps({
