@@ -39,13 +39,10 @@ export const Header = observer(() => {
     };
 
     const onPauseProtectionTimeoutClick = async () => {
-        // TODO add one setter for PROTECTION_ENABLED and PROTECTION_PAUSE_EXPIRES,
-        //  updateCurrentTime
         await setSetting(SETTINGS_NAMES.PROTECTION_ENABLED, false);
         updateCurrentTime();
         await setSetting(
             SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES,
-            // TODO: reload page when timer is out and popup is closed
             settingsStore.currentTime + PROTECTION_PAUSE_TIMEOUT,
         );
         setProtectionPausedTimer();

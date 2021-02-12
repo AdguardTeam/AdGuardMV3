@@ -68,7 +68,7 @@ export const messageHandler = async (
                 case SETTINGS_NAMES.FILTERING_ENABLED:
                 case SETTINGS_NAMES.PROTECTION_ENABLED:
                 case SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES: {
-                    /* TODO do not reload options page, find out reloading logic */
+                    /* TODO do not reload options and extension pages */
                     await tabUtils.reloadActiveTab();
                     break;
                 }

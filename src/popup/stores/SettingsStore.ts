@@ -2,7 +2,6 @@ import {
     action,
     observable,
     makeObservable,
-    runInAction,
     computed,
 } from 'mobx';
 
@@ -41,16 +40,14 @@ export class SettingsStore {
     @observable
     currentTime = 0;
 
+    @action
     getCurrentTabUrl = async () => {
         const activeTab = await tabUtils.getActiveTab();
-        runInAction(() => {
-            this.currentUrl = activeTab.url || '';
-        });
+        this.currentUrl = activeTab.url || '';
     };
 
     @computed
     get protectionPauseExpires() {
-        // TODO updateCurrentTime here?
         return this.settings[SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES] as number;
     }
 
@@ -95,19 +92,27 @@ export class SettingsStore {
     };
 
     @action
+    setSettings = (settings: SettingsType) => {
+        this.settings = settings;
+    };
+
+    @action
+    setPopupDataReady = (popupDataReady: boolean) => {
+        this.popupDataReady = popupDataReady;
+    };
+
+    @action
     getPopupData = async () => {
         await this.getCurrentTabUrl();
 
         const { settings } = await sender.getPopupData();
 
-        runInAction(() => {
-            this.popupDataReady = true;
-            this.settings = settings;
+        this.setPopupDataReady(true);
+        this.setSettings(settings);
 
-            if (settings[SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES] > Date.now()) {
-                this.setProtectionPausedTimer();
-            }
-        });
+        if (this.protectionPauseExpires > Date.now()) {
+            this.setProtectionPausedTimer();
+        }
     };
 
     @computed
