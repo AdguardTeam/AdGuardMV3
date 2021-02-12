@@ -1,26 +1,14 @@
-import React, { useContext } from 'react';
-import { observer } from 'mobx-react';
-import cn from 'classnames';
+import React from 'react';
 import { Icon } from 'Common/components/ui/Icon';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { theme } from 'Common/styles';
 import { ICON_ID } from 'Common/components/ui/Icons';
-import { rootStore } from '../../stores';
 
 import styles from './Footer.module.pcss';
 
-export const Footer = observer(() => {
-    const { settingsStore } = useContext(rootStore);
-    const { protectionEnabled, protectionPaused } = settingsStore;
-
-    const protectionDisabled = !protectionEnabled || protectionPaused;
-
-    const className = cn(styles.footer, {
-        [styles.footerDisabled]: protectionDisabled,
-    });
-
+export const Footer = () => {
     return (
-        <footer className={className}>
+        <footer className={styles.footer}>
             <span className={theme.common.textRegular}>
                 {reactTranslator.getMessage('options_works_with_v3', {
                     span: (payload: string) => (
@@ -33,4 +21,4 @@ export const Footer = observer(() => {
             <Icon id={ICON_ID.CHROME_LOGO} className={styles.footerLogo} />
         </footer>
     );
-});
+};

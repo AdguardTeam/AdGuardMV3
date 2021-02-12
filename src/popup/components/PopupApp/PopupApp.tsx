@@ -80,6 +80,7 @@ export const PopupApp = observer(() => {
 
     return (
         <div className={styles.popup}>
+            {!protectionEnabled && <div className={styles.overlay} />}
             <Icons />
             {wizardEnabled
                 ? <Wizard />
@@ -87,7 +88,7 @@ export const PopupApp = observer(() => {
                     <>
                         <Header />
                         <main className={className}>
-                            {protectionEnabled && !protectionPaused
+                            {protectionEnabled
                                 ? (
                                     <>
                                         <Switcher />

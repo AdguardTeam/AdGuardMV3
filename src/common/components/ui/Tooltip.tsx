@@ -10,7 +10,7 @@ import styles from './Tooltip.module.pcss';
 type IProps = {
     iconId: IconIdType,
     className?: string,
-    children: JSX.Element,
+    children: React.ReactChild | React.ReactChild[],
     disabled: boolean,
 };
 

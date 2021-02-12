@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
-import cn from 'classnames';
 import { translator } from 'Common/translators/translator';
 import { Icon } from 'Common/components/ui/Icon';
 import { Tooltip } from 'Common/components/ui/Tooltip';
@@ -17,7 +16,6 @@ export const Header = observer(() => {
     const { settingsStore } = useContext(rootStore);
     const {
         protectionEnabled,
-        protectionPaused,
         updateCurrentTime,
         setProtectionPausedTimer,
         setSetting,
@@ -48,25 +46,20 @@ export const Header = observer(() => {
         setProtectionPausedTimer();
     };
 
-    const protectionDisabled = !protectionEnabled || protectionPaused;
-
-    const className = cn(styles.popupHeader, {
-        [styles.popupHeaderDisabled]: protectionDisabled,
-    });
-
     // TODO: align icons
+    // TODO remove fieldset child buttons disable after the bug is fixed https://github.com/facebook/react/issues/7711
     return (
-        <div className={className}>
+        <div className={styles.popupHeader}>
             <div className={styles.popupHeaderLogo}>
                 <Icon id={ICON_ID.LOGO} />
             </div>
-            <div className={styles.popupHeaderButtons}>
+            <fieldset className={styles.popupHeaderButtons} disabled={!protectionEnabled}>
                 <button
                     className={styles.popupHeaderButton}
                     type="button"
                     onClick={handleBlockAdsClick}
                     title={translator.getMessage('options_block_ads_on_website')}
-                    disabled={protectionDisabled}
+                    disabled={!protectionEnabled}
                 >
                     <Icon id={ICON_ID.START} />
                 </button>
@@ -75,40 +68,38 @@ export const Header = observer(() => {
                     type="button"
                     onClick={handleSettingsClick}
                     title={translator.getMessage('options_open_settings')}
-                    disabled={protectionDisabled}
+                    disabled={!protectionEnabled}
                 >
                     <Icon id={ICON_ID.SETTINGS} />
                 </button>
                 <Tooltip
                     iconId={ICON_ID.CRUMBS}
                     className={styles.popupHeaderButton}
-                    disabled={protectionDisabled}
+                    disabled={!protectionEnabled}
                 >
-                    <div>
-                        <button
-                            type="button"
-                            className={styles.item}
-                            onClick={onPauseProtectionClick}
-                        >
-                            {reactTranslator.getMessage('popup_settings_pause_protection')}
-                        </button>
-                        <button
-                            type="button"
-                            className={styles.item}
-                            onClick={onPauseProtectionTimeoutClick}
-                        >
-                            {reactTranslator.getMessage('popup_settings_pause_protection_temporarily', { count: PROTECTION_PAUSE_TIMEOUT / 1000 })}
-                        </button>
-                        <button
-                            type="button"
-                            className={styles.item}
-                            disabled
-                        >
-                            {reactTranslator.getMessage('popup_settings_disable_site_temporarily', { count: PROTECTION_PAUSE_TIMEOUT / 1000 })}
-                        </button>
-                    </div>
+                    <button
+                        type="button"
+                        className={styles.item}
+                        onClick={onPauseProtectionClick}
+                    >
+                        {reactTranslator.getMessage('popup_settings_pause_protection')}
+                    </button>
+                    <button
+                        type="button"
+                        className={styles.item}
+                        onClick={onPauseProtectionTimeoutClick}
+                    >
+                        {reactTranslator.getMessage('popup_settings_pause_protection_temporarily', { count: PROTECTION_PAUSE_TIMEOUT / 1000 })}
+                    </button>
+                    <button
+                        type="button"
+                        className={styles.item}
+                        disabled
+                    >
+                        {reactTranslator.getMessage('popup_settings_disable_site_temporarily', { count: PROTECTION_PAUSE_TIMEOUT / 1000 })}
+                    </button>
                 </Tooltip>
-            </div>
+            </fieldset>
         </div>
     );
 });
