@@ -39,7 +39,7 @@ export class SettingsStore {
     protectionPausedTimerId = 0;
 
     @observable
-    currentDate = 0;
+    currentTime = 0;
 
     getCurrentTabUrl = async () => {
         const activeTab = await tabUtils.getActiveTab();
@@ -49,16 +49,19 @@ export class SettingsStore {
     };
 
     @computed
+    get protectionPauseExpires() {
+        // TODO updateCurrentTime here?
+        return this.settings[SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES] as number;
+    }
+
+    @computed
     get protectionPausedTimer() {
-        return Math.ceil(
-            (this.settings[SETTINGS_NAMES
-                .GLOBAL_FILTERING_PAUSE_EXPIRES] as number - this.currentDate) / 1000,
-        );
+        return Math.ceil((this.protectionPauseExpires - this.currentTime) / 1000);
     }
 
     @computed
     get protectionPaused() {
-        return !!this.currentDate && this.protectionPausedTimer > 0;
+        return !!this.currentTime && this.protectionPausedTimer > 0;
     }
 
     @computed
@@ -97,13 +100,13 @@ export class SettingsStore {
 
         const { settings } = await sender.getPopupData();
 
-        if (settings[SETTINGS_NAMES.GLOBAL_FILTERING_PAUSE_EXPIRES] > Date.now()) {
-            this.setProtectionPausedTimer();
-        }
-
         runInAction(() => {
             this.popupDataReady = true;
             this.settings = settings;
+
+            if (settings[SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES] > Date.now()) {
+                this.setProtectionPausedTimer();
+            }
         });
     };
 
@@ -123,8 +126,8 @@ export class SettingsStore {
     }
 
     @action
-    tick = () => {
-        this.currentDate = Date.now();
+    updateCurrentTime = () => {
+        this.currentTime = Date.now();
     };
 
     @action
@@ -133,8 +136,9 @@ export class SettingsStore {
             return;
         }
 
+        this.updateCurrentTime();
         this.setProtectionPausedTimerId(window.setInterval(async () => {
-            this.tick();
+            this.updateCurrentTime();
             if (!this.protectionPausedTimer) {
                 await this.resetProtectionPausedTimeout();
             }
@@ -145,7 +149,8 @@ export class SettingsStore {
     resetProtectionPausedTimeout = async () => {
         clearTimeout(this.protectionPausedTimerId);
         this.setProtectionPausedTimerId(0);
-        this.tick();
-        await sender.setSetting(SETTINGS_NAMES.GLOBAL_FILTERING_PAUSE_EXPIRES, 0);
+        this.updateCurrentTime();
+        await this.setSetting(SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES, 0);
+        await this.setSetting(SETTINGS_NAMES.PROTECTION_ENABLED, true);
     };
 }

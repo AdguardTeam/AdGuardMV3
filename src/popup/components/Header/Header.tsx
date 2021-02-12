@@ -6,7 +6,7 @@ import { Icon } from 'Common/components/ui/Icon';
 import { Tooltip } from 'Common/components/ui/Tooltip';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { SETTINGS_NAMES } from 'Common/settings-constants';
-import { GLOBAL_FILTERING_PAUSE_TIMEOUT } from 'Common/constants';
+import { PROTECTION_PAUSE_TIMEOUT } from 'Common/constants';
 import { ICON_ID } from 'Common/components/ui/Icons';
 import { sender } from '../../messaging/sender';
 import { rootStore } from '../../stores';
@@ -18,6 +18,9 @@ export const Header = observer(() => {
     const {
         protectionEnabled,
         protectionPaused,
+        updateCurrentTime,
+        setProtectionPausedTimer,
+        setSetting,
     } = settingsStore;
 
     const handleBlockAdsClick = async () => {
@@ -32,15 +35,20 @@ export const Header = observer(() => {
     };
 
     const onPauseProtectionClick = async () => {
-        await sender.setSetting(SETTINGS_NAMES.PROTECTION_ENABLED, false);
+        await setSetting(SETTINGS_NAMES.PROTECTION_ENABLED, false);
     };
 
     const onPauseProtectionTimeoutClick = async () => {
-        await sender.setSetting(
-            SETTINGS_NAMES.GLOBAL_FILTERING_PAUSE_EXPIRES,
+        // TODO add one setter for PROTECTION_ENABLED and PROTECTION_PAUSE_EXPIRES,
+        //  updateCurrentTime
+        await setSetting(SETTINGS_NAMES.PROTECTION_ENABLED, false);
+        updateCurrentTime();
+        await setSetting(
+            SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES,
             // TODO: reload page when timer is out and popup is closed
-            Date.now() + GLOBAL_FILTERING_PAUSE_TIMEOUT,
+            settingsStore.currentTime + PROTECTION_PAUSE_TIMEOUT,
         );
+        setProtectionPausedTimer();
     };
 
     const protectionDisabled = !protectionEnabled || protectionPaused;
@@ -92,14 +100,14 @@ export const Header = observer(() => {
                             className={styles.item}
                             onClick={onPauseProtectionTimeoutClick}
                         >
-                            {reactTranslator.getMessage('popup_settings_pause_protection_temporarily', { count: GLOBAL_FILTERING_PAUSE_TIMEOUT / 1000 })}
+                            {reactTranslator.getMessage('popup_settings_pause_protection_temporarily', { count: PROTECTION_PAUSE_TIMEOUT / 1000 })}
                         </button>
                         <button
                             type="button"
                             className={styles.item}
                             disabled
                         >
-                            {reactTranslator.getMessage('popup_settings_disable_site_temporarily', { count: GLOBAL_FILTERING_PAUSE_TIMEOUT / 1000 })}
+                            {reactTranslator.getMessage('popup_settings_disable_site_temporarily', { count: PROTECTION_PAUSE_TIMEOUT / 1000 })}
                         </button>
                     </div>
                 </Tooltip>

@@ -38,6 +38,13 @@ class Settings {
     };
 
     public getSettings = () => {
+        const protectionPauseExpires = this.settings[SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES];
+
+        if (protectionPauseExpires !== 0 && protectionPauseExpires <= Date.now()) {
+            this.setSetting(SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES, 0);
+            this.setSetting(SETTINGS_NAMES.PROTECTION_ENABLED, true);
+        }
+
         return this.settings;
     };
 

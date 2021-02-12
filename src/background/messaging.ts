@@ -58,10 +58,6 @@ export const messageHandler = async (
         case MESSAGE_TYPES.GET_POPUP_DATA: {
             const popupSettings = settings.getSettings();
 
-            if (popupSettings[SETTINGS_NAMES.GLOBAL_FILTERING_PAUSE_EXPIRES] < Date.now()) {
-                settings.setSetting(SETTINGS_NAMES.GLOBAL_FILTERING_PAUSE_EXPIRES, 0);
-            }
-
             return { settings: popupSettings } as PopupData;
         }
         case MESSAGE_TYPES.SET_SETTING: {
@@ -71,7 +67,7 @@ export const messageHandler = async (
             switch (key as SETTINGS_NAMES) {
                 case SETTINGS_NAMES.FILTERING_ENABLED:
                 case SETTINGS_NAMES.PROTECTION_ENABLED:
-                case SETTINGS_NAMES.GLOBAL_FILTERING_PAUSE_EXPIRES: {
+                case SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES: {
                     /* TODO do not reload options page, find out reloading logic */
                     await tabUtils.reloadActiveTab();
                     break;
@@ -107,15 +103,8 @@ export const messageHandler = async (
         case MESSAGE_TYPES.GET_CSS: {
             const filteringEnabled = settings.getSetting(SETTINGS_NAMES.FILTERING_ENABLED);
             const protectionEnabled = settings.getSetting(SETTINGS_NAMES.PROTECTION_ENABLED);
-            const globalFilteringPausedUntil = settings.getSetting(
-                SETTINGS_NAMES.GLOBAL_FILTERING_PAUSE_EXPIRES,
-            );
 
-            if (
-                filteringEnabled
-                && protectionEnabled
-                && globalFilteringPausedUntil <= Date.now()
-            ) {
+            if (filteringEnabled && protectionEnabled) {
                 // example rules
                 return ['* { background-color: pink }'];
             }

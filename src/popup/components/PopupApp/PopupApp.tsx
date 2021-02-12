@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useLayoutEffect } from 'react';
 import { observer } from 'mobx-react';
 import cn from 'classnames';
 
@@ -8,7 +8,6 @@ import { NOTIFIER_EVENTS } from 'Common/constants';
 import { createLongLivedConnection } from 'Common/messaging-utils';
 import { Icon } from 'Common/components/ui/Icon';
 import { reactTranslator } from 'Common/translators/reactTranslator';
-import { SETTINGS_NAMES } from 'Common/settings-constants';
 import { theme } from 'Common/styles';
 import { rootStore } from '../../stores';
 import { Header } from '../Header';
@@ -29,14 +28,12 @@ export const PopupApp = observer(() => {
         popupDataReady,
         wizardEnabled,
         protectionEnabled,
-        setSetting,
         protectionPaused,
         protectionPausedTimer,
-        setProtectionPausedTimer,
         resetProtectionPausedTimeout,
     } = settingsStore;
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         (async () => {
             try {
                 await getPopupData();
@@ -56,18 +53,6 @@ export const PopupApp = observer(() => {
                 case NOTIFIER_EVENTS.SETTING_UPDATED: {
                     const { key, value } = data;
                     settingsStore.updateSettingState(key, value);
-
-                    switch (key as SETTINGS_NAMES) {
-                        case SETTINGS_NAMES.GLOBAL_FILTERING_PAUSE_EXPIRES: {
-                            if (value > Date.now()) {
-                                setProtectionPausedTimer();
-                            }
-                            break;
-                        }
-                        default: {
-                            break;
-                        }
-                    }
                     break;
                 }
 
@@ -90,12 +75,7 @@ export const PopupApp = observer(() => {
     }
 
     const onEnableProtectionClick = async () => {
-        if (protectionPaused) {
-            await setSetting(SETTINGS_NAMES.GLOBAL_FILTERING_PAUSE_EXPIRES, 0);
-            await resetProtectionPausedTimeout();
-        } else {
-            await setSetting(SETTINGS_NAMES.PROTECTION_ENABLED, true);
-        }
+        await resetProtectionPausedTimeout();
     };
 
     return (
