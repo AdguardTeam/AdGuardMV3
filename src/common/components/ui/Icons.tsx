@@ -44,7 +44,7 @@ export const ICON_ID_CLASS_MAP: Record<ICON_ID, string> = {
     [ICON_ID.USER_RULES]: iconStyles.iconOption,
     [ICON_ID.ARROW]: iconStyles.iconOption,
     [ICON_ID.CRUMBS]: iconStyles.iconButton,
-    [ICON_ID.DISABLED_LOGO]: iconStyles.icon,
+    [ICON_ID.DISABLED_LOGO]: iconStyles.disabledLogo,
 };
 
 export const Icons = () => {
