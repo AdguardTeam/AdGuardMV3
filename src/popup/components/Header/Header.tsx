@@ -75,7 +75,7 @@ export const Header = observer(() => {
                 <Tooltip
                     iconId={ICON_ID.CRUMBS}
                     className={styles.popupHeaderButton}
-                    disabled={!protectionEnabled}
+                    enabled={protectionEnabled}
                 >
                     <button
                         type="button"

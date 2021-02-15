@@ -125,7 +125,7 @@ export class SettingsStore {
 
     @computed
     get protectionEnabled() {
-        return this.settings[SETTINGS_NAMES.PROTECTION_ENABLED];
+        return this.settings[SETTINGS_NAMES.PROTECTION_ENABLED] as boolean;
     }
 
     @action

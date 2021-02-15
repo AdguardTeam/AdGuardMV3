@@ -11,14 +11,14 @@ type IProps = {
     iconId: IconIdType,
     className?: string,
     children: React.ReactChild | React.ReactChild[],
-    disabled: boolean,
+    enabled?: boolean,
 };
 
 const Tooltip = ({
     iconId,
     className,
     children,
-    disabled,
+    enabled,
 }: IProps) => {
     const [visible, setVisible] = useState(false);
     const ref = useRef<HTMLSpanElement>(null);
@@ -48,7 +48,7 @@ const Tooltip = ({
                 type="button"
                 ref={setTriggerRef}
                 className={className}
-                disabled={disabled}
+                disabled={!enabled}
                 onClick={open}
             >
                 <Icon id={iconId} />
@@ -70,6 +70,7 @@ const Tooltip = ({
 
 Tooltip.defaultProps = {
     className: '',
+    enabled: true,
 };
 
 export { Tooltip };

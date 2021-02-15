@@ -7,6 +7,7 @@ type IconProps = {
     className?: string,
 };
 
+/* Import Icons before to use this component */
 const Icon = ({
     id,
     className,
