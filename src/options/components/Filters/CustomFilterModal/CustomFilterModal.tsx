@@ -1,10 +1,7 @@
 /* eslint-disable @typescript-eslint/no-shadow */
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Modal from 'react-modal';
-import { log } from 'Common/logger';
-import commander from 'commander';
 import { rootStore } from '../../../stores';
-import { sender } from '../../../messaging/sender';
 import { AddCustomFilter } from './AddCustomFilter';
 import { AddCustomFilterConfirm } from './AddCustomFilterConfirm';
 

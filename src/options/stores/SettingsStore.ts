@@ -17,9 +17,7 @@ export class SettingsStore {
 
     constructor(rootStore: RootStore) {
         this.rootStore = rootStore;
-        makeObservable(this, {
-            addCustomFilterByContent: flow,
-        });
+        makeObservable(this);
     }
 
     @observable
