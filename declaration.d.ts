@@ -10,3 +10,13 @@ interface Filter {
     description: string,
     groupId: number,
 }
+
+interface FilterInfo {
+    title: string,
+    description?: string,
+    homepage?: string,
+    version?: string,
+    expires?: string,
+    timeUpdated?: string,
+    url?: string,
+}

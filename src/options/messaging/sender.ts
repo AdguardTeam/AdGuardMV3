@@ -27,6 +27,14 @@ class Sender {
     disableFilter = (filterId: number): Promise<Filter[]> => {
         return sendMessage(MESSAGE_TYPES.DISABLE_FILTER, { filterId });
     };
+
+    getFilterInfo = (filterContent: string): Promise<FilterInfo> => {
+        return sendMessage(MESSAGE_TYPES.GET_FILTER_INFO_BY_CONTENT, { filterContent });
+    };
+
+    addCustomFilterByContent = (filterContent: string): Promise<Filter[]> => {
+        return sendMessage(MESSAGE_TYPES.ADD_CUSTOM_FILTER_BY_CONTENT, { filterContent });
+    };
 }
 
 export const sender = new Sender();

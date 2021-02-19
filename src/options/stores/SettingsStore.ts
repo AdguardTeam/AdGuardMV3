@@ -4,6 +4,7 @@ import {
     makeObservable,
     runInAction,
     computed,
+    flow,
 } from 'mobx';
 
 import { DEFAULT_SETTINGS, SETTINGS_NAMES } from 'Common/settings-constants';
@@ -16,7 +17,9 @@ export class SettingsStore {
 
     constructor(rootStore: RootStore) {
         this.rootStore = rootStore;
-        makeObservable(this);
+        makeObservable(this, {
+            addCustomFilterByContent: flow,
+        });
     }
 
     @observable
@@ -85,5 +88,14 @@ export class SettingsStore {
     @computed
     get filteringEnabled() {
         return this.settings[SETTINGS_NAMES.FILTERING_ENABLED];
+    }
+
+    @flow* addCustomFilterByContent(filterContent: string) {
+        try {
+            const filters = yield sender.addCustomFilterByContent(filterContent);
+            this.filters = filters;
+        } catch (e) {
+            log.error(e.message);
+        }
     }
 }

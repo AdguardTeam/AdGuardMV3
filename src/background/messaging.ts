@@ -10,7 +10,7 @@ import { tabUtils } from 'Common/tab-utils';
 import { settings } from './settings';
 import { app } from './app';
 import { notifier } from './notifier';
-import { filters } from './filter';
+import { filters } from './filters';
 
 interface MessageHandler {
     (message: Message, sender: chrome.runtime.MessageSender): any;
@@ -60,9 +60,10 @@ export const messageHandler = async (
             return tabUtils.openOptionsPage();
         }
         case MESSAGE_TYPES.GET_POPUP_DATA: {
-            return {
+            const popupData: PopupData = {
                 settings: settings.getSettings(),
-            } as PopupData;
+            };
+            return popupData;
         }
         case MESSAGE_TYPES.SET_SETTING: {
             const { key, value } = data;
@@ -102,6 +103,16 @@ export const messageHandler = async (
         }
         case MESSAGE_TYPES.DISABLE_FILTER: {
             return filters.disableFilter(data.filterId);
+        }
+        case MESSAGE_TYPES.GET_FILTER_INFO_BY_CONTENT: {
+            const { filterContent } = data;
+            const rules = filterContent.split('\n');
+            return filters.parseFilterInfo(rules);
+        }
+        case MESSAGE_TYPES.ADD_CUSTOM_FILTER_BY_CONTENT: {
+            const { filterContent } = data;
+            const filterStrings = filterContent.split('\n');
+            return filters.addCustomFilterByContent(filterStrings);
         }
         default: {
             throw new Error(`No message handler for type: ${type}`);

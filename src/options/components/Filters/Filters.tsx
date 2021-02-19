@@ -1,10 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { observer } from 'mobx-react';
+import Modal from 'react-modal';
 
+import { reactTranslator } from 'Common/translators/reactTranslator';
 import { Filter } from './Filter';
 import s from './Filters.module.pcss';
 import { rootStore } from '../../stores';
+import { CustomFilterModal } from './CustomFilterModal';
+
+Modal.setAppElement('#root');
 
 const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -24,6 +29,8 @@ const getPageTitle = (groupId: string): string | null => {
 
 export const Filters = observer(() => {
     const { settingsStore } = useContext(rootStore);
+    // FIXME set default to false
+    const [isCustomFilterModalOpen, setIsCustomFilterModalOpen] = useState(true);
     const history = useHistory();
 
     const { filters } = settingsStore;
@@ -45,13 +52,26 @@ export const Filters = observer(() => {
     const filtersByGroupId = filters.filter((filter) => filter.groupId === parseInt(groupId, 10));
 
     // FIXME add new custom filter modal
+    // FIXME handle clicks to links for subscribe to new filters
 
     const handleBackClick = () => {
         history.push('/');
     };
 
+    const handleAddCustomFilter = () => {
+        setIsCustomFilterModalOpen(true);
+    };
+
+    const closeAddCustomFilterModal = () => {
+        setIsCustomFilterModalOpen(false);
+    };
+
     return (
         <>
+            <CustomFilterModal
+                isOpen={isCustomFilterModalOpen}
+                closeHandler={closeAddCustomFilterModal}
+            />
             <button
                 onClick={handleBackClick}
                 className={s.button}
@@ -64,8 +84,12 @@ export const Filters = observer(() => {
                 Search
             </button>
             {isCustomGroup && (
-                <button className={s.button} type="button">
-                    Add a custom filter
+                <button
+                    className={s.button}
+                    onClick={handleAddCustomFilter}
+                    type="button"
+                >
+                    {reactTranslator.getMessage('options_add_custom_filter')}
                 </button>
             )}
 
