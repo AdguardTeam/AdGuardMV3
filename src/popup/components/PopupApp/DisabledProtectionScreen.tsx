@@ -35,7 +35,7 @@ export const DisabledProtectionScreen = observer(() => {
                 </section>
                 <button
                     type="button"
-                    className={`${styles.buttonGreen} action-button`}
+                    className={cn(theme.common.actionButton, styles.buttonGreen)}
                     onClick={onEnableProtectionClick}
                 >
                     {reactTranslator.getMessage('popup_protection_resume_now')}
