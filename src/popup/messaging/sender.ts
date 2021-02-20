@@ -33,6 +33,11 @@ class Sender {
     reportSite = () => sendMessage(MESSAGE_TYPES.REPORT_SITE);
 
     /**
+     * Asks background service worker to reload active tab
+     */
+    reloadActiveTab = () => sendMessage(MESSAGE_TYPES.RELOAD_ACTIVE_TAB);
+
+    /**
      * Asks background service worker to open assistant on the active tab
      */
     openAssistant = async () => {

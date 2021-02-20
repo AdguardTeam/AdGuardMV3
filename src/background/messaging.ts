@@ -60,6 +60,10 @@ export const messageHandler = async (
 
             return { settings: popupSettings } as PopupData;
         }
+        case MESSAGE_TYPES.RELOAD_ACTIVE_TAB: {
+            await tabUtils.reloadActiveTab();
+            break;
+        }
         case MESSAGE_TYPES.SET_SETTING: {
             const { key, value } = data;
             settings.setSetting(key, value);

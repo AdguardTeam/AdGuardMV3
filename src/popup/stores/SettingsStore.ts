@@ -39,6 +39,14 @@ export class SettingsStore {
     @observable
     currentTime = 0;
 
+    @observable
+    refreshToEnableProtectionNeeded = false;
+
+    @action
+    setRefreshToEnableProtectionNeeded = (refreshToEnableProtectionNeeded: boolean) => {
+        this.refreshToEnableProtectionNeeded = refreshToEnableProtectionNeeded;
+    };
+
     @action
     getCurrentTabUrl = async () => {
         const activeTab = await tabUtils.getActiveTab();
@@ -115,7 +123,7 @@ export class SettingsStore {
 
     @computed
     get filteringEnabled() {
-        return this.settings[SETTINGS_NAMES.FILTERING_ENABLED];
+        return this.settings[SETTINGS_NAMES.FILTERING_ENABLED] as boolean;
     }
 
     @computed
