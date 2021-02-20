@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 import React, { useContext, useState } from 'react';
 import Modal from 'react-modal';
+
+import { log } from 'Common/logger';
 import { rootStore } from '../../../stores';
 import { AddCustomFilter } from './AddCustomFilter';
 import { AddCustomFilterConfirm } from './AddCustomFilterConfirm';
@@ -50,31 +52,33 @@ export const CustomFilterModal = ({ isOpen, closeHandler }: CustomFilterModalPro
 
     const [currentStep, setCurrentStep] = useState(STEPS.ADD_CUSTOM_FILTER);
 
-    const [filterInfo, setFilterInfo] = useState<FilterInfo>();
+    const [filterInfo, setFilterInfo] = useState<FilterInfo|null>(null);
 
-    const [filterContent, setFilterContent] = useState<string>();
+    const [filterContent, setFilterContent] = useState<string|null>(null);
 
     const onCancelAddCustomModal = () => {
         closeHandler();
     };
 
+    const resetModalToInit = () => {
+        setCurrentStep(STEPS.ADD_CUSTOM_FILTER);
+        setFilterInfo(null);
+        setFilterContent(null);
+    };
+
     const onSaveCustomModal = async () => {
-        console.log('save custom modal');
-        if (filterInfo?.url) {
-            // FIXME add custom filter by url
-            // await settingsStore.addCustomFilterByUrl(filterInfo.url);
-        } else if (filterContent) {
-            console.log(filterContent.slice(0, 50));
+        if (filterContent && filterInfo) {
             try {
-                await settingsStore.addCustomFilterByContent(filterContent);
+                await settingsStore.addCustomFilterByContent(filterContent, filterInfo.title);
             } catch (e) {
-                console.log(e);
+                log.error(e);
             }
         } else {
             throw new Error('Save custom modal requires url or filter content');
         }
         // close modal on success
         closeHandler();
+        resetModalToInit();
     };
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

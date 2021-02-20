@@ -11,6 +11,7 @@ import { settings } from './settings';
 import { app } from './app';
 import { notifier } from './notifier';
 import { filters } from './filters';
+import { backend } from './backend';
 
 interface MessageHandler {
     (message: Message, sender: chrome.runtime.MessageSender): any;
@@ -105,14 +106,19 @@ export const messageHandler = async (
             return filters.disableFilter(data.filterId);
         }
         case MESSAGE_TYPES.GET_FILTER_INFO_BY_CONTENT: {
-            const { filterContent } = data;
+            const { filterContent, title } = data;
             const rules = filterContent.split('\n');
-            return filters.parseFilterInfo(rules);
+            return filters.parseFilterInfo(rules, title);
         }
         case MESSAGE_TYPES.ADD_CUSTOM_FILTER_BY_CONTENT: {
-            const { filterContent } = data;
+            const { filterContent, title } = data;
             const filterStrings = filterContent.split('\n');
-            return filters.addCustomFilterByContent(filterStrings);
+            return filters.addCustomFilterByContent(filterStrings, title);
+        }
+        case MESSAGE_TYPES.GET_FILTER_CONTENT_BY_URL: {
+            const { url } = data;
+            const lines = await backend.loadFilterByUrl(url);
+            return lines.join('\n');
         }
         default: {
             throw new Error(`No message handler for type: ${type}`);

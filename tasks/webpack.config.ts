@@ -139,6 +139,7 @@ const config = {
                 );
                 return aliases;
             }, {}),
+        fallback: { url: false },
     },
     module: {
         rules: [

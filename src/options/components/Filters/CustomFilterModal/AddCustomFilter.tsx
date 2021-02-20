@@ -52,13 +52,34 @@ export const AddCustomFilter = ({ onError, onSuccess }: AddCustomProps) => {
         try {
             const fileContent = await readFile(file);
             // FIXME use filename if filter doesnt have title
-            const filterInfo = await sender.getFilterInfo(fileContent);
-            onSuccess(filterInfo, fileContent);
+            const filterInfo = await sender.getFilterInfoByContent(fileContent, file.name);
             if (!filterInfo) {
                 const errorMessage = 'Filter format is broken';
                 log.error(errorMessage);
                 onError(errorMessage);
             }
+            onSuccess(filterInfo, fileContent);
+        } catch (ex) {
+            const errorMessage = `Filter format is broken, ${ex.message}`;
+            log.error(errorMessage);
+            onError(errorMessage);
+        }
+    };
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const form = e.currentTarget;
+        const data = new FormData(form);
+        const url = data.get('url') as string;
+        try {
+            const filterContent = await sender.getFilterContentByUrl(url);
+            const filterInfo = await sender.getFilterInfoByContent(filterContent, url);
+            if (!filterInfo) {
+                const errorMessage = 'Filter format is broken';
+                log.error(errorMessage);
+                onError(errorMessage);
+            }
+            onSuccess(filterInfo, filterContent);
         } catch (ex) {
             const errorMessage = `Filter format is broken, ${ex.message}`;
             log.error(errorMessage);
@@ -69,11 +90,12 @@ export const AddCustomFilter = ({ onError, onSuccess }: AddCustomProps) => {
     // FIXME disable add button until textarea is empty
     return (
         <>
-            <form action="#">
+            <form action="#" onSubmit={handleSubmit}>
                 <input
                     type="textarea"
                     value={textareaValue}
                     onChange={handleTextareaChange}
+                    name="url"
                 />
                 <input
                     type="file"

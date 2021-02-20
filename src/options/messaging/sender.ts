@@ -28,12 +28,16 @@ class Sender {
         return sendMessage(MESSAGE_TYPES.DISABLE_FILTER, { filterId });
     };
 
-    getFilterInfo = (filterContent: string): Promise<FilterInfo> => {
-        return sendMessage(MESSAGE_TYPES.GET_FILTER_INFO_BY_CONTENT, { filterContent });
+    getFilterInfoByContent = (filterContent: string, title: string): Promise<FilterInfo> => {
+        return sendMessage(MESSAGE_TYPES.GET_FILTER_INFO_BY_CONTENT, { filterContent, title });
     };
 
-    addCustomFilterByContent = (filterContent: string): Promise<Filter[]> => {
-        return sendMessage(MESSAGE_TYPES.ADD_CUSTOM_FILTER_BY_CONTENT, { filterContent });
+    getFilterContentByUrl = (url: string): Promise<string> => {
+        return sendMessage(MESSAGE_TYPES.GET_FILTER_CONTENT_BY_URL, { url });
+    };
+
+    addCustomFilterByContent = (filterContent: string, title: string): Promise<Filter[]> => {
+        return sendMessage(MESSAGE_TYPES.ADD_CUSTOM_FILTER_BY_CONTENT, { filterContent, title });
     };
 }
 

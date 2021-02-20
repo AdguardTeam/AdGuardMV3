@@ -2,7 +2,6 @@ import {
     action,
     observable,
     makeObservable,
-    runInAction,
     computed,
     flow,
 } from 'mobx';
@@ -59,14 +58,11 @@ export class SettingsStore {
         }
     };
 
-    getOptionsData = async () => {
-        const { settings, filters } = await sender.getOptionsData();
-
-        runInAction(() => {
-            this.settings = settings;
-            this.filters = filters;
-        });
-    };
+    getOptionsData = flow(function* getOptionsData(this: SettingsStore) {
+        const { settings, filters } = yield sender.getOptionsData();
+        this.settings = settings;
+        this.filters = filters;
+    }).bind(this);
 
     setSetting = async (key: SETTINGS_NAMES, value: boolean) => {
         await sender.setSetting(key, value);
@@ -88,10 +84,9 @@ export class SettingsStore {
         return this.settings[SETTINGS_NAMES.FILTERING_ENABLED];
     }
 
-    @flow* addCustomFilterByContent(filterContent: string) {
+    @flow* addCustomFilterByContent(filterContent: string, title: string) {
         try {
-            const filters = yield sender.addCustomFilterByContent(filterContent);
-            this.filters = filters;
+            this.filters = yield sender.addCustomFilterByContent(filterContent, title);
         } catch (e) {
             log.error(e.message);
         }

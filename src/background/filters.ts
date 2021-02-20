@@ -86,9 +86,10 @@ class Filters {
      * Parses filter metadata from rules header
      *
      * @param rules
+     * @param title - string to be used as title if title tag wouldn't be found
      * @returns object
      */
-    parseFilterInfo = (rules: string[]): FilterInfo => {
+    parseFilterInfo = (rules: string[], title: string): FilterInfo => {
         const parseTag = (tagName: string): string => {
             let result = '';
 
@@ -110,10 +111,8 @@ class Filters {
             return result;
         };
 
-        console.log(parseTag('Title'));
-
         return {
-            title: parseTag('Title'),
+            title: parseTag('Title') || title,
             description: parseTag('Description'),
             homepage: parseTag('Homepage'),
             version: parseTag('Version'),
@@ -133,8 +132,8 @@ class Filters {
         return max >= CUSTOM_FILTERS_START_ID ? max + 1 : CUSTOM_FILTERS_START_ID;
     };
 
-    addCustomFilterByContent = (filterStrings: []) => {
-        const filterInfo = this.parseFilterInfo(filterStrings);
+    addCustomFilterByContent = (filterStrings: [], title: string) => {
+        const filterInfo = this.parseFilterInfo(filterStrings, title);
         const filter: Filter = {
             id: this.getCustomFilterId(),
             title: filterInfo.title,
