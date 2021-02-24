@@ -18,6 +18,7 @@ export const Header = observer(() => {
         protectionEnabled,
         setProtectionPausedTimer,
         setSetting,
+        updateCurrentTime,
     } = settingsStore;
 
     const handleBlockAdsClick = async () => {
@@ -39,6 +40,7 @@ export const Header = observer(() => {
     const onPauseProtectionTimeoutClick = async () => {
         await setSetting(SETTINGS_NAMES.PROTECTION_ENABLED, false);
         await sender.reloadActiveTab();
+        updateCurrentTime();
         await setSetting(
             SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES,
             settingsStore.currentTime + PROTECTION_PAUSE_TIMEOUT_MS,

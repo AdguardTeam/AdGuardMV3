@@ -54,12 +54,17 @@ const getProtectionStatusProps = (
 
 export const PageInfo = observer(() => {
     const { settingsStore } = useContext(rootStore);
-    const { filteringEnabled, currentSite, protectionPauseExpired } = settingsStore;
+    const {
+        filteringEnabled, currentSite, protectionPauseExpires, protectionPauseExpired,
+    } = settingsStore;
 
     const {
         key,
         params,
-    } = getProtectionStatusProps(filteringEnabled, protectionPauseExpired);
+    } = getProtectionStatusProps(
+        filteringEnabled,
+        protectionPauseExpires > 0 && protectionPauseExpired,
+    );
 
     const className = cn({
         [styles.sectionDisabled]: !filteringEnabled,

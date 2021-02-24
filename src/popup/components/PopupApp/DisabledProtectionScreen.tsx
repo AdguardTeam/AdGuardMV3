@@ -13,7 +13,11 @@ import styles from './DisabledProtectionScreen.module.pcss';
 
 export const DisabledProtectionScreen = observer(() => {
     const { settingsStore } = useContext(rootStore);
-    const { protectionPaused, protectionPausedTimer, resetProtectionPausedTimeout } = settingsStore;
+    const {
+        protectionPaused,
+        protectionPausedTimer,
+        resetProtectionPausedTimeout,
+    } = settingsStore;
 
     const onEnableProtectionClick = async () => {
         await resetProtectionPausedTimeout();

@@ -53,7 +53,7 @@ export class SettingsStore {
 
     @computed
     get protectionPauseExpired() {
-        return this.protectionPauseExpires !== 0 && this.protectionPauseExpires <= this.currentTime;
+        return this.protectionPauseExpires <= this.currentTime;
     }
 
     @computed
@@ -137,8 +137,13 @@ export class SettingsStore {
     }
 
     @action
-    updateCurrentTime = () => {
-        this.currentTime = Date.now();
+    updateCurrentTime = (time = Date.now()) => {
+        this.currentTime = time;
+    };
+
+    @action
+    resetCurrentTime = () => {
+        this.updateCurrentTime(0);
     };
 
     @action
@@ -148,6 +153,7 @@ export class SettingsStore {
         }
 
         this.setProtectionPausedTimerId(window.setInterval(async () => {
+            this.updateCurrentTime();
             if (!this.protectionPaused) {
                 await this.resetProtectionPausedTimeout();
             }

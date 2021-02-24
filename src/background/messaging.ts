@@ -48,17 +48,13 @@ export const messageHandler = async (
 
     switch (type) {
         case MESSAGE_TYPES.GET_OPTIONS_DATA: {
-            return ({
-                settings: settings.getSettings(),
-            }) as OptionsData;
+            return { settings: settings.getSettings() } as OptionsData;
         }
         case MESSAGE_TYPES.OPEN_OPTIONS: {
             return tabUtils.openOptionsPage();
         }
         case MESSAGE_TYPES.GET_POPUP_DATA: {
-            const popupSettings = settings.getSettings();
-
-            return { settings: popupSettings } as PopupData;
+            return { settings: settings.getSettings() } as PopupData;
         }
         case MESSAGE_TYPES.RELOAD_ACTIVE_TAB: {
             await tabUtils.reloadActiveTab();
