@@ -6,6 +6,7 @@ import { Icon } from 'Common/components/ui/Icon';
 import { SETTINGS_NAMES } from 'Common/settings-constants';
 import { ICON_ID } from 'Common/components/ui/Icons';
 import { rootStore } from '../../stores';
+import { sender } from '../../messaging/sender';
 
 import './switcher.pcss';
 
@@ -15,6 +16,7 @@ export const Switcher = observer(() => {
 
     const onClick = async () => {
         await setSetting(SETTINGS_NAMES.FILTERING_ENABLED, !filteringEnabled);
+        await sender.reloadActiveTab();
     };
 
     const icon = filteringEnabled ? ICON_ID.CHECKMARK : ICON_ID.CIRCLE;

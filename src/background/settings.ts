@@ -37,16 +37,7 @@ class Settings {
         return this.settings[key];
     };
 
-    public getSettings = () => {
-        const protectionPauseExpires = this.settings[SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES];
-
-        if (protectionPauseExpires !== 0 && protectionPauseExpires <= Date.now()) {
-            this.setSetting(SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES, 0);
-            this.setSetting(SETTINGS_NAMES.PROTECTION_ENABLED, true);
-        }
-
-        return this.settings;
-    };
+    public getSettings = () => this.settings;
 
     public setSetting = (key: SETTINGS_NAMES, value: SettingsValueType) => {
         this.settings[key] = value;

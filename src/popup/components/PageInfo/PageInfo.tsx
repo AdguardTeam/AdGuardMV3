@@ -41,9 +41,9 @@ const PROTECTION_STATUS: {[key:string]: ProtectionStatusType} = {
 
 const getProtectionStatusProps = (
     filteringEnabled: boolean,
-    refreshToEnableProtectionNeeded: boolean,
+    protectionPauseExpired: boolean,
 ) => {
-    if (refreshToEnableProtectionNeeded) {
+    if (protectionPauseExpired) {
         return PROTECTION_STATUS.REFRESH_NEEDED;
     }
     if (filteringEnabled) {
@@ -54,12 +54,12 @@ const getProtectionStatusProps = (
 
 export const PageInfo = observer(() => {
     const { settingsStore } = useContext(rootStore);
-    const { filteringEnabled, currentSite, refreshToEnableProtectionNeeded } = settingsStore;
+    const { filteringEnabled, currentSite, protectionPauseExpired } = settingsStore;
 
     const {
         key,
         params,
-    } = getProtectionStatusProps(filteringEnabled, refreshToEnableProtectionNeeded);
+    } = getProtectionStatusProps(filteringEnabled, protectionPauseExpired);
 
     const className = cn({
         [styles.sectionDisabled]: !filteringEnabled,

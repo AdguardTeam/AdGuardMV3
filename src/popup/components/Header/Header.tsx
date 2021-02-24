@@ -5,7 +5,7 @@ import { Icon } from 'Common/components/ui/Icon';
 import { Tooltip } from 'Common/components/ui/Tooltip';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { SETTINGS_NAMES } from 'Common/settings-constants';
-import { PROTECTION_PAUSE_TIMEOUT } from 'Common/constants';
+import { PROTECTION_PAUSE_TIMEOUT_S, PROTECTION_PAUSE_TIMEOUT_MS } from 'Common/constants';
 import { ICON_ID } from 'Common/components/ui/Icons';
 import { sender } from '../../messaging/sender';
 import { rootStore } from '../../stores';
@@ -16,7 +16,6 @@ export const Header = observer(() => {
     const { settingsStore } = useContext(rootStore);
     const {
         protectionEnabled,
-        updateCurrentTime,
         setProtectionPausedTimer,
         setSetting,
     } = settingsStore;
@@ -34,14 +33,15 @@ export const Header = observer(() => {
 
     const onPauseProtectionClick = async () => {
         await setSetting(SETTINGS_NAMES.PROTECTION_ENABLED, false);
+        await sender.reloadActiveTab();
     };
 
     const onPauseProtectionTimeoutClick = async () => {
         await setSetting(SETTINGS_NAMES.PROTECTION_ENABLED, false);
-        updateCurrentTime();
+        await sender.reloadActiveTab();
         await setSetting(
             SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES,
-            settingsStore.currentTime + PROTECTION_PAUSE_TIMEOUT,
+            settingsStore.currentTime + PROTECTION_PAUSE_TIMEOUT_MS,
         );
         setProtectionPausedTimer();
     };
@@ -89,14 +89,14 @@ export const Header = observer(() => {
                         className={styles.item}
                         onClick={onPauseProtectionTimeoutClick}
                     >
-                        {reactTranslator.getMessage('popup_settings_pause_protection_temporarily', { count: PROTECTION_PAUSE_TIMEOUT / 1000 })}
+                        {reactTranslator.getMessage('popup_settings_pause_protection_temporarily', { count: PROTECTION_PAUSE_TIMEOUT_S })}
                     </button>
                     <button
                         type="button"
                         className={styles.item}
                         disabled
                     >
-                        {reactTranslator.getMessage('popup_settings_disable_site_temporarily', { count: PROTECTION_PAUSE_TIMEOUT / 1000 })}
+                        {reactTranslator.getMessage('popup_settings_disable_site_temporarily', { count: PROTECTION_PAUSE_TIMEOUT_S })}
                     </button>
                 </Tooltip>
             </fieldset>

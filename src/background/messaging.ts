@@ -68,19 +68,6 @@ export const messageHandler = async (
             const { key, value } = data;
             settings.setSetting(key, value);
 
-            switch (key as SETTINGS_NAMES) {
-                case SETTINGS_NAMES.FILTERING_ENABLED:
-                case SETTINGS_NAMES.PROTECTION_ENABLED:
-                case SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES: {
-                    /* TODO do not reload options and extension pages */
-                    await tabUtils.reloadActiveTab();
-                    break;
-                }
-                default: {
-                    break;
-                }
-            }
-
             break;
         }
         case MESSAGE_TYPES.REPORT_SITE: {

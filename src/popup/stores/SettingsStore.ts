@@ -14,6 +14,7 @@ import {
     SettingsValueType,
 } from 'Common/settings-constants';
 import { tabUtils } from 'Common/tab-utils';
+import { MILLISECONDS_IN_SECOND, PROTECTION_PAUSE_TIMEOUT_TICK_MS } from 'Common/constants';
 import { sender } from '../messaging/sender';
 import type { RootStore } from './RootStore';
 
@@ -37,15 +38,7 @@ export class SettingsStore {
     protectionPausedTimerId = 0;
 
     @observable
-    currentTime = 0;
-
-    @observable
-    refreshToEnableProtectionNeeded = false;
-
-    @action
-    setRefreshToEnableProtectionNeeded = (refreshToEnableProtectionNeeded: boolean) => {
-        this.refreshToEnableProtectionNeeded = refreshToEnableProtectionNeeded;
-    };
+    currentTime = Date.now();
 
     @action
     getCurrentTabUrl = async () => {
@@ -59,13 +52,20 @@ export class SettingsStore {
     }
 
     @computed
+    get protectionPauseExpired() {
+        return this.protectionPauseExpires !== 0 && this.protectionPauseExpires <= this.currentTime;
+    }
+
+    @computed
     get protectionPausedTimer() {
-        return Math.ceil((this.protectionPauseExpires - this.currentTime) / 1000);
+        return this.protectionPauseExpired
+            ? 0
+            : Math.ceil((this.protectionPauseExpires - this.currentTime) / MILLISECONDS_IN_SECOND);
     }
 
     @computed
     get protectionPaused() {
-        return !!this.currentTime && this.protectionPausedTimer > 0;
+        return this.protectionPausedTimer > 0;
     }
 
     @computed
@@ -116,7 +116,7 @@ export class SettingsStore {
         this.setPopupDataReady(true);
         this.setSettings(settings);
 
-        if (this.protectionPauseExpires > Date.now()) {
+        if (this.protectionPaused) {
             this.setProtectionPausedTimer();
         }
     };
@@ -147,21 +147,17 @@ export class SettingsStore {
             return;
         }
 
-        this.updateCurrentTime();
         this.setProtectionPausedTimerId(window.setInterval(async () => {
-            this.updateCurrentTime();
-            if (!this.protectionPausedTimer) {
+            if (!this.protectionPaused) {
                 await this.resetProtectionPausedTimeout();
             }
-        }, 1000));
+        }, PROTECTION_PAUSE_TIMEOUT_TICK_MS));
     };
 
     @action
     resetProtectionPausedTimeout = async () => {
         clearTimeout(this.protectionPausedTimerId);
         this.setProtectionPausedTimerId(0);
-        this.updateCurrentTime();
-        await this.setSetting(SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES, 0);
         await this.setSetting(SETTINGS_NAMES.PROTECTION_ENABLED, true);
     };
 }

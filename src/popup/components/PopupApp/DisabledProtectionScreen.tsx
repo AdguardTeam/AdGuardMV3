@@ -5,7 +5,9 @@ import { Icon } from 'Common/components/ui/Icon';
 import { ICON_ID } from 'Common/components/ui/Icons';
 import { theme } from 'Common/styles';
 import { reactTranslator } from 'Common/translators/reactTranslator';
+import { SETTINGS_NAMES } from 'Common/settings-constants';
 import { rootStore } from '../../stores';
+import { sender } from '../../messaging/sender';
 
 import styles from './DisabledProtectionScreen.module.pcss';
 
@@ -15,6 +17,8 @@ export const DisabledProtectionScreen = observer(() => {
 
     const onEnableProtectionClick = async () => {
         await resetProtectionPausedTimeout();
+        await settingsStore.setSetting(SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES, 0);
+        await sender.reloadActiveTab();
     };
 
     return (
