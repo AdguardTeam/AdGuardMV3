@@ -15,7 +15,12 @@ export class RootStore {
             () => this.settingsStore.protectionPauseExpires,
             () => this.settingsStore.resetCurrentTime(),
             {
-                equals: (prevValue: number) => prevValue === 0,
+                equals: (prevValue: number, value: number) => {
+                    if (value === 0 && prevValue !== 0) {
+                        return false;
+                    }
+                    return true;
+                },
             },
         );
     }
