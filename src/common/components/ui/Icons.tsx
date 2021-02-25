@@ -50,18 +50,10 @@ export const ICON_ID_CLASS_MAP: Record<ICON_ID, string> = {
 export const Icons = () => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" className="hidden">
-            <svg id={ICON_ID.START} width="24" height="26">
-                <g
-                    stroke="#C23814"
-                    strokeWidth="1.5"
-                    fill="none"
-                    fillRule="evenodd"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                >
-                    <path d="M12 10.273a2.727 2.727 0 100 5.454 2.727 2.727 0 000-5.454z" />
-                    <path d="M12 4a9 9 0 109 9 9.01 9.01 0 00-9-9zM1 13h4M19 13h4M12 2v4M12 20v4" />
-                </g>
+            <svg id={ICON_ID.START} width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path clipRule="evenodd" d="M12 9.273a2.727 2.727 0 100 5.454 2.727 2.727 0 000-5.454z" stroke="#BF4829" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path clipRule="evenodd" d="M12 3a9 9 0 109 9 9.01 9.01 0 00-9-9z" stroke="#BF4829" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M1 12h4M19 12h4M12 1v4M12 19v4" stroke="#BF4829" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
 
             <svg id={ICON_ID.PAUSE} width="24" height="26">
@@ -78,17 +70,9 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id={ICON_ID.SETTINGS} width="22" height="22">
-                <g fill="none" fillRule="evenodd">
-                    <path fill="#131313" d="M-281-17H39v480h-320z" />
-                    <path
-                        d="M6.93 17.915c.135 0 .268.032.388.095.425.225.87.41 1.33.552a.833.833 0 01.551.559c.254.854.495 1.493.653 1.879h2.296c.158-.386.4-1.026.653-1.88a.833.833 0 01.552-.559c.459-.143.904-.327 1.33-.551a.833.833 0 01.785.004c.784.425 1.407.707 1.791.868l1.624-1.623a20.204 20.204 0 00-.868-1.792.833.833 0 01-.004-.785c.224-.426.408-.87.551-1.33a.833.833 0 01.559-.552A20.184 20.184 0 0021 12.147V9.851c-.386-.158-1.026-.4-1.88-.653a.833.833 0 01-.559-.551 7.887 7.887 0 00-.551-1.33.833.833 0 01.004-.786c.425-.784.707-1.406.868-1.79L17.26 3.116a20.13 20.13 0 00-1.792.868.833.833 0 01-.786.005 7.886 7.886 0 00-1.33-.552.833.833 0 01-.551-.559A20.135 20.135 0 0012.148 1H9.852c-.156.385-.397 1.02-.651 1.87a.833.833 0 01-.555.569c-.459.143-.904.327-1.33.551a.833.833 0 01-.785-.005 20.17 20.17 0 00-1.791-.867L3.117 4.74c.161.386.443 1.008.868 1.792.132.245.134.54.004.786-.223.425-.408.87-.55 1.33a.833.833 0 01-.56.551c-.854.254-1.493.495-1.879.653v2.296c.384.156 1.016.396 1.862.648a.835.835 0 01.583.578c.14.446.32.878.536 1.292a.833.833 0 01-.007.823 20.04 20.04 0 00-.856 1.77l1.623 1.625a20.13 20.13 0 001.792-.868.833.833 0 01.396-.101zM11 8.273a2.727 2.727 0 100 5.454 2.727 2.727 0 000-5.454z"
-                        stroke="#67b278"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="1.5"
-                    />
-                </g>
+            <svg id={ICON_ID.SETTINGS} width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path clipRule="evenodd" d="M7.93 18.915c.135 0 .268.033.388.096.425.224.87.408 1.33.551a.833.833 0 01.551.559c.254.854.495 1.493.653 1.879h2.296c.158-.387.4-1.026.653-1.88a.834.834 0 01.552-.559c.459-.143.904-.327 1.33-.551a.833.833 0 01.785.004 20.28 20.28 0 001.791.868l1.624-1.623a20.214 20.214 0 00-.868-1.792.833.833 0 01-.005-.785c.225-.426.41-.87.552-1.33a.834.834 0 01.559-.552A20.172 20.172 0 0022 13.147v-2.296a20.22 20.22 0 00-1.88-.653.834.834 0 01-.559-.551 7.879 7.879 0 00-.551-1.33.834.834 0 01.004-.786c.425-.784.707-1.406.868-1.79L18.26 4.116c-.386.161-1.008.443-1.792.868a.833.833 0 01-.786.005 7.887 7.887 0 00-1.33-.552.833.833 0 01-.551-.559A20.142 20.142 0 0013.148 2h-2.296c-.156.385-.397 1.02-.651 1.87a.833.833 0 01-.555.569c-.459.143-.904.327-1.33.551a.833.833 0 01-.785-.005 20.169 20.169 0 00-1.791-.867L4.117 5.74c.161.386.443 1.008.868 1.792.132.245.134.54.004.786-.223.425-.408.87-.55 1.33a.833.833 0 01-.56.551c-.854.254-1.493.495-1.879.653v2.296c.384.156 1.016.396 1.862.648a.835.835 0 01.583.578c.14.446.32.878.536 1.292a.833.833 0 01-.007.823 20.041 20.041 0 00-.856 1.77l1.623 1.625a20.104 20.104 0 001.792-.868.834.834 0 01.396-.101z" stroke="#67B279" strokeWidth="1.5" strokeLinejoin="round" />
+                <path clipRule="evenodd" d="M12 9.273a2.727 2.727 0 100 5.454 2.727 2.727 0 000-5.454z" stroke="#67B279" strokeWidth="1.5" strokeLinejoin="round" />
             </svg>
 
             <svg id={ICON_ID.LOGO} width="108" height="24">
@@ -550,32 +534,13 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id={ICON_ID.CRUMBS} width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <filter x="-75%" y="-34.5%" width="256.6%" height="188.4%" filterUnits="objectBoundingBox" id="a">
-                        <feMorphology radius=".5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1" />
-                        <feOffset dy="2" in="shadowSpreadOuter1" result="shadowOffsetOuter1" />
-                        <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1" />
-                        <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1" />
-                        <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0" in="shadowBlurOuter1" />
-                    </filter>
-                    <path id="b" d="M0 14.04V0l10 10.08-4.452.153 3.38 6.487L6.8 18l-3.585-6.858z" />
-                </defs>
-                <g fill="none" fillRule="evenodd">
-                    <path fill="#131313" d="M-290-21H30v480h-320z" />
-                    <g fill="#000" transform="translate(-3 12)">
-                        <use filter="url(#a)" />
-                        <use stroke="#F6F4F4" />
-                    </g>
-                    <path
-                        d="M2 11a1 1 0 110 2 1 1 0 010-2zm0-5a1 1 0 110 2 1 1 0 010-2zm0-5a1 1 0 110 2 1 1 0 010-2z"
-                        stroke="#A4A4A4"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="1.5"
-                        transform="translate(10, 4)"
-                    />
-                </g>
+            <svg id={ICON_ID.CRUMBS} width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M12 8a1 1 0 110-2 1 1 0 010 2zm0 5a1 1 0 110-2 1 1 0 010 2zm-1 4a1 1 0 102 0 1 1 0 00-2 0z"
+                    fill="#67B279"
+                />
             </svg>
 
             <svg id={ICON_ID.DISABLED_LOGO} width="68" height="68" xmlns="http://www.w3.org/2000/svg">

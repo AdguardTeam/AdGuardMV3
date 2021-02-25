@@ -93,6 +93,7 @@ export const Header = observer(() => {
                     >
                         {reactTranslator.getMessage('popup_settings_pause_protection_temporarily', { count: PROTECTION_PAUSE_TIMEOUT_S })}
                     </button>
+                    {/* TODO implement feature AG-6836 */}
                     <button
                         type="button"
                         className={styles.item}
