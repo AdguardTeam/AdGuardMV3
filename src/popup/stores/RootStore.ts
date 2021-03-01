@@ -11,6 +11,8 @@ export class RootStore {
         this.settingsStore = new SettingsStore(this);
         this.wizardStore = new WizardStore(this);
 
+        /* Reset current time once protection pause is ended
+        and protection is applied after the page reload */
         reaction(
             () => this.settingsStore.protectionPauseExpires,
             () => this.settingsStore.resetCurrentTime(),

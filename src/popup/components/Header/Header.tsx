@@ -48,7 +48,6 @@ export const Header = observer(() => {
         setProtectionPausedTimer();
     };
 
-    // TODO: align icons
     // TODO remove fieldset child buttons disable after the bug is fixed https://github.com/facebook/react/issues/7711
     return (
         <div className={styles.popupHeader}>

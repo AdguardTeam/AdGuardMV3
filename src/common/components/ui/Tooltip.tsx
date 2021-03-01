@@ -3,7 +3,7 @@ import React, { useRef, useState } from 'react';
 import { usePopperTooltip } from 'react-popper-tooltip';
 
 import { Icon } from 'Common/components/ui/Icon';
-import useOutsideClick from 'Common/hooks/useOutsideClick';
+import { useOutsideClick } from 'Common/hooks/useOutsideClick';
 import { IconIdType } from 'Common/components/ui/Icons';
 import styles from './Tooltip.module.pcss';
 
