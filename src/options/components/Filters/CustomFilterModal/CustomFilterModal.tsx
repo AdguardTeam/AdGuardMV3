@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-shadow */
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Modal from 'react-modal';
+import { observer } from 'mobx-react';
 
 import { log } from 'Common/logger';
 import { rootStore } from '../../../stores';
@@ -40,17 +41,25 @@ const customStyles: ReactModal.Styles = {
     },
 };
 
-enum STEPS {
+export enum STEPS {
     ADD_CUSTOM_FILTER = 'ADD_CUSTOM_FILTER',
     ADD_CUSTOM_FILTER_CONFIRM = 'ADD_CUSTOM_FILTER_CONFIRM',
     ADD_CUSTOM_RETRY = 'ADD_CUSTOM_RETRY',
     REMOVE_CUSTOM = 'REMOVE_CUSTOM',
 }
 
-export const CustomFilterModal = ({ isOpen, closeHandler }: CustomFilterModalProps) => {
+export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilterModalProps) => {
     const { settingsStore } = useContext(rootStore);
 
     const [currentStep, setCurrentStep] = useState(STEPS.ADD_CUSTOM_FILTER);
+
+    useEffect(() => {
+        setCurrentStep(settingsStore.filterIdInCustomModal
+            ? STEPS.REMOVE_CUSTOM
+            : STEPS.ADD_CUSTOM_FILTER);
+    }, [settingsStore.filterIdInCustomModal]);
+
+    console.log(currentStep);
 
     const [filterInfo, setFilterInfo] = useState<FilterInfo|null>(null);
 
@@ -147,4 +156,4 @@ export const CustomFilterModal = ({ isOpen, closeHandler }: CustomFilterModalPro
             {renderContent()}
         </Modal>
     );
-};
+});

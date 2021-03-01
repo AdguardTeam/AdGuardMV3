@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { observer } from 'mobx-react';
 import Modal from 'react-modal';
@@ -15,22 +15,21 @@ const useQuery = () => {
     return new URLSearchParams(useLocation().search);
 };
 
-const CUSTOM_GROUP_ID = '0';
-const LANGUAGES_GROUP_ID = '1';
+const CUSTOM_GROUP_ID = 0;
+const LANGUAGES_GROUP_ID = 1;
 
-const TITLES_MAP: { [key: string]: string } = {
+const TITLES_MAP: { [key: number]: string } = {
     [CUSTOM_GROUP_ID]: 'Custom filters',
     [LANGUAGES_GROUP_ID]: 'Languages',
 };
 
-const getPageTitle = (groupId: string): string | null => {
+const getPageTitle = (groupId: number): string | null => {
     return TITLES_MAP[groupId] || null;
 };
 
 export const Filters = observer(() => {
     const { settingsStore } = useContext(rootStore);
-    // FIXME set default to false
-    const [isCustomFilterModalOpen, setIsCustomFilterModalOpen] = useState(true);
+
     const history = useHistory();
 
     const { filters } = settingsStore;
@@ -43,9 +42,11 @@ export const Filters = observer(() => {
         throw new Error('groupId should be provided in query string');
     }
 
-    const isCustomGroup = groupId === CUSTOM_GROUP_ID;
+    const parsedGroupId = parseInt(groupId, 10);
 
-    const pageTitle = getPageTitle(groupId);
+    const isCustomGroup = parsedGroupId === CUSTOM_GROUP_ID;
+
+    const pageTitle = getPageTitle(parsedGroupId);
 
     // FIXME add search
 
@@ -53,23 +54,22 @@ export const Filters = observer(() => {
 
     // FIXME add new custom filter modal
     // FIXME handle clicks to links for subscribe to new filters
-
     const handleBackClick = () => {
         history.push('/');
     };
 
     const handleAddCustomFilter = () => {
-        setIsCustomFilterModalOpen(true);
+        settingsStore.openCustomFilterModal();
     };
 
     const closeAddCustomFilterModal = () => {
-        setIsCustomFilterModalOpen(false);
+        settingsStore.closeCustomFilterModal();
     };
 
     return (
         <>
             <CustomFilterModal
-                isOpen={isCustomFilterModalOpen}
+                isOpen={settingsStore.isCustomFilterModalOpen}
                 closeHandler={closeAddCustomFilterModal}
             />
             <button

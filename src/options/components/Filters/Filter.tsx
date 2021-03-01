@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */
 import React, { useContext } from 'react';
 
 import { Icon } from 'Common/components/ui/Icon';
@@ -21,15 +22,22 @@ export const Filter = ({ id, title, enabled }: FilterProps) => {
         }
     };
 
+    const handleClickToFilter = (e: React.SyntheticEvent) => {
+        e.preventDefault();
+        settingsStore.openCustomFilterModal(id);
+    };
+
     return (
         <div key={id} className="option__item">
-            <Icon id="custom_filters_icon" className="icon--option" />
-            <label
-                htmlFor={String(id)}
-                className="option__label"
-            >
-                {title}
-            </label>
+            <div onClick={handleClickToFilter}>
+                <Icon id="custom_filters_icon" className="icon--option" />
+                <label
+                    htmlFor={String(id)}
+                    className="option__label"
+                >
+                    {title}
+                </label>
+            </div>
             <Checkbox id={String(id)} checked={enabled} onChange={onChange} />
         </div>
     );

@@ -1,10 +1,4 @@
-import {
-    action,
-    observable,
-    makeObservable,
-    computed,
-    flow,
-} from 'mobx';
+import { action, computed, flow, makeObservable, observable, } from 'mobx';
 
 import { DEFAULT_SETTINGS, SETTINGS_NAMES } from 'Common/settings-constants';
 import { log } from 'Common/logger';
@@ -24,6 +18,13 @@ export class SettingsStore {
 
     @observable
     filters: Filter[] = [];
+
+    // FIXME set by default to false
+    @observable
+    isCustomFilterModalOpen: boolean = true;
+
+    @observable
+    filterIdInCustomModal: number | null = null;
 
     @action
     updateFilterState = (filterId: number, filterProps: Partial<Filter>) => {
@@ -91,4 +92,18 @@ export class SettingsStore {
             log.error(e.message);
         }
     }
+
+    @action
+    openCustomFilterModal = (filterId?: number) => {
+        this.isCustomFilterModalOpen = true;
+        if (filterId) {
+            this.filterIdInCustomModal = filterId;
+        }
+    };
+
+    @action
+    closeCustomFilterModal = () => {
+        this.isCustomFilterModalOpen = false;
+        this.filterIdInCustomModal = null;
+    };
 }
