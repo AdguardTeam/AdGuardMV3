@@ -44,6 +44,11 @@ class Sender {
         const currentTab = await tabUtils.getActiveTab();
         return sendMessage(MESSAGE_TYPES.OPEN_ASSISTANT, { tab: currentTab });
     };
+
+    setProtectionPauseTimer = (protectionPauseExpires: number) => sendMessage(
+        MESSAGE_TYPES.SET_PROTECTION_PAUSE_TIMER,
+        { protectionPauseExpires },
+    );
 }
 
 export const sender = new Sender();

@@ -98,6 +98,19 @@ export const messageHandler = async (
 
             return null;
         }
+        case MESSAGE_TYPES.SET_PROTECTION_PAUSE_TIMER: {
+            const { protectionPauseExpires } = data;
+            // FIXME reset timer on protection resume
+            const alarmHandler = () => {
+                chrome.alarms.onAlarm.removeListener(alarmHandler);
+                settings.setSetting(SETTINGS_NAMES.PROTECTION_ENABLED, true);
+            };
+            chrome.alarms.onAlarm.addListener(alarmHandler);
+            chrome.alarms
+                .create(SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES, { when: protectionPauseExpires });
+
+            break;
+        }
         default: {
             throw new Error(`No message handler for type: ${type}`);
         }

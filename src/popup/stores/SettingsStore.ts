@@ -164,6 +164,5 @@ export class SettingsStore {
     resetProtectionPausedTimeout = async () => {
         clearTimeout(this.protectionPausedTimerId);
         this.setProtectionPausedTimerId(0);
-        await this.setSetting(SETTINGS_NAMES.PROTECTION_ENABLED, true);
     };
 }
