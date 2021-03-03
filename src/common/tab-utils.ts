@@ -7,25 +7,9 @@ import {
 import { log } from 'Common/logger';
 import { prefs } from 'Common/prefs';
 import { getUrlWithQueryString } from 'Common/helpers';
-import { SETTINGS_NAMES } from 'Common/settings-constants';
 import { scripting } from '../background/scripting';
-import { settings } from '../background/settings';
 
 class TabUtils {
-    constructor() {
-        chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
-            if (changeInfo.status === 'complete' || changeInfo.status === 'loading') {
-                const protectionPauseExpires = settings.getSetting(
-                    SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES,
-                );
-
-                if (protectionPauseExpires !== 0 && protectionPauseExpires <= Date.now()) {
-                    settings.setSetting(SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES, 0);
-                }
-            }
-        });
-    }
-
     getActiveTab = (): Promise<chrome.tabs.Tab> => {
         return new Promise((resolve, reject) => {
             chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {

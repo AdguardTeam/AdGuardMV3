@@ -21,6 +21,7 @@ export const DisabledProtectionScreen = observer(() => {
 
     const onEnableProtectionClick = async () => {
         await resetProtectionPausedTimeout();
+        await sender.removeProtectionPauseTimer();
         await settingsStore.setSetting(SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES, 0);
         await sender.reloadActiveTab();
     };

@@ -10,6 +10,7 @@ import { tabUtils } from 'Common/tab-utils';
 import { settings } from './settings';
 import { app } from './app';
 import { notifier } from './notifier';
+import { protectionPause } from './protectionPause';
 
 interface MessageHandler {
     (message: Message, sender: chrome.runtime.MessageSender): any;
@@ -100,15 +101,11 @@ export const messageHandler = async (
         }
         case MESSAGE_TYPES.SET_PROTECTION_PAUSE_TIMER: {
             const { protectionPauseExpires } = data;
-            // FIXME reset timer on protection resume
-            const alarmHandler = () => {
-                chrome.alarms.onAlarm.removeListener(alarmHandler);
-                settings.setSetting(SETTINGS_NAMES.PROTECTION_ENABLED, true);
-            };
-            chrome.alarms.onAlarm.addListener(alarmHandler);
-            chrome.alarms
-                .create(SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES, { when: protectionPauseExpires });
-
+            protectionPause.addTimer(protectionPauseExpires);
+            break;
+        }
+        case MESSAGE_TYPES.REMOVE_PROTECTION_PAUSE_TIMER: {
+            protectionPause.removeTimer();
             break;
         }
         default: {
