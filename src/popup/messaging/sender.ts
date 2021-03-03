@@ -45,11 +45,6 @@ class Sender {
         return sendMessage(MESSAGE_TYPES.OPEN_ASSISTANT, { tab: currentTab });
     };
 
-    setProtectionPauseTimer = (protectionPauseExpires: number) => sendMessage(
-        MESSAGE_TYPES.SET_PROTECTION_PAUSE_TIMER,
-        { protectionPauseExpires },
-    );
-
     removeProtectionPauseTimer = () => sendMessage(MESSAGE_TYPES.REMOVE_PROTECTION_PAUSE_TIMER);
 }
 
