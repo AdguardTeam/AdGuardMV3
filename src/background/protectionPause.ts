@@ -16,6 +16,8 @@ class ProtectionPause {
             settings.setSetting(SETTINGS_NAMES.PROTECTION_ENABLED, true);
         };
 
+        /* Page can be reloaded without closing the popup.
+        Clear SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES once it is expired on page reload. */
         this.reloadPageHandler = (tabId, changeInfo) => {
             if (changeInfo.status === 'complete' || changeInfo.status === 'loading') {
                 const protectionPauseExpires = settings.getSetting(
