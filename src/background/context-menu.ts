@@ -25,6 +25,7 @@ const CONTEXT_MENU_MAP = {
     [CONTEXT_MENU_ITEMS.DISABLE_FILTERING_ON_SITE]: {
         action: () => {
             // FIXME add working actions
+            // eslint-disable-next-line no-console
             console.log(CONTEXT_MENU_ITEMS.DISABLE_FILTERING_ON_SITE);
         },
         title: CONTEXT_MENU_ITEMS.DISABLE_FILTERING_ON_SITE,
@@ -32,6 +33,7 @@ const CONTEXT_MENU_MAP = {
     [CONTEXT_MENU_ITEMS.ENABLE_FILTERING_ON_SITE]: {
         action: () => {
             // FIXME add working actions
+            // eslint-disable-next-line no-console
             console.log(CONTEXT_MENU_ITEMS.ENABLE_FILTERING_ON_SITE);
         },
         title: CONTEXT_MENU_ITEMS.ENABLE_FILTERING_ON_SITE,

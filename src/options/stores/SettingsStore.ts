@@ -46,6 +46,6 @@ export class SettingsStore {
 
     @computed
     get filteringEnabled() {
-        return this.settings[SETTINGS_NAMES.FILTERING_ENABLED];
+        return this.settings[SETTINGS_NAMES.FILTERING_ENABLED] as boolean;
     }
 }

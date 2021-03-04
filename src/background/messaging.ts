@@ -10,6 +10,7 @@ import { tabUtils } from 'Common/tab-utils';
 import { settings } from './settings';
 import { app } from './app';
 import { notifier } from './notifier';
+import { protectionPause } from './protectionPause';
 
 interface MessageHandler {
     (message: Message, sender: chrome.runtime.MessageSender): any;
@@ -48,21 +49,23 @@ export const messageHandler = async (
 
     switch (type) {
         case MESSAGE_TYPES.GET_OPTIONS_DATA: {
-            return ({
-                settings: settings.getSettings(),
-            }) as OptionsData;
+            return { settings: settings.getSettings() } as OptionsData;
         }
         case MESSAGE_TYPES.OPEN_OPTIONS: {
             return tabUtils.openOptionsPage();
         }
         case MESSAGE_TYPES.GET_POPUP_DATA: {
-            return {
-                settings: settings.getSettings(),
-            } as PopupData;
+            return { settings: settings.getSettings() } as PopupData;
+        }
+        case MESSAGE_TYPES.RELOAD_ACTIVE_TAB: {
+            await tabUtils.reloadActiveTab();
+            break;
         }
         case MESSAGE_TYPES.SET_SETTING: {
             const { key, value } = data;
-            return settings.setSetting(key, value);
+            settings.setSetting(key, value);
+
+            break;
         }
         case MESSAGE_TYPES.REPORT_SITE: {
             const { url } = await tabUtils.getActiveTab();
@@ -87,11 +90,24 @@ export const messageHandler = async (
         }
         case MESSAGE_TYPES.GET_CSS: {
             const filteringEnabled = settings.getSetting(SETTINGS_NAMES.FILTERING_ENABLED);
-            if (!filteringEnabled) {
-                return null;
+            const protectionEnabled = settings.getSetting(SETTINGS_NAMES.PROTECTION_ENABLED);
+
+            if (filteringEnabled && protectionEnabled) {
+                // example rules
+                return ['* { background-color: pink }'];
             }
-            // example rules
-            return ['* { background-color: pink }'];
+
+            return null;
+        }
+        case MESSAGE_TYPES.SET_PAUSE_EXPIRES: {
+            const { protectionPauseExpires } = data;
+            settings.setSetting(SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES, protectionPauseExpires);
+            protectionPause.addTimer(protectionPauseExpires);
+            break;
+        }
+        case MESSAGE_TYPES.REMOVE_PROTECTION_PAUSE_TIMER: {
+            protectionPause.removeTimer();
+            break;
         }
         default: {
             throw new Error(`No message handler for type: ${type}`);

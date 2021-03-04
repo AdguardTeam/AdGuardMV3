@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
+import cn from 'classnames';
 
 import { Icon } from 'Common/components/ui/Icon';
 import { reactTranslator } from 'Common/translators/reactTranslator';
+import { theme } from 'Common/styles';
 import { rootStore } from '../../stores';
 
 import './wizard.pcss';
@@ -46,7 +48,7 @@ export const Wizard = observer(() => {
             </div>
             <button
                 type="button"
-                className="wizard__button"
+                className={cn(theme.common.buttonGreen, 'wizard__button')}
                 onClick={isLastStep ? skipWizard : setNextStep}
             >
                 {reactTranslator.getMessage(buttonTextKey)}
