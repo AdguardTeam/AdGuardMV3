@@ -65,20 +65,6 @@ export const messageHandler = async (
             const { key, value } = data;
             settings.setSetting(key, value);
 
-            switch (key) {
-                case SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES: {
-                    if (value > 0) {
-                        const protectionPauseExpires = settings.getSetting(
-                            SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES,
-                        ) as number;
-                        protectionPause.addTimer(protectionPauseExpires);
-                    }
-                    break;
-                }
-                default:
-                    break;
-            }
-
             break;
         }
         case MESSAGE_TYPES.REPORT_SITE: {
@@ -112,6 +98,12 @@ export const messageHandler = async (
             }
 
             return null;
+        }
+        case MESSAGE_TYPES.SET_PAUSE_EXPIRES: {
+            const { protectionPauseExpires } = data;
+            settings.setSetting(SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES, protectionPauseExpires);
+            protectionPause.addTimer(protectionPauseExpires);
+            break;
         }
         case MESSAGE_TYPES.REMOVE_PROTECTION_PAUSE_TIMER: {
             protectionPause.removeTimer();

@@ -41,10 +41,7 @@ export const Header = observer(() => {
         await setSetting(SETTINGS_NAMES.PROTECTION_ENABLED, false);
         await sender.reloadActiveTab();
         updateCurrentTime();
-        await setSetting(
-            SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES,
-            settingsStore.currentTime + PROTECTION_PAUSE_TIMEOUT_MS,
-        );
+        await sender.setPauseExpires(settingsStore.currentTime + PROTECTION_PAUSE_TIMEOUT_MS);
         setProtectionPausedTimer();
     };
 

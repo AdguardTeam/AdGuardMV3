@@ -46,6 +46,11 @@ class Sender {
     };
 
     removeProtectionPauseTimer = () => sendMessage(MESSAGE_TYPES.REMOVE_PROTECTION_PAUSE_TIMER);
+
+    setPauseExpires = (protectionPauseExpires: number) => sendMessage(
+        MESSAGE_TYPES.SET_PAUSE_EXPIRES,
+        { protectionPauseExpires },
+    );
 }
 
 export const sender = new Sender();
