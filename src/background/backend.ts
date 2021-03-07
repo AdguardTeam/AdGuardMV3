@@ -12,7 +12,7 @@ const FILTER_COMPILER_OPTIONS = {
 };
 
 class Backend {
-    loadingUrls: {[key: string]: boolean} = {};
+    loadingUrls: { [key: string]: boolean } = {};
 
     loadFilterByUrl = async (url: string): Promise<string[]> => {
         if (url in this.loadingUrls) {
