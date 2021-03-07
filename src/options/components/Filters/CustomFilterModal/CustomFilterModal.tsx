@@ -9,6 +9,7 @@ import { AddCustomFilter } from './AddCustomFilter';
 import { AddCustomFilterConfirm } from './AddCustomFilterConfirm';
 
 import s from './CustomFilterModal.module.pcss';
+import { RemoveCustomFilter } from './RemoveCustomFilter';
 
 Modal.setAppElement('#root');
 
@@ -45,21 +46,21 @@ export enum STEPS {
     ADD_CUSTOM_FILTER = 'ADD_CUSTOM_FILTER',
     ADD_CUSTOM_FILTER_CONFIRM = 'ADD_CUSTOM_FILTER_CONFIRM',
     ADD_CUSTOM_RETRY = 'ADD_CUSTOM_RETRY',
-    REMOVE_CUSTOM = 'REMOVE_CUSTOM',
+    REMOVE_CUSTOM_FILTER = 'REMOVE_CUSTOM_FILTER',
 }
 
 export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilterModalProps) => {
     const { settingsStore } = useContext(rootStore);
 
+    const { filterIdInCustomModal } = settingsStore;
+
     const [currentStep, setCurrentStep] = useState(STEPS.ADD_CUSTOM_FILTER);
 
     useEffect(() => {
-        setCurrentStep(settingsStore.filterIdInCustomModal
-            ? STEPS.REMOVE_CUSTOM
+        setCurrentStep(filterIdInCustomModal
+            ? STEPS.REMOVE_CUSTOM_FILTER
             : STEPS.ADD_CUSTOM_FILTER);
-    }, [settingsStore.filterIdInCustomModal]);
-
-    console.log(currentStep);
+    }, [filterIdInCustomModal]);
 
     const [filterInfo, setFilterInfo] = useState<FilterInfo|null>(null);
 
@@ -75,7 +76,7 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
         setFilterContent(null);
     };
 
-    const onSaveCustomModal = async () => {
+    const onSaveCustomFilter = async () => {
         if (filterContent && filterInfo) {
             try {
                 await settingsStore.addCustomFilterByContent(filterContent, filterInfo.title);
@@ -86,6 +87,16 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
             throw new Error('Save custom modal requires url or filter content');
         }
         // close modal on success
+        closeHandler();
+        resetModalToInit();
+    };
+
+    const onRemoveCustomFilter = async () => {
+        if (filterIdInCustomModal) {
+            await settingsStore.removeCustomFilterById(filterIdInCustomModal);
+        } else {
+            throw new Error('Provide filter id in order to remove filter');
+        }
         closeHandler();
         resetModalToInit();
     };
@@ -121,7 +132,7 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
                 <AddCustomFilterConfirm
                     description={filterInfo?.description || null}
                     onCancel={onCancelAddCustomModal}
-                    onSave={onSaveCustomModal}
+                    onSave={onSaveCustomFilter}
                 />
             ),
         },
@@ -129,9 +140,29 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
             title: 'Retry',
             component: () => (<div>TODO retry</div>),
         },
-        [STEPS.REMOVE_CUSTOM]: {
+        [STEPS.REMOVE_CUSTOM_FILTER]: {
             title: 'Are you sure?',
-            component: () => (<div>TODO remove</div>),
+            component: () => {
+                if (!filterIdInCustomModal) {
+                    return null;
+                    // throw new Error('Filter should be selected');
+                }
+
+                const filter = settingsStore.getFilterById(filterIdInCustomModal);
+
+                if (!filter) {
+                    return null;
+                    // throw new Error('Filter should be found');
+                }
+
+                return (
+                    <RemoveCustomFilter
+                        title={filter.title}
+                        description={filter.description}
+                        onRemove={onRemoveCustomFilter}
+                    />
+                );
+            },
         },
     };
 

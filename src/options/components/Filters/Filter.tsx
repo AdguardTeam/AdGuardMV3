@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 
 import { Icon } from 'Common/components/ui/Icon';
 import { Checkbox } from 'Common/components/Checkbox';
+import { ICON_ID } from 'Common/components/ui/Icons';
 import { rootStore } from '../../stores';
 
 type FilterProps = {
@@ -30,7 +31,7 @@ export const Filter = ({ id, title, enabled }: FilterProps) => {
     return (
         <div key={id} className="option__item">
             <div onClick={handleClickToFilter}>
-                <Icon id="custom_filters_icon" className="icon--option" />
+                <Icon id={ICON_ID.CUSTOM_FILTERS} className="icon--option" />
                 <label
                     htmlFor={String(id)}
                     className="option__label"

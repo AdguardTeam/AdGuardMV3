@@ -115,6 +115,14 @@ class TabUtils {
             });
         });
     };
+
+    reloadActiveTab = async () => {
+        const tab = await this.getActiveTab();
+
+        if (tab?.id) {
+            await this.reloadTab(tab.id);
+        }
+    };
 }
 
 export const tabUtils = new TabUtils();

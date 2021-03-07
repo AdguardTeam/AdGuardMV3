@@ -1,4 +1,6 @@
-import { action, computed, flow, makeObservable, observable, } from 'mobx';
+import {
+    action, computed, flow, makeObservable, observable,
+} from 'mobx';
 
 import { DEFAULT_SETTINGS, SETTINGS_NAMES } from 'Common/settings-constants';
 import { log } from 'Common/logger';
@@ -82,12 +84,20 @@ export class SettingsStore {
 
     @computed
     get filteringEnabled() {
-        return this.settings[SETTINGS_NAMES.FILTERING_ENABLED];
+        return this.settings[SETTINGS_NAMES.FILTERING_ENABLED] as boolean;
     }
 
     @flow* addCustomFilterByContent(filterContent: string, title: string) {
         try {
             this.filters = yield sender.addCustomFilterByContent(filterContent, title);
+        } catch (e) {
+            log.error(e.message);
+        }
+    }
+
+    @flow* removeCustomFilterById(filterId: number) {
+        try {
+            this.filters = yield sender.removeCustomFilterById(filterId);
         } catch (e) {
             log.error(e.message);
         }
@@ -105,5 +115,9 @@ export class SettingsStore {
     closeCustomFilterModal = () => {
         this.isCustomFilterModalOpen = false;
         this.filterIdInCustomModal = null;
+    };
+
+    getFilterById = (filterId: number): Filter | null => {
+        return this.filters.find((filter) => filter.id === filterId) || null;
     };
 }

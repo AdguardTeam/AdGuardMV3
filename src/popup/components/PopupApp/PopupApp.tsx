@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useLayoutEffect } from 'react';
 import { observer } from 'mobx-react';
 import cn from 'classnames';
 
@@ -13,8 +13,9 @@ import { PageInfo } from '../PageInfo';
 import { Action } from '../Action';
 import { Footer } from '../Footer';
 import { Wizard } from '../Wizard';
+import { DisabledProtectionScreen } from './DisabledProtectionScreen';
 
-import './popup-app.pcss';
+import styles from './PopupApp.module.pcss';
 
 export const PopupApp = observer(() => {
     const store = useContext(rootStore);
@@ -24,9 +25,10 @@ export const PopupApp = observer(() => {
         getPopupData,
         popupDataReady,
         wizardEnabled,
+        protectionEnabled,
     } = settingsStore;
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         (async () => {
             try {
                 await getPopupData();
@@ -48,39 +50,53 @@ export const PopupApp = observer(() => {
                     settingsStore.updateSettingState(key, value);
                     break;
                 }
-                default:
+
+                default: {
                     throw new Error(`Non supported event type: ${type}`);
+                }
             }
         };
 
         return createLongLivedConnection('popup', events, messageHandler);
     }, []);
 
-    const classname = cn('main', {
-        'main--disabled': !filteringEnabled,
-    });
-
     if (!popupDataReady) {
-        return <div className="popup" />;
+        return <div className={styles.popup} />;
     }
 
+    if (wizardEnabled) {
+        return (
+            <div className={styles.popup}>
+                <Icons />
+                <Wizard />
+            </div>
+        );
+    }
+
+    const className = cn(styles.main, {
+        [styles.mainDisabled]: !filteringEnabled,
+        [styles.mainPaused]: !protectionEnabled,
+    });
+
     return (
-        <div className="popup">
+        <div className={styles.popup}>
             <Icons />
-            {wizardEnabled
-                ? <Wizard />
-                : (
-                    <>
-                        <Header />
-                        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                        <main className={classname}>
+            {!protectionEnabled && <div className={styles.overlay} />}
+            <Header />
+            <main className={className}>
+                {protectionEnabled
+                    ? (
+                        <>
                             <Switcher />
                             <PageInfo />
                             <Action />
-                        </main>
-                        <Footer />
-                    </>
-                )}
+                        </>
+                    )
+                    : (
+                        <DisabledProtectionScreen />
+                    )}
+            </main>
+            <Footer />
         </div>
     );
 });

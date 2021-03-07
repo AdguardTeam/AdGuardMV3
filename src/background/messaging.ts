@@ -10,6 +10,7 @@ import { tabUtils } from 'Common/tab-utils';
 import { settings } from './settings';
 import { app } from './app';
 import { notifier } from './notifier';
+import { protectionPause } from './protectionPause';
 import { filters } from './filters';
 import { backend } from './backend';
 
@@ -66,9 +67,15 @@ export const messageHandler = async (
             };
             return popupData;
         }
+        case MESSAGE_TYPES.RELOAD_ACTIVE_TAB: {
+            await tabUtils.reloadActiveTab();
+            break;
+        }
         case MESSAGE_TYPES.SET_SETTING: {
             const { key, value } = data;
-            return settings.setSetting(key, value);
+            settings.setSetting(key, value);
+
+            break;
         }
         case MESSAGE_TYPES.REPORT_SITE: {
             const { url } = await tabUtils.getActiveTab();
@@ -93,11 +100,24 @@ export const messageHandler = async (
         }
         case MESSAGE_TYPES.GET_CSS: {
             const filteringEnabled = settings.getSetting(SETTINGS_NAMES.FILTERING_ENABLED);
-            if (!filteringEnabled) {
-                return null;
+            const protectionEnabled = settings.getSetting(SETTINGS_NAMES.PROTECTION_ENABLED);
+
+            if (filteringEnabled && protectionEnabled) {
+                // example rules
+                return ['* { background-color: pink }'];
             }
-            // example rules
-            return ['* { background-color: pink }'];
+
+            return null;
+        }
+        case MESSAGE_TYPES.SET_PAUSE_EXPIRES: {
+            const { protectionPauseExpires } = data;
+            settings.setSetting(SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES, protectionPauseExpires);
+            protectionPause.addTimer(protectionPauseExpires);
+            break;
+        }
+        case MESSAGE_TYPES.REMOVE_PROTECTION_PAUSE_TIMER: {
+            protectionPause.removeTimer();
+            break;
         }
         case MESSAGE_TYPES.ENABLE_FILTER: {
             return filters.enableFilter(data.filterId);
@@ -119,6 +139,10 @@ export const messageHandler = async (
             const { url } = data;
             const lines = await backend.loadFilterByUrl(url);
             return lines.join('\n');
+        }
+        case MESSAGE_TYPES.REMOVE_CUSTOM_FILTER_BY_ID: {
+            const { filterId } = data;
+            return filters.removeFilter(filterId);
         }
         default: {
             throw new Error(`No message handler for type: ${type}`);

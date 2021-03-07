@@ -26,8 +26,9 @@ class Filters {
         this.filters.push(filter);
     };
 
-    removeFilter = (filterId: number): void => {
+    removeFilter = (filterId: number): Filter[] => {
         this.filters = this.filters.filter((f) => f.id !== filterId);
+        return this.filters;
     };
 
     getFilters = (): Filter[] => {

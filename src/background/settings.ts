@@ -2,7 +2,9 @@ import { throttle } from 'lodash';
 
 import { log } from 'Common/logger';
 import { NOTIFIER_EVENTS } from 'Common/constants';
-import { DEFAULT_SETTINGS, SETTINGS_NAMES, SettingsType } from 'Common/settings-constants';
+import {
+    DEFAULT_SETTINGS, SETTINGS_NAMES, SettingsType, SettingsValueType,
+} from 'Common/settings-constants';
 import { storage } from './storage';
 import { notifier } from './notifier';
 
@@ -35,11 +37,9 @@ class Settings {
         return this.settings[key];
     };
 
-    public getSettings = () => {
-        return this.settings;
-    };
+    public getSettings = () => this.settings;
 
-    public setSetting = (key: SETTINGS_NAMES, value: boolean) => {
+    public setSetting = (key: SETTINGS_NAMES, value: SettingsValueType) => {
         this.settings[key] = value;
         notifier.notify(NOTIFIER_EVENTS.SETTING_UPDATED, { key, value });
         this.updateStorage();

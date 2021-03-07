@@ -39,6 +39,10 @@ class Sender {
     addCustomFilterByContent = (filterContent: string, title: string): Promise<Filter[]> => {
         return sendMessage(MESSAGE_TYPES.ADD_CUSTOM_FILTER_BY_CONTENT, { filterContent, title });
     };
+
+    removeCustomFilterById = (filterId: number): Promise<Filter[]> => {
+        return sendMessage(MESSAGE_TYPES.REMOVE_CUSTOM_FILTER_BY_ID, { filterId });
+    };
 }
 
 export const sender = new Sender();

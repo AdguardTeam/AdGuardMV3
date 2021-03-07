@@ -1,25 +1,64 @@
 import React from 'react';
+import iconStyles from './Icons.module.pcss';
 
-import './Icons.pcss';
+export enum ICON_ID {
+    START = 'START',
+    PAUSE = 'PAUSE',
+    SETTINGS = 'SETTINGS',
+    LOGO = 'LOGO',
+    CHECKMARK = 'CHECKMARK',
+    CIRCLE = 'CIRCLE',
+    EXPERIMENT = 'EXPERIMENT',
+    NEW_TECH = 'NEW_TECH',
+    FAST_WORK = 'FAST_WORK',
+    CHROME_LOGO = 'CHROME_LOGO',
+    AD_BLOCKING = 'AD_BLOCKING',
+    ANNOYANCES = 'ANNOYANCES',
+    TRACKERS_BLOCKING = 'TRACKERS_BLOCKING',
+    LANGUAGES = 'LANGUAGES',
+    CUSTOM_FILTERS = 'CUSTOM_FILTERS',
+    USER_RULES = 'USER_RULES',
+    ARROW = 'ARROW',
+    CRUMBS = 'CRUMBS',
+    DISABLED_LOGO = 'DISABLED_LOGO',
+    SOCIAL_WIDGETS = 'SOCIAL_WIDGETS',
+}
+
+export type IconIdType = keyof typeof ICON_ID;
+
+export const ICON_ID_CLASS_MAP: Record<ICON_ID, string> = {
+    [ICON_ID.START]: iconStyles.iconButton,
+    [ICON_ID.PAUSE]: iconStyles.icon,
+    [ICON_ID.SETTINGS]: iconStyles.iconButton,
+    [ICON_ID.LOGO]: iconStyles.iconLogo,
+    [ICON_ID.CHECKMARK]: iconStyles.iconLogo,
+    [ICON_ID.CIRCLE]: iconStyles.icon,
+    [ICON_ID.EXPERIMENT]: iconStyles.icon,
+    [ICON_ID.NEW_TECH]: iconStyles.icon,
+    [ICON_ID.FAST_WORK]: iconStyles.icon,
+    [ICON_ID.CHROME_LOGO]: iconStyles.icon,
+    [ICON_ID.AD_BLOCKING]: iconStyles.iconOption,
+    [ICON_ID.ANNOYANCES]: iconStyles.iconOption,
+    [ICON_ID.SOCIAL_WIDGETS]: iconStyles.iconOption,
+    [ICON_ID.TRACKERS_BLOCKING]: iconStyles.iconOption,
+    [ICON_ID.LANGUAGES]: iconStyles.iconOption,
+    [ICON_ID.CUSTOM_FILTERS]: iconStyles.iconOption,
+    [ICON_ID.USER_RULES]: iconStyles.iconOption,
+    [ICON_ID.ARROW]: iconStyles.iconOption,
+    [ICON_ID.CRUMBS]: iconStyles.iconButton,
+    [ICON_ID.DISABLED_LOGO]: iconStyles.disabledLogo,
+};
 
 export const Icons = () => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" className="hidden">
-            <svg id="start" width="24" height="26">
-                <g
-                    stroke="#C23814"
-                    strokeWidth="1.5"
-                    fill="none"
-                    fillRule="evenodd"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                >
-                    <path d="M12 10.273a2.727 2.727 0 100 5.454 2.727 2.727 0 000-5.454z" />
-                    <path d="M12 4a9 9 0 109 9 9.01 9.01 0 00-9-9zM1 13h4M19 13h4M12 2v4M12 20v4" />
-                </g>
+            <svg id={ICON_ID.START} width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path clipRule="evenodd" d="M12 9.273a2.727 2.727 0 100 5.454 2.727 2.727 0 000-5.454z" stroke="#BF4829" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path clipRule="evenodd" d="M12 3a9 9 0 109 9 9.01 9.01 0 00-9-9z" stroke="#BF4829" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M1 12h4M19 12h4M12 1v4M12 19v4" stroke="#BF4829" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
 
-            <svg id="pause" width="24" height="26">
+            <svg id={ICON_ID.PAUSE} width="24" height="26">
                 <g
                     stroke="#A4A4A4"
                     strokeWidth="1.5"
@@ -33,20 +72,12 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="settings" width="22" height="22">
-                <g fill="none" fillRule="evenodd">
-                    <path fill="#131313" d="M-281-17H39v480h-320z" />
-                    <path
-                        d="M6.93 17.915c.135 0 .268.032.388.095.425.225.87.41 1.33.552a.833.833 0 01.551.559c.254.854.495 1.493.653 1.879h2.296c.158-.386.4-1.026.653-1.88a.833.833 0 01.552-.559c.459-.143.904-.327 1.33-.551a.833.833 0 01.785.004c.784.425 1.407.707 1.791.868l1.624-1.623a20.204 20.204 0 00-.868-1.792.833.833 0 01-.004-.785c.224-.426.408-.87.551-1.33a.833.833 0 01.559-.552A20.184 20.184 0 0021 12.147V9.851c-.386-.158-1.026-.4-1.88-.653a.833.833 0 01-.559-.551 7.887 7.887 0 00-.551-1.33.833.833 0 01.004-.786c.425-.784.707-1.406.868-1.79L17.26 3.116a20.13 20.13 0 00-1.792.868.833.833 0 01-.786.005 7.886 7.886 0 00-1.33-.552.833.833 0 01-.551-.559A20.135 20.135 0 0012.148 1H9.852c-.156.385-.397 1.02-.651 1.87a.833.833 0 01-.555.569c-.459.143-.904.327-1.33.551a.833.833 0 01-.785-.005 20.17 20.17 0 00-1.791-.867L3.117 4.74c.161.386.443 1.008.868 1.792.132.245.134.54.004.786-.223.425-.408.87-.55 1.33a.833.833 0 01-.56.551c-.854.254-1.493.495-1.879.653v2.296c.384.156 1.016.396 1.862.648a.835.835 0 01.583.578c.14.446.32.878.536 1.292a.833.833 0 01-.007.823 20.04 20.04 0 00-.856 1.77l1.623 1.625a20.13 20.13 0 001.792-.868.833.833 0 01.396-.101zM11 8.273a2.727 2.727 0 100 5.454 2.727 2.727 0 000-5.454z"
-                        stroke="#A4A4A4"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="1.5"
-                    />
-                </g>
+            <svg id={ICON_ID.SETTINGS} width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path clipRule="evenodd" d="M7.93 18.915c.135 0 .268.033.388.096.425.224.87.408 1.33.551a.833.833 0 01.551.559c.254.854.495 1.493.653 1.879h2.296c.158-.387.4-1.026.653-1.88a.834.834 0 01.552-.559c.459-.143.904-.327 1.33-.551a.833.833 0 01.785.004 20.28 20.28 0 001.791.868l1.624-1.623a20.214 20.214 0 00-.868-1.792.833.833 0 01-.005-.785c.225-.426.41-.87.552-1.33a.834.834 0 01.559-.552A20.172 20.172 0 0022 13.147v-2.296a20.22 20.22 0 00-1.88-.653.834.834 0 01-.559-.551 7.879 7.879 0 00-.551-1.33.834.834 0 01.004-.786c.425-.784.707-1.406.868-1.79L18.26 4.116c-.386.161-1.008.443-1.792.868a.833.833 0 01-.786.005 7.887 7.887 0 00-1.33-.552.833.833 0 01-.551-.559A20.142 20.142 0 0013.148 2h-2.296c-.156.385-.397 1.02-.651 1.87a.833.833 0 01-.555.569c-.459.143-.904.327-1.33.551a.833.833 0 01-.785-.005 20.169 20.169 0 00-1.791-.867L4.117 5.74c.161.386.443 1.008.868 1.792.132.245.134.54.004.786-.223.425-.408.87-.55 1.33a.833.833 0 01-.56.551c-.854.254-1.493.495-1.879.653v2.296c.384.156 1.016.396 1.862.648a.835.835 0 01.583.578c.14.446.32.878.536 1.292a.833.833 0 01-.007.823 20.041 20.041 0 00-.856 1.77l1.623 1.625a20.104 20.104 0 001.792-.868.834.834 0 01.396-.101z" stroke="#67B279" strokeWidth="1.5" strokeLinejoin="round" />
+                <path clipRule="evenodd" d="M12 9.273a2.727 2.727 0 100 5.454 2.727 2.727 0 000-5.454z" stroke="#67B279" strokeWidth="1.5" strokeLinejoin="round" />
             </svg>
 
-            <svg id="logo" width="108" height="24">
+            <svg id={ICON_ID.LOGO} width="108" height="24">
                 <g fill="none" fillRule="evenodd">
                     <path
                         fill="#FFF"
@@ -67,7 +98,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <symbol id="checkmark" width="20" height="16">
+            <symbol id={ICON_ID.CHECKMARK} width="20" height="16">
                 <g transform="translate(-50 -18)" fill="none" fillRule="evenodd">
                     <path
                         d="M0 25c0-8.284 6.717-15 15-15h50c8.284 0 15 6.714 15 15 0 8.284-6.717 15-15 15H15C6.716 40 0 33.286 0 25z"
@@ -84,7 +115,7 @@ export const Icons = () => {
                 </g>
             </symbol>
 
-            <svg id="circle" width="20" height="20">
+            <svg id={ICON_ID.CIRCLE} width="20" height="20">
                 <g fill="none" fillRule="evenodd">
                     <path
                         d="M-13 10C-13 1.716-6.283-5 2-5h50c8.284 0 15 6.714 15 15 0 8.284-6.717 15-15 15H2c-8.284 0-15-6.714-15-15z"
@@ -98,7 +129,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="experiment" width="90" height="94" xmlns="http://www.w3.org/2000/svg">
+            <svg id={ICON_ID.EXPERIMENT} width="90" height="94" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <linearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="a">
                         <stop stopColor="#2B2B2B" offset="0%" />
@@ -202,7 +233,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="new_tech" width="100" height="104" xmlns="http://www.w3.org/2000/svg">
+            <svg id={ICON_ID.NEW_TECH} width="100" height="104" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <linearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="a">
                         <stop stopColor="#2B2B2B" offset="0%" />
@@ -278,7 +309,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="fast_work" width="104" height="104" xmlns="http://www.w3.org/2000/svg">
+            <svg id={ICON_ID.FAST_WORK} width="104" height="104" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <linearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="a">
                         <stop stopColor="#2B2B2B" offset="0%" />
@@ -372,7 +403,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="chrome_logo" width="94" height="94" xmlns="http://www.w3.org/2000/svg">
+            <svg id={ICON_ID.CHROME_LOGO} width="94" height="94" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="a">
                         <stop stopColor="#2B2B2B" offset="0%" />
@@ -413,7 +444,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="block_ads" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+            <svg id={ICON_ID.AD_BLOCKING} width="20" height="20" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fillRule="evenodd">
                     <path fill="#000" d="M-322-110h686v554h-686z" />
                     <path fill="#131313" d="M-38-110h402v554H-38z" />
@@ -427,7 +458,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="annoyances" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+            <svg id={ICON_ID.ANNOYANCES} width="20" height="20" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fillRule="evenodd">
                     <path fill="#000" d="M-322-159h686v554h-686z" />
                     <path fill="#131313" d="M-38-159h402v554H-38z" />
@@ -441,7 +472,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="block_trackers" width="18" height="20" xmlns="http://www.w3.org/2000/svg">
+            <svg id={ICON_ID.TRACKERS_BLOCKING} width="18" height="20" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fillRule="evenodd">
                     <path fill="#000" d="M-323-206h686v554h-686z" />
                     <path fill="#131313" d="M-39-206h402v554H-39z" />
@@ -455,7 +486,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="languages" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+            <svg id={ICON_ID.LANGUAGES} width="20" height="20" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fillRule="evenodd">
                     <path fill="#000" d="M-322-254h686v554h-686z" />
                     <path fill="#131313" d="M-38-254h402v554H-38z" />
@@ -469,7 +500,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="custom_filters_icon" width="18" height="14" xmlns="http://www.w3.org/2000/svg">
+            <svg id={ICON_ID.CUSTOM_FILTERS} width="18" height="14" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fillRule="evenodd">
                     <path fill="#000" d="M-323-305h686v554h-686z" />
                     <path fill="#131313" d="M-39-305h402v554H-39z" />
@@ -483,11 +514,11 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="social_widgets" xmlns="http://www.w3.org/2000/svg" width="19" height="20">
+            <svg id={ICON_ID.SOCIAL_WIDGETS} xmlns="http://www.w3.org/2000/svg" width="19" height="20">
                 <path fill="none" fillRule="evenodd" stroke="#67B279" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M14.4328737,0.11422243 C16.2819372,0.591822545 17.3775742,2.42997558 16.880067,4.21986703 C16.3825598,6.00972371 14.4802856,7.07354355 12.6312221,6.595956 C11.9630811,6.42335796 11.3932972,6.0731331 10.9614863,5.61170087 C10.9408817,5.58968281 10.5386984,5.09485529 10.5187264,5.07233804 L6.57868031,7.51622565 C6.58905993,7.54399268 6.55928412,7.47708814 6.75726383,7.96273665 C6.94902435,8.43312936 6.95504817,9.56386334 6.70218619,10.2307226 C6.69398536,10.2523503 6.47621582,10.7720929 6.46746788,10.7927063 L10.4483869,13.0225655 C10.4643058,13.0025817 10.8176854,12.5521054 10.834076,12.5324621 C11.2784171,11.999945 11.8951184,11.5941967 12.6312221,11.4040611 C14.4802856,10.9264468 16.3825598,11.9902667 16.880067,13.7801501 C17.3775742,15.5700335 16.2819372,17.4081678 14.4328737,17.8857821 C12.5838102,18.3633697 10.681536,17.2995766 10.1840288,15.5096931 C10.0031946,14.8590806 10.0328357,14.2021072 10.2326539,13.6064244 C10.2409584,13.5816676 10.4394974,13.0471057 10.4483869,13.0225655 L6.46746788,10.7927063 C6.45298449,10.8090356 6.07023772,11.2391201 6.05542093,11.2551879 C5.62164581,11.7255887 5.04569791,12.0827648 4.36879681,12.2576258 C2.51972225,12.7352134 0.61745637,11.6714203 0.11993201,9.88153684 C-0.377574677,8.09165342 0.718073391,6.25349235 2.56713138,5.77590481 C3.90126324,5.43129293 5.263093,5.8891409 6.10498541,6.843174 C6.13404202,6.87610098 6.55088489,7.48212918 6.57868031,7.51622565 L10.5187264,5.07233804 C10.5079136,5.04685921 10.3019493,4.58131216 10.2917804,4.55556517 C10.0400511,3.91820446 9.98664298,3.20045838 10.1840288,2.4903106 C10.681536,0.700432522 12.5838102,-0.363379289 14.4328737,0.11422243 Z" transform="translate(1 1)" />
             </svg>
 
-            <svg id="user_rules" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+            <svg id={ICON_ID.USER_RULES} width="18" height="18" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fillRule="evenodd">
                     <path fill="#000" d="M-323-351h686v554h-686z" />
                     <path fill="#131313" d="M-39-351h402v554H-39z" />
@@ -501,11 +532,40 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id="arrow" width="8" height="14" xmlns="http://www.w3.org/2000/svg">
+            <svg id={ICON_ID.ARROW} width="8" height="14" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fillRule="evenodd">
                     <path fill="#000" d="M-592-257H94v554h-686z" />
                     <path fill="#131313" d="M-308-257H94v554h-402z" />
                     <path d="M1 13l6-6-6-6" stroke="#888" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" />
+                </g>
+            </svg>
+
+            <svg id={ICON_ID.CRUMBS} width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M12 8a1 1 0 110-2 1 1 0 010 2zm0 5a1 1 0 110-2 1 1 0 010 2zm-1 4a1 1 0 102 0 1 1 0 00-2 0z"
+                    fill="#67B279"
+                />
+            </svg>
+
+            <svg id={ICON_ID.DISABLED_LOGO} width="68" height="68" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none" fillRule="evenodd">
+                    <path fill="#131313" d="M-125-112h320v480h-320z" />
+                    <g style={{ mixBlendMode: 'luminosity' }}>
+                        <path
+                            d="M34 0C23.371 0 10.552 2.438 0 7.805 0 19.395-.146 48.27 34 68 68.144 48.27 68 19.395 68 7.805 57.446 2.438 44.627 0 34 0z"
+                            fill="#68BC71"
+                        />
+                        <path
+                            d="M34 0v68C.878 48.862.021 21.12 0 8.894v-1.09C10.553 2.439 23.372 0 34 0z"
+                            fill="#67B279"
+                        />
+                        <path
+                            d="M33.7 43.714l19.729-26.14c-1.446-1.14-2.714-.335-3.412.287l-.026.002-16.45 16.823-6.197-7.332c-2.957-3.359-6.976-.797-7.915-.12L33.7 43.714"
+                            fill="#FFF"
+                        />
+                    </g>
                 </g>
             </svg>
         </svg>

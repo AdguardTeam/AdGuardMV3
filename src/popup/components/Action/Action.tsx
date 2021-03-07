@@ -4,8 +4,9 @@ import { observer } from 'mobx-react';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { rootStore } from '../../stores';
 import { sender } from '../../messaging/sender';
+import { theme } from '../../../common/styles';
 
-import './action.pcss';
+import styles from './action.module.pcss';
 
 export const Action = observer(() => {
     const { settingsStore } = useContext(rootStore);
@@ -19,18 +20,17 @@ export const Action = observer(() => {
 
     if (filteringEnabled) {
         return (
-            <section className="action-text__container">
-                <h1 className="action-text action-text__bold">{blockedAdsCount}</h1>
-                &nbsp;
-                <h6 className="action-text ">
-                    {reactTranslator.getMessage('popup_trackers_and_ad_blockers')}
+            <section className={styles.container}>
+                <h1 className={styles.counter}>{blockedAdsCount}</h1>
+                <h6 className={styles.text}>
+                    {reactTranslator.getMessage('popup_blocked_on_this_page')}
                 </h6>
             </section>
         );
     }
 
     return (
-        <button type="button" className="action-button" onClick={reportSiteClickHandler}>
+        <button type="button" className={theme.common.actionButton} onClick={reportSiteClickHandler}>
             {reactTranslator.getMessage('popup_report_site_option')}
         </button>
     );
