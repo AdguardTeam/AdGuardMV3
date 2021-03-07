@@ -21,9 +21,8 @@ export class SettingsStore {
     @observable
     filters: Filter[] = [];
 
-    // FIXME set by default to false
     @observable
-    isCustomFilterModalOpen: boolean = true;
+    isCustomFilterModalOpen: boolean = false;
 
     @observable
     filterIdInCustomModal: number | null = null;

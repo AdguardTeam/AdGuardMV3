@@ -8,6 +8,7 @@ import { Filter } from './Filter';
 import s from './Filters.module.pcss';
 import { rootStore } from '../../stores';
 import { CustomFilterModal } from './CustomFilterModal';
+import { FiltersSearch } from './FiltersSearch';
 
 Modal.setAppElement('#root');
 
@@ -28,7 +29,7 @@ const getPageTitle = (groupId: number): string | null => {
 };
 
 export const Filters = observer(() => {
-    const { settingsStore } = useContext(rootStore);
+    const { settingsStore, searchStore } = useContext(rootStore);
 
     const history = useHistory();
 
@@ -48,14 +49,14 @@ export const Filters = observer(() => {
 
     const pageTitle = getPageTitle(parsedGroupId);
 
-    // FIXME add search
+    const filtersByGroupId = filters
+        .filter((filter) => filter.groupId === parseInt(groupId, 10))
+        .filter((filter) => searchStore.matchesSearchQuery(filter.title));
 
-    const filtersByGroupId = filters.filter((filter) => filter.groupId === parseInt(groupId, 10));
-
-    // FIXME add new custom filter modal
     // FIXME handle clicks to links for subscribe to new filters
     const handleBackClick = () => {
         history.push('/');
+        searchStore.closeSearch();
     };
 
     const handleAddCustomFilter = () => {
@@ -64,6 +65,30 @@ export const Filters = observer(() => {
 
     const closeAddCustomFilterModal = () => {
         settingsStore.closeCustomFilterModal();
+    };
+
+    const handleSearchClick = () => {
+        searchStore.openSearch();
+    };
+
+    const renderHeader = () => {
+        if (searchStore.isSearchOpen) {
+            return <FiltersSearch />;
+        }
+
+        return (
+            <>
+                <h1>{pageTitle}</h1>
+                {/* FIXME change from text button to icon button */}
+                <button
+                    className={s.button}
+                    type="button"
+                    onClick={handleSearchClick}
+                >
+                    Search
+                </button>
+            </>
+        );
     };
 
     return (
@@ -79,10 +104,7 @@ export const Filters = observer(() => {
             >
                 back
             </button>
-            <h1>{pageTitle}</h1>
-            <button className={s.button} type="button">
-                Search
-            </button>
+            { renderHeader() }
             {isCustomGroup && (
                 <button
                     className={s.button}

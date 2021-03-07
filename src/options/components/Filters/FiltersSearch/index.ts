@@ -1,0 +1,1 @@
+export { FiltersSearch } from './FiltersSearch';
