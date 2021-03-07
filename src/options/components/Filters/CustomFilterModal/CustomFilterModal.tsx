@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-shadow */
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Modal from 'react-modal';
 import { observer } from 'mobx-react';
 
@@ -10,6 +10,7 @@ import { AddCustomFilterConfirm } from './AddCustomFilterConfirm';
 
 import s from './CustomFilterModal.module.pcss';
 import { RemoveCustomFilter } from './RemoveCustomFilter';
+import { STEPS } from '../../../stores/CustomFilterModalStore';
 
 Modal.setAppElement('#root');
 
@@ -42,25 +43,18 @@ const customStyles: ReactModal.Styles = {
     },
 };
 
-export enum STEPS {
-    ADD_CUSTOM_FILTER = 'ADD_CUSTOM_FILTER',
-    ADD_CUSTOM_FILTER_CONFIRM = 'ADD_CUSTOM_FILTER_CONFIRM',
-    ADD_CUSTOM_RETRY = 'ADD_CUSTOM_RETRY',
-    REMOVE_CUSTOM_FILTER = 'REMOVE_CUSTOM_FILTER',
-}
-
 export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilterModalProps) => {
-    const { settingsStore } = useContext(rootStore);
+    const {
+        settingsStore,
+        customFilterModalStore,
+    } = useContext(rootStore);
 
-    const { filterIdInCustomModal } = settingsStore;
-
-    const [currentStep, setCurrentStep] = useState(STEPS.ADD_CUSTOM_FILTER);
-
-    useEffect(() => {
-        setCurrentStep(filterIdInCustomModal
-            ? STEPS.REMOVE_CUSTOM_FILTER
-            : STEPS.ADD_CUSTOM_FILTER);
-    }, [filterIdInCustomModal]);
+    const {
+        filterIdInModal,
+        currentStep,
+        switchToAddCustomFilterRetryStep,
+        switchToAddCustomFilterConfirmStep,
+    } = customFilterModalStore;
 
     const [filterInfo, setFilterInfo] = useState<FilterInfo|null>(null);
 
@@ -68,12 +62,6 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
 
     const onCancelAddCustomModal = () => {
         closeHandler();
-    };
-
-    const resetModalToInit = () => {
-        setCurrentStep(STEPS.ADD_CUSTOM_FILTER);
-        setFilterInfo(null);
-        setFilterContent(null);
     };
 
     const onSaveCustomFilter = async () => {
@@ -86,34 +74,29 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
         } else {
             throw new Error('Save custom modal requires url or filter content');
         }
-        // close modal on success
-        closeHandler();
-        resetModalToInit();
     };
 
     const onRemoveCustomFilter = async () => {
-        if (filterIdInCustomModal) {
-            await settingsStore.removeCustomFilterById(filterIdInCustomModal);
+        if (filterIdInModal) {
+            await settingsStore.removeCustomFilterById(filterIdInModal);
         } else {
             throw new Error('Provide filter id in order to remove filter');
         }
-        closeHandler();
-        resetModalToInit();
     };
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const onAddCustomFilterError = (error: string) => {
         // FIXME display error
-        setCurrentStep(STEPS.ADD_CUSTOM_RETRY);
+        switchToAddCustomFilterRetryStep();
         // setError(error);
     };
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const onAddCustomFilterSuccess = (filterInfo: FilterInfo, filterContent: string) => {
         setFilterInfo(filterInfo);
-        // FIXME save file content for next actions
+        // save filter content for next actions
         setFilterContent(filterContent);
-        setCurrentStep(STEPS.ADD_CUSTOM_FILTER_CONFIRM);
+        switchToAddCustomFilterConfirmStep();
     };
 
     const stepsMap = {
@@ -136,23 +119,21 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
                 />
             ),
         },
-        [STEPS.ADD_CUSTOM_RETRY]: {
+        [STEPS.ADD_CUSTOM_FILTER_RETRY]: {
             title: 'Retry',
             component: () => (<div>TODO retry</div>),
         },
         [STEPS.REMOVE_CUSTOM_FILTER]: {
             title: 'Are you sure?',
             component: () => {
-                if (!filterIdInCustomModal) {
-                    return null;
-                    // throw new Error('Filter should be selected');
+                if (!filterIdInModal) {
+                    throw new Error('Filter should be selected');
                 }
 
-                const filter = settingsStore.getFilterById(filterIdInCustomModal);
+                const filter = settingsStore.getFilterById(filterIdInModal);
 
                 if (!filter) {
-                    return null;
-                    // throw new Error('Filter should be found');
+                    throw new Error('Filter should be found');
                 }
 
                 return (

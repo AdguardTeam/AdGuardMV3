@@ -21,12 +21,6 @@ export class SettingsStore {
     @observable
     filters: Filter[] = [];
 
-    @observable
-    isCustomFilterModalOpen: boolean = false;
-
-    @observable
-    filterIdInCustomModal: number | null = null;
-
     @action
     updateFilterState = (filterId: number, filterProps: Partial<Filter>) => {
         const filter = this.filters.find((f) => f.id === filterId);
@@ -89,6 +83,7 @@ export class SettingsStore {
     @flow* addCustomFilterByContent(filterContent: string, title: string) {
         try {
             this.filters = yield sender.addCustomFilterByContent(filterContent, title);
+            this.rootStore.customFilterModalStore.closeModal();
         } catch (e) {
             log.error(e.message);
         }
@@ -97,24 +92,11 @@ export class SettingsStore {
     @flow* removeCustomFilterById(filterId: number) {
         try {
             this.filters = yield sender.removeCustomFilterById(filterId);
+            this.rootStore.customFilterModalStore.closeModal();
         } catch (e) {
             log.error(e.message);
         }
     }
-
-    @action
-    openCustomFilterModal = (filterId?: number) => {
-        this.isCustomFilterModalOpen = true;
-        if (filterId) {
-            this.filterIdInCustomModal = filterId;
-        }
-    };
-
-    @action
-    closeCustomFilterModal = () => {
-        this.isCustomFilterModalOpen = false;
-        this.filterIdInCustomModal = null;
-    };
 
     getFilterById = (filterId: number): Filter | null => {
         return this.filters.find((filter) => filter.id === filterId) || null;

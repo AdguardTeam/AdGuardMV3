@@ -13,7 +13,7 @@ type FilterProps = {
 };
 
 export const Filter = ({ id, title, enabled }: FilterProps) => {
-    const { settingsStore } = useContext(rootStore);
+    const { settingsStore, customFilterModalStore } = useContext(rootStore);
 
     const onChange = () => {
         if (enabled) {
@@ -25,7 +25,7 @@ export const Filter = ({ id, title, enabled }: FilterProps) => {
 
     const handleClickToFilter = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        settingsStore.openCustomFilterModal(id);
+        customFilterModalStore.openRemoveCustomFilterModal(id);
     };
 
     return (

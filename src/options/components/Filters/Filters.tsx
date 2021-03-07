@@ -29,7 +29,11 @@ const getPageTitle = (groupId: number): string | null => {
 };
 
 export const Filters = observer(() => {
-    const { settingsStore, searchStore } = useContext(rootStore);
+    const {
+        settingsStore,
+        searchStore,
+        customFilterModalStore,
+    } = useContext(rootStore);
 
     const history = useHistory();
 
@@ -60,11 +64,11 @@ export const Filters = observer(() => {
     };
 
     const handleAddCustomFilter = () => {
-        settingsStore.openCustomFilterModal();
+        customFilterModalStore.openModal();
     };
 
-    const closeAddCustomFilterModal = () => {
-        settingsStore.closeCustomFilterModal();
+    const closeCustomFilterModal = () => {
+        customFilterModalStore.closeModal();
     };
 
     const handleSearchClick = () => {
@@ -94,8 +98,8 @@ export const Filters = observer(() => {
     return (
         <>
             <CustomFilterModal
-                isOpen={settingsStore.isCustomFilterModalOpen}
-                closeHandler={closeAddCustomFilterModal}
+                isOpen={customFilterModalStore.isModalOpen}
+                closeHandler={closeCustomFilterModal}
             />
             <button
                 onClick={handleBackClick}

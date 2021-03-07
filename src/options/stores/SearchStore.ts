@@ -1,4 +1,9 @@
-import { action, computed, makeObservable, observable } from 'mobx';
+import {
+    action,
+    computed,
+    makeObservable,
+    observable,
+} from 'mobx';
 
 import type { RootStore } from './RootStore';
 
