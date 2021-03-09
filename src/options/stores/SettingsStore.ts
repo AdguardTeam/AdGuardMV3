@@ -1,5 +1,9 @@
 import {
-    action, computed, flow, makeObservable, observable,
+    action,
+    computed,
+    flow,
+    makeObservable,
+    observable,
 } from 'mobx';
 
 import { DEFAULT_SETTINGS, SETTINGS_NAMES } from 'Common/settings-constants';

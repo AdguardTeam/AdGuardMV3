@@ -10,9 +10,9 @@ import { Sidebar } from '../Sidebar';
 import { About } from '../About';
 import { rootStore } from '../../stores';
 import { Settings } from '../Settings';
+import { Filters } from '../Filters';
 
 import './options-app.pcss';
-import { Filters } from '../Filters';
 
 export const OptionsApp = observer(() => {
     const store = useContext(rootStore);
