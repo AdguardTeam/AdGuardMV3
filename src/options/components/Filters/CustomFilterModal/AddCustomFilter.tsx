@@ -38,6 +38,7 @@ export const AddCustomFilter = ({ onError, onSuccess }: AddCustomProps) => {
         }
     };
 
+    // Adds filter by file content
     const handleFileInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         if (!e.target.files) {
             log.error('No files provided');
@@ -65,6 +66,7 @@ export const AddCustomFilter = ({ onError, onSuccess }: AddCustomProps) => {
         }
     };
 
+    // Adds filter by url
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const data = new FormData(e.currentTarget);
