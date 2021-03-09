@@ -4,13 +4,14 @@ import Modal from 'react-modal';
 import { observer } from 'mobx-react';
 
 import { log } from 'Common/logger';
+import { reactTranslator } from 'Common/translators/reactTranslator';
 import { rootStore } from '../../../stores';
+import { STEPS } from '../../../stores/CustomFilterModalStore';
 import { AddCustomFilter } from './AddCustomFilter';
 import { AddCustomFilterConfirm } from './AddCustomFilterConfirm';
+import { RemoveCustomFilter } from './RemoveCustomFilter';
 
 import s from './CustomFilterModal.module.pcss';
-import { RemoveCustomFilter } from './RemoveCustomFilter';
-import { STEPS } from '../../../stores/CustomFilterModalStore';
 
 Modal.setAppElement('#root');
 
@@ -84,24 +85,23 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
         }
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // TODO display error screen with retry button
     const onAddCustomFilterError = (error: string) => {
-        // FIXME display error
+        // eslint-disable-next-line no-console
+        console.log(error);
         switchToAddCustomFilterRetryStep();
-        // setError(error);
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const onAddCustomFilterSuccess = (filterInfo: FilterInfo, filterContent: string) => {
         setFilterInfo(filterInfo);
-        // save filter content for next actions
+        // save filter content for next steps
         setFilterContent(filterContent);
         switchToAddCustomFilterConfirmStep();
     };
 
     const stepsMap = {
         [STEPS.ADD_CUSTOM_FILTER]: {
-            title: 'Add a custom filter',
+            title: reactTranslator.getMessage('options_custom_filter_modal_add_title'),
             component: () => (
                 <AddCustomFilter
                     onError={onAddCustomFilterError}
@@ -124,7 +124,7 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
             component: () => (<div>TODO retry</div>),
         },
         [STEPS.REMOVE_CUSTOM_FILTER]: {
-            title: 'Are you sure?',
+            title: reactTranslator.getMessage('options_custom_filter_remove_title'),
             component: () => {
                 if (!filterIdInModal) {
                     throw new Error('Filter should be selected');
@@ -157,7 +157,7 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
         );
     };
 
-    // FIXME translate buttons
+    // FIXME replace text button with icon button
     return (
         <Modal
             isOpen={isOpen}

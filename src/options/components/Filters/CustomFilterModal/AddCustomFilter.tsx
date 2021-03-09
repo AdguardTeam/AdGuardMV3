@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
-import { log } from 'Common/logger';
 
+import { reactTranslator } from 'Common/translators/reactTranslator';
+import { log } from 'Common/logger';
 import { sender } from '../../../messaging/sender';
 
 const readFile = (file: File): Promise<string> => {
@@ -37,7 +38,6 @@ export const AddCustomFilter = ({ onError, onSuccess }: AddCustomProps) => {
         }
     };
 
-    // TODO implement notifications module to tell users about errors
     const handleFileInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         if (!e.target.files) {
             log.error('No files provided');
@@ -51,7 +51,6 @@ export const AddCustomFilter = ({ onError, onSuccess }: AddCustomProps) => {
 
         try {
             const fileContent = await readFile(file);
-            // FIXME use filename if filter doesnt have title
             const filterInfo = await sender.getFilterInfoByContent(fileContent, file.name);
             if (!filterInfo) {
                 const errorMessage = 'Filter format is broken';
@@ -68,8 +67,7 @@ export const AddCustomFilter = ({ onError, onSuccess }: AddCustomProps) => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const form = e.currentTarget;
-        const data = new FormData(form);
+        const data = new FormData(e.currentTarget);
         const url = data.get('url') as string;
         try {
             const filterContent = await sender.getFilterContentByUrl(url);
@@ -87,13 +85,12 @@ export const AddCustomFilter = ({ onError, onSuccess }: AddCustomProps) => {
         }
     };
 
-    // FIXME disable add button until textarea is empty
     return (
         <>
             <form action="#" onSubmit={handleSubmit}>
                 <input
                     type="textarea"
-                    value={textareaValue}
+                    defaultValue={textareaValue}
                     onChange={handleTextareaChange}
                     name="url"
                 />
@@ -108,12 +105,13 @@ export const AddCustomFilter = ({ onError, onSuccess }: AddCustomProps) => {
                     type="button"
                     onClick={handleBrowseClick}
                 >
-                    Browse
+                    {reactTranslator.getMessage('options_custom_filter_modal_add_browse_button')}
                 </button>
                 <button
                     type="submit"
+                    disabled={textareaValue.length === 0}
                 >
-                    Add
+                    {reactTranslator.getMessage('options_custom_filter_modal_add_add_button')}
                 </button>
             </form>
         </>

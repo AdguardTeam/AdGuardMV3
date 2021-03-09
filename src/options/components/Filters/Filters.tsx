@@ -57,7 +57,6 @@ export const Filters = observer(() => {
         .filter((filter) => filter.groupId === parseInt(groupId, 10))
         .filter((filter) => searchStore.matchesSearchQuery(filter.title));
 
-    // FIXME handle clicks to links for subscribe to new filters
     const handleBackClick = () => {
         history.push('/');
         searchStore.closeSearch();

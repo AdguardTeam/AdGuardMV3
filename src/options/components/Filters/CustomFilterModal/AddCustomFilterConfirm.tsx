@@ -1,12 +1,13 @@
 import React from 'react';
 
+import { reactTranslator } from 'Common/translators/reactTranslator';
+
 type ConfirmAddCustomProps = {
     description: string | null,
     onCancel: () => void;
     onSave: () => void;
 };
 
-// FIXME translate buttons
 export const AddCustomFilterConfirm = (
     {
         description,
@@ -17,8 +18,18 @@ export const AddCustomFilterConfirm = (
     return (
         <>
             <div>{description}</div>
-            <button type="button" onClick={onCancel}>Cancel</button>
-            <button type="button" onClick={onSave}>Save</button>
+            <button
+                type="button"
+                onClick={onCancel}
+            >
+                {reactTranslator.getMessage('options_custom_filter_modal_confirm_cancel_button')}
+            </button>
+            <button
+                type="button"
+                onClick={onSave}
+            >
+                {reactTranslator.getMessage('options_custom_filter_modal_confirm_save_button')}
+            </button>
         </>
     );
 };
