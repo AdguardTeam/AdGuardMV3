@@ -11,7 +11,6 @@ export const FiltersSearch = observer(() => {
     };
 
     const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.persist();
         searchStore.setSearchValue(e.currentTarget.value);
     };
 

@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 import Modal from 'react-modal';
 
 import { reactTranslator } from 'Common/translators/reactTranslator';
+import { CUSTOM_GROUP_ID } from 'Common/constants';
 import { Filter } from './Filter';
 import s from './Filters.module.pcss';
 import { rootStore } from '../../stores';
@@ -16,7 +17,6 @@ const useQuery = () => {
     return new URLSearchParams(useLocation().search);
 };
 
-const CUSTOM_GROUP_ID = 0;
 const LANGUAGES_GROUP_ID = 1;
 
 const TITLES_MAP: { [key: number]: string } = {
@@ -54,7 +54,7 @@ export const Filters = observer(() => {
     const pageTitle = getPageTitle(parsedGroupId);
 
     const filtersByGroupId = filters
-        .filter((filter) => filter.groupId === parseInt(groupId, 10))
+        .filter((filter) => filter.groupId === parsedGroupId)
         .filter((filter) => searchStore.matchesSearchQuery(filter.title));
 
     const handleBackClick = () => {

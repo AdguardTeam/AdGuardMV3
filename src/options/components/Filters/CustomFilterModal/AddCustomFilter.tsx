@@ -88,34 +88,33 @@ export const AddCustomFilter = ({ onError, onSuccess }: AddCustomProps) => {
     };
 
     return (
-        <>
-            <form action="#" onSubmit={handleSubmit}>
-                <input
-                    type="textarea"
-                    defaultValue={textareaValue}
-                    onChange={handleTextareaChange}
-                    name="url"
-                />
-                <input
-                    type="file"
-                    accept=".txt"
-                    style={{ display: 'none' }}
-                    ref={inputRef}
-                    onChange={handleFileInputChange}
-                />
-                <button
-                    type="button"
-                    onClick={handleBrowseClick}
-                >
-                    {reactTranslator.getMessage('options_custom_filter_modal_add_browse_button')}
-                </button>
-                <button
-                    type="submit"
-                    disabled={textareaValue.length === 0}
-                >
-                    {reactTranslator.getMessage('options_custom_filter_modal_add_add_button')}
-                </button>
-            </form>
-        </>
+        <form action="#" onSubmit={handleSubmit}>
+            <input
+                type="textarea"
+                defaultValue={textareaValue}
+                onChange={handleTextareaChange}
+                name="url"
+            />
+            <input
+                id="test"
+                type="file"
+                accept=".txt"
+                style={{ display: 'none' }}
+                ref={inputRef}
+                onChange={handleFileInputChange}
+            />
+            <button
+                type="button"
+                onClick={handleBrowseClick}
+            >
+                {reactTranslator.getMessage('options_custom_filter_modal_add_browse_button')}
+            </button>
+            <button
+                type="submit"
+                disabled={textareaValue.trim().length === 0}
+            >
+                {reactTranslator.getMessage('options_custom_filter_modal_add_add_button')}
+            </button>
+        </form>
     );
 };

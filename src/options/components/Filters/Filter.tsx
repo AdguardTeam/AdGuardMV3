@@ -31,7 +31,7 @@ export const Filter = ({ id, title, enabled }: FilterProps) => {
     return (
         <div key={id} className="option__item">
             <div onClick={handleClickToFilter}>
-                <Icon id={ICON_ID.CUSTOM_FILTERS} className="icon--option" />
+                <Icon id={ICON_ID.CUSTOM_FILTERS} />
                 <label
                     htmlFor={String(id)}
                     className="option__label"
