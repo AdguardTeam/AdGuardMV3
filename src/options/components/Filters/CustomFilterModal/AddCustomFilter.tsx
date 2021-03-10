@@ -1,8 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { log } from 'Common/logger';
 import { sender } from '../../../messaging/sender';
+
+import styles from './CustomFilterModal.module.pcss';
 
 const readFile = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
@@ -25,17 +27,10 @@ type AddCustomProps = {
 
 export const AddCustomFilter = ({ onError, onSuccess }: AddCustomProps) => {
     const [textareaValue, setTextareaValue] = useState('');
-    const inputRef = useRef<HTMLInputElement>(null);
 
     const handleTextareaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
         setTextareaValue(value);
-    };
-
-    const handleBrowseClick = () => {
-        if (inputRef.current) {
-            inputRef.current.click();
-        }
     };
 
     // Adds filter by file content
@@ -96,19 +91,15 @@ export const AddCustomFilter = ({ onError, onSuccess }: AddCustomProps) => {
                 name="url"
             />
             <input
-                id="test"
+                id="file-input"
                 type="file"
                 accept=".txt"
                 style={{ display: 'none' }}
-                ref={inputRef}
                 onChange={handleFileInputChange}
             />
-            <button
-                type="button"
-                onClick={handleBrowseClick}
-            >
+            <label htmlFor="file-input" className={styles.button}>
                 {reactTranslator.getMessage('options_custom_filter_modal_add_browse_button')}
-            </button>
+            </label>
             <button
                 type="submit"
                 disabled={textareaValue.trim().length === 0}
