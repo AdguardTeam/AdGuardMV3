@@ -97,9 +97,11 @@ export const AddCustomFilter = ({ onError, onSuccess }: AddCustomProps) => {
                 style={{ display: 'none' }}
                 onChange={handleFileInputChange}
             />
-            <label htmlFor="file-input" className={styles.button}>
-                {reactTranslator.getMessage('options_custom_filter_modal_add_browse_button')}
-            </label>
+            <button type="button">
+                <label htmlFor="file-input" className={styles.button}>
+                    {reactTranslator.getMessage('options_custom_filter_modal_add_browse_button')}
+                </label>
+            </button>
             <button
                 type="submit"
                 disabled={textareaValue.trim().length === 0}
