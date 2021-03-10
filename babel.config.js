@@ -6,9 +6,7 @@ module.exports = (api) => {
                 '@babel/preset-env',
                 {
                     targets: {
-                        chrome: '55',
-                        edge: '79',
-                        opera: '42',
+                        chrome: '88',
                     },
                     corejs: '3',
                     useBuiltIns: 'entry',
