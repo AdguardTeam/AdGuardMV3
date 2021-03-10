@@ -41,8 +41,7 @@ class Filters {
             throw new Error(`There is filter with id: ${filterId}`);
         }
         const filterIdx = this.filters.indexOf(filter);
-        const updatedFilter = { ...filter, ...filterProps };
-        this.filters.splice(filterIdx, 1, updatedFilter);
+        this.filters[filterIdx] = { ...filter, ...filterProps };
     };
 
     enableFilter = (filterId: number): void => {

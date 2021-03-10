@@ -32,8 +32,7 @@ export class SettingsStore {
             throw new Error('filterId should be in the list of filters');
         }
         const idx = this.filters.indexOf(filter);
-        const updatedFilter = { ...filter, ...filterProps };
-        this.filters.splice(idx, 1, updatedFilter);
+        this.filters[idx] = { ...filter, ...filterProps };
     };
 
     @action
