@@ -10,6 +10,7 @@ import { Sidebar } from '../Sidebar';
 import { About } from '../About';
 import { rootStore } from '../../stores';
 import { Settings } from '../Settings';
+import { Filters } from '../Filters';
 
 import './options-app.pcss';
 
@@ -57,6 +58,7 @@ export const OptionsApp = observer(() => {
                     <Switch>
                         <Route path="/" exact component={Settings} />
                         <Route path="/about" component={About} />
+                        <Route path="/filters" component={Filters} />
                         <Route />
                     </Switch>
                 </div>

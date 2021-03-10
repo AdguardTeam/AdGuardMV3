@@ -13,14 +13,15 @@ export enum ICON_ID {
     FAST_WORK = 'FAST_WORK',
     CHROME_LOGO = 'CHROME_LOGO',
     AD_BLOCKING = 'AD_BLOCKING',
-    MISCELLANEOUS = 'MISCELLANEOUS',
+    ANNOYANCES = 'ANNOYANCES',
     TRACKERS_BLOCKING = 'TRACKERS_BLOCKING',
     LANGUAGES = 'LANGUAGES',
-    FILTERS = 'FILTERS',
+    CUSTOM_FILTERS = 'CUSTOM_FILTERS',
     USER_RULES = 'USER_RULES',
     ARROW = 'ARROW',
     CRUMBS = 'CRUMBS',
     DISABLED_LOGO = 'DISABLED_LOGO',
+    SOCIAL_WIDGETS = 'SOCIAL_WIDGETS',
 }
 
 export type IconIdType = keyof typeof ICON_ID;
@@ -37,10 +38,11 @@ export const ICON_ID_CLASS_MAP: Record<ICON_ID, string> = {
     [ICON_ID.FAST_WORK]: iconStyles.icon,
     [ICON_ID.CHROME_LOGO]: iconStyles.icon,
     [ICON_ID.AD_BLOCKING]: iconStyles.iconOption,
-    [ICON_ID.MISCELLANEOUS]: iconStyles.iconOption,
+    [ICON_ID.ANNOYANCES]: iconStyles.iconOption,
+    [ICON_ID.SOCIAL_WIDGETS]: iconStyles.iconOption,
     [ICON_ID.TRACKERS_BLOCKING]: iconStyles.iconOption,
     [ICON_ID.LANGUAGES]: iconStyles.iconOption,
-    [ICON_ID.FILTERS]: iconStyles.iconOption,
+    [ICON_ID.CUSTOM_FILTERS]: iconStyles.iconOption,
     [ICON_ID.USER_RULES]: iconStyles.iconOption,
     [ICON_ID.ARROW]: iconStyles.iconOption,
     [ICON_ID.CRUMBS]: iconStyles.iconButton,
@@ -456,7 +458,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id={ICON_ID.MISCELLANEOUS} width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+            <svg id={ICON_ID.ANNOYANCES} width="20" height="20" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fillRule="evenodd">
                     <path fill="#000" d="M-322-159h686v554h-686z" />
                     <path fill="#131313" d="M-38-159h402v554H-38z" />
@@ -498,7 +500,7 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id={ICON_ID.FILTERS} width="18" height="14" xmlns="http://www.w3.org/2000/svg">
+            <svg id={ICON_ID.CUSTOM_FILTERS} width="18" height="14" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fillRule="evenodd">
                     <path fill="#000" d="M-323-305h686v554h-686z" />
                     <path fill="#131313" d="M-39-305h402v554H-39z" />
@@ -510,6 +512,10 @@ export const Icons = () => {
                         strokeWidth="1.5"
                     />
                 </g>
+            </svg>
+
+            <svg id={ICON_ID.SOCIAL_WIDGETS} xmlns="http://www.w3.org/2000/svg" width="19" height="20">
+                <path fill="none" fillRule="evenodd" stroke="#67B279" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M14.4328737,0.11422243 C16.2819372,0.591822545 17.3775742,2.42997558 16.880067,4.21986703 C16.3825598,6.00972371 14.4802856,7.07354355 12.6312221,6.595956 C11.9630811,6.42335796 11.3932972,6.0731331 10.9614863,5.61170087 C10.9408817,5.58968281 10.5386984,5.09485529 10.5187264,5.07233804 L6.57868031,7.51622565 C6.58905993,7.54399268 6.55928412,7.47708814 6.75726383,7.96273665 C6.94902435,8.43312936 6.95504817,9.56386334 6.70218619,10.2307226 C6.69398536,10.2523503 6.47621582,10.7720929 6.46746788,10.7927063 L10.4483869,13.0225655 C10.4643058,13.0025817 10.8176854,12.5521054 10.834076,12.5324621 C11.2784171,11.999945 11.8951184,11.5941967 12.6312221,11.4040611 C14.4802856,10.9264468 16.3825598,11.9902667 16.880067,13.7801501 C17.3775742,15.5700335 16.2819372,17.4081678 14.4328737,17.8857821 C12.5838102,18.3633697 10.681536,17.2995766 10.1840288,15.5096931 C10.0031946,14.8590806 10.0328357,14.2021072 10.2326539,13.6064244 C10.2409584,13.5816676 10.4394974,13.0471057 10.4483869,13.0225655 L6.46746788,10.7927063 C6.45298449,10.8090356 6.07023772,11.2391201 6.05542093,11.2551879 C5.62164581,11.7255887 5.04569791,12.0827648 4.36879681,12.2576258 C2.51972225,12.7352134 0.61745637,11.6714203 0.11993201,9.88153684 C-0.377574677,8.09165342 0.718073391,6.25349235 2.56713138,5.77590481 C3.90126324,5.43129293 5.263093,5.8891409 6.10498541,6.843174 C6.13404202,6.87610098 6.55088489,7.48212918 6.57868031,7.51622565 L10.5187264,5.07233804 C10.5079136,5.04685921 10.3019493,4.58131216 10.2917804,4.55556517 C10.0400511,3.91820446 9.98664298,3.20045838 10.1840288,2.4903106 C10.681536,0.700432522 12.5838102,-0.363379289 14.4328737,0.11422243 Z" transform="translate(1 1)" />
             </svg>
 
             <svg id={ICON_ID.USER_RULES} width="18" height="18" xmlns="http://www.w3.org/2000/svg">

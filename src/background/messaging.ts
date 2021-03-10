@@ -11,6 +11,8 @@ import { settings } from './settings';
 import { app } from './app';
 import { notifier } from './notifier';
 import { protectionPause } from './protectionPause';
+import { filters } from './filters';
+import { backend } from './backend';
 
 interface MessageHandler {
     (message: Message, sender: chrome.runtime.MessageSender): any;
@@ -49,13 +51,21 @@ export const messageHandler = async (
 
     switch (type) {
         case MESSAGE_TYPES.GET_OPTIONS_DATA: {
-            return { settings: settings.getSettings() } as OptionsData;
+            const optionsData: OptionsData = {
+                settings: settings.getSettings(),
+                filters: filters.getFilters(),
+            };
+
+            return optionsData;
         }
         case MESSAGE_TYPES.OPEN_OPTIONS: {
             return tabUtils.openOptionsPage();
         }
         case MESSAGE_TYPES.GET_POPUP_DATA: {
-            return { settings: settings.getSettings() } as PopupData;
+            const popupData: PopupData = {
+                settings: settings.getSettings(),
+            };
+            return popupData;
         }
         case MESSAGE_TYPES.RELOAD_ACTIVE_TAB: {
             await tabUtils.reloadActiveTab();
@@ -108,6 +118,31 @@ export const messageHandler = async (
         case MESSAGE_TYPES.REMOVE_PROTECTION_PAUSE_TIMER: {
             protectionPause.removeTimer();
             break;
+        }
+        case MESSAGE_TYPES.ENABLE_FILTER: {
+            return filters.enableFilter(data.filterId);
+        }
+        case MESSAGE_TYPES.DISABLE_FILTER: {
+            return filters.disableFilter(data.filterId);
+        }
+        case MESSAGE_TYPES.GET_FILTER_INFO_BY_CONTENT: {
+            const { filterContent, title } = data;
+            const rules = filterContent.split('\n');
+            return filters.parseFilterInfo(rules, title);
+        }
+        case MESSAGE_TYPES.ADD_CUSTOM_FILTER_BY_CONTENT: {
+            const { filterContent, title } = data;
+            const filterStrings = filterContent.split('\n');
+            return filters.addCustomFilterByContent(filterStrings, title);
+        }
+        case MESSAGE_TYPES.GET_FILTER_CONTENT_BY_URL: {
+            const { url } = data;
+            const lines = await backend.loadFilterByUrl(url);
+            return lines.join('\n');
+        }
+        case MESSAGE_TYPES.REMOVE_CUSTOM_FILTER_BY_ID: {
+            const { filterId } = data;
+            return filters.removeFilter(filterId);
         }
         default: {
             throw new Error(`No message handler for type: ${type}`);

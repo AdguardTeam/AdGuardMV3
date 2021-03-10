@@ -19,6 +19,30 @@ class Sender {
      * Retrieves options data from background service worker
      */
     getOptionsData = () => sendMessage<OptionsData>(MESSAGE_TYPES.GET_OPTIONS_DATA);
+
+    enableFilter = (filterId: number): Promise<Filter[]> => {
+        return sendMessage(MESSAGE_TYPES.ENABLE_FILTER, { filterId });
+    };
+
+    disableFilter = (filterId: number): Promise<Filter[]> => {
+        return sendMessage(MESSAGE_TYPES.DISABLE_FILTER, { filterId });
+    };
+
+    getFilterInfoByContent = (filterContent: string, title: string): Promise<FilterInfo> => {
+        return sendMessage(MESSAGE_TYPES.GET_FILTER_INFO_BY_CONTENT, { filterContent, title });
+    };
+
+    getFilterContentByUrl = (url: string): Promise<string> => {
+        return sendMessage(MESSAGE_TYPES.GET_FILTER_CONTENT_BY_URL, { url });
+    };
+
+    addCustomFilterByContent = (filterContent: string, title: string): Promise<Filter[]> => {
+        return sendMessage(MESSAGE_TYPES.ADD_CUSTOM_FILTER_BY_CONTENT, { filterContent, title });
+    };
+
+    removeCustomFilterById = (filterId: number): Promise<Filter[]> => {
+        return sendMessage(MESSAGE_TYPES.REMOVE_CUSTOM_FILTER_BY_ID, { filterId });
+    };
 }
 
 export const sender = new Sender();

@@ -16,7 +16,7 @@ type ProtectionStatusType = {
     }
 };
 
-const PROTECTION_STATUS: {[key:string]: ProtectionStatusType} = {
+const PROTECTION_STATUS: { [key:string]: ProtectionStatusType } = {
     ENABLED: {
         key: 'popup_protection_enabled_status',
     },
