@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
 import cn from 'classnames';
-import { Icon } from 'Common/components/ui/Icon';
-import { ICON_ID } from 'Common/components/ui/Icons';
+import { Icon, ICON_ID } from 'Common/components/ui';
 import { theme } from 'Common/styles';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { SETTINGS_NAMES } from 'Common/settings-constants';

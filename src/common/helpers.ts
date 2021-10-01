@@ -58,3 +58,29 @@ export const getUrlDetails = (urlString: string): URLInfo | null => {
         return null;
     }
 };
+
+type Obj = Record<string, any>;
+
+const validateKeyInObject = (obj: Obj, key: keyof Obj): undefined | never => {
+    if (!Object.prototype.hasOwnProperty.call(obj, key)) {
+        throw new Error(`The key "${key}" to group by is not in the object ${JSON.stringify(obj, null, 4)}`);
+    }
+    return undefined;
+};
+
+/**
+ * Groups array by key
+ * @param arr
+ * @param key
+ */
+export const groupByKeyValue = (arr: Obj[], key: keyof Obj): Obj => {
+    return arr.reduce(
+        (acc: { [key: string]: Obj[] }, cur: Obj) => {
+            validateKeyInObject(cur, key);
+
+            const groupValue = cur[key];
+            acc[groupValue] = (acc[groupValue] || []).concat(cur);
+            return acc;
+        }, {},
+    );
+};

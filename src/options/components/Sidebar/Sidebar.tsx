@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { Icon } from 'Common/components/ui/Icon';
-import { ICON_ID } from 'Common/components/ui/Icons';
+import { ICON_ID, Icon } from 'Common/components/ui';
 import { Nav } from '../Nav';
 import { Notice } from '../Notice';
 

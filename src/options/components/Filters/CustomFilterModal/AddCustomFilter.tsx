@@ -28,7 +28,7 @@ type AddCustomProps = {
 export const AddCustomFilter = ({ onError, onSuccess }: AddCustomProps) => {
     const [textareaValue, setTextareaValue] = useState('');
 
-    const handleTextareaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const { value } = e.target;
         setTextareaValue(value);
     };
@@ -84,11 +84,12 @@ export const AddCustomFilter = ({ onError, onSuccess }: AddCustomProps) => {
 
     return (
         <form action="#" onSubmit={handleSubmit}>
-            <input
-                type="textarea"
+            <textarea
+                className={styles.modalTextarea}
                 defaultValue={textareaValue}
                 onChange={handleTextareaChange}
                 name="url"
+                placeholder={reactTranslator.getMessage('options_paste_filter_url') as string}
             />
             <input
                 id="file-input"
@@ -97,17 +98,20 @@ export const AddCustomFilter = ({ onError, onSuccess }: AddCustomProps) => {
                 style={{ display: 'none' }}
                 onChange={handleFileInputChange}
             />
-            <button type="button">
-                <label htmlFor="file-input" className={styles.button}>
-                    {reactTranslator.getMessage('options_custom_filter_modal_add_browse_button')}
-                </label>
-            </button>
-            <button
-                type="submit"
-                disabled={textareaValue.trim().length === 0}
-            >
-                {reactTranslator.getMessage('options_custom_filter_modal_add_add_button')}
-            </button>
+            <div className={styles.buttonsGroup}>
+                <button type="button" className={styles.btnLight}>
+                    <label htmlFor="file-input" className={styles.label}>
+                        {reactTranslator.getMessage('options_custom_filter_modal_add_browse_button')}
+                    </label>
+                </button>
+                <button
+                    type="submit"
+                    disabled={textareaValue.trim().length === 0}
+                    className={styles.btnSave}
+                >
+                    {reactTranslator.getMessage('options_custom_filter_modal_add_add_button')}
+                </button>
+            </div>
         </form>
     );
 };

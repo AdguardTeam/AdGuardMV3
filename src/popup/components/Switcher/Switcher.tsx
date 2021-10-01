@@ -2,9 +2,8 @@ import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
 import cn from 'classnames';
 
-import { Icon } from 'Common/components/ui/Icon';
+import { Icon, ICON_ID } from 'Common/components/ui';
 import { SETTINGS_NAMES } from 'Common/settings-constants';
-import { ICON_ID } from 'Common/components/ui/Icons';
 import { rootStore } from '../../stores';
 import { sender } from '../../messaging/sender';
 

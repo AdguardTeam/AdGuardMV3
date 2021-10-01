@@ -10,6 +10,9 @@ export enum SETTINGS_NAMES {
     NOTICE_HIDDEN = 'notice.hidden',
 }
 
+export type OPTION_SETTINGS_NAMES = Pick<SettingsType,
+SETTINGS_NAMES.FILTERING_ENABLED | SETTINGS_NAMES.NOTICE_HIDDEN>;
+
 export type SettingsValueType = boolean | number;
 
 export type SettingsType = Record<SETTINGS_NAMES, SettingsValueType>;

@@ -1,33 +1,42 @@
-import React, { useContext } from 'react';
+/* eslint-disable jsx-a11y/no-autofocus */
+import React, { useRef } from 'react';
 import { observer } from 'mobx-react';
+import { ICON_ID, Icon } from 'Common/components/ui';
+import { useOutsideClick } from 'Common/hooks/useOutsideClick';
+import { reactTranslator } from 'Common/translators/reactTranslator';
 
-import { rootStore } from '../../../stores';
+import styles from 'Options/components/Filters/FiltersSearch/FiltersSearch.module.pcss';
 
-export const FiltersSearch = observer(() => {
-    const { searchStore } = useContext(rootStore);
+export type IProps = {
+    value: string,
+    handleCloseSearchClick: () => void,
+    handleSearchInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+};
 
-    const handleCloseSearchClick = () => {
-        searchStore.closeSearch();
-    };
+export const FiltersSearch = observer(({
+    value,
+    handleCloseSearchClick,
+    handleSearchInputChange,
+}: IProps) => {
+    const formRef = useRef<HTMLFormElement>(null);
 
-    const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        searchStore.setSearchValue(e.currentTarget.value);
-    };
+    useOutsideClick(formRef, handleCloseSearchClick);
 
     return (
-        <form>
+        <form ref={formRef} className={styles.container}>
             <input
+                autoFocus
                 type="text"
-                placeholder="Search"
-                defaultValue={searchStore.searchValue}
+                placeholder={reactTranslator.getMessage('options_rules_search') as string}
+                value={value}
                 onChange={handleSearchInputChange}
+                className={styles.search}
             />
-            {/* FIXME change button from text to icon */}
             <button
                 type="button"
                 onClick={handleCloseSearchClick}
             >
-                close
+                <Icon id={ICON_ID.CROSS} />
             </button>
         </form>
     );

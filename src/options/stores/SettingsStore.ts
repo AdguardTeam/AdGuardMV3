@@ -6,7 +6,7 @@ import {
     observable,
 } from 'mobx';
 
-import { DEFAULT_SETTINGS, SETTINGS_NAMES } from 'Common/settings-constants';
+import { OPTION_SETTINGS_NAMES, SETTINGS_NAMES } from 'Common/settings-constants';
 import { log } from 'Common/logger';
 import type { RootStore } from './RootStore';
 import { sender } from '../messaging/sender';
@@ -20,7 +20,10 @@ export class SettingsStore {
     }
 
     @observable
-    settings = DEFAULT_SETTINGS;
+    settings: OPTION_SETTINGS_NAMES = {
+        [SETTINGS_NAMES.FILTERING_ENABLED]: false,
+        [SETTINGS_NAMES.NOTICE_HIDDEN]: true,
+    };
 
     @observable
     filters: Filter[] = [];
@@ -63,13 +66,13 @@ export class SettingsStore {
         this.filters = filters;
     }).bind(this);
 
-    setSetting = async (key: SETTINGS_NAMES, value: boolean) => {
+    setSetting = async (key: keyof OPTION_SETTINGS_NAMES, value: boolean) => {
         await sender.setSetting(key, value);
         this.updateSettingState(key, value);
     };
 
     @action
-    updateSettingState = (key: SETTINGS_NAMES, value: boolean) => {
+    updateSettingState = (key: keyof OPTION_SETTINGS_NAMES, value: boolean) => {
         this.settings[key] = value;
     };
 

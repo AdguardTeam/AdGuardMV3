@@ -13,6 +13,8 @@ import { BROWSERS, BUILD_ENVS } from './constants';
 const packageJson = require('../package.json');
 const tsconfig = require('../tsconfig.json');
 
+const APP_DIR = path.resolve(__dirname, '../src');
+
 const updateManifest = (isDev: boolean, content: Buffer) => {
     const manifest = JSON.parse(content.toString());
 
@@ -159,6 +161,7 @@ const config = {
             },
             {
                 test: /\.p?css$/,
+                include: APP_DIR,
                 use: [
                     MiniCssExtractPlugin.loader,
                     {
@@ -178,6 +181,10 @@ const config = {
                     },
                     'postcss-loader',
                 ],
+            },
+            {
+                test: /\.css$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],
             },
         ],
     },

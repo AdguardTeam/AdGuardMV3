@@ -1,9 +1,9 @@
 import React from 'react';
 import cn from 'classnames';
-import { ICON_ID_CLASS_MAP, IconIdType } from './Icons';
+import { ICON_ID_CLASS_MAP, ICON_ID } from './Icons';
 
 type IconProps = {
-    id: IconIdType,
+    id: ICON_ID,
     className?: string,
 };
 

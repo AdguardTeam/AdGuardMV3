@@ -1,15 +1,18 @@
-import React, { useContext } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { observer } from 'mobx-react';
 import Modal from 'react-modal';
 
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { CUSTOM_GROUP_ID } from 'Common/constants';
-import { Filter } from './Filter';
-import s from './Filters.module.pcss';
-import { rootStore } from '../../stores';
-import { CustomFilterModal } from './CustomFilterModal';
-import { FiltersSearch } from './FiltersSearch';
+import { ICON_ID } from 'Common/components/ui';
+import { FilterHeader } from 'Options/components/Filters/FiltersHeader';
+import { rootStore } from 'Options/stores';
+import { CustomFilterModal } from 'Options/components/Filters/CustomFilterModal';
+import { CheckboxOption } from 'Options/components/CheckboxOption';
+import { ModalButton } from 'Common/components/ModalButton/ModalButton';
+
+import styles from './Filters.module.pcss';
 
 Modal.setAppElement('#root');
 
@@ -35,7 +38,26 @@ export const Filters = observer(() => {
         customFilterModalStore,
     } = useContext(rootStore);
 
-    const history = useHistory();
+    const {
+        openModal,
+        closeModal,
+    } = customFilterModalStore;
+
+    const {
+        openSearch,
+        closeSearch,
+        matchesSearchQuery,
+        setSearchValue,
+    } = searchStore;
+
+    const {
+        disableFilter,
+        enableFilter,
+    } = settingsStore;
+
+    useEffect(() => {
+        return searchStore.closeSearch;
+    }, []);
 
     const { filters } = settingsStore;
 
@@ -55,80 +77,56 @@ export const Filters = observer(() => {
 
     const filtersByGroupId = filters
         .filter((filter) => filter.groupId === parsedGroupId)
-        .filter((filter) => searchStore.matchesSearchQuery(filter.title));
+        .filter((filter) => matchesSearchQuery(filter.title));
 
-    const handleBackClick = () => {
-        history.push('/');
-        searchStore.closeSearch();
-    };
-
-    const handleAddCustomFilter = () => {
-        customFilterModalStore.openModal();
-    };
-
-    const closeCustomFilterModal = () => {
-        customFilterModalStore.closeModal();
-    };
-
-    const handleSearchClick = () => {
-        searchStore.openSearch();
-    };
-
-    const renderHeader = () => {
-        if (searchStore.isSearchOpen) {
-            return <FiltersSearch />;
-        }
-
-        return (
-            <>
-                <h1>{pageTitle}</h1>
-                {/* FIXME change from text button to icon button */}
-                <button
-                    className={s.button}
-                    type="button"
-                    onClick={handleSearchClick}
-                >
-                    Search
-                </button>
-            </>
-        );
+    const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchValue(e.currentTarget.value);
     };
 
     return (
         <>
             <CustomFilterModal
                 isOpen={customFilterModalStore.isModalOpen}
-                closeHandler={closeCustomFilterModal}
+                closeHandler={closeModal}
             />
-            <button
-                onClick={handleBackClick}
-                className={s.button}
-                type="button"
-            >
-                back
-            </button>
-            { renderHeader() }
+            <FilterHeader
+                isOpen={searchStore.isSearchOpen}
+                handleBackClick={closeSearch}
+                handleSearchClick={openSearch}
+                handleCloseSearchClick={closeSearch}
+                handleSearchInputChange={handleSearchInputChange}
+                searchValue={searchStore.searchValue}
+                pageTitle={pageTitle || ''}
+            />
             {isCustomGroup && (
-                <button
-                    className={s.button}
-                    onClick={handleAddCustomFilter}
-                    type="button"
-                >
-                    {reactTranslator.getMessage('options_add_custom_filter')}
-                </button>
+                <ModalButton
+                    handleClick={openModal}
+                    message={reactTranslator.getMessage('options_add_custom_filter') as string}
+                />
             )}
+            <div className={styles.container}>
+                {filtersByGroupId?.length > 0
+                    ? filtersByGroupId.map((filter) => {
+                        const onChange = async () => {
+                            if (filter.enabled) {
+                                await disableFilter(filter.id);
+                            } else {
+                                await enableFilter(filter.id);
+                            }
+                        };
 
-            <div className="option__container">
-                {filtersByGroupId.map((filter) => {
-                    return (
-                        <Filter
-                            key={filter.id}
-                            id={filter.id}
-                            title={filter.title}
-                            enabled={filter.enabled}
-                        />
-                    );
-                })}
+                        return (
+                            <CheckboxOption
+                                iconId={ICON_ID.CUSTOM_FILTERS}
+                                key={filter.id}
+                                id={filter.id.toString()}
+                                message={filter.title}
+                                checked={filter.enabled}
+                                onChange={onChange}
+                            />
+                        );
+                    })
+                    : <div className={styles.notFound}>{reactTranslator.getMessage('options_filters_not_found')}</div>}
             </div>
         </>
     );

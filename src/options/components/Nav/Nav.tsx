@@ -3,21 +3,21 @@ import { NavLink } from 'react-router-dom';
 
 import { reactTranslator } from 'Common/translators/reactTranslator';
 
-import './nav.pcss';
+import styles from './nav.module.pcss';
 
 const Nav = () => (
-    <div className="nav">
+    <div className={styles.nav}>
         <NavLink
-            className="nav__item"
+            className={styles.item}
             exact
-            activeClassName="nav__item--active"
+            activeClassName={styles.active}
             to="/"
         >
             {reactTranslator.getMessage('options_nav_link_general')}
         </NavLink>
         <NavLink
-            className="nav__item"
-            activeClassName="nav__item--active"
+            className={styles.item}
+            activeClassName={styles.active}
             to="/about"
         >
             {reactTranslator.getMessage('options_nav_link_about')}

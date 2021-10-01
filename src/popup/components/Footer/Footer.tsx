@@ -1,8 +1,7 @@
 import React from 'react';
-import { Icon } from 'Common/components/ui/Icon';
+import { Icon, ICON_ID } from 'Common/components/ui';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { theme } from 'Common/styles';
-import { ICON_ID } from 'Common/components/ui/Icons';
 
 import styles from './Footer.module.pcss';
 

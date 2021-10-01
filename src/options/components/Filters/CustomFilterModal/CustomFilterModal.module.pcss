@@ -1,12 +1,114 @@
-.title {
-    color: black;
-}
-
 .description {
     color: black;
 }
 
-.button {
-    cursor: pointer;
-    color: black;
+.modal {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    width: 40rem;
+    background-color: var(--bg-main);
+    color: var(--white);
+    padding: 2.4rem 3.2rem 3.2rem;
 }
+
+.contentContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.heading {
+    font-weight: 500;
+    font-size: 2.4rem;
+    line-height: 2.8rem;
+    color: var(--white);
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.75);
+    z-index: var(--z_3);
+}
+
+.contentContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.closeIcon {
+    top: 1.6rem;
+    right: 1.6rem;
+    position: absolute;
+    color: #67b279;
+    padding: 0;
+}
+
+.btn {
+    font-size: 1.6rem;
+    line-height: 1.6rem;
+    text-align: center;
+    letter-spacing: 0.0376471rem;
+    text-transform: uppercase;
+    color: var(--white);
+    border-radius: 4px;
+    height: 3.2rem;
+    width: 12rem;
+    padding: 0.567rem 0 1.033rem;
+}
+
+.btnDelete {
+    composes: btn;
+    background: #C23814;
+    margin-right: 1.6rem;
+}
+
+.btnSave {
+    composes: btn;
+    background: #67B279;
+}
+
+.btnLight {
+    composes: btn;
+    background: var(--transparent);
+    border: 1px solid #979797;
+    color: #FFFFFF;
+    margin-right: 1.6rem;
+}
+
+.buttonsGroup {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modalTextarea {
+    color: var(--white);
+    margin: 1.6rem 0 2.4rem;
+    padding: 0.8rem 1.1rem;
+    width: 33.5rem;
+    height: 10rem;
+    background: #2A2A2A;
+    border: 1px solid #888888;
+    box-sizing: border-box;
+    resize: none;
+
+    font-family: PT Mono;
+    font-size: 1.6rem;
+    line-height: 1.8rem;
+}
+
+.modalTextarea::placeholder {
+    color: #888888;
+}
+
+.label {
+    cursor: inherit;
+}
+

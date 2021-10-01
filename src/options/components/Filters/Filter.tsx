@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */
 import React, { useContext } from 'react';
 
-import { Icon } from 'Common/components/ui/Icon';
+import { Icon, ICON_ID } from 'Common/components/ui';
 import { Checkbox } from 'Common/components/Checkbox';
-import { ICON_ID } from 'Common/components/ui/Icons';
 import { rootStore } from '../../stores';
+
+import styles from './Filters.module.pcss';
 
 type FilterProps = {
     id: number,
@@ -29,12 +30,12 @@ export const Filter = ({ id, title, enabled }: FilterProps) => {
     };
 
     return (
-        <div key={id} className="option__item">
+        <div key={id} className={styles.item}>
             <div onClick={handleClickToFilter}>
                 <Icon id={ICON_ID.CUSTOM_FILTERS} />
                 <label
                     htmlFor={String(id)}
-                    className="option__label"
+                    className={styles.label}
                 >
                     {title}
                 </label>

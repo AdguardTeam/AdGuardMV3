@@ -1,6 +1,6 @@
 import { MESSAGE_TYPES, OptionsData } from 'Common/constants';
 import { sendMessage } from 'Common/helpers';
-import { SETTINGS_NAMES } from 'Common/settings-constants';
+import { OPTION_SETTINGS_NAMES } from 'Common/settings-constants';
 
 /**
  * Module with methods used to communicate with background service worker
@@ -11,7 +11,7 @@ class Sender {
      * @param key
      * @param value
      */
-    setSetting = (key: SETTINGS_NAMES, value: boolean) => sendMessage(
+    setSetting = (key: keyof OPTION_SETTINGS_NAMES, value: boolean) => sendMessage(
         MESSAGE_TYPES.SET_SETTING, { key, value },
     );
 

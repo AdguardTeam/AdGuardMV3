@@ -2,7 +2,7 @@ import React, { useContext, useLayoutEffect } from 'react';
 import { observer } from 'mobx-react';
 import cn from 'classnames';
 
-import { Icons } from 'Common/components/ui/Icons';
+import { Icons } from 'Common/components/ui';
 import { log } from 'Common/logger';
 import { NOTIFIER_EVENTS } from 'Common/constants';
 import { createLongLivedConnection } from 'Common/messaging-utils';

@@ -1,25 +1,26 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useLayoutEffect } from 'react';
 import { observer } from 'mobx-react';
 import { Route, Switch, HashRouter } from 'react-router-dom';
 
-import { Icons } from 'Common/components/ui/Icons';
+import { Icons } from 'Common/components/ui';
 import { log } from 'Common/logger';
 import { NOTIFIER_EVENTS } from 'Common/constants';
 import { createLongLivedConnection } from 'Common/messaging-utils';
-import { Sidebar } from '../Sidebar';
-import { About } from '../About';
-import { rootStore } from '../../stores';
-import { Settings } from '../Settings';
-import { Filters } from '../Filters';
+import { Sidebar } from 'Options/components/Sidebar';
+import { About } from 'Options/components/About';
+import { rootStore } from 'Options/stores';
+import { Settings } from 'Options/components/Settings';
+import { Filters } from 'Options/components/Filters';
+import { UserRules } from 'Options/components/Filters/UserRules';
 
-import './options-app.pcss';
+import styles from 'Options/components/OptionsApp/options-app.module.pcss';
 
 export const OptionsApp = observer(() => {
     const store = useContext(rootStore);
     const { settingsStore } = store;
     const { getOptionsData } = settingsStore;
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         (async () => {
             try {
                 await getOptionsData();
@@ -52,12 +53,13 @@ export const OptionsApp = observer(() => {
     return (
         <HashRouter hashType="noslash">
             <Icons />
-            <div className="section">
+            <div className={styles.section}>
                 <Sidebar />
-                <div className="content">
+                <div className={styles.content}>
                     <Switch>
                         <Route path="/" exact component={Settings} />
                         <Route path="/about" component={About} />
+                        <Route path="/userRules" component={UserRules} />
                         <Route path="/filters" component={Filters} />
                         <Route />
                     </Switch>

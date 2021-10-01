@@ -5,11 +5,12 @@ import { observer } from 'mobx-react';
 
 import { log } from 'Common/logger';
 import { reactTranslator } from 'Common/translators/reactTranslator';
-import { rootStore } from '../../../stores';
-import { STEPS } from '../../../stores/CustomFilterModalStore';
-import { AddCustomFilter } from './AddCustomFilter';
-import { AddCustomFilterConfirm } from './AddCustomFilterConfirm';
-import { RemoveCustomFilter } from './RemoveCustomFilter';
+import { Icon, ICON_ID } from 'Common/components/ui';
+import { rootStore } from 'Options/stores';
+import { STEPS } from 'Options/stores/CustomFilterModalStore';
+import { AddCustomFilter } from 'Options/components/Filters/CustomFilterModal/AddCustomFilter';
+import { AddCustomFilterConfirm } from 'Options/components/Filters/CustomFilterModal/AddCustomFilterConfirm';
+import { RemoveCustomFilter } from 'Options/components/Filters/CustomFilterModal/RemoveCustomFilter';
 
 import s from './CustomFilterModal.module.pcss';
 
@@ -17,31 +18,7 @@ Modal.setAppElement('#root');
 
 type CustomFilterModalProps = {
     isOpen: boolean,
-    closeHandler: () => void,
-};
-
-const customStyles: ReactModal.Styles = {
-    overlay: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'rgba(0, 0, 0, .1)',
-        width: '100%',
-        height: '100%',
-        zIndex: 7,
-    },
-    content: {
-        border: 0,
-        width: '560px',
-        height: 'auto',
-        position: 'relative',
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
-        padding: '30px',
-        overflow: 'auto',
-    },
+    closeHandler: (e: React.MouseEvent) => void,
 };
 
 export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilterModalProps) => {
@@ -61,8 +38,8 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
 
     const [filterContent, setFilterContent] = useState<string|null>(null);
 
-    const onCancelAddCustomModal = () => {
-        closeHandler();
+    const onCancelAddCustomModal = (e: React.MouseEvent) => {
+        closeHandler(e);
     };
 
     const onSaveCustomFilter = async () => {
@@ -113,7 +90,7 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
             title: filterInfo?.title,
             component: () => (
                 <AddCustomFilterConfirm
-                    description={filterInfo?.description || null}
+                    description={filterInfo?.description || ''}
                     onCancel={onCancelAddCustomModal}
                     onSave={onSaveCustomFilter}
                 />
@@ -147,25 +124,27 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
         },
     };
 
-    const renderContent = () => {
-        const step = stepsMap[currentStep];
-        return (
-            <>
-                <div className={s.title}>{step.title}</div>
-                {step.component()}
-            </>
-        );
-    };
+    const step = stepsMap[currentStep];
 
-    // FIXME replace text button with icon button
     return (
         <Modal
             isOpen={isOpen}
             onRequestClose={closeHandler}
-            style={customStyles}
+            className={s.modal}
+            bodyOpenClassName="bodyOpenClassName"
+            overlayClassName={{
+                base: s.overlay,
+                afterOpen: 'overlay--after-open',
+                beforeClose: 'overlay--before-close',
+            }}
         >
-            <button type="button" onClick={closeHandler}>close</button>
-            {renderContent()}
+            <div className={s.contentContainer}>
+                <h1 className={s.heading}>{step.title}</h1>
+                <button onClick={closeHandler} className={s.closeIcon} type="button">
+                    <Icon id={ICON_ID.CROSS} />
+                </button>
+                {step.component()}
+            </div>
         </Modal>
     );
 });
