@@ -31,8 +31,8 @@ export const DisabledProtectionScreen = observer(() => {
                 <Icon id={ICON_ID.DISABLED_LOGO} />
             </div>
             <div className={styles.sectionContainer}>
-                <section>
-                    <h1 className={theme.common.pageInfoMain}>{reactTranslator.getMessage('popup_protection_is_paused')}</h1>
+                <section className={styles.section}>
+                    <h1 className={styles.pageInfoMain}>{reactTranslator.getMessage('popup_protection_is_paused')}</h1>
                     {protectionPaused && (
                         <h6 className={cn(theme.common.pageInfoAdditional,
                             styles.pageInfoAdditional)}

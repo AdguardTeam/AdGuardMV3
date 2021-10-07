@@ -66,7 +66,7 @@ export const PageInfo = observer(() => {
         protectionPauseExpires > 0 && protectionPauseExpired,
     );
 
-    const className = cn({
+    const className = cn(styles.mainSection, {
         [styles.sectionDisabled]: !filteringEnabled,
     });
 

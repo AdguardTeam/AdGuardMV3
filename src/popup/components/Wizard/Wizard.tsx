@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
 import cn from 'classnames';
 
-import { Icon } from 'Common/components/ui';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { theme } from 'Common/styles';
 import { rootStore } from '../../stores';
@@ -20,9 +19,15 @@ export const Wizard = observer(() => {
         buttonTextKey,
     } = wizardStore;
 
+    const { icon } = stepInfo;
+
+    const img = icon.toLowerCase().replace('_', '');
+
+    const containerClassName = cn(styles.container, styles[img]);
+
     // TODO add learn more link handler
     return (
-        <section className={styles.container}>
+        <section className={containerClassName}>
             <div className={styles.header}>
                 <button type="button" className={styles.link}>
                     {reactTranslator.getMessage('popup_learn_more_link')}
@@ -35,24 +40,23 @@ export const Wizard = observer(() => {
                     {reactTranslator.getMessage('popup_skip_wizard')}
                 </button>
             </div>
-            <div className={styles.icon}>
-                <Icon id={stepInfo.icon} />
+            <div className={styles.inner}>
+                <div className={cn(styles.info, styles.main)}>
+                    {`${step}.`}
+                    &nbsp;
+                    {reactTranslator.getMessage(stepInfo.nameKey)}
+                </div>
+                <div className={cn(styles.info, styles.description)}>
+                    {reactTranslator.getMessage(stepInfo.descriptionKey)}
+                </div>
+                <button
+                    type="button"
+                    className={cn(theme.common.buttonGreen, styles.button)}
+                    onClick={isLastStep ? skipWizard : setNextStep}
+                >
+                    {reactTranslator.getMessage(buttonTextKey)}
+                </button>
             </div>
-            <div className={cn(styles.info, styles.main)}>
-                {`${step}.`}
-                &nbsp;
-                {reactTranslator.getMessage(stepInfo.nameKey)}
-            </div>
-            <div className={cn(styles.info, styles.description)}>
-                {reactTranslator.getMessage(stepInfo.descriptionKey)}
-            </div>
-            <button
-                type="button"
-                className={cn(theme.common.buttonGreen, styles.button)}
-                onClick={isLastStep ? skipWizard : setNextStep}
-            >
-                {reactTranslator.getMessage(buttonTextKey)}
-            </button>
         </section>
     );
 });

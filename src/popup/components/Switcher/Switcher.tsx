@@ -7,7 +7,7 @@ import { SETTINGS_NAMES } from 'Common/settings-constants';
 import { rootStore } from '../../stores';
 import { sender } from '../../messaging/sender';
 
-import './switcher.pcss';
+import styles from './switcher.module.pcss';
 
 export const Switcher = observer(() => {
     const { settingsStore } = useContext(rootStore);
@@ -20,8 +20,8 @@ export const Switcher = observer(() => {
 
     const icon = filteringEnabled ? ICON_ID.CHECKMARK : ICON_ID.CIRCLE;
 
-    const className = cn('switcher', {
-        'switcher--disabled': !filteringEnabled,
+    const className = cn(styles.switcher, {
+        [styles.disabled]: !filteringEnabled,
     });
 
     return (
@@ -30,9 +30,9 @@ export const Switcher = observer(() => {
             className={className}
             onClick={onClick}
         >
-            <div className="switcher__center" />
-            <div className="switcher__btn">
-                <Icon id={icon} className="switcher__icon" />
+            <div className={styles.center} />
+            <div className={styles.btn}>
+                <Icon id={icon} className={styles.icon} />
             </div>
         </button>
     );
