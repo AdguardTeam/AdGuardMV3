@@ -8,7 +8,7 @@ import './sidebar.pcss';
 
 export const Sidebar = () => {
     return (
-        <div>
+        <>
             <div className="sidebar__menu" role="menu">
                 <button className="sidebar__open-button" type="button">
                     {/* @ts-ignore TODO fix on mobile screen */}
@@ -20,6 +20,6 @@ export const Sidebar = () => {
                 <Nav />
                 <Notice />
             </div>
-        </div>
+        </>
     );
 };

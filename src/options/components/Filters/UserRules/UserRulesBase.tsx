@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import { useStore } from 'Options/stores/useStore';
 import React, { useMemo, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation, useRouteMatch } from 'react-router-dom';
 import Modal from 'react-modal';
 import cn from 'classnames';
 import { USER_RULE_STATUS, UserRuleType } from 'Options/stores/OptionsStore';
@@ -13,6 +13,7 @@ import { UserRule } from 'Options/components/Filters/UserRule';
 import { Icon, ICON_ID } from 'Common/components/ui';
 
 import styles from 'Options/components/Filters/UserRules/UserRules.module.pcss';
+import s from 'Options/components/Filters/CustomFilterModal/CustomFilterModal.module.pcss';
 
 export const UserRulesBase = observer(() => {
     const { optionsStore, searchStore } = useStore();
@@ -196,9 +197,29 @@ export const UserRulesBase = observer(() => {
 
     const content = userRuleEnum[ruleInputType]();
 
+    const history = useHistory();
+
+    const { pathname } = useLocation();
+
+    const editorPathPart = '/editor';
+
+    const { url } = useRouteMatch();
+
+    const showEditor = pathname.endsWith(editorPathPart);
+
+    const toggleEditor = () => {
+        history.push(showEditor ? `${url}` : `${url}${editorPathPart}`);
+    };
+
     return (
         <>
             <ModalButton
+                icon={ICON_ID.MENU}
+                handleClick={toggleEditor}
+                message={reactTranslator.getMessage('options_user_rule_open_editor') as string}
+            />
+            <ModalButton
+                icon={ICON_ID.PLUS}
                 handleClick={openModal}
                 message={reactTranslator.getMessage('options_user_rule_add_user_rule') as string}
             />
@@ -231,6 +252,11 @@ export const UserRulesBase = observer(() => {
                 contentLabel="Example Modal"
                 bodyOpenClassName="bodyOpenClassName"
                 className={modalClass}
+                overlayClassName={{
+                    base: s.overlay,
+                    afterOpen: 'overlay--after-open',
+                    beforeClose: 'overlay--before-close',
+                }}
             >
                 <div className={styles.contentContainer}>
                     <h1 className={styles.heading}>

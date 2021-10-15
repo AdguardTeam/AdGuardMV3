@@ -56,13 +56,15 @@ export const OptionsApp = observer(() => {
             <div className={styles.section}>
                 <Sidebar />
                 <div className={styles.content}>
-                    <Switch>
-                        <Route path="/" exact component={Settings} />
-                        <Route path="/about" component={About} />
-                        <Route path="/userRules" component={UserRules} />
-                        <Route path="/filters" component={Filters} />
-                        <Route />
-                    </Switch>
+                    <div className={styles.inner}>
+                        <Switch>
+                            <Route path="/" exact component={Settings} />
+                            <Route path="/about" component={About} />
+                            <Route path="/userRules" component={UserRules} />
+                            <Route path="/filters" component={Filters} />
+                            <Route />
+                        </Switch>
+                    </div>
                 </div>
             </div>
         </HashRouter>

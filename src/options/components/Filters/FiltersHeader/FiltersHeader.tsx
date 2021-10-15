@@ -11,7 +11,6 @@ export type IProps = {
     isOpen: boolean,
     handleBackClick: () => void,
     handleSearchClick?: () => void,
-    handleMenuClick?: () => void,
     handleCloseSearchClick: () => void,
     handleSearchInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
     pageTitle: string,
@@ -23,7 +22,6 @@ export const FilterHeader = ({
     searchValue,
     handleBackClick,
     handleSearchClick,
-    handleMenuClick,
     handleCloseSearchClick,
     handleSearchInputChange,
     pageTitle,
@@ -52,15 +50,6 @@ export const FilterHeader = ({
             </div>
             {!isOpen && (
                 <div className={styles.iconsGroup}>
-                    {handleMenuClick && (
-                        <button
-                            type="button"
-                            aria-label={reactTranslator.getMessage('options_user_menu') as string}
-                            onClick={handleMenuClick}
-                        >
-                            <Icon id={ICON_ID.MENU} />
-                        </button>
-                    )}
                     {handleSearchClick && (
                         <button
                             type="button"

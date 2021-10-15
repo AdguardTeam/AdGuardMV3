@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import {
     Route,
     Switch,
-    useHistory,
     useLocation,
     useRouteMatch,
 } from 'react-router-dom';
@@ -25,9 +24,8 @@ export const UserRules = observer(() => {
         openSearch,
     } = searchStore;
 
-    const history = useHistory();
     const { pathname } = useLocation();
-    const { url, path } = useRouteMatch();
+    const { path } = useRouteMatch();
 
     useEffect(() => {
         return searchStore.closeSearch;
@@ -40,10 +38,6 @@ export const UserRules = observer(() => {
         searchStore.setSearchValue(e.currentTarget.value);
     };
 
-    const toggleEditor = () => {
-        history.push(showEditor ? `${url}` : `${url}${editorPathPart}`);
-    };
-
     // FIXME modal overlay
     return (
         <>
@@ -54,7 +48,6 @@ export const UserRules = observer(() => {
                     handleSearchClick={showEditor ? undefined : openSearch}
                     pageTitle={reactTranslator.getMessage('options_user_rules_option') as string}
                     searchValue={searchStore.searchValue}
-                    handleMenuClick={toggleEditor}
                     handleCloseSearchClick={closeSearch}
                     handleSearchInputChange={handleSearchInputChange}
                 />

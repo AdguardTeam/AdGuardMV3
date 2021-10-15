@@ -100,6 +100,7 @@ export const Filters = observer(() => {
             />
             {isCustomGroup && (
                 <ModalButton
+                    icon={ICON_ID.PLUS}
                     handleClick={openModal}
                     message={reactTranslator.getMessage('options_add_custom_filter') as string}
                 />
