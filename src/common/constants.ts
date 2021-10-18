@@ -46,6 +46,9 @@ export enum NOTIFIER_EVENTS {
 
 export const REPORT_SITE_BASE_URL = 'https://reports.adguard.com/new_issue.html';
 
+// TODO add correct url
+export const LEARN_MORE_URL = 'https://adguard.com/compare.html';
+
 export const CUSTOM_GROUP_ID = 0;
 
 /* GLOBAL FILTERING */

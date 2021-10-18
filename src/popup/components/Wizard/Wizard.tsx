@@ -4,6 +4,7 @@ import cn from 'classnames';
 
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { theme } from 'Common/styles';
+import { LEARN_MORE_URL } from 'Common/constants';
 import { rootStore } from '../../stores';
 
 import styles from './wizard.module.pcss';
@@ -25,13 +26,17 @@ export const Wizard = observer(() => {
 
     const containerClassName = cn(styles.container, styles[img]);
 
-    // TODO add learn more link handler
     return (
         <section className={containerClassName}>
             <div className={styles.header}>
-                <button type="button" className={styles.link}>
+                <a
+                    className={styles.link}
+                    href={LEARN_MORE_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                >
                     {reactTranslator.getMessage('popup_learn_more_link')}
-                </button>
+                </a>
                 <button
                     type="button"
                     className={styles.link}

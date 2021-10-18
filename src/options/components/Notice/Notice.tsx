@@ -4,12 +4,10 @@ import { observer } from 'mobx-react';
 
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { theme } from 'Common/styles';
+import { LEARN_MORE_URL } from 'Common/constants';
 import { SETTINGS_NAMES } from 'Common/settings-constants';
 import styles from './Notice.module.pcss';
 import { rootStore } from '../../stores';
-
-// TODO: change link, add to tds
-const COMPARISON_LINK = 'https://adguard.com';
 
 const Notice = observer(() => {
     const store = useContext(rootStore);
@@ -29,7 +27,7 @@ const Notice = observer(() => {
             <hr className={cn(theme.common.hr, styles.noticeHr)} />
             <div className={styles.notice}>{reactTranslator.getMessage('options_notice_program')}</div>
             <a
-                href={COMPARISON_LINK}
+                href={LEARN_MORE_URL}
                 className={cn(theme.common.link, styles.compareLink)}
                 rel="noopener noreferrer"
                 target="_blank"
