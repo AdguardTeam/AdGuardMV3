@@ -61,7 +61,7 @@ export const Settings = observer(() => {
             id: 'languages_option',
             iconId: ICON_ID.LANGUAGES,
             messageKey: 'options_languages_option',
-            to: '/',
+            to: '/languages',
         },
         CUSTOM_FILTERS: {
             id: 'custom_filters',

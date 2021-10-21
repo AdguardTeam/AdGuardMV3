@@ -7,6 +7,7 @@ import {
 } from 'mobx';
 
 import { OPTION_SETTINGS_NAMES, SETTINGS_NAMES } from 'Common/settings-constants';
+import { CategoriesType } from 'Common/constants';
 import { log } from 'Common/logger';
 import type { RootStore } from './RootStore';
 import { sender } from '../messaging/sender';
@@ -27,6 +28,9 @@ export class SettingsStore {
 
     @observable
     filters: Filter[] = [];
+
+    @observable
+    categories: CategoriesType = [];
 
     @action
     updateFilterState = (filterId: number, filterProps: Partial<Filter>) => {
@@ -61,9 +65,10 @@ export class SettingsStore {
     };
 
     getOptionsData = flow(function* getOptionsData(this: SettingsStore) {
-        const { settings, filters } = yield sender.getOptionsData();
+        const { settings, filters, categories } = yield sender.getOptionsData();
         this.settings = settings;
         this.filters = filters;
+        this.categories = categories;
     }).bind(this);
 
     setSetting = async (key: keyof OPTION_SETTINGS_NAMES, value: boolean) => {

@@ -4,9 +4,16 @@ export interface PopupData {
     settings: SettingsType
 }
 
+export type CategoriesType = {
+    groupId: number,
+    groupName: string,
+    displayNumber: number,
+}[];
+
 export interface OptionsData {
     settings: SettingsType
     filters: Filter[]
+    categories: CategoriesType
 }
 
 export enum MESSAGE_TYPES {
@@ -24,6 +31,8 @@ export enum MESSAGE_TYPES {
     SET_PAUSE_EXPIRES = 'SET_PAUSE_EXPIRES',
     ENABLE_FILTER = 'ENABLE_FILTER',
     DISABLE_FILTER = 'DISABLE_FILTER',
+    CATEGORIES_ENABLE_FILTER = 'CATEGORIES_ENABLE_FILTER',
+    CATEGORIES_DISABLE_FILTER = 'CATEGORIES_DISABLE_FILTER',
     GET_FILTER_INFO_BY_CONTENT = 'GET_FILTER_INFO_BY_CONTENT',
     ADD_CUSTOM_FILTER_BY_CONTENT = 'ADD_CUSTOM_FILTER_BY_CONTENT',
     GET_FILTER_CONTENT_BY_URL = 'GET_FILTER_CONTENT_BY_URL',

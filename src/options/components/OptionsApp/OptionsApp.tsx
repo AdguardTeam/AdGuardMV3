@@ -12,6 +12,7 @@ import { rootStore } from 'Options/stores';
 import { Settings } from 'Options/components/Settings';
 import { Filters } from 'Options/components/Filters';
 import { UserRules } from 'Options/components/Filters/UserRules';
+import { Languages } from 'Options/components/Languages';
 
 import styles from 'Options/components/OptionsApp/options-app.module.pcss';
 
@@ -62,6 +63,7 @@ export const OptionsApp = observer(() => {
                             <Route path="/about" component={About} />
                             <Route path="/userRules" component={UserRules} />
                             <Route path="/filters" component={Filters} />
+                            <Route path="/languages" component={Languages} />
                             <Route />
                         </Switch>
                     </div>

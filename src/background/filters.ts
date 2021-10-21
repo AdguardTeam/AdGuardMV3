@@ -15,10 +15,13 @@ class Filters {
             id: 3, title: 'Custom filter 3', enabled: false, description: 'Custom filter description', groupId: 0,
         },
         {
-            id: 4, title: 'English', enabled: false, description: 'English filter description', groupId: 1,
+            id: 4, title: 'English', enabled: true, description: 'English filter description', groupId: 2,
         },
         {
-            id: 5, title: 'Russian', enabled: false, description: 'Russian filter description', groupId: 1,
+            id: 5, title: 'Russian', enabled: false, description: 'Russian filter description', groupId: 7,
+        },
+        {
+            id: 6, title: 'Spanish', enabled: false, description: 'Spanish filter description', groupId: 7,
         },
     ];
 

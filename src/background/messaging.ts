@@ -12,6 +12,7 @@ import { app } from './app';
 import { notifier } from './notifier';
 import { protectionPause } from './protectionPause';
 import { filters } from './filters';
+import { categories } from './categories';
 import { backend } from './backend';
 
 interface MessageHandler {
@@ -54,6 +55,7 @@ export const messageHandler = async (
             const optionsData: OptionsData = {
                 settings: settings.getSettings(),
                 filters: filters.getFilters(),
+                categories: categories.getCategories(),
             };
 
             return optionsData;

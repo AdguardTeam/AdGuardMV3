@@ -16,12 +16,14 @@ export interface IProps {
     iconId?: ICON_ID;
     checked?: boolean;
     messageKey?: string;
+    messageKeyDesc?: string;
     message?: string;
     tooltipMessage?: string;
     onChange: ChangeHandler;
     className?: string,
     iconClass?: string,
     containerClass?: string,
+    integrated?: boolean,
 }
 
 export const CheckboxOption = ({
@@ -29,12 +31,14 @@ export const CheckboxOption = ({
     iconId,
     checked,
     messageKey,
+    messageKeyDesc,
     message = messageKey && reactTranslator.getMessage(messageKey) as string,
     tooltipMessage = message,
     onChange,
     className = '',
     iconClass = '',
     containerClass = '',
+    integrated = false,
 }: IProps) => {
     const ref = useRef(null);
 
@@ -42,16 +46,27 @@ export const CheckboxOption = ({
         <Fragment key={id}>
             <div className={cn(styles.optionItem, containerClass)}>
                 <div>
-                    {iconId && <Icon id={iconId} className={iconClass} />}
+                    {iconId && (
+                        <span className={styles.icon}>
+                            <Icon id={iconId} className={iconClass} />
+                        </span>
+                    )}
                     <label
                         htmlFor={id}
                         className={cn(styles.optionLabel, className)}
                         ref={ref}
                     >
                         {message}
+                        {messageKeyDesc && (
+                            <div className={styles.optionLabelDesc}>
+                                {reactTranslator.getMessage(messageKeyDesc) as string}
+                            </div>
+                        )}
                     </label>
                 </div>
-                <Checkbox id={id} checked={checked} onChange={onChange} />
+                {!integrated && (
+                    <Checkbox id={id} checked={checked} onChange={onChange} />
+                )}
             </div>
             <TitleTooltip ref={ref}>{tooltipMessage}</TitleTooltip>
         </Fragment>
