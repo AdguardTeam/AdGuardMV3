@@ -38,6 +38,8 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
 
     const [filterContent, setFilterContent] = useState<string|null>(null);
 
+    const [filterTitle, setFilterTitle] = useState(filterInfo?.title || '');
+
     const onCancelAddCustomModal = (e: React.MouseEvent) => {
         closeHandler(e);
     };
@@ -45,7 +47,7 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
     const onSaveCustomFilter = async () => {
         if (filterContent && filterInfo) {
             try {
-                await settingsStore.addCustomFilterByContent(filterContent, filterInfo.title);
+                await settingsStore.addCustomFilterByContent(filterContent, filterTitle);
             } catch (e) {
                 log.error(e);
             }
@@ -71,9 +73,15 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
 
     const onAddCustomFilterSuccess = (filterInfo: FilterInfo, filterContent: string) => {
         setFilterInfo(filterInfo);
+        setFilterTitle(filterInfo.title);
         // save filter content for next steps
         setFilterContent(filterContent);
         switchToAddCustomFilterConfirmStep();
+    };
+
+    const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.target;
+        setFilterTitle(value);
     };
 
     const stepsMap = {
@@ -139,7 +147,16 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
             }}
         >
             <div className={s.contentContainer}>
-                <h1 className={s.heading}>{step.title}</h1>
+                { step.title === filterInfo?.title
+                    ? (
+                        <input
+                            className={s.modalInput}
+                            type="text"
+                            value={filterTitle}
+                            onChange={onChangeTitle}
+                        />
+                    )
+                    : <h1 className={s.heading}>{step.title}</h1>}
                 <button onClick={closeHandler} className={s.closeIcon} type="button">
                     <Icon id={ICON_ID.CROSS} />
                 </button>

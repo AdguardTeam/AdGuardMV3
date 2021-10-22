@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import cn from 'classnames';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { log } from 'Common/logger';
 import { sender } from '../../../messaging/sender';
@@ -85,7 +85,7 @@ export const AddCustomFilter = ({ onError, onSuccess }: AddCustomProps) => {
     return (
         <form action="#" onSubmit={handleSubmit}>
             <textarea
-                className={styles.modalTextarea}
+                className={cn(styles.modalInput, styles.modalTextarea)}
                 defaultValue={textareaValue}
                 onChange={handleTextareaChange}
                 name="url"
