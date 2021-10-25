@@ -7,22 +7,45 @@ interface RemoveCustomFilterProps {
     title: string;
     description: string;
     onRemove: () => void;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onSave: () => void;
 }
 
-export const RemoveCustomFilter = ({ title, description, onRemove }: RemoveCustomFilterProps) => {
+export const RemoveCustomFilter = ({
+    title,
+    description,
+    onRemove,
+    onChange,
+    onSave,
+}: RemoveCustomFilterProps) => {
     return (
         <>
-            <div className={s.title}>{title}</div>
+            <input
+                className={s.modalInput}
+                type="text"
+                value={title}
+                onChange={onChange}
+            />
             {
                 description
                 && <div className={s.description}>{description}</div>
             }
-            <button
-                type="button"
-                onClick={onRemove}
-            >
-                {reactTranslator.getMessage('options_custom_filter_modal_delete')}
-            </button>
+            <div className={s.buttonsGroup}>
+                <button
+                    type="button"
+                    className={s.btnDelete}
+                    onClick={onRemove}
+                >
+                    {reactTranslator.getMessage('options_custom_filter_modal_remove_button')}
+                </button>
+                <button
+                    className={s.btnSave}
+                    type="button"
+                    onClick={onSave}
+                >
+                    {reactTranslator.getMessage('options_custom_filter_modal_confirm_save_button')}
+                </button>
+            </div>
         </>
     );
 };

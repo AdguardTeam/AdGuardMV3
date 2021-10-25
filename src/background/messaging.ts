@@ -127,6 +127,9 @@ export const messageHandler = async (
         case MESSAGE_TYPES.DISABLE_FILTER: {
             return filters.disableFilter(data.filterId);
         }
+        case MESSAGE_TYPES.UPDATE_FILTER_TITLE: {
+            return filters.updateFilterTitle(data.filterId, data.filterTitle);
+        }
         case MESSAGE_TYPES.GET_FILTER_INFO_BY_CONTENT: {
             const { filterContent, title } = data;
             const rules = filterContent.split('\n');

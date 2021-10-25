@@ -55,6 +55,10 @@ class Filters {
         this.updateFilterState(filterId, { enabled: false });
     };
 
+    updateFilterTitle = (filterId: number, filterTitle: string): void => {
+        this.updateFilterState(filterId, { title: filterTitle });
+    };
+
     private parseExpiresStr = (str: string): number => {
         const regexp = /(\d+)\s+(day|hour)/;
 

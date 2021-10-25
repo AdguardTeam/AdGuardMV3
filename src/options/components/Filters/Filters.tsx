@@ -83,6 +83,10 @@ export const Filters = observer(() => {
         setSearchValue(e.currentTarget.value);
     };
 
+    const handleClickToFilter = (id: number) => {
+        customFilterModalStore.openRemoveCustomFilterModal(id);
+    };
+
     return (
         <>
             <CustomFilterModal
@@ -123,6 +127,7 @@ export const Filters = observer(() => {
                                 id={filter.id.toString()}
                                 message={filter.title}
                                 checked={filter.enabled}
+                                onClick={() => { handleClickToFilter(filter.id); }}
                                 onChange={onChange}
                             />
                         );
