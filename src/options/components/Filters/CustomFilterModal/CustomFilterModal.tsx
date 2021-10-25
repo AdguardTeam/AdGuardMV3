@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 import React, { useContext, useState } from 'react';
+import cn from 'classnames';
 import Modal from 'react-modal';
 import { observer } from 'mobx-react';
 
@@ -30,6 +31,7 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
     const {
         filterIdInModal,
         currentStep,
+        switchToAddCustomFilterStep,
         switchToAddCustomFilterRetryStep,
         switchToAddCustomFilterConfirmStep,
     } = customFilterModalStore;
@@ -86,6 +88,7 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
 
     const stepsMap = {
         [STEPS.ADD_CUSTOM_FILTER]: {
+            icon: null,
             title: reactTranslator.getMessage('options_custom_filter_modal_add_title'),
             component: () => (
                 <AddCustomFilter
@@ -95,6 +98,7 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
             ),
         },
         [STEPS.ADD_CUSTOM_FILTER_CONFIRM]: {
+            icon: null,
             title: filterInfo?.title,
             component: () => (
                 <AddCustomFilterConfirm
@@ -105,10 +109,27 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
             ),
         },
         [STEPS.ADD_CUSTOM_FILTER_RETRY]: {
-            title: 'Retry',
-            component: () => (<div>TODO retry</div>),
+            icon: ICON_ID.WARNING,
+            title: reactTranslator.getMessage('options_custom_filter_modal_retry_title'),
+            component: () => (
+                <>
+                    <div className={s.description}>
+                        {reactTranslator.getMessage('options_custom_filter_modal_retry_description')}
+                    </div>
+                    <div className={cn(s.buttonsGroup, s.center)}>
+                        <button
+                            type="button"
+                            className={s.btnSave}
+                            onClick={switchToAddCustomFilterStep}
+                        >
+                            {reactTranslator.getMessage('options_custom_filter_modal_retry_button')}
+                        </button>
+                    </div>
+                </>
+            ),
         },
         [STEPS.REMOVE_CUSTOM_FILTER]: {
+            icon: null,
             title: reactTranslator.getMessage('options_custom_filter_remove_title'),
             component: () => {
                 if (!filterIdInModal) {
@@ -147,16 +168,19 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
             }}
         >
             <div className={s.contentContainer}>
-                { step.title === filterInfo?.title
-                    ? (
-                        <input
-                            className={s.modalInput}
-                            type="text"
-                            value={filterTitle}
-                            onChange={onChangeTitle}
-                        />
-                    )
-                    : <h1 className={s.heading}>{step.title}</h1>}
+                <div className={s.header}>
+                    {step.icon && <Icon className={s.icon} id={step.icon} />}
+                    { step.title === filterInfo?.title
+                        ? (
+                            <input
+                                className={s.modalInput}
+                                type="text"
+                                value={filterTitle}
+                                onChange={onChangeTitle}
+                            />
+                        )
+                        : <h1 className={s.heading}>{step.title}</h1>}
+                </div>
                 <button onClick={closeHandler} className={s.closeIcon} type="button">
                     <Icon id={ICON_ID.CROSS} />
                 </button>
