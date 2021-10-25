@@ -32,6 +32,7 @@ export enum ICON_ID {
     LIGHTNING = 'LIGHTNING',
     MENU = 'MENU',
     MAGNIFIER = 'MAGNIFIER',
+    WARNING = 'WARNING',
 }
 
 export const ICON_ID_CLASS_MAP: Record<ICON_ID, string> = {
@@ -65,6 +66,7 @@ export const ICON_ID_CLASS_MAP: Record<ICON_ID, string> = {
     [ICON_ID.LIGHTNING]: iconStyles.iconButton,
     [ICON_ID.MENU]: iconStyles.iconButton,
     [ICON_ID.MAGNIFIER]: iconStyles.iconButton,
+    [ICON_ID.WARNING]: iconStyles.iconButton,
 };
 
 export const Icons = () => {
@@ -696,6 +698,11 @@ export const Icons = () => {
                 <path d="M14 14L19 19" stroke="#67B279" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
 
+            <svg id={ICON_ID.WARNING} width="24" height="23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <ellipse rx="9" ry="8.25688" transform="matrix(1 0 0 -1 12 11.0092)" stroke="#D58500" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M12 7.33965V12.8442" stroke="#D58500" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M11.997 15.0498C12.009 15.0481 11.997 15.2251 11.997 15.2251" stroke="#D58500" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
         </svg>
     );
 };
