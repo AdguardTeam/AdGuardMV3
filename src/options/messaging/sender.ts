@@ -28,6 +28,10 @@ class Sender {
         return sendMessage(MESSAGE_TYPES.DISABLE_FILTER, { filterId });
     };
 
+    updateFilterTitle = (filterId: number, filterTitle: string): Promise<Filter[]> => {
+        return sendMessage(MESSAGE_TYPES.UPDATE_FILTER_TITLE, { filterId, filterTitle });
+    };
+
     getFilterInfoByContent = (filterContent: string, title: string): Promise<FilterInfo> => {
         return sendMessage(MESSAGE_TYPES.GET_FILTER_INFO_BY_CONTENT, { filterContent, title });
     };

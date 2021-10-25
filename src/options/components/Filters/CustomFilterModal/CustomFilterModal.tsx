@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-shadow */
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { observer } from 'mobx-react';
 
@@ -84,6 +84,28 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
         setFilterTitle(value);
     };
 
+    let filter: Filter | null;
+
+    useEffect(() => {
+        if (filterIdInModal) {
+            filter = settingsStore.getFilterById(filterIdInModal);
+
+            if (!filter) {
+                throw new Error('Filter should be found');
+            }
+
+            setFilterTitle(filter.title);
+        }
+    }, [filterIdInModal]);
+
+    const onSaveTitle = async () => {
+        if (filterIdInModal) {
+            await settingsStore.updateFilterTitle(filterIdInModal, filterTitle);
+        } else {
+            throw new Error('Filter should be found');
+        }
+    };
+
     const stepsMap = {
         [STEPS.ADD_CUSTOM_FILTER]: {
             title: reactTranslator.getMessage('options_custom_filter_modal_add_title'),
@@ -109,25 +131,20 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
             component: () => (<div>TODO retry</div>),
         },
         [STEPS.REMOVE_CUSTOM_FILTER]: {
-            title: reactTranslator.getMessage('options_custom_filter_remove_title'),
+            title: reactTranslator.getMessage('options_custom_filter_modal_add_title'),
             component: () => {
-                if (!filterIdInModal) {
-                    throw new Error('Filter should be selected');
+                if (filterIdInModal) {
+                    return (
+                        <RemoveCustomFilter
+                            title={filterTitle}
+                            description={filter?.description || ''}
+                            onChange={onChangeTitle}
+                            onRemove={onRemoveCustomFilter}
+                            onSave={onSaveTitle}
+                        />
+                    );
                 }
-
-                const filter = settingsStore.getFilterById(filterIdInModal);
-
-                if (!filter) {
-                    throw new Error('Filter should be found');
-                }
-
-                return (
-                    <RemoveCustomFilter
-                        title={filter.title}
-                        description={filter.description}
-                        onRemove={onRemoveCustomFilter}
-                    />
-                );
+                return null;
             },
         },
     };

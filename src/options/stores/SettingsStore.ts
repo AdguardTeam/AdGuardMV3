@@ -64,6 +64,17 @@ export class SettingsStore {
         }
     };
 
+    @action
+    updateFilterTitle = async (filterId: number, filterTitle: string) => {
+        this.updateFilterState(filterId, { title: filterTitle });
+        try {
+            await sender.updateFilterTitle(filterId, filterTitle);
+            this.rootStore.customFilterModalStore.closeModal();
+        } catch (e) {
+            log.debug(e.message);
+        }
+    };
+
     getOptionsData = flow(function* getOptionsData(this: SettingsStore) {
         const { settings, filters, categories } = yield sender.getOptionsData();
         this.settings = settings;

@@ -19,6 +19,7 @@ export interface IProps {
     messageKeyDesc?: string;
     message?: string;
     tooltipMessage?: string;
+    onClick?: () => void;
     onChange: ChangeHandler;
     className?: string,
     iconClass?: string,
@@ -34,6 +35,7 @@ export const CheckboxOption = ({
     messageKeyDesc,
     message = messageKey && reactTranslator.getMessage(messageKey) as string,
     tooltipMessage = message,
+    onClick,
     onChange,
     className = '',
     iconClass = '',
@@ -45,7 +47,11 @@ export const CheckboxOption = ({
     return (
         <Fragment key={id}>
             <div className={cn(styles.optionItem, containerClass)}>
-                <div>
+                <button
+                    className={styles.button}
+                    type="button"
+                    onClick={onClick}
+                >
                     {iconId && (
                         <span className={styles.icon}>
                             <Icon id={iconId} className={iconClass} />
@@ -63,7 +69,7 @@ export const CheckboxOption = ({
                             </div>
                         )}
                     </label>
-                </div>
+                </button>
                 {!integrated && (
                     <Checkbox id={id} checked={checked} onChange={onChange} />
                 )}
