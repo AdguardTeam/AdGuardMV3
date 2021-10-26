@@ -30,7 +30,7 @@ const downloadMessagesByUrl = async (url: string): Promise<Buffer> | never => {
         const response = await axios.get<Buffer>(url, { responseType: 'arraybuffer' });
         cliLog.info(`Downloaded: ${url}`);
         return response.data;
-    } catch (e) {
+    } catch (e: any) {
         let errorMessage;
         if (e.response && e.response.data) {
             const decoder = new TextDecoder();
@@ -90,7 +90,7 @@ const downloadLocales = async (locales: string[]) => {
 const saveFile = async (filePath: string, data: Buffer) => {
     try {
         await fs.promises.writeFile(filePath, data);
-    } catch (e) {
+    } catch (e: any) {
         cliLog.error(`Was unable do save data in path: ${filePath}. Error: ${e.message}`);
     }
 };

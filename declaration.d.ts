@@ -3,7 +3,7 @@ declare module '*.module.pcss' {
     export default content;
 }
 
-declare module 'filters-downloader' {
+declare module '@adguard/filters-downloader' {
     interface DefinedExpressions {
         adguard?: boolean,
         adguard_ext_chromium?: boolean,
@@ -15,7 +15,7 @@ declare module 'filters-downloader' {
     }
 
     interface Download {
-        (url: string, options: DefinedExpressions): string[];
+        (url: string, options: DefinedExpressions): Promise<string[]>;
     }
 
     const download: Download;

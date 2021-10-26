@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+
 import { localeMessageType, localeUrlType } from './locales/constants';
 
 export const chunkArray = (arr: localeUrlType[], size: number) => arr

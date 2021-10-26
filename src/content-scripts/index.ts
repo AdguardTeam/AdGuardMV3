@@ -23,6 +23,11 @@ const tryLoadCssAndScripts = async () => {
 };
 
 (async () => {
+    // TODO remove
+    if (!document.location.href.includes('example.org')) {
+        return;
+    }
+
     try {
         await tryLoadCssAndScripts();
     } catch (err) {

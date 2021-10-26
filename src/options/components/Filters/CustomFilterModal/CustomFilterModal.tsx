@@ -36,9 +36,9 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
         switchToAddCustomFilterConfirmStep,
     } = customFilterModalStore;
 
-    const [filterInfo, setFilterInfo] = useState<FilterInfo|null>(null);
+    const [filterInfo, setFilterInfo] = useState<FilterInfo | null>(null);
 
-    const [filterContent, setFilterContent] = useState<string|null>(null);
+    const [filterContent, setFilterContent] = useState<string | null>(null);
 
     const [filterTitle, setFilterTitle] = useState(filterInfo?.title || '');
 

@@ -172,7 +172,7 @@ const longLivedMessageHandler = (port: chrome.runtime.Port) => {
             listenerId = notifier.addEventListener(events, (...args: any) => {
                 try {
                     port.postMessage({ type: MESSAGE_TYPES.NOTIFY_LISTENERS, data: args });
-                } catch (e) {
+                } catch (e: any) {
                     log.error(e.message);
                 }
             });

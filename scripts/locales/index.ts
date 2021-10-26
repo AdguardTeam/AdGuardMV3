@@ -19,7 +19,7 @@ const download = async (locales: string[]) => {
         await downloadAndSave(locales);
         cliLog.success('Download was successful');
         await checkTranslations(REQUIRED_LOCALES);
-    } catch (e) {
+    } catch (e: any) {
         cliLog.error(e.message);
         process.exit(1);
     }
@@ -31,7 +31,7 @@ const upload = async () => {
         await checkUnusedMessages();
         const result = await uploadLocales();
         cliLog.success(`Upload was successful with response: ${JSON.stringify(result)}`);
-    } catch (e) {
+    } catch (e: any) {
         cliLog.error(e.message);
         process.exit(1);
     }
@@ -40,7 +40,7 @@ const upload = async () => {
 const renew = async () => {
     try {
         await renewLocales();
-    } catch (e) {
+    } catch (e: any) {
         cliLog.error(e.message);
         process.exit(1);
     }
@@ -49,7 +49,7 @@ const renew = async () => {
 const validate = async (locales: string[]) => {
     try {
         await checkTranslations(locales);
-    } catch (e) {
+    } catch (e: any) {
         cliLog.error(e.message);
         process.exit(1);
     }
@@ -58,7 +58,7 @@ const validate = async (locales: string[]) => {
 const summary = async (isInfo: boolean) => {
     try {
         await checkTranslations(LOCALES, isInfo);
-    } catch (e) {
+    } catch (e: any) {
         cliLog.error(e.message);
         process.exit(1);
     }
@@ -67,7 +67,7 @@ const summary = async (isInfo: boolean) => {
 const unused = async () => {
     try {
         await checkUnusedMessages();
-    } catch (e) {
+    } catch (e: any) {
         cliLog.error(e.message);
         process.exit(1);
     }

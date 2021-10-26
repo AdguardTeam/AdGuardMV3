@@ -54,8 +54,8 @@ export const AddCustomFilter = ({ onError, onSuccess }: AddCustomProps) => {
                 onError(errorMessage);
             }
             onSuccess(filterInfo, fileContent);
-        } catch (ex) {
-            const errorMessage = `Filter format is broken, ${ex.message}`;
+        } catch (error: any) {
+            const errorMessage = `Filter format is broken, ${error.message}`;
             log.error(errorMessage);
             onError(errorMessage);
         }
@@ -75,8 +75,8 @@ export const AddCustomFilter = ({ onError, onSuccess }: AddCustomProps) => {
                 onError(errorMessage);
             }
             onSuccess(filterInfo, filterContent);
-        } catch (ex) {
-            const errorMessage = `Filter format is broken, ${ex.message}`;
+        } catch (error: any) {
+            const errorMessage = `Filter format is broken, ${error.message}`;
             log.error(errorMessage);
             onError(errorMessage);
         }

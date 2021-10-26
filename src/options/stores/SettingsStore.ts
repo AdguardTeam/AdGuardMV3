@@ -47,7 +47,7 @@ export class SettingsStore {
         this.updateFilterState(filterId, { enabled: true });
         try {
             await sender.enableFilter(filterId);
-        } catch (e) {
+        } catch (e: any) {
             log.debug(e.message);
             this.updateFilterState(filterId, { enabled: false });
         }
@@ -58,7 +58,7 @@ export class SettingsStore {
         this.updateFilterState(filterId, { enabled: false });
         try {
             await sender.disableFilter(filterId);
-        } catch (e) {
+        } catch (e: any) {
             log.debug(e.message);
             this.updateFilterState(filterId, { enabled: true });
         }
@@ -70,7 +70,7 @@ export class SettingsStore {
         try {
             await sender.updateFilterTitle(filterId, filterTitle);
             this.rootStore.customFilterModalStore.closeModal();
-        } catch (e) {
+        } catch (e: any) {
             log.debug(e.message);
         }
     };
@@ -106,7 +106,7 @@ export class SettingsStore {
         try {
             this.filters = yield sender.addCustomFilterByContent(filterContent, title);
             this.rootStore.customFilterModalStore.closeModal();
-        } catch (e) {
+        } catch (e: any) {
             log.error(e.message);
         }
     }
@@ -115,7 +115,7 @@ export class SettingsStore {
         try {
             this.filters = yield sender.removeCustomFilterById(filterId);
             this.rootStore.customFilterModalStore.closeModal();
-        } catch (e) {
+        } catch (e: any) {
             log.error(e.message);
         }
     }

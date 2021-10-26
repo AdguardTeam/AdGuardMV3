@@ -1,4 +1,4 @@
-import FiltersDownloader from 'filters-downloader';
+import FiltersDownloader from '@adguard/filters-downloader';
 
 import { browserUtils } from 'Common/utils/browser-utils';
 
@@ -31,7 +31,7 @@ class Backend {
             }
 
             return lines;
-        } catch (e) {
+        } catch (e: any) {
             delete this.loadingUrls[url];
             const message = e instanceof Error ? e.message : e;
             throw new Error(message);
