@@ -16,7 +16,7 @@ export const AddCustomFilterConfirm = ({
 }: ConfirmAddCustomProps) => {
     return (
         <>
-            <div>{description}</div>
+            <div className={styles.description}>{description}</div>
             <div className={styles.buttonsGroup}>
                 <button
                     className={styles.btnDelete}
