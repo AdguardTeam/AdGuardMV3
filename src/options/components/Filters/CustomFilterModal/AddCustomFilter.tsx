@@ -21,11 +21,12 @@ const readFile = (file: File): Promise<string> => {
 };
 
 type AddCustomProps = {
-    onError: (error: string) => void,
+    onError: (error: string | boolean) => void,
     onSuccess: (filterInfo: FilterInfo, fileContent: string) => void,
+    addCustomFilterError: boolean,
 };
 
-export const AddCustomFilter = ({ onError, onSuccess }: AddCustomProps) => {
+export const AddCustomFilter = ({ onError, onSuccess, addCustomFilterError }: AddCustomProps) => {
     const [textareaValue, setTextareaValue] = useState('');
 
     const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -81,6 +82,25 @@ export const AddCustomFilter = ({ onError, onSuccess }: AddCustomProps) => {
             onError(errorMessage);
         }
     };
+
+    if (addCustomFilterError) {
+        return (
+            <>
+                <div className={styles.description}>
+                    {reactTranslator.getMessage('options_custom_filter_modal_retry_description')}
+                </div>
+                <div className={cn(styles.buttonsGroup, styles.center)}>
+                    <button
+                        type="button"
+                        className={styles.btnSave}
+                        onClick={() => { onError(false); }}
+                    >
+                        {reactTranslator.getMessage('options_custom_filter_modal_retry_button')}
+                    </button>
+                </div>
+            </>
+        );
+    }
 
     return (
         <form action="#" onSubmit={handleSubmit}>

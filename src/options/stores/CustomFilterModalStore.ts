@@ -9,7 +9,6 @@ import type { RootStore } from './RootStore';
 export enum STEPS {
     ADD_CUSTOM_FILTER = 'ADD_CUSTOM_FILTER',
     ADD_CUSTOM_FILTER_CONFIRM = 'ADD_CUSTOM_FILTER_CONFIRM',
-    ADD_CUSTOM_FILTER_RETRY = 'ADD_CUSTOM_FILTER_RETRY',
     REMOVE_CUSTOM_FILTER = 'REMOVE_CUSTOM_FILTER',
 }
 
@@ -58,10 +57,6 @@ export class CustomFilterModalStore {
 
     switchToAddCustomFilterStep = () => {
         this.setCurrentStep(STEPS.ADD_CUSTOM_FILTER);
-    };
-
-    switchToAddCustomFilterRetryStep = () => {
-        this.setCurrentStep(STEPS.ADD_CUSTOM_FILTER_RETRY);
     };
 
     switchToAddCustomFilterConfirmStep = () => {

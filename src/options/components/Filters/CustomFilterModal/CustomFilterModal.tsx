@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 import React, { useContext, useEffect, useState } from 'react';
-import cn from 'classnames';
 import Modal from 'react-modal';
 import { observer } from 'mobx-react';
 
@@ -31,8 +30,6 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
     const {
         filterIdInModal,
         currentStep,
-        switchToAddCustomFilterStep,
-        switchToAddCustomFilterRetryStep,
         switchToAddCustomFilterConfirmStep,
     } = customFilterModalStore;
 
@@ -41,6 +38,8 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
     const [filterContent, setFilterContent] = useState<string | null>(null);
 
     const [filterTitle, setFilterTitle] = useState(filterInfo?.title || '');
+
+    const [addCustomFilterError, setAddCustomFilterError] = useState(false);
 
     const onCancelAddCustomModal = (e: React.MouseEvent) => {
         closeHandler(e);
@@ -66,11 +65,14 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
         }
     };
 
-    // TODO display error screen with retry button
-    const onAddCustomFilterError = (error: string) => {
-        // eslint-disable-next-line no-console
-        console.log(error);
-        switchToAddCustomFilterRetryStep();
+    const onAddCustomFilterError = (error: string | boolean) => {
+        if (error) {
+            // eslint-disable-next-line no-console
+            console.log(error);
+            setAddCustomFilterError(true);
+        } else {
+            setAddCustomFilterError(false);
+        }
     };
 
     const onAddCustomFilterSuccess = (filterInfo: FilterInfo, filterContent: string) => {
@@ -110,10 +112,11 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
 
     const stepsMap = {
         [STEPS.ADD_CUSTOM_FILTER]: {
-            icon: null,
-            title: reactTranslator.getMessage('options_custom_filter_modal_add_title'),
+            icon: addCustomFilterError ? ICON_ID.WARNING : null,
+            title: addCustomFilterError ? reactTranslator.getMessage('options_custom_filter_modal_retry_title') : reactTranslator.getMessage('options_custom_filter_modal_add_title'),
             component: () => (
                 <AddCustomFilter
+                    addCustomFilterError={addCustomFilterError}
                     onError={onAddCustomFilterError}
                     onSuccess={onAddCustomFilterSuccess}
                 />
@@ -129,26 +132,6 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
                     onCancel={onCancelAddCustomModal}
                     onSave={onSaveCustomFilter}
                 />
-            ),
-        },
-        [STEPS.ADD_CUSTOM_FILTER_RETRY]: {
-            icon: ICON_ID.WARNING,
-            title: reactTranslator.getMessage('options_custom_filter_modal_retry_title'),
-            component: () => (
-                <>
-                    <div className={s.description}>
-                        {reactTranslator.getMessage('options_custom_filter_modal_retry_description')}
-                    </div>
-                    <div className={cn(s.buttonsGroup, s.center)}>
-                        <button
-                            type="button"
-                            className={s.btnSave}
-                            onClick={switchToAddCustomFilterStep}
-                        >
-                            {reactTranslator.getMessage('options_custom_filter_modal_retry_button')}
-                        </button>
-                    </div>
-                </>
             ),
         },
         [STEPS.REMOVE_CUSTOM_FILTER]: {
