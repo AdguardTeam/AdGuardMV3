@@ -40,6 +40,7 @@ export const RemoveCustomFilter = ({
                 </button>
                 <button
                     className={s.btnSave}
+                    disabled={title.trim().length === 0}
                     type="button"
                     onClick={onSave}
                 >

@@ -124,6 +124,7 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
             title: filterInfo?.title,
             component: () => (
                 <AddCustomFilterConfirm
+                    title={filterTitle}
                     description={filterInfo?.description || ''}
                     onCancel={onCancelAddCustomModal}
                     onSave={onSaveCustomFilter}

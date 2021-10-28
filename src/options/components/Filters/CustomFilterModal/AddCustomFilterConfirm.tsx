@@ -4,12 +4,14 @@ import { reactTranslator } from 'Common/translators/reactTranslator';
 import styles from './CustomFilterModal.module.pcss';
 
 type ConfirmAddCustomProps = {
+    title: string | '',
     description: string | null,
     onCancel: (e: React.MouseEvent) => void;
     onSave: () => void;
 };
 
 export const AddCustomFilterConfirm = ({
+    title,
     description,
     onCancel,
     onSave,
@@ -28,6 +30,7 @@ export const AddCustomFilterConfirm = ({
                 <button
                     className={styles.btnSave}
                     type="button"
+                    disabled={title.trim().length === 0}
                     onClick={onSave}
                 >
                     {reactTranslator.getMessage('options_custom_filter_modal_confirm_save_button')}
