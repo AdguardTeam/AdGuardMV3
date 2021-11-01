@@ -4,7 +4,7 @@ import Modal from 'react-modal';
 import { observer } from 'mobx-react';
 
 import { log } from 'Common/logger';
-import { reactTranslator } from 'Common/translators/reactTranslator';
+import { translator } from 'Common/translators/translator';
 import { Icon, ICON_ID } from 'Common/components/ui';
 import { rootStore } from 'Options/stores';
 import { STEPS } from 'Options/stores/CustomFilterModalStore';
@@ -25,6 +25,7 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
     const {
         settingsStore,
         customFilterModalStore,
+        uiStore,
     } = useContext(rootStore);
 
     const {
@@ -49,6 +50,7 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
         if (filterContent && filterInfo) {
             try {
                 await settingsStore.addCustomFilterByContent(filterContent, filterTitle);
+                uiStore.addNotification(translator.getMessage('options_custom_filter_add_notification', { name: filterTitle }));
             } catch (e) {
                 log.error(e);
             }
@@ -113,7 +115,7 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
     const stepsMap = {
         [STEPS.ADD_CUSTOM_FILTER]: {
             icon: addCustomFilterError ? ICON_ID.WARNING : null,
-            title: addCustomFilterError ? reactTranslator.getMessage('options_custom_filter_modal_retry_title') : reactTranslator.getMessage('options_custom_filter_modal_add_title'),
+            title: addCustomFilterError ? translator.getMessage('options_custom_filter_modal_retry_title') : translator.getMessage('options_custom_filter_modal_add_title'),
             component: () => (
                 <AddCustomFilter
                     addCustomFilterError={addCustomFilterError}
@@ -136,7 +138,7 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
         },
         [STEPS.REMOVE_CUSTOM_FILTER]: {
             icon: null,
-            title: reactTranslator.getMessage('options_custom_filter_modal_add_title'),
+            title: translator.getMessage('options_custom_filter_modal_add_title'),
             component: () => {
                 if (filterIdInModal) {
                     return (

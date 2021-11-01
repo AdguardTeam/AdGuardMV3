@@ -1,0 +1,71 @@
+.notifications {
+    position: fixed;
+    z-index: 10;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0 10px;
+    padding-bottom: 16px;
+}
+
+.notification {
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: 370px;
+    margin: 0 auto;
+    min-height: 50px;
+    padding: 16px 23px;
+    border-radius: 8px;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: var(--gray4d);
+    color: var(--white);
+    overflow: hidden;
+    animation: notify-show 0.3s ease-in;
+
+    &.close {
+        animation: notify-show-reverse 0.3s ease-out;
+        animation-fill-mode: forwards;
+    }
+}
+
+.icon {
+    width: 24px;
+    height: 21px;
+}
+
+.notificationClose {
+    margin-left: auto;
+}
+
+.description {
+    font-size: 14px;
+    padding-right: 15px;
+    max-width: 100%;
+    max-height: 57px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@keyframes notify-show {
+    0% {
+        transform: translateY(75px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes notify-show-reverse {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(75px);
+    }
+}

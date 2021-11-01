@@ -7,6 +7,7 @@ import { log } from 'Common/logger';
 import { NOTIFIER_EVENTS } from 'Common/constants';
 import { createLongLivedConnection } from 'Common/messaging-utils';
 import { Sidebar } from 'Options/components/Sidebar';
+import { Notifications } from 'Options/components/Notifications';
 import { About } from 'Options/components/About';
 import { rootStore } from 'Options/stores';
 import { Settings } from 'Options/components/Settings';
@@ -66,6 +67,7 @@ export const OptionsApp = observer(() => {
                             <Route path="/languages" component={Languages} />
                             <Route />
                         </Switch>
+                        <Notifications />
                     </div>
                 </div>
             </div>
