@@ -52,6 +52,7 @@ export type Message = {
 
 export enum NOTIFIER_EVENTS {
     SETTING_UPDATED = 'event.setting.updated',
+    FILTERING_STATE_UPDATED = 'event.filtering.state.updated',
 }
 
 export const REPORT_SITE_BASE_URL = 'https://reports.adguard.com/new_issue.html';

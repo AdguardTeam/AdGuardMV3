@@ -18,8 +18,6 @@ const executeScript = async (tabId: number, options: ExecuteScriptOptions) => {
     };
 
     return new Promise((resolve, reject) => {
-        // TODO use typings for v3 version api, when they'll be available
-        // @ts-ignore
         chrome.scripting.executeScript(executeScriptOptions, (result) => {
             if (chrome.runtime.lastError) {
                 reject(new Error(chrome.runtime.lastError.message));

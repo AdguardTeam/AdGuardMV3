@@ -13,6 +13,19 @@ declare global {
  */
 export const prefs = (() => {
     const Prefs = {
+        get ICONS() {
+            return lazyGet(Prefs, 'ICONS', () => ({
+                ENABLED: {
+                    19: chrome.runtime.getURL('assets/icons/green-19.png'),
+                    38: chrome.runtime.getURL('assets/icons/green-38.png'),
+                },
+                DISABLED: {
+                    19: chrome.runtime.getURL('assets/icons/gray-19.png'),
+                    38: chrome.runtime.getURL('assets/icons/gray-38.png'),
+                },
+            }));
+        },
+
         get browser() {
             return lazyGet(Prefs, 'browser', () => {
                 let browser;

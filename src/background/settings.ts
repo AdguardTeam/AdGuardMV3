@@ -3,7 +3,10 @@ import { throttle } from 'lodash';
 import { log } from 'Common/logger';
 import { NOTIFIER_EVENTS } from 'Common/constants';
 import {
-    DEFAULT_SETTINGS, SETTINGS_NAMES, SettingsType, SettingsValueType,
+    DEFAULT_SETTINGS,
+    SETTINGS_NAMES,
+    SettingsType,
+    SettingsValueType,
 } from 'Common/settings-constants';
 import { storage } from './storage';
 import { notifier } from './notifier';
