@@ -1,0 +1,1 @@
+export { alertPopup } from './alertPopup';
