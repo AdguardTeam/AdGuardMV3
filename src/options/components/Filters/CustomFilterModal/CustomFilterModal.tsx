@@ -19,9 +19,16 @@ Modal.setAppElement('#root');
 type CustomFilterModalProps = {
     isOpen: boolean,
     closeHandler: (e: React.MouseEvent) => void,
+    urlToSubscribe: string,
+    initialTitle: string | null,
 };
 
-export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilterModalProps) => {
+export const CustomFilterModal = observer(({
+    isOpen,
+    closeHandler,
+    urlToSubscribe,
+    initialTitle,
+}: CustomFilterModalProps) => {
     const {
         settingsStore,
         customFilterModalStore,
@@ -46,7 +53,7 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
         closeHandler(e);
     };
 
-    const onSaveCustomFilter = async () => {
+    const onSaveCustomFilter = async (e: React.MouseEvent) => {
         if (filterContent && filterInfo) {
             try {
                 await settingsStore.addCustomFilterByContent(filterContent, filterTitle);
@@ -57,6 +64,7 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
         } else {
             throw new Error('Save custom modal requires url or filter content');
         }
+        closeHandler(e);
     };
 
     const onRemoveCustomFilter = async () => {
@@ -118,6 +126,8 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
             title: addCustomFilterError ? translator.getMessage('options_custom_filter_modal_retry_title') : translator.getMessage('options_custom_filter_modal_add_title'),
             component: () => (
                 <AddCustomFilter
+                    initialTitle={initialTitle}
+                    urlToSubscribe={urlToSubscribe}
                     addCustomFilterError={addCustomFilterError}
                     onError={onAddCustomFilterError}
                     onSuccess={onAddCustomFilterSuccess}
@@ -126,7 +136,7 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
         },
         [STEPS.ADD_CUSTOM_FILTER_CONFIRM]: {
             icon: null,
-            title: filterInfo?.title,
+            title: filterTitle,
             component: () => (
                 <AddCustomFilterConfirm
                     title={filterTitle}
@@ -173,7 +183,7 @@ export const CustomFilterModal = observer(({ isOpen, closeHandler }: CustomFilte
             <div className={s.contentContainer}>
                 <div className={s.header}>
                     {step.icon && <Icon className={s.icon} id={step.icon} />}
-                    { step.title === filterInfo?.title
+                    { step.title === filterTitle
                         ? (
                             <input
                                 className={s.modalInput}

@@ -1,10 +1,14 @@
-import React, { useContext, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, {
+    useContext,
+    useEffect,
+    useState,
+} from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
 import { observer } from 'mobx-react';
 import Modal from 'react-modal';
 
-import { reactTranslator } from 'Common/translators/reactTranslator';
-import { CUSTOM_GROUP_ID } from 'Common/constants';
+import { translator } from 'Common/translators/translator';
+import { CUSTOM_GROUP_ID, QUERY_PARAM_NAMES } from 'Common/constants';
 import { ICON_ID } from 'Common/components/ui';
 import { FilterHeader } from 'Options/components/Filters/FiltersHeader';
 import { rootStore } from 'Options/stores';
@@ -20,18 +24,9 @@ const useQuery = () => {
     return new URLSearchParams(useLocation().search);
 };
 
-const LANGUAGES_GROUP_ID = 1;
-
-const TITLES_MAP: { [key: number]: string } = {
-    [CUSTOM_GROUP_ID]: 'Custom filters',
-    [LANGUAGES_GROUP_ID]: 'Languages',
-};
-
-const getPageTitle = (groupId: number): string | null => {
-    return TITLES_MAP[groupId] || null;
-};
-
 export const Filters = observer(() => {
+    const history = useHistory();
+
     const {
         settingsStore,
         searchStore,
@@ -63,20 +58,13 @@ export const Filters = observer(() => {
 
     const query = useQuery();
 
-    const groupId = query.get('groupId');
-
-    if (!groupId) {
-        throw new Error('groupId should be provided in query string');
-    }
-
-    const parsedGroupId = parseInt(groupId, 10);
-
-    const isCustomGroup = parsedGroupId === CUSTOM_GROUP_ID;
-
-    const pageTitle = getPageTitle(parsedGroupId);
+    const [urlToSubscribe, setUrlToSubscribe] = useState(decodeURIComponent(query.get(QUERY_PARAM_NAMES.SUBSCRIBE) || ''));
+    const [customFilterTitle, setCustomFilterTitle] = useState(
+        query.get(QUERY_PARAM_NAMES.TITLE),
+    );
 
     const filtersByGroupId = filters
-        .filter((filter) => filter.groupId === parsedGroupId)
+        .filter((filter) => filter.groupId === CUSTOM_GROUP_ID)
         .filter((filter) => matchesSearchQuery(filter.title));
 
     const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -87,11 +75,32 @@ export const Filters = observer(() => {
         customFilterModalStore.openRemoveCustomFilterModal(id);
     };
 
+    const closeModalHandler = () => {
+        setUrlToSubscribe('');
+        setCustomFilterTitle('');
+        closeModal();
+
+        // clear querystring params
+        if (query.has(QUERY_PARAM_NAMES.TITLE) || query.has(QUERY_PARAM_NAMES.SUBSCRIBE)) {
+            query.delete(QUERY_PARAM_NAMES.TITLE);
+            query.delete(QUERY_PARAM_NAMES.SUBSCRIBE);
+            history.push(`${history.location.pathname}?${decodeURIComponent(query.toString())}`);
+        }
+    };
+
+    useEffect(() => {
+        if (urlToSubscribe) {
+            openModal();
+        }
+    }, [urlToSubscribe, openModal]);
+
     return (
         <>
             <CustomFilterModal
+                initialTitle={customFilterTitle}
+                urlToSubscribe={urlToSubscribe}
                 isOpen={customFilterModalStore.isModalOpen}
-                closeHandler={closeModal}
+                closeHandler={closeModalHandler}
             />
             <FilterHeader
                 isOpen={searchStore.isSearchOpen}
@@ -100,15 +109,13 @@ export const Filters = observer(() => {
                 handleCloseSearchClick={closeSearch}
                 handleSearchInputChange={handleSearchInputChange}
                 searchValue={searchStore.searchValue}
-                pageTitle={pageTitle || ''}
+                pageTitle={translator.getMessage('options_custom_filters_option')}
             />
-            {isCustomGroup && (
-                <ModalButton
-                    icon={ICON_ID.PLUS}
-                    handleClick={openModal}
-                    message={reactTranslator.getMessage('options_add_custom_filter') as string}
-                />
-            )}
+            <ModalButton
+                icon={ICON_ID.PLUS}
+                handleClick={openModal}
+                message={translator.getMessage('options_add_custom_filter')}
+            />
             <div className={styles.container}>
                 {filtersByGroupId?.length > 0
                     ? filtersByGroupId.map((filter) => {
@@ -132,7 +139,7 @@ export const Filters = observer(() => {
                             />
                         );
                     })
-                    : <div className={styles.notFound}>{reactTranslator.getMessage('options_filters_not_found')}</div>}
+                    : <div className={styles.notFound}>{translator.getMessage('options_filters_not_found')}</div>}
             </div>
         </>
     );

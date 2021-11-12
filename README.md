@@ -33,3 +33,4 @@ yarn dev chrome --watch
 
 ## Permissions required
 - `scripting` - this permission is required in order to inject assistant script only in the pages required
+- `tabs` - this permission is required in order to get the url of the options page tab

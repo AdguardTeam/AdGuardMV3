@@ -1,5 +1,6 @@
 import { log } from 'Common/logger';
 import { sender } from './messaging/sender';
+import { subscribe } from './subscribe';
 
 log.debug('Content script has loaded via Manifest V3.');
 
@@ -21,6 +22,8 @@ const tryLoadCssAndScripts = async () => {
     const response = await sender.getCss();
     applyCss(response);
 };
+
+subscribe.init();
 
 (async () => {
     // TODO remove

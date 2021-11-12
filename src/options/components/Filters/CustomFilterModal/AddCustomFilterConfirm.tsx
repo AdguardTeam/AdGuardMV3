@@ -7,7 +7,7 @@ type ConfirmAddCustomProps = {
     title: string | '',
     description: string | null,
     onCancel: (e: React.MouseEvent) => void;
-    onSave: () => void;
+    onSave: (e: React.MouseEvent) => void;
 };
 
 export const AddCustomFilterConfirm = ({

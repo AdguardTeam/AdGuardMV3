@@ -100,6 +100,21 @@ export const messageHandler = async (
             console.log(ruleText);
             break;
         }
+        case MESSAGE_TYPES.ADD_FILTERING_SUBSCRIPTION: {
+            const { url, title } = data;
+
+            let path = 'options.html#customfilters';
+
+            path += `?subscribe=${encodeURIComponent(url)}`;
+
+            if (title) {
+                path += `&title=${title}`;
+            }
+
+            tabUtils.openOptionsPage(path);
+
+            break;
+        }
         case MESSAGE_TYPES.GET_CSS: {
             const filteringEnabled = settings.getSetting(SETTINGS_NAMES.FILTERING_ENABLED);
             const protectionEnabled = settings.getSetting(SETTINGS_NAMES.PROTECTION_ENABLED);

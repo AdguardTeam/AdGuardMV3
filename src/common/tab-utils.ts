@@ -101,8 +101,21 @@ class TabUtils {
         }
     };
 
-    openOptionsPage = () => {
-        return chrome.runtime.openOptionsPage();
+    /**
+     * opens the options page and makes it active
+     * @param path - if exists, updates the url of the current tab
+     */
+
+    openOptionsPage = (path?: string) => {
+        chrome.runtime.openOptionsPage(async () => {
+            const { id, url } = await this.getActiveTab();
+            if (path && id) {
+                this.updateTab(id, path);
+                if (url?.includes(chrome.runtime.id)) {
+                    this.reloadActiveTab();
+                }
+            }
+        });
     };
 
     reloadTab = (tabId: number) => {
@@ -122,6 +135,10 @@ class TabUtils {
         if (tab?.id) {
             await this.reloadTab(tab.id);
         }
+    };
+
+    updateTab = (tabId: number, path: string) => {
+        return chrome.tabs.update(tabId, { url: path });
     };
 }
 

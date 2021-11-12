@@ -143,7 +143,7 @@ class Filters {
         const filterInfo = this.parseFilterInfo(filterStrings, title);
         const filter: Filter = {
             id: this.getCustomFilterId(),
-            title: filterInfo.title,
+            title: title || filterInfo.title,
             enabled: true,
             description: filterInfo.description || '',
             groupId: CUSTOM_GROUP_ID,

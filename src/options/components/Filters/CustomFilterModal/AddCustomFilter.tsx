@@ -24,10 +24,18 @@ type AddCustomProps = {
     onError: (error: string | boolean) => void,
     onSuccess: (filterInfo: FilterInfo, fileContent: string) => void,
     addCustomFilterError: boolean,
+    urlToSubscribe: string,
+    initialTitle: string | null,
 };
 
-export const AddCustomFilter = ({ onError, onSuccess, addCustomFilterError }: AddCustomProps) => {
-    const [textareaValue, setTextareaValue] = useState('');
+export const AddCustomFilter = ({
+    onError,
+    onSuccess,
+    addCustomFilterError,
+    urlToSubscribe,
+    initialTitle,
+}: AddCustomProps) => {
+    const [textareaValue, setTextareaValue] = useState(urlToSubscribe);
 
     const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const { value } = e.target;
@@ -48,7 +56,8 @@ export const AddCustomFilter = ({ onError, onSuccess, addCustomFilterError }: Ad
 
         try {
             const fileContent = await readFile(file);
-            const filterInfo = await sender.getFilterInfoByContent(fileContent, file.name);
+            const filterInfo = await sender.getFilterInfoByContent(fileContent,
+                initialTitle || file.name);
             if (!filterInfo) {
                 const errorMessage = 'Filter format is broken';
                 log.error(errorMessage);
@@ -69,7 +78,8 @@ export const AddCustomFilter = ({ onError, onSuccess, addCustomFilterError }: Ad
         const url = data.get('url') as string;
         try {
             const filterContent = await sender.getFilterContentByUrl(url);
-            const filterInfo = await sender.getFilterInfoByContent(filterContent, url);
+            const filterInfo = await sender.getFilterInfoByContent(filterContent,
+                initialTitle || url);
             if (!filterInfo) {
                 const errorMessage = 'Filter format is broken';
                 log.error(errorMessage);

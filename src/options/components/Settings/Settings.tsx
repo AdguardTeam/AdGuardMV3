@@ -67,14 +67,14 @@ export const Settings = observer(() => {
             id: 'custom_filters',
             iconId: ICON_ID.CUSTOM_FILTERS,
             messageKey: 'options_custom_filters_option',
-            to: '/filters?groupId=0',
+            to: '/customfilters',
         },
         USER_RULES: {
             id: 'user_rules_option',
             iconId: ICON_ID.USER_RULES,
             messageKey: 'options_user_rules_option',
             // FIXME make enum
-            to: '/userRules',
+            to: '/userrules',
         },
     };
 

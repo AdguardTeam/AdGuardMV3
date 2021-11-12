@@ -62,8 +62,8 @@ export const OptionsApp = observer(() => {
                         <Switch>
                             <Route path="/" exact component={Settings} />
                             <Route path="/about" component={About} />
-                            <Route path="/userRules" component={UserRules} />
-                            <Route path="/filters" component={Filters} />
+                            <Route path="/userrules" component={UserRules} />
+                            <Route path="/customfilters" component={Filters} />
                             <Route path="/languages" component={Languages} />
                             <Route />
                         </Switch>
