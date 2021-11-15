@@ -7,6 +7,7 @@ import cn from 'classnames';
 import { USER_RULE_STATUS, UserRuleType } from 'Options/stores/OptionsStore';
 import { groupByKeyValue } from 'Common/helpers';
 import { CheckboxOption } from 'Options/components/CheckboxOption';
+import { theme } from 'Common/styles';
 import { ModalButton } from 'Common/components/ModalButton';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { UserRule } from 'Options/components/Filters/UserRule';
@@ -289,7 +290,11 @@ export const UserRulesBase = observer(() => {
                         {RULE_INPUT_TYPE.IS_CUSTOM && (
                             <button
                                 type="button"
-                                className={styles.btnDelete}
+                                className={cn(
+                                    theme.button.middle,
+                                    theme.button.green,
+                                    styles.leftBtn,
+                                )}
                                 onClick={onDeleteClick}
                             >
                                 {reactTranslator.getMessage('options_user_rule_delete')}
@@ -297,7 +302,7 @@ export const UserRulesBase = observer(() => {
                         )}
                         <button
                             type="button"
-                            className={styles.btnSave}
+                            className={cn(theme.button.middle, theme.button.green)}
                             onClick={saveRule}
                         >
                             {reactTranslator.getMessage('options_user_rule_save')}

@@ -1,7 +1,9 @@
 import React, { useRef, useState } from 'react';
+import cn from 'classnames';
 import ReactResizeDetector from 'react-resize-detector';
 import AceEditor from 'react-ace';
 import { useStore } from 'Options/stores/useStore';
+import { theme } from 'Common/styles';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 
 import styles from 'Options/components/Filters/Editor/Editor.module.pcss';
@@ -87,7 +89,7 @@ export const Editor = () => {
             />
             <div className={styles.controls}>
                 <button
-                    className={styles.btnSave}
+                    className={cn(theme.button.middle, theme.button.green)}
                     type="button"
                     onClick={onSave}
                 >

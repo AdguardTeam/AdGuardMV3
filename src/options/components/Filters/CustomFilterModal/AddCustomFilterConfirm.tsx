@@ -1,5 +1,6 @@
 import React from 'react';
-
+import cn from 'classnames';
+import { theme } from 'Common/styles';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import styles from './CustomFilterModal.module.pcss';
 
@@ -21,14 +22,14 @@ export const AddCustomFilterConfirm = ({
             <div className={styles.description}>{description}</div>
             <div className={styles.buttonsGroup}>
                 <button
-                    className={styles.btnDelete}
+                    className={cn(theme.button.middle, theme.button.red, styles.leftBtn)}
                     type="button"
                     onClick={onCancel}
                 >
                     {reactTranslator.getMessage('options_custom_filter_modal_confirm_cancel_button')}
                 </button>
                 <button
-                    className={styles.btnSave}
+                    className={cn(theme.button.middle, theme.button.green)}
                     type="button"
                     disabled={title.trim().length === 0}
                     onClick={onSave}

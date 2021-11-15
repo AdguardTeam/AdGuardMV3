@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import cn from 'classnames';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { log } from 'Common/logger';
+import { theme } from 'Common/styles';
 import { sender } from '../../../messaging/sender';
 
 import styles from './CustomFilterModal.module.pcss';
@@ -102,7 +103,7 @@ export const AddCustomFilter = ({
                 <div className={cn(styles.buttonsGroup, styles.center)}>
                     <button
                         type="button"
-                        className={styles.btnSave}
+                        className={cn(theme.button.middle, theme.button.green)}
                         onClick={() => { onError(false); }}
                     >
                         {reactTranslator.getMessage('options_custom_filter_modal_retry_button')}
@@ -129,7 +130,7 @@ export const AddCustomFilter = ({
                 onChange={handleFileInputChange}
             />
             <div className={styles.buttonsGroup}>
-                <button type="button" className={styles.btnLight}>
+                <button type="button" className={cn(theme.button.middle, theme.button.transparent, styles.leftBtn)}>
                     <label htmlFor="file-input" className={styles.label}>
                         {reactTranslator.getMessage('options_custom_filter_modal_add_browse_button')}
                     </label>
@@ -137,7 +138,7 @@ export const AddCustomFilter = ({
                 <button
                     type="submit"
                     disabled={textareaValue.trim().length === 0}
-                    className={styles.btnSave}
+                    className={cn(theme.button.middle, theme.button.green)}
                 >
                     {reactTranslator.getMessage('options_custom_filter_modal_add_add_button')}
                 </button>
