@@ -1,6 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
-import { Icon, ICON_ID } from 'Common/components/ui';
+import { Icon, IconId } from 'Common/components/ui';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { theme } from 'Common/styles';
 
@@ -18,7 +18,7 @@ export const Footer = () => {
                     ),
                 })}
             </span>
-            <Icon id={ICON_ID.CHROME_LOGO} className={styles.footerLogo} />
+            <Icon id={IconId.CHROME_LOGO} className={styles.footerLogo} />
         </footer>
     );
 };

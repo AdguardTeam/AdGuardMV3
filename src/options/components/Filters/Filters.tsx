@@ -5,20 +5,17 @@ import React, {
 } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import { observer } from 'mobx-react';
-import Modal from 'react-modal';
 
 import { translator } from 'Common/translators/translator';
 import { CUSTOM_GROUP_ID, QUERY_PARAM_NAMES } from 'Common/constants';
-import { ICON_ID } from 'Common/components/ui';
-import { FilterHeader } from 'Options/components/Filters/FiltersHeader';
+import { Section, Header } from 'Common/components/Section';
+import { IconId } from 'Common/components/ui';
 import { rootStore } from 'Options/stores';
 import { CustomFilterModal } from 'Options/components/Filters/CustomFilterModal';
 import { CheckboxOption } from 'Options/components/CheckboxOption';
-import { ModalButton } from 'Common/components/ModalButton/ModalButton';
+import { Button } from 'Common/components/Button/Button';
 
 import styles from './Filters.module.pcss';
-
-Modal.setAppElement('#root');
 
 const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -102,45 +99,50 @@ export const Filters = observer(() => {
                 isOpen={customFilterModalStore.isModalOpen}
                 closeHandler={closeModalHandler}
             />
-            <FilterHeader
-                isOpen={searchStore.isSearchOpen}
-                handleBackClick={closeSearch}
-                handleSearchClick={openSearch}
-                handleCloseSearchClick={closeSearch}
-                handleSearchInputChange={handleSearchInputChange}
-                searchValue={searchStore.searchValue}
-                pageTitle={translator.getMessage('options_custom_filters_option')}
-            />
-            <ModalButton
-                icon={ICON_ID.PLUS}
-                handleClick={openModal}
-                message={translator.getMessage('options_add_custom_filter')}
-            />
-            <div className={styles.container}>
-                {filtersByGroupId?.length > 0
-                    ? filtersByGroupId.map((filter) => {
-                        const onChange = async () => {
-                            if (filter.enabled) {
-                                await disableFilter(filter.id);
-                            } else {
-                                await enableFilter(filter.id);
-                            }
-                        };
+            <Section
+                header={(
+                    <Header
+                        isOpen={searchStore.isSearchOpen}
+                        handleBackClick={closeSearch}
+                        handleSearchClick={openSearch}
+                        handleCloseSearchClick={closeSearch}
+                        handleSearchInputChange={handleSearchInputChange}
+                        searchValue={searchStore.searchValue}
+                        pageTitle={translator.getMessage('options_custom_filters_option')}
+                    />
+                )}
+            >
+                <Button
+                    icon={IconId.PLUS}
+                    handleClick={openModal}
+                    message={translator.getMessage('options_add_custom_filter')}
+                />
+                <div className={styles.container}>
+                    {filtersByGroupId?.length > 0
+                        ? filtersByGroupId.map((filter) => {
+                            const onChange = async () => {
+                                if (filter.enabled) {
+                                    await disableFilter(filter.id);
+                                } else {
+                                    await enableFilter(filter.id);
+                                }
+                            };
 
-                        return (
-                            <CheckboxOption
-                                iconId={ICON_ID.CUSTOM_FILTERS}
-                                key={filter.id}
-                                id={filter.id.toString()}
-                                message={filter.title}
-                                checked={filter.enabled}
-                                onClick={() => { handleClickToFilter(filter.id); }}
-                                onChange={onChange}
-                            />
-                        );
-                    })
-                    : <div className={styles.notFound}>{translator.getMessage('options_filters_not_found')}</div>}
-            </div>
+                            return (
+                                <CheckboxOption
+                                    iconId={IconId.CUSTOM_FILTERS}
+                                    key={filter.id}
+                                    id={filter.id.toString()}
+                                    message={filter.title}
+                                    checked={filter.enabled}
+                                    onClick={() => { handleClickToFilter(filter.id); }}
+                                    onChange={onChange}
+                                />
+                            );
+                        })
+                        : <div className={styles.notFound}>{translator.getMessage('options_filters_not_found')}</div>}
+                </div>
+            </Section>
         </>
     );
 });

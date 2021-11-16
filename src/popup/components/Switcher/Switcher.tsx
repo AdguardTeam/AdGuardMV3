@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
 import cn from 'classnames';
 
-import { Icon, ICON_ID } from 'Common/components/ui';
+import { Icon, IconId } from 'Common/components/ui';
 import { SETTINGS_NAMES } from 'Common/settings-constants';
 import { rootStore } from '../../stores';
 import { sender } from '../../messaging/sender';
@@ -18,7 +18,7 @@ export const Switcher = observer(() => {
         await sender.reloadActiveTab();
     };
 
-    const icon = filteringEnabled ? ICON_ID.CHECKMARK : ICON_ID.CIRCLE;
+    const icon = filteringEnabled ? IconId.CHECKMARK : IconId.CIRCLE;
 
     const className = cn(styles.switcher, {
         [styles.disabled]: !filteringEnabled,

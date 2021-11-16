@@ -55,10 +55,6 @@ export class CustomFilterModalStore {
         this.openModal();
     };
 
-    switchToAddCustomFilterStep = () => {
-        this.setCurrentStep(STEPS.ADD_CUSTOM_FILTER);
-    };
-
     switchToAddCustomFilterConfirmStep = () => {
         this.setCurrentStep(STEPS.ADD_CUSTOM_FILTER_CONFIRM);
     };

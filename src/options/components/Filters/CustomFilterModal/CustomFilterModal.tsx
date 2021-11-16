@@ -1,24 +1,21 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 import React, { useContext, useEffect, useState } from 'react';
-import Modal from 'react-modal';
 import { observer } from 'mobx-react';
 
+import { Modal } from 'Common/components/Modal';
+import { theme } from 'Common/styles';
 import { log } from 'Common/logger';
 import { translator } from 'Common/translators/translator';
-import { Icon, ICON_ID } from 'Common/components/ui';
+import { Icon, IconId } from 'Common/components/ui';
 import { rootStore } from 'Options/stores';
 import { STEPS } from 'Options/stores/CustomFilterModalStore';
 import { AddCustomFilter } from 'Options/components/Filters/CustomFilterModal/AddCustomFilter';
 import { AddCustomFilterConfirm } from 'Options/components/Filters/CustomFilterModal/AddCustomFilterConfirm';
 import { RemoveCustomFilter } from 'Options/components/Filters/CustomFilterModal/RemoveCustomFilter';
 
-import s from './CustomFilterModal.module.pcss';
-
-Modal.setAppElement('#root');
-
 type CustomFilterModalProps = {
     isOpen: boolean,
-    closeHandler: (e: React.MouseEvent) => void,
+    closeHandler: () => void,
     urlToSubscribe: string,
     initialTitle: string | null,
 };
@@ -49,11 +46,11 @@ export const CustomFilterModal = observer(({
 
     const [addCustomFilterError, setAddCustomFilterError] = useState(false);
 
-    const onCancelAddCustomModal = (e: React.MouseEvent) => {
-        closeHandler(e);
+    const onCancelAddCustomModal = () => {
+        closeHandler();
     };
 
-    const onSaveCustomFilter = async (e: React.MouseEvent) => {
+    const onSaveCustomFilter = async () => {
         if (filterContent && filterInfo) {
             try {
                 await settingsStore.addCustomFilterByContent(filterContent, filterTitle);
@@ -64,7 +61,7 @@ export const CustomFilterModal = observer(({
         } else {
             throw new Error('Save custom modal requires url or filter content');
         }
-        closeHandler(e);
+        closeHandler();
     };
 
     const onRemoveCustomFilter = async () => {
@@ -122,7 +119,7 @@ export const CustomFilterModal = observer(({
 
     const stepsMap = {
         [STEPS.ADD_CUSTOM_FILTER]: {
-            icon: addCustomFilterError ? ICON_ID.WARNING : null,
+            icon: addCustomFilterError ? IconId.WARNING : null,
             title: addCustomFilterError ? translator.getMessage('options_custom_filter_modal_retry_title') : translator.getMessage('options_custom_filter_modal_add_title'),
             component: () => (
                 <AddCustomFilter
@@ -171,32 +168,22 @@ export const CustomFilterModal = observer(({
     return (
         <Modal
             isOpen={isOpen}
-            onRequestClose={closeHandler}
-            className={s.modal}
-            bodyOpenClassName="bodyOpenClassName"
-            overlayClassName={{
-                base: s.overlay,
-                afterOpen: 'overlay--after-open',
-                beforeClose: 'overlay--before-close',
-            }}
+            handleClose={closeHandler}
         >
-            <div className={s.contentContainer}>
-                <div className={s.header}>
-                    {step.icon && <Icon className={s.icon} id={step.icon} />}
+            <div className={theme.modal.container}>
+                <div className={theme.modal.header}>
+                    {step.icon && <Icon className={theme.modal.headerIcon} id={step.icon} />}
                     { step.title === filterTitle
                         ? (
                             <input
-                                className={s.modalInput}
+                                className={theme.modal.modalInput}
                                 type="text"
                                 value={filterTitle}
                                 onChange={onChangeTitle}
                             />
                         )
-                        : <h1 className={s.heading}>{step.title}</h1>}
+                        : <h1 className={theme.modal.title}>{step.title}</h1>}
                 </div>
-                <button onClick={closeHandler} className={s.closeIcon} type="button">
-                    <Icon id={ICON_ID.CROSS} />
-                </button>
                 {step.component()}
             </div>
         </Modal>

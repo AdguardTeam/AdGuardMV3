@@ -1,6 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
-import { Icon, ICON_ID } from 'Common/components/ui';
+import { Icon, IconId } from 'Common/components/ui';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { NavLink } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ import styles from './NavOption.module.pcss';
 
 export interface IProps {
     id: string;
-    iconId?: ICON_ID;
+    iconId?: IconId;
     messageKey: string;
     to: string;
 }
@@ -34,7 +34,7 @@ export const NavOption = ({
                     {reactTranslator.getMessage(messageKey)}
                 </label>
             </div>
-            <Icon id={ICON_ID.ARROW} />
+            <Icon id={IconId.ARROW} />
         </div>
     </NavLink>
 );

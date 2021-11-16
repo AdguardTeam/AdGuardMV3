@@ -14,6 +14,7 @@ import { protectionPause } from './protectionPause';
 import { filters } from './filters';
 import { categories } from './categories';
 import { backend } from './backend';
+import { userRules } from './userRules';
 
 interface MessageHandler {
     (message: Message, sender: chrome.runtime.MessageSender): any;
@@ -163,6 +164,12 @@ export const messageHandler = async (
         case MESSAGE_TYPES.REMOVE_CUSTOM_FILTER_BY_ID: {
             const { filterId } = data;
             return filters.removeFilter(filterId);
+        }
+        case MESSAGE_TYPES.GET_USER_RULES: {
+            return userRules.getRules();
+        }
+        case MESSAGE_TYPES.SET_USER_RULES: {
+            return userRules.setUserRules(data.userRules);
         }
         default: {
             throw new Error(`No message handler for type: ${type}`);

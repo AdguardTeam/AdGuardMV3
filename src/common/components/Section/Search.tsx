@@ -1,33 +1,34 @@
 /* eslint-disable jsx-a11y/no-autofocus */
 import React, { useRef } from 'react';
 import { observer } from 'mobx-react';
-import { ICON_ID, Icon } from 'Common/components/ui';
-import { useOutsideClick } from 'Common/hooks/useOutsideClick';
-import { reactTranslator } from 'Common/translators/reactTranslator';
 
-import styles from 'Options/components/Filters/FiltersSearch/FiltersSearch.module.pcss';
+import { IconId, Icon } from '../ui';
+import { useOutsideClick } from '../../hooks/useOutsideClick';
+import { translator } from '../../translators/translator';
 
-export type IProps = {
+import styles from './Section.module.pcss';
+
+interface SearchProps {
     value: string,
     handleCloseSearchClick: () => void,
     handleSearchInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
-};
+}
 
-export const FiltersSearch = observer(({
+export const Search = observer(({
     value,
     handleCloseSearchClick,
     handleSearchInputChange,
-}: IProps) => {
+}: SearchProps) => {
     const formRef = useRef<HTMLFormElement>(null);
 
     useOutsideClick(formRef, handleCloseSearchClick);
 
     return (
-        <form ref={formRef} className={styles.container}>
+        <form ref={formRef} className={styles.searchContainer}>
             <input
                 autoFocus
                 type="text"
-                placeholder={reactTranslator.getMessage('options_rules_search') as string}
+                placeholder={translator.getMessage('options_rules_search')}
                 value={value}
                 onChange={handleSearchInputChange}
                 className={styles.search}
@@ -36,7 +37,7 @@ export const FiltersSearch = observer(({
                 type="button"
                 onClick={handleCloseSearchClick}
             >
-                <Icon id={ICON_ID.CROSS} />
+                <Icon id={IconId.CROSS} />
             </button>
         </form>
     );

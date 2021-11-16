@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import cn from 'classnames';
+
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { log } from 'Common/logger';
 import { theme } from 'Common/styles';
-import { sender } from '../../../messaging/sender';
-
-import styles from './CustomFilterModal.module.pcss';
+import { translator } from 'Common/translators/translator';
+import { sender } from 'Options/messaging/sender';
 
 const readFile = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
@@ -97,10 +97,10 @@ export const AddCustomFilter = ({
     if (addCustomFilterError) {
         return (
             <>
-                <div className={styles.description}>
+                <div className={theme.modal.description}>
                     {reactTranslator.getMessage('options_custom_filter_modal_retry_description')}
                 </div>
-                <div className={cn(styles.buttonsGroup, styles.center)}>
+                <div className={cn(theme.modal.footer, theme.modal.center)}>
                     <button
                         type="button"
                         className={cn(theme.button.middle, theme.button.green)}
@@ -116,11 +116,11 @@ export const AddCustomFilter = ({
     return (
         <form action="#" onSubmit={handleSubmit}>
             <textarea
-                className={cn(styles.modalInput, styles.modalTextarea)}
+                className={cn(theme.modal.modalInput, theme.modal.modalTextarea)}
                 defaultValue={textareaValue}
                 onChange={handleTextareaChange}
                 name="url"
-                placeholder={reactTranslator.getMessage('options_paste_filter_url') as string}
+                placeholder={translator.getMessage('options_paste_filter_url')}
             />
             <input
                 id="file-input"
@@ -129,9 +129,9 @@ export const AddCustomFilter = ({
                 style={{ display: 'none' }}
                 onChange={handleFileInputChange}
             />
-            <div className={styles.buttonsGroup}>
-                <button type="button" className={cn(theme.button.middle, theme.button.transparent, styles.leftBtn)}>
-                    <label htmlFor="file-input" className={styles.label}>
+            <div className={cn(theme.modal.footer, theme.modal.right)}>
+                <button type="button" className={cn(theme.button.middle, theme.button.transparent, theme.modal.leftBtn)}>
+                    <label htmlFor="file-input">
                         {reactTranslator.getMessage('options_custom_filter_modal_add_browse_button')}
                     </label>
                 </button>

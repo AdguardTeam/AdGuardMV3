@@ -11,5 +11,6 @@ export default {
     ],
     moduleNameMapper: {
         'Common/(.*)': ['<rootDir>/src/common/$1'],
+        'Options/(.*)': ['<rootDir>/src/options/$1'],
     },
 };

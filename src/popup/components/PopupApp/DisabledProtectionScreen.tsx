@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
 import cn from 'classnames';
-import { Icon, ICON_ID } from 'Common/components/ui';
+import { Icon, IconId } from 'Common/components/ui';
 import { theme } from 'Common/styles';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { SETTINGS_NAMES } from 'Common/settings-constants';
@@ -28,7 +28,7 @@ export const DisabledProtectionScreen = observer(() => {
     return (
         <>
             <div>
-                <Icon id={ICON_ID.DISABLED_LOGO} />
+                <Icon id={IconId.DISABLED_LOGO} />
             </div>
             <div className={styles.sectionContainer}>
                 <section className={styles.section}>

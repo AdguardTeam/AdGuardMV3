@@ -1,15 +1,16 @@
 import React from 'react';
-import { Icon, ICON_ID } from 'Common/components/ui';
 
-import styles from 'Common/components/ModalButton/ModalButton.module.pcss';
+import { Icon, IconId } from 'Common/components/ui';
 
-export type IProps = {
+import styles from 'Common/components/Button/Button.module.pcss';
+
+export type ButtonProps = {
     handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void,
     message: string,
-    icon: ICON_ID,
+    icon: IconId,
 };
 
-export const ModalButton = ({ handleClick, message, icon }: IProps) => (
+export const Button = ({ handleClick, message, icon }: ButtonProps) => (
     <div className={styles.addRuleContainer}>
         <button
             className={styles.addRuleButton}

@@ -2,7 +2,6 @@ import React from 'react';
 import cn from 'classnames';
 import { theme } from 'Common/styles';
 import { reactTranslator } from 'Common/translators/reactTranslator';
-import styles from './CustomFilterModal.module.pcss';
 
 interface RemoveCustomFilterProps {
     title: string;
@@ -22,19 +21,19 @@ export const RemoveCustomFilter = ({
     return (
         <>
             <input
-                className={styles.modalInput}
+                className={theme.modal.modalInput}
                 type="text"
                 value={title}
                 onChange={onChange}
             />
             {
                 description
-                && <div className={styles.description}>{description}</div>
+                && <div className={theme.modal.description}>{description}</div>
             }
-            <div className={styles.buttonsGroup}>
+            <div className={theme.modal.footer}>
                 <button
                     type="button"
-                    className={cn(theme.button.middle, theme.button.red, styles.leftBtn)}
+                    className={cn(theme.button.middle, theme.button.red, theme.modal.leftBtn)}
                     onClick={onRemove}
                 >
                     {reactTranslator.getMessage('options_custom_filter_modal_remove_button')}

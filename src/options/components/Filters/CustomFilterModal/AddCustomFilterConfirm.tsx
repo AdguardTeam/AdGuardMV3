@@ -2,7 +2,6 @@ import React from 'react';
 import cn from 'classnames';
 import { theme } from 'Common/styles';
 import { reactTranslator } from 'Common/translators/reactTranslator';
-import styles from './CustomFilterModal.module.pcss';
 
 type ConfirmAddCustomProps = {
     title: string | '',
@@ -19,10 +18,10 @@ export const AddCustomFilterConfirm = ({
 }: ConfirmAddCustomProps) => {
     return (
         <>
-            <div className={styles.description}>{description}</div>
-            <div className={styles.buttonsGroup}>
+            <div className={theme.modal.description}>{description}</div>
+            <div className={cn(theme.modal.footer, theme.modal.right)}>
                 <button
-                    className={cn(theme.button.middle, theme.button.red, styles.leftBtn)}
+                    className={cn(theme.button.middle, theme.button.red, theme.modal.leftBtn)}
                     type="button"
                     onClick={onCancel}
                 >

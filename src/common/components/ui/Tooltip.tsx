@@ -2,12 +2,12 @@
 import React, { useRef, useState } from 'react';
 import { usePopperTooltip } from 'react-popper-tooltip';
 
-import { Icon, ICON_ID } from 'Common/components/ui';
+import { Icon, IconId } from 'Common/components/ui';
 import { useOutsideClick } from 'Common/hooks/useOutsideClick';
 import styles from './Tooltip.module.pcss';
 
 type IProps = {
-    iconId: ICON_ID,
+    iconId: IconId,
     className?: string,
     children: React.ReactChild | React.ReactChild[],
     enabled?: boolean,

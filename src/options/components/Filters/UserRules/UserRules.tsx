@@ -1,61 +1,83 @@
 import React, { useEffect } from 'react';
-import {
-    Route,
-    Switch,
-    useLocation,
-    useRouteMatch,
-} from 'react-router-dom';
-import Modal from 'react-modal';
-import { reactTranslator } from 'Common/translators/reactTranslator';
 import { observer } from 'mobx-react';
-import { FilterHeader } from 'Options/components/Filters/FiltersHeader';
-import { Editor } from 'Options/components/Filters/Editor';
+
+import { Editor } from 'Options/components/Filters/UserRules/Editor';
 import { useStore } from 'Options/stores/useStore';
-import { UserRulesBase } from 'Options/components/Filters/UserRules/UserRulesBase';
-
-import styles from 'Options/components/Filters/UserRules/UserRules.module.pcss';
-
-Modal.setAppElement('#root');
+import { UserRulesGroups } from 'Options/components/Filters/UserRules/UserRulesGroups';
+import { translator } from 'Common/translators/translator';
+import { Button } from 'Common/components/Button';
+import { Section, Header } from 'Common/components/Section';
+import { IconId } from 'Common/components/ui';
+import { UserRuleWizard } from 'Options/components/Filters/UserRules/UserRuleWizard';
 
 export const UserRules = observer(() => {
-    const { searchStore } = useStore();
+    const {
+        searchStore,
+        optionsStore,
+    } = useStore();
+
     const {
         closeSearch,
         openSearch,
     } = searchStore;
 
-    const { pathname } = useLocation();
-    const { path } = useRouteMatch();
-
     useEffect(() => {
         return searchStore.closeSearch;
     }, []);
 
-    const editorPathPart = '/editor';
-    const showEditor = pathname.endsWith(editorPathPart);
+    useEffect(() => {
+        optionsStore.fetchUserRules();
+    }, []);
 
     const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         searchStore.setSearchValue(e.currentTarget.value);
     };
 
-    // FIXME modal overlay
+    const openEditor = () => {
+        optionsStore.openEditor();
+    };
+
+    const openAddUserRuleWizard = () => {
+        optionsStore.openNewUserRuleWizard();
+    };
+
+    const renderContent = (editorOpen: boolean) => {
+        if (editorOpen) {
+            return <Editor />;
+        }
+        return (
+            <>
+                <Button
+                    icon={IconId.MENU}
+                    handleClick={openEditor}
+                    message={translator.getMessage('options_user_rule_open_editor')}
+                />
+                <Button
+                    icon={IconId.PLUS}
+                    handleClick={openAddUserRuleWizard}
+                    message={translator.getMessage('options_user_rule_add_user_rule')}
+                />
+                <UserRulesGroups />
+            </>
+        );
+    };
+
     return (
-        <>
-            <div className={styles.container}>
-                <FilterHeader
+        <Section
+            header={(
+                <Header
                     isOpen={searchStore.isSearchOpen}
                     handleBackClick={closeSearch}
-                    handleSearchClick={showEditor ? undefined : openSearch}
-                    pageTitle={reactTranslator.getMessage('options_user_rules_option') as string}
+                    handleSearchClick={optionsStore.editorOpen ? undefined : openSearch}
+                    pageTitle={translator.getMessage('options_user_rules_option')}
                     searchValue={searchStore.searchValue}
                     handleCloseSearchClick={closeSearch}
                     handleSearchInputChange={handleSearchInputChange}
                 />
-            </div>
-            <Switch>
-                <Route exact path={path} component={UserRulesBase} />
-                <Route path={`${path}${editorPathPart}`} component={Editor} />
-            </Switch>
-        </>
+            )}
+        >
+            {renderContent(optionsStore.editorOpen)}
+            <UserRuleWizard />
+        </Section>
     );
 });

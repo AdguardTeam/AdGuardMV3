@@ -2,29 +2,36 @@ import React, { useRef, useState } from 'react';
 import cn from 'classnames';
 import ReactResizeDetector from 'react-resize-detector';
 import AceEditor from 'react-ace';
+
 import { useStore } from 'Options/stores/useStore';
 import { theme } from 'Common/styles';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 
-import styles from 'Options/components/Filters/Editor/Editor.module.pcss';
+import styles from 'Options/components/Filters/UserRules/Editor/Editor.module.pcss';
 
 import 'ace-builds/src-noconflict/ext-searchbox';
 import 'ace-builds/src-noconflict/theme-textmate';
-import './mode-adguard';
+import 'Common/editor/mode-adguard';
 
 export const Editor = () => {
+    const { optionsStore } = useStore();
+
     const name = 'editor';
     const editorRef = useRef<AceEditor>(null);
-    const { optionsStore } = useStore();
-    const { rawUserRules, setRawUserRules } = optionsStore;
-    const [text, setText] = useState(rawUserRules.join('\n'));
+    const { userRules, setUserRules, closeEditor } = optionsStore;
+    const [text, setText] = useState(userRules);
 
     const onChange = (value: string): void => {
         setText(value);
     };
 
     const onSave = () => {
-        setRawUserRules(text.split('\n').filter(Boolean));
+        setUserRules(text);
+        closeEditor();
+    };
+
+    const onCancel = () => {
+        closeEditor();
     };
 
     const SIZE_STORAGE_KEY = `${name}_editor-size`;
@@ -74,7 +81,7 @@ export const Editor = () => {
                 editorProps={{ $blockScrolling: true }}
                 value={text}
                 onChange={onChange}
-                className={styles.editor}
+                className={cn(styles.editor, 'editor')}
                 onLoad={(editor) => {
                     const offset = 8;
                     editor.renderer.setPadding(offset);
@@ -89,11 +96,18 @@ export const Editor = () => {
             />
             <div className={styles.controls}>
                 <button
-                    className={cn(theme.button.middle, theme.button.green)}
+                    className={cn(theme.button.middle, theme.button.green, styles.btnLeft)}
                     type="button"
                     onClick={onSave}
                 >
                     {reactTranslator.getMessage('options_editor_save')}
+                </button>
+                <button
+                    className={cn(theme.button.middle, theme.button.red)}
+                    type="button"
+                    onClick={onCancel}
+                >
+                    {reactTranslator.getMessage('options_editor_cancel')}
                 </button>
             </div>
         </div>

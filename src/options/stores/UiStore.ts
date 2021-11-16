@@ -5,12 +5,12 @@ import {
 } from 'mobx';
 import { nanoid } from 'nanoid';
 
-import { ICON_ID } from 'Common/components/ui';
+import { IconId } from 'Common/components/ui';
 import type { RootStore } from './RootStore';
 
 type Notifications = {
     id: string,
-    icon: ICON_ID | undefined,
+    icon: IconId | undefined,
     description: string,
 };
 
@@ -26,7 +26,7 @@ export class UiStore {
     }
 
     @action
-    addNotification = (description: string, icon?: ICON_ID) => {
+    addNotification = (description: string, icon?: IconId) => {
         const id = nanoid();
         this.notifications.push({
             id,

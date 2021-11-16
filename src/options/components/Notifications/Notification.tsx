@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import cn from 'classnames';
 
-import { Icon, ICON_ID } from 'Common/components/ui';
+import { Icon, IconId } from 'Common/components/ui';
 import { rootStore } from '../../stores';
 import styles from './notifications.module.pcss';
 
 interface NotificationProps {
     id: string
     description: string,
-    icon: ICON_ID | undefined,
+    icon: IconId | undefined,
 }
 
 export const Notification = ({ id, description, icon }: NotificationProps) => {
@@ -56,7 +56,7 @@ export const Notification = ({ id, description, icon }: NotificationProps) => {
                 className={styles.notificationClose}
                 onClick={close}
             >
-                <Icon id={ICON_ID.CROSS} className={cn(styles.icon, styles.close)} />
+                <Icon id={IconId.CROSS} className={cn(styles.icon, styles.close)} />
             </button>
         </div>
     );

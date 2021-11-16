@@ -1,13 +1,13 @@
 import React, { useRef } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Icon, ICON_ID } from 'Common/components/ui';
-import { FiltersSearch } from 'Options/components/Filters/FiltersSearch';
-import { reactTranslator } from 'Common/translators/reactTranslator';
+
+import { Icon, IconId } from 'Common/components/ui';
 import { TitleTooltip } from 'Common/components/TitleTooltip';
+import { translator } from 'Common/translators/translator';
+import { Search } from './Search';
+import styles from './Section.module.pcss';
 
-import styles from 'Options/components/Filters/FiltersHeader/FiltersHeader.module.pcss';
-
-export type IProps = {
+interface HeaderProps {
     isOpen: boolean,
     handleBackClick: () => void,
     handleSearchClick?: () => void,
@@ -15,9 +15,9 @@ export type IProps = {
     handleSearchInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
     pageTitle: string,
     searchValue: string,
-};
+}
 
-export const FilterHeader = ({
+export const Header = ({
     isOpen,
     searchValue,
     handleBackClick,
@@ -25,18 +25,18 @@ export const FilterHeader = ({
     handleCloseSearchClick,
     handleSearchInputChange,
     pageTitle,
-}: IProps) => {
+}: HeaderProps) => {
     const ref = useRef(null);
 
     return (
         <div className={styles.iconGroup}>
             <div className={styles.iconGroupHeading}>
                 <NavLink to="/" onClick={handleBackClick}>
-                    <Icon id={ICON_ID.ARROW_NAV} />
+                    <Icon id={IconId.ARROW_NAV} />
                 </NavLink>
                 {isOpen
                     ? (
-                        <FiltersSearch
+                        <Search
                             value={searchValue}
                             handleCloseSearchClick={handleCloseSearchClick}
                             handleSearchInputChange={handleSearchInputChange}
@@ -53,14 +53,18 @@ export const FilterHeader = ({
                     {handleSearchClick && (
                         <button
                             type="button"
-                            aria-label={reactTranslator.getMessage('options_user_magnifier') as string}
+                            aria-label={translator.getMessage('options_user_magnifier')}
                             onClick={handleSearchClick}
                         >
-                            <Icon id={ICON_ID.MAGNIFIER} />
+                            <Icon id={IconId.MAGNIFIER} />
                         </button>
                     )}
                 </div>
             )}
         </div>
     );
+};
+
+Header.defaultProps = {
+    handleSearchClick: undefined,
 };

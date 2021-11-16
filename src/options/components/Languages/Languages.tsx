@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
+
 import { rootStore } from 'Options/stores';
-import { reactTranslator } from 'Common/translators/reactTranslator';
 import { CheckboxOption } from 'Options/components/CheckboxOption';
 import { Category } from 'Options/components/Category';
+import { translator } from 'Common/translators/translator';
 
 export const Languages = observer(() => {
     const {
@@ -23,7 +24,7 @@ export const Languages = observer(() => {
     return (
         <Category
             navLink="/"
-            headerName={reactTranslator.getMessage('options_languages_option') as string}
+            headerName={translator.getMessage('options_languages_option')}
         >
             <>
                 {filters && filters.length > 0 && (

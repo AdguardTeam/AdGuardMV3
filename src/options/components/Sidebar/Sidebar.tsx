@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ICON_ID, Icon } from 'Common/components/ui';
+import { IconId, Icon } from 'Common/components/ui';
 import { Nav } from '../Nav';
 import { Notice } from '../Notice';
 
@@ -16,7 +16,7 @@ export const Sidebar = () => {
                 </button>
             </div>
             <div className="sidebar">
-                <Icon id={ICON_ID.LOGO} className="sidebar__logo" />
+                <Icon id={IconId.LOGO} className="sidebar__logo" />
                 <Nav />
                 <Notice />
             </div>

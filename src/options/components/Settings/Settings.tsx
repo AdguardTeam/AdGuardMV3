@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
 
-import { reactTranslator } from 'Common/translators/reactTranslator';
+import { translator } from 'Common/translators/translator';
 import { SETTINGS_NAMES } from 'Common/settings-constants';
-import { ICON_ID } from 'Common/components/ui';
+import { Section } from 'Common/components/Section';
+import { IconId } from 'Common/components/ui';
 import { rootStore } from '../../stores';
 import { CheckboxOption, CheckboxOptionProps } from '../CheckboxOption';
 import { NavOption, NavOptionProps } from '../NavOption';
@@ -18,7 +19,7 @@ export const Settings = observer(() => {
         BLOCK_ADS: {
             // NOTE! The value of the id attribute must be unique within the HTML document.
             id: 'block_ads_option',
-            iconId: ICON_ID.AD_BLOCKING,
+            iconId: IconId.AD_BLOCKING,
             messageKey: 'options_block_ads_option',
             onChange: async (e: React.ChangeEvent<HTMLInputElement>) => {
                 await setSetting(SETTINGS_NAMES.FILTERING_ENABLED, e.target.checked);
@@ -28,7 +29,7 @@ export const Settings = observer(() => {
         },
         BLOCK_ANNOYANCES: {
             id: 'block_annoyances_option',
-            iconId: ICON_ID.ANNOYANCES,
+            iconId: IconId.ANNOYANCES,
             messageKey: 'options_block_annoyances_option',
             onChange: async (e: React.ChangeEvent<HTMLInputElement>) => {
                 // eslint-disable-next-line no-console
@@ -38,7 +39,7 @@ export const Settings = observer(() => {
         },
         BLOCK_TRACKERS: {
             id: 'block_trackers_option',
-            iconId: ICON_ID.TRACKERS_BLOCKING,
+            iconId: IconId.TRACKERS_BLOCKING,
             messageKey: 'options_block_trackers_option',
             onChange: async (e: React.ChangeEvent<HTMLInputElement>) => {
                 // eslint-disable-next-line no-console
@@ -49,7 +50,7 @@ export const Settings = observer(() => {
         },
         BLOCK_SOCIAL_WIDGETS: {
             id: 'block_social_widgets_option',
-            iconId: ICON_ID.SOCIAL_WIDGETS,
+            iconId: IconId.SOCIAL_WIDGETS,
             messageKey: 'options_block_social_widgets_option',
             onChange: async (e: React.ChangeEvent<HTMLInputElement>) => {
                 // eslint-disable-next-line no-console
@@ -59,19 +60,19 @@ export const Settings = observer(() => {
         },
         LANGUAGES: {
             id: 'languages_option',
-            iconId: ICON_ID.LANGUAGES,
+            iconId: IconId.LANGUAGES,
             messageKey: 'options_languages_option',
             to: '/languages',
         },
         CUSTOM_FILTERS: {
             id: 'custom_filters',
-            iconId: ICON_ID.CUSTOM_FILTERS,
+            iconId: IconId.CUSTOM_FILTERS,
             messageKey: 'options_custom_filters_option',
             to: '/customfilters',
         },
         USER_RULES: {
             id: 'user_rules_option',
-            iconId: ICON_ID.USER_RULES,
+            iconId: IconId.USER_RULES,
             messageKey: 'options_user_rules_option',
             // FIXME make enum
             to: '/userrules',
@@ -93,13 +94,12 @@ export const Settings = observer(() => {
 
     return (
         <>
-            <h1 className={styles.h1}>
-                {reactTranslator.getMessage('options_settings_title')}
-            </h1>
-            <div className={styles.optionContainer}>
+            <Section
+                title={translator.getMessage('options_settings_title')}
+            >
                 {checkboxOptions.map(CheckboxOption)}
                 {navOptions.map(NavOption)}
-            </div>
+            </Section>
         </>
     );
 });

@@ -1,46 +1,41 @@
 import {
     action,
+    computed,
     observable,
-    makeObservable, computed,
+    makeObservable,
+    runInAction,
 } from 'mobx';
+import _ from 'lodash';
+
+import { sender } from 'Options/messaging/sender';
+import { UserRulesProcessor } from 'Options/user-rules-processor';
+import { NEW_LINE_SEPARATOR } from 'Common/constants';
+import { OTHER_DOMAIN_TITLE } from 'Options/constants';
 
 import type { RootStore } from './RootStore';
 
-export enum USER_RULE_STATUS {
+export enum UserRuleType {
     SITE_BLOCKED = 'SITE_BLOCKED',
     ELEMENT_BLOCKED = 'ELEMENT_BLOCKED',
     SITE_ALLOWED = 'SITE_ALLOWED',
     CUSTOM = 'CUSTOM',
 }
 
-const domainRegexp = /(([a-zA-Z]{1})|([a-zA-Z]{1}[a-zA-Z]{1})|([a-zA-Z]{1}[0-9]{1})|([0-9]{1}[a-zA-Z]{1})|([a-zA-Z0-9][a-zA-Z0-9-_]{1,61}[a-zA-Z0-9]))\.([a-zA-Z]{2,6}|[a-zA-Z0-9-]{2,30}\.[a-zA-Z]{2,3})/;
+export enum UserRuleWizardNewType {
+    CUSTOM = 'CUSTOM',
+    BLOCKING = 'BLOCKING',
+    UNBLOCKING = 'UNBLOCKING',
+}
 
-const parseDomainFromRule = (rule: string) => {
-    const matchArr = rule.match(domainRegexp);
-    return matchArr ? matchArr[0] : rule;
-};
+export enum UserRuleWizardAction {
+    NEW = 'NEW',
+    EDIT = 'EDIT',
+}
 
-const parseStatusFromRule = (rule: string): USER_RULE_STATUS => {
-    if (rule.startsWith('||')) {
-        return USER_RULE_STATUS.SITE_BLOCKED;
-    }
-    if (rule.startsWith('@@')) {
-        return USER_RULE_STATUS.SITE_ALLOWED;
-    }
-    return USER_RULE_STATUS.CUSTOM;
-};
-
-const parseUserRule = (rule: string) => ({
-    rule,
-    domain: parseDomainFromRule(rule),
-    status: parseStatusFromRule(rule),
-});
-
-export type UserRuleType = {
-    domain: string,
-    rule: string,
-    status: USER_RULE_STATUS,
-};
+interface UserRuleInWizard {
+    id: number,
+    ruleText: string,
+}
 
 export class OptionsStore {
     public rootStore: RootStore;
@@ -50,90 +45,177 @@ export class OptionsStore {
         makeObservable(this);
     }
 
-    defaultRuleInputType = USER_RULE_STATUS.CUSTOM;
-
-    defaultUserRules = [
-        {
-            domain: 'facebook.com',
-            rule: '||baddomain.com^$domain=facebook',
-            status: USER_RULE_STATUS.SITE_BLOCKED,
-        },
-        {
-            domain: 'google.com',
-            rule: 'example.org##.banner/google.com',
-            status: USER_RULE_STATUS.ELEMENT_BLOCKED,
-        },
-        {
-            domain: 'adguard.com',
-            rule: '@@|adguard.com',
-            status: USER_RULE_STATUS.SITE_ALLOWED,
-        },
-        {
-            domain: 'google.com',
-            rule: 'google.com',
-            status: USER_RULE_STATUS.CUSTOM,
-        },
-    ];
-
-    defaultRawUserRules = this.defaultUserRules.map(({ rule }) => {
-        return rule;
-    });
-
-    defaultUserRuleInput = '';
+    @observable
+    userRules = '';
 
     @observable
-    ruleInputType = this.defaultRuleInputType;
+    editorOpen = false;
+
+    @observable
+    userRuleWizardOpen = false;
+
+    @observable
+    userRuleWizardAction = UserRuleWizardAction.NEW;
+
+    @observable
+    userRuleInWizard: UserRuleInWizard | null = null;
+
+    @observable
+    userRuleWizardNewType = UserRuleWizardNewType.CUSTOM;
+
+    @observable
+    createdUserRuleText = '';
 
     @computed
-    get RULE_INPUT_TYPE() {
-        // Only one value should be true
-        return ({
-            IS_SITE_BLOCKED: USER_RULE_STATUS.SITE_BLOCKED === this.ruleInputType,
-            IS_SITE_ALLOWED: USER_RULE_STATUS.SITE_ALLOWED === this.ruleInputType,
-            IS_ELEMENT_BLOCKED: USER_RULE_STATUS.ELEMENT_BLOCKED === this.ruleInputType,
-            IS_CUSTOM: USER_RULE_STATUS.CUSTOM === this.ruleInputType,
+    get userRulesGroups() {
+        const userRulesProcessor = new UserRulesProcessor(this.userRules);
+        const userRulesData = userRulesProcessor.getData();
+
+        const userRulesGroupedByDomain = _.groupBy(userRulesData, (userRuleData) => {
+            return userRuleData.domain || OTHER_DOMAIN_TITLE;
         });
+
+        const userRulesGroups = Object.entries(userRulesGroupedByDomain);
+
+        const sortedGroups = userRulesGroups.sort((groupA, groupB) => {
+            const [domainA] = groupA;
+            const [domainB] = groupB;
+
+            if (domainA === domainB) {
+                return 0;
+            }
+
+            if (domainA === OTHER_DOMAIN_TITLE) {
+                return 1;
+            }
+
+            if (domainB === OTHER_DOMAIN_TITLE) {
+                return -1;
+            }
+
+            return domainA > domainB ? 1 : -1;
+        });
+
+        return sortedGroups;
     }
 
-    // FIXME group by domain
-    @observable
-    rawUserRules: string[] = this.defaultRawUserRules;
-
     @action
-    setRawUserRules = (rawUserRules: string[]) => {
-        this.rawUserRules = rawUserRules;
+    setUserRules = (userRules: string) => {
+        if (this.userRules === userRules) {
+            return;
+        }
+
+        this.userRules = userRules;
+        sender.setUserRules(this.userRules);
     };
 
-    @computed
-    get parsedUserRules(): UserRuleType[] {
-        return this.rawUserRules.map(parseUserRule);
+    @action
+    fetchUserRules = async () => {
+        const result = await sender.getUserRules();
+        runInAction(() => {
+            this.userRules = result;
+        });
+    };
+
+    @action
+    openEditor() {
+        this.editorOpen = true;
     }
 
-    @observable
-    userRuleInput = this.defaultUserRuleInput;
-
     @action
-    setRuleInputType = (value: USER_RULE_STATUS) => {
-        this.ruleInputType = value;
+    closeEditor = () => {
+        this.editorOpen = false;
     };
 
     @action
-    resetRuleInputType = () => {
-        this.ruleInputType = this.defaultRuleInputType;
+    enableRule = (ruleId: number) => {
+        const userRulesProcessor = new UserRulesProcessor(this.userRules);
+        userRulesProcessor.enableRule(ruleId);
+        this.setUserRules(userRulesProcessor.getUserRules());
     };
 
     @action
-    addRawUserRule = (rawUserRule: string) => {
-        this.rawUserRules.push(rawUserRule);
+    disableRule = (ruleId: number) => {
+        const userRulesProcessor = new UserRulesProcessor(this.userRules);
+        userRulesProcessor.disableRule(ruleId);
+        this.setUserRules(userRulesProcessor.getUserRules());
     };
 
     @action
-    updateUserRuleInput = (userRuleInput: string) => {
-        this.userRuleInput = userRuleInput;
-    };
+    openEditUserRuleWizard(userRule: UserRuleInWizard) {
+        this.userRuleInWizard = userRule;
+        this.openUserRuleWizard(UserRuleWizardAction.EDIT);
+    }
 
     @action
-    resetUserRuleInput = () => {
-        this.updateUserRuleInput(this.defaultUserRuleInput);
-    };
+    openNewUserRuleWizard() {
+        this.userRuleWizardNewType = UserRuleWizardNewType.CUSTOM;
+        this.openUserRuleWizard(UserRuleWizardAction.NEW);
+        this.createdUserRuleText = '';
+    }
+
+    @action
+    openUserRuleWizard(wizardAction = UserRuleWizardAction.NEW) {
+        this.userRuleWizardOpen = true;
+        this.userRuleWizardAction = wizardAction;
+    }
+
+    @action
+    closeUserRuleWizard() {
+        this.userRuleWizardOpen = false;
+    }
+
+    @action
+    setUserRuleWizardNewType(type: UserRuleWizardNewType) {
+        this.userRuleWizardNewType = type;
+        this.createdUserRuleText = '';
+    }
+
+    @action
+    updateCreatedUserRule(ruleText: string) {
+        this.createdUserRuleText = ruleText;
+    }
+
+    @action
+    addCreatedUserRule() {
+        const newUserRules = `${this.userRules}${NEW_LINE_SEPARATOR}${this.createdUserRuleText}`;
+        this.setUserRules(newUserRules);
+    }
+
+    @action
+    updateUserRuleInWizard(value: string) {
+        if (!this.userRuleInWizard) {
+            throw new Error('User rule in wizard should be defined to update it');
+        }
+        this.userRuleInWizard.ruleText = value;
+    }
+
+    @action
+    saveUserRuleInWizard() {
+        if (!this.userRuleInWizard) {
+            throw new Error('User rule in wizard should be defined to save it');
+        }
+        const userRulesProcessor = new UserRulesProcessor(this.userRules);
+        userRulesProcessor.updateRule(this.userRuleInWizard.id, this.userRuleInWizard.ruleText);
+        this.setUserRules(userRulesProcessor.getUserRules());
+        this.closeUserRuleWizard();
+    }
+
+    @action
+    deleteUserRuleInWizard() {
+        if (!this.userRuleInWizard) {
+            throw new Error('User rule in wizard should be defined to delete it');
+        }
+        const userRulesProcessor = new UserRulesProcessor(this.userRules);
+        userRulesProcessor.deleteRule(this.userRuleInWizard.id);
+        this.setUserRules(userRulesProcessor.getUserRules());
+        this.closeUserRuleWizard();
+    }
+
+    @action
+    addNewUserRule(newRule: string) {
+        const newUserRules = `${this.userRules}${NEW_LINE_SEPARATOR}${newRule}`;
+        this.setUserRules(newUserRules);
+        this.closeUserRuleWizard();
+    }
 }

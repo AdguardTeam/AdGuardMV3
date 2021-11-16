@@ -1,10 +1,12 @@
 import React, { useRef, Fragment } from 'react';
-import { Icon, ICON_ID } from 'Common/components/ui';
-import { reactTranslator } from 'Common/translators/reactTranslator';
-import { Checkbox } from 'Common/components/Checkbox';
 import cn from 'classnames';
 
+import { Icon, IconId } from 'Common/components/ui';
+import { reactTranslator } from 'Common/translators/reactTranslator';
+import { Checkbox } from 'Common/components/Checkbox';
+import { translator } from 'Common/translators/translator';
 import { TitleTooltip } from 'Common/components/TitleTooltip';
+
 import styles from './CheckboxOption.module.pcss';
 
 interface ChangeHandler {
@@ -13,7 +15,7 @@ interface ChangeHandler {
 
 export interface IProps {
     id: string;
-    iconId?: ICON_ID;
+    iconId?: IconId;
     checked?: boolean;
     messageKey?: string;
     messageKeyDesc?: string;
@@ -33,7 +35,7 @@ export const CheckboxOption = ({
     checked,
     messageKey,
     messageKeyDesc,
-    message = messageKey && reactTranslator.getMessage(messageKey) as string,
+    message = messageKey && translator.getMessage(messageKey),
     tooltipMessage = message,
     onClick,
     onChange,

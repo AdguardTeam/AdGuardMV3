@@ -47,6 +47,14 @@ class Sender {
     removeCustomFilterById = (filterId: number): Promise<Filter[]> => {
         return sendMessage(MESSAGE_TYPES.REMOVE_CUSTOM_FILTER_BY_ID, { filterId });
     };
+
+    getUserRules = (): Promise<string> => {
+        return sendMessage(MESSAGE_TYPES.GET_USER_RULES);
+    };
+
+    setUserRules = (userRules: string): Promise<void> => {
+        return sendMessage(MESSAGE_TYPES.SET_USER_RULES, { userRules });
+    };
 }
 
 export const sender = new Sender();

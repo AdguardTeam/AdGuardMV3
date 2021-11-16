@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Icon, ICON_ID } from 'Common/components/ui';
+import { Icon, IconId } from 'Common/components/ui';
 import style from './Category.module.pcss';
 
 interface CategoryProps {
@@ -18,7 +18,7 @@ export const Category = ({
         <>
             <div className={style.header}>
                 <NavLink to={navLink}>
-                    <Icon id={ICON_ID.ARROW_NAV} />
+                    <Icon id={IconId.ARROW_NAV} />
                 </NavLink>
                 <div className={style.headerName}>
                     {headerName}

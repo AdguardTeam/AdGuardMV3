@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
 import { translator } from 'Common/translators/translator';
-import { Icon, Tooltip, ICON_ID } from 'Common/components/ui';
+import { Icon, Tooltip, IconId } from 'Common/components/ui';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { SETTINGS_NAMES } from 'Common/settings-constants';
 import { PROTECTION_PAUSE_TIMEOUT_S, PROTECTION_PAUSE_TIMEOUT_MS } from 'Common/constants';
@@ -47,7 +47,7 @@ export const Header = observer(() => {
     return (
         <div className={styles.popupHeader}>
             <div className={styles.popupHeaderLogo}>
-                <Icon id={ICON_ID.LOGO} />
+                <Icon id={IconId.LOGO} />
             </div>
             <fieldset className={styles.popupHeaderButtons} disabled={!protectionEnabled}>
                 <button
@@ -57,7 +57,7 @@ export const Header = observer(() => {
                     title={translator.getMessage('options_block_ads_on_website')}
                     disabled={!protectionEnabled}
                 >
-                    <Icon id={ICON_ID.START} />
+                    <Icon id={IconId.START} />
                 </button>
                 <button
                     className={styles.popupHeaderButton}
@@ -66,10 +66,10 @@ export const Header = observer(() => {
                     title={translator.getMessage('options_open_settings')}
                     disabled={!protectionEnabled}
                 >
-                    <Icon id={ICON_ID.SETTINGS} />
+                    <Icon id={IconId.SETTINGS} />
                 </button>
                 <Tooltip
-                    iconId={ICON_ID.CRUMBS}
+                    iconId={IconId.CRUMBS}
                     className={styles.popupHeaderButton}
                     enabled={protectionEnabled}
                 >
