@@ -1,7 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import cn from 'classnames';
 import ReactResizeDetector from 'react-resize-detector';
 import AceEditor from 'react-ace';
+import { observer } from 'mobx-react';
 
 import { useStore } from 'Options/stores/useStore';
 import { theme } from 'Common/styles';
@@ -13,13 +14,17 @@ import 'ace-builds/src-noconflict/ext-searchbox';
 import 'ace-builds/src-noconflict/theme-textmate';
 import 'Common/editor/mode-adguard';
 
-export const Editor = () => {
+export const Editor = observer(() => {
     const { optionsStore } = useStore();
 
     const name = 'editor';
     const editorRef = useRef<AceEditor>(null);
     const { userRules, setUserRules, closeEditor } = optionsStore;
     const [text, setText] = useState(userRules);
+
+    useEffect(() => {
+        setText(userRules);
+    }, [userRules]);
 
     const onChange = (value: string): void => {
         setText(value);
@@ -112,4 +117,4 @@ export const Editor = () => {
             </div>
         </div>
     );
-};
+});

@@ -1,6 +1,8 @@
 import _ from 'lodash';
 
+import { NEW_LINE_SEPARATOR, NOTIFIER_EVENTS } from 'Common/constants';
 import { log } from 'Common/logger';
+import { notifier } from './notifier';
 import { storage } from './storage';
 
 class UserRules {
@@ -31,6 +33,12 @@ class UserRules {
         this.rules = userRules;
         this.persist();
     }
+
+    addRules = (rulesText: string) => {
+        notifier.notify(NOTIFIER_EVENTS.ADD_RULES, rulesText);
+        const newUserRules = `${this.rules}${NEW_LINE_SEPARATOR}${rulesText}`;
+        this.rules = newUserRules;
+    };
 
     async init() {
         this.rules = await storage.get(this.STORAGE_KEY) || this.rules;

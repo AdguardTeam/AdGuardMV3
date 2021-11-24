@@ -19,7 +19,7 @@ import styles from 'Options/components/OptionsApp/options-app.module.pcss';
 
 export const OptionsApp = observer(() => {
     const store = useContext(rootStore);
-    const { settingsStore } = store;
+    const { settingsStore, optionsStore } = store;
     const { getOptionsData } = settingsStore;
 
     useLayoutEffect(() => {
@@ -33,6 +33,7 @@ export const OptionsApp = observer(() => {
 
         const events = [
             NOTIFIER_EVENTS.SETTING_UPDATED,
+            NOTIFIER_EVENTS.ADD_RULES,
         ];
 
         const messageHandler = (message: any) => {
@@ -42,6 +43,11 @@ export const OptionsApp = observer(() => {
                 case NOTIFIER_EVENTS.SETTING_UPDATED: {
                     const { key, value } = data;
                     settingsStore.updateSettingState(key, value);
+                    break;
+                }
+                case NOTIFIER_EVENTS.ADD_RULES: {
+                    optionsStore.updateCreatedUserRule(data);
+                    optionsStore.addCreatedUserRule();
                     break;
                 }
                 default:

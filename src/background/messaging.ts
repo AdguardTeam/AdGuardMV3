@@ -96,9 +96,7 @@ export const messageHandler = async (
         }
         case MESSAGE_TYPES.ADD_USER_RULE: {
             const { ruleText } = data;
-            // TODO implement user rules add user rule method
-            // eslint-disable-next-line no-console
-            console.log(ruleText);
+            userRules.addRules(ruleText);
             break;
         }
         case MESSAGE_TYPES.ADD_FILTERING_SUBSCRIPTION: {
