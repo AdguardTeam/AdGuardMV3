@@ -7,12 +7,14 @@ interface CategoryProps {
     children: ReactElement,
     navLink: string;
     headerName: string;
+    headerDesc?: string;
 }
 
 export const Category = ({
     children,
     navLink,
     headerName,
+    headerDesc,
 }: CategoryProps) => {
     return (
         <>
@@ -21,10 +23,21 @@ export const Category = ({
                     <Icon id={IconId.ARROW_NAV} />
                 </NavLink>
                 <div className={style.headerName}>
-                    {headerName}
+                    <div className={style.headerNameIn}>
+                        {headerName}
+                    </div>
+                    {headerDesc && (
+                        <div className={style.headerDesc}>
+                            {headerDesc}
+                        </div>
+                    )}
                 </div>
             </div>
             {children}
         </>
     );
+};
+
+Category.defaultProps = {
+    headerDesc: undefined,
 };

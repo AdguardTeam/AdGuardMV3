@@ -12,7 +12,6 @@ import styles from './wizard.module.pcss';
 export const Wizard = observer(() => {
     const { wizardStore } = useContext(rootStore);
     const {
-        step,
         stepInfo,
         isLastStep,
         skipWizard,
@@ -47,8 +46,6 @@ export const Wizard = observer(() => {
             </div>
             <div className={styles.inner}>
                 <div className={cn(styles.info, styles.main)}>
-                    {`${step}.`}
-                    &nbsp;
                     {reactTranslator.getMessage(stepInfo.nameKey)}
                 </div>
                 <div className={cn(styles.info, styles.description)}>

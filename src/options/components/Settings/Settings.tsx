@@ -31,6 +31,7 @@ export const Settings = observer(() => {
             id: 'block_annoyances_option',
             iconId: IconId.ANNOYANCES,
             messageKey: 'options_block_annoyances_option',
+            messageKeyDesc: 'options_block_annoyances_option_desc',
             onChange: async (e: React.ChangeEvent<HTMLInputElement>) => {
                 // eslint-disable-next-line no-console
                 console.log('annoyances', e);
@@ -41,6 +42,7 @@ export const Settings = observer(() => {
             id: 'block_trackers_option',
             iconId: IconId.TRACKERS_BLOCKING,
             messageKey: 'options_block_trackers_option',
+            messageKeyDesc: 'options_block_trackers_option_desc',
             onChange: async (e: React.ChangeEvent<HTMLInputElement>) => {
                 // eslint-disable-next-line no-console
                 console.log('block_trackers', e);
@@ -52,6 +54,7 @@ export const Settings = observer(() => {
             id: 'block_social_widgets_option',
             iconId: IconId.SOCIAL_WIDGETS,
             messageKey: 'options_block_social_widgets_option',
+            messageKeyDesc: 'options_block_social_widgets_option_desc',
             onChange: async (e: React.ChangeEvent<HTMLInputElement>) => {
                 // eslint-disable-next-line no-console
                 console.log('block_trackers', e);
@@ -62,18 +65,21 @@ export const Settings = observer(() => {
             id: 'languages_option',
             iconId: IconId.LANGUAGES,
             messageKey: 'options_languages_option',
+            messageKeyDesc: 'options_languages_option_desc',
             to: '/languages',
         },
         CUSTOM_FILTERS: {
             id: 'custom_filters',
             iconId: IconId.CUSTOM_FILTERS,
             messageKey: 'options_custom_filters_option',
+            messageKeyDesc: 'options_custom_filters_option_desc',
             to: '/customfilters',
         },
         USER_RULES: {
             id: 'user_rules_option',
             iconId: IconId.USER_RULES,
             messageKey: 'options_user_rules_option',
+            messageKeyDesc: 'options_user_rules_option_desc',
             // FIXME make enum
             to: '/userrules',
         },

@@ -7,7 +7,6 @@ import styles from './About.module.pcss';
 
 // TODO add links to tds
 const READ_MORE_LINK = 'https://adguard.com';
-const ADGUARD_SITE_LINK = 'https://adguard.com';
 
 export const About = () => {
     return (
@@ -16,9 +15,12 @@ export const About = () => {
                 {reactTranslator.getMessage('options_about_title')}
             </h2>
             <h3 className={cn(theme.common.headingSecondary, styles.version)}>
-                {`${reactTranslator.getMessage('options_about_version')} ${chrome.runtime.getManifest().version}`}
+                {`${reactTranslator.getMessage('options_about_version')} ${chrome.runtime.getManifest().version} `}
+                {reactTranslator.getMessage('options_about_nightly')}
             </h3>
-            <div className={styles.section}>Placeholder</div>
+            <div className={styles.section}>
+                {reactTranslator.getMessage('options_about_latest_version')}
+            </div>
             <div className={styles.readMoreSection}>
                 <a
                     href={READ_MORE_LINK}
@@ -32,15 +34,6 @@ export const About = () => {
             <div className={styles.section}>{`2009-${new Date().getFullYear()} AdGuard Software Ltd.`}</div>
             <div className={styles.section}>
                 {reactTranslator.getMessage('options_about_rights_reserved')}
-                &nbsp;
-                <a
-                    href={ADGUARD_SITE_LINK}
-                    className={styles.link}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                >
-                    adguard.com
-                </a>
             </div>
         </section>
     );

@@ -72,9 +72,11 @@ export const CheckboxOption = ({
                         )}
                     </label>
                 </button>
-                {!integrated && (
-                    <Checkbox id={id} checked={checked} onChange={onChange} />
-                )}
+                {integrated ? (
+                    <div className={styles.optionLabelDesc}>
+                        {reactTranslator.getMessage('options_base_filter')}
+                    </div>
+                ) : <Checkbox id={id} checked={checked} onChange={onChange} />}
             </div>
             <TitleTooltip ref={ref}>{tooltipMessage}</TitleTooltip>
         </Fragment>

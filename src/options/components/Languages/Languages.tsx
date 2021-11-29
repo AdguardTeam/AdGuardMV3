@@ -25,6 +25,7 @@ export const Languages = observer(() => {
         <Category
             navLink="/"
             headerName={translator.getMessage('options_languages_option')}
+            headerDesc={translator.getMessage('options_languages_option_header_desc')}
         >
             <>
                 {filters && filters.length > 0 && (
@@ -45,7 +46,6 @@ export const Languages = observer(() => {
                                     key={filter.id}
                                     id={filter.id.toString()}
                                     message={filter.title}
-                                    messageKeyDesc={filter.description}
                                     checked={filter.enabled}
                                     onChange={onChange}
                                 />

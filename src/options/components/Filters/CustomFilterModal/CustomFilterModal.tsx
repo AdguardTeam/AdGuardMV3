@@ -46,6 +46,8 @@ export const CustomFilterModal = observer(({
 
     const [addCustomFilterError, setAddCustomFilterError] = useState(false);
 
+    const [confirmModal, setConfirmModal] = useState(false);
+
     const onCancelAddCustomModal = () => {
         closeHandler();
     };
@@ -62,6 +64,10 @@ export const CustomFilterModal = observer(({
             throw new Error('Save custom modal requires url or filter content');
         }
         closeHandler();
+    };
+
+    const removeConfirmModal = (param: boolean) => {
+        setConfirmModal(param);
     };
 
     const onRemoveCustomFilter = async () => {
@@ -121,6 +127,7 @@ export const CustomFilterModal = observer(({
         [STEPS.ADD_CUSTOM_FILTER]: {
             icon: addCustomFilterError ? IconId.WARNING : null,
             title: addCustomFilterError ? translator.getMessage('options_custom_filter_modal_retry_title') : translator.getMessage('options_custom_filter_modal_add_title'),
+            input: false,
             component: () => (
                 <AddCustomFilter
                     initialTitle={initialTitle}
@@ -133,7 +140,8 @@ export const CustomFilterModal = observer(({
         },
         [STEPS.ADD_CUSTOM_FILTER_CONFIRM]: {
             icon: null,
-            title: filterTitle,
+            title: translator.getMessage('options_custom_filter_modal_add_title'),
+            input: true,
             component: () => (
                 <AddCustomFilterConfirm
                     title={filterTitle}
@@ -145,17 +153,22 @@ export const CustomFilterModal = observer(({
         },
         [STEPS.REMOVE_CUSTOM_FILTER]: {
             icon: null,
-            title: translator.getMessage('options_custom_filter_modal_add_title'),
+            title: confirmModal ? translator.getMessage('options_custom_filter_modal_removed') : translator.getMessage('options_custom_filter_modal_edit_title'),
+            input: false,
             component: () => {
                 if (filterIdInModal) {
                     return (
-                        <RemoveCustomFilter
-                            title={filterTitle}
-                            description={filter?.description || ''}
-                            onChange={onChangeTitle}
-                            onRemove={onRemoveCustomFilter}
-                            onSave={onSaveTitle}
-                        />
+                        <>
+                            <RemoveCustomFilter
+                                title={filterTitle}
+                                description={filter?.description || ''}
+                                onChange={onChangeTitle}
+                                confirmModal={confirmModal}
+                                onRemove={onRemoveCustomFilter}
+                                onConfirmModal={removeConfirmModal}
+                                onSave={onSaveTitle}
+                            />
+                        </>
                     );
                 }
                 return null;
@@ -171,18 +184,20 @@ export const CustomFilterModal = observer(({
             handleClose={closeHandler}
         >
             <div className={theme.modal.container}>
+                <h1 className={theme.modal.title}>{step.title}</h1>
                 <div className={theme.modal.header}>
                     {step.icon && <Icon className={theme.modal.headerIcon} id={step.icon} />}
-                    { step.title === filterTitle
-                        ? (
-                            <input
-                                className={theme.modal.modalInput}
-                                type="text"
-                                value={filterTitle}
-                                onChange={onChangeTitle}
-                            />
-                        )
-                        : <h1 className={theme.modal.title}>{step.title}</h1>}
+                    { step.input
+                        && (
+                            <div>
+                                <input
+                                    className={theme.modal.modalInput}
+                                    type="text"
+                                    value={filterTitle}
+                                    onChange={onChangeTitle}
+                                />
+                            </div>
+                        )}
                 </div>
                 {step.component()}
             </div>

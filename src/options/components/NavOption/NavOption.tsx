@@ -10,6 +10,7 @@ export interface IProps {
     id: string;
     iconId?: IconId;
     messageKey: string;
+    messageKeyDesc: string;
     to: string;
 }
 
@@ -17,6 +18,7 @@ export const NavOption = ({
     id,
     iconId,
     messageKey,
+    messageKeyDesc,
     to = '',
 }: IProps) => (
     <NavLink
@@ -25,13 +27,18 @@ export const NavOption = ({
         to={to}
     >
         <div className={cn(styles.optionItem, styles.itemNav)}>
-            <div>
+            <div className={styles.option}>
                 {iconId && <Icon id={iconId} />}
                 <label
                     htmlFor={id}
                     className={styles.optionLabel}
                 >
                     {reactTranslator.getMessage(messageKey)}
+                    {messageKeyDesc && (
+                        <div className={styles.optionLabelDesc}>
+                            {reactTranslator.getMessage(messageKeyDesc) as string}
+                        </div>
+                    )}
                 </label>
             </div>
             <Icon id={IconId.ARROW} />
