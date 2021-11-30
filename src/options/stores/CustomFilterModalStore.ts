@@ -10,6 +10,8 @@ export enum STEPS {
     ADD_CUSTOM_FILTER = 'ADD_CUSTOM_FILTER',
     ADD_CUSTOM_FILTER_CONFIRM = 'ADD_CUSTOM_FILTER_CONFIRM',
     REMOVE_CUSTOM_FILTER = 'REMOVE_CUSTOM_FILTER',
+    CONFIRM_REMOVE_FILTER = 'CONFIRM_REMOVE_FILTER',
+    SAVE_CHANGES = 'SAVE_CHANGES',
 }
 
 const DEFAULT_STEP = STEPS.ADD_CUSTOM_FILTER;
@@ -57,5 +59,13 @@ export class CustomFilterModalStore {
 
     switchToAddCustomFilterConfirmStep = () => {
         this.setCurrentStep(STEPS.ADD_CUSTOM_FILTER_CONFIRM);
+    };
+
+    switchToConfirmRemoveStep = () => {
+        this.setCurrentStep(STEPS.CONFIRM_REMOVE_FILTER);
+    };
+
+    switchToSaveChangesStep = () => {
+        this.setCurrentStep(STEPS.SAVE_CHANGES);
     };
 }

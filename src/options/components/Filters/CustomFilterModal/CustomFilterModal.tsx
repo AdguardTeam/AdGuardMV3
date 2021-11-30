@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 import React, { useContext, useEffect, useState } from 'react';
+import cn from 'classnames';
 import { observer } from 'mobx-react';
 
 import { Modal } from 'Common/components/Modal';
@@ -36,17 +37,20 @@ export const CustomFilterModal = observer(({
         filterIdInModal,
         currentStep,
         switchToAddCustomFilterConfirmStep,
+        switchToSaveChangesStep,
+        switchToConfirmRemoveStep,
+        openRemoveCustomFilterModal,
     } = customFilterModalStore;
 
     const [filterInfo, setFilterInfo] = useState<FilterInfo | null>(null);
 
     const [filterContent, setFilterContent] = useState<string | null>(null);
 
+    const [currentFilter, setCurrentFilter] = useState<Filter | null>(null);
+
     const [filterTitle, setFilterTitle] = useState(filterInfo?.title || '');
 
     const [addCustomFilterError, setAddCustomFilterError] = useState(false);
-
-    const [confirmModal, setConfirmModal] = useState(false);
 
     const onCancelAddCustomModal = () => {
         closeHandler();
@@ -66,8 +70,8 @@ export const CustomFilterModal = observer(({
         closeHandler();
     };
 
-    const removeConfirmModal = (param: boolean) => {
-        setConfirmModal(param);
+    const openConfirmModal = () => {
+        switchToConfirmRemoveStep();
     };
 
     const onRemoveCustomFilter = async () => {
@@ -101,16 +105,15 @@ export const CustomFilterModal = observer(({
         setFilterTitle(value);
     };
 
-    let filter: Filter | null;
-
     useEffect(() => {
         if (filterIdInModal) {
-            filter = settingsStore.getFilterById(filterIdInModal);
+            const filter = settingsStore.getFilterById(filterIdInModal);
 
             if (!filter) {
                 throw new Error('Filter should be found');
             }
 
+            setCurrentFilter(filter);
             setFilterTitle(filter.title);
         }
     }, [filterIdInModal]);
@@ -153,7 +156,7 @@ export const CustomFilterModal = observer(({
         },
         [STEPS.REMOVE_CUSTOM_FILTER]: {
             icon: null,
-            title: confirmModal ? translator.getMessage('options_custom_filter_modal_removed') : translator.getMessage('options_custom_filter_modal_edit_title'),
+            title: translator.getMessage('options_custom_filter_modal_edit_title'),
             input: false,
             component: () => {
                 if (filterIdInModal) {
@@ -161,11 +164,9 @@ export const CustomFilterModal = observer(({
                         <>
                             <RemoveCustomFilter
                                 title={filterTitle}
-                                description={filter?.description || ''}
+                                description={currentFilter?.description || ''}
                                 onChange={onChangeTitle}
-                                confirmModal={confirmModal}
-                                onRemove={onRemoveCustomFilter}
-                                onConfirmModal={removeConfirmModal}
+                                openConfirmModal={openConfirmModal}
                                 onSave={onSaveTitle}
                             />
                         </>
@@ -174,14 +175,89 @@ export const CustomFilterModal = observer(({
                 return null;
             },
         },
+        [STEPS.CONFIRM_REMOVE_FILTER]: {
+            icon: null,
+            title: translator.getMessage('options_custom_filter_modal_removed'),
+            input: false,
+            component: () => {
+                if (filterIdInModal) {
+                    return (
+                        <>
+                            <div className={theme.modal.description}>
+                                {translator.getMessage('options_custom_filter_modal_removed_desc')}
+                            </div>
+                            <div className={theme.modal.footer}>
+                                <button
+                                    className={cn(
+                                        theme.button.middle,
+                                        theme.button.green,
+                                        theme.modal.leftBtn,
+                                    )}
+                                    type="button"
+                                    onClick={() => openRemoveCustomFilterModal(filterIdInModal)}
+                                >
+                                    {translator.getMessage('options_custom_filter_modal_confirm_cancel_button')}
+                                </button>
+                                <button
+                                    type="button"
+                                    className={cn(theme.button.middle, theme.button.red)}
+                                    onClick={onRemoveCustomFilter}
+                                >
+                                    {translator.getMessage('options_custom_filter_modal_remove_button')}
+                                </button>
+                            </div>
+                        </>
+                    );
+                }
+                return null;
+            },
+        },
+        [STEPS.SAVE_CHANGES]: {
+            icon: null,
+            title: translator.getMessage('options_custom_filter_modal_save_changes'),
+            input: false,
+            component: () => (
+                <div className={theme.modal.footer}>
+                    <button
+                        className={cn(
+                            theme.button.middle,
+                            theme.button.green,
+                            theme.modal.leftBtn,
+                        )}
+                        type="button"
+                        onClick={onSaveTitle}
+                    >
+                        {translator.getMessage('options_custom_filter_modal_confirm_save_button')}
+                    </button>
+                    <button
+                        type="button"
+                        className={cn(theme.button.middle, theme.button.red)}
+                        onClick={closeHandler}
+                    >
+                        {translator.getMessage('options_custom_filter_modal_confirm_cancel_button')}
+                    </button>
+                </div>
+            ),
+        },
     };
 
     const step = stepsMap[currentStep];
 
+    const handleClose = () => {
+        if (
+            currentStep === STEPS.REMOVE_CUSTOM_FILTER
+            && currentFilter?.title !== filterTitle
+            && filterTitle.length > 0
+        ) {
+            return switchToSaveChangesStep();
+        }
+        return closeHandler();
+    };
+
     return (
         <Modal
             isOpen={isOpen}
-            handleClose={closeHandler}
+            handleClose={handleClose}
         >
             <div className={theme.modal.container}>
                 <h1 className={theme.modal.title}>{step.title}</h1>
