@@ -6,6 +6,7 @@ import {
     RuleFactory,
 } from '@adguard/tsurlfilter';
 import { UserRuleType } from 'Options/stores/OptionsStore';
+import { REGEX_DOMAIN_IN_RULE } from './constants';
 
 export interface UserRulesData {
     id: number;
@@ -39,7 +40,12 @@ export class UserRulesProcessor {
             return null;
         }
 
-        const permittedDomains = rule.getPermittedDomains();
+        const ruleText = rule.getText();
+        const domainRules = ruleText.match(REGEX_DOMAIN_IN_RULE);
+
+        const permittedDomains = rule.getPermittedDomains()
+            ? rule.getPermittedDomains() : domainRules;
+
         if (!permittedDomains) {
             return null;
         }
