@@ -8,7 +8,7 @@ import {
 import _ from 'lodash';
 
 import { sender } from 'Options/messaging/sender';
-import { UserRulesProcessor } from 'Options/user-rules-processor';
+import { UserRulesProcessor, UserRulesData } from 'Options/user-rules-processor';
 import { NEW_LINE_SEPARATOR } from 'Common/constants';
 import { OTHER_DOMAIN_TITLE } from 'Options/constants';
 
@@ -96,7 +96,26 @@ export class OptionsStore {
             return domainA > domainB ? 1 : -1;
         });
 
-        return sortedGroups;
+        const { matchesSearchQuery } = this.rootStore.searchStore;
+
+        const filteredRules = (rules: UserRulesData[]) => {
+            return rules.filter((rule) => {
+                return matchesSearchQuery(rule.ruleText);
+            });
+        };
+
+        const filteredGroups = sortedGroups.filter((group) => {
+            const [, userRules] = group;
+            return filteredRules(userRules).length > 0;
+        });
+
+        const filteredRuleGroups = filteredGroups.map((group) => {
+            const [, userRules] = group;
+            group.splice(1, 1, filteredRules(userRules));
+            return group;
+        });
+
+        return filteredRuleGroups;
     }
 
     @action
