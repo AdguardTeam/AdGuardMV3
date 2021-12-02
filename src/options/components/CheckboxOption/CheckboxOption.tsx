@@ -1,11 +1,10 @@
-import React, { useRef, Fragment } from 'react';
+import React from 'react';
 import cn from 'classnames';
 
 import { Icon, IconId } from 'Common/components/ui';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { Checkbox } from 'Common/components/Checkbox';
 import { translator } from 'Common/translators/translator';
-import { TitleTooltip } from 'Common/components/TitleTooltip';
 
 import styles from './CheckboxOption.module.pcss';
 
@@ -20,7 +19,6 @@ export interface IProps {
     messageKey?: string;
     messageKeyDesc?: string;
     message?: string;
-    tooltipMessage?: string;
     onClick?: () => void;
     onChange: ChangeHandler;
     className?: string,
@@ -36,7 +34,6 @@ export const CheckboxOption = ({
     messageKey,
     messageKeyDesc,
     message = messageKey && translator.getMessage(messageKey),
-    tooltipMessage = message,
     onClick,
     onChange,
     className = '',
@@ -44,41 +41,47 @@ export const CheckboxOption = ({
     containerClass = '',
     integrated = false,
 }: IProps) => {
-    const ref = useRef(null);
-
+    const content = () => {
+        return (
+            <>
+                {iconId && (
+                    <span className={styles.icon}>
+                        <Icon id={iconId} className={iconClass} />
+                    </span>
+                )}
+                <div className={cn(styles.optionLabel, className)}>
+                    {message}
+                    {messageKeyDesc && (
+                        <div className={styles.optionLabelDesc}>
+                            {reactTranslator.getMessage(messageKeyDesc) as string}
+                        </div>
+                    )}
+                </div>
+            </>
+        );
+    };
     return (
-        <Fragment key={id}>
-            <div className={cn(styles.optionItem, containerClass)}>
+        <label
+            className={cn(
+                styles.optionItem, containerClass, { [styles.disabled]: integrated },
+            )}
+            htmlFor={id}
+            key={id}
+        >
+            {onClick ? (
                 <button
                     className={styles.button}
                     type="button"
                     onClick={onClick}
                 >
-                    {iconId && (
-                        <span className={styles.icon}>
-                            <Icon id={iconId} className={iconClass} />
-                        </span>
-                    )}
-                    <label
-                        htmlFor={id}
-                        className={cn(styles.optionLabel, className)}
-                        ref={ref}
-                    >
-                        {message}
-                        {messageKeyDesc && (
-                            <div className={styles.optionLabelDesc}>
-                                {reactTranslator.getMessage(messageKeyDesc) as string}
-                            </div>
-                        )}
-                    </label>
+                    {content()}
                 </button>
-                {integrated ? (
-                    <div className={styles.optionLabelDesc}>
-                        {reactTranslator.getMessage('options_base_filter')}
-                    </div>
-                ) : <Checkbox id={id} checked={checked} onChange={onChange} />}
-            </div>
-            <TitleTooltip ref={ref}>{tooltipMessage}</TitleTooltip>
-        </Fragment>
+            ) : content()}
+            {integrated ? (
+                <div className={styles.optionLabelDesc}>
+                    {reactTranslator.getMessage('options_base_filter')}
+                </div>
+            ) : <Checkbox id={id} checked={checked} onChange={onChange} />}
+        </label>
     );
 };

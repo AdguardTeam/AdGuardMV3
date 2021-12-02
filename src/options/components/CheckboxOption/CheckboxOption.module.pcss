@@ -1,8 +1,23 @@
 .optionItem {
     display: flex;
-    padding: 1.3rem 0;
+    padding: 1.3rem;
+    width: calc(100% + 2.6rem);
+    transform: translateX(-1.3rem);
     align-items: center;
     justify-content: space-between;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease background-color;
+    user-select: none;
+
+    &.disabled {
+        cursor: default;
+        pointer-events: none;
+    }
+
+    &:hover {
+        background-color: var(--gray4d);
+    }
 }
 
 .icon {
@@ -14,12 +29,17 @@
     display: flex;
     align-items: center;
     padding: 0;
+
+    &:hover .optionLabel {
+        color: var(--bg-main)
+    }
 }
 
 .optionLabel {
     font-size: 1.6rem;
     color: var(--white);
     cursor: pointer;
+    transition: 0.1s ease color;
 }
 
 .optionLabelDesc {

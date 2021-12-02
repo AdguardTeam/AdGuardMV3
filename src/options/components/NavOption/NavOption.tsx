@@ -41,7 +41,7 @@ export const NavOption = ({
                     )}
                 </label>
             </div>
-            <Icon id={IconId.ARROW} />
+            <Icon className={styles.arrow} id={IconId.ARROW} />
         </div>
     </NavLink>
 );

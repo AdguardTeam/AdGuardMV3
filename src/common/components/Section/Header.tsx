@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { Icon, IconId } from 'Common/components/ui';
-import { TitleTooltip } from 'Common/components/TitleTooltip';
 import { translator } from 'Common/translators/translator';
 import { Search } from './Search';
 import styles from './Section.module.pcss';
@@ -44,7 +43,6 @@ export const Header = ({
                     ) : (
                         <>
                             <h1 className={styles.heading} ref={ref}>{pageTitle}</h1>
-                            <TitleTooltip ref={ref}>{pageTitle}</TitleTooltip>
                         </>
                     )}
             </div>

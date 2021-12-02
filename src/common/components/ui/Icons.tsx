@@ -499,8 +499,8 @@ export const Icons = () => {
 
             <svg id={IconId.AD_BLOCKING} width="20" height="20" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fillRule="evenodd">
-                    <path fill="#000" d="M-322-110h686v554h-686z" />
-                    <path fill="#131313" d="M-38-110h402v554H-38z" />
+                    <path d="M-322-110h686v554h-686z" />
+                    <path d="M-38-110h402v554H-38z" />
                     <path
                         d="M2 5h16a1 1 0 011 1v8a1 1 0 01-1 1H2a1 1 0 01-1-1V6a1 1 0 011-1zm0 14L18 1"
                         stroke="#67B279"
@@ -513,8 +513,8 @@ export const Icons = () => {
 
             <svg id={IconId.ANNOYANCES} width="20" height="20" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fillRule="evenodd">
-                    <path fill="#000" d="M-322-159h686v554h-686z" />
-                    <path fill="#131313" d="M-38-159h402v554H-38z" />
+                    <path d="M-322-159h686v554h-686z" />
+                    <path d="M-38-159h402v554H-38z" />
                     <path
                         d="M17 1.22H3a2 2 0 00-2 2v9.015a2 2 0 002 2h9.032l4.148 4.339v-4.339H17a2 2 0 002-2V3.22a2 2 0 00-2-2zM10 4.5V8m-.003 2.596c.008 0 .008-.063 0-.192"
                         stroke="#67B279"
@@ -527,8 +527,8 @@ export const Icons = () => {
 
             <svg id={IconId.TRACKERS_BLOCKING} width="18" height="20" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fillRule="evenodd">
-                    <path fill="#000" d="M-323-206h686v554h-686z" />
-                    <path fill="#131313" d="M-39-206h402v554H-39z" />
+                    <path d="M-323-206h686v554h-686z" />
+                    <path d="M-39-206h402v554H-39z" />
                     <path
                         d="M14.392 7.168c.87.699 1.739 1.567 2.608 2.604-2.667 3.333-5.333 5-8 5-.44 0-.879-.045-1.318-.136m-2.51-1.023C4.167 12.954 2.777 11.673 1 9.772 3.667 6.591 6.333 5 9 5c1.072 0 2.143.257 3.215.77m-4.63 5.644a2 2 0 012.66-2.98M1 19L17 1"
                         stroke="#67B279"
@@ -541,8 +541,8 @@ export const Icons = () => {
 
             <svg id={IconId.LANGUAGES} width="20" height="20" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fillRule="evenodd">
-                    <path fill="#000" d="M-322-254h686v554h-686z" />
-                    <path fill="#131313" d="M-38-254h402v554H-38z" />
+                    <path d="M-322-254h686v554h-686z" />
+                    <path d="M-38-254h402v554H-38z" />
                     <path
                         d="M10 19a9 9 0 100-18 9 9 0 000 18zm2.5-17.5c.275 1.167.493 2.334.654 3.5M17 5a26.16 26.16 0 01-3.746.784 36.405 36.405 0 010 8.434c1.248.164 2.497.425 3.746.782m-3.846 0a38.054 38.054 0 01-.654 3.5m-5 0a38.053 38.053 0 01-.654-3.5M3 15a26.16 26.16 0 013.747-.784 36.178 36.178 0 010-8.433A26.024 26.024 0 013 5h0m3.846 0c.161-1.166.38-2.333.654-3.5h0m0 12.627a24.612 24.612 0 015 0m0-8.254a24.612 24.612 0 01-5 0M1 10h18"
                         stroke="#67B279"
@@ -553,18 +553,8 @@ export const Icons = () => {
                 </g>
             </svg>
 
-            <svg id={IconId.CUSTOM_FILTERS} width="18" height="14" xmlns="http://www.w3.org/2000/svg">
-                <g fill="none" fillRule="evenodd">
-                    <path fill="#000" d="M-323-305h686v554h-686z" />
-                    <path fill="#131313" d="M-39-305h402v554H-39z" />
-                    <path
-                        d="M1 1h16M1 5h12M1 9h16M1 13h8"
-                        stroke="#67B279"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="1.5"
-                    />
-                </g>
+            <svg id={IconId.CUSTOM_FILTERS} width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#131313" fillRule="evenodd" clipRule="evenodd" d="M10 19C9.89286 19 9.78571 18.9571 9.7 18.8714L1.12857 10.3C0.957143 10.1286 0.957143 9.87143 1.12857 9.7L9.7 1.12857C9.87143 0.957143 10.1286 0.957143 10.3 1.12857L13.2571 4.08571C13.3643 4.19286 13.4071 4.38571 13.3643 4.53571C13.3 4.68571 13.1714 4.79286 13 4.81429C12.8286 4.83571 12.6571 4.87857 12.4857 4.94286C12.2286 5.05 11.9929 5.2 11.8 5.39286C11.4143 5.77857 11.2214 6.27143 11.2214 6.80714C11.2214 7.34286 11.4357 7.83571 11.8 8.22143C12.5714 8.99286 13.8357 8.99286 14.6286 8.22143C14.8214 8.02857 14.9714 7.79286 15.0786 7.53571C15.1429 7.36429 15.1857 7.19286 15.2071 7.02143C15.2286 6.85 15.3357 6.72143 15.4857 6.65714C15.6357 6.59286 15.8071 6.63571 15.9357 6.76429L18.8929 9.72143C18.9571 9.78571 19 9.89286 19 10C19 10.1071 18.9571 10.2143 18.8714 10.3L16.4071 12.7857C16.8143 12.9143 17.2 13.15 17.5214 13.4714C18.6357 14.5857 18.6357 16.3857 17.5214 17.5C16.9857 18.0357 16.2571 18.3357 15.5071 18.3357C14.7357 18.3357 14.0286 18.0357 13.4929 17.5C13.1714 17.1786 12.9357 16.8143 12.8071 16.3857L10.3 18.8714C10.2143 18.9571 10.1071 19 10 19Z" stroke="#67B279" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
 
             <svg id={IconId.SOCIAL_WIDGETS} xmlns="http://www.w3.org/2000/svg" width="19" height="20">
@@ -573,8 +563,8 @@ export const Icons = () => {
 
             <svg id={IconId.USER_RULES} width="18" height="18" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fillRule="evenodd">
-                    <path fill="#000" d="M-323-351h686v554h-686z" />
-                    <path fill="#131313" d="M-39-351h402v554H-39z" />
+                    <path d="M-323-351h686v554h-686z" />
+                    <path d="M-39-351h402v554H-39z" />
                     <path
                         d="M9 9a4 4 0 100-8 4 4 0 000 8zm-8 8v-1a5 5 0 015-5h6a5 5 0 015 5v1h0"
                         strokeWidth="1.5"
@@ -587,8 +577,8 @@ export const Icons = () => {
 
             <svg id={IconId.ARROW} width="8" height="14" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fillRule="evenodd">
-                    <path fill="#000" d="M-592-257H94v554h-686z" />
-                    <path fill="#131313" d="M-308-257H94v554h-402z" />
+                    <path d="M-592-257H94v554h-686z" />
+                    <path d="M-308-257H94v554h-402z" />
                     <path
                         d="M1 13l6-6-6-6"
                         stroke="#888"
