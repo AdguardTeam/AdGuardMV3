@@ -9,7 +9,11 @@ import { sender } from '../../messaging/sender';
 
 import styles from './switcher.module.pcss';
 
-export const Switcher = observer(() => {
+interface SwitcherProps {
+    disabled?: boolean,
+}
+
+export const Switcher = observer(({ disabled }: SwitcherProps) => {
     const { settingsStore } = useContext(rootStore);
     const { filteringEnabled, setSetting } = settingsStore;
 
@@ -22,6 +26,7 @@ export const Switcher = observer(() => {
 
     const className = cn(styles.switcher, {
         [styles.disabled]: !filteringEnabled,
+        [styles.noActive]: disabled,
     });
 
     return (

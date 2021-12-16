@@ -11,8 +11,21 @@
         --icon-position: 1.5rem;
     }
 
+    &.noActive {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
+    &.disabled {
+        --state-color: var(--red);
+        --position-right: var(--center-width);
+        --icon-position: 1.5rem;
+    }
+
     position: relative;
     cursor: pointer;
+    margin-top: 6.4rem;
+    margin-bottom: auto;
 }
 
 .center {
@@ -30,7 +43,12 @@
     right: var(--position-right);
     top: -10px;
     cursor: pointer;
-    transition: 0.3s ease transform;
+    transition: 0.3s ease transform, 0.3s ease box-shadow;
+    border-radius: 100%;
+
+    &:hover {
+        box-shadow: 0 0 0 6px rgb(255 255 255 / 20%);
+    }
 
     &:before {
         content: '';

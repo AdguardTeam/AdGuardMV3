@@ -116,6 +116,8 @@ export const AddCustomFilter = ({
     return (
         <form action="#" onSubmit={handleSubmit}>
             <textarea
+                // eslint-disable-next-line jsx-a11y/no-autofocus
+                autoFocus
                 className={cn(theme.modal.modalInput, theme.modal.modalTextarea)}
                 defaultValue={textareaValue}
                 onChange={handleTextareaChange}
@@ -129,7 +131,7 @@ export const AddCustomFilter = ({
                 style={{ display: 'none' }}
                 onChange={handleFileInputChange}
             />
-            <div className={cn(theme.modal.footer, theme.modal.right)}>
+            <div className={theme.modal.footer}>
                 <button type="button" className={cn(theme.button.middle, theme.button.transparent, theme.modal.leftBtn)}>
                     <label htmlFor="file-input">
                         {reactTranslator.getMessage('options_custom_filter_modal_add_browse_button')}

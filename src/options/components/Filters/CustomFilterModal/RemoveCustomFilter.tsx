@@ -28,7 +28,11 @@ export const RemoveCustomFilter = ({
             />
             {
                 description
-                && <div className={theme.modal.description}>{description}</div>
+                && (
+                    <div className={cn(theme.modal.description, theme.modal.name)}>
+                        {description}
+                    </div>
+                )
             }
             <div className={theme.modal.footer}>
                 <button

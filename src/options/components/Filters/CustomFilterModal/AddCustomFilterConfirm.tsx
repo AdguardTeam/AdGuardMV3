@@ -18,8 +18,8 @@ export const AddCustomFilterConfirm = ({
 }: ConfirmAddCustomProps) => {
     return (
         <>
-            <div className={theme.modal.description}>{description}</div>
-            <div className={cn(theme.modal.footer, theme.modal.right)}>
+            <div className={cn(theme.modal.description, theme.modal.name)}>{description}</div>
+            <div className={theme.modal.footer}>
                 <button
                     className={cn(theme.button.middle, theme.button.red, theme.modal.leftBtn)}
                     type="button"

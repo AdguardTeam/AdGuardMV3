@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
 import cn from 'classnames';
-import { Icon, IconId } from 'Common/components/ui';
 import { theme } from 'Common/styles';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { SETTINGS_NAMES } from 'Common/settings-constants';
@@ -9,6 +8,7 @@ import { rootStore } from '../../stores';
 import { sender } from '../../messaging/sender';
 
 import styles from './DisabledProtectionScreen.module.pcss';
+import { Switcher } from '../Switcher';
 
 export const DisabledProtectionScreen = observer(() => {
     const { settingsStore } = useContext(rootStore);
@@ -27,20 +27,18 @@ export const DisabledProtectionScreen = observer(() => {
 
     return (
         <>
-            <div>
-                <Icon id={IconId.DISABLED_LOGO} />
-            </div>
             <div className={styles.sectionContainer}>
                 <section className={styles.section}>
                     <h1 className={styles.pageInfoMain}>{reactTranslator.getMessage('popup_protection_is_paused')}</h1>
-                    {protectionPaused && (
-                        <h6 className={cn(theme.common.pageInfoAdditional,
-                            styles.pageInfoAdditional)}
-                        >
-                            {reactTranslator.getMessage('popup_protection_will_be_resumed_after', { count: protectionPausedTimer })}
-                        </h6>
-                    )}
+                    <h6 className={cn(theme.common.pageInfoAdditional,
+                        styles.pageInfoAdditional)}
+                    >
+                        {protectionPaused
+                            ? reactTranslator.getMessage('popup_protection_will_be_resumed_after', { count: protectionPausedTimer })
+                            : reactTranslator.getMessage('popup_protection_paused_for_all_')}
+                    </h6>
                 </section>
+                <Switcher disabled />
                 <button
                     type="button"
                     className={cn(theme.common.actionButton, styles.buttonGreen)}

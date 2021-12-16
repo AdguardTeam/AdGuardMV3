@@ -62,6 +62,9 @@ export const REPORT_SITE_BASE_URL = 'https://reports.adguard.com/new_issue.html'
 // TODO add correct url
 export const LEARN_MORE_URL = 'https://adguard.com/compare.html';
 
+// TODO add correct url
+export const MV3_URL = 'https://developer.chrome.com/docs/extensions/mv3/intro/';
+
 export const CUSTOM_GROUP_ID = 0;
 
 /* GLOBAL FILTERING */

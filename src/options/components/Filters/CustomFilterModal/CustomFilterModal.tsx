@@ -260,21 +260,21 @@ export const CustomFilterModal = observer(({
             handleClose={handleClose}
         >
             <div className={theme.modal.container}>
-                <h1 className={theme.modal.title}>{step.title}</h1>
                 <div className={theme.modal.header}>
                     {step.icon && <Icon className={theme.modal.headerIcon} id={step.icon} />}
-                    { step.input
-                        && (
-                            <div>
-                                <input
-                                    className={theme.modal.modalInput}
-                                    type="text"
-                                    value={filterTitle}
-                                    onChange={onChangeTitle}
-                                />
-                            </div>
-                        )}
+                    <h1 className={theme.modal.title}>{step.title}</h1>
                 </div>
+                {step.input
+                    && (
+                        <div>
+                            <input
+                                className={theme.modal.modalInput}
+                                type="text"
+                                value={filterTitle}
+                                onChange={onChangeTitle}
+                            />
+                        </div>
+                    )}
                 {step.component()}
             </div>
         </Modal>

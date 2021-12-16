@@ -1,5 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
+import { MV3_URL } from 'Common/constants';
 import { Icon, IconId } from 'Common/components/ui';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { theme } from 'Common/styles';
@@ -8,7 +9,12 @@ import styles from './Footer.module.pcss';
 
 export const Footer = () => {
     return (
-        <footer className={styles.footer}>
+        <a
+            href={MV3_URL}
+            target="_blank"
+            className={styles.footer}
+            rel="noreferrer"
+        >
             <span className={cn(theme.common.textRegular, styles.text)}>
                 {reactTranslator.getMessage('options_works_with_v3', {
                     span: (payload: string) => (
@@ -19,6 +25,6 @@ export const Footer = () => {
                 })}
             </span>
             <Icon id={IconId.CHROME_LOGO} className={styles.footerLogo} />
-        </footer>
+        </a>
     );
 };

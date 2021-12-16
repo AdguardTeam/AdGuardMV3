@@ -87,8 +87,8 @@ export const PopupApp = observer(() => {
                 {protectionEnabled
                     ? (
                         <>
-                            <Switcher />
                             <PageInfo />
+                            <Switcher />
                             <Action />
                         </>
                     )
