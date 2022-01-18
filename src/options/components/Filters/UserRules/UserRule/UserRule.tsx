@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 import { UserRuleTypeComponent } from 'Options/components/Filters/UserRules/UserRule/UserRuleTypeComponent';
-import { UserRuleType } from 'Options/stores/OptionsStore';
+import { UserRuleType } from 'Common/constants';
 
 import styles from 'Options/components/Filters/UserRules/UserRule/UserRule.module.pcss';
 import { rootStore } from 'Options/stores';
@@ -42,7 +42,7 @@ export const UserRule = ({
         <>
             <div className={styles.checkboxContainer}>
                 <span className={`${styles.container} ${styles.rule}`}>
-                    <input type="checkbox" id={String(id)} defaultChecked={enabled} onChange={handleToggle} />
+                    <input type="checkbox" id={String(id)} checked={enabled} onChange={handleToggle} />
                     {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                     <label className={styles.checkmark} htmlFor={String(id)} />
                     <button type="button" onClick={handleRuleClick} className={styles.ruleButton}>{ruleText}</button>

@@ -3,7 +3,6 @@ import { observer } from 'mobx-react';
 import cn from 'classnames';
 
 import { Icon, IconId } from 'Common/components/ui';
-import { SETTINGS_NAMES } from 'Common/settings-constants';
 import { rootStore } from '../../stores';
 import { sender } from '../../messaging/sender';
 
@@ -15,18 +14,20 @@ interface SwitcherProps {
 
 export const Switcher = observer(({ disabled }: SwitcherProps) => {
     const { settingsStore } = useContext(rootStore);
-    const { filteringEnabled, setSetting } = settingsStore;
+    const {
+        toggleAllowlisted, isAllowlisted, applicationAvailable,
+    } = settingsStore;
 
     const onClick = async () => {
-        await setSetting(SETTINGS_NAMES.FILTERING_ENABLED, !filteringEnabled);
+        await toggleAllowlisted();
         await sender.reloadActiveTab();
     };
 
-    const icon = filteringEnabled ? IconId.CHECKMARK : IconId.CIRCLE;
+    const icon = isAllowlisted ? IconId.CIRCLE : IconId.CHECKMARK;
 
     const className = cn(styles.switcher, {
-        [styles.disabled]: !filteringEnabled,
-        [styles.noActive]: disabled,
+        [styles.disabled]: isAllowlisted,
+        [styles.noActive]: disabled || !applicationAvailable,
     });
 
     return (

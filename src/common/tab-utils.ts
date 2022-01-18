@@ -140,6 +140,14 @@ class TabUtils {
     updateTab = (tabId: number, path: string) => {
         return chrome.tabs.update(tabId, { url: path });
     };
+
+    onActivated = (callback: (activeInfo: chrome.tabs.TabActiveInfo) => void) => (
+        chrome.tabs.onActivated.addListener((activeInfo) => callback(activeInfo))
+    );
+
+    onUpdated = (callback: (tabId: number) => void) => (
+        chrome.tabs.onUpdated.addListener((tabId) => callback(tabId))
+    );
 }
 
 export const tabUtils = new TabUtils();

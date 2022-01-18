@@ -3,10 +3,11 @@ import {
     observable,
     makeObservable,
     computed,
+    runInAction,
 } from 'mobx';
 
 import { log } from 'Common/logger';
-import { getUrlDetails } from 'Common/helpers';
+import { getUrlDetails, isHttpRequest } from 'Common/helpers';
 import {
     DEFAULT_SETTINGS,
     SETTINGS_NAMES,
@@ -14,7 +15,10 @@ import {
     SettingsValueType,
 } from 'Common/settings-constants';
 import { tabUtils } from 'Common/tab-utils';
-import { MILLISECONDS_IN_SECOND, PROTECTION_PAUSE_TIMEOUT_TICK_MS } from 'Common/constants';
+import {
+    MILLISECONDS_IN_SECOND, NEW_LINE_SEPARATOR, PROTECTION_PAUSE_TIMEOUT_TICK_MS, UserRuleType,
+} from 'Common/constants';
+import { UserRulesData, UserRulesProcessor } from 'Options/user-rules-processor';
 import { sender } from '../messaging/sender';
 import type { RootStore } from './RootStore';
 
@@ -40,10 +44,21 @@ export class SettingsStore {
     @observable
     currentTime = Date.now();
 
+    @observable
+    isAllowlisted = false;
+
+    @observable
+    applicationAvailable = true;
+
+    currentAllowRule: UserRulesData | undefined;
+
+    userRules = '';
+
     @action
     getCurrentTabUrl = async () => {
         const activeTab = await tabUtils.getActiveTab();
         this.currentUrl = activeTab.url || '';
+        this.applicationAvailable = !!isHttpRequest(this.currentUrl);
     };
 
     @computed
@@ -108,13 +123,35 @@ export class SettingsStore {
     };
 
     @action
+    updateAllowlist = () => {
+        const userRulesProcessor = new UserRulesProcessor(this.userRules);
+        const userRulesData = userRulesProcessor.getData();
+        const allowlist = userRulesData.filter((rule) => rule.type === UserRuleType.SITE_ALLOWED);
+        const currentAllowRule = allowlist.find(
+            (rule) => rule.domain === this.currentSite,
+        );
+
+        const filteringEnabled = !!(currentAllowRule && currentAllowRule?.enabled);
+
+        this.setSetting(SETTINGS_NAMES.FILTERING_ENABLED, !filteringEnabled);
+
+        runInAction(() => {
+            this.currentAllowRule = currentAllowRule;
+            this.isAllowlisted = !!currentAllowRule?.enabled;
+        });
+    };
+
+    @action
     getPopupData = async () => {
         await this.getCurrentTabUrl();
 
-        const { settings } = await sender.getPopupData();
+        const { settings, userRules } = await sender.getPopupData();
 
         this.setPopupDataReady(true);
         this.setSettings(settings);
+        this.userRules = userRules;
+
+        this.updateAllowlist();
 
         if (this.protectionPaused) {
             this.setProtectionPausedTimer();
@@ -165,5 +202,36 @@ export class SettingsStore {
         clearTimeout(this.protectionPausedTimerId);
         this.setProtectionPausedTimerId(0);
         await this.setSetting(SETTINGS_NAMES.PROTECTION_ENABLED, true);
+    };
+
+    @action
+    setUserRules = (userRules: string) => {
+        if (this.userRules === userRules) {
+            return;
+        }
+
+        this.userRules = userRules;
+        sender.setUserRules(this.userRules);
+    };
+
+    @action
+    toggleAllowlisted = () => {
+        if (this.currentAllowRule && this.isAllowlisted) {
+            // remove rule
+            const userRulesProcessor = new UserRulesProcessor(this.userRules);
+            userRulesProcessor.deleteRule(this.currentAllowRule.id);
+            this.setUserRules(userRulesProcessor.getUserRules());
+        } else if (this.currentAllowRule) {
+            // enable rule if disable
+            const userRulesProcessor = new UserRulesProcessor(this.userRules);
+            userRulesProcessor.enableRule(this.currentAllowRule.id);
+            this.setUserRules(userRulesProcessor.getUserRules());
+        } else {
+            // add rule
+            const newRule = `@@||${this.currentSite}^`;
+            const newUserRules = `${this.userRules}${NEW_LINE_SEPARATOR}${newRule}`;
+            this.setUserRules(newUserRules);
+        }
+        this.updateAllowlist();
     };
 }

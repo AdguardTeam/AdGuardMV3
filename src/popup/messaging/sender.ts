@@ -51,6 +51,14 @@ class Sender {
         MESSAGE_TYPES.SET_PAUSE_EXPIRES,
         { protectionPauseExpires },
     );
+
+    getUserRules = (): Promise<string> => {
+        return sendMessage(MESSAGE_TYPES.GET_USER_RULES);
+    };
+
+    setUserRules = (userRules: string): Promise<void> => {
+        return sendMessage(MESSAGE_TYPES.SET_USER_RULES, { userRules });
+    };
 }
 
 export const sender = new Sender();

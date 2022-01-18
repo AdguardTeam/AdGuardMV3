@@ -14,13 +14,6 @@ import { OTHER_DOMAIN_TITLE } from 'Options/constants';
 
 import type { RootStore } from './RootStore';
 
-export enum UserRuleType {
-    SITE_BLOCKED = 'SITE_BLOCKED',
-    ELEMENT_BLOCKED = 'ELEMENT_BLOCKED',
-    SITE_ALLOWED = 'SITE_ALLOWED',
-    CUSTOM = 'CUSTOM',
-}
-
 export enum UserRuleWizardNewType {
     CUSTOM = 'CUSTOM',
     BLOCKING = 'BLOCKING',

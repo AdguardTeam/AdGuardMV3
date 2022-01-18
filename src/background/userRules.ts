@@ -1,7 +1,8 @@
 import _ from 'lodash';
 
-import { NEW_LINE_SEPARATOR, NOTIFIER_EVENTS } from 'Common/constants';
+import { NEW_LINE_SEPARATOR, NOTIFIER_EVENTS, UserRuleType } from 'Common/constants';
 import { log } from 'Common/logger';
+import { UserRulesProcessor } from 'Options/user-rules-processor';
 import { notifier } from './notifier';
 import { storage } from './storage';
 
@@ -29,9 +30,30 @@ class UserRules {
         return this.rules;
     }
 
+    getAllowlist() {
+        const userRulesProcessor = new UserRulesProcessor(this.rules);
+        const userRulesData = userRulesProcessor.getData();
+        const allowlist = userRulesData.filter(
+            (rule) => rule.type === UserRuleType.SITE_ALLOWED,
+        );
+
+        return allowlist;
+    }
+
+    getCurrentAllowRule(domainName: string) {
+        const allowlist = this.getAllowlist();
+
+        const currentAllowRule = allowlist.find(
+            (rule) => rule.domain === domainName,
+        );
+
+        return currentAllowRule;
+    }
+
     setUserRules(userRules: string) {
         this.rules = userRules;
         this.persist();
+        notifier.notify(NOTIFIER_EVENTS.SET_RULES, this.rules);
     }
 
     addRules = (rulesText: string) => {

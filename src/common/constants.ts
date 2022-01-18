@@ -1,7 +1,8 @@
 import { SettingsType } from './settings-constants';
 
 export interface PopupData {
-    settings: SettingsType
+    settings: SettingsType,
+    userRules: string,
 }
 
 export type CategoriesType = {
@@ -55,6 +56,7 @@ export enum NOTIFIER_EVENTS {
     SETTING_UPDATED = 'event.setting.updated',
     FILTERING_STATE_UPDATED = 'event.filtering.state.updated',
     ADD_RULES = 'event.add.rules',
+    SET_RULES = 'event.set.rules',
 }
 
 export const REPORT_SITE_BASE_URL = 'https://reports.adguard.com/new_issue.html';
@@ -82,3 +84,10 @@ export const QUERY_PARAM_NAMES = {
     TITLE: 'title',
     SUBSCRIBE: 'subscribe',
 };
+
+export enum UserRuleType {
+    SITE_BLOCKED = 'SITE_BLOCKED',
+    ELEMENT_BLOCKED = 'ELEMENT_BLOCKED',
+    SITE_ALLOWED = 'SITE_ALLOWED',
+    CUSTOM = 'CUSTOM',
+}

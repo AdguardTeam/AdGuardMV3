@@ -16,7 +16,7 @@ type ProtectionStatusType = {
     }
 };
 
-const PROTECTION_STATUS: { [key:string]: ProtectionStatusType } = {
+const PROTECTION_STATUS: { [key: string]: ProtectionStatusType } = {
     ENABLED: {
         key: 'popup_protection_enabled_status',
     },
@@ -55,19 +55,19 @@ const getProtectionStatusProps = (
 export const PageInfo = observer(() => {
     const { settingsStore } = useContext(rootStore);
     const {
-        filteringEnabled, currentSite, protectionPauseExpires, protectionPauseExpired,
+        currentSite, protectionPauseExpires, protectionPauseExpired, isAllowlisted,
     } = settingsStore;
 
     const {
         key,
         params,
     } = getProtectionStatusProps(
-        filteringEnabled,
+        !isAllowlisted,
         protectionPauseExpires > 0 && protectionPauseExpired,
     );
 
     const className = cn(styles.mainSection, {
-        [styles.sectionDisabled]: !filteringEnabled,
+        [styles.sectionDisabled]: isAllowlisted,
     });
 
     return (

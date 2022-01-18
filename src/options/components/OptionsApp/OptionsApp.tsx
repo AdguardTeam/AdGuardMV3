@@ -34,6 +34,7 @@ export const OptionsApp = observer(() => {
         const events = [
             NOTIFIER_EVENTS.SETTING_UPDATED,
             NOTIFIER_EVENTS.ADD_RULES,
+            NOTIFIER_EVENTS.SET_RULES,
         ];
 
         const messageHandler = (message: any) => {
@@ -48,6 +49,10 @@ export const OptionsApp = observer(() => {
                 case NOTIFIER_EVENTS.ADD_RULES: {
                     optionsStore.updateCreatedUserRule(data);
                     optionsStore.addCreatedUserRule();
+                    break;
+                }
+                case NOTIFIER_EVENTS.SET_RULES: {
+                    optionsStore.setUserRules(data);
                     break;
                 }
                 default:

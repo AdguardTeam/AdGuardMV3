@@ -67,6 +67,7 @@ export const messageHandler = async (
         case MESSAGE_TYPES.GET_POPUP_DATA: {
             const popupData: PopupData = {
                 settings: settings.getSettings(),
+                userRules: userRules.getRules(),
             };
             return popupData;
         }

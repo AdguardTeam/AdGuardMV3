@@ -1,9 +1,11 @@
+import { getUrlDetails } from 'Common/helpers';
+import { tabUtils } from 'Common/tab-utils';
 import { log } from 'Common/logger';
 import { prefs } from 'Common/prefs';
 import { NOTIFIER_EVENTS } from 'Common/constants';
 import { SETTINGS_NAMES } from 'Common/settings-constants';
 import { notifier } from './notifier';
-import { settings } from './settings';
+import { userRules } from './userRules';
 
 type TabIconDetails = chrome.action.TabIconDetails;
 
@@ -62,17 +64,33 @@ class BrowserActions {
         }
     };
 
-    onFilteringStateChange = async () => {
-        const filteringEnabled = settings.getSetting(SETTINGS_NAMES.FILTERING_ENABLED);
+    setIconByFiltering(filteringEnabled: boolean, tabId?: number) {
         if (filteringEnabled) {
-            await this.setIconEnabled();
+            this.setIconDisabled(tabId);
         } else {
-            await this.setIconDisabled();
+            this.setIconEnabled(tabId);
+        }
+    }
+
+    onFilteringStateChange = async () => {
+        const activeTab = await tabUtils.getActiveTab();
+
+        if (activeTab.url) {
+            const urlDetails = getUrlDetails(activeTab.url);
+
+            if (urlDetails?.domainName) {
+                const currentAllowRule = userRules.getCurrentAllowRule(urlDetails.domainName);
+
+                const filteringEnabled = !!currentAllowRule?.enabled;
+
+                this.setIconByFiltering(filteringEnabled, activeTab.id);
+            }
         }
     };
 
     init() {
-        this.onFilteringStateChange();
+        tabUtils.onActivated(() => this.onFilteringStateChange());
+        tabUtils.onUpdated(() => this.onFilteringStateChange());
 
         notifier.addEventListener(NOTIFIER_EVENTS.SETTING_UPDATED, async ({ key }) => {
             if (key !== SETTINGS_NAMES.FILTERING_ENABLED) {

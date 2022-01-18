@@ -10,7 +10,7 @@ import styles from './action.module.pcss';
 
 export const Action = observer(() => {
     const { settingsStore } = useContext(rootStore);
-    const { filteringEnabled } = settingsStore;
+    const { isAllowlisted } = settingsStore;
 
     const blockedAdsCount = 354; // TODO replace with real number
 
@@ -18,7 +18,7 @@ export const Action = observer(() => {
         await sender.reportSite();
     };
 
-    if (filteringEnabled) {
+    if (!isAllowlisted) {
         return (
             <section className={styles.container}>
                 <h1 className={styles.counter}>{blockedAdsCount}</h1>
