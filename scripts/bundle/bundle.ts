@@ -6,18 +6,22 @@ import { getWebpackConfig } from './webpack-config';
 import { BROWSERS, BUILD_ENVS } from './constants';
 
 interface Task {
-    (watch: boolean): Promise<void>
+    (options: TaskOptions): Promise<void> | void
+}
+
+interface TaskOptions {
+    watch?: boolean
 }
 
 export const bundle = () => {
-    const bundleChrome = (watch: boolean) => {
+    const bundleChrome: Task = (options: TaskOptions) => {
         const webpackConfig = getWebpackConfig(BROWSERS.CHROME);
-        return bundleRunner(webpackConfig, watch);
+        return bundleRunner(webpackConfig, options.watch);
     };
 
-    const bundleEdge = (watch: boolean) => {
+    const bundleEdge: Task = (options: TaskOptions) => {
         const webpackConfig = getWebpackConfig(BROWSERS.EDGE);
-        return bundleRunner(webpackConfig, watch);
+        return bundleRunner(webpackConfig, options.watch);
     };
 
     const devPlan = [
@@ -37,7 +41,7 @@ export const bundle = () => {
 
     const runBuild = async (tasks: Task[], watch: boolean) => {
         for (const task of tasks) {
-            await task(watch);
+            await task({ watch });
         }
     };
 
@@ -71,7 +75,7 @@ export const bundle = () => {
 
     const chrome = async (watch: boolean) => {
         try {
-            await bundleChrome(watch);
+            await bundleChrome({ watch });
         } catch (e) {
             console.error(e);
             process.exit(1);
@@ -80,7 +84,7 @@ export const bundle = () => {
 
     const edge = async (watch: boolean) => {
         try {
-            await bundleEdge(watch);
+            await bundleEdge({ watch });
         } catch (e) {
             console.error(e);
             process.exit(1);

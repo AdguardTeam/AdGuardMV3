@@ -7,6 +7,7 @@ import ZipWebpackPlugin from 'zip-webpack-plugin';
 import { Configuration, WebpackPluginInstance } from 'webpack';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import _ from 'lodash';
+import fs from 'fs';
 
 import type { Browser, BuildEnv } from './constants';
 import { BROWSERS, BUILD_ENVS } from './constants';
@@ -15,8 +16,9 @@ const packageJson = require('../../package.json');
 const tsconfig = require('../../tsconfig.json');
 
 const APP_DIR = path.resolve(__dirname, '../../src');
+const DECLARATIVE_FILTERS_DIR = `${APP_DIR}/filters/%browser%/declarative`;
 
-const updateManifest = (isDev: boolean, content: Buffer) => {
+const updateManifest = (isDev: boolean, content: Buffer, browser: string) => {
     const manifest = JSON.parse(content.toString());
 
     manifest.version = packageJson.version;
@@ -24,6 +26,25 @@ const updateManifest = (isDev: boolean, content: Buffer) => {
     if (isDev) {
         // TODO add eval rule e.g. 'unsafe-eval' when manifest v3 docs are released
         manifest.content_security_policy = { extension_pages: "script-src 'self'; object-src 'self'" };
+    }
+
+    const declarativeFiltersDir = `${DECLARATIVE_FILTERS_DIR.replace('%browser%', browser)}`;
+
+    if (fs.existsSync(declarativeFiltersDir)) {
+        const nameList = fs.readdirSync(declarativeFiltersDir).map((file) => file);
+
+        const rules = {
+            rule_resources: nameList.map((name: string) => {
+                const rulesetIndex = name.match(/\d+/);
+                return {
+                    id: `ruleset_${rulesetIndex}`,
+                    enabled: true,
+                    path: `filters/declarative/${name}`,
+                };
+            }),
+        };
+
+        manifest.declarative_net_request = rules;
     }
 
     return JSON.stringify(manifest, null, 4);
@@ -61,12 +82,18 @@ export const getWebpackConfig = (browser: Browser = BROWSERS.CHROME): Configurat
                 {
                     from: 'manifest.common.json',
                     to: 'manifest.json',
-                    transform: (content) => updateManifest(IS_DEV, content),
+                    transform: (content) => updateManifest(IS_DEV, content, browser),
                 },
                 {
                     context: 'src',
                     from: 'assets',
                     to: 'assets',
+                },
+                {
+                    context: 'src',
+                    from: `filters/${browser}`,
+                    to: 'filters',
+                    noErrorOnMissing: true,
                 },
                 {
                     context: 'src',
