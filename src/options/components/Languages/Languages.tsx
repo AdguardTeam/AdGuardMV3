@@ -5,6 +5,7 @@ import { rootStore } from 'Options/stores';
 import { CheckboxOption } from 'Options/components/CheckboxOption';
 import { Category } from 'Options/components/Category';
 import { translator } from 'Common/translators/translator';
+import { FiltersGroupId } from 'Common/constants';
 
 export const Languages = observer(() => {
     const {
@@ -17,9 +18,17 @@ export const Languages = observer(() => {
         enableFilter,
     } = settingsStore;
 
-    const LANGUAGES_GROUP_ID = 7;
+    const onChange = async (filter: Filter) => {
+        if (filter.enabled) {
+            await disableFilter(filter.id);
+        } else {
+            await enableFilter(filter.id);
+        }
+    };
 
-    const INTEGRATED_LIST = [4];
+    const languagesFilters = filters.filter((filter: Filter) => (
+        filter.groupId === FiltersGroupId.LANGUAGES
+        || filter.groupId === FiltersGroupId.INTEGRATED));
 
     return (
         <Category
@@ -28,31 +37,22 @@ export const Languages = observer(() => {
             headerDesc={translator.getMessage('options_languages_option_header_desc')}
         >
             <>
-                {filters && filters.length > 0 && (
-                    filters.map((filter) => {
-                        const onChange = async () => {
-                            if (filter.enabled) {
-                                await disableFilter(filter.id);
-                            } else {
-                                await enableFilter(filter.id);
-                            }
-                        };
-
-                        if (filter.groupId === LANGUAGES_GROUP_ID
-                            || INTEGRATED_LIST.includes(filter.id)) {
-                            return (
-                                <CheckboxOption
-                                    integrated={INTEGRATED_LIST.includes(filter.id)}
-                                    key={filter.id}
-                                    id={filter.id.toString()}
-                                    message={filter.title}
-                                    checked={filter.enabled}
-                                    onChange={onChange}
-                                />
-                            );
-                        }
-                        return null;
-                    }))}
+                <CheckboxOption
+                    integrated
+                    key="english_integrated"
+                    id="english_integrated"
+                    messageKey="options_languages_english"
+                />
+                {languagesFilters.map((filter) => (
+                    <CheckboxOption
+                        integrated={filter.groupId === FiltersGroupId.INTEGRATED}
+                        key={filter.id}
+                        id={filter.id.toString()}
+                        message={filter.title}
+                        checked={filter.enabled}
+                        onChange={() => { onChange(filter); }}
+                    />
+                ))}
             </>
         </Category>
     );

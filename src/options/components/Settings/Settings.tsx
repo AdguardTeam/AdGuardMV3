@@ -2,65 +2,22 @@ import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
 
 import { translator } from 'Common/translators/translator';
-import { SETTINGS_NAMES } from 'Common/settings-constants';
+import { FiltersGroupId } from 'Common/constants';
 import { Section } from 'Common/components/Section';
 import { IconId } from 'Common/components/ui';
 import { rootStore } from '../../stores';
-import { CheckboxOption, CheckboxOptionProps } from '../CheckboxOption';
+import { CheckboxOption } from '../CheckboxOption';
 import { NavOption, NavOptionProps } from '../NavOption';
 import styles from './Settings.module.pcss';
 
 export const Settings = observer(() => {
     const { settingsStore } = useContext(rootStore);
 
-    const { filteringEnabled, setSetting } = settingsStore;
+    const {
+        filters, disableFilter, enableFilter,
+    } = settingsStore;
 
     const OPTIONS = {
-        BLOCK_ADS: {
-            // NOTE! The value of the id attribute must be unique within the HTML document.
-            id: 'block_ads_option',
-            iconId: IconId.AD_BLOCKING,
-            messageKey: 'options_block_ads_option',
-            onChange: async (e: React.ChangeEvent<HTMLInputElement>) => {
-                await setSetting(SETTINGS_NAMES.FILTERING_ENABLED, e.target.checked);
-            },
-            className: styles.optionLabel,
-            checked: filteringEnabled,
-        },
-        BLOCK_ANNOYANCES: {
-            id: 'block_annoyances_option',
-            iconId: IconId.ANNOYANCES,
-            messageKey: 'options_block_annoyances_option',
-            messageKeyDesc: 'options_block_annoyances_option_desc',
-            onChange: async (e: React.ChangeEvent<HTMLInputElement>) => {
-                // eslint-disable-next-line no-console
-                console.log('annoyances', e);
-            },
-            className: styles.optionLabel,
-        },
-        BLOCK_TRACKERS: {
-            id: 'block_trackers_option',
-            iconId: IconId.TRACKERS_BLOCKING,
-            messageKey: 'options_block_trackers_option',
-            messageKeyDesc: 'options_block_trackers_option_desc',
-            onChange: async (e: React.ChangeEvent<HTMLInputElement>) => {
-                // eslint-disable-next-line no-console
-                console.log('block_trackers', e);
-            },
-            className: styles.optionLabel,
-            enabled: false,
-        },
-        BLOCK_SOCIAL_WIDGETS: {
-            id: 'block_social_widgets_option',
-            iconId: IconId.SOCIAL_WIDGETS,
-            messageKey: 'options_block_social_widgets_option',
-            messageKeyDesc: 'options_block_social_widgets_option_desc',
-            onChange: async (e: React.ChangeEvent<HTMLInputElement>) => {
-                // eslint-disable-next-line no-console
-                console.log('block_trackers', e);
-            },
-            className: styles.optionLabel,
-        },
         LANGUAGES: {
             id: 'languages_option',
             iconId: IconId.LANGUAGES,
@@ -85,25 +42,39 @@ export const Settings = observer(() => {
         },
     };
 
-    const checkboxOptions: CheckboxOptionProps[] = [
-        OPTIONS.BLOCK_ADS,
-        OPTIONS.BLOCK_ANNOYANCES,
-        OPTIONS.BLOCK_TRACKERS,
-        OPTIONS.BLOCK_SOCIAL_WIDGETS,
-    ];
-
     const navOptions: NavOptionProps[] = [
         OPTIONS.LANGUAGES,
         OPTIONS.CUSTOM_FILTERS,
         OPTIONS.USER_RULES,
     ];
 
+    const onChange = async (filter: Filter) => {
+        if (filter.enabled) {
+            await disableFilter(filter.id);
+        } else {
+            await enableFilter(filter.id);
+        }
+    };
+
+    const mainFilters = filters.filter((i: Filter) => i.groupId === FiltersGroupId.MAIN);
+
     return (
         <>
             <Section
                 title={translator.getMessage('options_settings_title')}
             >
-                {checkboxOptions.map(CheckboxOption)}
+                {mainFilters.map((filter) => (
+                    <CheckboxOption
+                        key={filter.id}
+                        iconId={filter.iconId}
+                        id={filter.id.toString()}
+                        className={styles.optionLabel}
+                        messageKey={filter.title}
+                        messageKeyDesc={filter.description}
+                        checked={filter.enabled}
+                        onChange={() => { onChange(filter); }}
+                    />
+                ))}
                 {navOptions.map(NavOption)}
             </Section>
         </>

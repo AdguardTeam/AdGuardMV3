@@ -9,7 +9,7 @@ const COMMON_FILTERS_DIR = 'src/filters';
 const FILTERS_DIR = `${COMMON_FILTERS_DIR}/%browser`;
 const DECLARATIVE_FILTERS_DIR = `${COMMON_FILTERS_DIR}/%browser%/declarative`;
 
-const ADGUARD_FILTERS_IDS = [1, 2, 3, 4];
+const ADGUARD_FILTERS_IDS = [1, 2, 3, 4, 9, 14];
 
 const EXTENSION_FILTERS_SERVER_URL_FORMAT = 'https://filters.adtidy.org/extension/%browser';
 const FILTER_DOWNLOAD_URL_FORMAT = `${EXTENSION_FILTERS_SERVER_URL_FORMAT}/filters/%filter.txt`;

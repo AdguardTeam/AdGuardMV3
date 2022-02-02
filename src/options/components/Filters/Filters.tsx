@@ -7,7 +7,7 @@ import { useLocation, useHistory } from 'react-router-dom';
 import { observer } from 'mobx-react';
 
 import { translator } from 'Common/translators/translator';
-import { CUSTOM_GROUP_ID, QUERY_PARAM_NAMES } from 'Common/constants';
+import { FiltersGroupId, QUERY_PARAM_NAMES } from 'Common/constants';
 import { Section, Header } from 'Common/components/Section';
 import { IconId } from 'Common/components/ui';
 import { rootStore } from 'Options/stores';
@@ -61,7 +61,7 @@ export const Filters = observer(() => {
     );
 
     const filtersByGroupId = filters
-        .filter((filter) => filter.groupId === CUSTOM_GROUP_ID)
+        .filter((filter) => filter.groupId === FiltersGroupId.CUSTOM)
         .filter((filter) => matchesSearchQuery(filter.title));
 
     const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

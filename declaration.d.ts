@@ -27,9 +27,10 @@ declare module '@adguard/filters-downloader' {
 
 interface Filter {
     id: number,
+    iconId?: IconId,
     title: string,
     enabled: boolean,
-    description: string,
+    description?: string,
     groupId: number,
 }
 

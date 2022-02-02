@@ -67,8 +67,6 @@ export const LEARN_MORE_URL = 'https://adguard.com/compare.html';
 // TODO add correct url
 export const MV3_URL = 'https://developer.chrome.com/docs/extensions/mv3/intro/';
 
-export const CUSTOM_GROUP_ID = 0;
-
 /* GLOBAL FILTERING */
 export const MILLISECONDS_IN_SECOND = 10 ** 3;
 export const PROTECTION_PAUSE_TIMEOUT_S = 30;
@@ -91,3 +89,28 @@ export enum UserRuleType {
     SITE_ALLOWED = 'SITE_ALLOWED',
     CUSTOM = 'CUSTOM',
 }
+
+export enum FiltersGroupId {
+    CUSTOM = 0,
+    INTEGRATED = 2,
+    MAIN = 3,
+    LANGUAGES = 7,
+}
+
+export enum RulesetType {
+    RULESET_1 = 'ruleset_1',
+    RULESET_2 = 'ruleset_2',
+    RULESET_3 = 'ruleset_3',
+    RULESET_4 = 'ruleset_4',
+    RULESET_9 = 'ruleset_9',
+    RULESET_14 = 'ruleset_14',
+}
+
+export const FILTER_RULESET = {
+    [RulesetType.RULESET_1]: 1,
+    [RulesetType.RULESET_2]: 2,
+    [RulesetType.RULESET_3]: 3,
+    [RulesetType.RULESET_4]: 4,
+    [RulesetType.RULESET_9]: 9,
+    [RulesetType.RULESET_14]: 14,
+};

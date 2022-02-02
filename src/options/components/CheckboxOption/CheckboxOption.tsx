@@ -20,7 +20,7 @@ export interface IProps {
     messageKeyDesc?: string;
     message?: string;
     onClick?: () => void;
-    onChange: ChangeHandler;
+    onChange?: ChangeHandler;
     className?: string,
     iconClass?: string,
     containerClass?: string,
@@ -77,7 +77,7 @@ export const CheckboxOption = ({
                     {content()}
                 </button>
             ) : content()}
-            {integrated ? (
+            {integrated || !onChange ? (
                 <div className={styles.optionLabelDesc}>
                     {reactTranslator.getMessage('options_base_filter')}
                 </div>
