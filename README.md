@@ -23,6 +23,16 @@ Build dev for chrome in watch mode run:
 yarn dev chrome --watch
 ```
 
+Download and convert filters into declarative rules:
+```
+yarn filters update
+```
+
+Сonvert filters into declarative rules:
+```
+yarn filters сonvert
+```
+
 ## TODO
 - [ ] enable disable blocking from popup
 - [ ] set filter ids on site report

@@ -1,8 +1,8 @@
-! Checksum: J5eyFh46D3NtqOp21g1/Ew
+! Checksum: t09v60DqLfk4o7g8oZTevQ
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish and Portuguese languages.
-! Version: 2.0.12.56
-! TimeUpdated: 2022-01-31T13:31:50+00:00
+! Version: 2.0.12.58
+! TimeUpdated: 2022-02-06T21:31:46+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -78,7 +78,13 @@
 !-------------- Advertising networks ---------------------------------------!
 !---------------------------------------------------------------------------!
 !
-! Section contains list of advertising networks
+! This section contains the list of third-party advertising networks domains.
+! Note, that we only put rules that block full domains here and not URL parts (there's `general_url.txt` for that). Also, it must be domains that are used in a third-party context.
+!
+! Good: ||doubleclick.net^$third-party
+! Bad: /banner.jpg (should be in general_url.txt)
+! Bad: ||adssubdomain.legitwebsite.com^ (should be in adservers_firstparty.txt)
+!
 !
 ! https://forum.adguard.com/index.php?threads/ivoox-com-podcasts-issues.29530/
 ! ||addevweb.com^$third-party
@@ -281,12 +287,20 @@
 !-------------- Anti-adblock rules -----------------------------------------!
 !---------------------------------------------------------------------------!
 !
-! These rules are against all kinds of ad blocking reinjection/circumvention scripts
+! First of all, this section has common rules that prevent most known ad block detections. In that case domain should be added to the common rules.
+! The section contains the list of the rules are against all kinds of ads reinjection or ad-blocking circumvention scripts. If such a script does not cripple the website, we add rules to the Annoyances filter.
+! Rules should generally be domain-specific. In some exceptional cases, it's allowed to add generic ones, but this should be approved by most of the maintainers.
+!
+! Good: ||example.org/adblock/detect.js
+! Good: @@/adblocker/detect.js$domain=example.org
+! Bad: ||ad.doubleclick.net^ (should be in adservers.txt)
 !
 ! AdRegain
 tunovelaligera.com#%#//scriptlet("abort-on-property-write", "adregain_wall")
 tunovelaligera.com#%#//scriptlet("abort-on-property-read", "ad_nodes")
 !
+! https://github.com/uBlockOrigin/uAssets/issues/11586
+@@||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=marcaclaro.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/106023
 it-swarm-es.com#%#//scriptlet("prevent-setTimeout", "adsbygoogle")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/105079
@@ -1174,7 +1188,11 @@ peru21.pe#@#.adstop
 !-------------- Extended CSS rules -----------------------------------------!
 !---------------------------------------------------------------------------!
 !
-! Extended CSS rules
+! This section contains the list of extended CSS rules against ads.
+! Note, that rules should be domain-specific and you have to use special syntax `#?#` instead of `##`.
+!
+! Good: example.org#?#main > div.row:has(> div.ad)
+! Bad: example.org##main > div.ad (should be in specific.txt)
 !
 ! https://github.com/AdguardTeam/AdguardFilters/issues/24801
 yahoo.com#?#ul[class^="Mb(0)"] > li.js-stream-content:has(> div > a[rel="nofollow noopener noreferrer"]+div:contains(Patrocinado))
@@ -1290,7 +1308,11 @@ maisgasolina.com#?##main [id$="Block"][-ext-has='.adsbygoogle']
 !-------------- General element hiding rules -------------------------------!
 !---------------------------------------------------------------------------!
 !
-! Section contains list general hiding rules
+! This section contains generic element hiding rules that block ads.
+!
+! Good: ##.adv
+! Bad: example.org##.adv (should be in specific.txt)
+!
 !
 ##.publicity-content
 ##.publicidad
@@ -1377,6 +1399,11 @@ maisgasolina.com#?##main [id$="Block"][-ext-has='.adsbygoogle']
 !---------------------------------------------------------------------------!
 !-------------- General javascript, CSS and HTML extensions ----------------!
 !---------------------------------------------------------------------------!
+!
+! This section contains the list of ad blocking rules that fall under "advanced" category.
+!
+! Bad: example.org###rek (should be in specific.txt)
+!
 !--------------------------------------!
 !------- JS rules ---------------------!
 !--------------------------------------!
@@ -1696,7 +1723,11 @@ windowsblogitalia.com#$#.sidebar > div.tile-top.tile { height: auto!important; }
 !-------------- General URL blocking rules ---------------------------------!
 !---------------------------------------------------------------------------!
 !
-! Banner names
+! This section contains the list of generic blocking rules.
+!
+! Good: .org/ads/
+! Bad: .org/ads/$domain=example.org (for instance, should be in speficic.txt)
+!
 !
 /imagenes_publicidad/*
 -publicidad-
@@ -1795,7 +1826,9 @@ http://adw.
 !------------------ Content replacement rules ------------------------------!
 !---------------------------------------------------------------------------!
 !
-! The content replacement rules
+! This section contains the list of the content replacement rules that block ads. Rules must be domain-specific.
+!
+! Bad:  ||example.org/video-links (should be in specific.txt)
 !
 ! https://github.com/AdguardTeam/AdguardFilters/issues/91363
 ! https://github.com/AdguardTeam/AdguardFilters/issues/59758
@@ -1804,9 +1837,12 @@ http://adw.
 !---------------------------------------------------------------------------!
 !-------------- Rules for specific websites --------------------------------!
 !---------------------------------------------------------------------------!
-!--------------------------------------------------------!
-!-------------------- Specific rules --------------------!
-!--------------------------------------------------------!
+!
+! This section contains the list of domain-specific rules that block ads.
+!
+! Good: example.org###rek; ||example.com/ads/
+! Bad: example.org#$##rek { display: none !important; } (for instance, should be in general_extensions.txt)
+!
 !
 ! For URL shorteners or simple sites with frequently changed ad servers.
 ! Incorrectly blocked domains can be excluded using regex(synchronize this regexp in all filters)
@@ -1817,6 +1853,7 @@ jc.ne10.uol.com.br,internetpasoapaso.com,acidadeon.com,leouve.com.br,larazon.es,
 ! ##.ad
 laopiniondemurcia.es,larazon.es,dicio.com.br,band.uol.com.br,xataka.com,onyxplay.com,genbeta.com,vagalume.com.br,xatakandroid.com,abril.com.br##.ad
 !
+olimpicos.marcaclaro.com##.banner-leader
 lostiempos.com###takeover-desktop-counter
 legiaodosherois.com.br##.bg-ad-wrapper
 legiaodosherois.com.br##.widget--adsense
@@ -4213,7 +4250,11 @@ uol.com.br##ul.produtos
 !------ White list. Fixing filtration errors (false-positive) --------------!
 !---------------------------------------------------------------------------!
 !
-! White list. Fixing filtration errors (false-positive)
+! This section contains the list of rules that fix incorrect blocking. Rules must be domain-specific.
+!
+! Good: example.org#@#.ad
+! Bad:  @@||example.org^$stealth (should be in AdGuard Base - whitelist_stealth.txt)
+!
 !
 ! https://github.com/AdguardTeam/AdguardFilters/issues/103893
 @@||movistarplus.es/js/yomvi/player/publi.js

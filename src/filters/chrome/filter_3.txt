@@ -1,8 +1,8 @@
-! Checksum: NPRfq/UP2PEofPHUHVkkUQ
+! Checksum: SV6+5dDLgLzdMWxJwoWu+A
 ! Title: AdGuard Tracking Protection filter
 ! Description: The most comprehensive list of various online counters and web analytics tools. Use this filter if you do not want your actions on the Internet to be tracked.
-! Version: 2.0.34.85
-! TimeUpdated: 2022-02-01T11:31:23+00:00
+! Version: 2.0.35.15
+! TimeUpdated: 2022-02-07T12:31:20+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -76,6 +76,10 @@
 !-------------------------------------------------------------------------------!
 !-------------- General javascript, CSS and HTML extensions --------------------!
 !-------------------------------------------------------------------------------!
+!
+! This section contains the list of blocking rules that fall under "advanced" category.
+!
+! Bad: example.org###rek (should be in specific.txt)
 !
 ! This rule is for suppressing Google FLoC.
 ! Read more about it here:
@@ -179,7 +183,11 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 !-------------- General hiding rules--------------------------------------------!
 !-------------------------------------------------------------------------------!
 !
-! Hide counters images
+! This section contains generic element hiding rules that block counters leftovers.
+!
+! Good: ##.adv
+! Bad: example.org##.adv (should be in specific.txt)
+!
 !
 ##amp-embed[type="taboola"]
 ###qoo-counter
@@ -200,7 +208,11 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 !-------------- Extended CSS rules -----------------------------------------!
 !---------------------------------------------------------------------------!
 !
-! Extended CSS rules
+! This section contains the list of extended CSS rules against leftovers.
+! Note, that rules should be domain-specific and you have to use special syntax `#?#` instead of `##`.
+!
+! Good: example.org#?#main > div.row:has(> div.ad)
+! Bad: example.org##main > div.ad (should be in specific.txt)
 !
 ! https://github.com/AdguardTeam/AdguardFilters/issues/6281
 vol.az#?##footer > .column-one-fourth[-ext-has=".line > span:contains(Sayğac)"]
@@ -237,6 +249,14 @@ journal-plaza.net#?#.rightside div.block.bnavi[-ext-has="h3.dtitle:contains(Сч
 !-------------------------------------------------------------------------------!
 !-------------- Tracking servers list  -----------------------------------------!
 !-------------------------------------------------------------------------------!
+!
+! This section contains the list of third-party tracking networks domains.
+! Note, that we only put rules that block full domains here and not URL parts (there's `general_url.txt` for that). Also, it must be domains that are used in a third-party context.
+!
+! Good: ||doubleclick.net^$third-party
+! Bad: /banner.jpg (should be in general_url.txt)
+! Bad: ||tracker.legitwebsite.com^ (should be in tracking_servers_firstparty.txt)
+!
 !
 ! Blocking Firebase crash reporting is quite problematic:
 ! https://github.com/AdguardTeam/AdguardForAndroid/issues/1334#issuecomment-319302543
@@ -283,11 +303,15 @@ journal-plaza.net#?#.rightside div.block.bnavi[-ext-has="h3.dtitle:contains(Сч
 !||i.snssdk.com/log/*
 !||i.snssdk.com/slardar/sdk.js
 !
+||events.audioplace.me^$third-party
+||usageanalytics.coveo.com^
+||ox.bncounter.com^
 ||pbkqidejmes.ru^
 ||sensors.ibreader.com^
 ||bvr.ast.snva.jp^
 ||kantartns.lt^$third-party
 ||trk2-wtb.swaven.com^
+||firstpromoter.com^$third-party
 ||st.hbrd.io^
 ||sgtm.sefamerve.com^
 ||analytics-api.statvoo.com^
@@ -4948,7 +4972,13 @@ nethunt.com/api/v1/track/email/$image
 !+ NOT_PLATFORM(windows, mac, android)
 ||artfut.com^$redirect=nooptext,important
 !
-! Section contains the list of tracking servers, which are hosted on useful sites as subdomains
+! This section contains the list of tracking networks domains, which are hosted on non advertising sites as subdomains.
+! Note, that we only put rules that block full subdomains here and not URL parts (there's `general_url.txt` for that).
+!
+! Good: ||tracker.doubleclick.net^
+! Bad: /banner.jpg (should be in general_url.txt)
+! Bad: ||legitwebsite.com^$third-party (should be in adservers.txt)
+!
 !
 ! https://github.com/AdguardTeam/AdguardFilters/issues/25467
 ||ct.pinterest.com^
@@ -4973,6 +5003,11 @@ nethunt.com/api/v1/track/email/$image
 ! Disabled in DNS filter
 ||telemetry.mozilla.org^
 !
+||analytics.vedantu.com^
+||stat.mydaddy.cc^
+||event-collector.analytics.onedio.com^
+||gtmdev.jabra.
+||tracking.adsbot.kr^
 ||gtm.beiersdorf.com^
 ||hwa.his.huawei.com^
 ||stat.i3.dmm.com^
@@ -6870,7 +6905,11 @@ charlestownwyllie.oaklawnnonantum.com^
 !-------------- CNAME trackers  ------------------------------------------------!
 !-------------------------------------------------------------------------------!
 !
-! CNAME trackers
+! This section contains the list of the rules are against CNAME tracking networks.
+!
+! Good: !#include https://raw.githubusercontent.com/AdguardTeam/cname-trackers/master/trackers/adspyglass.txt
+! Bad:  ||monerominer.rocks^$third-party (should be in adservers.txt)
+!
 !
 ! A8.net : a8.net disguised trackers
 !
@@ -20033,6 +20072,11 @@ charlestownwyllie.oaklawnnonantum.com^
 !-------------- General (unsorted) url blocking --------------------------------!
 !-------------------------------------------------------------------------------!
 !
+! This section contains the list of generic blocking rules.
+!
+! Good: .org/ads/
+! Bad: .org/ads/$domain=example.org (for instance, should be in speficic.txt)
+!
 ! Blocking conversion tracking URLs that are used by WebKit
 ! More info: https://webkit.org/blog/11529/introducing-private-click-measurement-pcm/
 ! Content blockers can prevent this: https://bugs.webkit.org/show_bug.cgi?id=197183
@@ -20111,6 +20155,7 @@ charlestownwyllie.oaklawnnonantum.com^
 ! Umami
 /umami.js
 !
+/perimeterx/*
 /cdn-cgi/apps/head/*$script,~third-party
 /analyticstracking.js
 /hawklinks.js
@@ -20468,6 +20513,11 @@ _tracking.php?b=
 !-------------- Specific web sites ---------------------------------------------!
 !-------------------------------------------------------------------------------!
 !
+! This section contains the list of domain-specific rules that block analytics.
+!
+! Good: example.org###counter; ||tracker.org/stats/
+! Bad: example.org#$##rek { display: none !important; } (for instance, should be in general_extensions.txt); ||tracker.org^$third-party (should be in tracking_servers.txt)
+!
 ! Temporary
 ! https://github.com/easylist/easylist/issues/1719
 ! https://github.com/AdguardTeam/AdguardFilters/issues/22746
@@ -20489,7 +20539,7 @@ _tracking.php?b=
 !
 !
 ! TODO: check the whitelist file from time to time to remove unnecessary exceptions
-||mc.yandex.ru/metrika/tag.js$script,redirect=metrika-yandex-tag
+||mc.yandex.ru/metrika/tag.js$script,redirect=metrika-yandex-tag,domain=~gosuslugi.ru
 ||mc.yandex.ru/metrika/watch.js$script,redirect=metrika-yandex-watch,domain=~disk.yandex.*|~docviewer.yandex.*|~tv.yandex.*|~music.yandex.*|~plus.yandex.*
 ! TODO: replace `~domain.com` by exclusions after ext4.0 release
 ! https://github.com/AdguardTeam/AdguardForWindows/issues/3973
@@ -20513,8 +20563,21 @@ _tracking.php?b=
 ||adc.nine.com.au/?token=$redirect=nooptext,important,domain=9now.com.au
 ||googleadservices.com/pagead/conversion_async.js$redirect=noopjs,domain=ffm.to,important
 !
-/analytics.js$domain=bataryapil.com|journey.com.tr|freexcafe.com|rusvideos.tv|nakubani.ru|lun.com|songsara.net|partifabrik.com|newsmax.com
+/analytics.js$domain=bataryapil.com|journey.com.tr|freexcafe.com|rusvideos.tv|nakubani.ru|lun.com|songsara.net|partifabrik.com|newsmax.com|bolgehastanesi.com
 !
+||common.doosanmagazine.com/js/eLogs.js$domain=allurekorea.com
+||js.selfimg.com.cn/cna/analytics.js
+||js.selfimg.com.cn/lib/ga/ga.js
+||js.selfimg.com.cn/statistics/total.js
+||js.selfimg.com.cn/cna/tracking.min.js
+||js.selfimg.com.cn/vogue/discovery/js/collect-entry.js
+||facebook.com/email_open_log_
+||srv.onedio.com/counter/
+||api-onedio-lambda-production.onedio.com/srv/counters/
+||levelaccess.net/analytics/
+||platform-eu.cloud.coveo.com/rest/*/analytics/view?
+||static.cloud.coveo.com/coveo.analytics.js/
+||cdnen.rt.com/static/js/libs/counters.js
 ||pln-pskov.ru/cntr.php?id=
 ||fashionbykakao.com/api/*/tr?
 oceans-nadia.com##.gtm-bnr-rensai
@@ -23019,7 +23082,12 @@ link.gmapp*.net$image
 !-------------- Cookies --------------------------------------------------------!
 !-------------------------------------------------------------------------------!
 !
-! Section contains the rules for blocking cookies
+!
+! This section contains the list of the rules that block tracking cookies. Rules should be specific and have only only one modifier `$cookie`.
+!
+! Good: ||lemurov.net^$cookie=flat_r_mb
+! Bad:  ||monerominer.rocks^$third-party (should be in adservers.txt)
+!
 !
 !------------------------------
 !---- Domain pecific rules ----
@@ -23097,7 +23165,6 @@ $cookie=wuuid,domain=duolingo.com|duolingo.cn
 ! wisepops.com widget counter
 $cookie=/^wisepops/
 ! Demandware Analytics
-$cookie=dwsid
 $cookie=/dwanonymous_/
 $cookie=/dwac_/
 $cookie=cqcid
@@ -23581,10 +23648,8 @@ $cookie=bf_visit
 !---- Fixing filtering errors -
 !------------------------------
 !
-! https://github.com/AdguardTeam/AdguardFilters/issues/108850
-@@||akg.com^$cookie=dwsid
-! https://github.com/AdguardTeam/AdguardFilters/issues/108417
-@@||paulaschoice.com^$cookie=dwsid
+! https://github.com/AdguardTeam/AdguardFilters/issues/108624
+@@||store-jp.nintendo.com^$cookie
 ! https://github.com/AdguardTeam/AdguardFilters/issues/101014
 @@||gigabyte.*^$cookie=/^_ga_/
 ! https://github.com/AdguardTeam/AdguardFilters/issues/101455
@@ -23597,7 +23662,11 @@ $cookie=bf_visit
 !-------------- Mobile analytics  ----------------------------------------------!
 !-------------------------------------------------------------------------------!
 !
-! Section contains rules for mobile analytics and spyware
+! This section contains the list of the rules that block mobile analytics and spyware.
+!
+! Good: ||adeventtracker.spotify.com^
+! Bad:  ||adeventtracker.spotify.com^ (if this is everywhere, should be in tracking_servers.txt)
+!
 !
 ! Do not block pixapi.net. It causes issues
 !
@@ -23699,6 +23768,7 @@ $cookie=bf_visit
 ||int.vlancaa.fun^
 ||tok.vaicore.xyz^
 !
+||analytics.studiodesignapp.com^
 ||misc.api.snaptube.app^
 ||dig.bdurl.net^
 ||trusted-collector-bk.tmocce.com^
@@ -24265,7 +24335,10 @@ $cookie=bf_visit
 !-------------- Mobile analytics exceptions  -----------------------------------!
 !-------------------------------------------------------------------------------!
 !
-! Exception rules that fix broken mobile apps and mobile websites
+! This section contains the list of the base rules that fix broken mobile apps and mobile websites. Rules should be specific.
+!
+! Good: @@||tracker.org^$domain=m.example.org
+! Bad:  @@||example.org^$stealth (should be in AdGuard Base - whitelist_stealth.txt)
 !
 !
 ! https://github.com/AdguardTeam/AdguardFilters/issues/100669
@@ -24319,6 +24392,11 @@ $cookie=bf_visit
 !-------------- Whitelist ------------------------------------------------------!
 !-------------------------------------------------------------------------------!
 !
+! This section contains the list of rules that fix incorrect blocking. Rules must be domain-specific.
+!
+! Good: example.org#@#.ad
+! Bad:  @@||example.org^$stealth (should be in AdGuard Base - whitelist_stealth.txt)
+!
 !
 !### Temporary ###
 ! https://github.com/AdguardTeam/CoreLibs/issues/1306
@@ -24337,6 +24415,15 @@ $cookie=bf_visit
 ! For platforms which do not support $redirect rules
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/109188
+||googletagmanager.com/gtm.js$script,redirect=googletagmanager-gtm,domain=carsmile.pl
+! https://github.com/AdguardTeam/AdguardFilters/issues/108618
+! https://github.com/AdguardTeam/AdguardFilters/issues/108615
+! `$redirect` cannot be used due to integrity check
+@@||cdnjs.cloudflare.com/ajax/libs/fingerprintjs2/2.1.0/fingerprint2.js$script,domain=picoworkers.com
+! https://github.com/AdguardTeam/AdguardFilters/issues/108296
+||new.hnair.com/hainanair/ibe/static/scripts/new/profile/fingerprint2.js$script,redirect=fingerprintjs,important
+@@||new.hnair.com/hainanair/ibe/static/scripts/new/profile/fingerprint2.js
 ! https://github.com/AdguardTeam/AdguardFilters/issues/108678
 ! https://github.com/AdguardTeam/AdguardFilters/issues/108760
 ||uim.tifbs.net/js/*.js$script,redirect=noopjs,domain=web.de|gmx.net|gmx.ch
@@ -24371,6 +24458,7 @@ ntp.msn.com#@%#navigator.getBattery = undefined;
 ! https://github.com/AdguardTeam/AdguardFilters/issues/106408
 @@||online.a1.by/l/v/track.php?event=$domain=a1.by
 ! https://github.com/AdguardTeam/Scriptlets/issues/141#issuecomment-921042595
+||cloudflare.com/ajax/libs/fingerprintjs2/$script,redirect=fingerprintjs,domain=gamebox.gesoten.com,important
 @@||cloudflare.com/ajax/libs/fingerprintjs2/$script,domain=gamebox.gesoten.com
 ! riteaid.com
 @@||rfksrv.com/rfk/js/*/init.js$script,domain=riteaid.com
@@ -24597,7 +24685,6 @@ pizzakiosk.ee#@#img[width="88"][height="31"]
 @@||googletagmanager.com/gtm.js$domain=dengekionline.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/91881
 @@||googletagmanager.com/gtm.js$domain=mainichi.jp
-||googletagmanager.com/gtm.js$script,xmlhttprequest,redirect=googletagmanager-gtm,important,domain=mainichi.jp
 ! https://github.com/AdguardTeam/AdguardFilters/issues/91939
 @@||googletagmanager.com/gtm.js$domain=pcjisaku.com
 ||googletagmanager.com/gtm.js$script,xmlhttprequest,redirect=googletagmanager-gtm,important,domain=pcjisaku.com
@@ -25149,8 +25236,9 @@ ciokorea.com,adpiamall.com,live.joins.com,naver.com,jbe.go.kr#%#//scriptlet('set
 @@||tags.crwdcntrl.net/c/*/cc.js?ns=$domain=html5.gamedistribution.com
 ! overwatchleague.com - fixing images
 @@||googletagmanager.com/gtm.js$domain=overwatchleague.com
+! https://github.com/AdguardTeam/AdguardFilters/issues/109127
 ! https://github.com/AdguardTeam/AdguardFilters/issues/59975
-@@||google-analytics.com/analytics.js$domain=html5.gamedistribution.com
+||googletagmanager.com/gtag/js$script,redirect=googletagmanager-gtm,domain=html5.gamedistribution.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/59975
 @@||az416426.vo.msecnd.net/next/ai.2.min.js$domain=ams.cdn.arkadiumhosted.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/87519
