@@ -30,11 +30,14 @@ const messageHandlerWrapper = (messageHandler: MessageHandler) => (
     sender: chrome.runtime.MessageSender,
     sendResponse: (...args: any[]) => void,
 ) => {
-    messageHandler(message, sender)
-        .catch((e: Error) => {
-            log.error(e);
-        })
-        .then(sendResponse);
+    (async () => {
+        try {
+            const response = await messageHandler(message, sender);
+            sendResponse(response);
+        } catch (e: any) {
+            sendResponse({ error: { message: e.message } });
+        }
+    })();
     return true;
 };
 
@@ -97,7 +100,7 @@ export const messageHandler = async (
         }
         case MESSAGE_TYPES.ADD_USER_RULE: {
             const { ruleText } = data;
-            userRules.addRules(ruleText);
+            await userRules.addRule(ruleText);
             break;
         }
         case MESSAGE_TYPES.ADD_FILTERING_SUBSCRIPTION: {

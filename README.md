@@ -40,6 +40,7 @@ yarn filters сonvert
 - [ ] notifications module to notify users about errors or successes
 - [ ] bamboo specs
 - [ ] add task to add build.txt file into build directory
+- [ ] apply cosmetic rules via chrome.declarativeContent https://developer.chrome.com/docs/extensions/reference/declarativeContent
 
 ## Permissions required
 - `scripting` - this permission is required in order to inject assistant script only in the pages required

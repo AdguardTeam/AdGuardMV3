@@ -8,9 +8,15 @@ export const sendMessage = <T = void>(type: MessageType, data?: any): Promise<T>
         }
         chrome.runtime.sendMessage(message, (response) => {
             if (chrome.runtime.lastError) {
-                reject(chrome.runtime.lastError.message);
+                reject(new Error(chrome.runtime.lastError.message));
                 return;
             }
+
+            if (response?.error) {
+                reject(new Error(response.error.message));
+                return;
+            }
+
             resolve(response);
         });
     },

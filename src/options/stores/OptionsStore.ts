@@ -112,13 +112,22 @@ export class OptionsStore {
     }
 
     @action
-    setUserRules = (userRules: string) => {
+    setUserRules = async (userRules: string) => {
         if (this.userRules === userRules) {
             return;
         }
 
+        // update user rules only if there is no validation errors
+        try {
+            await sender.setUserRules(userRules);
+        } catch (e: any) {
+            // TODO handle errors properly in the UI
+            // eslint-disable-next-line no-console
+            console.error(e.message);
+            return;
+        }
+
         this.userRules = userRules;
-        sender.setUserRules(this.userRules);
     };
 
     @action

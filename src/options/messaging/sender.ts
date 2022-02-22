@@ -52,7 +52,7 @@ class Sender {
         return sendMessage(MESSAGE_TYPES.GET_USER_RULES);
     };
 
-    setUserRules = (userRules: string): Promise<void> => {
+    setUserRules = async (userRules: string): Promise<void> => {
         return sendMessage(MESSAGE_TYPES.SET_USER_RULES, { userRules });
     };
 }

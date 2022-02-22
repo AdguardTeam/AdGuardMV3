@@ -1,30 +1,29 @@
-import _ from 'lodash';
-
 import { NEW_LINE_SEPARATOR, NOTIFIER_EVENTS, UserRuleType } from 'Common/constants';
 import { log } from 'Common/logger';
 import { UserRulesProcessor } from 'Options/user-rules-processor';
 import { notifier } from './notifier';
 import { storage } from './storage';
+import { dynamicRules } from './dynamic-rules';
 
 class UserRules {
-    // TODO remove sample rules
-    rules = `example.org##h1
-@@||adguard.com^
-||baddomain.com^$domain=google.com
-!off!@@||gooddomain.com^$domain=google.com
-`;
+    rules = '';
 
     STORAGE_KEY = 'user_rules';
 
-    THROTTLE_TIMEOUT_MS = 1000;
+    private setRules = async (rules: string) => {
+        await dynamicRules.setRules(rules);
+        await this.saveRulesInStorage(rules);
 
-    persist = _.throttle(async () => {
+        this.rules = rules;
+    };
+
+    private saveRulesInStorage = async (rules: string) => {
         try {
-            await storage.set(this.STORAGE_KEY, this.rules);
+            await storage.set(this.STORAGE_KEY, rules);
         } catch (e: any) {
             log.error(e.message);
         }
-    }, this.THROTTLE_TIMEOUT_MS);
+    };
 
     getRules() {
         return this.rules;
@@ -50,20 +49,24 @@ class UserRules {
         return currentAllowRule;
     }
 
-    setUserRules(userRules: string) {
-        this.rules = userRules;
-        this.persist();
-        notifier.notify(NOTIFIER_EVENTS.SET_RULES, this.rules);
-    }
+    setUserRules = async (userRules: string) => {
+        await this.setRules(userRules);
 
-    addRules = (rulesText: string) => {
-        notifier.notify(NOTIFIER_EVENTS.ADD_RULES, rulesText);
-        const newUserRules = `${this.rules}${NEW_LINE_SEPARATOR}${rulesText}`;
-        this.rules = newUserRules;
+        notifier.notify(NOTIFIER_EVENTS.SET_RULES, this.rules);
     };
 
-    async init() {
-        this.rules = await storage.get(this.STORAGE_KEY) || this.rules;
+    addRule = async (ruleText: string) => {
+        const newUserRules = `${this.rules}${NEW_LINE_SEPARATOR}${ruleText}`;
+
+        await this.setRules(newUserRules);
+
+        notifier.notify(NOTIFIER_EVENTS.ADD_RULES, this.rules);
+    };
+
+    public async init() {
+        const storedRules = await storage.get(this.STORAGE_KEY) as string || this.rules;
+
+        await this.setRules(storedRules);
     }
 }
 
