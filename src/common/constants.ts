@@ -97,6 +97,11 @@ export enum FiltersGroupId {
     LANGUAGES = 7,
 }
 
+export interface Rules {
+    id: number,
+    rules: string,
+}
+
 export enum RulesetType {
     RULESET_1 = 'ruleset_1',
     RULESET_2 = 'ruleset_2',
@@ -107,6 +112,7 @@ export enum RulesetType {
 }
 
 export const FILTER_RULESET = {
+    USER_RULES: 0,
     [RulesetType.RULESET_1]: 1,
     [RulesetType.RULESET_2]: 2,
     [RulesetType.RULESET_3]: 3,
@@ -114,3 +120,7 @@ export const FILTER_RULESET = {
     [RulesetType.RULESET_9]: 9,
     [RulesetType.RULESET_14]: 14,
 };
+
+export const RULES_STORAGE_KEY = 'rules';
+
+export const USER_RULES_STORAGE_KEY = 'user_rules';

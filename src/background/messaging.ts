@@ -1,12 +1,10 @@
 import {
-    Message,
-    MESSAGE_TYPES,
-    OptionsData,
-    PopupData,
+    Message, MESSAGE_TYPES, OptionsData, PopupData,
 } from 'Common/constants';
 import { log } from 'Common/logger';
 import { SETTINGS_NAMES } from 'Common/settings-constants';
 import { tabUtils } from 'Common/tab-utils';
+import { CosmeticOption } from '@adguard/tsurlfilter';
 import { settings } from './settings';
 import { app } from './app';
 import { notifier } from './notifier';
@@ -15,6 +13,7 @@ import { filters } from './filters';
 import { categories } from './categories';
 import { backend } from './backend';
 import { userRules } from './userRules';
+import { engine } from './engine';
 
 interface MessageHandler {
     (message: Message, sender: chrome.runtime.MessageSender): any;
@@ -123,8 +122,10 @@ export const messageHandler = async (
             const protectionEnabled = settings.getSetting(SETTINGS_NAMES.PROTECTION_ENABLED);
 
             if (filteringEnabled && protectionEnabled) {
-                // example rules
-                return ['* { background-color: pink }'];
+                const selectors = engine.getSelectorsForUrl(
+                    data.url, CosmeticOption.CosmeticOptionAll, false, false,
+                );
+                return selectors;
             }
 
             return null;

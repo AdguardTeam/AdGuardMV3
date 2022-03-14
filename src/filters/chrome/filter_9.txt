@@ -1,8 +1,8 @@
-! Checksum: 2emQmAAxh2h3nXF0BDRJwQ
+! Checksum: JQmW+ib5FAY85zjcL3Zzdg
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish and Portuguese languages.
-! Version: 2.0.12.73
-! TimeUpdated: 2022-02-21T10:31:43+00:00
+! Version: 2.0.12.79
+! TimeUpdated: 2022-03-01T22:31:40+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -299,6 +299,10 @@
 tunovelaligera.com#%#//scriptlet("abort-on-property-write", "adregain_wall")
 tunovelaligera.com#%#//scriptlet("abort-on-property-read", "ad_nodes")
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/111554
+@@||paky3.me/wp-content/plugins/wordpress-popup/assets/js/adb.min.js
+! https://github.com/AdguardTeam/AdguardFilters/issues/111261
+acortalink.me#@#.adsbygoogle
 ! https://github.com/AdguardTeam/AdguardFilters/issues/111042
 ||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,xmlhttprequest,redirect=googlesyndication-adsbygoogle,important,domain=monarcamanga.com
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js|$domain=monarcamanga.com
@@ -1202,6 +1206,7 @@ peru21.pe#@#.adstop
 ! https://github.com/AdguardTeam/AdguardFilters/issues/24801
 yahoo.com#?#ul[class^="Mb(0)"] > li.js-stream-content:has(> div > a[rel="nofollow noopener noreferrer"]+div:contains(Patrocinado))
 !
+hackstore.la#?#.block-container > #widget > .movie-thumbnail:has(> .movie-back > h3 > :is(a[href$="/netflix-premium/"], a[href$="/spotify-premium/"], a[title="Disney Premium"]))
 atomixhq.art#?#.featured-slides > li.slide:not([id]):has(a[href^="https://startgaming.net/"])
 hojeemdia.com.br#?#div[class^="Block__Component-"]:has(> label:contains(/^Publicidade$/))
 reforma.com#?#div[style^="height:250px;"]:has(> div > div#registroNuevoNL)
@@ -1415,6 +1420,13 @@ maisgasolina.com#?##main [id$="Block"][-ext-has='.adsbygoogle']
 !------- JS rules ---------------------!
 !--------------------------------------!
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/111554
+paky3.me,pelismart.com,pelismarthd.com#%#//scriptlet("prevent-window-open")
+! https://github.com/AdguardTeam/AdguardFilters/issues/111452
+tiohentai.xyz#%#//scriptlet("set-constant", "loadingAds", "undefined")
+tiohentai.xyz#%#//scriptlet("abort-current-inline-script", "document.addEventListener", "create_")
+! https://github.com/AdguardTeam/AdguardFilters/issues/111261
+acortalink.me#%#AG_onLoad(function(){try{var a;"function"==typeof decode_link&&"string"==typeof link_out&&(a=decode_link(atob(link_out)),location.assign(a)),"string"==typeof api_key&&(document.cookie=`${api_key}=Wn275; path=/`);var b=document.querySelector("* > .button#contador");b&&a&&setTimeout(()=>{var c=b.cloneNode(!0);b.parentNode.replaceChild(c,b),c.addEventListener("click",function(){location.assign(a)},!1)},500)}catch(a){}});
 ! https://github.com/AdguardTeam/AdguardFilters/issues/109027
 pelispedia-v1.wtf#%#//scriptlet("prevent-window-open")
 pelispedia-v1.wtf#%#//scriptlet("adjust-setInterval", "Loading player", "", "0.02")
@@ -1870,12 +1882,15 @@ atomixhq.art,jc.ne10.uol.com.br,internetpasoapaso.com,acidadeon.com,leouve.com.b
 ! ##.ad
 laopiniondemurcia.es,larazon.es,dicio.com.br,band.uol.com.br,xataka.com,onyxplay.com,genbeta.com,vagalume.com.br,xatakandroid.com,abril.com.br##.ad
 !
+jovempan.com.br##div[style="margin:10px auto; text-align:center"]
+jovempan.com.br##div[style="margin: 0px auto 10px auto; text-align:center"]
+||hentaila.ml/random.js
 culturageek.com.ar##.g-dyn > p[align="center"] > a[data-track][target="_blank"] > img
 marca.com##.content-ad
 vitoriadaconquistanoticias.com.br###webtivaFloating
 vitoriadaconquistanoticias.com.br##.adcontainer
 vitoriadaconquistanoticias.com.br##.bsac-float-center
-atomixhq.art##a[href^="https://startgaming.net/"]
+hackstore.la,atomixhq.art##a[href^="https://startgaming.net/"]
 atomtt.com##.ddl > ul > li.slide
 ||tcloudbase.com/access?
 ||pelistorrent.org/wp-content/uploads/*/pandabanner.png
@@ -4313,7 +4328,7 @@ uol.com.br##ul.produtos
 @@||adhandler.kissfmradio.cires21.com/get_link?url=$domain=hitfm.es
 ! https://github.com/AdguardTeam/AdguardFilters/issues/71530
 @@||sunmedia.tv/integrations/*.js$domain=vandal.elespanol.com
-@@||static.sunmedia.tv/AdBlockDetection/adblockDetector.min.js^$domain=vandal.elespanol.com
+@@||static.sunmedia.tv/AdBlockDetection/adblockDetector.min.js*iframevideo$domain=vandal.elespanol.com
 !
 ! https://github.com/uBlockOrigin/uAssets/issues/8471
 @@.m3u8$xmlhttprequest,domain=videos.memedeportes.com|videos.cuantarazon.com|videos.vistoenlasredes.com|videos.vrutal.com|videos.humorenserie.com

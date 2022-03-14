@@ -1,8 +1,15 @@
 // TODO store filters in the storage
 import { IconId } from 'Common/components/ui';
 import {
-    FILTER_RULESET, RulesetType, FiltersGroupId,
+    FILTER_RULESET,
+    RulesetType,
+    FiltersGroupId,
+    RULES_STORAGE_KEY,
+    Rules,
 } from 'Common/constants';
+import { ADGUARD_FILTERS_IDS } from '../../scripts/bundle/constants';
+import { backend } from './backend';
+import { engine } from './engine';
 import { storage } from './storage';
 
 const CUSTOM_FILTERS_START_ID = 1000;
@@ -62,19 +69,41 @@ class Filters {
 
     filters: Filter[] = [];
 
+    rules: Rules[] = [];
+
     async init() {
+        const promises = ADGUARD_FILTERS_IDS.map((id) => backend.downloadFilterRules(id));
+        const result = await Promise.all(promises);
+        // TODO add to storage only those rules that applied by the content script;
+        // Read the rules from the storages for each download background sw,
+        // if there are no rules, then get the rules from the files;
+        // If the rules have changed, get them (on the first lines + check time)
+        this.rules = await this.getRulesFromStorage() || result;
+        await storage.set(RULES_STORAGE_KEY, result);
+
         this.filters = await this.getFromStorage();
         await this.setRulesetsOptions();
     }
 
-    addFilter = (filter: Filter) => {
-        // TODO save in storage
-        this.filters.push(filter);
+    getRulesFromStorage = async () => {
+        const rules = await storage.get<Rules[]>(RULES_STORAGE_KEY);
+        return rules;
     };
 
-    removeFilter = (filterId: number): Filter[] => {
-        // TODO save in storage
+    // TODO add tests
+    addFilter = async (filter: Filter, rules: string) => {
+        this.filters.push(filter);
+        const { id } = filter;
+        this.rules.push({ id, rules });
+        await storage.set(RULES_STORAGE_KEY, this.rules);
+        await engine.init();
+    };
+
+    removeFilter = async (filterId: number): Promise<Filter[]> => {
         this.filters = this.filters.filter((f) => f.id !== filterId);
+        this.rules = this.rules.filter((f) => f.id !== filterId);
+        await storage.set(RULES_STORAGE_KEY, this.rules);
+        await engine.init();
         return this.filters;
     };
 
@@ -226,6 +255,7 @@ class Filters {
 
     addCustomFilterByContent = (filterStrings: [], title: string) => {
         const filterInfo = this.parseFilterInfo(filterStrings, title);
+
         const filter: Filter = {
             id: this.getCustomFilterId(),
             title: title || filterInfo.title,
@@ -233,7 +263,7 @@ class Filters {
             description: filterInfo.description || '',
             groupId: FiltersGroupId.CUSTOM,
         };
-        this.addFilter(filter);
+        this.addFilter(filter, filterStrings.join(''));
         return this.getFilters();
     };
 }

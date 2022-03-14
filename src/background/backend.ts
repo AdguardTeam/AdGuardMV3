@@ -11,8 +11,23 @@ const FILTER_COMPILER_OPTIONS = {
     adguard_ext_opera: browserUtils.isOperaBrowser(),
 };
 
+const COMMON_FILTERS_DIR = 'filters';
+
 class Backend {
     loadingUrls: { [key: string]: boolean } = {};
+
+    downloadFilterRules = async (filterId: number) => {
+        const url = chrome.runtime.getURL(`${COMMON_FILTERS_DIR}/filter_${filterId}.txt`);
+
+        const response = await FiltersDownloader.download(
+            url, FILTER_COMPILER_OPTIONS,
+        );
+
+        return {
+            id: filterId,
+            rules: response.join(''),
+        };
+    };
 
     loadFilterByUrl = async (url: string): Promise<string[]> => {
         if (url in this.loadingUrls) {

@@ -75,7 +75,7 @@ class BrowserActions {
     onFilteringStateChange = async () => {
         const activeTab = await tabUtils.getActiveTab();
 
-        if (activeTab.url) {
+        if (activeTab?.url) {
             const urlDetails = getUrlDetails(activeTab.url);
 
             if (urlDetails?.domainName) {

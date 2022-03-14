@@ -1,25 +1,30 @@
-import { NEW_LINE_SEPARATOR, NOTIFIER_EVENTS, UserRuleType } from 'Common/constants';
+import {
+    USER_RULES_STORAGE_KEY,
+    NEW_LINE_SEPARATOR,
+    NOTIFIER_EVENTS,
+    UserRuleType,
+} from 'Common/constants';
 import { log } from 'Common/logger';
 import { UserRulesProcessor } from 'Options/user-rules-processor';
 import { notifier } from './notifier';
 import { storage } from './storage';
 import { dynamicRules } from './dynamic-rules';
+import { engine } from './engine';
 
 class UserRules {
     rules = '';
-
-    STORAGE_KEY = 'user_rules';
 
     private setRules = async (rules: string) => {
         await dynamicRules.setRules(rules);
         await this.saveRulesInStorage(rules);
 
         this.rules = rules;
+        await engine.init();
     };
 
     private saveRulesInStorage = async (rules: string) => {
         try {
-            await storage.set(this.STORAGE_KEY, rules);
+            await storage.set(USER_RULES_STORAGE_KEY, rules);
         } catch (e: any) {
             log.error(e.message);
         }
@@ -64,7 +69,7 @@ class UserRules {
     };
 
     public async init() {
-        const storedRules = await storage.get(this.STORAGE_KEY) as string || this.rules;
+        const storedRules = await storage.get(USER_RULES_STORAGE_KEY) as string || this.rules;
 
         await this.setRules(storedRules);
     }

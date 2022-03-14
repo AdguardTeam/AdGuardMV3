@@ -1,8 +1,26 @@
+import TSUrlFilter from '@adguard/tsurlfilter/src/content-script';
+
 import { log } from 'Common/logger';
 import { sender } from './messaging/sender';
 import { subscribe } from './subscribe';
 
 log.debug('Content script has loaded via Manifest V3.');
+
+const applyExtendedCss = (extendedCss: string[]) => {
+    if (!extendedCss || !extendedCss.length) {
+        return;
+    }
+
+    const styleSheet = extendedCss.join('\n');
+    if (!styleSheet) {
+        return;
+    }
+
+    const extcss = new TSUrlFilter.ExtendedCss({
+        styleSheet,
+    });
+    extcss.apply();
+};
 
 const applyCss = (css: string[]) => {
     if (!css || css.length === 0) {
@@ -19,8 +37,9 @@ const applyCss = (css: string[]) => {
 };
 
 const tryLoadCssAndScripts = async () => {
-    const response = await sender.getCss();
-    applyCss(response);
+    const response = await sender.getCss(document.location.href);
+    applyCss(response.css);
+    applyExtendedCss(response.extendedCss);
 };
 
 subscribe.init();

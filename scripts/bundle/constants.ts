@@ -9,6 +9,8 @@ export const BUILD_ENVS = {
     RELEASE: 'release',
 } as const;
 
+export const ADGUARD_FILTERS_IDS = [1, 2, 3, 4, 9, 14];
+
 export type BuildEnv = typeof BUILD_ENVS[keyof typeof BUILD_ENVS];
 export type Browser = typeof BROWSERS[keyof typeof BROWSERS];
 

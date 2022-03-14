@@ -1,6 +1,11 @@
 import { MESSAGE_TYPES } from 'Common/constants';
 import { sendMessage } from 'Common/helpers';
 
+interface Response {
+    css: string[];
+    extendedCss: string[];
+}
+
 export const sender = {
-    getCss: () => sendMessage<string[]>(MESSAGE_TYPES.GET_CSS),
+    getCss: (url: string) => sendMessage<Response>(MESSAGE_TYPES.GET_CSS, { url }),
 };
