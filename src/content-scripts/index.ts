@@ -1,4 +1,6 @@
-import TSUrlFilter from '@adguard/tsurlfilter/src/content-script';
+// TODO remove ts-ignore
+// @ts-ignore
+import TSUrlFilter from '@adguard/tsurlfilter/dist/TSUrlFilterContentScript';
 
 import { log } from 'Common/logger';
 import { sender } from './messaging/sender';
