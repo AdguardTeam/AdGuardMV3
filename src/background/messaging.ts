@@ -1,10 +1,13 @@
+import { CosmeticOption } from '@adguard/tsurlfilter';
 import {
-    Message, MESSAGE_TYPES, OptionsData, PopupData,
+    Message,
+    MESSAGE_TYPES,
+    OptionsData,
+    PopupData,
 } from 'Common/constants';
 import { log } from 'Common/logger';
 import { SETTINGS_NAMES } from 'Common/settings-constants';
 import { tabUtils } from 'Common/tab-utils';
-import { CosmeticOption } from '@adguard/tsurlfilter';
 import { settings } from './settings';
 import { app } from './app';
 import { notifier } from './notifier';
@@ -118,6 +121,8 @@ export const messageHandler = async (
             break;
         }
         case MESSAGE_TYPES.GET_CSS: {
+            await engine.init();
+
             const filteringEnabled = settings.getSetting(SETTINGS_NAMES.FILTERING_ENABLED);
             const protectionEnabled = settings.getSetting(SETTINGS_NAMES.PROTECTION_ENABLED);
 

@@ -6,6 +6,7 @@ import {
     FiltersGroupId,
     RULES_STORAGE_KEY,
     Rules,
+    ENABLED_FILTERS_IDS,
 } from 'Common/constants';
 import { ADGUARD_FILTERS_IDS } from '../../scripts/bundle/constants';
 import { backend } from './backend';
@@ -62,6 +63,20 @@ const DEFAULT_FILTERS = [
         description: 'Spanish filter description',
         groupId: FiltersGroupId.LANGUAGES,
     },
+    {
+        id: FILTER_RULESET[RulesetType.RULESET_16],
+        title: 'French',
+        enabled: true,
+        description: 'French filter description',
+        groupId: FiltersGroupId.LANGUAGES,
+    },
+    {
+        id: FILTER_RULESET[RulesetType.RULESET_224],
+        title: 'Chinese',
+        enabled: true,
+        description: 'Chinese filter description',
+        groupId: FiltersGroupId.LANGUAGES,
+    },
 ];
 
 class Filters {
@@ -79,9 +94,10 @@ class Filters {
         // if there are no rules, then get the rules from the files;
         // If the rules have changed, get them (on the first lines + check time)
         this.rules = await this.getRulesFromStorage() || result;
-        await storage.set(RULES_STORAGE_KEY, result);
+        await storage.set(RULES_STORAGE_KEY, this.rules);
 
         this.filters = await this.getFromStorage();
+        await this.setEnabledIds();
         await this.setRulesetsOptions();
     }
 
@@ -93,22 +109,34 @@ class Filters {
     // TODO add tests
     addFilter = async (filter: Filter, rules: string) => {
         this.filters.push(filter);
+        await this.saveInStorage(this.filters);
+
         const { id } = filter;
         this.rules.push({ id, rules });
         await storage.set(RULES_STORAGE_KEY, this.rules);
-        await engine.init();
+        await this.setEnabledIds();
     };
 
     removeFilter = async (filterId: number): Promise<Filter[]> => {
         this.filters = this.filters.filter((f) => f.id !== filterId);
+        await this.saveInStorage(this.filters);
+
         this.rules = this.rules.filter((f) => f.id !== filterId);
         await storage.set(RULES_STORAGE_KEY, this.rules);
-        await engine.init();
+        await this.setEnabledIds();
         return this.filters;
     };
 
     genRulesetId = (id: number) => {
         return `ruleset_${id}`;
+    };
+
+    setEnabledIds = async () => {
+        const enableFiltersIds = this.filters
+            .filter((filter) => filter.enabled)
+            .map((filter) => filter.id);
+        await storage.set(ENABLED_FILTERS_IDS, enableFiltersIds);
+        await engine.init(true);
     };
 
     setRulesetsOptions = async () => {
@@ -142,6 +170,7 @@ class Filters {
 
         await this.setRulesetsOptions();
         await this.saveInStorage(this.filters);
+        await this.setEnabledIds();
     };
 
     /**
@@ -263,7 +292,7 @@ class Filters {
             description: filterInfo.description || '',
             groupId: FiltersGroupId.CUSTOM,
         };
-        this.addFilter(filter, filterStrings.join(''));
+        this.addFilter(filter, filterStrings.join('\n'));
         return this.getFilters();
     };
 }

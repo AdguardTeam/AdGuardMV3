@@ -109,6 +109,8 @@ export enum RulesetType {
     RULESET_4 = 'ruleset_4',
     RULESET_9 = 'ruleset_9',
     RULESET_14 = 'ruleset_14',
+    RULESET_16 = 'ruleset_16',
+    RULESET_224 = 'ruleset_224',
 }
 
 export const FILTER_RULESET = {
@@ -119,8 +121,12 @@ export const FILTER_RULESET = {
     [RulesetType.RULESET_4]: 4,
     [RulesetType.RULESET_9]: 9,
     [RulesetType.RULESET_14]: 14,
+    [RulesetType.RULESET_16]: 16,
+    [RulesetType.RULESET_224]: 224,
 };
 
 export const RULES_STORAGE_KEY = 'rules';
 
 export const USER_RULES_STORAGE_KEY = 'user_rules';
+
+export const ENABLED_FILTERS_IDS = 'ENABLED_FILTERS_IDS';

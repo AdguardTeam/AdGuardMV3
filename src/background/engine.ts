@@ -7,6 +7,7 @@ import {
     FILTER_RULESET,
     Rules,
     USER_RULES_STORAGE_KEY,
+    ENABLED_FILTERS_IDS,
 } from 'Common/constants';
 import { storage } from './storage';
 import { cssService } from './css-service';
@@ -16,8 +17,21 @@ class Engine {
 
     engine: TSUrlFilter.Engine | null = null;
 
-    init = async () => {
-        this.engine = await this.startEngine();
+    enginePromise: Promise<TSUrlFilter.Engine> | null = null;
+
+    init = async (restart = false) => {
+        if (restart) {
+            this.engine = null;
+            this.enginePromise = null;
+        }
+
+        if (!this.enginePromise) {
+            this.enginePromise = this.startEngine();
+        }
+
+        if (!this.engine) {
+            this.engine = await this.enginePromise;
+        }
     };
 
     startEngine = async () => {
@@ -32,12 +46,19 @@ class Engine {
             USER_RULES_STORAGE_KEY,
         );
 
+        const enabledFiltersIds: number[] = await storage.get(
+            ENABLED_FILTERS_IDS,
+        );
+
         const userFilter = {
             id: FILTER_RULESET.USER_RULES,
             rules: userRules,
         };
 
-        [userFilter, ...filters].forEach((filter) => {
+        const enabledFilters = filters
+            .filter((filter) => enabledFiltersIds.includes(filter.id));
+
+        [userFilter, ...enabledFilters].forEach((filter) => {
             const filterList = new TSUrlFilter.StringRuleList(
                 filter.id, filter.rules, false, false, false,
             );

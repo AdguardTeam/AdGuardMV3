@@ -19,7 +19,7 @@ class UserRules {
         await this.saveRulesInStorage(rules);
 
         this.rules = rules;
-        await engine.init();
+        await engine.init(true);
     };
 
     private saveRulesInStorage = async (rules: string) => {

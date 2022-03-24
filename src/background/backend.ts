@@ -25,7 +25,7 @@ class Backend {
 
         return {
             id: filterId,
-            rules: response.join(''),
+            rules: response.join('\n'),
         };
     };
 
