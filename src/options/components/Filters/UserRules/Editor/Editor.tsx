@@ -16,6 +16,7 @@ import 'Common/editor/mode-adguard';
 
 export const Editor = observer(() => {
     const { optionsStore } = useStore();
+    const { error } = optionsStore;
 
     const name = 'editor';
     const editorRef = useRef<AceEditor>(null);
@@ -24,6 +25,7 @@ export const Editor = observer(() => {
 
     useEffect(() => {
         setText(userRules);
+        optionsStore.resetError();
     }, [userRules]);
 
     const onChange = (value: string): void => {
@@ -32,7 +34,6 @@ export const Editor = observer(() => {
 
     const onSave = () => {
         setUserRules(text);
-        closeEditor();
     };
 
     const onCancel = () => {
@@ -72,6 +73,10 @@ export const Editor = observer(() => {
         editorRef.current?.editor.resize();
     };
 
+    const onFocus = () => {
+        optionsStore.resetError();
+    };
+
     return (
         <div className={styles.container} style={editorStyles}>
             <AceEditor
@@ -92,6 +97,7 @@ export const Editor = observer(() => {
                     editor.renderer.setPadding(offset);
                     editor.renderer.setScrollMargin(offset, offset, 0, 0);
                 }}
+                onFocus={onFocus}
             />
             <ReactResizeDetector
                 skipOnMount
@@ -99,10 +105,16 @@ export const Editor = observer(() => {
                 handleHeight
                 onResize={onResize}
             />
+            {error && (
+                <div className={theme.common.error}>
+                    {error}
+                </div>
+            )}
             <div className={styles.controls}>
                 <button
                     className={cn(theme.button.middle, theme.button.green, styles.btnLeft)}
                     type="button"
+                    disabled={!text}
                     onClick={onSave}
                 >
                     {reactTranslator.getMessage('options_editor_save')}

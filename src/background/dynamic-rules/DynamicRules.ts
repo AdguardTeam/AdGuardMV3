@@ -12,6 +12,8 @@ type DeclarativeRule = chrome.declarativeNetRequest.Rule;
 export class DynamicRules {
     MAX_NUMBER_OF_RULES = chrome.declarativeNetRequest.MAX_NUMBER_OF_DYNAMIC_AND_SESSION_RULES;
 
+    MAX_NUMBER_OF_REGEX_RULES = chrome.declarativeNetRequest.MAX_NUMBER_OF_REGEX_RULES;
+
     async setRules(rules: string) {
         const convertedRules = this.convertRules(rules);
 
@@ -31,6 +33,7 @@ export class DynamicRules {
         const convertedRules = converter.convert(
             list,
             this.MAX_NUMBER_OF_RULES,
+            this.MAX_NUMBER_OF_REGEX_RULES,
         );
 
         return convertedRules;

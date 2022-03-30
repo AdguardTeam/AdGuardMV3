@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { rootStore } from 'Options/stores';
 import AceEditor from 'react-ace';
 import cn from 'classnames';
 
@@ -17,9 +18,15 @@ const EDITOR_WIDTH = '335px';
 const EDITOR_HEIGHT = '100px';
 
 export const UserRuleEditor = ({ ruleText, onChange }: UserRuleEditorProps) => {
+    const { optionsStore } = useContext(rootStore);
+
     const editorSize = {
         width: EDITOR_WIDTH,
         height: EDITOR_HEIGHT,
+    };
+
+    const onFocus = () => {
+        optionsStore.resetError();
     };
 
     return (
@@ -36,6 +43,7 @@ export const UserRuleEditor = ({ ruleText, onChange }: UserRuleEditorProps) => {
                 value={ruleText}
                 onChange={onChange}
                 className={cn(styles.editor, 'editor')}
+                onFocus={onFocus}
             />
         </div>
     );

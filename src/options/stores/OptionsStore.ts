@@ -10,6 +10,7 @@ import _ from 'lodash';
 import { sender } from 'Options/messaging/sender';
 import { UserRulesProcessor, UserRulesData } from 'Options/user-rules-processor';
 import { NEW_LINE_SEPARATOR } from 'Common/constants';
+import { translator } from 'Common/translators/translator';
 import { OTHER_DOMAIN_TITLE } from 'Options/constants';
 
 import type { RootStore } from './RootStore';
@@ -29,6 +30,18 @@ interface UserRuleInWizard {
     id: number,
     ruleText: string,
 }
+
+const {
+    MAX_NUMBER_OF_DYNAMIC_AND_SESSION_RULES,
+    MAX_NUMBER_OF_REGEX_RULES,
+} = chrome.declarativeNetRequest;
+
+const ERROR_UI_MESSAGES: { [key: string]: string } = {
+    1001: translator.getMessage('error_rule_is_invalid'),
+    1002: translator.getMessage('error_rules_limit', { limit: MAX_NUMBER_OF_DYNAMIC_AND_SESSION_RULES }),
+    1003: translator.getMessage('error_regexp_rules_limit', { limit: MAX_NUMBER_OF_REGEX_RULES }),
+    DEFAULT: translator.getMessage('error_rule_is_invalid'),
+};
 
 export class OptionsStore {
     public rootStore: RootStore;
@@ -58,6 +71,9 @@ export class OptionsStore {
 
     @observable
     createdUserRuleText = '';
+
+    @observable
+    error = '';
 
     @computed
     get userRulesGroups() {
@@ -117,16 +133,17 @@ export class OptionsStore {
             return;
         }
 
-        // update user rules only if there is no validation errors
         try {
             await sender.setUserRules(userRules);
         } catch (e: any) {
-            // TODO handle errors properly in the UI
-            // eslint-disable-next-line no-console
-            console.error(e.message);
-            return;
+            const statusCode = e.message.match(/\d+/);
+            this.error = ERROR_UI_MESSAGES[statusCode]
+                ? ERROR_UI_MESSAGES[statusCode] : ERROR_UI_MESSAGES.DEFAULT;
+            throw new Error(e.message);
         }
 
+        this.closeEditor();
+        this.closeUserRuleWizard();
         this.userRules = userRules;
     };
 
@@ -139,12 +156,18 @@ export class OptionsStore {
     };
 
     @action
+    resetError() {
+        this.error = '';
+    }
+
+    @action
     openEditor() {
         this.editorOpen = true;
     }
 
     @action
     closeEditor = () => {
+        this.resetError();
         this.editorOpen = false;
     };
 
@@ -183,6 +206,7 @@ export class OptionsStore {
 
     @action
     closeUserRuleWizard() {
+        this.resetError();
         this.userRuleWizardOpen = false;
     }
 
