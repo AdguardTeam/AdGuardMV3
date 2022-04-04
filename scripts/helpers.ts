@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { ENV_CONF } from './constants';
 
 import { localeMessageType, localeUrlType } from './locales/constants';
 
@@ -46,4 +47,12 @@ export const getUrlWithQueryString = (url: string, params: { [key: string]: stri
     const searchParams = new URLSearchParams(params);
 
     return `${url}?${searchParams.toString()}`;
+};
+
+export const getEnvConf = (env: string) => {
+    const envConfig = ENV_CONF[env];
+    if (!envConfig) {
+        throw new Error(`No env config for: "${env}"`);
+    }
+    return envConfig;
 };

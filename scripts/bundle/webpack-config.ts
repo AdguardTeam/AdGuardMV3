@@ -113,6 +113,10 @@ export const getWebpackConfig = (browser: Browser = BROWSERS.CHROME): Configurat
             filename: 'options.html',
             chunks: ['options'],
         }),
+        new ZipWebpackPlugin({
+            path: '../',
+            filename: `${browser}.zip`,
+        }),
         new MiniCssExtractPlugin(),
     ];
 
@@ -120,13 +124,6 @@ export const getWebpackConfig = (browser: Browser = BROWSERS.CHROME): Configurat
         plugins.push(
             new CleanWebpackPlugin({
                 cleanAfterEveryBuildPatterns: ['!**/*.json', '!assets/**/*'],
-            }),
-        );
-    } else {
-        plugins.push(
-            new ZipWebpackPlugin({
-                path: '../',
-                filename: `${browser}.zip`,
             }),
         );
     }

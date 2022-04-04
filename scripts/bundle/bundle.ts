@@ -1,6 +1,7 @@
 /* eslint-disable no-console,no-restricted-syntax,no-await-in-loop */
 import { program } from 'commander';
 
+import { buildInfo } from './build-info';
 import { bundleRunner } from './bundle-runner';
 import { getWebpackConfig } from './webpack-config';
 import { BROWSERS, BUILD_ENVS } from './constants';
@@ -27,16 +28,19 @@ export const bundle = () => {
     const devPlan = [
         bundleChrome,
         bundleEdge,
+        buildInfo,
     ];
 
     const betaPlan = [
         bundleChrome,
         bundleEdge,
+        buildInfo,
     ];
 
     const releasePlan = [
         bundleChrome,
         bundleEdge,
+        buildInfo,
     ];
 
     const runBuild = async (tasks: Task[], watch: boolean) => {
