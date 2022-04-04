@@ -109,20 +109,22 @@ class Filters {
     // TODO add tests
     addFilter = async (filter: Filter, rules: string) => {
         this.filters.push(filter);
-        await this.saveInStorage(this.filters);
-
         const { id } = filter;
         this.rules.push({ id, rules });
+
+        await this.saveInStorage(this.filters);
         await storage.set(RULES_STORAGE_KEY, this.rules);
+
         await this.setEnabledIds();
     };
 
     removeFilter = async (filterId: number): Promise<Filter[]> => {
         this.filters = this.filters.filter((f) => f.id !== filterId);
-        await this.saveInStorage(this.filters);
-
         this.rules = this.rules.filter((f) => f.id !== filterId);
+
+        await this.saveInStorage(this.filters);
         await storage.set(RULES_STORAGE_KEY, this.rules);
+
         await this.setEnabledIds();
         return this.filters;
     };
@@ -282,7 +284,7 @@ class Filters {
         return max >= CUSTOM_FILTERS_START_ID ? max + 1 : CUSTOM_FILTERS_START_ID;
     };
 
-    addCustomFilterByContent = (filterStrings: [], title: string) => {
+    addCustomFilterByContent = (filterStrings: [], title: string, url: string) => {
         const filterInfo = this.parseFilterInfo(filterStrings, title);
 
         const filter: Filter = {
@@ -291,6 +293,7 @@ class Filters {
             enabled: true,
             description: filterInfo.description || '',
             groupId: FiltersGroupId.CUSTOM,
+            url,
         };
         this.addFilter(filter, filterStrings.join('\n'));
         return this.getFilters();

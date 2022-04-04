@@ -18,6 +18,7 @@ type CustomFilterModalProps = {
     isOpen: boolean,
     closeHandler: () => void,
     urlToSubscribe: string,
+    setUrlToSubscribe: (url: string) => void,
     initialTitle: string | null,
 };
 
@@ -25,6 +26,7 @@ export const CustomFilterModal = observer(({
     isOpen,
     closeHandler,
     urlToSubscribe,
+    setUrlToSubscribe,
     initialTitle,
 }: CustomFilterModalProps) => {
     const {
@@ -50,7 +52,7 @@ export const CustomFilterModal = observer(({
 
     const [filterTitle, setFilterTitle] = useState(filterInfo?.title || '');
 
-    const [addCustomFilterError, setAddCustomFilterError] = useState(false);
+    const [addCustomFilterError, setAddCustomFilterError] = useState('');
 
     const onCancelAddCustomModal = () => {
         closeHandler();
@@ -59,7 +61,9 @@ export const CustomFilterModal = observer(({
     const onSaveCustomFilter = async () => {
         if (filterContent && filterInfo) {
             try {
-                await settingsStore.addCustomFilterByContent(filterContent, filterTitle);
+                await settingsStore.addCustomFilterByContent(
+                    filterContent, filterTitle, urlToSubscribe,
+                );
                 uiStore.addNotification(translator.getMessage('options_custom_filter_add_notification', { name: filterTitle }));
             } catch (e) {
                 log.error(e);
@@ -82,13 +86,12 @@ export const CustomFilterModal = observer(({
         }
     };
 
-    const onAddCustomFilterError = (error: string | boolean) => {
+    const onAddCustomFilterError = (error: string) => {
         if (error) {
-            // eslint-disable-next-line no-console
-            console.log(error);
-            setAddCustomFilterError(true);
+            setAddCustomFilterError(error);
+            throw new Error(error);
         } else {
-            setAddCustomFilterError(false);
+            setAddCustomFilterError('');
         }
     };
 
@@ -135,6 +138,7 @@ export const CustomFilterModal = observer(({
                 <AddCustomFilter
                     initialTitle={initialTitle}
                     urlToSubscribe={urlToSubscribe}
+                    setUrlToSubscribe={setUrlToSubscribe}
                     addCustomFilterError={addCustomFilterError}
                     onError={onAddCustomFilterError}
                     onSuccess={onAddCustomFilterSuccess}
@@ -251,6 +255,7 @@ export const CustomFilterModal = observer(({
         ) {
             return switchToSaveChangesStep();
         }
+        setAddCustomFilterError('');
         return closeHandler();
     };
 

@@ -96,6 +96,7 @@ export const Filters = observer(() => {
             <CustomFilterModal
                 initialTitle={customFilterTitle}
                 urlToSubscribe={urlToSubscribe}
+                setUrlToSubscribe={setUrlToSubscribe}
                 isOpen={customFilterModalStore.isModalOpen}
                 closeHandler={closeModalHandler}
             />

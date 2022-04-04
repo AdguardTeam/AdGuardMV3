@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import cn from 'classnames';
 
 import { reactTranslator } from 'Common/translators/reactTranslator';
+import { FiltersGroupId } from 'Common/constants';
 import { log } from 'Common/logger';
 import { theme } from 'Common/styles';
 import { translator } from 'Common/translators/translator';
+import { rootStore } from 'Options/stores';
 import { sender } from 'Options/messaging/sender';
 
 const readFile = (file: File): Promise<string> => {
@@ -22,10 +24,11 @@ const readFile = (file: File): Promise<string> => {
 };
 
 type AddCustomProps = {
-    onError: (error: string | boolean) => void,
+    onError: (error: string) => void,
     onSuccess: (filterInfo: FilterInfo, fileContent: string) => void,
-    addCustomFilterError: boolean,
+    addCustomFilterError: string,
     urlToSubscribe: string,
+    setUrlToSubscribe: (url: string) => void,
     initialTitle: string | null,
 };
 
@@ -35,8 +38,19 @@ export const AddCustomFilter = ({
     addCustomFilterError,
     urlToSubscribe,
     initialTitle,
+    setUrlToSubscribe,
 }: AddCustomProps) => {
+    const { settingsStore } = useContext(rootStore);
+    const { filters } = settingsStore;
     const [textareaValue, setTextareaValue] = useState(urlToSubscribe);
+
+    const ERROR_FORMAT_IS_BROKEN = translator.getMessage('options_custom_filter_modal_retry_description');
+    // TODO error text for popup is not approved
+    const ERROR_URL_ALREADY_UPLOADED = translator.getMessage('options_custom_filter_modal_url_already_uploaded');
+
+    const filtersUrls = filters
+        .filter((filter) => filter.groupId === FiltersGroupId.CUSTOM)
+        .map((filter) => filter.url);
 
     const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const { value } = e.target;
@@ -60,15 +74,13 @@ export const AddCustomFilter = ({
             const filterInfo = await sender.getFilterInfoByContent(fileContent,
                 initialTitle || file.name);
             if (!filterInfo) {
-                const errorMessage = 'Filter format is broken';
-                log.error(errorMessage);
-                onError(errorMessage);
+                log.error(ERROR_FORMAT_IS_BROKEN);
+                onError(ERROR_FORMAT_IS_BROKEN);
             }
             onSuccess(filterInfo, fileContent);
         } catch (error: any) {
-            const errorMessage = `Filter format is broken, ${error.message}`;
-            log.error(errorMessage);
-            onError(errorMessage);
+            log.error(`${ERROR_FORMAT_IS_BROKEN} ${error.message}`);
+            onError(ERROR_FORMAT_IS_BROKEN);
         }
     };
 
@@ -77,20 +89,22 @@ export const AddCustomFilter = ({
         e.preventDefault();
         const data = new FormData(e.currentTarget);
         const url = data.get('url') as string;
+        if (filtersUrls.includes(url)) {
+            onError(ERROR_URL_ALREADY_UPLOADED);
+        }
+        setUrlToSubscribe(url);
         try {
             const filterContent = await sender.getFilterContentByUrl(url);
             const filterInfo = await sender.getFilterInfoByContent(filterContent,
                 initialTitle || url);
             if (!filterInfo) {
-                const errorMessage = 'Filter format is broken';
-                log.error(errorMessage);
-                onError(errorMessage);
+                log.error(ERROR_FORMAT_IS_BROKEN);
+                onError(ERROR_FORMAT_IS_BROKEN);
             }
             onSuccess(filterInfo, filterContent);
         } catch (error: any) {
-            const errorMessage = `Filter format is broken, ${error.message}`;
-            log.error(errorMessage);
-            onError(errorMessage);
+            log.error(`${ERROR_FORMAT_IS_BROKEN} ${error.message}`);
+            onError(ERROR_FORMAT_IS_BROKEN);
         }
     };
 
@@ -98,13 +112,13 @@ export const AddCustomFilter = ({
         return (
             <>
                 <div className={theme.modal.description}>
-                    {reactTranslator.getMessage('options_custom_filter_modal_retry_description')}
+                    {addCustomFilterError}
                 </div>
                 <div className={cn(theme.modal.footer, theme.modal.center)}>
                     <button
                         type="button"
                         className={cn(theme.button.middle, theme.button.green)}
-                        onClick={() => { onError(false); }}
+                        onClick={() => { onError(''); }}
                     >
                         {reactTranslator.getMessage('options_custom_filter_modal_retry_button')}
                     </button>

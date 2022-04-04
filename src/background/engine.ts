@@ -52,7 +52,7 @@ class Engine {
 
         const userFilter = {
             id: FILTER_RULESET.USER_RULES,
-            rules: userRules,
+            rules: userRules || '',
         };
 
         const enabledFilters = filters

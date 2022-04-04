@@ -40,8 +40,12 @@ class Sender {
         return sendMessage(MESSAGE_TYPES.GET_FILTER_CONTENT_BY_URL, { url });
     };
 
-    addCustomFilterByContent = (filterContent: string, title: string): Promise<Filter[]> => {
-        return sendMessage(MESSAGE_TYPES.ADD_CUSTOM_FILTER_BY_CONTENT, { filterContent, title });
+    addCustomFilterByContent = (
+        filterContent: string, title: string, url: string,
+    ): Promise<Filter[]> => {
+        return sendMessage(MESSAGE_TYPES.ADD_CUSTOM_FILTER_BY_CONTENT, {
+            filterContent, title, url,
+        });
     };
 
     removeCustomFilterById = (filterId: number): Promise<Filter[]> => {

@@ -102,9 +102,9 @@ export class SettingsStore {
         return this.settings[SETTINGS_NAMES.FILTERING_ENABLED] as boolean;
     }
 
-    @flow* addCustomFilterByContent(filterContent: string, title: string) {
+    @flow* addCustomFilterByContent(filterContent: string, title: string, url: string) {
         try {
-            this.filters = yield sender.addCustomFilterByContent(filterContent, title);
+            this.filters = yield sender.addCustomFilterByContent(filterContent, title, url);
             this.rootStore.customFilterModalStore.closeModal();
         } catch (e: any) {
             log.error(e.message);

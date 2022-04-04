@@ -32,6 +32,7 @@ interface Filter {
     enabled: boolean,
     description?: string,
     groupId: number,
+    url?: string,
 }
 
 interface FilterInfo {
