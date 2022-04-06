@@ -114,7 +114,7 @@ export const Editor = observer(() => {
                 <button
                     className={cn(theme.button.middle, theme.button.green, styles.btnLeft)}
                     type="button"
-                    disabled={!text}
+                    disabled={text === userRules}
                     onClick={onSave}
                 >
                     {reactTranslator.getMessage('options_editor_save')}
