@@ -223,7 +223,9 @@ export class OptionsStore {
 
     @action
     addCreatedUserRule() {
-        const newUserRules = `${this.userRules}${NEW_LINE_SEPARATOR}${this.createdUserRuleText}`;
+        const newUserRules = this.userRules
+            ? `${this.userRules}${NEW_LINE_SEPARATOR}${this.createdUserRuleText}`
+            : this.createdUserRuleText;
         this.setUserRules(newUserRules);
     }
 

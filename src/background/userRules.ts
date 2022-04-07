@@ -61,11 +61,13 @@ class UserRules {
     };
 
     addRule = async (ruleText: string) => {
-        const newUserRules = `${this.rules}${NEW_LINE_SEPARATOR}${ruleText}`;
+        const newUserRules = this.rules
+            ? `${this.rules}${NEW_LINE_SEPARATOR}${ruleText}`
+            : ruleText;
 
         await this.setRules(newUserRules);
 
-        notifier.notify(NOTIFIER_EVENTS.ADD_RULES, this.rules);
+        notifier.notify(NOTIFIER_EVENTS.ADD_RULES, ruleText);
     };
 
     public async init() {
