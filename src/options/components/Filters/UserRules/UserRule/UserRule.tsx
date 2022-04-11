@@ -6,6 +6,8 @@ import { UserRuleType } from 'Common/constants';
 import styles from 'Options/components/Filters/UserRules/UserRule/UserRule.module.pcss';
 import { rootStore } from 'Options/stores';
 
+import { HighlightSearch } from '../../../HighlightSearch';
+
 interface UserRuleProps {
     id: number;
     ruleText: string;
@@ -45,7 +47,9 @@ export const UserRule = ({
                     <input type="checkbox" id={String(id)} checked={enabled} onChange={handleToggle} />
                     {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                     <label className={styles.checkmark} htmlFor={String(id)} />
-                    <button type="button" onClick={handleRuleClick} className={styles.ruleButton}>{ruleText}</button>
+                    <button type="button" onClick={handleRuleClick} className={styles.ruleButton}>
+                        <HighlightSearch str={ruleText} />
+                    </button>
                 </span>
             </div>
             <UserRuleTypeComponent type={type} />

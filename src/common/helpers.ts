@@ -94,3 +94,42 @@ export const groupByKeyValue = (arr: Obj[], key: keyof Obj): Obj => {
 export const isHttpRequest = (url: string) => {
     return url && url.indexOf('http') === 0;
 };
+
+/**
+ * Returns the index of the first character inside the search
+ * @param str
+ * @param searchString
+ */
+export const indexOfIgnoreCase = (str: string, searchString: string) => {
+    return str.toLowerCase().indexOf(searchString.toLowerCase());
+};
+
+/**
+ * Returns true if the str is inside the search
+ * @param str
+ * @param searchString
+ */
+export const containsIgnoreCase = (str: string, searchString: string) => {
+    return !!(str && searchString && indexOfIgnoreCase(str, searchString) >= 0);
+};
+
+/**
+ * Returns an array with the search match and the rest of the string in its original order
+ * @param str
+ * @param searchString
+ * @param chunks
+ */
+export const findChunks = (str: string, searchString: string, chunks: string[] = []) => {
+    const ind = indexOfIgnoreCase(str, searchString);
+    if (ind > -1) {
+        chunks.push(str.slice(0, ind));
+        chunks.push(str.slice(ind, ind + searchString.length));
+        const restStr = str.slice(ind + searchString.length);
+        if (containsIgnoreCase(restStr, searchString)) {
+            findChunks(restStr, searchString, chunks);
+        } else {
+            chunks.push(restStr);
+        }
+    }
+    return chunks.filter((i) => !!i);
+};

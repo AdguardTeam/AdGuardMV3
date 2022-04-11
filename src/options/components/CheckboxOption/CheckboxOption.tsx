@@ -6,6 +6,8 @@ import { reactTranslator } from 'Common/translators/reactTranslator';
 import { Checkbox } from 'Common/components/Checkbox';
 import { translator } from 'Common/translators/translator';
 
+import { HighlightSearch } from '../HighlightSearch';
+
 import styles from './CheckboxOption.module.pcss';
 
 interface ChangeHandler {
@@ -50,7 +52,9 @@ export const CheckboxOption = ({
                     </span>
                 )}
                 <div className={cn(styles.optionLabel, className)}>
-                    {message}
+                    {message && (
+                        <HighlightSearch str={message} />
+                    )}
                     {messageKeyDesc && (
                         <div className={styles.optionLabelDesc}>
                             {reactTranslator.getMessage(messageKeyDesc) as string}
