@@ -144,7 +144,9 @@ export class OptionsStore {
 
         this.closeEditor();
         this.closeUserRuleWizard();
-        this.userRules = userRules;
+        runInAction(() => {
+            this.userRules = userRules;
+        });
     };
 
     @action

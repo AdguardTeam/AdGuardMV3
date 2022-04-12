@@ -1,4 +1,6 @@
 import { CosmeticOption } from '@adguard/tsurlfilter';
+import { isHttpRequest } from 'Common/helpers';
+import { log } from 'Common/logger';
 import { SETTINGS_NAMES } from 'Common/settings-constants';
 import { engine } from './engine';
 import { settings } from './settings';
@@ -42,11 +44,21 @@ export const executeResources = {
             async (details) => {
                 const filteringEnabled = settings.getSetting(SETTINGS_NAMES.FILTERING_ENABLED);
                 const protectionEnabled = settings.getSetting(SETTINGS_NAMES.PROTECTION_ENABLED);
+                const { tabId: id, url } = details;
 
-                if (filteringEnabled && protectionEnabled) {
-                    const { tabId: id, url } = details;
+                const NEW_TAB_PAGE = 'new-tab-page'; // the url from the details have http even on the new tab page
+
+                if (filteringEnabled
+                    && protectionEnabled
+                    && isHttpRequest(url)
+                    && !url.includes(NEW_TAB_PAGE)
+                ) {
                     const response = await getScripts(url);
-                    executeScript(response, id);
+                    try {
+                        executeScript(response, id);
+                    } catch (e) {
+                        log.error(e);
+                    }
                 }
             },
         );
