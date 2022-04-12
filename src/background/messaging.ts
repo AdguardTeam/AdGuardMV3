@@ -1,3 +1,4 @@
+import * as TSUrlFilter from '@adguard/tsurlfilter';
 import { CosmeticOption } from '@adguard/tsurlfilter';
 import {
     Message,
@@ -130,6 +131,7 @@ export const messageHandler = async (
                 const selectors = engine.getSelectorsForUrl(
                     data.url, CosmeticOption.CosmeticOptionAll, false, false,
                 );
+
                 return selectors;
             }
 
@@ -161,7 +163,8 @@ export const messageHandler = async (
         }
         case MESSAGE_TYPES.ADD_CUSTOM_FILTER_BY_CONTENT: {
             const { filterContent, title, url } = data;
-            const filterStrings = filterContent.split('\n');
+            const convertedRule = TSUrlFilter.RuleConverter.convertRules(filterContent);
+            const filterStrings = convertedRule.split('\n');
             return filters.addCustomFilterByContent(filterStrings, title, url);
         }
         case MESSAGE_TYPES.GET_FILTER_CONTENT_BY_URL: {

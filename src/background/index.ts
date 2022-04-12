@@ -6,6 +6,7 @@ import { browserActions } from './browser-actions';
 import { userRules } from './userRules';
 import { filters } from './filters';
 import { engine } from './engine';
+import { executeResources } from './executeResources';
 
 log.debug('Background service worker has loaded via Manifest V3.');
 
@@ -21,4 +22,5 @@ browserActions.init();
     await filters.init();
     await userRules.init();
     await engine.init();
+    await executeResources.init();
 })();

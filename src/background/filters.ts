@@ -284,7 +284,7 @@ class Filters {
         return max >= CUSTOM_FILTERS_START_ID ? max + 1 : CUSTOM_FILTERS_START_ID;
     };
 
-    addCustomFilterByContent = (filterStrings: [], title: string, url: string) => {
+    addCustomFilterByContent = (filterStrings: string[], title: string, url: string) => {
         const filterInfo = this.parseFilterInfo(filterStrings, title);
 
         const filter: Filter = {

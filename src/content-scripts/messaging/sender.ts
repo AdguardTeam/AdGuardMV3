@@ -7,5 +7,7 @@ interface Response {
 }
 
 export const sender = {
-    getCss: (url: string) => sendMessage<Response>(MESSAGE_TYPES.GET_CSS, { url }),
+    getCss: (url: string) => sendMessage<Response>(
+        MESSAGE_TYPES.GET_CSS, { url },
+    ),
 };

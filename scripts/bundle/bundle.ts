@@ -3,6 +3,7 @@ import { program } from 'commander';
 
 import { buildInfo } from './build-info';
 import { bundleRunner } from './bundle-runner';
+import { copyExternals } from './copy-external';
 import { getWebpackConfig } from './webpack-config';
 import { BROWSERS, BUILD_ENVS } from './constants';
 
@@ -26,18 +27,21 @@ export const bundle = () => {
     };
 
     const devPlan = [
+        copyExternals,
         bundleChrome,
         bundleEdge,
         buildInfo,
     ];
 
     const betaPlan = [
+        copyExternals,
         bundleChrome,
         bundleEdge,
         buildInfo,
     ];
 
     const releasePlan = [
+        copyExternals,
         bundleChrome,
         bundleEdge,
         buildInfo,

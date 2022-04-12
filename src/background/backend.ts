@@ -1,3 +1,4 @@
+import * as TSUrlFilter from '@adguard/tsurlfilter';
 import FiltersDownloader from '@adguard/filters-downloader';
 
 import { browserUtils } from 'Common/utils/browser-utils';
@@ -23,9 +24,11 @@ class Backend {
             url, FILTER_COMPILER_OPTIONS,
         );
 
+        const convertedRule = TSUrlFilter.RuleConverter.convertRules(response.join('\n'));
+
         return {
             id: filterId,
-            rules: response.join('\n'),
+            rules: convertedRule,
         };
     };
 
