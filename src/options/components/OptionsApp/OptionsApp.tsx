@@ -14,6 +14,7 @@ import { Settings } from 'Options/components/Settings';
 import { Filters } from 'Options/components/Filters';
 import { UserRules } from 'Options/components/Filters/UserRules';
 import { Languages } from 'Options/components/Languages';
+import { Loader } from 'Options/components/Loader';
 
 import styles from 'Options/components/OptionsApp/options-app.module.pcss';
 
@@ -79,6 +80,7 @@ export const OptionsApp = observer(() => {
                             <Route />
                         </Switch>
                         <Notifications />
+                        <Loader />
                     </div>
                 </div>
             </div>

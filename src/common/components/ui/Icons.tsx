@@ -34,6 +34,7 @@ export enum IconId {
     MENU = 'MENU',
     MAGNIFIER = 'MAGNIFIER',
     WARNING = 'WARNING',
+    LOADER = 'LOADER',
 }
 
 export const ICON_ID_CLASS_MAP: Record<IconId, string> = {
@@ -68,6 +69,7 @@ export const ICON_ID_CLASS_MAP: Record<IconId, string> = {
     [IconId.MENU]: iconStyles.iconButton,
     [IconId.MAGNIFIER]: iconStyles.iconButton,
     [IconId.WARNING]: iconStyles.iconButton,
+    [IconId.LOADER]: iconStyles.icon,
 };
 
 export const Icons = () => {
@@ -674,6 +676,12 @@ export const Icons = () => {
                 <ellipse rx="9" ry="8.25688" transform="matrix(1 0 0 -1 12 11.0092)" stroke="#D58500" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 <path d="M12 7.33965V12.8442" stroke="#D58500" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 <path d="M11.997 15.0498C12.009 15.0481 11.997 15.2251 11.997 15.2251" stroke="#D58500" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+
+            <svg id={IconId.LOADER} width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path id="Path" d="M6.29048 5.04253C6.40422 4.94909 6.52029 4.85837 6.6386 4.77049" stroke="#67B279" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path id="Path_2" d="M8.55505 3.68286C8.81995 3.57302 9.09124 3.47546 9.3682 3.3909C9.51026 3.34753 9.65382 3.30757 9.79877 3.27113" stroke="#67B279" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path id="Path_3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C9.51472 21 7.26472 19.9926 5.63604 18.364C4.80704 17.535 4.13901 16.545 3.68286 15.4449" stroke="#67B279" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
         </svg>
     );
