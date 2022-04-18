@@ -5,6 +5,7 @@ import { observer } from 'mobx-react';
 import { rootStore } from 'Options/stores';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { theme } from 'Common/styles';
+import { useKeyPress } from 'Common/hooks/useKeyPress';
 import { UserRuleEditor } from './UserRuleEditor';
 
 export const NewUserRuleCustom = observer(() => {
@@ -12,12 +13,15 @@ export const NewUserRuleCustom = observer(() => {
     const { createdUserRuleText, error } = optionsStore;
 
     const onChange = (value: string) => {
-        optionsStore.updateCreatedUserRule(value);
+        const rule = value.trim();
+        optionsStore.updateCreatedUserRule(rule);
     };
 
     const addRule = () => {
         optionsStore.addCreatedUserRule();
     };
+
+    useKeyPress('Enter', () => addRule(), [createdUserRuleText]);
 
     return (
         <>

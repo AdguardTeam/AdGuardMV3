@@ -42,8 +42,9 @@ export const UserRuleEditor = ({ ruleText, onChange }: UserRuleEditorProps) => {
                 editorProps={{ $blockScrolling: true }}
                 value={ruleText}
                 onChange={onChange}
-                className={cn(styles.editor, 'editor')}
+                className={cn(styles.editor, styles.editorUserRules, 'editor')}
                 onFocus={onFocus}
+                maxLines={1}
             />
         </div>
     );
