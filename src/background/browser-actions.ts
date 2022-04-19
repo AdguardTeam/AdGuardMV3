@@ -38,12 +38,16 @@ class BrowserActions {
      * 2. for tab browser action if tabId is provided
      */
     setIconEnabled = async (tabId?: number) => {
-        const details: TabIconDetails = { path: prefs.ICONS.ENABLED };
+        try {
+            const details: TabIconDetails = { path: prefs.ICONS.ENABLED };
 
-        await this.setIcon(details);
-        if (tabId) {
-            details.tabId = tabId;
             await this.setIcon(details);
+            if (tabId) {
+                details.tabId = tabId;
+                await this.setIcon(details);
+            }
+        } catch (e) {
+            log.info(e);
         }
     };
 
@@ -55,12 +59,16 @@ class BrowserActions {
      * @returns {Promise<void>}
      */
     setIconDisabled = async (tabId?: number) => {
-        const details: TabIconDetails = { path: prefs.ICONS.DISABLED };
+        try {
+            const details: TabIconDetails = { path: prefs.ICONS.DISABLED };
 
-        await this.setIcon(details);
-        if (tabId) {
-            details.tabId = tabId;
             await this.setIcon(details);
+            if (tabId) {
+                details.tabId = tabId;
+                await this.setIcon(details);
+            }
+        } catch (e) {
+            log.info(e);
         }
     };
 
@@ -73,18 +81,22 @@ class BrowserActions {
     }
 
     onFilteringStateChange = async () => {
-        const activeTab = await tabUtils.getActiveTab();
+        try {
+            const activeTab = await tabUtils.getActiveTab();
 
-        if (activeTab?.url) {
-            const urlDetails = getUrlDetails(activeTab.url);
+            if (activeTab?.url) {
+                const urlDetails = getUrlDetails(activeTab.url);
 
-            if (urlDetails?.domainName) {
-                const currentAllowRule = userRules.getCurrentAllowRule(urlDetails.domainName);
+                if (urlDetails?.domainName) {
+                    const currentAllowRule = userRules.getCurrentAllowRule(urlDetails.domainName);
 
-                const filteringEnabled = !!currentAllowRule?.enabled;
+                    const filteringEnabled = !!currentAllowRule?.enabled;
 
-                this.setIconByFiltering(filteringEnabled, activeTab.id);
+                    this.setIconByFiltering(filteringEnabled, activeTab.id);
+                }
             }
+        } catch (e) {
+            log.info(e);
         }
     };
 
@@ -92,12 +104,17 @@ class BrowserActions {
         tabUtils.onActivated(() => this.onFilteringStateChange());
         tabUtils.onUpdated(() => this.onFilteringStateChange());
 
-        notifier.addEventListener(NOTIFIER_EVENTS.SETTING_UPDATED, async ({ key }) => {
-            if (key !== SETTINGS_NAMES.FILTERING_ENABLED) {
-                return;
-            }
+        notifier.addEventListener(NOTIFIER_EVENTS.SETTING_UPDATED, async (data) => {
+            try {
+                const { key } = data;
+                if (key !== SETTINGS_NAMES.FILTERING_ENABLED) {
+                    return;
+                }
 
-            await this.onFilteringStateChange();
+                await this.onFilteringStateChange();
+            } catch (e) {
+                log.info(e);
+            }
         });
     }
 }

@@ -154,7 +154,11 @@ class Filters {
         await this.setRulesets({ enableRulesetIds, disableRulesetIds });
     };
 
-    getFilters = (): Filter[] => {
+    getFilters = async () => {
+        if (this.filters.length !== 0) {
+            return this.filters;
+        }
+        this.filters = await this.getFromStorage();
         return this.filters;
     };
 

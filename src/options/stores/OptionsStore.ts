@@ -75,9 +75,6 @@ export class OptionsStore {
     @observable
     error = '';
 
-    @observable
-    loader = false;
-
     @computed
     get userRulesGroups() {
         const userRulesProcessor = new UserRulesProcessor(this.userRules);
@@ -131,18 +128,14 @@ export class OptionsStore {
     }
 
     @action
-    setLoader = (value: boolean) => {
-        this.loader = value;
-    };
-
-    @action
     setUserRules = async (userRules: string) => {
+        const { setLoader } = this.rootStore.uiStore;
         if (this.userRules === userRules) {
             return;
         }
 
         try {
-            this.setLoader(true);
+            setLoader(true);
             await sender.setUserRules(userRules);
         } catch (e: any) {
             const statusCode = e.message.match(/\d+/);
@@ -151,18 +144,23 @@ export class OptionsStore {
             throw new Error(e.message);
         }
 
-        this.setLoader(false);
+        setLoader(false);
         this.closeEditor();
         this.closeUserRuleWizard();
-        this.userRules = userRules;
+        runInAction(() => {
+            this.userRules = userRules;
+        });
     };
 
     @action
     fetchUserRules = async () => {
+        const { setLoader } = this.rootStore.uiStore;
+        setLoader(true);
         const result = await sender.getUserRules();
         runInAction(() => {
             this.userRules = result;
         });
+        setLoader(false);
     };
 
     @action

@@ -30,9 +30,18 @@ class UserRules {
         }
     };
 
-    getRules() {
+    getFromStorage = async () => {
+        const rules = await storage.get(USER_RULES_STORAGE_KEY) as string;
+        return rules ?? this.rules;
+    };
+
+    getRules = async () => {
+        if (this.rules) {
+            return this.rules;
+        }
+        this.rules = await this.getFromStorage();
         return this.rules;
-    }
+    };
 
     getAllowlist() {
         const userRulesProcessor = new UserRulesProcessor(this.rules);

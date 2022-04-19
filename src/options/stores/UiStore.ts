@@ -20,6 +20,9 @@ export class UiStore {
     @observable
     notifications: Notifications[] = [];
 
+    @observable
+    loader = false;
+
     constructor(rootStore: RootStore) {
         this.rootStore = rootStore;
         makeObservable(this);
@@ -41,4 +44,9 @@ export class UiStore {
         this.notifications = this.notifications
             .filter((notification) => notification.id !== id);
     }
+
+    @action
+    setLoader = (value: boolean) => {
+        this.loader = value;
+    };
 }

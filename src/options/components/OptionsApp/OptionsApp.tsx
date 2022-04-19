@@ -21,16 +21,17 @@ import styles from 'Options/components/OptionsApp/options-app.module.pcss';
 export const OptionsApp = observer(() => {
     const store = useContext(rootStore);
     const { settingsStore, optionsStore } = store;
-    const { getOptionsData } = settingsStore;
+
+    const getOptionsData = async () => {
+        try {
+            await settingsStore.getOptionsData();
+        } catch (e) {
+            log.error(e);
+        }
+    };
 
     useLayoutEffect(() => {
-        (async () => {
-            try {
-                await getOptionsData();
-            } catch (e) {
-                log.error(e);
-            }
-        })();
+        getOptionsData();
 
         const events = [
             NOTIFIER_EVENTS.SETTING_UPDATED,

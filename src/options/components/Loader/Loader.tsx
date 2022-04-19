@@ -5,9 +5,9 @@ import { Icon, IconId } from 'Common/components/ui';
 import style from './loader.module.pcss';
 
 export const Loader = observer(() => {
-    const { optionsStore } = useContext(rootStore);
+    const { uiStore } = useContext(rootStore);
 
-    if (optionsStore.loader) {
+    if (uiStore.loader) {
         return (
             <div className={style.loader}>
                 <Icon id={IconId.LOADER} className={style.wheel} />

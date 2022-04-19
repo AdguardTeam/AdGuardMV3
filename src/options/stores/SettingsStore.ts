@@ -76,10 +76,13 @@ export class SettingsStore {
     };
 
     getOptionsData = flow(function* getOptionsData(this: SettingsStore) {
+        const { setLoader } = this.rootStore.uiStore;
+        setLoader(true);
         const { settings, filters, categories } = yield sender.getOptionsData();
         this.settings = settings;
         this.filters = filters;
         this.categories = categories;
+        setLoader(false);
     }).bind(this);
 
     setSetting = async (key: keyof OPTION_SETTINGS_NAMES, value: boolean) => {
