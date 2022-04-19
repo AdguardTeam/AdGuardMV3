@@ -9,6 +9,7 @@ import {
 import { log } from 'Common/logger';
 import { SETTINGS_NAMES } from 'Common/settings-constants';
 import { tabUtils } from 'Common/tab-utils';
+import { isHttpRequest } from 'Common/helpers';
 import { settings } from './settings';
 import { app } from './app';
 import { notifier } from './notifier';
@@ -128,8 +129,14 @@ export const messageHandler = async (
             const protectionEnabled = settings.getSetting(SETTINGS_NAMES.PROTECTION_ENABLED);
 
             if (filteringEnabled && protectionEnabled) {
+                let { url } = data;
+                const activeTab = await tabUtils.getActiveTab();
+
+                if (!isHttpRequest(data.url) && activeTab?.url) {
+                    url = activeTab.url;
+                }
                 const selectors = engine.getSelectorsForUrl(
-                    data.url, CosmeticOption.CosmeticOptionAll, false, false,
+                    url, CosmeticOption.CosmeticOptionAll, false, false,
                 );
 
                 return selectors;
