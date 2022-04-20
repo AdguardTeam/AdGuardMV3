@@ -4,9 +4,7 @@ import { log } from 'Common/logger';
 import { urlUtils } from 'Common/utils/url-utils';
 import {
     RULES_STORAGE_KEY,
-    FILTER_RULESET,
     Rules,
-    USER_RULES_STORAGE_KEY,
     ENABLED_FILTERS_IDS,
 } from 'Common/constants';
 import { storage } from './storage';
@@ -42,23 +40,14 @@ class Engine {
             RULES_STORAGE_KEY,
         );
 
-        const userRules: string = await storage.get(
-            USER_RULES_STORAGE_KEY,
-        );
-
         const enabledFiltersIds: number[] = await storage.get(
             ENABLED_FILTERS_IDS,
         );
 
-        const userFilter = {
-            id: FILTER_RULESET.USER_RULES,
-            rules: userRules || '',
-        };
-
         const enabledFilters = filters
             .filter((filter) => enabledFiltersIds.includes(filter.id));
 
-        [userFilter, ...enabledFilters].forEach((filter) => {
+        [...enabledFilters].forEach((filter) => {
             const filterList = new TSUrlFilter.StringRuleList(
                 filter.id, filter.rules, false, false, false,
             );

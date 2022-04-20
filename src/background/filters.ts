@@ -10,6 +10,7 @@ import {
 } from 'Common/constants';
 import { ADGUARD_FILTERS_IDS } from '../../scripts/bundle/constants';
 import { backend } from './backend';
+import { dynamicRules } from './dynamic-rules';
 import { engine } from './engine';
 import { storage } from './storage';
 
@@ -133,10 +134,23 @@ class Filters {
         return `ruleset_${id}`;
     };
 
-    setEnabledIds = async () => {
-        const enableFiltersIds = this.filters
-            .filter((filter) => filter.enabled)
+    // Add custom filters and user rules to dynamic rules
+    setDynamicRules = async (filters: Filter[]) => {
+        const ids = filters
+            .filter((filter) => filter.groupId === FiltersGroupId.CUSTOM
+                || filter.groupId === FiltersGroupId.USER_RULES)
             .map((filter) => filter.id);
+
+        const rules = this.rules
+            .filter((filter) => ids.includes(filter.id))
+            .map((rule) => rule.rules);
+        await dynamicRules.setRules(rules.join('\n'));
+    };
+
+    setEnabledIds = async () => {
+        const enableFilters = this.filters.filter((filter) => filter.enabled);
+        const enableFiltersIds = enableFilters.map((filter) => filter.id);
+        await this.setDynamicRules(enableFilters);
         await storage.set(ENABLED_FILTERS_IDS, enableFiltersIds);
         await engine.init(true);
     };

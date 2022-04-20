@@ -3,23 +3,34 @@ import {
     NEW_LINE_SEPARATOR,
     NOTIFIER_EVENTS,
     UserRuleType,
+    FiltersGroupId,
+    USER_RULES_FILTER_ID,
 } from 'Common/constants';
 import { log } from 'Common/logger';
 import { UserRulesProcessor } from 'Options/user-rules-processor';
 import { notifier } from './notifier';
 import { storage } from './storage';
-import { dynamicRules } from './dynamic-rules';
-import { engine } from './engine';
+import { filters } from './filters';
 
 class UserRules {
     rules = '';
 
     private setRules = async (rules: string) => {
-        await dynamicRules.setRules(rules);
         await this.saveRulesInStorage(rules);
-
         this.rules = rules;
-        await engine.init(true);
+
+        // TODO consider updating user rules without removing filter every time
+        await filters.removeFilter(USER_RULES_FILTER_ID);
+
+        // Create a filter to add to dynamic rules
+        const filter: Filter = {
+            id: USER_RULES_FILTER_ID,
+            title: 'User rules',
+            enabled: true,
+            groupId: FiltersGroupId.USER_RULES,
+        };
+
+        await filters.addFilter(filter, rules);
     };
 
     private saveRulesInStorage = async (rules: string) => {
