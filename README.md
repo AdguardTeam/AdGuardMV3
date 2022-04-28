@@ -45,3 +45,16 @@ yarn filters сonvert
 ## Permissions required
 - `scripting` - this permission is required in order to inject assistant script only in the pages required
 - `tabs` - this permission is required in order to get the url of the options page tab
+
+## Problems
+- Regexp is not supported in remove params
+- We cannot implement inversion in remove params
+- We cannot filter by request methods
+- Only one rule applies for a redirect. For this reason, different rules with the same url may not work. Example below:
+```
+Works   ||testcases.adguard.com$removeparam=p1case6|p2case6
+
+Failed  ||testcases.adguard.com$removeparam=p1case6
+Works   ||testcases.adguard.com$removeparam=p2case6
+```
+- Script rules only work on a resource without a CSP
