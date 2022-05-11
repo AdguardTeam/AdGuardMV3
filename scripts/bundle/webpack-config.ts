@@ -101,6 +101,11 @@ export const getWebpackConfig = (browser: Browser = BROWSERS.CHROME): Configurat
                     to: '_locales',
                     transform: (content) => updateLocalesMSGName(content, buildEnv),
                 },
+                {
+                    context: 'src',
+                    from: 'web-accessible-resources',
+                    to: 'web-accessible-resources',
+                },
             ],
         }),
         new HtmlWebpackPlugin({

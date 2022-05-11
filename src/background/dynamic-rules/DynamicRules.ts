@@ -9,6 +9,9 @@ type DeclarativeRule = chrome.declarativeNetRequest.Rule;
 /**
  * https://developer.chrome.com/docs/extensions/reference/declarativeNetRequest
  */
+
+const WEB_ACCESSIBLE_RESOURCES = 'web-accessible-resources';
+
 export class DynamicRules {
     MAX_NUMBER_OF_RULES = chrome.declarativeNetRequest.MAX_NUMBER_OF_DYNAMIC_AND_SESSION_RULES;
 
@@ -32,8 +35,11 @@ export class DynamicRules {
 
         const convertedRules = converter.convert(
             list,
-            this.MAX_NUMBER_OF_RULES,
-            this.MAX_NUMBER_OF_REGEX_RULES,
+            {
+                resoursesPath: `/${WEB_ACCESSIBLE_RESOURCES}/redirects`,
+                maxLimit: this.MAX_NUMBER_OF_RULES,
+                maxRegexLimit: this.MAX_NUMBER_OF_REGEX_RULES,
+            },
         );
 
         return convertedRules;
