@@ -135,8 +135,17 @@ export const messageHandler = async (
                 if (!isHttpRequest(data.url) && activeTab?.url) {
                     url = activeTab.url;
                 }
+
+                // CosmeticOption is the enumeration of various content script options.
+                // Depending on the set of enabled flags the content script will contain
+                // different set of settings.
+                const cosmeticOption = engine.matchRequest({
+                    requestUrl: url,
+                    frameUrl: url,
+                })?.getCosmeticOption();
+
                 const selectors = engine.getSelectorsForUrl(
-                    url, CosmeticOption.CosmeticOptionAll, false, false,
+                    url, cosmeticOption || CosmeticOption.CosmeticOptionAll, false, false,
                 );
 
                 return selectors;

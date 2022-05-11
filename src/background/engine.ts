@@ -81,6 +81,37 @@ class Engine {
     };
 
     /**
+     * Gets matching result for request.
+     *
+     * @param matchQuery
+     * @returns matching result or null
+     */
+    matchRequest = (matchQuery: {
+        requestUrl: string;
+        frameUrl: string;
+    }) => {
+        const {
+            requestUrl,
+            frameUrl,
+        } = matchQuery;
+
+        if (!this.engine) {
+            log.info('Filtering engine is not ready');
+            return null;
+        }
+
+        const request = new TSUrlFilter.Request(
+            requestUrl,
+            frameUrl,
+            TSUrlFilter.RequestType.Document,
+        );
+
+        const result = this.engine.matchRequest(request);
+
+        return result;
+    };
+
+    /**
      * Gets cosmetic result for the specified hostname and cosmetic options
      *
      * @param url

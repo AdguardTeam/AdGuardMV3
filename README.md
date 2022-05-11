@@ -58,3 +58,4 @@ Failed  ||testcases.adguard.com$removeparam=p1case6
 Works   ||testcases.adguard.com$removeparam=p2case6
 ```
 - Script rules only work on a resource without a CSP
+- [Tests](http://testcases.adguard.com/) may fail due to delayed injection of cosmetic rules
