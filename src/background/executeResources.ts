@@ -2,17 +2,20 @@ import { CosmeticOption } from '@adguard/tsurlfilter';
 import { isHttpRequest } from 'Common/helpers';
 import { log } from 'Common/logger';
 import { SETTINGS_NAMES } from 'Common/settings-constants';
-import { tabUtils } from 'Common/tab-utils';
 import { engine } from './engine';
 import { settings } from './settings';
 
 const getScripts = async (url: string) => {
-    return engine.getScriptsStringForUrl(
-        url, CosmeticOption.CosmeticOptionAll,
-    );
+    await engine.init(true);
+    return engine.getScriptsStringForUrl(url, CosmeticOption.CosmeticOptionAll);
 };
 
-const executeScript = async (scripts: string, id: number) => {
+const getScriptletsDataList = async (url: string) => {
+    await engine.init();
+    return engine.getScriptletsDataForUrl(url, CosmeticOption.CosmeticOptionAll);
+};
+
+const executeScript = async (scripts: string, tabId: number) => {
     if (scripts.length === 0) {
         return;
     }
@@ -29,8 +32,8 @@ const executeScript = async (scripts: string, id: number) => {
         }
     };
 
-    chrome.scripting.executeScript({
-        target: { tabId: id },
+    await chrome.scripting.executeScript({
+        target: { tabId },
         func: functionToInject,
         // @ts-ignore
         world: 'MAIN', // ISOLATED doesnt allow to execute code inline
@@ -40,6 +43,34 @@ const executeScript = async (scripts: string, id: number) => {
             log.debug(chrome.runtime.lastError);
         }
     });
+};
+
+/**
+ * Executes scriptlets data via chrome.scripting.executeScript api
+ * @param tabId
+ * @param scriptletsData
+ */
+const executeScriptletsData = async (
+    tabId: number,
+    // TODO export ScriptletData from tsurlfilter
+    // @ts-ignore
+    scriptletsData: (ScriptletData | null)[],
+) => {
+    const promises = scriptletsData.map(async (scriptletData) => {
+        if (scriptletData === null) {
+            return;
+        }
+
+        await chrome.scripting.executeScript({
+            target: { tabId },
+            func: scriptletData.func,
+            args: [scriptletData.params, scriptletData.params.args],
+            // @ts-ignore
+            world: 'MAIN',
+        });
+    });
+
+    await Promise.all(promises);
 };
 
 /**
@@ -59,22 +90,21 @@ const getAndExecuteScripts = async (id: number, url: string) => {
     ) {
         const response = await getScripts(url);
         await executeScript(response, id);
+
+        const scriptletData = await getScriptletsDataList(url);
+        await executeScriptletsData(id, scriptletData);
     }
 };
 
 export const executeResources = {
-    init: async () => {
-        const activeTab = await tabUtils.getActiveTab();
-
-        if (activeTab?.url && activeTab?.id) {
-            const { url, id } = activeTab;
-            await getAndExecuteScripts(id, url);
-        }
-
+    /**
+     * Init function should be synchronous, because chrome.webNavigation.onCommitted is required to
+     * be on the top level in order to wake up service worker
+     */
+    init: () => {
         chrome.webNavigation.onCommitted.addListener(
             async (details) => {
-                const { tabId, url } = details;
-                await getAndExecuteScripts(tabId, url);
+                await getAndExecuteScripts(details.tabId, details.url);
             },
         );
     },

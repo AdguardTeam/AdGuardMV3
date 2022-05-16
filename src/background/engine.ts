@@ -206,6 +206,19 @@ class Engine {
     };
 
     /**
+     * Returns scriptlets data by url
+     * @param url
+     * @param option
+     */
+    getScriptletsDataForUrl(url: string, option: TSUrlFilter.CosmeticOption) {
+        const scriptRules = this.getScriptsForUrl(url, option);
+        const scriptletDataList = scriptRules
+            .filter((rule) => rule.isScriptlet)
+            .map((scriptletRule) => scriptletRule.getScriptletData());
+        return scriptletDataList;
+    }
+
+    /**
      * Builds the final output string for the specified page.
      * Depending on the browser we either allow or forbid the new remote rules
      * grep "localScriptRulesService" for details about script source
@@ -217,7 +230,10 @@ class Engine {
     getScriptsStringForUrl(url: string, option: TSUrlFilter.CosmeticOption) {
         const scriptRules = this.getScriptsForUrl(url, option);
 
-        const scripts = scriptRules.map((scriptRule) => scriptRule.getScript());
+        // scriptlet rules would are handled separately
+        const scripts = scriptRules
+            .filter((rule) => !rule.isScriptlet)
+            .map((scriptRule) => scriptRule.getScript());
         // remove repeating scripts
         const scriptsCode = [...new Set(scripts)].join('\r\n');
 

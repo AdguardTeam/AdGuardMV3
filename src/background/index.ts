@@ -16,11 +16,11 @@ log.debug('Background service worker has loaded via Manifest V3.');
 messaging.init();
 contextMenu.init();
 browserActions.init();
+executeResources.init();
 
 (async () => {
     await app.init();
     await filters.init();
     await userRules.init();
     await engine.init();
-    await executeResources.init();
 })();
