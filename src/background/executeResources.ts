@@ -2,7 +2,6 @@ import { CosmeticOption } from '@adguard/tsurlfilter';
 import { isHttpRequest } from 'Common/helpers';
 import { log } from 'Common/logger';
 import { SETTINGS_NAMES } from 'Common/settings-constants';
-import { tabUtils } from 'Common/tab-utils';
 import { engine } from './engine';
 import { settings } from './settings';
 
@@ -66,6 +65,8 @@ const executeScriptletsData = async (
             target: { tabId },
             func: scriptletData.func,
             args: [scriptletData.params, scriptletData.params.args],
+            // @ts-ignore
+            world: 'MAIN',
         });
     });
 
@@ -96,14 +97,11 @@ const getAndExecuteScripts = async (id: number, url: string) => {
 };
 
 export const executeResources = {
-    init: async () => {
-        const activeTab = await tabUtils.getActiveTab();
-
-        if (activeTab?.url && activeTab?.id) {
-            const { url, id } = activeTab;
-            await getAndExecuteScripts(id, url);
-        }
-
+    /**
+     * Init function should be synchronous, because chrome.webNavigation.onCommitted is required to
+     * be on the top level in order to wake up service worker
+     */
+    init: () => {
         chrome.webNavigation.onCommitted.addListener(
             async (details) => {
                 await getAndExecuteScripts(details.tabId, details.url);
