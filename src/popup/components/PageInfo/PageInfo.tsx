@@ -23,6 +23,9 @@ const PROTECTION_STATUS: { [key: string]: ProtectionStatusType } = {
     DISABLED: {
         key: 'popup_protection_disabled_status',
     },
+    SECURE: {
+        key: 'popup_protection_secure_page',
+    },
     REFRESH_NEEDED: {
         key: 'popup_protection_enabled_refresh',
         params: {
@@ -42,7 +45,11 @@ const PROTECTION_STATUS: { [key: string]: ProtectionStatusType } = {
 const getProtectionStatusProps = (
     filteringEnabled: boolean,
     protectionPauseExpired: boolean,
+    applicationAvailable: boolean,
 ) => {
+    if (!applicationAvailable) {
+        return PROTECTION_STATUS.SECURE;
+    }
     if (protectionPauseExpired) {
         return PROTECTION_STATUS.REFRESH_NEEDED;
     }
@@ -55,7 +62,11 @@ const getProtectionStatusProps = (
 export const PageInfo = observer(() => {
     const { settingsStore } = useContext(rootStore);
     const {
-        currentSite, protectionPauseExpires, protectionPauseExpired, isAllowlisted,
+        currentSite,
+        protectionPauseExpires,
+        protectionPauseExpired,
+        isAllowlisted,
+        applicationAvailable,
     } = settingsStore;
 
     const {
@@ -64,6 +75,7 @@ export const PageInfo = observer(() => {
     } = getProtectionStatusProps(
         !isAllowlisted,
         protectionPauseExpires > 0 && protectionPauseExpired,
+        applicationAvailable,
     );
 
     const className = cn(styles.mainSection, {

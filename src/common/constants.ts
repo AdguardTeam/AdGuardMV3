@@ -61,11 +61,10 @@ export enum NOTIFIER_EVENTS {
 
 export const REPORT_SITE_BASE_URL = 'https://reports.adguard.com/new_issue.html';
 
-// TODO add correct url
-export const LEARN_MORE_URL = 'https://adguard.com/compare.html';
+// TODO add correct url when the product page is implemented
+export const LEARN_MORE_URL = 'https://adguard.com/blog/manifestv3-timeline.html';
 
-// TODO add correct url
-export const MV3_URL = 'https://developer.chrome.com/docs/extensions/mv3/intro/';
+export const MV3_URL = 'https://adguard.com/blog/manifestv3-timeline.html';
 
 /* GLOBAL FILTERING */
 export const MILLISECONDS_IN_SECOND = 10 ** 3;
