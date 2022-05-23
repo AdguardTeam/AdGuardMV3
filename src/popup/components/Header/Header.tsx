@@ -17,6 +17,8 @@ export const Header = observer(() => {
         setProtectionPausedTimer,
         setSetting,
         updateCurrentTime,
+        currentUrl,
+        enableFiltersIds,
     } = settingsStore;
 
     const handleBlockAdsClick = async () => {
@@ -95,6 +97,17 @@ export const Header = observer(() => {
                     >
                         {reactTranslator.getMessage('popup_settings_disable_site_temporarily', { count: PROTECTION_PAUSE_TIMEOUT_S })}
                     </button>
+                    <a
+                        target="_blank"
+                        rel="noreferrer"
+                        href={`https://reports.adguard.com/new_issue.html?product_version=${chrome.runtime.getManifest().version
+                        }&url=${encodeURIComponent(currentUrl)
+                        }&filters=${encodeURIComponent(enableFiltersIds.join('.'))
+                        }&browser=Chrome&product_type=Ext`}
+                        className={styles.item}
+                    >
+                        {reactTranslator.getMessage('popup_settings_report_issue')}
+                    </a>
                 </Tooltip>
             </fieldset>
         </div>

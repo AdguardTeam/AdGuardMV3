@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react';
 import { observer } from 'mobx-react';
 import cn from 'classnames';
 
+import { REGEX_DOMAIN } from 'Common/constants';
+import { useKeyPress } from 'Common/hooks/useKeyPress';
 import { translator } from 'Common/translators/translator';
 import { theme } from 'Common/styles';
 import { CheckboxOption } from 'Options/components/CheckboxOption';
@@ -31,13 +33,23 @@ export const NewUserRuleBlocking = observer(() => {
     };
 
     const onSave = () => {
-        const rule = buildBlockingRule(domain, blockSubdomains);
-        optionsStore.addNewUserRule(rule);
-        setDomain(DEFAULT_DOMAIN);
-        setBlockSubdomains(DEFAULT_BLOCK_SUBDOMAINS);
+        if (domain.match(REGEX_DOMAIN)) {
+            const rule = buildBlockingRule(domain, blockSubdomains);
+            optionsStore.addNewUserRule(rule);
+            setDomain(DEFAULT_DOMAIN);
+            setBlockSubdomains(DEFAULT_BLOCK_SUBDOMAINS);
+        } else {
+            optionsStore.setError(translator.getMessage('options_user_rule_wrong_domain_format'));
+        }
     };
 
+    useKeyPress('Enter', () => onSave(), [domain]);
+
     const message = translator.getMessage('options_user_rule_block_all_subdomains');
+
+    const onFocus = () => {
+        optionsStore.resetError();
+    };
 
     return (
         <>
@@ -46,6 +58,7 @@ export const NewUserRuleBlocking = observer(() => {
                 defaultValue={domain}
                 onChange={onChange}
                 placeholder="domain.com"
+                onFocus={onFocus}
             />
             <div className={theme.modal.checkboxGroup}>
                 <CheckboxOption
@@ -56,8 +69,14 @@ export const NewUserRuleBlocking = observer(() => {
                     onChange={onCheckboxChange}
                 />
             </div>
+            {optionsStore.error && (
+                <div className={theme.common.error}>
+                    {optionsStore.error}
+                </div>
+            )}
             <div className={theme.modal.footer}>
                 <button
+                    disabled={!domain}
                     type="button"
                     className={cn(theme.button.middle, theme.button.green)}
                     onClick={onSave}

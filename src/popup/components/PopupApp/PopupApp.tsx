@@ -10,7 +10,6 @@ import { rootStore } from '../../stores';
 import { Header } from '../Header';
 import { Switcher } from '../Switcher';
 import { PageInfo } from '../PageInfo';
-import { Action } from '../Action';
 import { Footer } from '../Footer';
 import { Wizard } from '../Wizard';
 import { DisabledProtectionScreen } from './DisabledProtectionScreen';
@@ -89,7 +88,8 @@ export const PopupApp = observer(() => {
                         <>
                             <PageInfo />
                             <Switcher />
-                            <Action />
+                            {/* TODO count blocked on the page */}
+                            {/* <Action /> */}
                         </>
                     )
                     : (

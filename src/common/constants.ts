@@ -3,6 +3,7 @@ import { SettingsType } from './settings-constants';
 export interface PopupData {
     settings: SettingsType,
     userRules: string,
+    enableFiltersIds: number[],
 }
 
 export type CategoriesType = {
@@ -131,3 +132,5 @@ export const RULES_STORAGE_KEY = 'rules';
 export const USER_RULES_STORAGE_KEY = 'user_rules';
 
 export const ENABLED_FILTERS_IDS = 'ENABLED_FILTERS_IDS';
+
+export const REGEX_DOMAIN = /^(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+[A-Za-z0-9][A-Za-z0-9-]{0,61}[A-Za-z0-9]$/;

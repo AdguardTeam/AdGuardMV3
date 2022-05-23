@@ -3,10 +3,8 @@ import { reactTranslator } from 'Common/translators/reactTranslator';
 
 import { theme } from 'Common/styles';
 import cn from 'classnames';
+import { LEARN_MORE_URL } from 'Common/constants';
 import styles from './About.module.pcss';
-
-// TODO add links to tds
-const READ_MORE_LINK = 'https://adguard.com';
 
 export const About = () => {
     return (
@@ -23,7 +21,7 @@ export const About = () => {
             </div>
             <div className={styles.readMoreSection}>
                 <a
-                    href={READ_MORE_LINK}
+                    href={LEARN_MORE_URL}
                     className={cn(theme.common.link, styles.readMoreLink)}
                     rel="noopener noreferrer"
                     target="_blank"

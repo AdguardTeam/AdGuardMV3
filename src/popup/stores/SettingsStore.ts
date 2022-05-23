@@ -50,6 +50,9 @@ export class SettingsStore {
     @observable
     applicationAvailable = true;
 
+    @observable
+    enableFiltersIds: number[] = [];
+
     currentAllowRule: UserRulesData | undefined;
 
     userRules = '';
@@ -145,11 +148,12 @@ export class SettingsStore {
     getPopupData = async () => {
         await this.getCurrentTabUrl();
 
-        const { settings, userRules } = await sender.getPopupData();
+        const { settings, userRules, enableFiltersIds } = await sender.getPopupData();
 
         this.setPopupDataReady(true);
         this.setSettings(settings);
         this.userRules = userRules;
+        this.enableFiltersIds = enableFiltersIds;
 
         this.updateAllowlist();
 

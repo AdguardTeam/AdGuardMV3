@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react';
 import cn from 'classnames';
 import { observer } from 'mobx-react';
 
+import { REGEX_DOMAIN } from 'Common/constants';
+import { useKeyPress } from 'Common/hooks/useKeyPress';
 import { translator } from 'Common/translators/translator';
 import { CheckboxOption } from 'Options/components/CheckboxOption';
 import { IconId } from 'Common/components/ui';
@@ -69,8 +71,12 @@ export const NewUserRuleUnblocking = observer(() => {
     };
 
     const onSave = () => {
-        const rule = buildUnblockingRule(domain, unblockOptions);
-        optionsStore.addNewUserRule(rule);
+        if (domain.match(REGEX_DOMAIN)) {
+            const rule = buildUnblockingRule(domain, unblockOptions);
+            optionsStore.addNewUserRule(rule);
+        } else {
+            optionsStore.setError(translator.getMessage('options_user_rule_wrong_domain_format'));
+        }
     };
 
     const renderOption = (id: UNBLOCK_OPTIONS) => {
@@ -88,6 +94,12 @@ export const NewUserRuleUnblocking = observer(() => {
         );
     };
 
+    const onFocus = () => {
+        optionsStore.resetError();
+    };
+
+    useKeyPress('Enter', () => onSave(), [domain]);
+
     return (
         <>
             <input
@@ -95,14 +107,21 @@ export const NewUserRuleUnblocking = observer(() => {
                 value={domain}
                 placeholder="domain.com"
                 onChange={onDomainChange}
+                onFocus={onFocus}
             />
             <div className={theme.modal.checkboxGroup}>
                 {renderOption(UNBLOCK_OPTIONS.LINKS)}
                 {renderOption(UNBLOCK_OPTIONS.HIDDEN_ELEMENTS)}
                 {renderOption(UNBLOCK_OPTIONS.ADVANCED_RULES)}
             </div>
+            {optionsStore.error && (
+                <div className={theme.common.error}>
+                    {optionsStore.error}
+                </div>
+            )}
             <div className={theme.modal.footer}>
                 <button
+                    disabled={!domain}
                     type="button"
                     className={cn(theme.button.middle, theme.button.green)}
                     onClick={onSave}

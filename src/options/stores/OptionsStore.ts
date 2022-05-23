@@ -137,19 +137,18 @@ export class OptionsStore {
         try {
             setLoader(true);
             await sender.setUserRules(userRules);
+            this.closeEditor();
+            this.closeUserRuleWizard();
+            runInAction(() => {
+                this.userRules = userRules;
+            });
         } catch (e: any) {
             const statusCode = e.message.match(/\d+/);
-            this.error = ERROR_UI_MESSAGES[statusCode]
+            const error = ERROR_UI_MESSAGES[statusCode]
                 ? ERROR_UI_MESSAGES[statusCode] : ERROR_UI_MESSAGES.DEFAULT;
-            throw new Error(e.message);
+            this.setError(error);
         }
-
         setLoader(false);
-        this.closeEditor();
-        this.closeUserRuleWizard();
-        runInAction(() => {
-            this.userRules = userRules;
-        });
     };
 
     @action
@@ -162,6 +161,11 @@ export class OptionsStore {
         });
         setLoader(false);
     };
+
+    @action
+    setError(value: string) {
+        this.error = value;
+    }
 
     @action
     resetError() {

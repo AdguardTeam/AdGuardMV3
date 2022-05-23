@@ -87,6 +87,8 @@ class Filters {
 
     rules: Rules[] = [];
 
+    enableFiltersIds: number[] = [];
+
     async init() {
         const promises = ADGUARD_FILTERS_IDS.map((id) => backend.downloadFilterRules(id));
         const result = await Promise.all(promises);
@@ -149,10 +151,18 @@ class Filters {
 
     setEnabledIds = async () => {
         const enableFilters = this.filters.filter((filter) => filter.enabled);
-        const enableFiltersIds = enableFilters.map((filter) => filter.id);
+        this.enableFiltersIds = enableFilters.map((filter) => filter.id);
         await this.setDynamicRules(enableFilters);
-        await storage.set(ENABLED_FILTERS_IDS, enableFiltersIds);
+        await storage.set(ENABLED_FILTERS_IDS, this.enableFiltersIds);
         await engine.init(true);
+    };
+
+    getEnableFiltersIds = async () => {
+        if (this.enableFiltersIds) {
+            return this.enableFiltersIds;
+        }
+        this.enableFiltersIds = await storage.get(ENABLED_FILTERS_IDS);
+        return this.enableFiltersIds;
     };
 
     setRulesetsOptions = async () => {

@@ -75,6 +75,7 @@ export const messageHandler = async (
             const popupData: PopupData = {
                 settings: settings.getSettings(),
                 userRules: await userRules.getRules(),
+                enableFiltersIds: await filters.getEnableFiltersIds(),
             };
             return popupData;
         }
