@@ -23,7 +23,7 @@ const DEFAULT_FILTERS = [
         id: FILTER_RULESET[RulesetType.RULESET_2],
         iconId: IconId.AD_BLOCKING,
         title: 'options_block_ads_option',
-        enabled: false,
+        enabled: true,
         groupId: FiltersGroupId.MAIN,
     },
     {
@@ -53,7 +53,7 @@ const DEFAULT_FILTERS = [
     {
         id: FILTER_RULESET[RulesetType.RULESET_1],
         title: 'Russian',
-        enabled: false,
+        enabled: true,
         description: 'Russian filter description',
         groupId: FiltersGroupId.LANGUAGES,
     },

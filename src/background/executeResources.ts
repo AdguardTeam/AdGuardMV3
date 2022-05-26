@@ -104,7 +104,11 @@ export const executeResources = {
     init: () => {
         chrome.webNavigation.onCommitted.addListener(
             async (details) => {
-                await getAndExecuteScripts(details.tabId, details.url);
+                try {
+                    await getAndExecuteScripts(details.tabId, details.url);
+                } catch (e: any) {
+                    log.info(e.message);
+                }
             },
         );
     },

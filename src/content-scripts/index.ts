@@ -40,8 +40,10 @@ const applyCss = (css: string[]) => {
 
 const tryLoadCssAndScripts = async () => {
     const response = await sender.getCss(document.location.href);
-    applyCss(response.css);
-    applyExtendedCss(response.extendedCss);
+    if (response) {
+        applyCss(response.css);
+        applyExtendedCss(response.extendedCss);
+    }
 };
 
 subscribe.init();

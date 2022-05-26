@@ -72,6 +72,8 @@ export const getWebpackConfig = (browser: Browser = BROWSERS.CHROME): Configurat
     const BACKGROUND_PATH = path.resolve(__dirname, SRC_PATH, 'background');
     const POPUP_PATH = path.resolve(__dirname, SRC_PATH, 'popup');
     const OPTIONS_PATH = path.resolve(__dirname, SRC_PATH, 'options');
+    const DEVTOOLS_PATH = path.resolve(__dirname, SRC_PATH, 'devtools');
+    const DEBUGGING_PATH = path.resolve(__dirname, SRC_PATH, 'debugging');
     const CONTENT_SCRIPTS_PATH = path.resolve(__dirname, SRC_PATH, 'content-scripts');
     const ASSISTANT_PATH = path.resolve(CONTENT_SCRIPTS_PATH, 'assistant');
 
@@ -118,6 +120,16 @@ export const getWebpackConfig = (browser: Browser = BROWSERS.CHROME): Configurat
             filename: 'options.html',
             chunks: ['options'],
         }),
+        new HtmlWebpackPlugin({
+            template: path.join(DEVTOOLS_PATH, 'index.html'),
+            filename: 'devtools.html',
+            chunks: ['devtools'],
+        }),
+        new HtmlWebpackPlugin({
+            template: path.join(DEBUGGING_PATH, 'index.html'),
+            filename: 'debugging.html',
+            chunks: ['debugging'],
+        }),
         new ZipWebpackPlugin({
             path: '../',
             filename: `${browser}.zip`,
@@ -144,7 +156,9 @@ export const getWebpackConfig = (browser: Browser = BROWSERS.CHROME): Configurat
         entry: {
             background: BACKGROUND_PATH,
             popup: POPUP_PATH,
+            debugging: DEBUGGING_PATH,
             options: OPTIONS_PATH,
+            devtools: DEVTOOLS_PATH,
             // content-scripts
             'content-scripts': CONTENT_SCRIPTS_PATH,
             assistant: ASSISTANT_PATH,

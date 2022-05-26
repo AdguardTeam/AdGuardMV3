@@ -145,6 +145,11 @@ export class SettingsStore {
     };
 
     @action
+    setEnableFiltersIds = (data: number[]) => {
+        this.enableFiltersIds = data;
+    };
+
+    @action
     getPopupData = async () => {
         await this.getCurrentTabUrl();
 
@@ -153,7 +158,7 @@ export class SettingsStore {
         this.setPopupDataReady(true);
         this.setSettings(settings);
         this.userRules = userRules;
-        this.enableFiltersIds = enableFiltersIds;
+        this.setEnableFiltersIds(enableFiltersIds);
 
         this.updateAllowlist();
 
