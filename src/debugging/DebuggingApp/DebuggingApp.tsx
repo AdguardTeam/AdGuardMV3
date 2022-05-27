@@ -19,13 +19,17 @@ export const DebuggingApp = () => {
     ];
 
     const newLog = new Set(ruleLog);
+
+    const setNewRuleLog = (i: chrome.declarativeNetRequest.MatchedRuleInfoDebug) => {
+        newLog.add(i);
+        setRuleLog([...newLog]);
+    };
+
     useEffect(() => {
-        chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(
-            (i) => {
-                newLog.add(i);
-                setRuleLog([...newLog]);
-            },
-        );
+        chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(setNewRuleLog);
+        return () => {
+            chrome.declarativeNetRequest.onRuleMatchedDebug.removeListener(setNewRuleLog);
+        };
     }, []);
 
     return (

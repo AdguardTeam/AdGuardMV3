@@ -34,7 +34,7 @@ class Engine {
 
     startEngine = async () => {
         log.info('Starting url filter engine');
-        const lists: TSUrlFilter.StringRuleList[] = [];
+        const lists = new Set<TSUrlFilter.StringRuleList>([]);
 
         const filters: Rules[] = await storage.get(
             RULES_STORAGE_KEY,
@@ -51,10 +51,10 @@ class Engine {
             const filterList = new TSUrlFilter.StringRuleList(
                 filter.id, filter.rules, false, false, false,
             );
-            lists.push(filterList);
+            lists.add(filterList);
         });
 
-        const ruleStorage = new TSUrlFilter.RuleStorage(lists);
+        const ruleStorage = new TSUrlFilter.RuleStorage([...lists]);
 
         const config = {
             engine: 'extension',
