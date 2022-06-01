@@ -1,5 +1,8 @@
 import * as TSUrlFilter from '@adguard/tsurlfilter';
 import { CosmeticOption } from '@adguard/tsurlfilter';
+import { MessageType } from '@adguard/tswebextension/mv3';
+import { MESSAGE_HANDLER_NAME } from '@adguard/tswebextension';
+
 import {
     Message,
     MESSAGE_TYPES,
@@ -19,30 +22,12 @@ import { categories } from './categories';
 import { backend } from './backend';
 import { userRules } from './userRules';
 import { engine } from './engine';
+import { checkConfigAndStart, tsWebExtensionMessageHandler } from './tswebextension';
 
-interface MessageHandler {
-    (message: Message, sender: chrome.runtime.MessageSender): any;
-}
-
-/**
- * Message handler wrapper used in order to handle async/await calls,
- * because chrome api by default do not support them
- * @param messageHandler
- */
-const messageHandlerWrapper = (messageHandler: MessageHandler) => (
-    message: Message,
-    sender: chrome.runtime.MessageSender,
-    sendResponse: (...args: any[]) => void,
-) => {
-    (async () => {
-        try {
-            const response = await messageHandler(message, sender);
-            sendResponse(response);
-        } catch (e: any) {
-            sendResponse({ error: { message: e.message } });
-        }
-    })();
-    return true;
+type TsWebMessageInner = {
+    type: MessageType,
+    handlerName: typeof MESSAGE_HANDLER_NAME,
+    payload?: any,
 };
 
 /**
@@ -50,12 +35,10 @@ const messageHandlerWrapper = (messageHandler: MessageHandler) => (
  * from content-script, popup, option or another pages of extension
  * @param message
  */
-export const messageHandler = async (
+const messageHandler = async (
     message: Message,
     // eslint-disable-next-line consistent-return
 ) => {
-    await app.init();
-
     const { type, data } = message;
 
     switch (type) {
@@ -123,37 +106,37 @@ export const messageHandler = async (
 
             break;
         }
-        case MESSAGE_TYPES.GET_CSS: {
-            await engine.init();
+        // case MESSAGE_TYPES.GET_CSS: {
+        //     await engine.init();
 
-            const filteringEnabled = settings.getSetting(SETTINGS_NAMES.FILTERING_ENABLED);
-            const protectionEnabled = settings.getSetting(SETTINGS_NAMES.PROTECTION_ENABLED);
+        //     const filteringEnabled = settings.getSetting(SETTINGS_NAMES.FILTERING_ENABLED);
+        //     const protectionEnabled = settings.getSetting(SETTINGS_NAMES.PROTECTION_ENABLED);
 
-            if (filteringEnabled && protectionEnabled) {
-                let { url } = data;
-                const activeTab = await tabUtils.getActiveTab();
+        //     if (filteringEnabled && protectionEnabled) {
+        //         let { url } = data;
+        //         const activeTab = await tabUtils.getActiveTab();
 
-                if (!isHttpRequest(data.url) && activeTab?.url) {
-                    url = activeTab.url;
-                }
+        //         if (!isHttpRequest(data.url) && activeTab?.url) {
+        //             url = activeTab.url;
+        //         }
 
-                // CosmeticOption is the enumeration of various content script options.
-                // Depending on the set of enabled flags the content script will contain
-                // different set of settings.
-                const cosmeticOption = engine.matchRequest({
-                    requestUrl: url,
-                    frameUrl: url,
-                })?.getCosmeticOption();
+        //         // CosmeticOption is the enumeration of various content script options.
+        //         // Depending on the set of enabled flags the content script will contain
+        //         // different set of settings.
+        //         const cosmeticOption = engine.matchRequest({
+        //             requestUrl: url,
+        //             frameUrl: url,
+        //         })?.getCosmeticOption();
 
-                const selectors = engine.getSelectorsForUrl(
-                    url, cosmeticOption || CosmeticOption.CosmeticOptionAll, false, false,
-                );
+        //         const selectors = engine.getSelectorsForUrl(
+        //             url, cosmeticOption || CosmeticOption.CosmeticOptionAll, false, false,
+        //         );
 
-                return selectors;
-            }
+        //         return selectors;
+        //     }
 
-            return null;
-        }
+        //     return null;
+        // }
         case MESSAGE_TYPES.SET_PAUSE_EXPIRES: {
             const { protectionPauseExpires } = data;
             settings.setSetting(SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES, protectionPauseExpires);
@@ -205,6 +188,45 @@ export const messageHandler = async (
     }
 };
 
+const proxyHandler = async (
+    message: Message,
+    sender: chrome.runtime.MessageSender,
+) => {
+    const id = `id_${Math.random().toString(16).slice(2)}`;
+    console.debug('[PROXY HANDLER]: start check config', id, message);
+
+    await checkConfigAndStart();
+
+    console.debug('[PROXY HANDLER]: after check config ', id, message);
+
+    if (message.handlerName === 'tsWebExtension') {
+        return tsWebExtensionMessageHandler(message as TsWebMessageInner, sender);
+    }
+
+    return messageHandler(message);
+};
+
+/**
+ * Message handler wrapper used in order to handle async/await calls,
+ * because chrome api by default do not support them
+ * @param messageHandler
+ */
+const messageHandlerWrapper = (
+    message: Message,
+    sender: chrome.runtime.MessageSender,
+    sendResponse: (response: any) => void,
+) => {
+    console.debug('[ON MESSAGE]: ', message);
+
+    proxyHandler(message, sender)
+        .then(sendResponse)
+        .catch((e: any) => {
+            sendResponse({ error: { message: e.message } });
+        });
+
+    return true;
+};
+
 /**
  * This handler used to subscribe for notifications from popup page
  * https://developer.chrome.com/extensions/messaging#connect
@@ -237,8 +259,7 @@ const longLivedMessageHandler = (port: chrome.runtime.Port) => {
 
 export const messaging = {
     init: () => {
-        const messageListener = messageHandlerWrapper(messageHandler);
-        chrome.runtime.onMessage.addListener(messageListener);
+        chrome.runtime.onMessage.addListener(messageHandlerWrapper);
         chrome.runtime.onConnect.addListener(longLivedMessageHandler);
     },
 };

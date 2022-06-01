@@ -1,3 +1,5 @@
+import { MESSAGE_HANDLER_NAME } from '@adguard/tswebextension';
+
 import { SettingsType } from './settings-constants';
 
 export interface PopupData {
@@ -50,6 +52,7 @@ export type MessageType = keyof typeof MESSAGE_TYPES;
 
 export type Message = {
     type: MessageType;
+    handlerName?: typeof MESSAGE_HANDLER_NAME;
     data?: any;
 };
 

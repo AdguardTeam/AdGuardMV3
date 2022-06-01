@@ -1,3 +1,9 @@
+export enum StorageKeys {
+    IS_STARTED = 'isStarted',
+    CONFIG = 'config',
+    RULESET_PREFIX = 'ruleset',
+}
+
 class Storage {
     private storage;
 
