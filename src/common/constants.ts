@@ -95,7 +95,6 @@ export enum FiltersGroupId {
     INTEGRATED = 2,
     MAIN = 3,
     LANGUAGES = 7,
-    USER_RULES = 9,
 }
 
 export interface Rules {
@@ -125,7 +124,33 @@ export const FILTER_RULESET = {
     [RulesetType.RULESET_224]: 224,
 };
 
-export const USER_RULES_FILTER_ID = 0;
+export const CATEGORIES: CategoriesType = [
+    {
+        groupId: 1,
+        groupName: 'Ad Blocking',
+        displayNumber: 1,
+    },
+    {
+        groupId: 3,
+        groupName: 'Social Widgets',
+        displayNumber: 3,
+    },
+    {
+        groupId: 4,
+        groupName: 'Annoyances',
+        displayNumber: 4,
+    },
+    {
+        groupId: 5,
+        groupName: 'Security',
+        displayNumber: 5,
+    },
+    {
+        groupId: 7,
+        groupName: 'Language-specific',
+        displayNumber: 7,
+    },
+];
 
 export const RULES_STORAGE_KEY = 'rules';
 

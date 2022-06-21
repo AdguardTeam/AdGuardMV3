@@ -10,13 +10,9 @@ import {
 } from 'Common/constants';
 import { ADGUARD_FILTERS_IDS } from '../../scripts/bundle/constants';
 import { backend } from './backend';
-import { dynamicRules } from './dynamic-rules';
-import { engine } from './engine';
 import { storage } from './storage';
 
 const CUSTOM_FILTERS_START_ID = 1000;
-
-const filterRuleset = Object.values(FILTER_RULESET);
 
 const DEFAULT_FILTERS = [
     {
@@ -92,6 +88,7 @@ class Filters {
     async init() {
         const promises = ADGUARD_FILTERS_IDS.map((id) => backend.downloadFilterRules(id));
         const result = await Promise.all(promises);
+
         // TODO add to storage only those rules that applied by the content script;
         // Read the rules from the storages for each download background sw,
         // if there are no rules, then get the rules from the files;
@@ -101,7 +98,6 @@ class Filters {
 
         this.filters = await this.getFromStorage();
         await this.setEnabledIds();
-        await this.setRulesetsOptions();
     }
 
     getRulesFromStorage = async () => {
@@ -129,6 +125,7 @@ class Filters {
         await storage.set(RULES_STORAGE_KEY, this.rules);
 
         await this.setEnabledIds();
+
         return this.filters;
     };
 
@@ -136,25 +133,10 @@ class Filters {
         return `ruleset_${id}`;
     };
 
-    // Add custom filters and user rules to dynamic rules
-    setDynamicRules = async (filters: Filter[]) => {
-        const ids = filters
-            .filter((filter) => filter.groupId === FiltersGroupId.CUSTOM
-                || filter.groupId === FiltersGroupId.USER_RULES)
-            .map((filter) => filter.id);
-
-        const rules = this.rules
-            .filter((filter) => ids.includes(filter.id))
-            .map((rule) => rule.rules);
-        await dynamicRules.setRules(rules.join('\n'));
-    };
-
     setEnabledIds = async () => {
         const enableFilters = this.filters.filter((filter) => filter.enabled);
         this.enableFiltersIds = enableFilters.map((filter) => filter.id);
-        await this.setDynamicRules(enableFilters);
         await storage.set(ENABLED_FILTERS_IDS, this.enableFiltersIds);
-        await engine.init(true);
     };
 
     getEnableFiltersIds = async () => {
@@ -165,19 +147,6 @@ class Filters {
         return this.enableFiltersIds;
     };
 
-    setRulesetsOptions = async () => {
-        // filter enabled & not custom
-        const enableRulesetIds = this.filters
-            .filter((filter) => filterRuleset.includes(filter.id) && filter.enabled)
-            .map((filter) => this.genRulesetId(filter.id));
-
-        const disableRulesetIds = this.filters
-            .filter((filter) => filterRuleset.includes(filter.id) && !filter.enabled)
-            .map((filter) => this.genRulesetId(filter.id));
-
-        await this.setRulesets({ enableRulesetIds, disableRulesetIds });
-    };
-
     getFilters = async () => {
         if (this.filters.length !== 0) {
             return this.filters;
@@ -186,8 +155,17 @@ class Filters {
         return this.filters;
     };
 
-    setRulesets = async (options: chrome.declarativeNetRequest.UpdateRulesetOptions) => {
-        await chrome.declarativeNetRequest.updateEnabledRulesets(options);
+    getEnabledFiltersWithRules = async () => {
+        const ids = await this.getEnableFiltersIds();
+
+        // TODO: Remove this excluding custom filters from result
+        // when tswebextension will apply custom filters
+        const filters = await this.getFilters();
+        const onlyDeclarativeIds = ids.filter((id) => {
+            return filters.some((f) => f.id === id && f.groupId !== FiltersGroupId.CUSTOM);
+        });
+
+        return this.rules.filter((r) => onlyDeclarativeIds.includes(r.id));
     };
 
     updateFilterState = async (filterId: number, filterProps: Partial<Filter>): Promise<void> => {
@@ -198,7 +176,6 @@ class Filters {
         const filterIdx = this.filters.indexOf(filter);
         this.filters[filterIdx] = { ...filter, ...filterProps };
 
-        await this.setRulesetsOptions();
         await this.saveInStorage(this.filters);
         await this.setEnabledIds();
     };

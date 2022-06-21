@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { program } from 'commander';
 import axios from 'axios';
-import * as TSUrlFilter from '@adguard/tsurlfilter';
+import { DeclarativeConverter, StringRuleList } from '@adguard/tsurlfilter';
 import fse from 'fs-extra';
 import fs from 'fs';
 import path from 'path';
@@ -44,7 +44,7 @@ const getUrlsOfFiltersResources = (browser: string) => {
 };
 
 const startConvert = (browser: string) => {
-    const converter = new TSUrlFilter.DeclarativeConverter();
+    const converter = new DeclarativeConverter();
     const filtersDir = FILTERS_DIR.replace('%browser', browser);
     const declarativeFiltersDir = `${DECLARATIVE_FILTERS_DIR.replace('%browser%', browser)}`;
 
@@ -52,10 +52,12 @@ const startConvert = (browser: string) => {
         const rulesetIndex = file.match(/\d+/);
         if (rulesetIndex) {
             const data = fs.readFileSync(`${filtersDir}/${file}`, { encoding: 'utf-8' });
-            const list = new TSUrlFilter.StringRuleList(
+            const list = new StringRuleList(
                 +rulesetIndex, data, false,
             );
-            const result = converter.convert(list);
+            const result = converter.convert(list, {
+                resoursesPath: '/web-accessible-resources/redirects',
+            });
 
             const fileDeclarative = file.replace('.txt', '.json');
             fse.ensureDirSync(declarativeFiltersDir);
@@ -115,7 +117,7 @@ export const filters = () => {
         .action(update);
 
     program
-        .command('сonvert')
+        .command('convert')
         .description('Convert filters into declarative rules')
         .action(сonvert);
 

@@ -6,6 +6,7 @@ import { NOTIFIER_EVENTS } from 'Common/constants';
 import { contextMenus } from './context-menus';
 import { settings } from './settings';
 import { notifier } from './notifier';
+import { tsWebExtensionWrapper } from './tswebextension';
 
 type Tab = chrome.tabs.Tab;
 
@@ -26,7 +27,7 @@ const CONTEXT_MENU_MAP = {
         action: () => {
             // FIXME add working actions
             // eslint-disable-next-line no-console
-            console.log(CONTEXT_MENU_ITEMS.DISABLE_FILTERING_ON_SITE);
+            console.error(CONTEXT_MENU_ITEMS.DISABLE_FILTERING_ON_SITE);
         },
         title: CONTEXT_MENU_ITEMS.DISABLE_FILTERING_ON_SITE,
     },
@@ -34,7 +35,7 @@ const CONTEXT_MENU_MAP = {
         action: () => {
             // FIXME add working actions
             // eslint-disable-next-line no-console
-            console.log(CONTEXT_MENU_ITEMS.ENABLE_FILTERING_ON_SITE);
+            console.error(CONTEXT_MENU_ITEMS.ENABLE_FILTERING_ON_SITE);
         },
         title: CONTEXT_MENU_ITEMS.ENABLE_FILTERING_ON_SITE,
     },
@@ -63,6 +64,7 @@ const CONTEXT_MENU_MAP = {
     [CONTEXT_MENU_ITEMS.DISABLE_BLOCKING]: {
         action: async (tab?: Tab) => {
             settings.disableFiltering();
+            await tsWebExtensionWrapper.stop();
             if (tab?.id) {
                 await tabUtils.reloadTab(tab.id);
             }
@@ -72,6 +74,7 @@ const CONTEXT_MENU_MAP = {
     [CONTEXT_MENU_ITEMS.ENABLE_BLOCKING]: {
         action: async (tab?: Tab) => {
             settings.enableFiltering();
+            await tsWebExtensionWrapper.start();
             if (tab?.id) {
                 await tabUtils.reloadTab(tab.id);
             }

@@ -1,61 +1,31 @@
-import * as TSUrlFilter from '@adguard/tsurlfilter';
-import { CosmeticOption } from '@adguard/tsurlfilter';
+import { RuleConverter } from '@adguard/tsurlfilter';
+
 import {
     Message,
     MESSAGE_TYPES,
     OptionsData,
     PopupData,
+    CATEGORIES,
 } from 'Common/constants';
 import { log } from 'Common/logger';
 import { SETTINGS_NAMES } from 'Common/settings-constants';
 import { tabUtils } from 'Common/tab-utils';
-import { isHttpRequest } from 'Common/helpers';
 import { settings } from './settings';
-import { app } from './app';
 import { notifier } from './notifier';
 import { protectionPause } from './protectionPause';
 import { filters } from './filters';
-import { categories } from './categories';
 import { backend } from './backend';
 import { userRules } from './userRules';
-import { engine } from './engine';
-
-interface MessageHandler {
-    (message: Message, sender: chrome.runtime.MessageSender): any;
-}
-
-/**
- * Message handler wrapper used in order to handle async/await calls,
- * because chrome api by default do not support them
- * @param messageHandler
- */
-const messageHandlerWrapper = (messageHandler: MessageHandler) => (
-    message: Message,
-    sender: chrome.runtime.MessageSender,
-    sendResponse: (...args: any[]) => void,
-) => {
-    (async () => {
-        try {
-            const response = await messageHandler(message, sender);
-            sendResponse(response);
-        } catch (e: any) {
-            sendResponse({ error: { message: e.message } });
-        }
-    })();
-    return true;
-};
+import { tsWebExtensionWrapper } from './tswebextension';
 
 /**
  * Message handler used to receive messages and send responses back on background service worker
  * from content-script, popup, option or another pages of extension
  * @param message
  */
-export const messageHandler = async (
+export const extensionMessageHandler = async (
     message: Message,
-    // eslint-disable-next-line consistent-return
 ) => {
-    await app.init();
-
     const { type, data } = message;
 
     switch (type) {
@@ -63,7 +33,7 @@ export const messageHandler = async (
             const optionsData: OptionsData = {
                 settings: settings.getSettings(),
                 filters: await filters.getFilters(),
-                categories: categories.getCategories(),
+                categories: CATEGORIES,
             };
 
             return optionsData;
@@ -87,6 +57,14 @@ export const messageHandler = async (
             const { key, value } = data;
             settings.setSetting(key, value);
 
+            if (key === SETTINGS_NAMES.PROTECTION_ENABLED) {
+                if (value) {
+                    await tsWebExtensionWrapper.start();
+                } else {
+                    await tsWebExtensionWrapper.stop();
+                }
+            }
+
             break;
         }
         case MESSAGE_TYPES.REPORT_SITE: {
@@ -106,6 +84,8 @@ export const messageHandler = async (
         case MESSAGE_TYPES.ADD_USER_RULE: {
             const { ruleText } = data;
             await userRules.addRule(ruleText);
+            await tsWebExtensionWrapper.configure();
+
             break;
         }
         case MESSAGE_TYPES.ADD_FILTERING_SUBSCRIPTION: {
@@ -123,37 +103,6 @@ export const messageHandler = async (
 
             break;
         }
-        case MESSAGE_TYPES.GET_CSS: {
-            await engine.init();
-
-            const filteringEnabled = settings.getSetting(SETTINGS_NAMES.FILTERING_ENABLED);
-            const protectionEnabled = settings.getSetting(SETTINGS_NAMES.PROTECTION_ENABLED);
-
-            if (filteringEnabled && protectionEnabled) {
-                let { url } = data;
-                const activeTab = await tabUtils.getActiveTab();
-
-                if (!isHttpRequest(data.url) && activeTab?.url) {
-                    url = activeTab.url;
-                }
-
-                // CosmeticOption is the enumeration of various content script options.
-                // Depending on the set of enabled flags the content script will contain
-                // different set of settings.
-                const cosmeticOption = engine.matchRequest({
-                    requestUrl: url,
-                    frameUrl: url,
-                })?.getCosmeticOption();
-
-                const selectors = engine.getSelectorsForUrl(
-                    url, cosmeticOption || CosmeticOption.CosmeticOptionAll, false, false,
-                );
-
-                return selectors;
-            }
-
-            return null;
-        }
         case MESSAGE_TYPES.SET_PAUSE_EXPIRES: {
             const { protectionPauseExpires } = data;
             settings.setSetting(SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES, protectionPauseExpires);
@@ -165,13 +114,22 @@ export const messageHandler = async (
             break;
         }
         case MESSAGE_TYPES.ENABLE_FILTER: {
-            return filters.enableFilter(data.filterId);
+            await filters.enableFilter(data.filterId);
+            await tsWebExtensionWrapper.configure();
+
+            break;
         }
         case MESSAGE_TYPES.DISABLE_FILTER: {
-            return filters.disableFilter(data.filterId);
+            await filters.disableFilter(data.filterId);
+            await tsWebExtensionWrapper.configure();
+
+            break;
         }
         case MESSAGE_TYPES.UPDATE_FILTER_TITLE: {
-            return filters.updateFilterTitle(data.filterId, data.filterTitle);
+            await filters.updateFilterTitle(data.filterId, data.filterTitle);
+            await tsWebExtensionWrapper.configure();
+
+            break;
         }
         case MESSAGE_TYPES.GET_FILTER_INFO_BY_CONTENT: {
             const { filterContent, title } = data;
@@ -180,9 +138,12 @@ export const messageHandler = async (
         }
         case MESSAGE_TYPES.ADD_CUSTOM_FILTER_BY_CONTENT: {
             const { filterContent, title, url } = data;
-            const convertedRule = TSUrlFilter.RuleConverter.convertRules(filterContent);
+            const convertedRule = RuleConverter.convertRules(filterContent);
             const filterStrings = convertedRule.split('\n');
-            return filters.addCustomFilterByContent(filterStrings, title, url);
+            await filters.addCustomFilterByContent(filterStrings, title, url);
+            await tsWebExtensionWrapper.configure();
+
+            break;
         }
         case MESSAGE_TYPES.GET_FILTER_CONTENT_BY_URL: {
             const { url } = data;
@@ -191,18 +152,26 @@ export const messageHandler = async (
         }
         case MESSAGE_TYPES.REMOVE_CUSTOM_FILTER_BY_ID: {
             const { filterId } = data;
-            return filters.removeFilter(filterId);
+            await filters.removeFilter(filterId);
+            await tsWebExtensionWrapper.configure();
+
+            break;
         }
         case MESSAGE_TYPES.GET_USER_RULES: {
             return userRules.getRules();
         }
         case MESSAGE_TYPES.SET_USER_RULES: {
-            return userRules.setUserRules(data.userRules);
+            await userRules.setUserRules(data.userRules);
+            await tsWebExtensionWrapper.configure();
+
+            break;
         }
         default: {
             throw new Error(`No message handler for type: ${type}`);
         }
     }
+
+    return null;
 };
 
 /**
@@ -235,10 +204,46 @@ const longLivedMessageHandler = (port: chrome.runtime.Port) => {
     });
 };
 
+// Singleton handler
+const apiMessageHandler = tsWebExtensionWrapper.getMessageHandler();
+let inited = false;
+
+// FIXME fix any
+const messageHandlerWrapper = (
+    message: any,
+    sender: any,
+    sendResponse: (response?: any) => void,
+) => {
+    (async () => {
+        if (!inited) {
+            // BUG: filters should initialized before userrules,
+            // because otherwise filters will be initialize with
+            // one filter from storage - userrules
+            await settings.init();
+            await filters.init();
+            await userRules.init();
+            await tsWebExtensionWrapper.start();
+
+            inited = true;
+        }
+
+        // TODO: use MESSAGE_HANDLER_NAME
+        if (message.handlerName === 'tsWebExtension') {
+            return apiMessageHandler(message, sender);
+        }
+        return extensionMessageHandler(message);
+    })()
+        .then(sendResponse)
+        .catch((e: any) => {
+            sendResponse({ error: { message: e.message } });
+        });
+
+    return true;
+};
+
 export const messaging = {
     init: () => {
-        const messageListener = messageHandlerWrapper(messageHandler);
-        chrome.runtime.onMessage.addListener(messageListener);
+        chrome.runtime.onMessage.addListener(messageHandlerWrapper);
         chrome.runtime.onConnect.addListener(longLivedMessageHandler);
     },
 };

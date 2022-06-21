@@ -1,16 +1,11 @@
 import {
     USER_RULES_STORAGE_KEY,
     NEW_LINE_SEPARATOR,
-    NOTIFIER_EVENTS,
     UserRuleType,
-    FiltersGroupId,
-    USER_RULES_FILTER_ID,
 } from 'Common/constants';
 import { log } from 'Common/logger';
 import { UserRulesProcessor } from 'Options/user-rules-processor';
-import { notifier } from './notifier';
 import { storage } from './storage';
-import { filters } from './filters';
 
 class UserRules {
     rules = '';
@@ -18,19 +13,6 @@ class UserRules {
     private setRules = async (rules: string) => {
         await this.saveRulesInStorage(rules);
         this.rules = rules;
-
-        // TODO consider updating user rules without removing filter every time
-        await filters.removeFilter(USER_RULES_FILTER_ID);
-
-        // Create a filter to add to dynamic rules
-        const filter: Filter = {
-            id: USER_RULES_FILTER_ID,
-            title: 'User rules',
-            enabled: true,
-            groupId: FiltersGroupId.USER_RULES,
-        };
-
-        await filters.addFilter(filter, rules);
     };
 
     private saveRulesInStorage = async (rules: string) => {
@@ -76,8 +58,6 @@ class UserRules {
 
     setUserRules = async (userRules: string) => {
         await this.setRules(userRules);
-
-        notifier.notify(NOTIFIER_EVENTS.SET_RULES, this.rules);
     };
 
     addRule = async (ruleText: string) => {
@@ -86,8 +66,6 @@ class UserRules {
             : ruleText;
 
         await this.setRules(newUserRules);
-
-        notifier.notify(NOTIFIER_EVENTS.ADD_RULES, ruleText);
     };
 
     public async init() {
