@@ -1,0 +1,85 @@
+---
+version: 2
+plan:
+  project-key: ADGEXT
+  key: BEMV3BETASPECS
+  name: browser extension mv3 - build beta
+variables:
+  dockerNode: adguard/node-ssh:15.14--6
+
+stages:
+  - Build:
+      manual: 'false'
+      final: 'false'
+      jobs:
+        - Build
+
+Build:
+  key: BUILD
+  other:
+    clean-working-dir: true
+  docker:
+    image: ${bamboo.dockerNode}
+    volumes:
+      ${system.YARN_DIR}: "${bamboo.cacheYarn}"
+  tasks:
+    - checkout:
+        force-clean-build: 'true'
+    - script:
+        interpreter: SHELL
+        scripts:
+          - |-
+            set -x
+            set -e
+            # Fix mixed logs
+            exec 2>&1
+            ls -la
+
+            yarn install ${bamboo.varsYarn}
+            CREDENTIALS_PASSWORD="${bamboo.extensionsPassphrase}" yarn beta
+            rm -rf node_modules
+    - inject-variables:
+        file: build/beta/build.txt
+        scope: RESULT
+        namespace: inject
+    - any-task:
+        plugin-key: com.atlassian.bamboo.plugins.vcs:task.vcs.tagging
+        configuration:
+          selectedRepository: defaultRepository
+          tagName: v${bamboo.inject.version}-beta
+  artifacts:
+    - name: build.txt
+      location: build/beta
+      pattern: build.txt
+      shared: true
+      required: true
+    - name: chrome.zip
+      location: build/beta
+      pattern: chrome.zip
+      shared: true
+      required: true
+    - name: edge.zip
+      location: build/beta
+      pattern: edge.zip
+      shared: true
+      required: true
+  requirements:
+    - adg-docker: 'true'
+
+triggers: []
+
+branches:
+  create: manually
+  delete: never
+  link-to-jira: 'true'
+
+notifications:
+  - events:
+      - plan-status-changed
+    recipients:
+      - webhook:
+          name: Build webhook
+          url: http://prod.jirahub.service.eu.consul/v1/webhook/bamboo
+labels: []
+other:
+  concurrent-build-plugin: system-default

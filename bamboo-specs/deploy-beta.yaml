@@ -1,0 +1,44 @@
+---
+version: 2
+deployment:
+  name: browser extension mv3 - deploy beta
+  source-plan: ADGEXT-BEMV3BETASPECS
+release-naming: ${bamboo.inject.version}-beta
+environments:
+  - Chrome WebStore
+
+Chrome WebStore:
+  triggers: []
+  tasks:
+    - clean
+    - checkout:
+        repository: bamboo-deploy-publisher
+        path: bamboo-deploy-publisher
+        force-clean-build: 'true'
+    - artifact-download:
+        artifacts:
+          - name: edge.zip
+          - name: chrome.zip
+          - name: build.txt
+    - script:
+        interpreter: SHELL
+        scripts:
+          - |-
+            set -x
+            set -e
+            # Fix mixed logs
+            exec 2>&1
+            ls -la
+
+            ./bamboo-deploy-publisher/deploy.sh browser-extension-v3-webstore-beta
+  final-tasks: []
+  variables: {}
+  requirements:
+    - adg-docker: 'true'
+  notifications:
+    - events:
+        - deployment-started-and-finished
+      recipients:
+        - webhook:
+            name: Deploy webhook
+            url: http://prod.jirahub.service.eu.consul/v1/webhook/bamboo?channel=adguard-qa
