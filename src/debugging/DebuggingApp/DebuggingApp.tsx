@@ -2,9 +2,13 @@ import React, { useState, useEffect } from 'react';
 import cn from 'classnames';
 import { translator } from 'Common/translators/translator';
 import style from './debugging.module.pcss';
+import { ADGUARD_FILTERS_IDS } from '../../../scripts/bundle/constants';
+import { COMMON_FILTERS_DIR } from '../../background/backend';
+import { RULESET_NAME } from '../../common/constants';
 
 export const DebuggingApp = () => {
     const [ruleLog, setRuleLog] = useState<chrome.declarativeNetRequest.MatchedRuleInfoDebug[]>([]);
+    const [filters, setFilters] = useState<chrome.declarativeNetRequest.Rule[][]>([]);
 
     const titles = [
         'Rule ID',
@@ -16,14 +20,27 @@ export const DebuggingApp = () => {
         'Tab ID',
         'Type',
         'URL',
+        'JSON Rule',
     ];
 
     const newLog = new Set(ruleLog);
 
     const setNewRuleLog = (i: chrome.declarativeNetRequest.MatchedRuleInfoDebug) => {
         newLog.add(i);
-        setRuleLog([...newLog]);
+        setRuleLog(Array.from(newLog));
     };
+
+    useEffect(() => {
+        ADGUARD_FILTERS_IDS
+            .forEach(async (id) => {
+                const url = chrome.runtime.getURL(`${COMMON_FILTERS_DIR}/declarative/filter_${id}.json`);
+                const result = await fetch(url);
+                const json = await result.json();
+                const rules = json as chrome.declarativeNetRequest.Rule[];
+                filters[id] = rules;
+                setFilters(filters);
+            });
+    }, []);
 
     useEffect(() => {
         chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(setNewRuleLog);
@@ -33,7 +50,7 @@ export const DebuggingApp = () => {
     }, []);
 
     return (
-        <div>
+        <div className={style.container}>
             <div className={style.header}>
                 {ruleLog.length > 0 ? (
                     <button
@@ -57,6 +74,7 @@ export const DebuggingApp = () => {
                         </div>
                     ))}
                 </div>
+
                 {ruleLog.length > 0 && (
                     ruleLog.map((i) => {
                         const { request, rule } = i;
@@ -70,6 +88,10 @@ export const DebuggingApp = () => {
                             type,
                             url,
                         } = request;
+
+                        const filterId = Number.parseInt(rulesetId.slice(RULESET_NAME.length), 10);
+                        const ruleInfo = filters[filterId]?.find(({ id }) => id === ruleId);
+
                         return (
                             <div className={style.row} key={`${rulesetId}_${ruleId}_${requestId}`}>
                                 <div className={style.cell}>{ruleId}</div>
@@ -81,6 +103,11 @@ export const DebuggingApp = () => {
                                 <div className={style.cell}>{tabId}</div>
                                 <div className={style.cell}>{type}</div>
                                 <div className={style.cell}>{url}</div>
+                                <div className={style.cell}>
+                                    <pre>
+                                        {JSON.stringify(ruleInfo, null, 4)}
+                                    </pre>
+                                </div>
                             </div>
                         );
                     })

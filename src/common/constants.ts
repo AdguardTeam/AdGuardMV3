@@ -102,6 +102,8 @@ export interface Rules {
     rules: string,
 }
 
+export const RULESET_NAME = 'ruleset_';
+
 export enum RulesetType {
     RULESET_1 = 'ruleset_1',
     RULESET_2 = 'ruleset_2',

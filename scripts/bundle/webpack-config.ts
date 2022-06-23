@@ -10,7 +10,7 @@ import _ from 'lodash';
 import fs from 'fs';
 
 import type { Browser, BuildEnv } from './constants';
-import { BROWSERS, BUILD_ENVS } from './constants';
+import { BROWSERS, BUILD_ENVS, RULESET_NAME } from './constants';
 
 const packageJson = require('../../package.json');
 const tsconfig = require('../../tsconfig.json');
@@ -37,7 +37,7 @@ const updateManifest = (isDev: boolean, content: Buffer, browser: string) => {
             rule_resources: nameList.map((name: string) => {
                 const rulesetIndex = name.match(/\d+/);
                 return {
-                    id: `ruleset_${rulesetIndex}`,
+                    id: `${RULESET_NAME}${rulesetIndex}`,
                     enabled: true,
                     path: `filters/declarative/${name}`,
                 };

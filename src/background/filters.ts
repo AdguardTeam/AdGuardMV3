@@ -7,6 +7,7 @@ import {
     RULES_STORAGE_KEY,
     Rules,
     ENABLED_FILTERS_IDS,
+    RULESET_NAME,
 } from 'Common/constants';
 import { ADGUARD_FILTERS_IDS } from '../../scripts/bundle/constants';
 import { backend } from './backend';
@@ -130,7 +131,7 @@ class Filters {
     };
 
     genRulesetId = (id: number) => {
-        return `ruleset_${id}`;
+        return `${RULESET_NAME}${id}`;
     };
 
     setEnabledIds = async () => {

@@ -12,7 +12,7 @@ const FILTER_COMPILER_OPTIONS = {
     adguard_ext_opera: browserUtils.isOperaBrowser(),
 };
 
-const COMMON_FILTERS_DIR = 'filters';
+export const COMMON_FILTERS_DIR = 'filters';
 
 class Backend {
     loadingUrls: { [key: string]: boolean } = {};

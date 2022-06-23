@@ -9,6 +9,8 @@ export const BUILD_ENVS = {
     RELEASE: 'release',
 } as const;
 
+export const RULESET_NAME = 'ruleset_';
+
 export const ADGUARD_FILTERS_IDS = [1, 2, 3, 4, 9, 14, 16, 224];
 
 export type BuildEnv = typeof BUILD_ENVS[keyof typeof BUILD_ENVS];
