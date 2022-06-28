@@ -166,6 +166,11 @@ export const extensionMessageHandler = async (
 
             break;
         }
+        // FIXME: Temporary construction for keeping alive service worker
+        // via constantly standing message exchange
+        case MESSAGE_TYPES.PING: {
+            break;
+        }
         default: {
             throw new Error(`No message handler for type: ${type}`);
         }
@@ -207,6 +212,7 @@ const longLivedMessageHandler = (port: chrome.runtime.Port) => {
 // Singleton handler
 const apiMessageHandler = tsWebExtensionWrapper.getMessageHandler();
 let inited = false;
+let waitForInit: Promise<void> | undefined;
 
 // FIXME fix any
 const messageHandlerWrapper = (
@@ -215,17 +221,31 @@ const messageHandlerWrapper = (
     sendResponse: (response?: any) => void,
 ) => {
     (async () => {
+        if (waitForInit) {
+            log.debug('[messageHandlerWrapper]: waiting for init', message);
+            await waitForInit;
+            waitForInit = undefined;
+        }
+
         if (!inited) {
-            // BUG: filters should initialized before userrules,
-            // because otherwise filters will be initialize with
-            // one filter from storage - userrules
-            await settings.init();
-            await filters.init();
-            await userRules.init();
-            await tsWebExtensionWrapper.start();
+            log.debug('[messageHandlerWrapper]: start init', message);
+            const innerInit = async () => {
+                // BUG: filters should initialized before userrules,
+                // because otherwise filters will be initialize with
+                // one filter from storage - userrules
+                await settings.init();
+                await filters.init();
+                await userRules.init();
+                await tsWebExtensionWrapper.start();
+            };
+            waitForInit = innerInit();
+            await waitForInit;
+            waitForInit = undefined;
 
             inited = true;
         }
+
+        log.debug('[messageHandlerWrapper]: handle message', message);
 
         // TODO: use MESSAGE_HANDLER_NAME
         if (message.handlerName === 'tsWebExtension') {

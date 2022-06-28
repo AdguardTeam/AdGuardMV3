@@ -101,7 +101,7 @@ const update = () => {
     }
 };
 
-const сonvert = () => {
+const convert = () => {
     try {
         startConvert(BROWSERS.CHROME);
     } catch (e) {
@@ -119,7 +119,7 @@ export const filters = () => {
     program
         .command('convert')
         .description('Convert filters into declarative rules')
-        .action(сonvert);
+        .action(convert);
 
     program.parse();
 };

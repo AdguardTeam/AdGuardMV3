@@ -28,9 +28,9 @@ Download and convert filters into declarative rules:
 yarn filters update
 ```
 
-Сonvert filters into declarative rules:
+Convert filters into declarative rules:
 ```
-yarn filters сonvert
+yarn filters convert
 ```
 
 ## TODO
