@@ -22,11 +22,17 @@ export const sendMessage = <T = void>(type: MessageType, data?: any): Promise<T>
     },
 );
 
+// Check if there are query parameters in the url
+const hasQueryParameters = (url: string) => {
+    const urlParts = url.split('?');
+    return urlParts.length > 1;
+};
+
 // Keep in sync with the same function in tasks helpers
 export const getUrlWithQueryString = (url: string, params: { [key: string]: string }) => {
     const searchParams = new URLSearchParams(params);
-
-    return `${url}?${searchParams.toString()}`;
+    const separator = hasQueryParameters(url) ? '&' : '?';
+    return `${url}${separator}${searchParams.toString()}`;
 };
 
 interface URLInfo extends URL {

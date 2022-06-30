@@ -4,7 +4,7 @@ import { translator } from 'Common/translators/translator';
 import { Icon, Tooltip, IconId } from 'Common/components/ui';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { SETTINGS_NAMES } from 'Common/settings-constants';
-import { PROTECTION_PAUSE_TIMEOUT_S, PROTECTION_PAUSE_TIMEOUT_MS } from 'Common/constants';
+import { PROTECTION_PAUSE_TIMEOUT_S, PROTECTION_PAUSE_TIMEOUT_MS, REPORT_SITE_BASE_URL } from 'Common/constants';
 import { sender } from '../../messaging/sender';
 import { rootStore } from '../../stores';
 
@@ -100,7 +100,7 @@ export const Header = observer(() => {
                     <a
                         target="_blank"
                         rel="noreferrer"
-                        href={`https://reports.adguard.com/new_issue.html?product_version=${chrome.runtime.getManifest().version
+                        href={`${REPORT_SITE_BASE_URL}?product_version=${chrome.runtime.getManifest().version
                         }&url=${encodeURIComponent(currentUrl)
                         }&filters=${encodeURIComponent(enableFiltersIds.join('.'))
                         }&browser=Chrome&product_type=Ext`}
