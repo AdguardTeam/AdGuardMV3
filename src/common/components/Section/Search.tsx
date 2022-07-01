@@ -2,6 +2,8 @@
 import React, { useRef } from 'react';
 import { observer } from 'mobx-react';
 
+import { useKeyPress } from 'Common/hooks/useKeyPress';
+import { KEY_ESCAPE } from 'Common/constants';
 import { IconId, Icon } from '../ui';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 import { translator } from '../../translators/translator';
@@ -22,6 +24,7 @@ export const Search = observer(({
     const formRef = useRef<HTMLFormElement>(null);
 
     useOutsideClick(formRef, handleCloseSearchClick);
+    useKeyPress(KEY_ESCAPE, handleCloseSearchClick);
 
     return (
         <form ref={formRef} className={styles.searchContainer}>

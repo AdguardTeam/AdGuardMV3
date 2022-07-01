@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import cn from 'classnames';
 import { observer } from 'mobx-react';
 
-import { REGEX_DOMAIN } from 'Common/constants';
+import { KEY_ENTER, REGEX_DOMAIN } from 'Common/constants';
 import { useKeyPress } from 'Common/hooks/useKeyPress';
 import { translator } from 'Common/translators/translator';
 import { CheckboxOption } from 'Options/components/CheckboxOption';
@@ -98,7 +98,7 @@ export const NewUserRuleUnblocking = observer(() => {
         optionsStore.resetError();
     };
 
-    useKeyPress('Enter', () => onSave(), [domain]);
+    useKeyPress(KEY_ENTER, () => onSave(), [domain]);
 
     return (
         <>

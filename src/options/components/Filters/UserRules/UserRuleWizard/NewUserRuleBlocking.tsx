@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { observer } from 'mobx-react';
 import cn from 'classnames';
 
-import { REGEX_DOMAIN } from 'Common/constants';
+import { KEY_ENTER, REGEX_DOMAIN } from 'Common/constants';
 import { useKeyPress } from 'Common/hooks/useKeyPress';
 import { translator } from 'Common/translators/translator';
 import { theme } from 'Common/styles';
@@ -43,7 +43,7 @@ export const NewUserRuleBlocking = observer(() => {
         }
     };
 
-    useKeyPress('Enter', () => onSave(), [domain]);
+    useKeyPress(KEY_ENTER, () => onSave(), [domain]);
 
     const message = translator.getMessage('options_user_rule_block_all_subdomains');
 
