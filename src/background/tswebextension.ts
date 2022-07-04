@@ -25,7 +25,7 @@ class TsWebExtensionWrapper {
     }
 
     private getConfiguration = async (): Promise<Configuration> => {
-        const enabledFilters = await filters.getEnabledFiltersWithRules();
+        const enabledFilters = await filters.getEnabledRules();
 
         return {
             settings: {

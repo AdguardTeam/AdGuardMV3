@@ -127,7 +127,7 @@ class Filters {
 
         await this.setEnabledIds();
 
-        return this.filters;
+        return this.getFilters();
     };
 
     genRulesetId = (id: number) => {
@@ -156,17 +156,10 @@ class Filters {
         return this.filters;
     };
 
-    getEnabledFiltersWithRules = async () => {
-        const ids = await this.getEnableFiltersIds();
+    getEnabledRules = async () => {
+        const enabledIds = await this.getEnableFiltersIds();
 
-        // TODO: Remove this excluding custom filters from result
-        // when tswebextension will apply custom filters
-        const filters = await this.getFilters();
-        const onlyDeclarativeIds = ids.filter((id) => {
-            return filters.some((f) => f.id === id && f.groupId !== FiltersGroupId.CUSTOM);
-        });
-
-        return this.rules.filter((r) => onlyDeclarativeIds.includes(r.id));
+        return this.rules.filter((r) => enabledIds.includes(r.id));
     };
 
     updateFilterState = async (filterId: number, filterProps: Partial<Filter>): Promise<void> => {
@@ -290,7 +283,7 @@ class Filters {
         return max >= CUSTOM_FILTERS_START_ID ? max + 1 : CUSTOM_FILTERS_START_ID;
     };
 
-    addCustomFilterByContent = (filterStrings: string[], title: string, url: string) => {
+    addCustomFilterByContent = async (filterStrings: string[], title: string, url: string) => {
         const filterInfo = this.parseFilterInfo(filterStrings, title);
 
         const filter: Filter = {
@@ -301,7 +294,7 @@ class Filters {
             groupId: FiltersGroupId.CUSTOM,
             url,
         };
-        this.addFilter(filter, filterStrings.join('\n'));
+        await this.addFilter(filter, filterStrings.join('\n'));
         return this.getFilters();
     };
 }

@@ -140,10 +140,14 @@ export const extensionMessageHandler = async (
             const { filterContent, title, url } = data;
             const convertedRule = RuleConverter.convertRules(filterContent);
             const filterStrings = convertedRule.split('\n');
-            await filters.addCustomFilterByContent(filterStrings, title, url);
+            const updatedFilters = await filters.addCustomFilterByContent(
+                filterStrings,
+                title,
+                url,
+            );
             await tsWebExtensionWrapper.configure();
 
-            break;
+            return updatedFilters;
         }
         case MESSAGE_TYPES.GET_FILTER_CONTENT_BY_URL: {
             const { url } = data;
@@ -152,10 +156,10 @@ export const extensionMessageHandler = async (
         }
         case MESSAGE_TYPES.REMOVE_CUSTOM_FILTER_BY_ID: {
             const { filterId } = data;
-            await filters.removeFilter(filterId);
+            const updatedFilters = await filters.removeFilter(filterId);
             await tsWebExtensionWrapper.configure();
 
-            break;
+            return updatedFilters;
         }
         case MESSAGE_TYPES.GET_USER_RULES: {
             return userRules.getRules();
