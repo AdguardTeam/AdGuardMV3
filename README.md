@@ -55,7 +55,6 @@ Works   ||testcases.adguard.com$removeparam=p1case6|p2case6
 Failed  ||testcases.adguard.com$removeparam=p1case6
 Works   ||testcases.adguard.com$removeparam=p2case6
 ```
-- Script rules only work on a resource without a CSP
 - [Tests](http://testcases.adguard.com/) may fail due to delayed injection of cosmetic rules
 - $badfilter doesn't work in MV3, you should manual toggle "bad filters" in the settings to turn them off or leave their .txt files empty
 
@@ -63,6 +62,8 @@ Works   ||testcases.adguard.com$removeparam=p2case6
 Filters currently in use are placed in the path 'src/filters/chrome'
 
 ### Edit static filters
+For change filters list, go to 'src/common/constants/filters.ts'
+
 For a single test:
 1. Run `yarn filters сonvert`
 2. Run `yarn dev chrome`
@@ -74,12 +75,16 @@ If you want to continuous edit&test filters after that, you can do different:
 3. Reload extension on the `browser://extensions/`
 
 ### List of id's and name's of static filters:
-1. Russian filter
+1. Russian
 2. Block ads (base English filter)
 3. Block trackers
 4. Block social widgets
-9. Block annoyances
-14. Spanish
+6. German
+7. Japanese
+8. Dutch
+9. Spanish
+13. Turkish
+14. Block annoyances
 16. French
 224. Chinese
 

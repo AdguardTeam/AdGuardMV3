@@ -1,6 +1,11 @@
-import { MESSAGE_TYPES, OptionsData } from 'Common/constants';
+import {
+    MESSAGE_TYPES,
+    OptionsData,
+    Filter,
+    FilterInfo,
+} from 'Common/constants/common';
+import { OPTION_SETTINGS_NAMES } from 'Common/constants/settings-constants';
 import { sendMessage } from 'Common/helpers';
-import { OPTION_SETTINGS_NAMES } from 'Common/settings-constants';
 
 /**
  * Module with methods used to communicate with background service worker

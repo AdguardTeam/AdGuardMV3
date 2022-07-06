@@ -7,10 +7,7 @@ import { checkUnusedMessages } from './unused';
 
 import { cliLog } from '../cli-log';
 
-import {
-    LANGUAGES,
-    REQUIRED_LOCALES,
-} from './locales-constants';
+import { LANGUAGES, REQUIRED_LOCALES } from './locales-constants';
 
 const LOCALES = Object.keys(LANGUAGES);
 

@@ -1,78 +1,111 @@
-// TODO store filters in the storage
 import { IconId } from 'Common/components/ui';
 import {
-    FILTER_RULESET,
-    RulesetType,
     FiltersGroupId,
-    RULES_STORAGE_KEY,
+    Filter,
     Rules,
-    ENABLED_FILTERS_IDS,
+    FilterInfo,
     RULESET_NAME,
-} from 'Common/constants';
-import { ADGUARD_FILTERS_IDS } from '../../scripts/bundle/constants';
+} from 'Common/constants/common';
+import { FILTER_RULESET, RulesetType, ADGUARD_FILTERS_IDS } from 'Common/constants/filters';
+import { RULES_STORAGE_KEY, ENABLED_FILTERS_IDS } from 'Common/constants/storage-keys';
 import { backend } from './backend';
 import { storage } from './storage';
 
 const CUSTOM_FILTERS_START_ID = 1000;
 
-const DEFAULT_FILTERS = [
+// Titles and descriptions are set to English by default.
+// TODO: Translations with watch for change language
+// TODO: The language will be determined by the browser and changed to English if necessary.
+const DEFAULT_FILTERS: Filter[] = [
     {
-        id: FILTER_RULESET[RulesetType.RULESET_2],
+        id: FILTER_RULESET[RulesetType.RULESET_1].id,
+        enabled: FILTER_RULESET[RulesetType.RULESET_1].enabled,
+        title: 'AdGuard Russian filter',
+        description: 'Filter that enables ad blocking on websites in the Russian language.',
+        groupId: FiltersGroupId.LANGUAGES,
+    },
+    {
+        id: FILTER_RULESET[RulesetType.RULESET_2].id,
+        enabled: FILTER_RULESET[RulesetType.RULESET_2].enabled,
         iconId: IconId.AD_BLOCKING,
         title: 'options_block_ads_option',
-        enabled: true,
         groupId: FiltersGroupId.MAIN,
     },
     {
-        id: FILTER_RULESET[RulesetType.RULESET_9],
-        iconId: IconId.ANNOYANCES,
-        title: 'options_block_annoyances_option',
-        enabled: true,
-        description: 'options_block_annoyances_option_desc',
-        groupId: FiltersGroupId.MAIN,
-    },
-    {
-        id: FILTER_RULESET[RulesetType.RULESET_3],
+        id: FILTER_RULESET[RulesetType.RULESET_3].id,
+        enabled: FILTER_RULESET[RulesetType.RULESET_3].enabled,
         iconId: IconId.TRACKERS_BLOCKING,
         title: 'options_block_trackers_option',
-        enabled: true,
         description: 'options_block_trackers_option_desc',
         groupId: FiltersGroupId.MAIN,
     },
     {
-        id: FILTER_RULESET[RulesetType.RULESET_4],
+        id: FILTER_RULESET[RulesetType.RULESET_4].id,
+        enabled: FILTER_RULESET[RulesetType.RULESET_4].enabled,
         iconId: IconId.SOCIAL_WIDGETS,
         title: 'options_block_social_widgets_option',
-        enabled: true,
         description: 'options_block_social_widgets_option_desc',
         groupId: FiltersGroupId.MAIN,
     },
     {
-        id: FILTER_RULESET[RulesetType.RULESET_1],
-        title: 'Russian',
-        enabled: true,
-        description: 'Russian filter description',
+        id: FILTER_RULESET[RulesetType.RULESET_6].id,
+        enabled: FILTER_RULESET[RulesetType.RULESET_6].enabled,
+        title: 'AdGuard German filter',
+        // eslint-disable-next-line max-len
+        description: 'EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in the German language.',
         groupId: FiltersGroupId.LANGUAGES,
     },
     {
-        id: FILTER_RULESET[RulesetType.RULESET_14],
-        title: 'Spanish',
-        enabled: true,
-        description: 'Spanish filter description',
+        id: FILTER_RULESET[RulesetType.RULESET_7].id,
+        enabled: FILTER_RULESET[RulesetType.RULESET_7].enabled,
+        title: 'AdGuard Japanese filter',
+        description: 'Filter that enables ad blocking on websites in the Japanese language.',
         groupId: FiltersGroupId.LANGUAGES,
     },
     {
-        id: FILTER_RULESET[RulesetType.RULESET_16],
-        title: 'French',
-        enabled: true,
-        description: 'French filter description',
+        id: FILTER_RULESET[RulesetType.RULESET_8].id,
+        enabled: FILTER_RULESET[RulesetType.RULESET_8].enabled,
+        title: 'AdGuard Dutch filter',
+        // eslint-disable-next-line max-len
+        description: 'EasyList Dutch + AdGuard Dutch filter. Filter list that specifically removes ads on websites in the Dutch language.',
         groupId: FiltersGroupId.LANGUAGES,
     },
     {
-        id: FILTER_RULESET[RulesetType.RULESET_224],
-        title: 'Chinese',
-        enabled: true,
-        description: 'Chinese filter description',
+        id: FILTER_RULESET[RulesetType.RULESET_9].id,
+        enabled: FILTER_RULESET[RulesetType.RULESET_9].enabled,
+        title: 'AdGuard Spanish/Portuguese filter',
+        description: 'Filter list that specifically removes ads on websites in the Spanish and Portuguese languages.',
+        groupId: FiltersGroupId.LANGUAGES,
+    },
+    {
+        id: FILTER_RULESET[RulesetType.RULESET_13].id,
+        enabled: FILTER_RULESET[RulesetType.RULESET_13].enabled,
+        title: 'AdGuard Turkish filter',
+        description: 'Filter list that specifically removes ads on websites in the Turkish language.',
+        groupId: FiltersGroupId.LANGUAGES,
+    },
+    {
+        id: FILTER_RULESET[RulesetType.RULESET_14].id,
+        enabled: FILTER_RULESET[RulesetType.RULESET_14].enabled,
+        iconId: IconId.ANNOYANCES,
+        title: 'options_block_annoyances_option',
+        description: 'options_block_annoyances_option_desc',
+        groupId: FiltersGroupId.MAIN,
+    },
+    {
+        id: FILTER_RULESET[RulesetType.RULESET_16].id,
+        enabled: FILTER_RULESET[RulesetType.RULESET_16].enabled,
+        title: 'AdGuard French filter',
+        // eslint-disable-next-line max-len
+        description: 'Liste FR + AdGuard French filter. Filter list that specifically removes ads on websites in the French language.',
+        groupId: FiltersGroupId.LANGUAGES,
+    },
+    {
+        id: FILTER_RULESET[RulesetType.RULESET_224].id,
+        enabled: FILTER_RULESET[RulesetType.RULESET_224].enabled,
+        title: 'AdGuard Chinese filter',
+        // eslint-disable-next-line max-len
+        description: 'EasyList China + AdGuard Chinese filter. Filter list that specifically removes ads on websites in Chinese language.',
         groupId: FiltersGroupId.LANGUAGES,
     },
 ];
@@ -87,7 +120,7 @@ class Filters {
     enableFiltersIds: number[] = [];
 
     async init() {
-        const promises = ADGUARD_FILTERS_IDS.map((id) => backend.downloadFilterRules(id));
+        const promises = ADGUARD_FILTERS_IDS.map(({ id }) => backend.downloadFilterRules(id));
         const result = await Promise.all(promises);
 
         // TODO add to storage only those rules that applied by the content script;
@@ -184,7 +217,7 @@ class Filters {
     /**
      * Returns filters state from storage
      */
-    getFromStorage = async () => {
+    getFromStorage = async (): Promise<Filter[]> => {
         const filters = await storage.get<Filter[]>(this.FILTERS_STORAGE_KEY);
         return filters ?? DEFAULT_FILTERS;
     };

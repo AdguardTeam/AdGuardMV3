@@ -7,10 +7,11 @@ import ZipWebpackPlugin from 'zip-webpack-plugin';
 import { Configuration, WebpackPluginInstance } from 'webpack';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import _ from 'lodash';
-import fs from 'fs';
+import fse from 'fs-extra';
 
-import type { Browser, BuildEnv } from './constants';
-import { BROWSERS, BUILD_ENVS, RULESET_NAME } from './constants';
+import { FILTER_RULESET, RulesetType } from '../../src/common/constants/filters';
+import type { Browser, BuildEnv } from '../build-constants';
+import { BROWSERS, BUILD_ENVS, RULESET_NAME } from '../build-constants';
 
 const packageJson = require('../../package.json');
 const tsconfig = require('../../tsconfig.json');
@@ -30,15 +31,17 @@ const updateManifest = (isDev: boolean, content: Buffer, browser: string) => {
 
     const declarativeFiltersDir = `${DECLARATIVE_FILTERS_DIR.replace('%browser%', browser)}`;
 
-    if (fs.existsSync(declarativeFiltersDir)) {
-        const nameList = fs.readdirSync(declarativeFiltersDir).map((file) => file);
+    if (fse.existsSync(declarativeFiltersDir)) {
+        const nameList = fse.readdirSync(declarativeFiltersDir).map((file) => file);
 
         const rules = {
             rule_resources: nameList.map((name: string) => {
-                const rulesetIndex = name.match(/\d+/);
+                const rulesetIndex = Number.parseInt(name.match(/\d+/)![0], 10);
+                const id = `${RULESET_NAME}${rulesetIndex}` as RulesetType;
+                const { enabled } = FILTER_RULESET[id];
                 return {
-                    id: `${RULESET_NAME}${rulesetIndex}`,
-                    enabled: true,
+                    id,
+                    enabled,
                     path: `filters/declarative/${name}`,
                 };
             }),
@@ -183,7 +186,10 @@ export const getWebpackConfig = (browser: Browser = BROWSERS.CHROME): Configurat
                     );
                     return aliases;
                 }, {}),
-            fallback: { url: false },
+            fallback: {
+                url: false,
+                path: false,
+            },
         },
         module: {
             rules: [

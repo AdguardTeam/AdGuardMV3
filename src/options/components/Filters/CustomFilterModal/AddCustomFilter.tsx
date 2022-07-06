@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import cn from 'classnames';
 
 import { reactTranslator } from 'Common/translators/reactTranslator';
-import { FiltersGroupId } from 'Common/constants';
+import { FiltersGroupId, FilterInfo } from 'Common/constants/common';
 import { log } from 'Common/logger';
 import { theme } from 'Common/styles';
 import { translator } from 'Common/translators/translator';
@@ -146,7 +146,10 @@ export const AddCustomFilter = ({
                 onChange={handleFileInputChange}
             />
             <div className={theme.modal.footer}>
-                <button type="button" className={cn(theme.button.middle, theme.button.transparent, theme.modal.leftBtn)}>
+                <button
+                    type="button"
+                    className={cn(theme.button.middle, theme.button.transparent, theme.modal.leftBtn)}
+                >
                     <label htmlFor="file-input">
                         {reactTranslator.getMessage('options_custom_filter_modal_add_browse_button')}
                     </label>

@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 
-import { MESSAGE_TYPES, Message, NOTIFIER_EVENTS } from 'Common/constants';
+import { NOTIFIER_EVENTS, MESSAGE_TYPES, Message } from 'Common/constants/common';
 import { log } from 'Common/logger';
 
 /**

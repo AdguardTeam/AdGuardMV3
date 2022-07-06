@@ -6,7 +6,7 @@ import {
     runInAction,
 } from 'mobx';
 
-import { SETTINGS_NAMES } from 'Common/settings-constants';
+import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
 import { IconId } from 'Common/components/ui/Icons';
 import type { RootStore } from './RootStore';
 

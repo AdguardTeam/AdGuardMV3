@@ -1,4 +1,3 @@
-/* eslint-disable no-await-in-loop,no-restricted-syntax,no-console */
 import fs from 'fs/promises';
 import path from 'path';
 import _ from 'lodash';
@@ -13,8 +12,8 @@ import {
     SRC_RELATIVE_PATH,
     SRC_FILENAME_EXTENSIONS,
     PERSISTENT_MESSAGES,
+    localeMessageType,
 } from './locales-constants';
-import { localeMessageType } from './constants';
 
 const LOCALES_DIR = path.resolve(__dirname, LOCALES_RELATIVE_PATH);
 const SRC_DIR = path.resolve(__dirname, SRC_RELATIVE_PATH);
@@ -52,12 +51,14 @@ const findFilesPaths = async (directory: string, filesReg: string) => {
     const walk = async (dir: string, filePaths: string[] = []) => {
         const files = await fs.readdir(dir);
 
+        // eslint-disable-next-line no-restricted-syntax
         for (const file of files) {
             const filePath = path.join(dir, file);
+            // eslint-disable-next-line no-await-in-loop
             const stat = await fs.stat(filePath);
 
             if (stat.isDirectory()) {
-                // eslint-disable-next-line no-param-reassign
+                // eslint-disable-next-line no-param-reassign, no-await-in-loop
                 filePaths = await walk(filePath, filePaths);
             } else if (filePath.match(filterRegexp)) {
                 filePaths.push(filePath);

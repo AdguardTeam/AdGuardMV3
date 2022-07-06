@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
 
 import { translator } from 'Common/translators/translator';
-import { FiltersGroupId } from 'Common/constants';
+import { Filter, FiltersGroupId } from 'Common/constants/common';
 import { Section } from 'Common/components/Section';
 import { IconId } from 'Common/components/ui';
 import { rootStore } from '../../stores';

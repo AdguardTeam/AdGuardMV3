@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fse from 'fs-extra';
 import path from 'path';
 
 import { cliLog } from '../cli-log';
@@ -39,12 +39,12 @@ const canContainLocalesStrings = (filePath: string) => {
  * @param result acc
  */
 const getSrcFilesContents = (dirPath: string, contents: string[] = []) => {
-    fs.readdirSync(dirPath).forEach((file) => {
+    fse.readdirSync(dirPath).forEach((file) => {
         const fullPath = path.join(dirPath, file);
-        if (fs.lstatSync(fullPath).isDirectory()) {
+        if (fse.lstatSync(fullPath).isDirectory()) {
             getSrcFilesContents(fullPath, contents);
         } else if (canContainLocalesStrings(fullPath)) {
-            contents.push(fs.readFileSync(fullPath).toString());
+            contents.push(fse.readFileSync(fullPath).toString());
         }
     });
     return contents;

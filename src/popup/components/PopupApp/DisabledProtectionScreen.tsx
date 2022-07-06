@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import cn from 'classnames';
 import { theme } from 'Common/styles';
 import { reactTranslator } from 'Common/translators/reactTranslator';
-import { SETTINGS_NAMES } from 'Common/settings-constants';
+import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
 import { rootStore } from '../../stores';
 import { sender } from '../../messaging/sender';
 
@@ -25,17 +25,17 @@ export const DisabledProtectionScreen = observer(() => {
         await sender.reloadActiveTab();
     };
 
+    const title = protectionPaused
+        ? reactTranslator.getMessage('popup_protection_will_be_resumed_after', { count: protectionPausedTimer })
+        : reactTranslator.getMessage('popup_protection_paused_for_all_');
+
     return (
         <>
             <div className={styles.sectionContainer}>
                 <section className={styles.section}>
                     <h1 className={styles.pageInfoMain}>{reactTranslator.getMessage('popup_protection_is_paused')}</h1>
-                    <h6 className={cn(theme.common.pageInfoAdditional,
-                        styles.pageInfoAdditional)}
-                    >
-                        {protectionPaused
-                            ? reactTranslator.getMessage('popup_protection_will_be_resumed_after', { count: protectionPausedTimer })
-                            : reactTranslator.getMessage('popup_protection_paused_for_all_')}
+                    <h6 className={cn(theme.common.pageInfoAdditional, styles.pageInfoAdditional)}>
+                        {title}
                     </h6>
                 </section>
                 <Switcher disabled />

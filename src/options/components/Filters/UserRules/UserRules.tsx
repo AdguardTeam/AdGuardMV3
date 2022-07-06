@@ -69,7 +69,11 @@ export const UserRules = observer(() => {
                     isOpen={searchStore.isSearchOpen}
                     handleBackClick={closeSearch}
                     handleSearchClick={optionsStore.editorOpen ? undefined : openSearch}
-                    pageTitle={optionsStore.editorOpen ? translator.getMessage('options_user_rules_option_editor') : translator.getMessage('options_user_rules_option')}
+                    pageTitle={
+                        optionsStore.editorOpen
+                            ? translator.getMessage('options_user_rules_option_editor')
+                            : translator.getMessage('options_user_rules_option')
+                    }
                     searchValue={searchStore.searchValue}
                     handleCloseSearchClick={closeSearch}
                     handleSearchInputChange={handleSearchInputChange}

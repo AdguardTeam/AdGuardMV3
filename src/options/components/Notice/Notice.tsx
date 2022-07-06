@@ -4,8 +4,8 @@ import { observer } from 'mobx-react';
 
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { theme } from 'Common/styles';
-import { LEARN_MORE_URL } from 'Common/constants';
-import { SETTINGS_NAMES } from 'Common/settings-constants';
+import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
+import { LEARN_MORE_URL } from 'Common/constants/common';
 import styles from './Notice.module.pcss';
 import { rootStore } from '../../stores';
 

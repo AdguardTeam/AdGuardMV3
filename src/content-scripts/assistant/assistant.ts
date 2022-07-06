@@ -1,6 +1,6 @@
 import { adguardAssistant } from '@adguard/assistant';
 
-import { MESSAGE_TYPES } from 'Common/constants';
+import { MESSAGE_TYPES } from 'Common/constants/common';
 import { sendMessage } from 'Common/helpers';
 
 const init = () => {

@@ -6,7 +6,7 @@ import { rootStore } from 'Options/stores';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { theme } from 'Common/styles';
 import { useKeyPress } from 'Common/hooks/useKeyPress';
-import { KEY_ENTER } from 'Common/constants';
+import { KEY_ENTER } from 'Common/constants/keyboard';
 import { UserRuleEditor } from './UserRuleEditor';
 
 export const NewUserRuleCustom = observer(() => {

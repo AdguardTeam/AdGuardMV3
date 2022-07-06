@@ -1,6 +1,6 @@
 import { sendMessage } from 'Common/helpers';
-import { MESSAGE_TYPES, PopupData } from 'Common/constants';
-import { SETTINGS_NAMES, SettingsValueType } from 'Common/settings-constants';
+import { PopupData, MESSAGE_TYPES } from 'Common/constants/common';
+import { SETTINGS_NAMES, SettingsValueType } from 'Common/constants/settings-constants';
 import { tabUtils } from 'Common/tab-utils';
 
 /**

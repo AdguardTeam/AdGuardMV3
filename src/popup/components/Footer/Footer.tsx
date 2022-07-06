@@ -1,6 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
-import { MV3_URL } from 'Common/constants';
+import { MV3_URL } from 'Common/constants/common';
 import { Icon, IconId } from 'Common/components/ui';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { theme } from 'Common/styles';

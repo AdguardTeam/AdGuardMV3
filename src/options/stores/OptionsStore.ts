@@ -9,9 +9,8 @@ import _ from 'lodash';
 
 import { sender } from 'Options/messaging/sender';
 import { UserRulesProcessor, UserRulesData } from 'Options/user-rules-processor';
-import { NEW_LINE_SEPARATOR } from 'Common/constants';
+import { OTHER_DOMAIN_TITLE, NEW_LINE_SEPARATOR } from 'Common/constants/common';
 import { translator } from 'Common/translators/translator';
-import { OTHER_DOMAIN_TITLE } from 'Options/constants';
 
 import type { RootStore } from './RootStore';
 

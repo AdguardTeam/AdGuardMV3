@@ -1,9 +1,9 @@
 import { RuleConverter } from '@adguard/tsurlfilter';
-import FiltersDownloader from '@adguard/filters-downloader';
+import FiltersDownloader, { DefinedExpressions } from '@adguard/filters-downloader/browser';
 
 import { browserUtils } from 'Common/utils/browser-utils';
 
-const FILTER_COMPILER_OPTIONS = {
+const FILTER_COMPILER_OPTIONS: DefinedExpressions = {
     adguard: true,
     adguard_ext_chromium: browserUtils.isChromium(),
     adguard_ext_firefox: browserUtils.isFirefoxBrowser(),

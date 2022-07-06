@@ -1,9 +1,9 @@
 import {
-    Message,
-    MESSAGE_TYPES,
-    MessageType,
     REPORT_SITE_BASE_URL,
-} from 'Common/constants';
+    MESSAGE_TYPES,
+    Message,
+    MessageType,
+} from 'Common/constants/common';
 import { log } from 'Common/logger';
 import { prefs } from 'Common/prefs';
 import { getUrlWithQueryString } from 'Common/helpers';

@@ -1,13 +1,13 @@
 import { throttle } from 'lodash';
 
 import { log } from 'Common/logger';
-import { NOTIFIER_EVENTS } from 'Common/constants';
+import { NOTIFIER_EVENTS } from 'Common/constants/common';
 import {
-    DEFAULT_SETTINGS,
-    SETTINGS_NAMES,
     SettingsType,
+    SETTINGS_NAMES,
     SettingsValueType,
-} from 'Common/settings-constants';
+    DEFAULT_SETTINGS,
+} from 'Common/constants/settings-constants';
 import { storage } from './storage';
 import { notifier } from './notifier';
 

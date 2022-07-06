@@ -1,4 +1,5 @@
 import { SettingsType } from './settings-constants';
+import { IconId } from './icons';
 
 export interface PopupData {
     settings: SettingsType,
@@ -11,6 +12,28 @@ export type CategoriesType = {
     groupName: string,
     displayNumber: number,
 }[];
+
+export interface Filter {
+    id: number,
+    iconId?: IconId,
+    title: string,
+    enabled: boolean,
+    description?: string,
+    groupId: FiltersGroupId,
+    url?: string,
+}
+
+export interface FilterInfo {
+    title: string,
+    description?: string,
+    homepage?: string,
+    version?: string,
+    expires?: string,
+    timeUpdated?: string,
+    url?: string,
+}
+
+export const FILTERS_I18N_FILENAME = 'filters_i18n.json';
 
 export interface OptionsData {
     settings: SettingsType
@@ -66,17 +89,17 @@ export enum NOTIFIER_EVENTS {
 export const REPORT_SITE_BASE_URL = 'https://reports.adguard.com/new_issue.html';
 
 // TODO add correct url when the product page is implemented
+// eslint-disable-next-line max-len
 export const LEARN_MORE_URL = 'https://adguard.com/forward.html?action=learn_more&from=options_screen&app=browser_extension_mv3';
 
 export const MV3_URL = 'https://adguard.com/forward.html?action=mv3_about&from=popup&app=browser_extension_mv3';
 
 /* GLOBAL FILTERING */
-export const MILLISECONDS_IN_SECOND = 10 ** 3;
+export const MS_IN_SECOND = 10 ** 3;
 export const PROTECTION_PAUSE_TIMEOUT_S = 30;
 export const PROTECTION_PAUSE_TIMEOUT_TICK_S = 1;
-export const PROTECTION_PAUSE_TIMEOUT_MS = PROTECTION_PAUSE_TIMEOUT_S * MILLISECONDS_IN_SECOND;
-export const PROTECTION_PAUSE_TIMEOUT_TICK_MS = PROTECTION_PAUSE_TIMEOUT_TICK_S
-    * MILLISECONDS_IN_SECOND;
+export const PROTECTION_PAUSE_TIMEOUT_MS = PROTECTION_PAUSE_TIMEOUT_S * MS_IN_SECOND;
+export const PROTECTION_PAUSE_TIMEOUT_TICK_MS = PROTECTION_PAUSE_TIMEOUT_TICK_S * MS_IN_SECOND;
 
 export const NEW_LINE_SEPARATOR = '\n';
 
@@ -107,64 +130,9 @@ export interface Rules {
 
 export const RULESET_NAME = 'ruleset_';
 
-export enum RulesetType {
-    RULESET_1 = 'ruleset_1',
-    RULESET_2 = 'ruleset_2',
-    RULESET_3 = 'ruleset_3',
-    RULESET_4 = 'ruleset_4',
-    RULESET_9 = 'ruleset_9',
-    RULESET_14 = 'ruleset_14',
-    RULESET_16 = 'ruleset_16',
-    RULESET_224 = 'ruleset_224',
-}
+export const OTHER_DOMAIN_TITLE = 'other';
 
-export const FILTER_RULESET = {
-    [RulesetType.RULESET_1]: 1,
-    [RulesetType.RULESET_2]: 2,
-    [RulesetType.RULESET_3]: 3,
-    [RulesetType.RULESET_4]: 4,
-    [RulesetType.RULESET_9]: 9,
-    [RulesetType.RULESET_14]: 14,
-    [RulesetType.RULESET_16]: 16,
-    [RulesetType.RULESET_224]: 224,
-};
-
-export const CATEGORIES: CategoriesType = [
-    {
-        groupId: 1,
-        groupName: 'Ad Blocking',
-        displayNumber: 1,
-    },
-    {
-        groupId: 3,
-        groupName: 'Social Widgets',
-        displayNumber: 3,
-    },
-    {
-        groupId: 4,
-        groupName: 'Annoyances',
-        displayNumber: 4,
-    },
-    {
-        groupId: 5,
-        groupName: 'Security',
-        displayNumber: 5,
-    },
-    {
-        groupId: 7,
-        groupName: 'Language-specific',
-        displayNumber: 7,
-    },
-];
-
-export const RULES_STORAGE_KEY = 'rules';
-
-export const USER_RULES_STORAGE_KEY = 'user_rules';
-
-export const ENABLED_FILTERS_IDS = 'ENABLED_FILTERS_IDS';
-
+// eslint-disable-next-line max-len
 export const REGEX_DOMAIN = /^(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+[A-Za-z0-9][A-Za-z0-9-]{0,61}[A-Za-z0-9]$/;
 
-// Keyboard keys
-export const KEY_ESCAPE = 'Escape';
-export const KEY_ENTER = 'Enter';
+export const REGEX_DOMAIN_IN_RULE = /(?<=\|\|)(.*?)(?=\^|\/|:|\$)/g;

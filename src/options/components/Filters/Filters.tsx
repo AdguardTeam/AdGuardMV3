@@ -1,13 +1,9 @@
-import React, {
-    useContext,
-    useEffect,
-    useState,
-} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import { observer } from 'mobx-react';
 
 import { translator } from 'Common/translators/translator';
-import { FiltersGroupId, QUERY_PARAM_NAMES } from 'Common/constants';
+import { FiltersGroupId, QUERY_PARAM_NAMES } from 'Common/constants/common';
 import { Section, Header } from 'Common/components/Section';
 import { IconId } from 'Common/components/ui';
 import { rootStore } from 'Options/stores';
@@ -55,7 +51,8 @@ export const Filters = observer(() => {
 
     const query = useQuery();
 
-    const [urlToSubscribe, setUrlToSubscribe] = useState(decodeURIComponent(query.get(QUERY_PARAM_NAMES.SUBSCRIBE) || ''));
+    const URI = query.get(QUERY_PARAM_NAMES.SUBSCRIBE) || '';
+    const [urlToSubscribe, setUrlToSubscribe] = useState(decodeURIComponent(URI));
     const [customFilterTitle, setCustomFilterTitle] = useState(
         query.get(QUERY_PARAM_NAMES.TITLE),
     );

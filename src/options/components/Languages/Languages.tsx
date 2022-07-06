@@ -5,7 +5,7 @@ import { rootStore } from 'Options/stores';
 import { CheckboxOption } from 'Options/components/CheckboxOption';
 import { Category } from 'Options/components/Category';
 import { translator } from 'Common/translators/translator';
-import { FiltersGroupId } from 'Common/constants';
+import { Filter, FiltersGroupId } from 'Common/constants/common';
 
 export const Languages = observer(() => {
     const {

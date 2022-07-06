@@ -9,15 +9,18 @@ import {
 import { log } from 'Common/logger';
 import { getUrlDetails, isHttpRequest } from 'Common/helpers';
 import {
-    DEFAULT_SETTINGS,
-    SETTINGS_NAMES,
+    UserRuleType,
+    MS_IN_SECOND,
+    PROTECTION_PAUSE_TIMEOUT_TICK_MS,
+    NEW_LINE_SEPARATOR,
+} from 'Common/constants/common';
+import {
     SettingsType,
     SettingsValueType,
-} from 'Common/settings-constants';
+    DEFAULT_SETTINGS,
+    SETTINGS_NAMES,
+} from 'Common/constants/settings-constants';
 import { tabUtils } from 'Common/tab-utils';
-import {
-    MILLISECONDS_IN_SECOND, NEW_LINE_SEPARATOR, PROTECTION_PAUSE_TIMEOUT_TICK_MS, UserRuleType,
-} from 'Common/constants';
 import { UserRulesData, UserRulesProcessor } from 'Options/user-rules-processor';
 import { sender } from '../messaging/sender';
 import type { RootStore } from './RootStore';
@@ -78,7 +81,7 @@ export class SettingsStore {
     get protectionPausedTimer() {
         return this.protectionPauseExpired
             ? 0
-            : Math.ceil((this.protectionPauseExpires - this.currentTime) / MILLISECONDS_IN_SECOND);
+            : Math.ceil((this.protectionPauseExpires - this.currentTime) / MS_IN_SECOND);
     }
 
     @computed

@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import cn from 'classnames';
+
 import { translator } from 'Common/translators/translator';
-import style from './debugging.module.pcss';
-import { ADGUARD_FILTERS_IDS } from '../../../scripts/bundle/constants';
+import { ADGUARD_FILTERS_IDS } from 'Common/constants/filters';
+
 import { COMMON_FILTERS_DIR } from '../../background/backend';
-import { RULESET_NAME } from '../../common/constants';
+import { RULESET_NAME } from '../../../scripts/build-constants';
+
+import style from './debugging.module.pcss';
 
 export const DebuggingApp = () => {
     const [ruleLog, setRuleLog] = useState<chrome.declarativeNetRequest.MatchedRuleInfoDebug[]>([]);
@@ -32,7 +35,7 @@ export const DebuggingApp = () => {
 
     useEffect(() => {
         ADGUARD_FILTERS_IDS
-            .forEach(async (id) => {
+            .forEach(async ({ id }) => {
                 const url = chrome.runtime.getURL(`${COMMON_FILTERS_DIR}/declarative/filter_${id}.json`);
                 const result = await fetch(url);
                 const json = await result.json();

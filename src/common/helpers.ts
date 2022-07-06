@@ -1,4 +1,4 @@
-import { Message, MessageType } from 'Common/constants';
+import { Message, MessageType } from 'Common/constants/common';
 
 export const sendMessage = <T = void>(type: MessageType, data?: any): Promise<T> => new Promise(
     (resolve, reject) => {

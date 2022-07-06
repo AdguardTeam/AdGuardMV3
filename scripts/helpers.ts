@@ -1,8 +1,8 @@
-import fs from 'fs';
+import fse from 'fs-extra';
 import path from 'path';
-import { ENV_CONF } from './constants';
+import { ENV_CONF } from './build-constants';
 
-import { localeMessageType, localeUrlType } from './locales/constants';
+import { localeMessageType, localeUrlType } from './locales/locales-constants';
 
 export const chunkArray = (arr: localeUrlType[], size: number) => arr
     .reduce((chunks: localeUrlType[][], el: localeUrlType, idx: number) => {
@@ -21,7 +21,7 @@ export const getLocaleTranslations = async (
     localesDir: string, locale: string, localesDataFilename: string,
 ): Promise<localeMessageType> => {
     const filePath = path.join(localesDir, locale, localesDataFilename);
-    const fileContent = await fs.promises.readFile(filePath, 'utf-8');
+    const fileContent = await fse.readFile(filePath, 'utf-8');
     return JSON.parse(fileContent);
 };
 

@@ -2,7 +2,8 @@ import React, { useContext, useState } from 'react';
 import { observer } from 'mobx-react';
 import cn from 'classnames';
 
-import { KEY_ENTER, REGEX_DOMAIN } from 'Common/constants';
+import { REGEX_DOMAIN } from 'Common/constants/common';
+import { KEY_ENTER } from 'Common/constants/keyboard';
 import { useKeyPress } from 'Common/hooks/useKeyPress';
 import { translator } from 'Common/translators/translator';
 import { theme } from 'Common/styles';

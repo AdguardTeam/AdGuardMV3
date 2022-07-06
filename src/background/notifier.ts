@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid';
-import { NOTIFIER_EVENTS } from 'Common/constants';
+import { NOTIFIER_EVENTS } from 'Common/constants/common';
 
 type Listener = {
     (...args: any[]): void

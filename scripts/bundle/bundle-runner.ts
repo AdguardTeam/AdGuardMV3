@@ -1,5 +1,5 @@
-/* eslint-disable no-console */
 import webpack, { Stats, Configuration } from 'webpack';
+import { cliLog } from '../cli-log';
 
 declare interface CallbackFunction<T> {
     (err?: Error, result?: T): any;
@@ -15,11 +15,11 @@ export const bundleRunner = (webpackConfig: Configuration, watch = false) => {
     return new Promise<void>((resolve, reject) => {
         run((err, stats) => {
             if (err) {
-                console.error(err.stack || err);
+                cliLog.error(err.stack || err.message || err.name);
                 // @ts-ignore
                 if (err.details) {
                     // @ts-ignore
-                    console.error(err.details);
+                    cliLog.error(err.details);
                 }
                 reject();
                 return;
@@ -31,7 +31,7 @@ export const bundleRunner = (webpackConfig: Configuration, watch = false) => {
             }
 
             if (stats.hasErrors()) {
-                console.log(stats.toString({
+                cliLog.info(stats.toString({
                     colors: true,
                     all: false,
                     errors: true,
@@ -42,7 +42,7 @@ export const bundleRunner = (webpackConfig: Configuration, watch = false) => {
                 return;
             }
 
-            console.log(stats.toString({
+            cliLog.info(stats.toString({
                 chunks: false, // Makes the build much quieter
                 colors: true, // Shows colors in the console
             }));

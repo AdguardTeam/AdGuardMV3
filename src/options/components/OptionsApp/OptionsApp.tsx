@@ -4,7 +4,7 @@ import { Route, Switch, HashRouter } from 'react-router-dom';
 
 import { Icons } from 'Common/components/ui';
 import { log } from 'Common/logger';
-import { NOTIFIER_EVENTS } from 'Common/constants';
+import { NOTIFIER_EVENTS } from 'Common/constants/common';
 import { createLongLivedConnection } from 'Common/messaging-utils';
 import { Sidebar } from 'Options/components/Sidebar';
 import { Notifications } from 'Options/components/Notifications';

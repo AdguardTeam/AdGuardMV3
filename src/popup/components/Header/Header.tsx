@@ -3,8 +3,8 @@ import { observer } from 'mobx-react';
 import { translator } from 'Common/translators/translator';
 import { Icon, Tooltip, IconId } from 'Common/components/ui';
 import { reactTranslator } from 'Common/translators/reactTranslator';
-import { SETTINGS_NAMES } from 'Common/settings-constants';
-import { PROTECTION_PAUSE_TIMEOUT_S, PROTECTION_PAUSE_TIMEOUT_MS, REPORT_SITE_BASE_URL } from 'Common/constants';
+import { PROTECTION_PAUSE_TIMEOUT_MS, PROTECTION_PAUSE_TIMEOUT_S, REPORT_SITE_BASE_URL } from 'Common/constants/common';
+import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
 import { sender } from '../../messaging/sender';
 import { rootStore } from '../../stores';
 
@@ -87,7 +87,12 @@ export const Header = observer(() => {
                         className={styles.item}
                         onClick={onPauseProtectionTimeoutClick}
                     >
-                        {reactTranslator.getMessage('popup_settings_pause_protection_temporarily', { count: PROTECTION_PAUSE_TIMEOUT_S })}
+                        {
+                            reactTranslator.getMessage(
+                                'popup_settings_pause_protection_temporarily',
+                                { count: PROTECTION_PAUSE_TIMEOUT_S },
+                            )
+                        }
                     </button>
                     {/* TODO implement feature AG-6836 */}
                     <button
@@ -95,7 +100,12 @@ export const Header = observer(() => {
                         className={styles.item}
                         disabled
                     >
-                        {reactTranslator.getMessage('popup_settings_disable_site_temporarily', { count: PROTECTION_PAUSE_TIMEOUT_S })}
+                        {
+                            reactTranslator.getMessage(
+                                'popup_settings_disable_site_temporarily',
+                                { count: PROTECTION_PAUSE_TIMEOUT_S },
+                            )
+                        }
                     </button>
                     <a
                         target="_blank"

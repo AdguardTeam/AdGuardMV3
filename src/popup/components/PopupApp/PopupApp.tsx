@@ -4,7 +4,7 @@ import cn from 'classnames';
 
 import { Icons } from 'Common/components/ui';
 import { log } from 'Common/logger';
-import { NOTIFIER_EVENTS } from 'Common/constants';
+import { NOTIFIER_EVENTS } from 'Common/constants/common';
 import { createLongLivedConnection } from 'Common/messaging-utils';
 import { rootStore } from '../../stores';
 import { Header } from '../Header';

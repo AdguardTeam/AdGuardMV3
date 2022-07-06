@@ -13,6 +13,7 @@ import { STEPS } from 'Options/stores/CustomFilterModalStore';
 import { AddCustomFilter } from 'Options/components/Filters/CustomFilterModal/AddCustomFilter';
 import { AddCustomFilterConfirm } from 'Options/components/Filters/CustomFilterModal/AddCustomFilterConfirm';
 import { RemoveCustomFilter } from 'Options/components/Filters/CustomFilterModal/RemoveCustomFilter';
+import { FilterInfo, Filter } from 'Common/constants/common';
 
 type CustomFilterModalProps = {
     isOpen: boolean,
@@ -64,7 +65,11 @@ export const CustomFilterModal = observer(({
                 await settingsStore.addCustomFilterByContent(
                     filterContent, filterTitle, urlToSubscribe,
                 );
-                uiStore.addNotification(translator.getMessage('options_custom_filter_add_notification', { name: filterTitle }));
+                const message = translator.getMessage(
+                    'options_custom_filter_add_notification',
+                    { name: filterTitle },
+                );
+                uiStore.addNotification(message);
             } catch (e) {
                 log.error(e);
             }
@@ -132,7 +137,9 @@ export const CustomFilterModal = observer(({
     const stepsMap = {
         [STEPS.ADD_CUSTOM_FILTER]: {
             icon: addCustomFilterError ? IconId.WARNING : null,
-            title: addCustomFilterError ? translator.getMessage('options_custom_filter_modal_retry_title') : translator.getMessage('options_custom_filter_modal_add_title'),
+            title: addCustomFilterError
+                ? translator.getMessage('options_custom_filter_modal_retry_title')
+                : translator.getMessage('options_custom_filter_modal_add_title'),
             input: false,
             component: () => (
                 <AddCustomFilter

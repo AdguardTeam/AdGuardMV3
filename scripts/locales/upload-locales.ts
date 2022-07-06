@@ -1,5 +1,5 @@
 import path from 'path';
-import fs from 'fs';
+import fse from 'fs-extra';
 import axios from 'axios';
 
 import {
@@ -29,7 +29,7 @@ const prepare = (locale: string): preparedDataType => {
     formData.append('language', LOCALE_PAIRS[locale] || locale);
     formData.append('filename', LOCALE_DATA_FILENAME);
     formData.append('project', PROJECT_ID);
-    formData.append('file', fs.createReadStream(path.join(LOCALES_DIR, `${locale}/${LOCALE_DATA_FILENAME}`)));
+    formData.append('file', fse.createReadStream(path.join(LOCALES_DIR, `${locale}/${LOCALE_DATA_FILENAME}`)));
     const headers: { [key: string]: string } = {
         ...formData.getHeaders(),
     };

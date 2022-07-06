@@ -9,9 +9,9 @@ import {
     LOCALES_RELATIVE_PATH,
     REQUIRED_LOCALES,
     THRESHOLD_PERCENTAGE,
+    translationResultType,
 } from './locales-constants';
 import { areArraysEqual, getLocaleTranslations } from '../helpers';
-import { translationResultType } from './constants';
 
 const LOCALES = Object.keys(LANGUAGES);
 const LOCALES_DIR = path.resolve(__dirname, LOCALES_RELATIVE_PATH);

@@ -3,7 +3,7 @@ import { reactTranslator } from 'Common/translators/reactTranslator';
 
 import { theme } from 'Common/styles';
 import cn from 'classnames';
-import { LEARN_MORE_URL } from 'Common/constants';
+import { LEARN_MORE_URL } from 'Common/constants/common';
 import styles from './About.module.pcss';
 
 export const About = () => {

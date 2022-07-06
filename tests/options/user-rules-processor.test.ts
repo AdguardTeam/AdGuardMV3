@@ -1,5 +1,5 @@
 import { UserRulesProcessor } from 'Options/user-rules-processor';
-import { UserRuleType } from 'Common/constants';
+import { UserRuleType } from 'Common/constants/common';
 
 describe('user rules processor', () => {
     it('processes user rules', () => {

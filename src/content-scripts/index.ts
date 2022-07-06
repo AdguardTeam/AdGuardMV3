@@ -1,5 +1,5 @@
 import '@adguard/tswebextension/mv3/content-script';
-import { MESSAGE_TYPES } from 'Common/constants';
+import { MESSAGE_TYPES } from 'Common/constants/common';
 
 // FIXME: Temporary construction for keeping alive service worker
 // via constantly standing message exchange

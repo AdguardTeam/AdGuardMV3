@@ -1,4 +1,4 @@
-import { MESSAGE_TYPES } from 'Common/constants';
+import { MESSAGE_TYPES } from 'Common/constants/common';
 import { sendMessage } from 'Common/helpers';
 
 interface Response {

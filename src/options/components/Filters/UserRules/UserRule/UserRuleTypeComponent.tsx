@@ -2,7 +2,7 @@ import React from 'react';
 import cn from 'classnames';
 
 import { translator } from 'Common/translators/translator';
-import { UserRuleType } from 'Common/constants';
+import { UserRuleType } from 'Common/constants/common';
 
 import styles from 'Options/components/Filters/UserRules/UserRule/UserRuleStatus.module.pcss';
 

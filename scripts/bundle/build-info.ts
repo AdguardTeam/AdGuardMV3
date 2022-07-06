@@ -1,6 +1,6 @@
 import path from 'path';
-import { promises as fsp } from 'fs';
-import { BUILD_PATH } from '../constants';
+import fse from 'fs-extra';
+import { BUILD_PATH } from '../build-constants';
 import packageJson from '../../package.json';
 import { getEnvConf } from '../helpers';
 
@@ -17,5 +17,5 @@ const filePath = path.join(BUILD_PATH, OUTPUT_PATH, FILE_NAME);
  * @returns {Promise<void>}
  */
 export const buildInfo = async () => {
-    await fsp.writeFile(filePath, content, 'utf-8');
+    await fse.writeFile(filePath, content, 'utf-8');
 };

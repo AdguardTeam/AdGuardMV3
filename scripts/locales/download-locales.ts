@@ -3,7 +3,7 @@
  */
 import axios from 'axios';
 import path from 'path';
-import fs from 'fs';
+import fse from 'fs-extra';
 import { cliLog } from '../cli-log';
 
 import {
@@ -15,9 +15,11 @@ import {
     LOCALES_RELATIVE_PATH,
     PERSISTENT_MESSAGES,
     PROJECT_ID,
+    localeDataType,
+    localeMessageType,
+    localeUrlType,
 } from './locales-constants';
 import { chunkArray, getLocaleTranslations, getUrlWithQueryString } from '../helpers';
-import { localeDataType, localeMessageType, localeUrlType } from './constants';
 
 const LOCALES_DOWNLOAD_URL = `${API_URL}/download`;
 const LOCALES_DIR = path.resolve(__dirname, LOCALES_RELATIVE_PATH);
@@ -89,7 +91,7 @@ const downloadLocales = async (locales: string[]) => {
 
 const saveFile = async (filePath: string, data: Buffer) => {
     try {
-        await fs.promises.writeFile(filePath, data);
+        await fse.writeFile(filePath, data);
     } catch (e: any) {
         cliLog.error(`Was unable do save data in path: ${filePath}. Error: ${e.message}`);
     }
@@ -100,9 +102,7 @@ const saveLocales = async (localeDataPairs: localeDataType[]) => {
         const { locale, data } = localeDataPair;
         const localeFilePath = path.join(LOCALES_DIR, locale, LOCALE_DATA_FILENAME);
         const localeDirPath = path.join(LOCALES_DIR, locale);
-        if (!fs.existsSync(localeDirPath)) {
-            fs.mkdirSync(localeDirPath);
-        }
+        fse.ensureDirSync(localeDirPath);
         return saveFile(localeFilePath, data);
     });
 
@@ -139,10 +139,10 @@ const validateRequiredFields = async () => {
     );
     const promises = LOCALES.map(async (locale) => {
         const pathToLocale = path.join(LOCALES_DIR, locale, LOCALE_DATA_FILENAME);
-        const messages = JSON.parse(await fs.promises.readFile(pathToLocale, 'utf-8'));
+        const messages = JSON.parse(await fse.promises.readFile(pathToLocale, 'utf-8'));
         const checkedMessages = checkRequiredFields(locale, messages, baseMessages);
         const checkedMessagesString = JSON.stringify(checkedMessages, null, 4).replace(/\//g, '\\/');
-        await fs.promises.writeFile(pathToLocale, checkedMessagesString);
+        await fse.writeFile(pathToLocale, checkedMessagesString);
     });
     await Promise.all(promises).catch((e) => {
         cliLog.error(e);

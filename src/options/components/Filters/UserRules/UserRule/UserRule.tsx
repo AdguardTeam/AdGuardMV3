@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 import { UserRuleTypeComponent } from 'Options/components/Filters/UserRules/UserRule/UserRuleTypeComponent';
-import { UserRuleType } from 'Common/constants';
+import { UserRuleType } from 'Common/constants/common';
 
 import styles from 'Options/components/Filters/UserRules/UserRule/UserRule.module.pcss';
 import { rootStore } from 'Options/stores';

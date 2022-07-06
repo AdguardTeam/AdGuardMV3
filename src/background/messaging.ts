@@ -1,14 +1,14 @@
 import { RuleConverter } from '@adguard/tsurlfilter';
 
 import {
-    Message,
     MESSAGE_TYPES,
     OptionsData,
     PopupData,
-    CATEGORIES,
-} from 'Common/constants';
+    Message,
+} from 'Common/constants/common';
+import { CATEGORIES } from 'Common/constants/filters';
+import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
 import { log } from 'Common/logger';
-import { SETTINGS_NAMES } from 'Common/settings-constants';
 import { tabUtils } from 'Common/tab-utils';
 import { settings } from './settings';
 import { notifier } from './notifier';

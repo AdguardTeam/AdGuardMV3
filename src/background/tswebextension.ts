@@ -51,7 +51,8 @@ class TsWebExtensionWrapper {
                     content: r.rules,
                 })),
             allowlist: [],
-            userrules: (await userRules.getRules()).split('\n'), // TODO: maybe getRules should return array instead of string
+            // TODO: maybe getRules should return array instead of string
+            userrules: (await userRules.getRules()).split('\n'),
             verbose: true,
         };
     };

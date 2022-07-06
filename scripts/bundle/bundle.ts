@@ -1,15 +1,13 @@
-/* eslint-disable no-console,no-restricted-syntax,no-await-in-loop */
 import { program } from 'commander';
+import { copyWar } from '@adguard/tswebextension/cli';
 
 import { buildInfo } from './build-info';
 import { bundleRunner } from './bundle-runner';
-import { copyExternals } from './copy-external';
 import { getWebpackConfig } from './webpack-config';
-import { BROWSERS, BUILD_ENVS } from './constants';
+import { BROWSERS, BUILD_ENVS } from '../build-constants';
+import { cliLog } from '../cli-log';
 
-interface Task {
-    (options: TaskOptions): Promise<void> | void
-}
+type Task = (options: TaskOptions) => Promise<void> | void;
 
 interface TaskOptions {
     watch?: boolean
@@ -17,38 +15,40 @@ interface TaskOptions {
 
 export const bundle = () => {
     const bundleChrome: Task = (options: TaskOptions) => {
+        // TODO: Check usage of redirects.yml in the 'src/assets/libs/scriptlets'
+        copyWar('src/web-accessible-resources');
         const webpackConfig = getWebpackConfig(BROWSERS.CHROME);
         return bundleRunner(webpackConfig, options.watch);
     };
 
     const bundleEdge: Task = (options: TaskOptions) => {
+        copyWar('src/web-accessible-resources');
         const webpackConfig = getWebpackConfig(BROWSERS.EDGE);
         return bundleRunner(webpackConfig, options.watch);
     };
 
     const devPlan = [
-        copyExternals,
         bundleChrome,
         bundleEdge,
         buildInfo,
     ];
 
     const betaPlan = [
-        copyExternals,
         bundleChrome,
         bundleEdge,
         buildInfo,
     ];
 
     const releasePlan = [
-        copyExternals,
         bundleChrome,
         bundleEdge,
         buildInfo,
     ];
 
     const runBuild = async (tasks: Task[], watch: boolean) => {
+        // eslint-disable-next-line no-restricted-syntax
         for (const task of tasks) {
+            // eslint-disable-next-line no-await-in-loop
             await task({ watch });
         }
     };
@@ -76,7 +76,7 @@ export const bundle = () => {
         try {
             await mainBuild(watch);
         } catch (e) {
-            console.error(e);
+            cliLog.error(JSON.stringify(e));
             process.exit(1);
         }
     };
@@ -85,7 +85,7 @@ export const bundle = () => {
         try {
             await bundleChrome({ watch });
         } catch (e) {
-            console.error(e);
+            cliLog.error(JSON.stringify(e));
             process.exit(1);
         }
     };
@@ -94,7 +94,7 @@ export const bundle = () => {
         try {
             await bundleEdge({ watch });
         } catch (e) {
-            console.error(e);
+            cliLog.error(JSON.stringify(e));
             process.exit(1);
         }
     };

@@ -6,8 +6,8 @@ import {
     observable,
 } from 'mobx';
 
-import { OPTION_SETTINGS_NAMES, SETTINGS_NAMES } from 'Common/settings-constants';
-import { CategoriesType } from 'Common/constants';
+import { Filter, CategoriesType } from 'Common/constants/common';
+import { OPTION_SETTINGS_NAMES, SETTINGS_NAMES } from 'Common/constants/settings-constants';
 import { log } from 'Common/logger';
 import type { RootStore } from './RootStore';
 import { sender } from '../messaging/sender';
