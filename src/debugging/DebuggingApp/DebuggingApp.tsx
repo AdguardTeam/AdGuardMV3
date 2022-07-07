@@ -3,9 +3,9 @@ import cn from 'classnames';
 
 import { translator } from 'Common/translators/translator';
 import { ADGUARD_FILTERS_IDS } from 'Common/constants/filters';
+import { RULESET_NAME } from 'Common/constants/common';
 
 import { COMMON_FILTERS_DIR } from '../../background/backend';
-import { RULESET_NAME } from '../../../scripts/build-constants';
 
 import style from './debugging.module.pcss';
 
