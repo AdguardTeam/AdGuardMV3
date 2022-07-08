@@ -51,6 +51,11 @@ const startConvert = (browser: string) => {
     fse.readdirSync(filtersDir).forEach((filePath) => {
         cliLog.info(`Convert ${filePath}...`);
 
+        if (filePath.endsWith('.map')) {
+            cliLog.info(`Convert ${filePath} skipped - it is sourcemap`);
+            return;
+        }
+
         if (filePath.indexOf(FILTERS_I18N_FILENAME) !== -1) {
             return;
         }
@@ -59,7 +64,7 @@ const startConvert = (browser: string) => {
         if (rulesetIndex) {
             const data = fse.readFileSync(`${filtersDir}/${filePath}`, { encoding: 'utf-8' });
             const list = new StringRuleList(+rulesetIndex, data);
-            const { declarativeRules } = converter.convert(
+            const { declarativeRules, convertedSourceMap } = converter.convert(
                 list,
                 { resourcesPath: '/web-accessible-resources/redirects' },
             );
@@ -68,6 +73,14 @@ const startConvert = (browser: string) => {
             fse.writeFileSync(
                 `${declarativeFiltersDir}/${fileDeclarative}`,
                 JSON.stringify(declarativeRules, null, '\t'),
+            );
+
+            const sourceMapPath = filePath
+                .replace('/declarative', '')
+                .replace('.txt', '.json.map');
+            fse.writeFileSync(
+                `${filtersDir}/${sourceMapPath}`,
+                JSON.stringify(Array.from(convertedSourceMap)),
             );
 
             cliLog.info(`Convert ${filePath} done`);

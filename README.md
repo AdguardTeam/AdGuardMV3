@@ -65,14 +65,14 @@ Filters currently in use are placed in the path 'src/filters/chrome'
 For change filters list, go to 'src/common/constants/filters.ts'
 
 For a single test:
-1. Run `yarn filters сonvert`
+1. Run `yarn filters convert`
 2. Run `yarn dev chrome`
-3. Reload extension on the `browser://extensions/`
+3. Reload extension on the `chrome://extensions/`
 
 If you want to continuous edit&test filters after that, you can do different:
 1. Run `yarn dev chrome --watch`
 2. In second terminal, but the same root project directory run `yarn filters conver` right after you done with editing filters and want to test results
-3. Reload extension on the `browser://extensions/`
+3. Reload extension on the `chrome://extensions/`
 
 ### List of id's and name's of static filters:
 1. Russian
@@ -93,12 +93,12 @@ Do the following:
 1. `yarn filters update`
 2. `yarn filters convert`
 3. `yarn dev chrome`
-3. Reload extension on the `browser://extensions/`
+3. Reload extension on the `chrome://extensions/`
 
 ## Debugging declarative rules
 1. Clone this repository
-2. Run `yarn dev chrome --watch`
-3. Go to `browser://extensions/`
+2. Run `yarn dev chrome --watch` (or `beta`/`release` instead of `dev`)
+3. Go to `chrome://extensions/` and install extension from folder `build`
 3.1. Enable Developer's mode in the right top corner
 3.2. Install unpacked extension
 4. After install open some website
@@ -107,5 +107,5 @@ Do the following:
 
 
 ## Dependencies
-1. `nodejs` - https://nodejs.org/en/download/
+1. `nodejs` - https://nodejs.org/en/download/, **only 16 version**
 2. `yarn`, nodejs packages manager - https://classic.yarnpkg.com/lang/en/docs/install

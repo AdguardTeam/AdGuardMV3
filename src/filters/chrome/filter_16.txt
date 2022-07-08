@@ -1,8 +1,8 @@
-! Checksum: RqQKho5g8cqiRGAuZ/yOfQ
+! Checksum: j+3Ig10E0Tus2Cj8eOZlnQ
 ! Title: AdGuard French filter
 ! Description: Liste FR + AdGuard French filter. Filter list that specifically removes ads on websites in French language.
-! Version: 2.0.33.76
-! TimeUpdated: 2022-07-05T13:30:53+00:00
+! Version: 2.0.33.77
+! TimeUpdated: 2022-07-06T14:30:53+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -127,6 +127,11 @@ capital.fr#@#.plainAd
 !
 !
 !
+! pianoweb.fr
+pianoweb.fr#%#//scriptlet('set-cookie', 'warnadb', '1')
+pianoweb.fr#%#//scriptlet('set-constant', 'noPub', '1')
+pianoweb.fr#@#.AdvertContainer
+pianoweb.fr###message_antipub
 ! https://github.com/AdguardTeam/AdguardFilters/issues/118024
 @@||parlons-basket.com/wp-content/*/js/prebid-ads.js
 parlons-basket.com#%#//scriptlet("set-constant", "canRunAds", "true")
@@ -764,6 +769,7 @@ all-stadium.net#$##layer2 {top:50px!important; left:950px!important;}
 /^(?!.*(bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yandex.|yastatic.net|ytimg.com|zencdn.net|player|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com)).*$/$third-party,script,domain=scan-fr.cc
 !
 !
+pianoweb.fr##.google-pub
 torrent911.org###vpnvpn
 ouest-france.fr##div[id*="taboola"]
 ouest-france.fr##div.pub[id^="pub_"]

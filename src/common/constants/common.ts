@@ -64,6 +64,7 @@ export enum MESSAGE_TYPES {
     ADD_FILTERING_SUBSCRIPTION = 'ADD_FILTERING_SUBSCRIPTION',
     GET_USER_RULES = 'GET_USER_RULES',
     SET_USER_RULES = 'SET_USER_RULES',
+    GET_DEBUG_INFO = 'GET_DEBUG_INFO',
 
     // FIXME: Remove
     PING = 'PING',
@@ -93,6 +94,8 @@ export const REPORT_SITE_BASE_URL = 'https://reports.adguard.com/new_issue.html'
 export const LEARN_MORE_URL = 'https://adguard.com/forward.html?action=learn_more&from=options_screen&app=browser_extension_mv3';
 
 export const MV3_URL = 'https://adguard.com/forward.html?action=mv3_about&from=popup&app=browser_extension_mv3';
+
+export const REPO_URL = 'https://adguard.com/forward.html?action=repo&from=debugging&app=browser_extension_mv3';
 
 /* GLOBAL FILTERING */
 export const MS_IN_SECOND = 10 ** 3;

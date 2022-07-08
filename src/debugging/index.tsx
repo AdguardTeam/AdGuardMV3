@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { log } from 'Common/logger';
-import { DebuggingApp } from './DebuggingApp';
+import { DebuggingInfo } from './DebuggingInfo';
 
 try {
     ReactDOM.render(
-        <DebuggingApp />,
+        <DebuggingInfo />,
         document.getElementById('root'),
     );
 } catch (error) {

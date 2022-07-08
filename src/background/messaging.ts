@@ -13,7 +13,7 @@ import { tabUtils } from 'Common/tab-utils';
 import { settings } from './settings';
 import { notifier } from './notifier';
 import { protectionPause } from './protectionPause';
-import { filters } from './filters';
+import { filters, CUSTOM_FILTERS_START_ID } from './filters';
 import { backend } from './backend';
 import { userRules } from './userRules';
 import { tsWebExtensionWrapper } from './tswebextension';
@@ -175,6 +175,15 @@ export const extensionMessageHandler = async (
         case MESSAGE_TYPES.PING: {
             break;
         }
+        case MESSAGE_TYPES.GET_DEBUG_INFO: {
+            return {
+                convertedSourceMap: Array.from(tsWebExtensionWrapper.convertedSourceMap),
+                customFilters: filters.rules.filter(({ id }) => id >= CUSTOM_FILTERS_START_ID),
+                userRules: await userRules.getRules(),
+                filtersInfo: filters.filters,
+                currentDeclarativeRules: await chrome.declarativeNetRequest.getDynamicRules(),
+            };
+        }
         default: {
             throw new Error(`No message handler for type: ${type}`);
         }
@@ -215,39 +224,52 @@ const longLivedMessageHandler = (port: chrome.runtime.Port) => {
 
 // Singleton handler
 const apiMessageHandler = tsWebExtensionWrapper.getMessageHandler();
-let inited = false;
+let initialized = false;
 let waitForInit: Promise<void> | undefined;
 
-// FIXME fix any
+/**
+ * Initialize and wait for initialization of the service worker and its modules
+ */
+export const initExtension = async (message?: any) => {
+    const wait = async () => {
+        await waitForInit;
+        waitForInit = undefined;
+
+        initialized = true;
+    };
+
+    if (waitForInit) {
+        log.debug('[messageHandlerWrapper]: waiting for init', message);
+        await wait();
+    }
+
+    if (!initialized) {
+        log.debug('[messageHandlerWrapper]: start init', message);
+        const innerInit = async () => {
+            // BUG: filters should initialized before userrules,
+            // because otherwise filters will be initialize with
+            // one filter from storage - userrules
+            await settings.init();
+            await filters.init();
+            await userRules.init();
+            await tsWebExtensionWrapper.start();
+        };
+        waitForInit = innerInit();
+        await wait();
+    }
+};
+
+/**
+ * General message handler, singleton
+ */
 const messageHandlerWrapper = (
+    // FIXME: fix any
     message: any,
     sender: any,
     sendResponse: (response?: any) => void,
 ) => {
     (async () => {
-        if (waitForInit) {
-            log.debug('[messageHandlerWrapper]: waiting for init', message);
-            await waitForInit;
-            waitForInit = undefined;
-        }
-
-        if (!inited) {
-            log.debug('[messageHandlerWrapper]: start init', message);
-            const innerInit = async () => {
-                // BUG: filters should initialized before userrules,
-                // because otherwise filters will be initialize with
-                // one filter from storage - userrules
-                await settings.init();
-                await filters.init();
-                await userRules.init();
-                await tsWebExtensionWrapper.start();
-            };
-            waitForInit = innerInit();
-            await waitForInit;
-            waitForInit = undefined;
-
-            inited = true;
-        }
+        await initExtension();
 
         log.debug('[messageHandlerWrapper]: handle message', message);
 

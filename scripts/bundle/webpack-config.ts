@@ -32,7 +32,8 @@ const updateManifest = (isDev: boolean, content: Buffer, browser: string) => {
     const declarativeFiltersDir = `${DECLARATIVE_FILTERS_DIR.replace('%browser%', browser)}`;
 
     if (fse.existsSync(declarativeFiltersDir)) {
-        const nameList = fse.readdirSync(declarativeFiltersDir).map((file) => file);
+        const nameList = fse.readdirSync(declarativeFiltersDir)
+            .filter((filePath) => filePath && !filePath.endsWith('.map'));
 
         const rules = {
             rule_resources: nameList.map((name: string) => {

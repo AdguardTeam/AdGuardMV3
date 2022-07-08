@@ -25,7 +25,7 @@ class TsWebExtensionWrapper {
     }
 
     private getConfiguration = async (): Promise<Configuration> => {
-        const enabledFilters = await filters.getEnabledRules();
+        const rules = await filters.getEnabledRules();
 
         return {
             settings: {
@@ -45,7 +45,7 @@ class TsWebExtensionWrapper {
                     selfDestructFirstPartyCookiesTime: 0,
                 },
             },
-            filters: enabledFilters
+            filters: rules
                 .map((r) => ({
                     filterId: r.id,
                     content: r.rules,
@@ -59,6 +59,10 @@ class TsWebExtensionWrapper {
 
     getMessageHandler() {
         return this.tsWebExtension.getMessageHandler();
+    }
+
+    get convertedSourceMap() {
+        return this.tsWebExtension.convertedSourceMap;
     }
 }
 

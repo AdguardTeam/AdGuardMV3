@@ -11,7 +11,7 @@ import { RULES_STORAGE_KEY, ENABLED_FILTERS_IDS } from 'Common/constants/storage
 import { backend } from './backend';
 import { storage } from './storage';
 
-const CUSTOM_FILTERS_START_ID = 1000;
+export const CUSTOM_FILTERS_START_ID = 1000;
 
 // Titles and descriptions are set to English by default.
 // TODO: Translations with watch for change language
@@ -20,7 +20,7 @@ const DEFAULT_FILTERS: Filter[] = [
     {
         id: FILTER_RULESET[RulesetType.RULESET_1].id,
         enabled: FILTER_RULESET[RulesetType.RULESET_1].enabled,
-        title: 'AdGuard Russian filter',
+        title: 'Russian',
         description: 'Filter that enables ad blocking on websites in the Russian language.',
         groupId: FiltersGroupId.LANGUAGES,
     },
@@ -50,7 +50,7 @@ const DEFAULT_FILTERS: Filter[] = [
     {
         id: FILTER_RULESET[RulesetType.RULESET_6].id,
         enabled: FILTER_RULESET[RulesetType.RULESET_6].enabled,
-        title: 'AdGuard German filter',
+        title: 'German',
         // eslint-disable-next-line max-len
         description: 'EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in the German language.',
         groupId: FiltersGroupId.LANGUAGES,
@@ -58,14 +58,14 @@ const DEFAULT_FILTERS: Filter[] = [
     {
         id: FILTER_RULESET[RulesetType.RULESET_7].id,
         enabled: FILTER_RULESET[RulesetType.RULESET_7].enabled,
-        title: 'AdGuard Japanese filter',
+        title: 'Japanese',
         description: 'Filter that enables ad blocking on websites in the Japanese language.',
         groupId: FiltersGroupId.LANGUAGES,
     },
     {
         id: FILTER_RULESET[RulesetType.RULESET_8].id,
         enabled: FILTER_RULESET[RulesetType.RULESET_8].enabled,
-        title: 'AdGuard Dutch filter',
+        title: 'Dutch',
         // eslint-disable-next-line max-len
         description: 'EasyList Dutch + AdGuard Dutch filter. Filter list that specifically removes ads on websites in the Dutch language.',
         groupId: FiltersGroupId.LANGUAGES,
@@ -73,14 +73,14 @@ const DEFAULT_FILTERS: Filter[] = [
     {
         id: FILTER_RULESET[RulesetType.RULESET_9].id,
         enabled: FILTER_RULESET[RulesetType.RULESET_9].enabled,
-        title: 'AdGuard Spanish/Portuguese filter',
+        title: 'Spanish/Portuguese',
         description: 'Filter list that specifically removes ads on websites in the Spanish and Portuguese languages.',
         groupId: FiltersGroupId.LANGUAGES,
     },
     {
         id: FILTER_RULESET[RulesetType.RULESET_13].id,
         enabled: FILTER_RULESET[RulesetType.RULESET_13].enabled,
-        title: 'AdGuard Turkish filter',
+        title: 'Turkish',
         description: 'Filter list that specifically removes ads on websites in the Turkish language.',
         groupId: FiltersGroupId.LANGUAGES,
     },
@@ -95,7 +95,7 @@ const DEFAULT_FILTERS: Filter[] = [
     {
         id: FILTER_RULESET[RulesetType.RULESET_16].id,
         enabled: FILTER_RULESET[RulesetType.RULESET_16].enabled,
-        title: 'AdGuard French filter',
+        title: 'French',
         // eslint-disable-next-line max-len
         description: 'Liste FR + AdGuard French filter. Filter list that specifically removes ads on websites in the French language.',
         groupId: FiltersGroupId.LANGUAGES,
@@ -103,7 +103,7 @@ const DEFAULT_FILTERS: Filter[] = [
     {
         id: FILTER_RULESET[RulesetType.RULESET_224].id,
         enabled: FILTER_RULESET[RulesetType.RULESET_224].enabled,
-        title: 'AdGuard Chinese filter',
+        title: 'Chinese',
         // eslint-disable-next-line max-len
         description: 'EasyList China + AdGuard Chinese filter. Filter list that specifically removes ads on websites in Chinese language.',
         groupId: FiltersGroupId.LANGUAGES,
