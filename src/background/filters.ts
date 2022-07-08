@@ -120,14 +120,17 @@ class Filters {
     enableFiltersIds: number[] = [];
 
     async init() {
-        const promises = ADGUARD_FILTERS_IDS.map(({ id }) => backend.downloadFilterRules(id));
-        const result = await Promise.all(promises);
+        const getRulesFromFiles = async () => {
+            const promises = ADGUARD_FILTERS_IDS.map(({ id }) => backend.downloadFilterRules(id));
+            const result = await Promise.all(promises);
+            return result;
+        };
 
         // TODO add to storage only those rules that applied by the content script;
         // Read the rules from the storages for each download background sw,
         // if there are no rules, then get the rules from the files;
         // If the rules have changed, get them (on the first lines + check time)
-        this.rules = await this.getRulesFromStorage() || result;
+        this.rules = await this.getRulesFromStorage() || await getRulesFromFiles();
         await storage.set(RULES_STORAGE_KEY, this.rules);
 
         this.filters = await this.getFromStorage();
