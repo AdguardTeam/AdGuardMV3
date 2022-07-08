@@ -16,12 +16,12 @@ export const prefs = (() => {
         get ICONS() {
             return lazyGet(Prefs, 'ICONS', () => ({
                 ENABLED: {
-                    19: chrome.runtime.getURL('assets/icons/green-19.png'),
-                    38: chrome.runtime.getURL('assets/icons/green-38.png'),
+                    19: chrome.runtime.getURL('assets/icons/enabled-19.png'),
+                    38: chrome.runtime.getURL('assets/icons/enabled-38.png'),
                 },
                 DISABLED: {
-                    19: chrome.runtime.getURL('assets/icons/gray-19.png'),
-                    38: chrome.runtime.getURL('assets/icons/gray-38.png'),
+                    19: chrome.runtime.getURL('assets/icons/disabled-19.png'),
+                    38: chrome.runtime.getURL('assets/icons/disabled-38.png'),
                 },
             }));
         },
