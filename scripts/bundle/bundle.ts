@@ -14,32 +14,36 @@ interface TaskOptions {
 }
 
 export const bundle = () => {
+    const copyExternal: Task = () => {
+        return copyWar('src/web-accessible-resources');
+    };
+
     const bundleChrome: Task = (options: TaskOptions) => {
-        // TODO: Check usage of redirects.yml in the 'src/assets/libs/scriptlets'
-        copyWar('src/web-accessible-resources');
         const webpackConfig = getWebpackConfig(BROWSERS.CHROME);
         return bundleRunner(webpackConfig, options.watch);
     };
 
     const bundleEdge: Task = (options: TaskOptions) => {
-        copyWar('src/web-accessible-resources');
         const webpackConfig = getWebpackConfig(BROWSERS.EDGE);
         return bundleRunner(webpackConfig, options.watch);
     };
 
     const devPlan = [
+        copyExternal,
         bundleChrome,
         bundleEdge,
         buildInfo,
     ];
 
     const betaPlan = [
+        copyExternal,
         bundleChrome,
         bundleEdge,
         buildInfo,
     ];
 
     const releasePlan = [
+        copyExternal,
         bundleChrome,
         bundleEdge,
         buildInfo,

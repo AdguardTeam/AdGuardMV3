@@ -12,6 +12,7 @@ import { Switcher } from '../Switcher';
 import { PageInfo } from '../PageInfo';
 import { Footer } from '../Footer';
 import { Wizard } from '../Wizard';
+import { Loader } from '../Loader';
 import { DisabledProtectionScreen } from './DisabledProtectionScreen';
 
 import styles from './PopupApp.module.pcss';
@@ -60,7 +61,12 @@ export const PopupApp = observer(() => {
     }, []);
 
     if (!popupDataReady) {
-        return <div className={styles.popup} />;
+        return (
+            <div className={styles.popup}>
+                <Icons />
+                <Loader />
+            </div>
+        );
     }
 
     if (wizardEnabled) {
