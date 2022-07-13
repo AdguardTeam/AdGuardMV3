@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { REPO_URL } from 'Common/constants/common';
+import { REPO } from 'Common/constants/urls';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 
 import { DebuggingApp } from '../DebuggingApp';
@@ -16,7 +16,7 @@ export const DebuggingInfo = () => {
                 {reactTranslator.getMessage('debugging_info', {
                     'link-to-repo': (s: string) => (
                         <a
-                            href={REPO_URL}
+                            href={REPO}
                             target="_blank"
                             rel="noreferrer"
                         >

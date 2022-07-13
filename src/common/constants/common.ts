@@ -87,16 +87,6 @@ export enum NOTIFIER_EVENTS {
     SET_RULES = 'event.set.rules',
 }
 
-export const REPORT_SITE_BASE_URL = 'https://reports.adguard.com/new_issue.html';
-
-// TODO add correct url when the product page is implemented
-// eslint-disable-next-line max-len
-export const LEARN_MORE_URL = 'https://adguard.com/forward.html?action=learn_more&from=options_screen&app=browser_extension_mv3';
-
-export const MV3_URL = 'https://adguard.com/forward.html?action=mv3_about&from=popup&app=browser_extension_mv3';
-
-export const REPO_URL = 'https://adguard.com/forward.html?action=repo&from=debugging&app=browser_extension_mv3';
-
 /* GLOBAL FILTERING */
 export const MS_IN_SECOND = 10 ** 3;
 export const PROTECTION_PAUSE_TIMEOUT_S = 30;

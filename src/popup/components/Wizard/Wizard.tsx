@@ -4,7 +4,7 @@ import cn from 'classnames';
 
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { theme } from 'Common/styles';
-import { LEARN_MORE_URL } from 'Common/constants/common';
+import { LEARN_MORE } from 'Common/constants/urls';
 import { rootStore } from '../../stores';
 
 import styles from './wizard.module.pcss';
@@ -30,7 +30,7 @@ export const Wizard = observer(() => {
             <div className={styles.header}>
                 <a
                     className={styles.link}
-                    href={LEARN_MORE_URL}
+                    href={LEARN_MORE}
                     target="_blank"
                     rel="noreferrer"
                 >

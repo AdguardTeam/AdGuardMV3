@@ -5,7 +5,7 @@ import { observer } from 'mobx-react';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { theme } from 'Common/styles';
 import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
-import { LEARN_MORE_URL } from 'Common/constants/common';
+import { LEARN_MORE } from 'Common/constants/urls';
 import styles from './Notice.module.pcss';
 import { rootStore } from '../../stores';
 
@@ -27,7 +27,7 @@ const Notice = observer(() => {
             <hr className={cn(theme.common.hr, styles.noticeHr)} />
             <div className={styles.notice}>{reactTranslator.getMessage('options_notice_program')}</div>
             <a
-                href={LEARN_MORE_URL}
+                href={LEARN_MORE}
                 className={cn(theme.common.link, styles.compareLink)}
                 rel="noopener noreferrer"
                 target="_blank"

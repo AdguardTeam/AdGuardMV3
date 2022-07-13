@@ -1,9 +1,5 @@
-import {
-    REPORT_SITE_BASE_URL,
-    MESSAGE_TYPES,
-    Message,
-    MessageType,
-} from 'Common/constants/common';
+import { MESSAGE_TYPES, Message, MessageType } from 'Common/constants/common';
+import { REPORT_SITE_BASE } from 'Common/constants/urls';
 import { log } from 'Common/logger';
 import { prefs } from 'Common/prefs';
 import { getUrlWithQueryString } from 'Common/helpers';
@@ -69,7 +65,7 @@ class TabUtils {
             filters: filtersIds.join('.'),
         };
 
-        const abuseUrl = getUrlWithQueryString(REPORT_SITE_BASE_URL, urlParams);
+        const abuseUrl = getUrlWithQueryString(REPORT_SITE_BASE, urlParams);
 
         return this.openPage(abuseUrl);
     };
