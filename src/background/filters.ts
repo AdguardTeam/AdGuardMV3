@@ -150,8 +150,10 @@ class Filters {
         return arrayToMap(arr);
     };
 
-    /** Returns a list of the newest filters (from the storage or from the extension bundle)
-     * with their IDs and contents */
+    /**
+     * Returns a list of the newest filters (from the storage or from the extension bundle)
+     * with their IDs and contents
+     */
     private getRules = async (): Promise<Rules[]> => {
         const filtersTimestamps = await this.getFiltersTimestamps();
         const rules = await storage.get<Rules[]>(RULES_STORAGE_KEY);
