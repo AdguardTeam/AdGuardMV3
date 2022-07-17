@@ -12,14 +12,14 @@ import fse from 'fs-extra';
 import { FILTER_RULESET, RulesetType } from '../../src/common/constants/filters';
 import type { Browser, BuildEnv } from '../build-constants';
 import { BROWSERS, BUILD_ENVS, RULESET_NAME } from '../build-constants';
+import CollectFiltersVersionsPlugin from './collect-filters-versions-plugin';
 
 const packageJson = require('../../package.json');
 const tsconfig = require('../../tsconfig.json');
 
 const APP_DIR = path.resolve(__dirname, '../../src');
-const DECLARATIVE_FILTERS_DIR = `${APP_DIR}/filters/%browser%/declarative`;
 
-const updateManifest = (isDev: boolean, content: Buffer, browser: string) => {
+const updateManifest = (isDev: boolean, content: Buffer, filtersDir: string): string => {
     const manifest = JSON.parse(content.toString());
 
     manifest.version = packageJson.version;
@@ -29,10 +29,8 @@ const updateManifest = (isDev: boolean, content: Buffer, browser: string) => {
         manifest.content_security_policy = { extension_pages: "script-src 'self'; object-src 'self'" };
     }
 
-    const declarativeFiltersDir = `${DECLARATIVE_FILTERS_DIR.replace('%browser%', browser)}`;
-
-    if (fse.existsSync(declarativeFiltersDir)) {
-        const nameList = fse.readdirSync(declarativeFiltersDir)
+    if (fse.existsSync(filtersDir)) {
+        const nameList = fse.readdirSync(filtersDir)
             .filter((filePath) => filePath && !filePath.endsWith('.map'));
 
         const rules = {
@@ -72,6 +70,7 @@ export const getWebpackConfig = (browser: Browser = BROWSERS.CHROME): Configurat
 
     const BUILD_PATH = '../../build';
     const SRC_PATH = '../../src';
+    const FILTERS_PATH = `filters/${browser}`;
     const OUTPUT_PATH = buildEnv;
     const BACKGROUND_PATH = path.resolve(__dirname, SRC_PATH, 'background');
     const POPUP_PATH = path.resolve(__dirname, SRC_PATH, 'popup');
@@ -80,6 +79,9 @@ export const getWebpackConfig = (browser: Browser = BROWSERS.CHROME): Configurat
     const DEBUGGING_PATH = path.resolve(__dirname, SRC_PATH, 'debugging');
     const CONTENT_SCRIPTS_PATH = path.resolve(__dirname, SRC_PATH, 'content-scripts');
     const ASSISTANT_PATH = path.resolve(CONTENT_SCRIPTS_PATH, 'assistant');
+    const OUTPUT_DIR = path.resolve(__dirname, BUILD_PATH, OUTPUT_PATH, browser);
+    const FILTERS_DIR = path.resolve(__dirname, SRC_PATH, FILTERS_PATH);
+    const OUTPUT_FILTERS_DECLARATIVE_DIR = path.resolve(OUTPUT_DIR, 'filters/declarative/');
 
     const plugins: WebpackPluginInstance[] = [
         new ForkTsCheckerWebpackPlugin(),
@@ -88,7 +90,11 @@ export const getWebpackConfig = (browser: Browser = BROWSERS.CHROME): Configurat
                 {
                     from: 'manifest.common.json',
                     to: 'manifest.json',
-                    transform: (content) => updateManifest(IS_DEV, content, browser),
+                    transform: (content) => updateManifest(
+                        IS_DEV,
+                        content,
+                        OUTPUT_FILTERS_DECLARATIVE_DIR,
+                    ),
                 },
                 {
                     context: 'src',
@@ -114,6 +120,7 @@ export const getWebpackConfig = (browser: Browser = BROWSERS.CHROME): Configurat
                 },
             ],
         }),
+        new CollectFiltersVersionsPlugin(FILTERS_DIR),
         new HtmlWebpackPlugin({
             template: path.join(POPUP_PATH, 'index.html'),
             filename: 'popup.html',
@@ -168,7 +175,7 @@ export const getWebpackConfig = (browser: Browser = BROWSERS.CHROME): Configurat
             assistant: ASSISTANT_PATH,
         },
         output: {
-            path: path.resolve(__dirname, BUILD_PATH, OUTPUT_PATH, browser),
+            path: OUTPUT_DIR,
             filename: '[name].js',
             publicPath: '',
         },

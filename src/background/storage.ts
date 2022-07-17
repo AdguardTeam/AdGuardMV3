@@ -5,7 +5,7 @@ class Storage {
         this.storage = storage;
     }
 
-    get = <T>(key: string): Promise<T> => {
+    get = <T>(key: string): Promise<T | undefined> => {
         return new Promise((resolve, reject) => {
             this.storage.get([key], (result: { [x: string]: T }) => {
                 if (chrome.runtime.lastError) {
