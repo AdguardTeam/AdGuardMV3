@@ -6,13 +6,15 @@ import { Icons } from 'Common/components/ui';
 import { log } from 'Common/logger';
 import { NOTIFIER_EVENTS } from 'Common/constants/common';
 import { createLongLivedConnection } from 'Common/messaging-utils';
+
 import { rootStore } from '../../stores';
 import { Header } from '../Header';
 import { Switcher } from '../Switcher';
 import { PageInfo } from '../PageInfo';
 import { Footer } from '../Footer';
 import { Wizard } from '../Wizard';
-import { Loader } from '../Loader';
+import { Loader as InitialLoader } from '../Loader';
+import { LoaderOverlay } from '../LoaderOverlay';
 import { DisabledProtectionScreen } from './DisabledProtectionScreen';
 
 import styles from './PopupApp.module.pcss';
@@ -64,7 +66,7 @@ export const PopupApp = observer(() => {
         return (
             <div className={styles.popup}>
                 <Icons />
-                <Loader />
+                <InitialLoader />
             </div>
         );
     }
@@ -103,6 +105,7 @@ export const PopupApp = observer(() => {
                     )}
             </main>
             <Footer />
+            <LoaderOverlay />
         </div>
     );
 });

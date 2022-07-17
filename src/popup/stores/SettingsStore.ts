@@ -60,6 +60,9 @@ export class SettingsStore {
 
     userRules = '';
 
+    @observable
+    loader = false;
+
     @action
     getCurrentTabUrl = async () => {
         const activeTab = await tabUtils.getActiveTab();
@@ -129,7 +132,7 @@ export class SettingsStore {
     };
 
     @action
-    updateAllowlist = () => {
+    updateAllowlist = async () => {
         const userRulesProcessor = new UserRulesProcessor(this.userRules);
         const userRulesData = userRulesProcessor.getData();
         const allowlist = userRulesData.filter((rule) => rule.type === UserRuleType.SITE_ALLOWED);
@@ -139,7 +142,7 @@ export class SettingsStore {
 
         const filteringEnabled = !!(currentAllowRule && currentAllowRule?.enabled);
 
-        this.setSetting(SETTINGS_NAMES.FILTERING_ENABLED, !filteringEnabled);
+        await this.setSetting(SETTINGS_NAMES.FILTERING_ENABLED, !filteringEnabled);
 
         runInAction(() => {
             this.currentAllowRule = currentAllowRule;
@@ -163,7 +166,7 @@ export class SettingsStore {
         this.userRules = userRules;
         this.setEnableFiltersIds(enableFiltersIds);
 
-        this.updateAllowlist();
+        await this.updateAllowlist();
 
         if (this.protectionPaused) {
             this.setProtectionPausedTimer();
@@ -217,33 +220,42 @@ export class SettingsStore {
     };
 
     @action
-    setUserRules = (userRules: string) => {
+    setUserRules = async (userRules: string) => {
         if (this.userRules === userRules) {
             return;
         }
 
         this.userRules = userRules;
-        sender.setUserRules(this.userRules);
+        await sender.setUserRules(this.userRules);
     };
 
     @action
-    toggleAllowlisted = () => {
+    toggleAllowlisted = async () => {
+        this.setLoader(true);
+
         if (this.currentAllowRule && this.isAllowlisted) {
             // remove rule
             const userRulesProcessor = new UserRulesProcessor(this.userRules);
             userRulesProcessor.deleteRule(this.currentAllowRule.id);
-            this.setUserRules(userRulesProcessor.getUserRules());
+            await this.setUserRules(userRulesProcessor.getUserRules());
         } else if (this.currentAllowRule) {
             // enable rule if disable
             const userRulesProcessor = new UserRulesProcessor(this.userRules);
             userRulesProcessor.enableRule(this.currentAllowRule.id);
-            this.setUserRules(userRulesProcessor.getUserRules());
+            await this.setUserRules(userRulesProcessor.getUserRules());
         } else {
             // add rule
             const newRule = `@@||${this.currentSite}^`;
             const newUserRules = `${this.userRules}${NEW_LINE_SEPARATOR}${newRule}`;
-            this.setUserRules(newUserRules);
+            await this.setUserRules(newUserRules);
         }
-        this.updateAllowlist();
+        await this.updateAllowlist();
+
+        this.setLoader(false);
+    };
+
+    @action
+    setLoader = (value: boolean) => {
+        this.loader = value;
     };
 }

@@ -133,8 +133,9 @@ export class OptionsStore {
             return;
         }
 
+        setLoader(true);
+
         try {
-            setLoader(true);
             await sender.setUserRules(userRules);
             this.closeEditor();
             this.closeUserRuleWizard();
@@ -147,6 +148,7 @@ export class OptionsStore {
                 ? ERROR_UI_MESSAGES[statusCode] : ERROR_UI_MESSAGES.DEFAULT;
             this.setError(error);
         }
+
         setLoader(false);
     };
 
