@@ -44,6 +44,8 @@ export class SettingsStore {
 
     @action
     enableFilter = async (filterId: number) => {
+        const { setLoader } = this.rootStore.uiStore;
+        setLoader(true);
         this.updateFilterState(filterId, { enabled: true });
         try {
             await sender.enableFilter(filterId);
@@ -51,10 +53,13 @@ export class SettingsStore {
             log.debug(e.message);
             this.updateFilterState(filterId, { enabled: false });
         }
+        setLoader(false);
     };
 
     @action
     disableFilter = async (filterId: number) => {
+        const { setLoader } = this.rootStore.uiStore;
+        setLoader(true);
         this.updateFilterState(filterId, { enabled: false });
         try {
             await sender.disableFilter(filterId);
@@ -62,6 +67,7 @@ export class SettingsStore {
             log.debug(e.message);
             this.updateFilterState(filterId, { enabled: true });
         }
+        setLoader(false);
     };
 
     @action
@@ -106,21 +112,31 @@ export class SettingsStore {
     }
 
     @flow* addCustomFilterByContent(filterContent: string, title: string, url: string) {
+        const { setLoader } = this.rootStore.uiStore;
+        setLoader(true);
+
         try {
             this.filters = yield sender.addCustomFilterByContent(filterContent, title, url);
             this.rootStore.customFilterModalStore.closeModal();
         } catch (e: any) {
             log.error(e.message);
         }
+
+        setLoader(false);
     }
 
     @flow* removeCustomFilterById(filterId: number) {
+        const { setLoader } = this.rootStore.uiStore;
+        setLoader(true);
+
         try {
             this.filters = yield sender.removeCustomFilterById(filterId);
             this.rootStore.customFilterModalStore.closeModal();
         } catch (e: any) {
             log.error(e.message);
         }
+
+        setLoader(false);
     }
 
     getFilterById = (filterId: number): Filter | null => {

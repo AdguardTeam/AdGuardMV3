@@ -127,7 +127,6 @@ export const extensionMessageHandler = async (
         }
         case MESSAGE_TYPES.UPDATE_FILTER_TITLE: {
             await filters.updateFilterTitle(data.filterId, data.filterTitle);
-            await tsWebExtensionWrapper.configure();
 
             break;
         }
