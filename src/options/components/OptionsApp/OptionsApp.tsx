@@ -9,6 +9,7 @@ import { createLongLivedConnection } from 'Common/messaging-utils';
 import { Sidebar } from 'Options/components/Sidebar';
 import { Notifications } from 'Options/components/Notifications';
 import { About } from 'Options/components/About';
+import { Limits } from 'Options/components/Limits';
 import { rootStore } from 'Options/stores';
 import { Settings } from 'Options/components/Settings';
 import { Filters } from 'Options/components/Filters';
@@ -75,6 +76,7 @@ export const OptionsApp = observer(() => {
                         <Switch>
                             <Route path="/" exact component={Settings} />
                             <Route path="/about" component={About} />
+                            <Route path="/limits" component={Limits} />
                             <Route path="/userrules" component={UserRules} />
                             <Route path="/customfilters" component={Filters} />
                             <Route path="/languages" component={Languages} />
