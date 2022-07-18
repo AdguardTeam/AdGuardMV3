@@ -7,7 +7,7 @@ import { Section } from 'Common/components/Section';
 import { IconId } from 'Common/components/ui';
 
 import { rootStore } from '../../stores';
-import { CheckboxOption } from '../CheckboxOption';
+import { SwitcherOption } from '../SwitcherOption';
 import { NavOption, NavOptionProps } from '../NavOption';
 
 import styles from './Settings.module.pcss';
@@ -66,7 +66,7 @@ export const Settings = observer(() => {
                 title={translator.getMessage('options_settings_title')}
             >
                 {mainFilters.map((filter) => (
-                    <CheckboxOption
+                    <SwitcherOption
                         key={filter.id}
                         iconId={filter.iconId}
                         id={filter.id.toString()}

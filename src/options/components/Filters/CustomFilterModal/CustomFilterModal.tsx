@@ -14,6 +14,7 @@ import { AddCustomFilter } from 'Options/components/Filters/CustomFilterModal/Ad
 import { AddCustomFilterConfirm } from 'Options/components/Filters/CustomFilterModal/AddCustomFilterConfirm';
 import { RemoveCustomFilter } from 'Options/components/Filters/CustomFilterModal/RemoveCustomFilter';
 import { FilterInfo, Filter } from 'Common/constants/common';
+import { reactTranslator } from 'Common/translators/reactTranslator';
 
 type CustomFilterModalProps = {
     isOpen: boolean,
@@ -278,7 +279,10 @@ export const CustomFilterModal = observer(({
                 </div>
                 {step.input
                     && (
-                        <div>
+                        <div className={theme.modal.itemWrapper}>
+                            <div className={theme.modal.label}>
+                                {reactTranslator.getMessage('options_custom_filter_add_label_name')}
+                            </div>
                             <input
                                 className={theme.modal.modalInput}
                                 type="text"

@@ -32,10 +32,16 @@ export const EditUserRule = observer(() => {
             <div className={theme.modal.title}>
                 {reactTranslator.getMessage('options_user_rule_edit_rule')}
             </div>
-            <UserRuleEditor
-                ruleText={optionsStore.userRuleInWizard.ruleText}
-                onChange={onChange}
-            />
+            <div className={theme.modal.itemWrapper}>
+                <div className={theme.modal.label}>
+                    {reactTranslator.getMessage('options_custom_filter_add_label_rule')}
+                </div>
+                <UserRuleEditor
+                    ruleText={optionsStore.userRuleInWizard.ruleText}
+                    onChange={onChange}
+                    mod="modal"
+                />
+            </div>
             <div className={theme.modal.footer}>
                 <button
                     type="button"

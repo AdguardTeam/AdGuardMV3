@@ -11,6 +11,7 @@
     color: var(--white);
     padding: 32px;
     box-shadow: 0 0 0 1px var(--gray4d);
+    border-radius: 4px;
 }
 
 .overlay {
@@ -38,9 +39,9 @@
 }
 
 .title {
-    font-weight: 500;
+    font-weight: 620;
     font-size: 2.4rem;
-    line-height: 2.8rem;
+    line-height: 3rem;
     color: var(--white);
 }
 
@@ -53,7 +54,6 @@
 }
 
 .modalSelectContainer {
-    padding-top: 2.4rem;
     position: relative;
 }
 
@@ -61,33 +61,44 @@
     appearance: none;
     padding: 0.6rem 0 0.7rem 1.3rem;
     width: 33.5rem;
-    height: 3.2rem;
-    color: var(--white);
-    background: #2A2A2A;
-    border: 1px solid #888888;
+    height: 4.8rem;
+    border: 1px solid var(--gray700);
     box-sizing: border-box;
     font-size: 1.6rem;
-    line-height: 1.9rem;
+    line-height: 1.8rem;
+    color: var(--white);
+    border-radius: 8px;
 }
 
 .modalSelectIcon {
     position: absolute;
-    bottom: 0.4rem;
+    bottom: calc(50% - 1.2rem);
     right: 0.4rem;
     pointer-events: none;
 }
 
+.itemWrapper {
+    margin-top: 24px;
+}
+
+.disabled {
+    opacity: 0.5;
+}
+
+.label {
+    margin-bottom: 8px;
+}
+
 .modalInput {
     color: var(--white);
-    margin-top: 19px;
-    padding: 8px 11px;
+    padding: 14px 11px;
     width: 335px;
+    height: 48px;
     background: var(--grayDark);
     border: 1px solid var(--gray700);
+    border-radius: 8px;
     box-sizing: border-box;
     resize: none;
-
-    font-family: PT Mono;
     font-size: 16px;
     line-height: 18px;
 
@@ -115,9 +126,26 @@
     }
 }
 
+.filterDescription {
+    color: var(--white);
+    max-height: 76px;
+    overflow-y: auto;
+    padding: 14px 11px;
+    background: var(--grayDark);
+    border: 1px solid var(--gray700);
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 16px;
+    line-height: 18px;
+
+    &.name {
+        word-break: break-all;
+    }
+}
+
 .footer {
     display: flex;
-    padding-top: 27px;
+    padding-top: 24px;
 
     &.right {
         justify-content: flex-end;

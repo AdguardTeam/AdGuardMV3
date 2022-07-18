@@ -39,10 +39,10 @@ const linkList = [
 export const About = () => {
     return (
         <section className={styles.container}>
-            <h2 className={cn(theme.common.headingMain, styles.title)}>
+            <h2 className={theme.common.headingMain}>
                 {reactTranslator.getMessage('options_about_title')}
             </h2>
-            <div className={cn(theme.common.headingSecondary, styles.description)}>
+            <div className={theme.common.headingSecondary}>
                 <div>
                     {reactTranslator.getMessage('options_about_product')}
                 </div>
@@ -50,7 +50,7 @@ export const About = () => {
                     {`${reactTranslator.getMessage('options_about_version')} ${chrome.runtime.getManifest().version} `}
                 </div>
             </div>
-            <div className={cn(theme.common.headingSecondary, styles.description)}>
+            <div className={theme.common.headingSecondary}>
                 <div>
                     {`© 2009-${new Date().getFullYear()} AdGuard Software Ltd.`}
                 </div>

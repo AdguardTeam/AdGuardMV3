@@ -81,7 +81,7 @@
         "message": "Remove social widget buttons"
     },
     "options_languages_option": {
-        "message": "Language support"
+        "message": "Language-specific filters"
     },
     "options_languages_option_desc": {
         "message": "Remove ads for language-specific websites"
@@ -115,6 +115,9 @@
     },
     "options_nav_link_about": {
         "message": "About"
+    },
+    "options_nav_link_limits": {
+        "message": "Rule limits"
     },
     "options_works_with_v3": {
         "message": "Works with Manifest <span>V3<\/span>"
@@ -160,9 +163,6 @@
     },
     "options_notice_compare_link": {
         "message": "Learn more"
-    },
-    "options_notice_hide": {
-        "message": "Hide"
     },
     "popup_settings_pause_protection": {
         "message": "Pause protection"
@@ -210,7 +210,7 @@
         "message": "Enable AdGuard protection"
     },
     "options_add_custom_filter": {
-        "message": "New custom filter"
+        "message": "Add custom filter"
     },
     "options_custom_filter_modal_remove_button": {
         "message": "Delete"
@@ -219,7 +219,19 @@
         "message": "Are you sure?"
     },
     "options_custom_filter_modal_add_title": {
-        "message": "New custom filter"
+        "message": "Add custom filter"
+    },
+    "options_custom_filter_add_label_name": {
+        "message": "Name"
+    },
+    "options_custom_filter_add_label_type": {
+        "message": "Type"
+    },
+    "options_custom_filter_add_label_rule": {
+        "message": "Rule"
+    },
+    "options_custom_filter_add_label_description": {
+        "message": "Description"
     },
     "options_custom_filter_modal_edit_title": {
         "message": "Edit filter name"
@@ -243,13 +255,13 @@
         "message": "Add"
     },
     "options_custom_filter_modal_retry_title": {
-        "message": "File is damaged"
+        "message": "Failed to import file"
     },
     "options_custom_filter_modal_retry_button": {
         "message": "Back"
     },
     "options_custom_filter_modal_retry_description": {
-        "message": "AdGuard can’t open this file. Please check its format."
+        "message": "The file may be damaged or have the wrong format."
     },
     "options_custom_filter_modal_url_already_uploaded": {
         "message": "The filter at this URL has already been uploaded."
@@ -267,31 +279,34 @@
         "message": "Open editor"
     },
     "options_user_rule_status_website_blocked": {
-        "message": "blocked domain"
+        "message": "Domain is blocked"
     },
     "options_user_rule_status_website_allowed": {
-        "message": "unblocked domain"
+        "message": "Domain is unblocked"
     },
     "options_user_rule_status_element_blocked": {
-        "message": "blocked element"
+        "message": "Element is blocked"
     },
     "options_user_rule_status_custom_rule": {
-        "message": "custom rule"
+        "message": "Custom rule"
     },
     "options_user_rule_wizard_custom": {
         "message": "Custom"
     },
     "options_user_rule_wizard_blocking": {
-        "message": "Blocking"
+        "message": "Block domain"
     },
     "options_user_rule_wizard_unblocking": {
-        "message": "Unblocking"
+        "message": "Add domain to allowlist"
     },
     "options_user_rule_delete": {
         "message": "Delete"
     },
     "options_user_rule_save": {
         "message": "Save"
+    },
+    "options_user_rule_block_domain": {
+        "message": "Domain name"
     },
     "options_user_rule_block_all_subdomains": {
         "message": "Block all subdomains"
@@ -308,11 +323,8 @@
     "options_user_rule_removing_elements": {
         "message": "Do not apply advanced rules"
     },
-    "options_user_rule_advanced_rules": {
-        "message": "Advanced rules"
-    },
     "options_user_rule_add_rule": {
-        "message": "New user rule"
+        "message": "Add user rule"
     },
     "options_user_rule_edit_rule": {
         "message": "Edit user rule"
@@ -329,8 +341,11 @@
     "options_filters_not_rules": {
         "message": "No rules found"
     },
+    "options_paste_filter_label": {
+        "message": "Filter URL or a local file path"
+    },
     "options_paste_filter_url": {
-        "message": "Paste the filter URL"
+        "message": "Paste the filter URL or a local file path"
     },
     "options_rules_search": {
         "message": "Search"
@@ -356,6 +371,9 @@
     "error_regexp_rules_limit": {
         "message": "Failed to add the rule. The limit of %limit% regex rules has been exceeded."
     },
+    "error_empty_input": {
+        "message": "Name cannot be empty"
+    },
     "debugging_title_reload_page": {
         "message": "Open developer tools and reload the page"
     },
@@ -367,5 +385,44 @@
     },
     "debugging_info": {
         "message": "If you want to see debugging information about the processed requests using MV3 declarative rules, you need to clone <link-to-repo>our repository<\/link-to-repo> and build the unpacked extension as described in Readme."
+    },
+    "options_nav_better_than_extension": {
+        "message": "Unlike the extension, the AdGuard app blocks ads with no limitations."
+    },
+    "options_nav_compare": {
+        "message": "Compare"
+    },
+    "options_limits_title": {
+        "message": "Rule limits"
+    },
+    "options_limits_desc_specifications": {
+        "message": "This extension conforms to Manifest V3."
+    },
+    "options_limits_link_about_mv3": {
+        "message": "Learn more about Manifest V3"
+    },
+    "options_limits_dynamic_title": {
+        "message": "Dynamic rules"
+    },
+    "options_limits_dynamic_added": {
+        "message": "User-added rules, such as user rules and custom filters"
+    },
+    "options_limits_regex": {
+        "message": "Regex rules (included in the above)"
+    },
+    "options_value_of_value": {
+        "message": "%first_value% of %second_value%"
+    },
+    "options_limits_static_title": {
+        "message": "Static rulesets"
+    },
+    "options_limits_static_rulesets_desc": {
+        "message": "Built-in filters (e.g. Block annoyances or Language-specific filters). You can enable up to %count% static rulesets at once."
+    },
+    "options_limits_static_rules_title": {
+        "message": "Static rules"
+    },
+    "options_limits_static_rules_desc": {
+        "message": "Rules from built-in filters. All extensions in your Chrome browser can use %count% static rules at once."
     }
 }

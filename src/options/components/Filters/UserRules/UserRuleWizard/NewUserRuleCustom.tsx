@@ -27,15 +27,21 @@ export const NewUserRuleCustom = observer(() => {
 
     return (
         <>
-            <UserRuleEditor
-                ruleText={createdUserRuleText}
-                onChange={onChange}
-            />
-            {error && (
-                <div className={theme.common.error}>
-                    {error}
+            <div className={theme.modal.itemWrapper}>
+                <div className={theme.modal.label}>
+                    {reactTranslator.getMessage('options_custom_filter_add_label_rule')}
                 </div>
-            )}
+                <UserRuleEditor
+                    ruleText={createdUserRuleText}
+                    onChange={onChange}
+                    mod="modal"
+                />
+                {error && (
+                    <div className={theme.common.error}>
+                        {error}
+                    </div>
+                )}
+            </div>
             <div className={theme.modal.footer}>
                 <button
                     disabled={!createdUserRuleText}
