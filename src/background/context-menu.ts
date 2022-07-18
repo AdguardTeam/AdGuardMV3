@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid';
 
 import { tabUtils } from 'Common/tab-utils';
 import { NOTIFIER_EVENTS } from 'Common/constants/common';
+
 import { contextMenus } from './context-menus';
 import { settings } from './settings';
 import { notifier } from './notifier';

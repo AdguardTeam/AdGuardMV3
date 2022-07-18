@@ -8,6 +8,7 @@ import {
 
 import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
 import { IconId } from 'Common/components/ui/Icons';
+
 import type { RootStore } from './RootStore';
 
 const INITIAL_STEP = 1;

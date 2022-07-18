@@ -1,4 +1,5 @@
 import React from 'react';
+
 import style from './loader.module.pcss';
 
 export const Loader = () => {

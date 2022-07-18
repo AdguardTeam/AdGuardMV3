@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import cn from 'classnames';
-
 import { observer } from 'mobx-react';
+
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { theme } from 'Common/styles';
+
 import { rootStore } from '../../stores';
 import { sender } from '../../messaging/sender';
 

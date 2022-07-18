@@ -1,8 +1,11 @@
+import path from 'path';
+
 import { Compiler } from 'webpack';
 import fse from 'fs-extra';
-import path from 'path';
+
 import FiltersUtils from '../../src/common/utils/filters';
 import { FILTERS_VERSIONS_FILENAME } from '../../src/common/constants/common';
+
 import { readNLinesFromFileWithStream } from './read-from-stream';
 
 /** Webpack plugin, collect filters versions and save it to filters folder */

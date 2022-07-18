@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
 import cn from 'classnames';
+
 import { rootStore } from '../../stores';
 import { containsIgnoreCase, findChunks } from '../../../common/helpers';
 import { theme } from '../../../common/styles';

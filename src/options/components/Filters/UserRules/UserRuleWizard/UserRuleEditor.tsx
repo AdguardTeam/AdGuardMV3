@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
-import { rootStore } from 'Options/stores';
 import AceEditor from 'react-ace';
 import cn from 'classnames';
+
+import { rootStore } from 'Options/stores';
 
 import styles from '../Editor/Editor.module.pcss';
 

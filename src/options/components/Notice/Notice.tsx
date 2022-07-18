@@ -6,8 +6,10 @@ import { reactTranslator } from 'Common/translators/reactTranslator';
 import { theme } from 'Common/styles';
 import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
 import { LEARN_MORE } from 'Common/constants/urls';
-import styles from './Notice.module.pcss';
+
 import { rootStore } from '../../stores';
+
+import styles from './Notice.module.pcss';
 
 const Notice = observer(() => {
     const store = useContext(rootStore);

@@ -5,6 +5,7 @@ import {
     NetworkRule,
     RuleFactory,
 } from '@adguard/tsurlfilter';
+
 import { UserRuleType, REGEX_DOMAIN_IN_RULE } from 'Common/constants/common';
 
 export interface UserRulesData {

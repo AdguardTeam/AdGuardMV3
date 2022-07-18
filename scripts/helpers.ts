@@ -1,7 +1,8 @@
-import fse from 'fs-extra';
 import path from 'path';
-import { ENV_CONF } from './build-constants';
 
+import fse from 'fs-extra';
+
+import { ENV_CONF } from './build-constants';
 import { localeMessageType, localeUrlType } from './locales/locales-constants';
 
 export const chunkArray = (arr: localeUrlType[], size: number) => arr

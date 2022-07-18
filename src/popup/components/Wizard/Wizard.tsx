@@ -5,6 +5,7 @@ import cn from 'classnames';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { theme } from 'Common/styles';
 import { LEARN_MORE } from 'Common/constants/urls';
+
 import { rootStore } from '../../stores';
 
 import styles from './wizard.module.pcss';

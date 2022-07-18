@@ -1,4 +1,5 @@
 import path from 'path';
+
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
@@ -12,6 +13,7 @@ import fse from 'fs-extra';
 import { FILTER_RULESET, RulesetType } from '../../src/common/constants/filters';
 import type { Browser, BuildEnv } from '../build-constants';
 import { BROWSERS, BUILD_ENVS, RULESET_NAME } from '../build-constants';
+
 import CollectFiltersVersionsPlugin from './collect-filters-versions-plugin';
 
 const packageJson = require('../../package.json');

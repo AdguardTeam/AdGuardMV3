@@ -1,12 +1,12 @@
+import path from 'path';
+
 import { program } from 'commander';
 import axios from 'axios';
 import { DeclarativeConverter, StringRuleList } from '@adguard/tsurlfilter';
 import fse from 'fs-extra';
-import path from 'path';
 
 import { ADGUARD_FILTERS_IDS } from '../../src/common/constants/filters';
 import { FILTERS_I18N_FILENAME } from '../../src/common/constants/common';
-
 import { cliLog } from '../cli-log';
 
 const COMMON_FILTERS_DIR = 'src/filters';

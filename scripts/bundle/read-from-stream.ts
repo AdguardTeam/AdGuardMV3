@@ -1,5 +1,6 @@
-import fse from 'fs-extra';
 import readline from 'readline';
+
+import fse from 'fs-extra';
 
 /**
  * Reads first N lines from requested file via stream

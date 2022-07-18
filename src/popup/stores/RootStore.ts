@@ -1,4 +1,5 @@
 import { reaction } from 'mobx';
+
 import { SettingsStore } from './SettingsStore';
 import { WizardStore } from './WizardStore';
 

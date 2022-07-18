@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import ReactModal from 'react-modal';
+
 import { Icon, IconId } from '../ui';
 import { theme } from '../../styles/index';
 

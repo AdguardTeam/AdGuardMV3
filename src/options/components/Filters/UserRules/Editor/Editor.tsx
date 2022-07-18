@@ -8,7 +8,7 @@ import { useStore } from 'Options/stores/useStore';
 import { theme } from 'Common/styles';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 
-import styles from 'Options/components/Filters/UserRules/Editor/Editor.module.pcss';
+import styles from './Editor.module.pcss';
 
 import 'ace-builds/src-noconflict/ext-searchbox';
 import 'ace-builds/src-noconflict/theme-textmate';

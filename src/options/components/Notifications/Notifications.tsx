@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
 
-import { rootStore } from '../../stores';
-import { Notification } from './Notification';
+import { rootStore } from 'Options/stores';
 
+import { Notification } from './Notification';
 import styles from './notifications.module.pcss';
 
 export const Notifications = observer(() => {

@@ -16,7 +16,7 @@ import { UserRules } from 'Options/components/Filters/UserRules';
 import { Languages } from 'Options/components/Languages';
 import { LoaderOverlay } from 'Options/components/LoaderOverlay';
 
-import styles from 'Options/components/OptionsApp/options-app.module.pcss';
+import styles from './options-app.module.pcss';
 
 export const OptionsApp = observer(() => {
     const store = useContext(rootStore);

@@ -1,5 +1,7 @@
 import path from 'path';
+
 import fse from 'fs-extra';
+
 import { BUILD_PATH } from '../build-constants';
 import packageJson from '../../package.json';
 import { getEnvConf } from '../helpers';

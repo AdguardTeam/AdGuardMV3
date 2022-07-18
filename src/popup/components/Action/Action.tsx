@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
 
 import { reactTranslator } from 'Common/translators/reactTranslator';
+
 import { rootStore } from '../../stores';
 import { sender } from '../../messaging/sender';
 import { theme } from '../../../common/styles';

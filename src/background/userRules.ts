@@ -2,6 +2,7 @@ import { UserRuleType, NEW_LINE_SEPARATOR } from 'Common/constants/common';
 import { USER_RULES_STORAGE_KEY } from 'Common/constants/storage-keys';
 import { log } from 'Common/logger';
 import { UserRulesProcessor } from 'Options/user-rules-processor';
+
 import { storage } from './storage';
 
 class UserRules {

@@ -1,4 +1,5 @@
 import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
+
 import { settings } from './settings';
 
 class ProtectionPause {
