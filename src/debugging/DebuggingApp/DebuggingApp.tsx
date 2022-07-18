@@ -5,8 +5,8 @@ import type { Rules } from 'Common/constants/common';
 import { MESSAGE_TYPES, Filter } from 'Common/constants/common';
 import { translator } from 'Common/translators/translator';
 import { ADGUARD_FILTERS_IDS } from 'Common/constants/filters';
-import { RequestsTable } from '../RequestsTable';
 
+import { RequestsTable } from '../RequestsTable';
 import { COMMON_FILTERS_DIR } from '../../background/backend';
 import { sendMessage } from '../../common/helpers';
 

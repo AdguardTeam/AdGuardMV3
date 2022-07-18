@@ -9,8 +9,10 @@ import {
 import { Filter, CategoriesType } from 'Common/constants/common';
 import { OPTION_SETTINGS_NAMES, SETTINGS_NAMES } from 'Common/constants/settings-constants';
 import { log } from 'Common/logger';
-import type { RootStore } from './RootStore';
+
 import { sender } from '../messaging/sender';
+
+import type { RootStore } from './RootStore';
 
 export class SettingsStore {
     public rootStore: RootStore;

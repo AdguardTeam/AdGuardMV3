@@ -22,7 +22,9 @@ import {
 } from 'Common/constants/settings-constants';
 import { tabUtils } from 'Common/tab-utils';
 import { UserRulesData, UserRulesProcessor } from 'Options/user-rules-processor';
+
 import { sender } from '../messaging/sender';
+
 import type { RootStore } from './RootStore';
 
 export class SettingsStore {

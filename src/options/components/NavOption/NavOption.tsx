@@ -1,8 +1,9 @@
 import React from 'react';
 import cn from 'classnames';
+import { NavLink } from 'react-router-dom';
+
 import { Icon, IconId } from 'Common/components/ui';
 import { reactTranslator } from 'Common/translators/reactTranslator';
-import { NavLink } from 'react-router-dom';
 
 import styles from './NavOption.module.pcss';
 

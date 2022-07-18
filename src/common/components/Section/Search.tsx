@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 
 import { useKeyPress } from 'Common/hooks/useKeyPress';
 import { KEY_ESCAPE } from 'Common/constants/keyboard';
+
 import { IconId, Icon } from '../ui';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 import { translator } from '../../translators/translator';

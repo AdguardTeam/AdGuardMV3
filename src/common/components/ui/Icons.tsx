@@ -2,6 +2,7 @@
 import React from 'react';
 
 import { IconId } from 'Common/constants/icons';
+
 import iconStyles from './Icons.module.pcss';
 
 export { IconId };

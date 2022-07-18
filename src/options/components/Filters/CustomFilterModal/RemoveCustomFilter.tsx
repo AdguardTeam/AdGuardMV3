@@ -1,5 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
+
 import { theme } from 'Common/styles';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 

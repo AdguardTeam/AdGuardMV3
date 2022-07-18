@@ -5,9 +5,11 @@ import { translator } from 'Common/translators/translator';
 import { Filter, FiltersGroupId } from 'Common/constants/common';
 import { Section } from 'Common/components/Section';
 import { IconId } from 'Common/components/ui';
+
 import { rootStore } from '../../stores';
 import { CheckboxOption } from '../CheckboxOption';
 import { NavOption, NavOptionProps } from '../NavOption';
+
 import styles from './Settings.module.pcss';
 
 export const Settings = observer(() => {

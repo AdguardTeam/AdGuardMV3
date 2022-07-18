@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { Icon, IconId } from 'Common/components/ui';
+
 import style from './loader.module.pcss';
 
 export const Loader = () => {

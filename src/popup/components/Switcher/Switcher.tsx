@@ -3,6 +3,7 @@ import { observer } from 'mobx-react';
 import cn from 'classnames';
 
 import { Icon, IconId } from 'Common/components/ui';
+
 import { rootStore } from '../../stores';
 import { sender } from '../../messaging/sender';
 

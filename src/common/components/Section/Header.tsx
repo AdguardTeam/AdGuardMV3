@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import { Icon, IconId } from 'Common/components/ui';
 import { translator } from 'Common/translators/translator';
+
 import { Search } from './Search';
 import styles from './Section.module.pcss';
 

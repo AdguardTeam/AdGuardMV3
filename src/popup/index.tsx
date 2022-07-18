@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'mobx-react';
 
 import { log } from 'Common/logger';
+
 import { PopupApp } from './components/PopupApp';
 
 import 'Common/styles/main.pcss';

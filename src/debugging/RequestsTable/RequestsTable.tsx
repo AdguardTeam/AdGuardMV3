@@ -1,8 +1,8 @@
 import { FilterConvertedSourceMap, HashOriginalRule, USER_FILTER_ID } from '@adguard/tswebextension/mv3';
 import { DeclarativeConverter } from '@adguard/tsurlfilter';
-
 import React from 'react';
 import cn from 'classnames';
+
 import { RULESET_NAME, NEW_LINE_SEPARATOR } from 'Common/constants/common';
 import { translator } from 'Common/translators/translator';
 

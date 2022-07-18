@@ -2,6 +2,7 @@ import { action, makeObservable, observable } from 'mobx';
 import { nanoid } from 'nanoid';
 
 import { IconId } from 'Common/components/ui';
+
 import type { RootStore } from './RootStore';
 
 type Notifications = {

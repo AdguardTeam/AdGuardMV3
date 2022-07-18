@@ -4,6 +4,7 @@ import { log } from 'Common/logger';
 import { prefs } from 'Common/prefs';
 import { NOTIFIER_EVENTS } from 'Common/constants/common';
 import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
+
 import { notifier } from './notifier';
 import { userRules } from './userRules';
 

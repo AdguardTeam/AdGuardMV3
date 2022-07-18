@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'mobx-react';
 
 import { log } from 'Common/logger';
+
 import { OptionsApp } from './components/OptionsApp';
 
 import 'Common/styles/main.pcss';

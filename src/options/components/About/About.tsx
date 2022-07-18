@@ -1,8 +1,8 @@
 import React from 'react';
-import { reactTranslator } from 'Common/translators/reactTranslator';
-
-import { theme } from 'Common/styles';
 import cn from 'classnames';
+
+import { reactTranslator } from 'Common/translators/reactTranslator';
+import { theme } from 'Common/styles';
 import {
     ACKNOWLEDGMENTS,
     DISCUSS,
@@ -10,6 +10,7 @@ import {
     PRIVACY,
     WEBSITE,
 } from 'Common/constants/urls';
+
 import styles from './About.module.pcss';
 
 const linkList = [

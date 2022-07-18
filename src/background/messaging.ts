@@ -10,6 +10,7 @@ import { CATEGORIES } from 'Common/constants/filters';
 import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
 import { log } from 'Common/logger';
 import { tabUtils } from 'Common/tab-utils';
+
 import { settings } from './settings';
 import { notifier } from './notifier';
 import { protectionPause } from './protectionPause';

@@ -1,11 +1,12 @@
 import { program } from 'commander';
 import { copyWar } from '@adguard/tswebextension/cli';
 
+import { BROWSERS, BUILD_ENVS } from '../build-constants';
+import { cliLog } from '../cli-log';
+
 import { buildInfo } from './build-info';
 import { bundleRunner } from './bundle-runner';
 import { getWebpackConfig } from './webpack-config';
-import { BROWSERS, BUILD_ENVS } from '../build-constants';
-import { cliLog } from '../cli-log';
 
 type Task = (options: TaskOptions) => Promise<void> | void;
 

@@ -1,14 +1,16 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
 import cn from 'classnames';
+
 import { theme } from 'Common/styles';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
+
 import { rootStore } from '../../stores';
 import { sender } from '../../messaging/sender';
+import { Switcher } from '../Switcher';
 
 import styles from './DisabledProtectionScreen.module.pcss';
-import { Switcher } from '../Switcher';
 
 export const DisabledProtectionScreen = observer(() => {
     const { settingsStore } = useContext(rootStore);

@@ -1,12 +1,12 @@
 import { program } from 'commander';
+
+import { cliLog } from '../cli-log';
+
 import { downloadAndSave } from './download-locales';
 import { uploadLocales } from './upload-locales';
 import { renewLocales } from './renew-locales';
 import { checkTranslations } from './validate';
 import { checkUnusedMessages } from './unused';
-
-import { cliLog } from '../cli-log';
-
 import { LANGUAGES, REQUIRED_LOCALES } from './locales-constants';
 
 const LOCALES = Object.keys(LANGUAGES);

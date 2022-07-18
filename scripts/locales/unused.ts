@@ -1,5 +1,6 @@
-import fse from 'fs-extra';
 import path from 'path';
+
+import fse from 'fs-extra';
 
 import { cliLog } from '../cli-log';
 import { getLocaleTranslations } from '../helpers';

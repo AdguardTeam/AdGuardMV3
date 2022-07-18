@@ -1,6 +1,7 @@
 import path from 'path';
 
 import { cliLog } from '../cli-log';
+import { areArraysEqual, getLocaleTranslations } from '../helpers';
 
 import {
     BASE_LOCALE,
@@ -11,7 +12,6 @@ import {
     THRESHOLD_PERCENTAGE,
     translationResultType,
 } from './locales-constants';
-import { areArraysEqual, getLocaleTranslations } from '../helpers';
 
 const LOCALES = Object.keys(LANGUAGES);
 const LOCALES_DIR = path.resolve(__dirname, LOCALES_RELATIVE_PATH);

@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
+
 import { translator } from 'Common/translators/translator';
 import { Icon, Tooltip, IconId } from 'Common/components/ui';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { PROTECTION_PAUSE_TIMEOUT_MS, PROTECTION_PAUSE_TIMEOUT_S } from 'Common/constants/common';
 import { REPORT_SITE_BASE } from 'Common/constants/urls';
 import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
+
 import { sender } from '../../messaging/sender';
 import { rootStore } from '../../stores';
 

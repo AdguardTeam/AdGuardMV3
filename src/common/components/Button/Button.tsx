@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Icon, IconId } from 'Common/components/ui';
 
-import styles from 'Common/components/Button/Button.module.pcss';
+import styles from './Button.module.pcss';
 
 export type ButtonProps = {
     handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void,

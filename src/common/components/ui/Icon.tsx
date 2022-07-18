@@ -1,5 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
+
 import { ICON_ID_CLASS_MAP, IconId } from './Icons';
 
 type IconProps = {

@@ -1,6 +1,8 @@
 import React, { ReactElement } from 'react';
 import { NavLink } from 'react-router-dom';
+
 import { Icon, IconId } from 'Common/components/ui';
+
 import style from './Category.module.pcss';
 
 interface CategoryProps {

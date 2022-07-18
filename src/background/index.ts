@@ -1,4 +1,5 @@
 import { log } from 'Common/logger';
+
 import { messaging, initExtension } from './messaging';
 import { contextMenu } from './context-menu';
 import { browserActions } from './browser-actions';

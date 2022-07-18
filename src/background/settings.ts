@@ -8,6 +8,7 @@ import {
     SettingsValueType,
     DEFAULT_SETTINGS,
 } from 'Common/constants/settings-constants';
+
 import { storage } from './storage';
 import { notifier } from './notifier';
 

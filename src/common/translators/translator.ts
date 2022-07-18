@@ -1,4 +1,5 @@
 import { translate } from '@adguard/translate';
+
 import { i18n } from './i18n';
 
 /**

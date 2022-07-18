@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { log } from 'Common/logger';
+
 import { DebuggingInfo } from './DebuggingInfo';
 
 try {

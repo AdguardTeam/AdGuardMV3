@@ -3,6 +3,7 @@ import { REPORT_SITE_BASE } from 'Common/constants/urls';
 import { log } from 'Common/logger';
 import { prefs } from 'Common/prefs';
 import { getUrlWithQueryString } from 'Common/helpers';
+
 import { scripting } from '../background/scripting';
 
 class TabUtils {

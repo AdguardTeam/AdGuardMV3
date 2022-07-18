@@ -2,7 +2,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import cn from 'classnames';
 
 import { Icon, IconId } from 'Common/components/ui';
+
 import { rootStore } from '../../stores';
+
 import styles from './notifications.module.pcss';
 
 interface NotificationProps {

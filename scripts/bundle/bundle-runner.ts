@@ -1,4 +1,5 @@
 import webpack, { Stats, Configuration } from 'webpack';
+
 import { cliLog } from '../cli-log';
 
 declare interface CallbackFunction<T> {

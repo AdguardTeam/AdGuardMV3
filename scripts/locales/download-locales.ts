@@ -1,10 +1,13 @@
 /**
  * This task updates locales in repository
  */
-import axios from 'axios';
 import path from 'path';
+
+import axios from 'axios';
 import fse from 'fs-extra';
+
 import { cliLog } from '../cli-log';
+import { chunkArray, getLocaleTranslations, getUrlWithQueryString } from '../helpers';
 
 import {
     API_URL,
@@ -19,7 +22,6 @@ import {
     localeMessageType,
     localeUrlType,
 } from './locales-constants';
-import { chunkArray, getLocaleTranslations, getUrlWithQueryString } from '../helpers';
 
 const LOCALES_DOWNLOAD_URL = `${API_URL}/download`;
 const LOCALES_DIR = path.resolve(__dirname, LOCALES_RELATIVE_PATH);

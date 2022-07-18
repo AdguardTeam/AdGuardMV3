@@ -15,8 +15,8 @@ import { Footer } from '../Footer';
 import { Wizard } from '../Wizard';
 import { Loader as InitialLoader } from '../Loader';
 import { LoaderOverlay } from '../LoaderOverlay';
-import { DisabledProtectionScreen } from './DisabledProtectionScreen';
 
+import { DisabledProtectionScreen } from './DisabledProtectionScreen';
 import styles from './PopupApp.module.pcss';
 
 export const PopupApp = observer(() => {
