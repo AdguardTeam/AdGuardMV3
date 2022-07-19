@@ -5,6 +5,7 @@ import { theme } from 'Common/styles';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { MV3 } from 'Common/constants/urls';
 
+import { Warning } from './Warning';
 import styles from './Limits.module.pcss';
 
 const STATIC_RULESETS_LIMIT = 150000;
@@ -44,6 +45,7 @@ export const Limits = () => {
                     </a>
                 </div>
             </div>
+            <Warning />
             <div className={styles.block}>
                 <div className={styles.title}>
                     {reactTranslator.getMessage('options_limits_dynamic_title')}
