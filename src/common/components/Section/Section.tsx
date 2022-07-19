@@ -1,4 +1,7 @@
 import React, { ReactNode } from 'react';
+import cn from 'classnames';
+
+import { theme } from 'Common/styles';
 
 import styles from './Section.module.pcss';
 
@@ -12,7 +15,7 @@ export const Section = ({ children, title, header }: SectionProps) => {
     return (
         <>
             {title ? (
-                <h1 className={styles.title}>
+                <h1 className={cn(styles.title, theme.common.headingMain)}>
                     {title}
                 </h1>
             ) : header}

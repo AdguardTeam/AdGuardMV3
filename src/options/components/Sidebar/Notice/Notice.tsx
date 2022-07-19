@@ -1,17 +1,18 @@
 import React, { useContext } from 'react';
-import cn from 'classnames';
 import { observer } from 'mobx-react';
+import cn from 'classnames';
 
-import { reactTranslator } from 'Common/translators/reactTranslator';
 import { theme } from 'Common/styles';
+import { IconId } from 'Common/constants/icons';
+import { reactTranslator } from 'Common/translators/reactTranslator';
 import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
 import { LEARN_MORE } from 'Common/constants/urls';
+import { rootStore } from 'Options/stores';
+import { Icon } from 'Common/components/ui';
 
-import { rootStore } from '../../stores';
+import style from './notice.module.pcss';
 
-import styles from './Notice.module.pcss';
-
-const Notice = observer(() => {
+export const Notice = observer(() => {
     const store = useContext(rootStore);
     const { settingsStore } = store;
     const { noticeHidden } = settingsStore;
@@ -25,26 +26,29 @@ const Notice = observer(() => {
     }
 
     return (
-        <div className={styles.container}>
-            <hr className={cn(theme.common.hr, styles.noticeHr)} />
-            <div className={styles.notice}>{reactTranslator.getMessage('options_notice_program')}</div>
+        <div className={style.block}>
+            <div className={style.message}>
+                {reactTranslator.getMessage('options_notice_program')}
+            </div>
             <a
                 href={LEARN_MORE}
-                className={cn(theme.common.link, styles.compareLink)}
-                rel="noopener noreferrer"
                 target="_blank"
+                className={cn(
+                    theme.button.middle,
+                    theme.button.green,
+                    theme.button.stretch,
+                )}
+                rel="noreferrer"
             >
                 {reactTranslator.getMessage('options_notice_compare_link')}
             </a>
             <button
                 type="button"
-                className={styles.button}
+                className={style.close}
                 onClick={hide}
             >
-                {reactTranslator.getMessage('options_notice_hide')}
+                <Icon id={IconId.CROSS} />
             </button>
         </div>
     );
 });
-
-export { Notice };

@@ -7,7 +7,6 @@ import { KEY_ENTER } from 'Common/constants/keyboard';
 import { useKeyPress } from 'Common/hooks/useKeyPress';
 import { translator } from 'Common/translators/translator';
 import { CheckboxOption } from 'Options/components/CheckboxOption';
-import { IconId } from 'Common/components/ui';
 import { rootStore } from 'Options/stores';
 import { theme } from 'Common/styles';
 
@@ -20,15 +19,12 @@ enum UNBLOCK_OPTIONS {
 const unblockOptionsMap = {
     [UNBLOCK_OPTIONS.LINKS]: {
         title: translator.getMessage('options_user_rule_unblock_subrequests'),
-        icon: IconId.LINK,
     },
     [UNBLOCK_OPTIONS.HIDDEN_ELEMENTS]: {
         title: translator.getMessage('options_user_rule_unhide_elements'),
-        icon: IconId.EYE,
     },
     [UNBLOCK_OPTIONS.ADVANCED_RULES]: {
-        title: translator.getMessage('options_user_rule_advanced_rules'),
-        icon: IconId.LIGHTNING,
+        title: translator.getMessage('options_user_rule_removing_elements'),
     },
 };
 
@@ -86,7 +82,6 @@ export const NewUserRuleUnblocking = observer(() => {
 
         return (
             <CheckboxOption
-                iconId={option.icon}
                 id={id}
                 message={option.title}
                 checked={checked}
@@ -102,11 +97,14 @@ export const NewUserRuleUnblocking = observer(() => {
     useKeyPress(KEY_ENTER, () => onSave(), [domain]);
 
     return (
-        <>
+        <div className={theme.modal.itemWrapper}>
+            <div className={theme.modal.label}>
+                {translator.getMessage('options_user_rule_block_domain')}
+            </div>
             <input
                 className={theme.modal.modalInput}
                 value={domain}
-                placeholder="domain.com"
+                placeholder="example.com"
                 onChange={onDomainChange}
                 onFocus={onFocus}
             />
@@ -127,9 +125,9 @@ export const NewUserRuleUnblocking = observer(() => {
                     className={cn(theme.button.middle, theme.button.green)}
                     onClick={onSave}
                 >
-                    {translator.getMessage('options_custom_filter_modal_confirm_save_button')}
+                    {translator.getMessage('options_user_rule_wizard_button_add')}
                 </button>
             </div>
-        </>
+        </div>
     );
 });

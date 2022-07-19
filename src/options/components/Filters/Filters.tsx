@@ -8,7 +8,7 @@ import { Section, Header } from 'Common/components/Section';
 import { IconId } from 'Common/components/ui';
 import { rootStore } from 'Options/stores';
 import { CustomFilterModal } from 'Options/components/Filters/CustomFilterModal';
-import { CheckboxOption } from 'Options/components/CheckboxOption';
+import { SwitcherOption } from 'Options/components/SwitcherOption';
 import { Button } from 'Common/components/Button/Button';
 
 import styles from './Filters.module.pcss';
@@ -127,7 +127,7 @@ export const Filters = observer(() => {
                             };
 
                             return (
-                                <CheckboxOption
+                                <SwitcherOption
                                     iconId={IconId.CUSTOM_FILTERS}
                                     key={filter.id}
                                     id={filter.id.toString()}

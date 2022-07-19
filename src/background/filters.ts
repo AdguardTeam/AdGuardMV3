@@ -33,6 +33,14 @@ const DEFAULT_FILTERS: Filter[] = [
         groupId: FiltersGroupId.MAIN,
     },
     {
+        id: FILTER_RULESET[RulesetType.RULESET_14].id,
+        enabled: FILTER_RULESET[RulesetType.RULESET_14].enabled,
+        iconId: IconId.ANNOYANCES,
+        title: 'options_block_annoyances_option',
+        description: 'options_block_annoyances_option_desc',
+        groupId: FiltersGroupId.MAIN,
+    },
+    {
         id: FILTER_RULESET[RulesetType.RULESET_3].id,
         enabled: FILTER_RULESET[RulesetType.RULESET_3].enabled,
         iconId: IconId.TRACKERS_BLOCKING,
@@ -84,14 +92,6 @@ const DEFAULT_FILTERS: Filter[] = [
         title: 'Turkish',
         description: 'Filter list that specifically removes ads on websites in the Turkish language.',
         groupId: FiltersGroupId.LANGUAGES,
-    },
-    {
-        id: FILTER_RULESET[RulesetType.RULESET_14].id,
-        enabled: FILTER_RULESET[RulesetType.RULESET_14].enabled,
-        iconId: IconId.ANNOYANCES,
-        title: 'options_block_annoyances_option',
-        description: 'options_block_annoyances_option_desc',
-        groupId: FiltersGroupId.MAIN,
     },
     {
         id: FILTER_RULESET[RulesetType.RULESET_16].id,

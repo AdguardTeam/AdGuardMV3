@@ -3,7 +3,8 @@ import React from 'react';
 import { IconId, Icon } from 'Common/components/ui';
 
 import { Nav } from '../Nav';
-import { Notice } from '../Notice';
+
+import { Notice } from './Notice';
 
 import './sidebar.pcss';
 

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
 
 import { rootStore } from 'Options/stores';
-import { CheckboxOption } from 'Options/components/CheckboxOption';
+import { SwitcherOption } from 'Options/components/SwitcherOption';
 import { Category } from 'Options/components/Category';
 import { translator } from 'Common/translators/translator';
 import { Filter, FiltersGroupId } from 'Common/constants/common';
@@ -37,14 +37,14 @@ export const Languages = observer(() => {
             headerDesc={translator.getMessage('options_languages_option_header_desc')}
         >
             <>
-                <CheckboxOption
+                <SwitcherOption
                     integrated
                     key="english_integrated"
                     id="english_integrated"
                     messageKey="options_languages_english"
                 />
                 {languagesFilters.map((filter) => (
-                    <CheckboxOption
+                    <SwitcherOption
                         integrated={filter.groupId === FiltersGroupId.INTEGRATED}
                         key={filter.id}
                         id={filter.id.toString()}
