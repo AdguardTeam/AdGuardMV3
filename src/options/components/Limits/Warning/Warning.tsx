@@ -2,6 +2,7 @@ import React from 'react';
 
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { theme } from 'Common/styles';
+import { DOWNLOAD_APP } from 'Common/constants/urls';
 
 import styles from './Warning.module.pcss';
 
@@ -48,13 +49,12 @@ const content = [
         id: 6,
         desc: reactTranslator.getMessage(
             'options_limits_warning_desc_app',
-            // TODO fix url
             {
                 link: (payload: string) => (
                     <a
-                        // TODO fix url
-                        // eslint-disable-next-line max-len
-                        href="https://adguard.com/forward.html?action=compare&from=options_screen&app=browser_extension_mv3"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href={DOWNLOAD_APP}
                         className={theme.button.link}
                     >
                         {payload}
