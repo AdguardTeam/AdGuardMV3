@@ -60,6 +60,10 @@ class Settings {
     public filteringEnabled = () => {
         return this.settings[SETTINGS_NAMES.FILTERING_ENABLED];
     };
+
+    public protectionEnabled = () => {
+        return this.settings[SETTINGS_NAMES.PROTECTION_ENABLED];
+    };
 }
 
 export const settings = new Settings(DEFAULT_SETTINGS);

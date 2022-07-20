@@ -1,12 +1,8 @@
-import { getUrlDetails } from 'Common/helpers';
 import { tabUtils } from 'Common/tab-utils';
 import { log } from 'Common/logger';
 import { prefs } from 'Common/prefs';
-import { NOTIFIER_EVENTS } from 'Common/constants/common';
-import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
 
-import { notifier } from './notifier';
-import { userRules } from './userRules';
+import { settings } from './settings';
 
 type TabIconDetails = chrome.action.TabIconDetails;
 
@@ -73,50 +69,26 @@ class BrowserActions {
         }
     };
 
-    setIconByFiltering(filteringEnabled: boolean, tabId?: number) {
+    async setIconByFiltering(filteringEnabled: boolean, tabId?: number) {
         if (filteringEnabled) {
-            this.setIconDisabled(tabId);
+            await this.setIconEnabled(tabId);
         } else {
-            this.setIconEnabled(tabId);
+            await this.setIconDisabled(tabId);
         }
     }
 
     onFilteringStateChange = async () => {
-        try {
-            const activeTab = await tabUtils.getActiveTab();
-
-            if (activeTab?.url) {
-                const urlDetails = getUrlDetails(activeTab.url);
-
-                if (urlDetails?.domainName) {
-                    const currentAllowRule = userRules.getCurrentAllowRule(urlDetails.domainName);
-
-                    const filteringEnabled = !!currentAllowRule?.enabled;
-
-                    this.setIconByFiltering(filteringEnabled, activeTab.id);
-                }
-            }
-        } catch (e) {
-            log.info(e);
+        const activeTab = await tabUtils.getActiveTab();
+        if (!activeTab) {
+            return;
         }
+        const isFilteringEnabled = !!(settings.filteringEnabled() && settings.protectionEnabled());
+        await this.setIconByFiltering(isFilteringEnabled, activeTab.id);
     };
 
     init() {
         tabUtils.onActivated(() => this.onFilteringStateChange());
         tabUtils.onUpdated(() => this.onFilteringStateChange());
-
-        notifier.addEventListener(NOTIFIER_EVENTS.SETTING_UPDATED, async (data) => {
-            try {
-                const { key } = data;
-                if (key !== SETTINGS_NAMES.FILTERING_ENABLED) {
-                    return;
-                }
-
-                await this.onFilteringStateChange();
-            } catch (e) {
-                log.info(e);
-            }
-        });
     }
 }
 
