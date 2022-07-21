@@ -57,13 +57,13 @@ class Settings {
         this.setSetting(SETTINGS_NAMES.FILTERING_ENABLED, false);
     };
 
-    public filteringEnabled = () => {
+    public get filteringEnabled() {
         return this.settings[SETTINGS_NAMES.FILTERING_ENABLED];
-    };
+    }
 
-    public protectionEnabled = () => {
+    public get protectionEnabled() {
         return this.settings[SETTINGS_NAMES.PROTECTION_ENABLED];
-    };
+    }
 }
 
 export const settings = new Settings(DEFAULT_SETTINGS);

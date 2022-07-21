@@ -82,8 +82,8 @@ class BrowserActions {
         if (!activeTab) {
             return;
         }
-        const isFilteringEnabled = !!(settings.filteringEnabled() && settings.protectionEnabled());
-        await this.setIconByFiltering(isFilteringEnabled, activeTab.id);
+        const isFilteringEnabled = settings.filteringEnabled && settings.protectionEnabled;
+        await this.setIconByFiltering(isFilteringEnabled as boolean, activeTab.id);
     };
 
     init() {
