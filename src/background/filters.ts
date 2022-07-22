@@ -134,7 +134,9 @@ class Filters {
         await this.setEnabledIds();
     }
 
-    /** Returns a list of information about the rule sets specified in the V3 manifest */
+    /**
+     * Returns a list of information about the rule sets specified in the V3 manifest
+     */
     private getManifestRulesets = (): ManifestRulesetInfo[] => {
         const {
             declarative_net_request: { rule_resources },
@@ -143,7 +145,9 @@ class Filters {
         return rule_resources;
     };
 
-    /** Loads and parses the version of the filters that was included in the extension */
+    /**
+     * Loads and parses the version of the filters that was included in the extension
+     */
     private getFiltersTimestamps = async () => {
         const url = chrome.runtime.getURL(`${COMMON_FILTERS_DIR}/${FILTERS_VERSIONS_FILENAME}`);
         const request = await fetch(url);
@@ -254,12 +258,16 @@ class Filters {
         await this.setEnabledIds();
     };
 
-    /** Saves filters state in the storage */
+    /**
+     * Saves filters state in the storage
+     */
     saveInStorage = async (filters: Filter[]) => {
         await storage.set(this.FILTERS_STORAGE_KEY, filters);
     };
 
-    /** Returns filters state from storage */
+    /**
+     * Returns filters state from storage
+     */
     getFiltersFromStorage = async (): Promise<Filter[]> => {
         const filters = await storage.get<Filter[]>(this.FILTERS_STORAGE_KEY);
         return filters ?? DEFAULT_FILTERS;

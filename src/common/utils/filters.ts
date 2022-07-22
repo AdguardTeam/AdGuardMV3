@@ -42,7 +42,9 @@ export default class FiltersUtils {
         };
     };
 
-    /** Parses expires tag */
+    /**
+     * Parses expires tag
+     */
     private static parseExpiresStr = (str: string): number => {
         const regexp = /(\d+)\s+(day|hour)/;
 
@@ -73,7 +75,9 @@ export default class FiltersUtils {
         return multiplier * parseInt(num, 10);
     };
 
-    /** Returns the parsed version of the specified rules or creates a new one with the current date */
+    /**
+     * Returns the parsed version of the specified rules or creates a new one with the current date
+     */
     public static getTimestampForFilter(rules: string[]) {
         const { timeUpdated } = FiltersUtils.parseFilterInfo(rules, '');
         return timeUpdated?.trim() || new Date().toISOString();

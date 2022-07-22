@@ -77,14 +77,18 @@ class Settings {
         return this.settings[SETTINGS_NAMES.FILTERING_ENABLED];
     };
 
-    /** Checks that settings is actual SettingsType */
+    /**
+     * Checks that settings is actual SettingsType
+     */
     private isSettingsTypeCorrect = (settings: any): boolean => {
         return Object.keys(settings).every((key) => {
             return typeof DEFAULT_SETTINGS[key as SETTINGS_NAMES] === settings[key];
         });
     };
 
-    /** Adds version to settings object */
+    /**
+     * Adds version to settings object
+     */
     private migrateFrom0to1 = (oldSettings: any): any => {
         return {
             ...oldSettings,
@@ -104,7 +108,9 @@ class Settings {
         0: this.migrateFrom0to1,
     };
 
-    /** Applying migrations one by one from the old version to the newest version */
+    /**
+     * Applying migrations one by one from the old version to the newest version
+     */
     private async applyMigrations(
         oldVersion: number,
         newestVersion: number,
@@ -125,7 +131,9 @@ class Settings {
         return migratedSettings as SettingsType;
     }
 
-    /** Gets version of settings object or 0 if not found version */
+    /**
+     * Gets version of settings object or 0 if not found version
+     */
     private static getSettingsVersion(settings: any): number {
         const { version } = settings;
 
@@ -134,13 +142,17 @@ class Settings {
             : 0;
     }
 
-    /** Checks scheme and migrate if needed */
+    /**
+     * Checks scheme and migrate if needed
+     */
     private static isSettingsOutdated(settings: any): boolean {
         const version = Settings.getSettingsVersion(settings);
         return version < SCHEME_VERSION;
     }
 
-    /** Runs migrations for settings */
+    /**
+     * Runs migrations for settings
+     */
     async migrateSettings(oldSettings: any): Promise<SettingsType> {
         const oldVersion = Settings.getSettingsVersion(oldSettings);
         const newestVersion = SCHEME_VERSION;

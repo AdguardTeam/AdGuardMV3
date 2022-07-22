@@ -8,21 +8,25 @@ import { FILTERS_VERSIONS_FILENAME } from '../../src/common/constants/common';
 
 import { readNLinesFromFileWithStream } from './read-from-stream';
 
-/** Webpack plugin, collect filters versions and save it to filters folder */
+/**
+ * Webpack plugin, collect filters versions and save it to filters folder
+ */
 export default class CollectFiltersVersionsPlugin {
-    /** Stores versions of filters */
+    // Stores versions of filters
     private filtersVersions: Map<number, number>;
 
-    /** Path to original .txt filters */
+    // Path to original .txt filters
     private originalFiltersPath: string;
 
-    /** Extension of original filters */
+    // Extension of original filters
     private FILTERS_EXT = '.txt';
 
-    /** Prefix of filter's filename to extract filter id */
+    // Prefix of filter's filename to extract filter id
     private FILTER_PREFIX = 'filter_';
 
-    /** @param originalFiltersPath absolute path to folder with original filters */
+    /**
+     * @param originalFiltersPath absolute path to folder with original filters
+    */
     constructor(originalFiltersPath: string) {
         this.filtersVersions = new Map<number, number>();
         this.originalFiltersPath = originalFiltersPath;
