@@ -82,7 +82,7 @@ class Settings {
      */
     private isSettingsTypeCorrect = (settings: any): boolean => {
         return Object.keys(settings).every((key) => {
-            return typeof DEFAULT_SETTINGS[key as SETTINGS_NAMES] === settings[key];
+            return typeof DEFAULT_SETTINGS[key as SETTINGS_NAMES] === typeof settings[key];
         });
     };
 
