@@ -1,8 +1,8 @@
-! Checksum: oqlneZNHMsR4C5Kt9LtPJA
+! Checksum: H2DLPisDh4M9mH+eutUXiw
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.28.68
-! TimeUpdated: 2022-07-15T22:31:37+00:00
+! Version: 2.0.28.81
+! TimeUpdated: 2022-07-21T12:32:04+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1015,6 +1015,10 @@ teleboy.ch#@#.adWrapper
 ! Good: example.org#?#main > div.row:has(> div.ad)
 ! Bad: example.org##main > div.ad (should be in specific.txt)
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/124978
+wz.de#?#.park-section-portal-top__content > div.park-section > article.park-teaser-collection:upward(1)
+! https://github.com/AdguardTeam/AdguardFilters/issues/124504#issuecomment-1189013577
+radio.de#?#div[class^="sc-"] > div[class^="sc-"] > div[id^="RAD_"]:upward(2)
 ! winfuture.de - left-over main page
 winfuture.de#?#.topnews > div[style]:has(> .adsbygoogle)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/123888
@@ -1852,7 +1856,8 @@ blick.ch#%#//scriptlet("set-constant", "Object.prototype.adsEnabled", "false")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/107055
 ! https://github.com/AdguardTeam/AdguardFilters/issues/94882
 gamepro.de,gamestar.de#%#//scriptlet("set-constant", "wgm.initAds", "noopFunc")
-gamepro.de,gamestar.de#%#(function(){const a={cmd:[],public:{getVideoAdUrl:function(){},createNewPosition:function(){},refreshAds:function(){},setTargetingOnPosition:function(){},setConfig:function(){},loadPositions:function(){},displayPositions:function(){},getDailymotionAdsParamsForScript:function(c,a){if(c&&"function"==typeof a)try{a({a:c})}catch(a){console.error(a)}}}};a.cmd.push=function(b){try{b()}catch(b){console.error(b)}},window.jad=a})();
+! Rule below fixes issue with video player if user has DNS filtering enabled, but it seems that at the moment it's not required
+! gamepro.de,gamestar.de#%#(function(){const b={cmd:[],public:{getVideoAdUrl:function(){},createNewPosition:function(){},refreshAds:function(){},setTargetingOnPosition:function(){},setConfig:function(){},loadPositions:function(){},displayPositions:function(){},getDailymotionAdsParamsForScript:function(b,c){if(b&&"function"==typeof c)try{c({a:b})}catch(b){console.error(b)}}}};b.cmd.push=function(a){try{window.addEventListener("load",()=>{a()})}catch(a){console.error(a)}},window.jad=b})();
 ! https://github.com/AdguardTeam/AdguardFilters/issues/93347
 joyn.de#%#//scriptlet('prevent-fetch', 'zomap.de')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/92118
@@ -1977,6 +1982,8 @@ menshealth.de#%#function google_ad_request_done() {};
 !------- CSS fixes --------------------!
 !--------------------------------------!
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/124639
+3c.web.de#$#html.can-have-sky .section-content { margin-right: 0px !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/120779
 giga.de#$#nav[data-role="alice-sub-navbar"][data-position="smart-sticky"] { margin-top: auto !important; }
 ! wooco.de - ad banner top
@@ -2236,7 +2243,16 @@ jungewelt.de,elektrikforum.de,bauexpertenforum.de,1erforum.de,avensis-forum.de,f
 drwindows.de,wiesbadenaktuell.de,rauchmeldungen.de,simfans.de,wn.de,cosmopolitan.de,wallstreet-online.de,tierchenwelt.de,bielefeld.de##.anzeige
 ! ##.id-Container--proBEEP
 hallo-muenchen.de,az-online.de,lokalo24.de,rosenheim24.de,kreiszeitung.de,mannheim24.de,merkur.de,oktoberfest-live.de,tz.de##.id-Container--proBEEP
+! ##.Ad
+vergleich.focus.de,chip.de,gutefrage.net,reisefrage.net,motorradfrage.net,autofrage.net,sportlerfrage.net,computerfrage.net,gesundheitsfrage.net,gutefrage.net,finanzfrage.net##.Ad
+! ##.ad
+3c.web.de,thueringen24.de,pfaffenhofen-today.de,holidaycheck.de,berlin.de,fuw.ch,allgemeine-zeitung.de,schlaukopf.de,schwarzwaelder-bote.de,aachener-zeitung.de,hamburg.de,sat1.de,abendzeitung-muenchen.de,dfb.de,gamestar.hu,ikz-online.de,nrz.de,stimme.de,waz.de,wiesbadener-kurier.de,wiesbadener-tagblatt.de,wp.de,wr.de##.ad
+! ##.adsbygoogle
+winfuture.de,netzwelt.de,quoka.de,farmeramania.de,bravofly.de,computerbild.de,digitalfernsehen.de,hl-live.de,chinamobilemag.de,focus.de,pcwelt.de##.adsbygoogle
 !
+np-coburg.de###hcsb-topteaser-upper
+spiegel.de##div[data-area="heise-widget"]
+hausgarten.net##.block-body > article.message:not([data-author])
 4kfilme.de##.tdi_104
 4kfilme.de##.tdi_132
 4kfilme.de##.tdi_70
@@ -2306,6 +2322,7 @@ gamestar.de##a[rel*="sponsored"]
 bild.de##.article-ad-link
 sueddeutsche.de###article-app-container a[href*="advertorial.sueddeutsche.de"]
 bz-berlin.de##.w-mrec > div[style*="width: 300px;"][style*="height: 250px"]
+computerbase.de##a[rel*="sponsored"]
 computerbase.de##a[data-affiliated="true"]
 computerbase.de##.content-list > .article > a[href*="-anzeige-"]
 computerbase.de##.content-list > .article > a[href*="-anzeige-"] + .article__main
@@ -3335,7 +3352,6 @@ winfuture.de##.mb14
 t-online.de###Tmainbox > div[id]:not([id^="T"]) > div[style*="color:"][style*="font:"]
 mtb-news.de##.js-replyNewMessageContainer > article:not([id]):not(.js-post)
 pi-news.net##.wpb_wrapper > div > a[target="_blank"] > img
-vergleich.focus.de,chip.de,gutefrage.net,reisefrage.net,motorradfrage.net,autofrage.net,sportlerfrage.net,computerfrage.net,gesundheitsfrage.net,gutefrage.net,finanzfrage.net##.Ad
 ariva.de###WEBSEITE > #siteTeaserLayer
 pixelio.de##div[style="float:right; width: 300px; height: 250px"]
 gut-erklaert.de##.bottomWb
@@ -3704,7 +3720,7 @@ echo-online.de###rightbar > .powered
 echo-online.de###rightbar > .powered + .box
 silicon.de###div-gpt-ad-DESKTOP_MEGA-1 > .dfp_word
 silicon.de##div[id^="div-gpt-ad"]:not([id^="div-gpt-ad-DESKTOP_MEGA"])
-nzz.ch##.recommendations
+heise.de,nzz.ch##.recommendations
 winfuture.de###news_content > div[class^="ws_contentAd"] + br + br
 winfuture.de###news_content > div[class^="ws_contentAd"] + br
 pcwelt.de###outer > .info-section
@@ -4661,7 +4677,6 @@ praxistipps.chip.de##.WidgetDsl
 pasta-selber-machen.de##.aawp-widget
 usp-forum.de,win-10-forum.de##.above_header
 winfuture.de##.acceptable_ad
-thueringen24.de,pfaffenhofen-today.de,holidaycheck.de,berlin.de,fuw.ch,allgemeine-zeitung.de,schlaukopf.de,schwarzwaelder-bote.de,aachener-zeitung.de,hamburg.de,sat1.de,abendzeitung-muenchen.de,dfb.de,gamestar.hu,ikz-online.de,nrz.de,stimme.de,waz.de,wiesbadener-kurier.de,wiesbadener-tagblatt.de,wp.de,wr.de##.ad
 medizin-und-technik.industrie.de##.ad-disclaimer + div[style*="width: 300px; height: 250px;"]
 utopia.de##.ad-intern
 bild.de##.ad-mark
@@ -4673,7 +4688,6 @@ weser-kurier.de##.adobj
 techbook.de##.ads
 radiohamburg.de##.ads-rectangle
 fcn.de##.ads:not([class^="ads small-block-grid-"])
-winfuture.de,netzwelt.de,quoka.de,farmeramania.de,bravofly.de,computerbild.de,digitalfernsehen.de,hl-live.de,chinamobilemag.de,focus.de,pcwelt.de##.adsbygoogle
 tvspielfilm.de##.adsd_rectangle
 eatsmarter.de##.adsense
 polizeinews.ch##.adv_middle
@@ -5656,9 +5670,13 @@ _woz_banner_vote.
 ###SlimSpot_imPop_Container
 ###Werb_Postbit_Bottom
 ###WerbungLinks
+###WerbungOben
 ###WerbungObenRechts10_GesamtDIV
 ###WerbungObenRechts8_GesamtDIV
 ###WerbungObenRechts9_GesamtDIV
+###WerbungRechts1
+###WerbungRechts2
+###WerbungUnten
 ###WerbungUntenLinks4_GesamtDIV
 ###WerbungUntenLinks7_GesamtDIV
 ###WerbungUntenLinks8_GesamtDIV
@@ -5838,6 +5856,7 @@ _woz_banner_vote.
 ##.KalaydoRessortBox
 ##.KomischeWerbeBox
 ##.RessortWerbungHeader
+##.Werbelabel
 ##.Werbeteaser
 ##.Werbung
 ##.WerbungAdpepper
@@ -7217,6 +7236,7 @@ $stylesheet,subdocument,third-party,xmlhttprequest,domain=canna-power.to|canna.t
 ||kroatien-nachrichten.de/wp-content/uploads/*/136685650_448400096333860_585562005834626849_n-3.jpg
 ||kroatien-nachrichten.de/wp-content/uploads/*/Kuoko_KN_Logo-300x112.jpg
 ||kroatien-nachrichten.de/wp-content/uploads/2020/11/Logo.jpg
+||krone.at/talk-ads/
 ||kronenachrichten.com/wp-content/uploads/banner/
 ||krzbb.de/revive/
 ||kulturmd.de/images/*_Banner_
@@ -7868,7 +7888,6 @@ $stylesheet,subdocument,third-party,xmlhttprequest,domain=canna-power.to|canna.t
 ||zurzeit.at/wp-content/uploads/*/Banner-
 ||zwerg-am-berg.de/wp-content/uploads/*/Banner_
 $csp=script-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: www.googletagmanager.com *.google.com *.gstatic.com www.google-analytics.com *.googleapis.com *.cloudflare.com *.twitter.com connect.facebook.net cdn.hdfilme.net cdn.hdfilme.cx ssl.p.jwpcdn.com,domain=hdfilme.cx
-||mygully.com^$csp=default-src 'self' www.google.com www.gstatic.com ajax.googleapis.com https://mygully.com http://mygully.com https://i.mygully.com http://i.mygully.com 'unsafe-inline' 'unsafe-eval' data: blob:
 /^https?:\/\/.*\/[a-z0-9A-Z]{3,15}\.(php|jsx|1ph)/$image,media,script,subdocument,domain=beeg-pornos.com|deinesexfilme.com|deutsche-sexfilme.net|deutschsex.com|deutschsex.mobi|einfachtitten.com|german-porno-deutsch.info|gutesexfilme.com|hd-pornos.info|hd-sexfilme.com|lesbenhd.com|meinyouporn.com|pornoaffe.com|pornoente.tv|pornofisch.com|pornohammer.com|pornohans.com|pornohirsch.net|pornojenny.com|pornoklinge.com|pornotom.com|pornotommy.com|pornozebra.com|reifporn.de|sexente.com|sexvideos-hd.com|tube8-pornos.com|xhamster-sexvideos.com|xnxx-porno.com
 /^https?:\/\/.*\/.*(sw[0-9a-z._-]|\.notify\.).*/$script,domain=hammerporno.xxx
 /^https?:\/\/[0-9a-z]{8,}\.com\/.*/$~media,~subdocument,third-party,domain=190.115.18.20|aniworld.to|bs.to|burningseries.ac|burningseries.cx|burningseries.nz|burningseries.se|burningseries.sx|burningseries.vc|kinox.top|s.to|serien.cam|serienstream.to|xcine.me
@@ -9932,7 +9951,6 @@ eurotransport.de#?#.v-A_-sidecol__list__item:-abp-has(.v-A_-teaser__tag--ad)
 fazemag.de#?#h4:-abp-has(span:-abp-contains(ANZEIGEN))
 feuerwehrmagazin.de#?#.excerpt-tile.cell.small-12.medium-6:-abp-has(.advertorials)
 finanzen.net#?#.mleft-10.small-font.light-grey:-abp-contains(Werbung) + .box + .border-blue-2
-finanzen.net#?#.mleft-10.small-font.light-grey:-abp-contains(Werbung) + .box + .box
 finanzen.net#?#.mleft-10:-abp-contains(Werbung) + .box
 fuersie.de#?#.teaser__item:-abp-has(.teaser__adtype)
 futurezone.de#?#article[data-post-id]:-abp-has(.sponsor-byline)

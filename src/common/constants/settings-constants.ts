@@ -1,4 +1,7 @@
 export enum SETTINGS_NAMES {
+    /* VERSION */
+    VERSION = 'version',
+
     /* PAGE FILTERING */
     FILTERING_ENABLED = 'filtering.enabled',
 
@@ -17,7 +20,11 @@ export type SettingsValueType = boolean | number;
 
 export type SettingsType = Record<SETTINGS_NAMES, SettingsValueType>;
 
+export const SCHEME_VERSION = 1;
+
 export const DEFAULT_SETTINGS: SettingsType = {
+    [SETTINGS_NAMES.VERSION]: SCHEME_VERSION,
+
     [SETTINGS_NAMES.FILTERING_ENABLED]: true,
 
     [SETTINGS_NAMES.PROTECTION_ENABLED]: true,
