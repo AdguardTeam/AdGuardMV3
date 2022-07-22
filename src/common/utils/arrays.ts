@@ -3,4 +3,4 @@
  */
 const arrayToMap = (arr: Array<Array<number>>) => new Map(arr.map((i) => [i[0], i[1]]));
 
-export default arrayToMap;
+export { arrayToMap };

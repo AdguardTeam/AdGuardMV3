@@ -4,7 +4,7 @@ import { FilterConvertedSourceMap, USER_FILTER_ID } from '@adguard/tswebextensio
 import type { Rules } from 'Common/constants/common';
 import { MESSAGE_TYPES, Filter } from 'Common/constants/common';
 import { translator } from 'Common/translators/translator';
-import arrayToMap from 'Common/utils/array-to-map';
+import { arrayToMap } from 'Common/utils/arrays';
 import { ADGUARD_FILTERS_IDS } from 'Common/constants/filters';
 
 import { RequestsTable } from '../RequestsTable';

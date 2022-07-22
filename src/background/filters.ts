@@ -9,7 +9,7 @@ import {
 import { FILTER_RULESET, RulesetType } from 'Common/constants/filters';
 import { RULES_STORAGE_KEY, ENABLED_FILTERS_IDS } from 'Common/constants/storage-keys';
 import FiltersUtils from 'Common/utils/filters';
-import arrayToMap from 'Common/utils/array-to-map';
+import { arrayToMap } from 'Common/utils/arrays';
 
 import { backend, COMMON_FILTERS_DIR } from './backend';
 import { storage } from './storage';
