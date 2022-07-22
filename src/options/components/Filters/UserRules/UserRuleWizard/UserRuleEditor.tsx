@@ -13,12 +13,13 @@ import 'Common/editor/mode-adguard';
 interface UserRuleEditorProps {
     ruleText: string;
     onChange: (value: string) => void;
+    mod?: string;
 }
 
 const EDITOR_WIDTH = '335px';
 const EDITOR_HEIGHT = '100px';
 
-export const UserRuleEditor = ({ ruleText, onChange }: UserRuleEditorProps) => {
+export const UserRuleEditor = ({ ruleText, onChange, mod }: UserRuleEditorProps) => {
     const { optionsStore } = useContext(rootStore);
 
     const editorSize = {
@@ -30,8 +31,12 @@ export const UserRuleEditor = ({ ruleText, onChange }: UserRuleEditorProps) => {
         optionsStore.resetError();
     };
 
+    const containerClassName = cn(styles.container, {
+        [styles.modal]: mod === 'modal',
+    });
+
     return (
-        <div className={cn(styles.container, styles.modal)} style={editorSize}>
+        <div className={containerClassName} style={editorSize}>
             <AceEditor
                 width="100%"
                 height="100%"
@@ -49,4 +54,8 @@ export const UserRuleEditor = ({ ruleText, onChange }: UserRuleEditorProps) => {
             />
         </div>
     );
+};
+
+UserRuleEditor.defaultProps = {
+    mod: '',
 };

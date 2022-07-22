@@ -7,8 +7,8 @@ import { KEY_ENTER } from 'Common/constants/keyboard';
 import { useKeyPress } from 'Common/hooks/useKeyPress';
 import { translator } from 'Common/translators/translator';
 import { theme } from 'Common/styles';
-import { CheckboxOption } from 'Options/components/CheckboxOption';
 import { rootStore } from 'Options/stores';
+import { CheckboxOption } from 'Options/components/CheckboxOption';
 
 const buildBlockingRule = (domain: string, blockSubdomains: boolean): string => {
     if (blockSubdomains) {
@@ -54,13 +54,18 @@ export const NewUserRuleBlocking = observer(() => {
 
     return (
         <>
-            <input
-                className={theme.modal.modalInput}
-                defaultValue={domain}
-                onChange={onChange}
-                placeholder="domain.com"
-                onFocus={onFocus}
-            />
+            <div className={theme.modal.itemWrapper}>
+                <div className={theme.modal.label}>
+                    {translator.getMessage('options_user_rule_block_domain')}
+                </div>
+                <input
+                    className={theme.modal.modalInput}
+                    defaultValue={domain}
+                    onChange={onChange}
+                    placeholder="example.com"
+                    onFocus={onFocus}
+                />
+            </div>
             <div className={theme.modal.checkboxGroup}>
                 <CheckboxOption
                     key={message}
@@ -82,7 +87,7 @@ export const NewUserRuleBlocking = observer(() => {
                     className={cn(theme.button.middle, theme.button.green)}
                     onClick={onSave}
                 >
-                    {translator.getMessage('options_custom_filter_modal_confirm_save_button')}
+                    {translator.getMessage('options_user_rule_wizard_button_add')}
                 </button>
             </div>
         </>

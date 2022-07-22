@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
+import cn from 'classnames';
 
 import { UserRuleTypeComponent } from 'Options/components/Filters/UserRules/UserRule/UserRuleTypeComponent';
 import { UserRuleType } from 'Common/constants/common';
 import styles from 'Options/components/Filters/UserRules/UserRule/UserRule.module.pcss';
 import { rootStore } from 'Options/stores';
+import { theme } from 'Common/styles';
 
 import { HighlightSearch } from '../../../HighlightSearch';
 
@@ -42,10 +44,10 @@ export const UserRule = ({
     return (
         <>
             <div className={styles.checkboxContainer}>
-                <span className={`${styles.container} ${styles.rule}`}>
+                <span className={cn(theme.checkbox.container, styles.rule)}>
                     <input type="checkbox" id={String(id)} checked={enabled} onChange={handleToggle} />
                     {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                    <label className={styles.checkmark} htmlFor={String(id)} />
+                    <label className={theme.checkbox.checkmark} htmlFor={String(id)} />
                     <button type="button" onClick={handleRuleClick} className={styles.ruleButton}>
                         <HighlightSearch str={ruleText} />
                     </button>

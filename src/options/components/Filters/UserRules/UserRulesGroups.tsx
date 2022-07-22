@@ -11,7 +11,7 @@ export const UserRulesGroups = observer(() => {
     const { optionsStore: { userRulesGroups } } = useStore();
 
     return (
-        <>
+        <div className={styles.wrapper}>
             {userRulesGroups.length > 0 ? (
                 userRulesGroups.map((userRulesGroup) => {
                     const [domain, userRules] = userRulesGroup;
@@ -26,6 +26,6 @@ export const UserRulesGroups = observer(() => {
             ) : (
                 <div className={styles.notFound}>{translator.getMessage('options_filters_not_rules')}</div>
             )}
-        </>
+        </div>
     );
 });

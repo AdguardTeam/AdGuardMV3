@@ -21,17 +21,27 @@ export const RemoveCustomFilter = ({
 }: RemoveCustomFilterProps) => {
     return (
         <>
-            <input
-                className={theme.modal.modalInput}
-                type="text"
-                value={title}
-                onChange={onChange}
-            />
+            <div className={theme.modal.itemWrapper}>
+                <div className={theme.modal.label}>
+                    {reactTranslator.getMessage('options_custom_filter_add_label_name')}
+                </div>
+                <input
+                    className={theme.modal.modalInput}
+                    type="text"
+                    value={title}
+                    onChange={onChange}
+                />
+            </div>
             {
                 description
                 && (
-                    <div className={cn(theme.modal.description, theme.modal.name)}>
-                        {description}
+                    <div className={cn(theme.modal.itemWrapper, theme.modal.disabled)}>
+                        <div className={theme.modal.label}>
+                            {reactTranslator.getMessage('options_custom_filter_add_label_description')}
+                        </div>
+                        <div className={cn(theme.modal.filterDescription, theme.modal.name)}>
+                            {description}
+                        </div>
                     </div>
                 )
             }

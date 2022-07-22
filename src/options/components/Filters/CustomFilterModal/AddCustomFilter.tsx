@@ -114,7 +114,7 @@ export const AddCustomFilter = ({
                 <div className={theme.modal.description}>
                     {addCustomFilterError}
                 </div>
-                <div className={cn(theme.modal.footer, theme.modal.center)}>
+                <div className={theme.modal.footer}>
                     <button
                         type="button"
                         className={cn(theme.button.middle, theme.button.green)}
@@ -129,15 +129,20 @@ export const AddCustomFilter = ({
 
     return (
         <form action="#" onSubmit={handleSubmit}>
-            <textarea
-                // eslint-disable-next-line jsx-a11y/no-autofocus
-                autoFocus
-                className={cn(theme.modal.modalInput, theme.modal.modalTextarea)}
-                defaultValue={textareaValue}
-                onChange={handleTextareaChange}
-                name="url"
-                placeholder={translator.getMessage('options_paste_filter_url')}
-            />
+            <div className={theme.modal.itemWrapper}>
+                <div className={theme.modal.label}>
+                    {reactTranslator.getMessage('options_paste_filter_label')}
+                </div>
+                <textarea
+                    // eslint-disable-next-line jsx-a11y/no-autofocus
+                    autoFocus
+                    className={theme.modal.modalInput}
+                    defaultValue={textareaValue}
+                    onChange={handleTextareaChange}
+                    name="url"
+                    placeholder={translator.getMessage('options_paste_filter_url')}
+                />
+            </div>
             <input
                 id="file-input"
                 type="file"
@@ -147,19 +152,19 @@ export const AddCustomFilter = ({
             />
             <div className={theme.modal.footer}>
                 <button
+                    type="submit"
+                    disabled={textareaValue.trim().length === 0}
+                    className={cn(theme.button.middle, theme.button.green, theme.modal.leftBtn)}
+                >
+                    {reactTranslator.getMessage('options_custom_filter_modal_add_add_button')}
+                </button>
+                <button
                     type="button"
-                    className={cn(theme.button.middle, theme.button.transparent, theme.modal.leftBtn)}
+                    className={cn(theme.button.middle, theme.button.transparent)}
                 >
                     <label htmlFor="file-input">
                         {reactTranslator.getMessage('options_custom_filter_modal_add_browse_button')}
                     </label>
-                </button>
-                <button
-                    type="submit"
-                    disabled={textareaValue.trim().length === 0}
-                    className={cn(theme.button.middle, theme.button.green)}
-                >
-                    {reactTranslator.getMessage('options_custom_filter_modal_add_add_button')}
                 </button>
             </div>
         </form>
