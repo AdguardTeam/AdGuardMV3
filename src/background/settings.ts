@@ -26,7 +26,7 @@ class Settings {
 
     public init = async () => {
         // The settings in the storage may be of an older version, so the type is 'any'
-        const storedSettings = await storage.get<any>(this.SETTINGS_STORAGE_KEY);
+        const storedSettings = await storage.get<unknown>(this.SETTINGS_STORAGE_KEY);
 
         if (!storedSettings) {
             log.debug('Settings not found, using default');
@@ -135,8 +135,11 @@ class Settings {
      * Gets version of settings object or 0 if not found version
      */
     private static getSettingsVersion(settings: any): number {
-        const { version } = settings;
+        if (!settings) {
+            return 0;
+        }
 
+        const { version } = settings;
         return version
             ? Number.parseInt(version, 10)
             : 0;
@@ -162,7 +165,7 @@ class Settings {
             oldSettings,
         );
 
-        log.info(`Settings were converted from ${oldSettings.VERSION} to ${SCHEME_VERSION}`);
+        log.info(`Settings were converted from ${oldVersion} to ${SCHEME_VERSION}`);
 
         return newSettings;
     }
