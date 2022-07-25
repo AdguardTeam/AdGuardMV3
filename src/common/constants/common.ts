@@ -21,6 +21,9 @@ export interface Filter {
     description?: string,
     groupId: FiltersGroupId,
     url?: string,
+    regexpRulesCounter?: number,
+    declarativeRulesCounter?: number,
+    localeCodes?: string[],
 }
 
 export interface FilterInfo {

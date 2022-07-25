@@ -3,6 +3,7 @@ import { log } from 'Common/logger';
 import { messaging, initExtension } from './messaging';
 import { contextMenu } from './context-menu';
 import { browserActions } from './browser-actions';
+import { filters } from './filters';
 
 log.debug('Background service worker has loaded via Manifest V3.');
 
@@ -15,6 +16,7 @@ browserActions.init();
 // to avoid waiting for the service worker to wake up
 chrome.runtime.onInstalled.addListener(async () => {
     await initExtension();
+    await filters.enableCurrentLanguageFilter();
 });
 
 // TODO: do not use same selector twice
