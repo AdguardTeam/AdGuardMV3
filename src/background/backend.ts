@@ -2,6 +2,7 @@ import { RuleConverter } from '@adguard/tsurlfilter';
 import FiltersDownloader, { DefinedExpressions } from '@adguard/filters-downloader/browser';
 
 import { browserUtils } from 'Common/utils/browser-utils';
+import { Rules } from 'Common/constants/common';
 
 const FILTER_COMPILER_OPTIONS: DefinedExpressions = {
     adguard: true,
@@ -17,7 +18,7 @@ export const COMMON_FILTERS_DIR = 'filters';
 class Backend {
     loadingUrls: { [key: string]: boolean } = {};
 
-    downloadFilterRules = async (filterId: number) => {
+    downloadFilterRules = async (filterId: number): Promise<Rules> => {
         const url = chrome.runtime.getURL(`${COMMON_FILTERS_DIR}/filter_${filterId}.txt`);
 
         const response = await FiltersDownloader.download(

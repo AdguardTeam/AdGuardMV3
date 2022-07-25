@@ -3,13 +3,15 @@ import {
     FiltersGroupId,
     Filter,
     Rules,
-    FilterInfo,
     RULESET_NAME,
+    FILTERS_VERSIONS_FILENAME,
 } from 'Common/constants/common';
-import { FILTER_RULESET, RulesetType, ADGUARD_FILTERS_IDS } from 'Common/constants/filters';
+import { FILTER_RULESET, RulesetType } from 'Common/constants/filters';
 import { RULES_STORAGE_KEY, ENABLED_FILTERS_IDS } from 'Common/constants/storage-keys';
+import FiltersUtils from 'Common/utils/filters';
+import { arrayToMap } from 'Common/utils/arrays';
 
-import { backend } from './backend';
+import { backend, COMMON_FILTERS_DIR } from './backend';
 import { storage } from './storage';
 
 export const CUSTOM_FILTERS_START_ID = 1000;
@@ -121,26 +123,71 @@ class Filters {
     enableFiltersIds: number[] = [];
 
     async init() {
-        const getRulesFromFiles = async () => {
-            const promises = ADGUARD_FILTERS_IDS.map(({ id }) => backend.downloadFilterRules(id));
-            const result = await Promise.all(promises);
-            return result;
-        };
-
-        // TODO add to storage only those rules that applied by the content script;
+        // TODO: add to storage only those rules that applied by the content script;
         // Read the rules from the storages for each download background sw,
         // if there are no rules, then get the rules from the files;
         // If the rules have changed, get them (on the first lines + check time)
-        this.rules = await this.getRulesFromStorage() || await getRulesFromFiles();
+        this.rules = await this.getRules();
         await storage.set(RULES_STORAGE_KEY, this.rules);
 
-        this.filters = await this.getFromStorage();
+        this.filters = await this.getFiltersFromStorage();
         await this.setEnabledIds();
     }
 
-    getRulesFromStorage = async () => {
+    /**
+     * Returns a list of information about the rule sets specified in the V3 manifest
+     */
+    private getManifestRulesets = (): ManifestRulesetInfo[] => {
+        const {
+            declarative_net_request: { rule_resources },
+        } = chrome.runtime.getManifest() as chrome.runtime.ManifestV3;
+
+        return rule_resources;
+    };
+
+    /**
+     * Loads and parses the version of the filters that was included in the extension
+     */
+    private getFiltersTimestamps = async () => {
+        const url = chrome.runtime.getURL(`${COMMON_FILTERS_DIR}/${FILTERS_VERSIONS_FILENAME}`);
+        const request = await fetch(url);
+        const arr = await request.json() as Array<Array<number>>;
+        return arrayToMap(arr);
+    };
+
+    /**
+     * Returns a list of the newest filters (from the storage or from the extension bundle)
+     * with their IDs and contents
+     */
+    private getRules = async (): Promise<Rules[]> => {
+        const filtersTimestamps = await this.getFiltersTimestamps();
         const rules = await storage.get<Rules[]>(RULES_STORAGE_KEY);
-        return rules;
+        const manifestRulesets = this.getManifestRulesets();
+
+        // Parse manifest's rulesets' ids
+        const filtersIds: number[] = manifestRulesets
+            .map(({ id }: ManifestRulesetInfo) => {
+                return Number.parseInt(id.slice(RULESET_NAME.length), 10);
+            });
+
+        // For each filters return newest version: from storage or load newest from extension bundle
+        const promisesWithRules: Promise<Rules>[] = filtersIds.map((filterId) => {
+            const rulesFromStorage = rules?.find(({ id }) => id === filterId);
+            if (!rulesFromStorage) {
+                return backend.downloadFilterRules(filterId);
+            }
+
+            const { timeUpdated } = FiltersUtils.parseFilterInfo(rulesFromStorage.rules.split('\n'), '');
+            const timeStamp = filtersTimestamps.get(filterId);
+
+            if (!timeStamp || !timeUpdated || timeStamp > new Date(timeUpdated).getTime()) {
+                return backend.downloadFilterRules(filterId);
+            }
+
+            return new Promise((resolve) => { resolve(rulesFromStorage); });
+        });
+
+        return Promise.all(promisesWithRules);
     };
 
     // TODO add tests
@@ -181,7 +228,7 @@ class Filters {
         if (this.enableFiltersIds) {
             return this.enableFiltersIds;
         }
-        this.enableFiltersIds = await storage.get(ENABLED_FILTERS_IDS);
+        this.enableFiltersIds = await storage.get(ENABLED_FILTERS_IDS) || [];
         return this.enableFiltersIds;
     };
 
@@ -189,7 +236,7 @@ class Filters {
         if (this.filters.length !== 0) {
             return this.filters;
         }
-        this.filters = await this.getFromStorage();
+        this.filters = await this.getFiltersFromStorage();
         return this.filters;
     };
 
@@ -221,7 +268,7 @@ class Filters {
     /**
      * Returns filters state from storage
      */
-    getFromStorage = async (): Promise<Filter[]> => {
+    getFiltersFromStorage = async (): Promise<Filter[]> => {
         const filters = await storage.get<Filter[]>(this.FILTERS_STORAGE_KEY);
         return filters ?? DEFAULT_FILTERS;
     };
@@ -238,77 +285,6 @@ class Filters {
         await this.updateFilterState(filterId, { title: filterTitle });
     };
 
-    // TODO move to helpers
-    private parseExpiresStr = (str: string): number => {
-        const regexp = /(\d+)\s+(day|hour)/;
-
-        const parseRes = str.match(regexp);
-
-        if (!parseRes) {
-            const parsed = Number.parseInt(str, 10);
-            return Number.isNaN(parsed) ? 0 : parsed;
-        }
-
-        const [, num, period] = parseRes;
-
-        let multiplier = 1;
-        switch (period) {
-            case 'day': {
-                multiplier = 24 * 60 * 60;
-                break;
-            }
-            case 'hour': {
-                multiplier = 60 * 60;
-                break;
-            }
-            default: {
-                break;
-            }
-        }
-
-        return multiplier * parseInt(num, 10);
-    };
-
-    /**
-     * // TODO move to helpers
-     * Parses filter metadata from rules header
-     *
-     * @param rules
-     * @param title - string to be used as title if title tag wouldn't be found
-     * @returns object
-     */
-    parseFilterInfo = (rules: string[], title: string): FilterInfo => {
-        const parseTag = (tagName: string): string => {
-            let result = '';
-
-            // Look up no more than 50 first lines
-            const maxLines = Math.min(50, rules.length);
-            for (let i = 0; i < maxLines; i += 1) {
-                const rule = rules[i];
-                const search = `! ${tagName}: `;
-                const indexOfSearch = rule.indexOf(search);
-                if (indexOfSearch >= 0) {
-                    result = rule.substring(indexOfSearch + search.length);
-                }
-            }
-
-            if (tagName === 'Expires') {
-                result = String(this.parseExpiresStr(result));
-            }
-
-            return result;
-        };
-
-        return {
-            title: parseTag('Title') || title,
-            description: parseTag('Description'),
-            homepage: parseTag('Homepage'),
-            version: parseTag('Version'),
-            expires: parseTag('Expires'),
-            timeUpdated: parseTag('TimeUpdated'),
-        };
-    };
-
     private getCustomFilterId = () => {
         let max = 0;
         this.filters.forEach((f) => {
@@ -321,7 +297,7 @@ class Filters {
     };
 
     addCustomFilterByContent = async (filterStrings: string[], title: string, url: string) => {
-        const filterInfo = this.parseFilterInfo(filterStrings, title);
+        const filterInfo = FiltersUtils.parseFilterInfo(filterStrings, title);
 
         const filter: Filter = {
             id: this.getCustomFilterId(),

@@ -35,6 +35,8 @@ export interface FilterInfo {
 
 export const FILTERS_I18N_FILENAME = 'filters_i18n.json';
 
+export const FILTERS_VERSIONS_FILENAME = 'filters_versions.json';
+
 export interface OptionsData {
     settings: SettingsType
     filters: Filter[]
