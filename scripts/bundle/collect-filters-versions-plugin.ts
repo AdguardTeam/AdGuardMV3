@@ -18,6 +18,9 @@ export default class CollectFiltersVersionsPlugin {
     // Path to original .txt filters
     private originalFiltersPath: string;
 
+    // Path to build folder with .txt filters
+    private outputFiltersPath: string;
+
     // Extension of original filters
     private FILTERS_EXT = '.txt';
 
@@ -26,10 +29,12 @@ export default class CollectFiltersVersionsPlugin {
 
     /**
      * @param originalFiltersPath absolute path to folder with original filters
+     * @param outputFiltersPath absolute path to output build folder with original filters
     */
-    constructor(originalFiltersPath: string) {
+    constructor(originalFiltersPath: string, outputFiltersPath: string) {
         this.filtersVersions = new Map<number, number>();
         this.originalFiltersPath = originalFiltersPath;
+        this.outputFiltersPath = outputFiltersPath;
     }
 
     apply = async (compiler: Compiler) => {
@@ -98,11 +103,12 @@ export default class CollectFiltersVersionsPlugin {
 
     /**
      * Saves json-stringified array-version of Map with filters' ids and versions
-     * to folder with original filters
+     * to output build folder with original filters
      */
     private saveFiltersFilters = async () => {
+        fse.ensureDirSync(this.outputFiltersPath);
         fse.writeFileSync(
-            path.resolve(this.originalFiltersPath, FILTERS_VERSIONS_FILENAME),
+            path.resolve(this.outputFiltersPath, FILTERS_VERSIONS_FILENAME),
             JSON.stringify(Array.from(this.filtersVersions)),
         );
     };

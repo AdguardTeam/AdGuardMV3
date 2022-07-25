@@ -13,6 +13,7 @@ import fse from 'fs-extra';
 import { FILTER_RULESET, RulesetType } from '../../src/common/constants/filters';
 import type { Browser, BuildEnv } from '../build-constants';
 import { BROWSERS, BUILD_ENVS, RULESET_NAME } from '../build-constants';
+import { FILTERS_VERSIONS_FILENAME } from '../../src/common/constants/common';
 
 import CollectFiltersVersionsPlugin from './collect-filters-versions-plugin';
 
@@ -83,10 +84,12 @@ export const getWebpackConfig = (browser: Browser = BROWSERS.CHROME): Configurat
     const ASSISTANT_PATH = path.resolve(CONTENT_SCRIPTS_PATH, 'assistant');
     const OUTPUT_DIR = path.resolve(__dirname, BUILD_PATH, OUTPUT_PATH, browser);
     const FILTERS_DIR = path.resolve(__dirname, SRC_PATH, FILTERS_PATH);
+    const OUTPUT_FILTERS_DIR = path.resolve(OUTPUT_DIR, 'filters/');
     const OUTPUT_FILTERS_DECLARATIVE_DIR = path.resolve(OUTPUT_DIR, 'filters/declarative/');
 
     const plugins: WebpackPluginInstance[] = [
         new ForkTsCheckerWebpackPlugin(),
+        new CollectFiltersVersionsPlugin(FILTERS_DIR, OUTPUT_FILTERS_DIR),
         new CopyWebpackPlugin({
             patterns: [
                 {
@@ -122,7 +125,6 @@ export const getWebpackConfig = (browser: Browser = BROWSERS.CHROME): Configurat
                 },
             ],
         }),
-        new CollectFiltersVersionsPlugin(FILTERS_DIR),
         new HtmlWebpackPlugin({
             template: path.join(POPUP_PATH, 'index.html'),
             filename: 'popup.html',
@@ -153,7 +155,14 @@ export const getWebpackConfig = (browser: Browser = BROWSERS.CHROME): Configurat
     if (IS_DEV) {
         plugins.push(
             new CleanWebpackPlugin({
-                cleanAfterEveryBuildPatterns: ['!**/*.json', '!assets/**/*'],
+                cleanOnceBeforeBuildPatterns: [
+                    `!**/${FILTERS_VERSIONS_FILENAME}`,
+                ],
+                cleanAfterEveryBuildPatterns: [
+                    `!**/${FILTERS_VERSIONS_FILENAME}`,
+                    '!**/*.json',
+                    '!assets/**/*',
+                ],
             }),
         );
     }
