@@ -102,6 +102,12 @@ class BrowserActions {
     };
 
     init() {
+        const COUNTER_GREEN_COLOR = '#4d995f';
+        chrome.declarativeNetRequest.setExtensionActionOptions({
+            displayActionCountAsBadgeText: true,
+        });
+        chrome.action.setBadgeBackgroundColor({ color: COUNTER_GREEN_COLOR });
+
         tabUtils.onActivated(() => this.onFilteringStateChange());
         tabUtils.onUpdated(() => this.onFilteringStateChange());
 
