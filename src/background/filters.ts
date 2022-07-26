@@ -344,7 +344,7 @@ class Filters {
     /**
      * Returns filters state from storage with mapped rules and regexps counters
      */
-    getFromStorage = async (): Promise<Filter[]> => {
+    getFiltersFromStorage = async (): Promise<Filter[]> => {
         const filtersFromStorage = await storage.get<Filter[]>(this.FILTERS_STORAGE_KEY);
         const filters = filtersFromStorage || DEFAULT_FILTERS;
 
@@ -355,11 +355,6 @@ class Filters {
             regexpRulesCounter: regexpCounters.get(f.id),
             declarativeRulesCounter: rulesCounters.get(f.id),
         }));
-    };
-
-    getFiltersFromStorage = async (): Promise<Filter[]> => {
-        const filters = await storage.get<Filter[]>(this.FILTERS_STORAGE_KEY);
-        return filters ?? DEFAULT_FILTERS;
     };
 
     enableFilter = async (filterId: number): Promise<void> => {
