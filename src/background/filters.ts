@@ -172,7 +172,7 @@ class Filters {
             && rulesToEnable < freeRules
             && enabledFiltersCounter < MAX_NUMBER_OF_ENABLED_STATIC_RULESETS
         ) {
-            this.updateFilterState(localeFilterInMemory.id, { enabled: true });
+            this.enableFilter(localeFilterInMemory.id);
             log.debug('Enabled locale filter: ', localeFilterInMemory.id);
         }
     };
