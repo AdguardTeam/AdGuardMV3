@@ -4,13 +4,12 @@ import { FilterConvertedSourceMap, USER_FILTER_ID } from '@adguard/tswebextensio
 import type { Rules } from 'Common/constants/common';
 import { MESSAGE_TYPES, Filter } from 'Common/constants/common';
 import { translator } from 'Common/translators/translator';
+import { arrayToMap } from 'Common/utils/arrays';
 import { ADGUARD_FILTERS_IDS } from 'Common/constants/filters';
 
 import { RequestsTable } from '../RequestsTable';
 import { COMMON_FILTERS_DIR } from '../../background/backend';
 import { sendMessage } from '../../common/helpers';
-
-const arrayToMap = (arr: Array<Array<number>>) => new Map(arr.map((i) => [i[0], i[1]]));
 
 export type FilterId = number;
 export type ConvertedSourceMaps = Map<FilterId, FilterConvertedSourceMap>;

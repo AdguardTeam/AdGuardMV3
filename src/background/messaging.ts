@@ -10,6 +10,7 @@ import { CATEGORIES } from 'Common/constants/filters';
 import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
 import { log } from 'Common/logger';
 import { tabUtils } from 'Common/tab-utils';
+import FiltersUtils from 'Common/utils/filters';
 
 import { settings } from './settings';
 import { notifier } from './notifier';
@@ -134,7 +135,7 @@ export const extensionMessageHandler = async (
         case MESSAGE_TYPES.GET_FILTER_INFO_BY_CONTENT: {
             const { filterContent, title } = data;
             const rules = filterContent.split('\n');
-            return filters.parseFilterInfo(rules, title);
+            return FiltersUtils.parseFilterInfo(rules, title);
         }
         case MESSAGE_TYPES.ADD_CUSTOM_FILTER_BY_CONTENT: {
             const { filterContent, title, url } = data;
