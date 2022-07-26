@@ -7,6 +7,7 @@ import { reactTranslator } from 'Common/translators/reactTranslator';
 import { theme } from 'Common/styles';
 import { useKeyPress } from 'Common/hooks/useKeyPress';
 import { KEY_ENTER } from 'Common/constants/keyboard';
+import { useNotifyDynamicRulesLimitsError } from 'Common/hooks/useNotifyDynamicRulesLimitError';
 
 import { UserRuleEditor } from './UserRuleEditor';
 
@@ -14,13 +15,16 @@ export const NewUserRuleCustom = observer(() => {
     const { optionsStore } = useContext(rootStore);
     const { createdUserRuleText, error } = optionsStore;
 
+    const checkAndNotifyDynamicRulesError = useNotifyDynamicRulesLimitsError();
+
     const onChange = (value: string) => {
         const rule = value.trim();
         optionsStore.updateCreatedUserRule(rule);
     };
 
-    const addRule = () => {
-        optionsStore.addCreatedUserRule();
+    const addRule = async () => {
+        const err = await optionsStore.addCreatedUserRule();
+        checkAndNotifyDynamicRulesError(err);
     };
 
     useKeyPress(KEY_ENTER, () => addRule(), [createdUserRuleText]);

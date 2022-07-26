@@ -120,7 +120,14 @@ export class SettingsStore {
 
     @action
     updateSettingState = (key: SETTINGS_NAMES, value: SettingsValueType) => {
-        this.settings[key] = value;
+        // TODO: Fix these types
+        if (key === SETTINGS_NAMES.FILTERS_CHANGED) {
+            this.settings[key] = value as unknown as number[];
+        } else if (key === SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES || key === SETTINGS_NAMES.VERSION) {
+            this.settings[key] = value as unknown as number;
+        } else {
+            this.settings[key] = value as unknown as boolean;
+        }
     };
 
     @action

@@ -23,6 +23,10 @@ export const prefs = (() => {
                     19: chrome.runtime.getURL('assets/icons/disabled-19.png'),
                     38: chrome.runtime.getURL('assets/icons/disabled-38.png'),
                 },
+                BROKEN: {
+                    19: chrome.runtime.getURL('assets/icons/broken-19.png'),
+                    38: chrome.runtime.getURL('assets/icons/broken-38.png'),
+                },
             }));
         },
 

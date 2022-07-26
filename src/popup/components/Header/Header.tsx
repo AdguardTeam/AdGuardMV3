@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
 
 import { translator } from 'Common/translators/translator';
-import { Icon, Tooltip, IconId } from 'Common/components/ui';
+import { Icon, TooltipIcon, IconId } from 'Common/components/ui';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { PROTECTION_PAUSE_TIMEOUT_MS, PROTECTION_PAUSE_TIMEOUT_S } from 'Common/constants/common';
 import { REPORT_SITE_BASE } from 'Common/constants/urls';
@@ -73,7 +73,7 @@ export const Header = observer(() => {
                 >
                     <Icon id={IconId.SETTINGS} />
                 </button>
-                <Tooltip
+                <TooltipIcon
                     iconId={IconId.CRUMBS}
                     className={styles.popupHeaderButton}
                     enabled={protectionEnabled}
@@ -121,7 +121,7 @@ export const Header = observer(() => {
                     >
                         {reactTranslator.getMessage('popup_settings_report_issue')}
                     </a>
-                </Tooltip>
+                </TooltipIcon>
             </fieldset>
         </div>
     );

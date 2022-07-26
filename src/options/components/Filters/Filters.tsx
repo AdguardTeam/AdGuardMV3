@@ -5,11 +5,13 @@ import { observer } from 'mobx-react';
 import { translator } from 'Common/translators/translator';
 import { FiltersGroupId, QUERY_PARAM_NAMES } from 'Common/constants/common';
 import { Section, Header } from 'Common/components/Section';
-import { IconId } from 'Common/components/ui';
+import { IconId, Popover } from 'Common/components/ui';
 import { rootStore } from 'Options/stores';
 import { CustomFilterModal } from 'Options/components/Filters/CustomFilterModal';
 import { SwitcherOption } from 'Options/components/SwitcherOption';
 import { Button } from 'Common/components/Button/Button';
+
+import { DynamicRulesLimitation } from '../DynamicRulesLimitation';
 
 import styles from './Filters.module.pcss';
 
@@ -88,6 +90,42 @@ export const Filters = observer(() => {
         }
     }, [urlToSubscribe, openModal]);
 
+    const getRulesMessage = (count: number) => (
+        translator.getPlural('options_filter_rules_counter', count, { count })
+    );
+
+    const content = (
+        <div className={styles.container}>
+            {filtersByGroupId.length > 0
+                ? filtersByGroupId.map((filter) => {
+                    const onChange = async () => {
+                        if (filter.enabled) {
+                            await disableFilter(filter.id);
+                        } else {
+                            await enableFilter(filter.id);
+                        }
+                    };
+
+                    return (
+                        <Popover
+                            key={filter.id}
+                            text={getRulesMessage(filter.declarativeRulesCounter || 0)}
+                        >
+                            <SwitcherOption
+                                iconId={IconId.CUSTOM_FILTERS}
+                                id={filter.id.toString()}
+                                message={filter.title}
+                                checked={filter.enabled}
+                                onClick={() => { handleClickToFilter(filter.id); }}
+                                onChange={onChange}
+                            />
+                        </Popover>
+                    );
+                })
+                : <div className={styles.notFound}>{translator.getMessage('options_filters_not_found')}</div>}
+        </div>
+    );
+
     return (
         <>
             <CustomFilterModal
@@ -110,36 +148,13 @@ export const Filters = observer(() => {
                     />
                 )}
             >
+                <DynamicRulesLimitation />
                 <Button
                     icon={IconId.PLUS}
                     handleClick={openModal}
                     message={translator.getMessage('options_add_custom_filter')}
                 />
-                <div className={styles.container}>
-                    {filtersByGroupId?.length > 0
-                        ? filtersByGroupId.map((filter) => {
-                            const onChange = async () => {
-                                if (filter.enabled) {
-                                    await disableFilter(filter.id);
-                                } else {
-                                    await enableFilter(filter.id);
-                                }
-                            };
-
-                            return (
-                                <SwitcherOption
-                                    iconId={IconId.CUSTOM_FILTERS}
-                                    key={filter.id}
-                                    id={filter.id.toString()}
-                                    message={filter.title}
-                                    checked={filter.enabled}
-                                    onClick={() => { handleClickToFilter(filter.id); }}
-                                    onChange={onChange}
-                                />
-                            );
-                        })
-                        : <div className={styles.notFound}>{translator.getMessage('options_filters_not_found')}</div>}
-                </div>
+                {content}
             </Section>
         </>
     );

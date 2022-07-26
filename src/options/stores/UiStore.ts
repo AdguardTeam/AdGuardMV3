@@ -1,3 +1,4 @@
+import React from 'react';
 import { action, makeObservable, observable } from 'mobx';
 import { nanoid } from 'nanoid';
 
@@ -8,7 +9,7 @@ import type { RootStore } from './RootStore';
 type Notifications = {
     id: string,
     icon: IconId | undefined,
-    description: string,
+    description: string | React.ReactNode,
 };
 
 export class UiStore {
@@ -26,7 +27,7 @@ export class UiStore {
     }
 
     @action
-    addNotification = (description: string, icon?: IconId) => {
+    addNotification = (description: string | React.ReactNode, icon?: IconId) => {
         const id = nanoid();
         this.notifications.push({
             id,

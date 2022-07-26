@@ -11,6 +11,12 @@ import { userRules } from './userRules';
 type TabIconDetails = chrome.action.TabIconDetails;
 
 class BrowserActions {
+    /**
+     * The extension may be in a third state - "broken" - when the browser has changed
+     * the current list of active rule sets, and we must notify the user of this
+    */
+    private broken: boolean = false;
+
     setIcon = (details: TabIconDetails) => {
         return new Promise<void>((resolve) => {
             chrome.action.setIcon(details, () => {
@@ -81,8 +87,12 @@ class BrowserActions {
         }
     }
 
-    onFilteringStateChange = async () => {
+    private onFilteringStateChange = async () => {
         try {
+            if (this.broken) {
+                return;
+            }
+
             const activeTab = await tabUtils.getActiveTab();
 
             if (activeTab?.url) {
@@ -101,6 +111,14 @@ class BrowserActions {
         }
     };
 
+    setIconBroken(value: boolean) {
+        this.broken = value;
+
+        if (this.broken) {
+            this.setIcon({ path: prefs.ICONS.BROKEN });
+        }
+    }
+
     init() {
         const COUNTER_GREEN_COLOR = '#4d995f';
         chrome.declarativeNetRequest.setExtensionActionOptions({
@@ -113,6 +131,10 @@ class BrowserActions {
 
         notifier.addEventListener(NOTIFIER_EVENTS.SETTING_UPDATED, async (data) => {
             try {
+                if (this.broken) {
+                    return;
+                }
+
                 const { key } = data;
                 if (key !== SETTINGS_NAMES.FILTERING_ENABLED) {
                     return;

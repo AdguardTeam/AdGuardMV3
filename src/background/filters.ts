@@ -3,10 +3,12 @@ import {
     FiltersGroupId,
     Filter,
     Rules,
+    FILTERS_REGEXP_COUNTER_FILENAME,
+    FILTERS_RULES_COUNTER_FILENAME,
     RULESET_NAME,
     FILTERS_VERSIONS_FILENAME,
 } from 'Common/constants/common';
-import { FILTER_RULESET, RulesetType } from 'Common/constants/filters';
+import { ADGUARD_FILTERS_IDS, FILTER_RULESET, RulesetType } from 'Common/constants/filters';
 import { RULES_STORAGE_KEY, ENABLED_FILTERS_IDS } from 'Common/constants/storage-keys';
 import FiltersUtils from 'Common/utils/filters';
 import { log } from 'Common/logger';
@@ -147,6 +149,27 @@ class Filters {
         await this.setEnabledIds();
     }
 
+    getRulesFromFiles = async (): Promise<Rules[]> => {
+        const promises = ADGUARD_FILTERS_IDS.map(({ id }) => backend.downloadFilterRules(id));
+        return Promise.all(promises);
+    };
+
+    getRulesRegexpCountersFromFile = async (): Promise<Map<number, number>> => {
+        const url = chrome.runtime.getURL(`${COMMON_FILTERS_DIR}/${FILTERS_REGEXP_COUNTER_FILENAME}`);
+        const file = await fetch(url);
+        const json = await file.json() as Array<Array<number>>;
+
+        return arrayToMap(json);
+    };
+
+    getRulesCountersFromFile = async (): Promise<Map<number, number>> => {
+        const url = chrome.runtime.getURL(`${COMMON_FILTERS_DIR}/${FILTERS_RULES_COUNTER_FILENAME}`);
+        const file = await fetch(url);
+        const json = await file.json() as Array<Array<number>>;
+
+        return arrayToMap(json);
+    };
+
     /**
      * Finds and enables filter for current browser locale
      */
@@ -263,6 +286,20 @@ class Filters {
         await storage.set(ENABLED_FILTERS_IDS, this.enableFiltersIds);
     };
 
+    setEnabledFiltersIds = async (ids: number[]) => {
+        this.filters = this.filters.map((f) => {
+            const enabled = ids.includes(f.id);
+
+            return {
+                ...f,
+                enabled,
+            };
+        });
+
+        await this.saveInStorage(this.filters);
+        await this.setEnabledIds();
+    };
+
     getEnableFiltersIds = async () => {
         if (this.enableFiltersIds) {
             return this.enableFiltersIds;
@@ -305,8 +342,21 @@ class Filters {
     };
 
     /**
-     * Returns filters state from storage
+     * Returns filters state from storage with mapped rules and regexps counters
      */
+    getFromStorage = async (): Promise<Filter[]> => {
+        const filtersFromStorage = await storage.get<Filter[]>(this.FILTERS_STORAGE_KEY);
+        const filters = filtersFromStorage || DEFAULT_FILTERS;
+
+        const regexpCounters = await this.getRulesRegexpCountersFromFile();
+        const rulesCounters = await this.getRulesCountersFromFile();
+        return filters.map((f) => ({
+            ...f,
+            regexpRulesCounter: regexpCounters.get(f.id),
+            declarativeRulesCounter: rulesCounters.get(f.id),
+        }));
+    };
+
     getFiltersFromStorage = async (): Promise<Filter[]> => {
         const filters = await storage.get<Filter[]>(this.FILTERS_STORAGE_KEY);
         return filters ?? DEFAULT_FILTERS;

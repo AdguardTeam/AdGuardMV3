@@ -11,18 +11,13 @@ export enum SETTINGS_NAMES {
 
     POPUP_V3_WIZARD_ENABLED = 'popup.v3.wizard.enabled',
     NOTICE_HIDDEN = 'notice.hidden',
+
+    FILTERS_CHANGED = 'filters.changed',
 }
-
-export type OPTION_SETTINGS_NAMES = Pick<SettingsType,
-SETTINGS_NAMES.FILTERING_ENABLED | SETTINGS_NAMES.NOTICE_HIDDEN>;
-
-export type SettingsValueType = boolean | number;
-
-export type SettingsType = Record<SETTINGS_NAMES, SettingsValueType>;
 
 export const SCHEME_VERSION = 1;
 
-export const DEFAULT_SETTINGS: SettingsType = {
+export const DEFAULT_SETTINGS = {
     [SETTINGS_NAMES.VERSION]: SCHEME_VERSION,
 
     [SETTINGS_NAMES.FILTERING_ENABLED]: true,
@@ -32,4 +27,13 @@ export const DEFAULT_SETTINGS: SettingsType = {
 
     [SETTINGS_NAMES.POPUP_V3_WIZARD_ENABLED]: true,
     [SETTINGS_NAMES.NOTICE_HIDDEN]: false,
+
+    [SETTINGS_NAMES.FILTERS_CHANGED]: [] as number[],
 };
+
+export type SettingsType = typeof DEFAULT_SETTINGS;
+
+export type SettingsValueType = SettingsType[keyof SettingsType];
+
+export type OPTION_SETTINGS_NAMES = Pick<SettingsType,
+SETTINGS_NAMES.FILTERING_ENABLED | SETTINGS_NAMES.NOTICE_HIDDEN | SETTINGS_NAMES.FILTERS_CHANGED>;

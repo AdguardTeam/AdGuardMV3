@@ -25,11 +25,12 @@ class Backend {
             url, FILTER_COMPILER_OPTIONS,
         );
 
-        const convertedRule = RuleConverter.convertRules(response.join('\n'));
+        // TODO: Why not convert on build and save converted result?
+        const convertedRules = RuleConverter.convertRules(response.join('\n'));
 
         return {
             id: filterId,
-            rules: convertedRule,
+            rules: convertedRules,
         };
     };
 

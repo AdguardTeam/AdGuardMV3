@@ -7,6 +7,7 @@ import { observer } from 'mobx-react';
 import { useStore } from 'Options/stores/useStore';
 import { theme } from 'Common/styles';
 import { reactTranslator } from 'Common/translators/reactTranslator';
+import { useNotifyDynamicRulesLimitsError } from 'Common/hooks/useNotifyDynamicRulesLimitError';
 
 import styles from './Editor.module.pcss';
 
@@ -23,6 +24,8 @@ export const Editor = observer(() => {
     const { userRules, setUserRules, closeEditor } = optionsStore;
     const [text, setText] = useState(userRules);
 
+    const checkAndNotifyDynamicRulesError = useNotifyDynamicRulesLimitsError();
+
     useEffect(() => {
         setText(userRules);
         optionsStore.resetError();
@@ -32,8 +35,9 @@ export const Editor = observer(() => {
         setText(value);
     };
 
-    const onSave = () => {
-        setUserRules(text);
+    const onSave = async () => {
+        const err = await setUserRules(text);
+        checkAndNotifyDynamicRulesError(err);
     };
 
     const onCancel = () => {

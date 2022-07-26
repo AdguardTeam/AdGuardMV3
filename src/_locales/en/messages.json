@@ -101,6 +101,30 @@
     "options_custom_filters_option_desc": {
         "message": "Add custom filters based on AdGuard filtering rules"
     },
+    "options_static_filters_limits_by_rules": {
+        "message": "You’ve reached the limit of active built-in rules. To activate new rules, disable some built-in filters. <newline><\/newline> <link-to-limits>Rule limits<\/link-to-limits>"
+    },
+    "options_static_filters_limits_by_filters": {
+        "message": "You’ve reached the limit of active built-in filters. %current-enabled% of %maximum% built-in filters are enabled. <newline><\/newline> <link-to-limits>Rule limits<\/link-to-limits>"
+    },
+    "options_static_filters_limits_by_filters_notification": {
+        "message": "You’ve reached the limit of active built-in filters. Disable some built-in filters before activating new ones. <newline><\/newline> <link-to-limits>Rule limits<\/link-to-limits>"
+    },
+    "options_static_filters_limits_by_regexp": {
+        "message": "You’ve reached the limit of active built-in regex rules. %current-enabled% of %maximum% built-in filters are enabled. <newline><\/newline> <link-to-limits>Rule limits<\/link-to-limits>"
+    },
+    "options_static_filters_limits_after_update": {
+        "message": "The browser has modified the list of active built-in filters. <newline><\/newline> <link-to-limits>See details<\/link-to-limits>"
+    },
+    "options_dynamic_rules_limit": {
+        "message": "You’ve reached the limit of user-added rules. %current-enabled% of %maximum% rules are enabled. Rules over the threshold are not active. <newline><\/newline> <link-to-limits>Rule limits<\/link-to-limits>"
+    },
+    "options_dynamic_rules_regexps_limit": {
+        "message": "You’ve reached the limit of user-added regex rules. %current-enabled% of %maximum% regex rules are enabled. Rules over the threshold are not active. <newline><\/newline> <link-to-limits>Rule limits<\/link-to-limits>"
+    },
+    "options_filter_rules_counter": {
+        "message": "| <count\/> rule | <count\/> rules"
+    },
     "options_user_rules_option": {
         "message": "User rules"
     },
@@ -116,7 +140,7 @@
     "options_nav_link_about": {
         "message": "About"
     },
-    "options_nav_link_limits": {
+    "options_nav_link_rule_limits": {
         "message": "Rule limits"
     },
     "options_works_with_v3": {
@@ -187,6 +211,12 @@
     },
     "popup_protection_resume_now": {
         "message": "Resume now"
+    },
+    "popup_limits_warning": {
+        "message": "The browser has modified the list of active built-in filters."
+    },
+    "popup_limits_warning_link": {
+        "message": " See details"
     },
     "context_menu_disable_filtering_on_site": {
         "message": "Disable filtering on this site"
@@ -323,6 +353,9 @@
     "options_user_rule_removing_elements": {
         "message": "Do not apply advanced rules"
     },
+    "options_user_rule_advanced_rules": {
+        "message": "Advanced rules"
+    },
     "options_user_rule_add_rule": {
         "message": "Add user rule"
     },
@@ -371,9 +404,6 @@
     "error_regexp_rules_limit": {
         "message": "Failed to add the rule. The limit of %limit% regex rules has been exceeded."
     },
-    "error_empty_input": {
-        "message": "Name cannot be empty"
-    },
     "debugging_title_reload_page": {
         "message": "Open developer tools and reload the page"
     },
@@ -385,6 +415,33 @@
     },
     "debugging_info": {
         "message": "If you want to see debugging information about the processed requests using MV3 declarative rules, you need to clone <link-to-repo>our repository<\/link-to-repo> and build the unpacked extension as described in Readme."
+    },
+    "options_limits_warning_title": {
+        "message": "The browser has modified the list of active filters"
+    },
+    "options_limits_warning_title_what_happened": {
+        "message": "What happened?"
+    },
+    "options_limits_warning_desc_what_happened": {
+        "message": "The limit of active built-in rules was exceeded after an update or adding a new extension. As per Manifest V3, your Chrome browser reacted by disabling all the extension's built-in filters except the default ones."
+    },
+    "options_limits_warning_title_filters_enabled": {
+        "message": "Filters enabled before the update"
+    },
+    "options_limits_warning_title_filters_enabled_now": {
+        "message": "Filters enabled now"
+    },
+    "options_limits_warning_title_possible_actions": {
+        "message": "Your possible actions"
+    },
+    "options_limits_warning_desc_possible_actions": {
+        "message": "Option 1. Delete unnecessary ad-blocking extensions from your browser. To reactivate the filters mentioned in the \"Filters enabled before the update\" section, click <button>reactivate filters<\/button>."
+    },
+    "options_limits_warning_desc_app": {
+        "message": "Option 2. Install the AdGuard Ad Blocker app: it has no restrictions on filtering rules. <link>Get AdGuard Ad Blocker<\/link>"
+    },
+    "options_limits_warning_desc_close": {
+        "message": "Option 3. If you're satisfied with the currently enabled default filter(s), <button>close this warning<\/button>."
     },
     "options_nav_better_than_extension": {
         "message": "Unlike the extension, the AdGuard app blocks ads with no limitations."
@@ -411,7 +468,7 @@
         "message": "Regex rules (included in the above)"
     },
     "options_value_of_value": {
-        "message": "%first_value% of %second_value%"
+        "message": "%current% of %max%"
     },
     "options_limits_static_title": {
         "message": "Static rulesets"
@@ -424,5 +481,11 @@
     },
     "options_limits_static_rules_desc": {
         "message": "Rules from built-in filters. All extensions in your Chrome browser can use %count% static rules at once."
+    },
+    "options_limits_static_filters_reactivated": {
+        "message": "Filters are reactivated."
+    },
+    "options_limits_static_filters_limit_still_exceed": {
+        "message": "Impossible to reactivate the filters: the rule limit is still exceeded."
     }
 }
