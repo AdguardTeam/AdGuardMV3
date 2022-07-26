@@ -9,6 +9,7 @@ import { translator } from 'Common/translators/translator';
 import { CheckboxOption } from 'Options/components/CheckboxOption';
 import { rootStore } from 'Options/stores';
 import { theme } from 'Common/styles';
+import { useNotifyDynamicRulesLimitsError } from 'Common/hooks/useNotifyDynamicRulesLimitError';
 
 enum UNBLOCK_OPTIONS {
     LINKS = 'LINKS',
@@ -56,6 +57,8 @@ const DEFAULT_UNBLOCK_OPTIONS = {
 export const NewUserRuleUnblocking = observer(() => {
     const { optionsStore } = useContext(rootStore);
 
+    const checkAndNotifyDynamicRulesError = useNotifyDynamicRulesLimitsError();
+
     const [domain, setDomain] = useState(DEFAULT_DOMAIN);
     const [unblockOptions, setUnblockOptions] = useState(DEFAULT_UNBLOCK_OPTIONS);
 
@@ -67,10 +70,11 @@ export const NewUserRuleUnblocking = observer(() => {
         setUnblockOptions({ ...unblockOptions, [e.target.id]: e.target.checked });
     };
 
-    const onSave = () => {
+    const onSave = async () => {
         if (domain.match(REGEX_DOMAIN)) {
             const rule = buildUnblockingRule(domain, unblockOptions);
-            optionsStore.addNewUserRule(rule);
+            const err = await optionsStore.addNewUserRule(rule);
+            checkAndNotifyDynamicRulesError(err);
         } else {
             optionsStore.setError(translator.getMessage('options_user_rule_wrong_domain_format'));
         }

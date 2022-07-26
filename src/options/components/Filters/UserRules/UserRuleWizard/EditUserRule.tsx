@@ -4,11 +4,14 @@ import { observer } from 'mobx-react';
 
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { UserRuleEditor } from 'Options/components/Filters/UserRules/UserRuleWizard/UserRuleEditor';
+import { useNotifyDynamicRulesLimitsError } from 'Common/hooks/useNotifyDynamicRulesLimitError';
 import { rootStore } from 'Options/stores';
 import { theme } from 'Common/styles';
 
 export const EditUserRule = observer(() => {
     const { optionsStore } = useContext(rootStore);
+
+    const checkAndNotifyDynamicRulesError = useNotifyDynamicRulesLimitsError();
 
     if (optionsStore.userRuleInWizard === null) {
         throw new Error('userRuleInWizard is required');
@@ -18,13 +21,15 @@ export const EditUserRule = observer(() => {
         optionsStore.updateUserRuleInWizard(value);
     };
 
-    const onDeleteClick = () => {
-        optionsStore.deleteUserRuleInWizard();
+    const onDeleteClick = async () => {
+        const err = await optionsStore.deleteUserRuleInWizard();
+        checkAndNotifyDynamicRulesError(err);
     };
 
     // TODO add some validation
-    const onSaveClick = () => {
-        optionsStore.saveUserRuleInWizard();
+    const onSaveClick = async () => {
+        const err = await optionsStore.saveUserRuleInWizard();
+        checkAndNotifyDynamicRulesError(err);
     };
 
     return (

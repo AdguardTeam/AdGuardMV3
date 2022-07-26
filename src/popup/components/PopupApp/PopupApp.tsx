@@ -6,6 +6,7 @@ import { Icons } from 'Common/components/ui';
 import { log } from 'Common/logger';
 import { NOTIFIER_EVENTS } from 'Common/constants/common';
 import { createLongLivedConnection } from 'Common/messaging-utils';
+import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
 
 import { rootStore } from '../../stores';
 import { Header } from '../Header';
@@ -15,6 +16,7 @@ import { Footer } from '../Footer';
 import { Wizard } from '../Wizard';
 import { Loader as InitialLoader } from '../Loader';
 import { LoaderOverlay } from '../LoaderOverlay';
+import { LimitsExceed } from '../LimitsExceed';
 
 import { DisabledProtectionScreen } from './DisabledProtectionScreen';
 import styles from './PopupApp.module.pcss';
@@ -28,6 +30,9 @@ export const PopupApp = observer(() => {
         popupDataReady,
         wizardEnabled,
         protectionEnabled,
+        settings: {
+            [SETTINGS_NAMES.FILTERS_CHANGED]: wasEnabledIds,
+        },
     } = settingsStore;
 
     useLayoutEffect(() => {
@@ -85,6 +90,8 @@ export const PopupApp = observer(() => {
         [styles.mainPaused]: !protectionEnabled,
     });
 
+    const isLimitsExceed = wasEnabledIds.length > 0;
+
     return (
         <div className={styles.popup}>
             <Icons />
@@ -104,7 +111,11 @@ export const PopupApp = observer(() => {
                         <DisabledProtectionScreen />
                     )}
             </main>
-            <Footer />
+            {
+                isLimitsExceed
+                    ? <LimitsExceed />
+                    : <Footer />
+            }
             <LoaderOverlay />
         </div>
     );

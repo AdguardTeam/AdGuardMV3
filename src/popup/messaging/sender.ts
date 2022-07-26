@@ -15,7 +15,7 @@ class Sender {
     /**
      * Asks background service worker to open options page
      */
-    openOptions = () => sendMessage(MESSAGE_TYPES.OPEN_OPTIONS);
+    openOptions = (path?: string) => sendMessage(MESSAGE_TYPES.OPEN_OPTIONS, { path });
 
     /**
      * Sets setting value by key

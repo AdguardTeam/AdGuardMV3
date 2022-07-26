@@ -12,6 +12,8 @@ import { UserRulesProcessor, UserRulesData } from 'Options/user-rules-processor'
 import { OTHER_DOMAIN_TITLE, NEW_LINE_SEPARATOR } from 'Common/constants/common';
 import { translator } from 'Common/translators/translator';
 
+import type { UserRulesLimits } from '../../background/userRules';
+
 import type { RootStore } from './RootStore';
 
 export enum UserRuleWizardNewType {
@@ -42,6 +44,11 @@ const ERROR_UI_MESSAGES: { [key: string]: string } = {
     DEFAULT: translator.getMessage('error_rule_is_invalid'),
 };
 
+export enum DYNAMIC_RULES_LIMITS_ERROR {
+    MAX_DYNAMIC_RULES_EXCEED,
+    MAX_DYNAMIC_REGEXPS_EXCEED,
+}
+
 export class OptionsStore {
     public rootStore: RootStore;
 
@@ -52,6 +59,12 @@ export class OptionsStore {
 
     @observable
     userRules = '';
+
+    @observable
+    userRulesDeclarativeRulesCount: number = 0;
+
+    @observable
+    userRulesRegexpsCount: number = 0;
 
     @observable
     editorOpen = false;
@@ -73,6 +86,18 @@ export class OptionsStore {
 
     @observable
     error = '';
+
+    @computed
+    get isMaxEnabledDynamicRules() {
+        const max = MAX_NUMBER_OF_DYNAMIC_AND_SESSION_RULES;
+        return this.userRulesDeclarativeRulesCount > max;
+    }
+
+    @computed
+    get isMaxEnabledDynamicRulesRegexps() {
+        const max = MAX_NUMBER_OF_REGEX_RULES;
+        return this.userRulesRegexpsCount > max;
+    }
 
     @computed
     get userRulesGroups() {
@@ -127,39 +152,88 @@ export class OptionsStore {
     }
 
     @action
-    setUserRules = async (userRules: string) => {
+    getDynamicRulesCounters = async () => {
+        const { setLoader } = this.rootStore.uiStore;
+        setLoader(true);
+
+        const userRulesLimits = await sender.getDynamicRulesCounters();
+        await this.setDynamicRulesCounters(userRulesLimits);
+
+        setLoader(false);
+    };
+
+    @action
+    setDynamicRulesCounters = async (userRulesLimits: UserRulesLimits) => {
+        const {
+            declarativeRulesCount,
+            regexpsCount,
+        } = userRulesLimits;
+
+        this.userRulesDeclarativeRulesCount = declarativeRulesCount;
+        this.userRulesRegexpsCount = regexpsCount;
+    };
+
+    @action
+    setUserRules = async (userRules: string): Promise<DYNAMIC_RULES_LIMITS_ERROR | null> => {
         const { setLoader } = this.rootStore.uiStore;
         if (this.userRules === userRules) {
-            return;
+            return null;
         }
 
         setLoader(true);
 
+        let resError: DYNAMIC_RULES_LIMITS_ERROR | null = null;
+
         try {
             await sender.setUserRules(userRules);
+
+            const userRulesLimits = await sender.getDynamicRulesCounters();
+            await this.setDynamicRulesCounters(userRulesLimits);
+
             this.closeEditor();
             this.closeUserRuleWizard();
+
+            resError = this.checkLimitsAndNotify();
+
             runInAction(() => {
                 this.userRules = userRules;
             });
         } catch (e: any) {
             const statusCode = e.message.match(/\d+/);
             const error = ERROR_UI_MESSAGES[statusCode]
-                ? ERROR_UI_MESSAGES[statusCode] : ERROR_UI_MESSAGES.DEFAULT;
+                ? ERROR_UI_MESSAGES[statusCode]
+                : ERROR_UI_MESSAGES.DEFAULT;
             this.setError(error);
         }
 
         setLoader(false);
+
+        return resError;
     };
+
+    checkLimitsAndNotify(): DYNAMIC_RULES_LIMITS_ERROR | null {
+        if (this.isMaxEnabledDynamicRules) {
+            return DYNAMIC_RULES_LIMITS_ERROR.MAX_DYNAMIC_REGEXPS_EXCEED;
+        }
+
+        if (this.isMaxEnabledDynamicRulesRegexps) {
+            return DYNAMIC_RULES_LIMITS_ERROR.MAX_DYNAMIC_RULES_EXCEED;
+        }
+
+        return null;
+    }
 
     @action
     fetchUserRules = async () => {
         const { setLoader } = this.rootStore.uiStore;
+
         setLoader(true);
+
         const result = await sender.getUserRules();
         runInAction(() => {
             this.userRules = result;
         });
+
         setLoader(false);
     };
 
@@ -185,17 +259,17 @@ export class OptionsStore {
     };
 
     @action
-    enableRule = (ruleId: number) => {
+    enableRule = (ruleId: number): Promise<DYNAMIC_RULES_LIMITS_ERROR | null> => {
         const userRulesProcessor = new UserRulesProcessor(this.userRules);
         userRulesProcessor.enableRule(ruleId);
-        this.setUserRules(userRulesProcessor.getUserRules());
+        return this.setUserRules(userRulesProcessor.getUserRules());
     };
 
     @action
-    disableRule = (ruleId: number) => {
+    disableRule = async (ruleId: number): Promise<DYNAMIC_RULES_LIMITS_ERROR | null> => {
         const userRulesProcessor = new UserRulesProcessor(this.userRules);
         userRulesProcessor.disableRule(ruleId);
-        this.setUserRules(userRulesProcessor.getUserRules());
+        return this.setUserRules(userRulesProcessor.getUserRules());
     };
 
     @action
@@ -239,7 +313,7 @@ export class OptionsStore {
         const newUserRules = this.userRules
             ? `${this.userRules}${NEW_LINE_SEPARATOR}${this.createdUserRuleText}`
             : this.createdUserRuleText;
-        this.setUserRules(newUserRules);
+        return this.setUserRules(newUserRules);
     }
 
     @action
@@ -251,30 +325,30 @@ export class OptionsStore {
     }
 
     @action
-    saveUserRuleInWizard() {
+    saveUserRuleInWizard(): Promise<DYNAMIC_RULES_LIMITS_ERROR | null> {
         if (!this.userRuleInWizard) {
             throw new Error('User rule in wizard should be defined to save it');
         }
         const userRulesProcessor = new UserRulesProcessor(this.userRules);
         userRulesProcessor.updateRule(this.userRuleInWizard.id, this.userRuleInWizard.ruleText);
-        this.setUserRules(userRulesProcessor.getUserRules());
         this.closeUserRuleWizard();
+        return this.setUserRules(userRulesProcessor.getUserRules());
     }
 
     @action
-    deleteUserRuleInWizard() {
+    deleteUserRuleInWizard(): Promise<DYNAMIC_RULES_LIMITS_ERROR | null> {
         if (!this.userRuleInWizard) {
             throw new Error('User rule in wizard should be defined to delete it');
         }
         const userRulesProcessor = new UserRulesProcessor(this.userRules);
         userRulesProcessor.deleteRule(this.userRuleInWizard.id);
-        this.setUserRules(userRulesProcessor.getUserRules());
+        return this.setUserRules(userRulesProcessor.getUserRules());
     }
 
     @action
-    addNewUserRule(newRule: string) {
+    addNewUserRule(newRule: string): Promise<DYNAMIC_RULES_LIMITS_ERROR | null> {
         const newUserRules = `${this.userRules}${NEW_LINE_SEPARATOR}${newRule}`;
-        this.setUserRules(newUserRules);
         this.closeUserRuleWizard();
+        return this.setUserRules(newUserRules);
     }
 }

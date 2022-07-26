@@ -7,6 +7,8 @@ import {
 import { OPTION_SETTINGS_NAMES } from 'Common/constants/settings-constants';
 import { sendMessage } from 'Common/helpers';
 
+import type { UserRulesLimits } from '../../background/userRules';
+
 /**
  * Module with methods used to communicate with background service worker
  */
@@ -16,14 +18,18 @@ class Sender {
      * @param key
      * @param value
      */
-    setSetting = (key: keyof OPTION_SETTINGS_NAMES, value: boolean) => sendMessage(
+    setSetting = (key: keyof OPTION_SETTINGS_NAMES, value: boolean | number[]) => sendMessage(
         MESSAGE_TYPES.SET_SETTING, { key, value },
     );
 
-    /**
-     * Retrieves options data from background service worker
-     */
+    /** Retrieves options data from background service worker */
     getOptionsData = () => sendMessage<OptionsData>(MESSAGE_TYPES.GET_OPTIONS_DATA);
+
+    /** Retrieves dynamic rules counters */
+    getDynamicRulesCounters = () => sendMessage<UserRulesLimits>(MESSAGE_TYPES.GET_DYNAMIC_RULES_LIMITS);
+
+    /** Relaunch tswebextension after possible filters limit release */
+    relaunchFiltering = (filterIds: number[]) => sendMessage(MESSAGE_TYPES.RELAUNCH_FILTERING, { filterIds });
 
     enableFilter = (filterId: number): Promise<Filter[]> => {
         return sendMessage(MESSAGE_TYPES.ENABLE_FILTER, { filterId });

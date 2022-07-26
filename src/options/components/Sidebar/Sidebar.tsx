@@ -13,8 +13,7 @@ export const Sidebar = () => {
         <>
             <div className="sidebar__menu" role="menu">
                 <button className="sidebar__open-button" type="button">
-                    {/* @ts-ignore TODO fix on mobile screen */}
-                    <Icon id="MENU" />
+                    <Icon id={IconId.MENU} />
                 </button>
             </div>
             <div className="sidebar">

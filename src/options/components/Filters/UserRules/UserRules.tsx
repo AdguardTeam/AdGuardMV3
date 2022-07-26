@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
 import { observer } from 'mobx-react';
 
-import { Editor } from 'Options/components/Filters/UserRules/Editor';
-import { useStore } from 'Options/stores/useStore';
-import { UserRulesGroups } from 'Options/components/Filters/UserRules/UserRulesGroups';
 import { translator } from 'Common/translators/translator';
 import { Button } from 'Common/components/Button';
 import { Section, Header } from 'Common/components/Section';
 import { IconId } from 'Common/components/ui';
+import { Editor } from 'Options/components/Filters/UserRules/Editor';
+import { useStore } from 'Options/stores/useStore';
+import { UserRulesGroups } from 'Options/components/Filters/UserRules/UserRulesGroups';
 import { UserRuleWizard } from 'Options/components/Filters/UserRules/UserRuleWizard';
+
+import { DynamicRulesLimitation } from '../../DynamicRulesLimitation';
 
 export const UserRules = observer(() => {
     const {
@@ -80,6 +82,7 @@ export const UserRules = observer(() => {
                 />
             )}
         >
+            <DynamicRulesLimitation />
             {renderContent(optionsStore.editorOpen)}
             <UserRuleWizard />
         </Section>

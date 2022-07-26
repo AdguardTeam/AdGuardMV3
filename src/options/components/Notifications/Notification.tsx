@@ -9,7 +9,7 @@ import styles from './notifications.module.pcss';
 
 interface NotificationProps {
     id: string
-    description: string,
+    description: string | React.ReactNode,
     icon: IconId | undefined,
 }
 
@@ -36,10 +36,6 @@ export const Notification = ({ id, description, icon }: NotificationProps) => {
         };
     }, [id, uiStore]);
 
-    const notificationClassnames = cn(styles.notification, {
-        [styles.close]: notificationOnClose,
-    });
-
     const close = () => {
         setNotificationOnClose(true);
         setTimeout(() => {
@@ -48,7 +44,7 @@ export const Notification = ({ id, description, icon }: NotificationProps) => {
     };
 
     return (
-        <div className={notificationClassnames}>
+        <div className={cn(styles.notification, { [styles.close]: notificationOnClose })}>
             {icon && (
                 <Icon id={icon} className={styles.icon} />
             )}

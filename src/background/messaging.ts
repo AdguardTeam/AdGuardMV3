@@ -41,7 +41,7 @@ export const extensionMessageHandler = async (
             return optionsData;
         }
         case MESSAGE_TYPES.OPEN_OPTIONS: {
-            return tabUtils.openOptionsPage();
+            return tabUtils.openOptionsPage(data.path);
         }
         case MESSAGE_TYPES.GET_POPUP_DATA: {
             const popupData: PopupData = {
@@ -171,7 +171,7 @@ export const extensionMessageHandler = async (
 
             break;
         }
-        // FIXME: Temporary construction for keeping alive service worker
+        // TODO: Temporary construction for keeping alive service worker
         // via constantly standing message exchange
         case MESSAGE_TYPES.PING: {
             break;
@@ -184,6 +184,16 @@ export const extensionMessageHandler = async (
                 filtersInfo: filters.filters,
                 currentDeclarativeRules: await chrome.declarativeNetRequest.getDynamicRules(),
             };
+        }
+        case MESSAGE_TYPES.GET_DYNAMIC_RULES_LIMITS: {
+            const userRulesCounters = await userRules.getUserRulesCounters();
+            return userRulesCounters;
+        }
+        case MESSAGE_TYPES.RELAUNCH_FILTERING: {
+            const { filterIds } = data;
+            await filters.setEnabledFiltersIds(filterIds);
+            await tsWebExtensionWrapper.configure();
+            break;
         }
         default: {
             throw new Error(`No message handler for type: ${type}`);
@@ -264,7 +274,7 @@ export const initExtension = async (message?: any) => {
  * General message handler, singleton
  */
 const messageHandlerWrapper = (
-    // FIXME: fix any
+    // TODO: fix any
     message: any,
     sender: any,
     sendResponse: (response?: any) => void,

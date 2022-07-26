@@ -22,6 +22,13 @@ const Nav = () => (
         >
             {reactTranslator.getMessage('options_nav_link_about')}
         </NavLink>
+        <NavLink
+            className={styles.item}
+            activeClassName={styles.active}
+            to="/limits"
+        >
+            {reactTranslator.getMessage('options_nav_link_rule_limits')}
+        </NavLink>
     </div>
 );
 

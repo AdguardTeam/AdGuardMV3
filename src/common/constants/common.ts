@@ -21,6 +21,8 @@ export interface Filter {
     description?: string,
     groupId: FiltersGroupId,
     url?: string,
+    regexpRulesCounter?: number,
+    declarativeRulesCounter?: number,
 }
 
 export interface FilterInfo {
@@ -34,12 +36,14 @@ export interface FilterInfo {
 }
 
 export const FILTERS_I18N_FILENAME = 'filters_i18n.json';
+export const FILTERS_RULES_COUNTER_FILENAME = 'filters_rules_counter.json';
+export const FILTERS_REGEXP_COUNTER_FILENAME = 'filters_regexp_counter.json';
 
 export const FILTERS_VERSIONS_FILENAME = 'filters_versions.json';
 
 export interface OptionsData {
-    settings: SettingsType
-    filters: Filter[]
+    settings: SettingsType,
+    filters: Filter[],
     categories: CategoriesType
 }
 
@@ -67,8 +71,10 @@ export enum MESSAGE_TYPES {
     GET_USER_RULES = 'GET_USER_RULES',
     SET_USER_RULES = 'SET_USER_RULES',
     GET_DEBUG_INFO = 'GET_DEBUG_INFO',
+    GET_DYNAMIC_RULES_LIMITS = 'GET_DYNAMIC_RULES_LIMITS',
+    RELAUNCH_FILTERING = 'RELAUNCH_FILTERING',
 
-    // FIXME: Remove
+    // TODO: Remove
     PING = 'PING',
 
     ADD_LONG_LIVED_CONNECTION = 'ADD_LONG_LIVED_CONNECTION',

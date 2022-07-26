@@ -9,6 +9,7 @@ import { translator } from 'Common/translators/translator';
 import { theme } from 'Common/styles';
 import { rootStore } from 'Options/stores';
 import { CheckboxOption } from 'Options/components/CheckboxOption';
+import { useNotifyDynamicRulesLimitsError } from 'Common/hooks/useNotifyDynamicRulesLimitError';
 
 const buildBlockingRule = (domain: string, blockSubdomains: boolean): string => {
     if (blockSubdomains) {
@@ -25,6 +26,8 @@ export const NewUserRuleBlocking = observer(() => {
     const [domain, setDomain] = useState('');
     const [blockSubdomains, setBlockSubdomains] = useState(DEFAULT_BLOCK_SUBDOMAINS);
 
+    const checkAndNotifyDynamicRulesError = useNotifyDynamicRulesLimitsError();
+
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setDomain(e.target.value);
     };
@@ -33,10 +36,11 @@ export const NewUserRuleBlocking = observer(() => {
         setBlockSubdomains(e.target.checked);
     };
 
-    const onSave = () => {
+    const onSave = async () => {
         if (domain.match(REGEX_DOMAIN)) {
             const rule = buildBlockingRule(domain, blockSubdomains);
-            optionsStore.addNewUserRule(rule);
+            const err = await optionsStore.addNewUserRule(rule);
+            checkAndNotifyDynamicRulesError(err);
             setDomain(DEFAULT_DOMAIN);
             setBlockSubdomains(DEFAULT_BLOCK_SUBDOMAINS);
         } else {

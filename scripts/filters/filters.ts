@@ -6,7 +6,11 @@ import { DeclarativeConverter, StringRuleList } from '@adguard/tsurlfilter';
 import fse from 'fs-extra';
 
 import { ADGUARD_FILTERS_IDS } from '../../src/common/constants/filters';
-import { FILTERS_I18N_FILENAME } from '../../src/common/constants/common';
+import {
+    FILTERS_I18N_FILENAME,
+    FILTERS_RULES_COUNTER_FILENAME,
+    FILTERS_REGEXP_COUNTER_FILENAME,
+} from '../../src/common/constants/common';
 import { cliLog } from '../cli-log';
 
 const COMMON_FILTERS_DIR = 'src/filters';
@@ -48,6 +52,9 @@ const startConvert = (browser: string) => {
     const declarativeFiltersDir = `${DECLARATIVE_FILTERS_DIR.replace('%browser%', browser)}`;
     fse.ensureDirSync(declarativeFiltersDir);
 
+    const regexpCounterMap = new Map<number, number>();
+    const rulesCounterMap = new Map<number, number>();
+
     fse.readdirSync(filtersDir).forEach((filePath) => {
         cliLog.info(`Convert ${filePath}...`);
 
@@ -60,11 +67,16 @@ const startConvert = (browser: string) => {
             return;
         }
 
-        const rulesetIndex = filePath.match(/\d+/);
-        if (rulesetIndex) {
+        const foundRegexps = filePath.match(/\d+/);
+        if (foundRegexps && foundRegexps[0] !== null) {
+            const rulesetIndex = Number.parseInt(foundRegexps[0], 10);
             const data = fse.readFileSync(`${filtersDir}/${filePath}`, { encoding: 'utf-8' });
-            const list = new StringRuleList(+rulesetIndex, data);
-            const { declarativeRules, convertedSourceMap } = converter.convert(
+            const list = new StringRuleList(rulesetIndex, data);
+            const {
+                declarativeRules,
+                convertedSourceMap,
+                regexpRulesCounter,
+            } = converter.convert(
                 list,
                 { resourcesPath: '/web-accessible-resources/redirects' },
             );
@@ -83,11 +95,26 @@ const startConvert = (browser: string) => {
                 JSON.stringify(Array.from(convertedSourceMap)),
             );
 
+            regexpCounterMap.set(rulesetIndex, regexpRulesCounter);
+            rulesCounterMap.set(rulesetIndex, declarativeRules.length);
+
             cliLog.info(`Convert ${filePath} done`);
         } else {
             cliLog.info(`Convert ${filePath} skipped`);
         }
     });
+
+    fse.writeFileSync(
+        `${filtersDir}/${FILTERS_REGEXP_COUNTER_FILENAME}`,
+        JSON.stringify(Array.from(regexpCounterMap)),
+    );
+    cliLog.info(`Regexp counters saved to ${FILTERS_REGEXP_COUNTER_FILENAME}`);
+
+    fse.writeFileSync(
+        `${filtersDir}/${FILTERS_RULES_COUNTER_FILENAME}`,
+        JSON.stringify(Array.from(rulesCounterMap)),
+    );
+    cliLog.info(`Rules counters saved to ${FILTERS_RULES_COUNTER_FILENAME}`);
 };
 
 const downloadFilter = async (url: UrlType, filtersDir: string) => {
