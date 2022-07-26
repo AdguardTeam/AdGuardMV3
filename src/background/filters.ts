@@ -164,7 +164,7 @@ class Filters {
             return;
         }
 
-        const rulesToEnable = localeFilterInMemory?.declarativeRulesCounter;
+        const rulesToEnable = localeFilterInMemory.declarativeRulesCounter;
         const freeRules = await chrome.declarativeNetRequest.getAvailableStaticRuleCount();
         const enabledFiltersCounter = this.filters.filter((f) => f.enabled).length;
 
@@ -172,8 +172,7 @@ class Filters {
             && rulesToEnable < freeRules
             && enabledFiltersCounter < MAX_NUMBER_OF_ENABLED_STATIC_RULESETS
         ) {
-            localeFilterInMemory.enabled = true;
-            await this.setEnabledIds();
+            this.updateFilterState(localeFilterInMemory.id, { enabled: true });
             log.debug('Enabled locale filter: ', localeFilterInMemory.id);
         }
     };
@@ -256,10 +255,6 @@ class Filters {
         await this.setEnabledIds();
 
         return this.getFilters();
-    };
-
-    genRulesetId = (id: number) => {
-        return `${RULESET_NAME}${id}`;
     };
 
     setEnabledIds = async () => {
