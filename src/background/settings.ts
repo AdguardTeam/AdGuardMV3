@@ -75,7 +75,11 @@ class Settings {
 
     public get filteringEnabled() {
         return this.settings[SETTINGS_NAMES.FILTERING_ENABLED];
-    };
+    }
+
+    public get protectionEnabled() {
+        return this.settings[SETTINGS_NAMES.PROTECTION_ENABLED];
+    }
 
     /**
      * Checks that settings is actual SettingsType
@@ -168,11 +172,6 @@ class Settings {
         log.info(`Settings were converted from ${oldVersion} to ${SCHEME_VERSION}`);
 
         return newSettings;
-    }
-    }
-
-    public get protectionEnabled() {
-        return this.settings[SETTINGS_NAMES.PROTECTION_ENABLED];
     }
 }
 
