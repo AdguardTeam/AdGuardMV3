@@ -1,4 +1,5 @@
 import path from 'path';
+import fs from 'fs';
 
 import { Compiler } from 'webpack';
 import fse from 'fs-extra';
@@ -62,6 +63,9 @@ export default class CollectFiltersVersionsPlugin {
      * * @param filtersDir absolute path to folder with original filters
     */
     private collectFiltersVersions = async (filtersDir: string): Promise<void> => {
+        if (!fs.existsSync(filtersDir)) {
+            return;
+        }
         const promises = fse.readdirSync(filtersDir)
             .map((filePath): Promise<void> => {
                 if (!filePath.endsWith(this.FILTERS_EXT)) {
