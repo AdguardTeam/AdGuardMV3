@@ -45,6 +45,7 @@ module.exports = {
     },
     plugins: [
         'import',
+        'import-newlines',
     ],
     rules: {
         'arrow-body-style': 'off',
@@ -74,6 +75,7 @@ module.exports = {
             },
         ],
         'max-len': ['error', 120],
+        'import-newlines/enforce': ['error', 3, 120],
         'import/order': [
             'error',
             {

@@ -16,3 +16,5 @@ export const WEBSITE = 'https://adguard.com/forward.html?action=adguard_site&fro
 export const DISCUSS = 'https://adguard.com/forward.html?action=discuss&from=options_screen&app=browser_extension_mv3';
 
 export const ACKNOWLEDGMENTS = 'https://adguard.com/forward.html?action=acknowledgments&from=options_screen&app=browser_extension_mv3';
+
+export const DOWNLOAD_APP = 'https://adguard.com/forward.html?action=download&from=options_screen&app=browser_extension_mv3';

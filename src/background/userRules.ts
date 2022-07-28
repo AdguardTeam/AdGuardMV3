@@ -1,12 +1,19 @@
 import { UserRuleType, NEW_LINE_SEPARATOR } from 'Common/constants/common';
-import { USER_RULES_STORAGE_KEY } from 'Common/constants/storage-keys';
+import { USER_RULES_STORAGE_KEY, USER_RULES_LIMITS_STORAGE_KEY } from 'Common/constants/storage-keys';
 import { log } from 'Common/logger';
 import { UserRulesProcessor } from 'Options/user-rules-processor';
 
 import { storage } from './storage';
 
+export type UserRulesLimits = {
+    declarativeRulesCount: number,
+    regexpsCount: number
+};
+
 class UserRules {
-    rules = '';
+    private rules = '';
+
+    private limits: UserRulesLimits | undefined;
 
     private setRules = async (rules: string) => {
         await this.saveRulesInStorage(rules);
@@ -32,6 +39,22 @@ class UserRules {
         }
         this.rules = await this.getFromStorage();
         return this.rules;
+    };
+
+    setUserRulesCounters = async (limits: UserRulesLimits) => {
+        await storage.set(USER_RULES_LIMITS_STORAGE_KEY, limits);
+        this.limits = limits;
+    };
+
+    getUserRulesCounters = async (): Promise<UserRulesLimits> => {
+        if (!this.limits) {
+            this.limits = await storage.get<UserRulesLimits>(USER_RULES_LIMITS_STORAGE_KEY);
+        }
+
+        return this.limits || {
+            declarativeRulesCount: 0,
+            regexpsCount: 0,
+        };
     };
 
     getAllowlist() {

@@ -4,8 +4,7 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 0 10px;
-    padding-bottom: 16px;
+    padding: 0 10px 16px;
 }
 
 .notification {
@@ -14,13 +13,12 @@
     width: 100%;
     max-width: 370px;
     min-height: 50px;
-    padding: 16px 23px;
-    border-radius: 8px;
+    padding: 12px 16px;
+    border-radius: 5px;
     margin-top: 15px;
     margin-left: auto;
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
+    align-items: flex-start;
     background-color: var(--gray4d);
     color: var(--white);
     overflow: hidden;
@@ -39,38 +37,39 @@
 
 .icon {
     width: 24px;
-    height: 21px;
+    height: 24px;
 }
 
 .notificationClose {
-    margin-left: auto;
+    padding: 0;
 }
 
 .description {
     font-size: 14px;
-    padding-right: 15px;
-    max-width: 100%;
-    max-height: 57px;
+    margin-left: 12px;
+    margin-right: 24px;
+    line-height: 16.41px;
+    max-height: 64px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 @keyframes notify-show {
     0% {
-        transform: translateY(75px);
+        transform: translate3d(0, 91px, 0);
     }
 
     100% {
-        transform: translateY(0);
+        transform: translate3(0, 0, 0);
     }
 }
 
-@keyframes notify-show-reverse {
+@keyframes notify-hide {
     0% {
-        transform: translateY(0);
+        transform: translate3d(0, 0, 0);
     }
 
     100% {
-        transform: translateY(75px);
+        transform: translate3d(0, 91px, 0);
     }
 }

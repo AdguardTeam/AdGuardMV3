@@ -30,5 +30,6 @@ export enum IconId {
     MENU = 'MENU',
     MAGNIFIER = 'MAGNIFIER',
     WARNING = 'WARNING',
+    RED_WARNING = 'RED_WARNING',
     LOADER = 'LOADER',
 }

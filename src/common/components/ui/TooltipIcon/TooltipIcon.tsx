@@ -4,9 +4,9 @@ import { usePopperTooltip } from 'react-popper-tooltip';
 
 import { useOutsideClick } from 'Common/hooks/useOutsideClick';
 
-import { Icon } from './Icon';
-import { IconId } from './Icons';
-import styles from './Tooltip.module.pcss';
+import { Icon, IconId } from '../Icons';
+
+import styles from './TooltipIcon.module.pcss';
 
 type IProps = {
     iconId: IconId,
@@ -15,7 +15,7 @@ type IProps = {
     enabled?: boolean,
 };
 
-export const Tooltip = ({
+export const TooltipIcon = ({
     iconId,
     className,
     children,
@@ -69,7 +69,7 @@ export const Tooltip = ({
     );
 };
 
-Tooltip.defaultProps = {
+TooltipIcon.defaultProps = {
     className: '',
     enabled: true,
 };

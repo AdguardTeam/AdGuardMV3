@@ -6,9 +6,11 @@ import { Icons } from 'Common/components/ui';
 import { log } from 'Common/logger';
 import { NOTIFIER_EVENTS } from 'Common/constants/common';
 import { createLongLivedConnection } from 'Common/messaging-utils';
+import { useNotifyDynamicRulesLimitsError } from 'Common/hooks/useNotifyDynamicRulesLimitError';
 import { Sidebar } from 'Options/components/Sidebar';
 import { Notifications } from 'Options/components/Notifications';
 import { About } from 'Options/components/About';
+import { Limits } from 'Options/components/Limits';
 import { rootStore } from 'Options/stores';
 import { Settings } from 'Options/components/Settings';
 import { Filters } from 'Options/components/Filters';
@@ -22,9 +24,12 @@ export const OptionsApp = observer(() => {
     const store = useContext(rootStore);
     const { settingsStore, optionsStore } = store;
 
+    const checkAndNotifyDynamicRulesError = useNotifyDynamicRulesLimitsError();
+
     const getOptionsData = async () => {
         try {
             await settingsStore.getOptionsData();
+            await optionsStore.getDynamicRulesCounters();
         } catch (e) {
             log.error(e);
         }
@@ -39,7 +44,7 @@ export const OptionsApp = observer(() => {
             NOTIFIER_EVENTS.SET_RULES,
         ];
 
-        const messageHandler = (message: any) => {
+        const messageHandler = async (message: any) => {
             const { type, data: [data] } = message;
 
             switch (type) {
@@ -50,11 +55,13 @@ export const OptionsApp = observer(() => {
                 }
                 case NOTIFIER_EVENTS.ADD_RULES: {
                     optionsStore.updateCreatedUserRule(data);
-                    optionsStore.addCreatedUserRule();
+                    const err = await optionsStore.addCreatedUserRule();
+                    checkAndNotifyDynamicRulesError(err);
                     break;
                 }
                 case NOTIFIER_EVENTS.SET_RULES: {
-                    optionsStore.setUserRules(data);
+                    const err = await optionsStore.setUserRules(data);
+                    checkAndNotifyDynamicRulesError(err);
                     break;
                 }
                 default:
@@ -75,6 +82,7 @@ export const OptionsApp = observer(() => {
                         <Switch>
                             <Route path="/" exact component={Settings} />
                             <Route path="/about" component={About} />
+                            <Route path="/limits" component={Limits} />
                             <Route path="/userrules" component={UserRules} />
                             <Route path="/customfilters" component={Filters} />
                             <Route path="/languages" component={Languages} />

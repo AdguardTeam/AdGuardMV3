@@ -59,8 +59,16 @@ class Settings {
 
     public getSettings = () => this.settings;
 
+    // TODO: Fix these types
     public setSetting = (key: SETTINGS_NAMES, value: SettingsValueType) => {
-        this.settings[key] = value;
+        if (key === SETTINGS_NAMES.FILTERS_CHANGED) {
+            this.settings[key] = value as unknown as number[];
+        } else if (key === SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES || key === SETTINGS_NAMES.VERSION) {
+            this.settings[key] = value as unknown as number;
+        } else {
+            this.settings[key] = value as unknown as boolean;
+        }
+
         notifier.notify(NOTIFIER_EVENTS.SETTING_UPDATED, { key, value });
         this.updateStorage();
     };

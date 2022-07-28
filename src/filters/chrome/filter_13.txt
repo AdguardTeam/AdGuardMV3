@@ -1,8 +1,8 @@
-! Checksum: 0tm2lvSiwF8ngfUNbiZvog
+! Checksum: aCpY6DS4HOxLsrp3kZ7cGg
 ! Title: AdGuard Turkish filter
 ! Description: Filter list that specifically removes ads on websites in Turkish language.
-! Version: 2.0.35.95
-! TimeUpdated: 2022-07-22T09:30:41+00:00
+! Version: 2.0.36.3
+! TimeUpdated: 2022-07-26T16:30:31+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -810,6 +810,7 @@ r10.net#%#//scriptlet('abort-on-property-write', 'rInt')
 ! Bad: example.org##main > div.ad (should be in specific.txt)
 !
 !
+filmizlesene.pw#$?#.vidcontainer { remove: true; }
 webteizle.one#?##header:has(> a[alt="reklam"])
 kimkazandi.com#?#.mainTopic:has(> div.row > div.item > div.img > div[id^="div-gpt-ad-"])
 bahiskilavuz4.com#?#.custom-html-widget:has(a[href^="https://rebrand.ly/"])
@@ -1376,6 +1377,10 @@ dizipal305.com,dizipal306.com,dizipal307.com,dizipal308.com,dizipal309.com,dizip
 ! dizipal*.cloud - frequently changed domains
 dizipal12.cloud,dizipal13.cloud,dizipal14.cloud,dizipal15.cloud,dizipal16.cloud,dizipal17.cloud,dizipal18.cloud,dizipal19.cloud,dizipal20.cloud,dizipal21.cloud,dizipal22.cloud,dizipal23.cloud,dizipal24.cloud,dizipal25.cloud,dizipal26.cloud,dizipal27.cloud,dizipal28.cloud,dizipal29.cloud,dizipal30.cloud,dizipal31.cloud,dizipal32.cloud,dizipal33.cloud,dizipal34.cloud,dizipal35.cloud,dizipal36.cloud,dizipal37.cloud,dizipal38.cloud,dizipal39.cloud,dizipal40.cloud,dizipal41.cloud,dizipal42.cloud,dizipal43.cloud,dizipal44.cloud,dizipal44.cloud,dizipal45.cloud,dizipal46.cloud,dizipal47.cloud,dizipal48.cloud,dizipal49.cloud,dizipal50.cloud#%#//scriptlet("remove-attr", "data-money", "div[data-money]")
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/124886
+eescobarvip.com#%#//scriptlet('prevent-addEventListener', 'click', 'popundr')
+! https://github.com/AdguardTeam/AdguardFilters/issues/124640
+filmizlesene.pw#%#AG_onLoad(function() { gizle(); });
 ! https://github.com/AdguardTeam/AdguardFilters/issues/123231
 movietube32.xyz,erotikizlefilm.com,turkerotikfilm.com,yetiskinfilmizle.net#%#//scriptlet('prevent-window-open')
 ! eksisozluk.com - ad placeholder
@@ -2272,6 +2277,12 @@ fullfilmcidayim.com,dizispeed.com###adStarter
 /service/advertchannels?$domain=ozgunkocaeli.com.tr|urfanatik.com|dirilispostasi.com|turkuazgazetesi.net|yenialanya.com|bugunkocaeli.com.tr|cagdaskocaeli.com.tr|mansetaydin.com|enkocaeli.com|kocaelikoz.com|kocaelibarisgazetesi.com|seskocaeli.com|sigortahaber.com
 dirilispostasi.com,turkuazgazetesi.net,yenialanya.com,bugunkocaeli.com.tr,cagdaskocaeli.com.tr,mansetaydin.com,seskocaeli.com,kocaelibarisgazetesi.com,kocaelikoz.com,enkocaeli.com##.block-pano > div.us
 !
+bursahayat.com.tr##.ads-box-news
+finans7.com##.finans_place_holder
+||filmsezonu.com/reklam*.jpeg
+||cdn.doccloud.me/rkl/
+||filmizlesene.pw/images/*.gif
+||r.filmizlesene.vip^
 ||ugurfilm2.com/reklampopup*.js
 ||i.ibb.co/zJVmXLT/1-01.png
 ||filmgezegeni.pw/wp-content/uploads/*/Bahisal-Mainnn1.mp4
@@ -2299,7 +2310,9 @@ sandalca.com##.widget_sponsor_150
 ||canyouseem3.github.io/dosyalar/
 dergicin.com##.piki-ads
 webursa.com##.banner
-/\/1xbbb|bettogoal\.webp/$domain=hdfilmifullizle.com|hdfilmfullizle.com
+hdfilmfullizle.com##.footerkyn
+hdfilmfullizle.com##.filmicerik ~ div[style^="margin:"]
+/\/(1xbbb|bettogoal)\.webp/$domain=hdfilmifullizle.com|hdfilmfullizle.com
 rarefivem.com###basladi
 ||rarefivem.com/raknet/
 ||720p-hdfilmizleme.com/rek/
@@ -3708,7 +3721,7 @@ bodrumhaber.com##a[target="\"_blank\""]:not([href^="https://bodrumhaber.com/"]) 
 ||i.emlaktasondakika.com/files/banners/
 ||emlakhaberajansi.com/wp-content/uploads/*Banner.jpg
 ||emlakhaberajansi.com/wp-content/uploads/2020/04/Tam.jpg
-brickfanatics.com,emlakdergisi.net##div[class^="code-block code-block-"]
+fullindirsene.net,brickfanatics.com,emlakdergisi.net##div[class^="code-block code-block-"]
 ||emlakmagazin.net/wp-content/uploads/Cekmekoy-Umraniye-Sancaktepe-Satilik-Daireler.jpg
 -970X250-$domain=emlakmanset.com|emlakhaberajansi.com
 emlakmanset.com##div[id^="nuifm-"]
@@ -3773,7 +3786,7 @@ uludagsozluk.com##.popup
 uludagsozluk.com##.sag_in > div[class*="300x250"][style*="width: 300px"]
 uludagsozluk.com##a[class^="rklm"]
 uludagsozluk.com##iframe[src^="\\theme\\resy\\v2\\"][src*="\\index.html"]
-fullhdizle.*,bizevdeyokuz.com,dizispeed.com,fullhdfilmizlesene.*,hdfilmcehennemi2.*,incisozluk.com.tr,filmyani.*,emlaktuel.com,tercihrobotu.com.tr,donanimarsivi.com,yeniisfikirleri.net,uludagsozluk.com,pasada.com.tr,ubnaija.com,enerjigazetesi.ist,ghiygmg.com,diziwatch.net,kanalfinans.com##a[href^="https://bit.ly/"]
+filmsezonu.com,fullhdizle.*,bizevdeyokuz.com,dizispeed.com,fullhdfilmizlesene.*,hdfilmcehennemi2.*,incisozluk.com.tr,filmyani.*,emlaktuel.com,tercihrobotu.com.tr,donanimarsivi.com,yeniisfikirleri.net,uludagsozluk.com,pasada.com.tr,ubnaija.com,enerjigazetesi.ist,ghiygmg.com,diziwatch.net,kanalfinans.com##a[href^="https://bit.ly/"]
 ||uludagsozluk.com/theme/*/v*/video-rkl/
 ||uludagsozluk.com/theme/resy/v2/*/index.html
 ||uludagsozluk.com/*/widget/sponsor*.php
@@ -5558,7 +5571,7 @@ gidahatti.com##a[href^="https://tr.hach.com"]
 ||cdn.xix*.com/bnr^
 ||imagizer.imageshack.us/a/img922/8810/wHDdVD.gif
 evdesifa.com##.post .code-block
-iskandinavya.com,sorumatik.co,andronova.net,koinfinans.com,hwp.com.tr,konupara.com,lafmacun.net,finanskocaeli.com##.code-block
+realfilmizle2.com,iskandinavya.com,sorumatik.co,andronova.net,koinfinans.com,hwp.com.tr,konupara.com,lafmacun.net,finanskocaeli.com##.code-block
 dilbilgisi.net##div[class^="code-block code-block-"][style*="margin: 8px auto; text-align: center;"]
 filmaltyazisi.com###sidebar > #custom_html-3
 milliyet.com.tr##.adv300B
@@ -6296,7 +6309,7 @@ orduulak.com##div[class^="advertise"]
 gecce.com##div[class^="anasayfaReklamBanner"]
 gecce.com##div[class^="anasayfaSagBanner"]
 yeniasya.com.tr##div[class^="banner area-"]
-turkhackteam.org,doviz.com,gecce.com,gundemkibris.com,ulasimonline.com,ulke.com.tr##div[class^="banner"]
+turizmprojedergisi.com,turkhackteam.org,doviz.com,gecce.com,gundemkibris.com,ulasimonline.com,ulke.com.tr##div[class^="banner"]
 oyunmoyun.com,oyunskor.com##div[class^="banner-"]
 fanatik.com.tr##div[class^="banner_300x"]
 mavikocaeli.com.tr##div[class^="buyuk-banner"]
@@ -6555,6 +6568,8 @@ driverdestek.com##.adsbygoogle
 ! Bad:  @@||example.org^$stealth (should be in AdGuard Base - whitelist_stealth.txt)
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/125027
+otomobilteknoloji.blogspot.com#@#.vertical-ads
 ! https://github.com/AdguardTeam/AdguardFilters/issues/123992
 @@||cdn.segmentify.com^$domain=gratis.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/121936

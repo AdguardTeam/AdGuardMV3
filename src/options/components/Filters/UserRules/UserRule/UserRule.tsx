@@ -6,6 +6,7 @@ import { UserRuleType } from 'Common/constants/common';
 import styles from 'Options/components/Filters/UserRules/UserRule/UserRule.module.pcss';
 import { rootStore } from 'Options/stores';
 import { theme } from 'Common/styles';
+import { useNotifyDynamicRulesLimitsError } from 'Common/hooks/useNotifyDynamicRulesLimitError';
 
 import { HighlightSearch } from '../../../HighlightSearch';
 
@@ -21,20 +22,24 @@ export const UserRule = ({
     enabled,
     ruleText,
     type,
-
 }: UserRuleProps) => {
     const { optionsStore } = useContext(rootStore);
 
-    const handleToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const checkAndNotifyDynamicRulesError = useNotifyDynamicRulesLimitsError();
+
+    const handleToggle = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const { target } = e;
 
         const ruleId = Number(target.id);
 
+        let error;
         if (target.checked) {
-            optionsStore.enableRule(ruleId);
+            error = await optionsStore.enableRule(ruleId);
         } else {
-            optionsStore.disableRule(ruleId);
+            error = await optionsStore.disableRule(ruleId);
         }
+
+        checkAndNotifyDynamicRulesError(error);
     };
 
     const handleRuleClick = () => {
