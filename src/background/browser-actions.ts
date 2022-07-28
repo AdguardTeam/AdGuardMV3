@@ -87,12 +87,16 @@ class BrowserActions {
     }
 
     onFilteringStateChange = async () => {
+        if (this.broken) {
+            return;
+        }
+
         const activeTab = await tabUtils.getActiveTab();
         if (!activeTab) {
             return;
         }
         const isFilteringEnabled = settings.filteringEnabled && settings.protectionEnabled;
-        await this.setIconByFiltering(isFilteringEnabled as boolean, activeTab.id);
+        await this.setIconByFiltering(isFilteringEnabled, activeTab.id);
     };
 
     setIconBroken(value: boolean) {
@@ -115,10 +119,6 @@ class BrowserActions {
 
         notifier.addEventListener(NOTIFIER_EVENTS.SETTING_UPDATED, async (data) => {
             try {
-                if (this.broken) {
-                    return;
-                }
-
                 const { key } = data;
                 if (key !== SETTINGS_NAMES.FILTERING_ENABLED) {
                     return;
