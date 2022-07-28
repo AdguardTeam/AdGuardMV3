@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid';
 
 import { tabUtils } from 'Common/tab-utils';
 import { NOTIFIER_EVENTS } from 'Common/constants/common';
+import { translator } from 'Common/translators/translator';
 
 import { contextMenus } from './context-menus';
 import { settings } from './settings';
@@ -30,7 +31,7 @@ const CONTEXT_MENU_MAP = {
             // eslint-disable-next-line no-console
             console.error(CONTEXT_MENU_ITEMS.DISABLE_FILTERING_ON_SITE);
         },
-        title: CONTEXT_MENU_ITEMS.DISABLE_FILTERING_ON_SITE,
+        title: translator.getMessage(CONTEXT_MENU_ITEMS.DISABLE_FILTERING_ON_SITE),
     },
     [CONTEXT_MENU_ITEMS.ENABLE_FILTERING_ON_SITE]: {
         action: () => {
@@ -38,7 +39,7 @@ const CONTEXT_MENU_MAP = {
             // eslint-disable-next-line no-console
             console.error(CONTEXT_MENU_ITEMS.ENABLE_FILTERING_ON_SITE);
         },
-        title: CONTEXT_MENU_ITEMS.ENABLE_FILTERING_ON_SITE,
+        title: translator.getMessage(CONTEXT_MENU_ITEMS.ENABLE_FILTERING_ON_SITE),
     },
     [CONTEXT_MENU_ITEMS.BLOCK_ADS_ON_SITE]: {
         action: async (tab?: Tab) => {
@@ -46,7 +47,7 @@ const CONTEXT_MENU_MAP = {
                 await tabUtils.openAssistant(tab.id);
             }
         },
-        title: CONTEXT_MENU_ITEMS.BLOCK_ADS_ON_SITE,
+        title: translator.getMessage(CONTEXT_MENU_ITEMS.BLOCK_ADS_ON_SITE),
     },
     [CONTEXT_MENU_ITEMS.REPORT_AN_ISSUE]: {
         action: async (tab?: Tab) => {
@@ -54,13 +55,13 @@ const CONTEXT_MENU_MAP = {
                 await tabUtils.openAbusePage(tab.url);
             }
         },
-        title: CONTEXT_MENU_ITEMS.REPORT_AN_ISSUE,
+        title: translator.getMessage(CONTEXT_MENU_ITEMS.REPORT_AN_ISSUE),
     },
     [CONTEXT_MENU_ITEMS.OPEN_OPTIONS]: {
         action: async () => {
             await tabUtils.openOptionsPage();
         },
-        title: CONTEXT_MENU_ITEMS.OPEN_OPTIONS,
+        title: translator.getMessage(CONTEXT_MENU_ITEMS.OPEN_OPTIONS),
     },
     [CONTEXT_MENU_ITEMS.DISABLE_BLOCKING]: {
         action: async (tab?: Tab) => {
@@ -70,7 +71,7 @@ const CONTEXT_MENU_MAP = {
                 await tabUtils.reloadTab(tab.id);
             }
         },
-        title: CONTEXT_MENU_ITEMS.DISABLE_BLOCKING,
+        title: translator.getMessage(CONTEXT_MENU_ITEMS.DISABLE_BLOCKING),
     },
     [CONTEXT_MENU_ITEMS.ENABLE_BLOCKING]: {
         action: async (tab?: Tab) => {
@@ -80,7 +81,7 @@ const CONTEXT_MENU_MAP = {
                 await tabUtils.reloadTab(tab.id);
             }
         },
-        title: CONTEXT_MENU_ITEMS.ENABLE_BLOCKING,
+        title: translator.getMessage(CONTEXT_MENU_ITEMS.ENABLE_BLOCKING),
     },
 };
 
