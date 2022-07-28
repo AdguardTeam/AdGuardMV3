@@ -95,12 +95,13 @@ class Settings {
     };
 
     /**
-     * Adds version to settings object
+     * Adds version and list of changed filters (mv3 limits) to settings object
      */
     private migrateFrom0to1 = (oldSettings: any): any => {
         return {
             ...oldSettings,
-            VERSION: 1,
+            [SETTINGS_NAMES.FILTERS_CHANGED]: [],
+            [SETTINGS_NAMES.VERSION]: 1,
         };
     };
 
