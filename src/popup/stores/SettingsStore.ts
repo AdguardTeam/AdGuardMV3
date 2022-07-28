@@ -254,7 +254,7 @@ export class SettingsStore {
             await this.setUserRules(userRulesProcessor.getUserRules());
         } else {
             // add rule
-            const newRule = `@@||${this.currentSite}^`;
+            const newRule = `@@||${this.currentSite}^$document`;
             const newUserRules = `${this.userRules}${NEW_LINE_SEPARATOR}${newRule}`;
             await this.setUserRules(newUserRules);
         }
