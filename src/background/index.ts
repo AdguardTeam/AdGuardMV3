@@ -3,6 +3,7 @@ import { log } from 'Common/logger';
 import { messaging, initExtension } from './messaging';
 import { contextMenu } from './context-menu';
 import { browserActions } from './browser-actions';
+import { filters } from './filters';
 
 log.debug('Background service worker has loaded via Manifest V3.');
 
@@ -13,8 +14,13 @@ browserActions.init();
 
 // To start the extension immediately after installing it,
 // to avoid waiting for the service worker to wake up
-chrome.runtime.onInstalled.addListener(async () => {
+chrome.runtime.onInstalled.addListener(async ({ reason }) => {
     await initExtension();
+
+    // Enable language filter only on first install
+    if (reason === chrome.runtime.OnInstalledReason.INSTALL) {
+        await filters.enableCurrentLanguageFilter();
+    }
 });
 
 // TODO: do not use same selector twice

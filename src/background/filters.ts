@@ -11,6 +11,7 @@ import {
 import { ADGUARD_FILTERS_IDS, FILTER_RULESET, RulesetType } from 'Common/constants/filters';
 import { RULES_STORAGE_KEY, ENABLED_FILTERS_IDS } from 'Common/constants/storage-keys';
 import FiltersUtils from 'Common/utils/filters';
+import { log } from 'Common/logger';
 import { arrayToMap } from 'Common/utils/arrays';
 
 import { backend, COMMON_FILTERS_DIR } from './backend';
@@ -28,6 +29,7 @@ const DEFAULT_FILTERS: Filter[] = [
         title: 'Russian',
         description: 'Filter that enables ad blocking on websites in the Russian language.',
         groupId: FiltersGroupId.LANGUAGES,
+        localeCodes: ['ru', 'ru_RU'],
     },
     {
         id: FILTER_RULESET[RulesetType.RULESET_2].id,
@@ -67,6 +69,7 @@ const DEFAULT_FILTERS: Filter[] = [
         // eslint-disable-next-line max-len
         description: 'EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in the German language.',
         groupId: FiltersGroupId.LANGUAGES,
+        localeCodes: ['de', 'de_DE'],
     },
     {
         id: FILTER_RULESET[RulesetType.RULESET_7].id,
@@ -74,6 +77,7 @@ const DEFAULT_FILTERS: Filter[] = [
         title: 'Japanese',
         description: 'Filter that enables ad blocking on websites in the Japanese language.',
         groupId: FiltersGroupId.LANGUAGES,
+        localeCodes: ['ja', 'ja_JP'],
     },
     {
         id: FILTER_RULESET[RulesetType.RULESET_8].id,
@@ -82,6 +86,7 @@ const DEFAULT_FILTERS: Filter[] = [
         // eslint-disable-next-line max-len
         description: 'EasyList Dutch + AdGuard Dutch filter. Filter list that specifically removes ads on websites in the Dutch language.',
         groupId: FiltersGroupId.LANGUAGES,
+        localeCodes: ['nl', 'nl_NL'],
     },
     {
         id: FILTER_RULESET[RulesetType.RULESET_9].id,
@@ -89,6 +94,7 @@ const DEFAULT_FILTERS: Filter[] = [
         title: 'Spanish/Portuguese',
         description: 'Filter list that specifically removes ads on websites in the Spanish and Portuguese languages.',
         groupId: FiltersGroupId.LANGUAGES,
+        localeCodes: ['es', 'es_ES', 'pt_PT', 'pt'],
     },
     {
         id: FILTER_RULESET[RulesetType.RULESET_13].id,
@@ -96,6 +102,7 @@ const DEFAULT_FILTERS: Filter[] = [
         title: 'Turkish',
         description: 'Filter list that specifically removes ads on websites in the Turkish language.',
         groupId: FiltersGroupId.LANGUAGES,
+        localeCodes: ['tr', 'tr_TR'],
     },
     {
         id: FILTER_RULESET[RulesetType.RULESET_16].id,
@@ -104,6 +111,7 @@ const DEFAULT_FILTERS: Filter[] = [
         // eslint-disable-next-line max-len
         description: 'Liste FR + AdGuard French filter. Filter list that specifically removes ads on websites in the French language.',
         groupId: FiltersGroupId.LANGUAGES,
+        localeCodes: ['fr', 'fr_FR'],
     },
     {
         id: FILTER_RULESET[RulesetType.RULESET_224].id,
@@ -112,8 +120,13 @@ const DEFAULT_FILTERS: Filter[] = [
         // eslint-disable-next-line max-len
         description: 'EasyList China + AdGuard Chinese filter. Filter list that specifically removes ads on websites in Chinese language.',
         groupId: FiltersGroupId.LANGUAGES,
+        localeCodes: ['zh', 'zh_CN'],
     },
 ];
+
+const {
+    MAX_NUMBER_OF_ENABLED_STATIC_RULESETS,
+} = chrome.declarativeNetRequest;
 
 class Filters {
     FILTERS_STORAGE_KEY = 'filters';
@@ -155,6 +168,36 @@ class Filters {
         const json = await file.json() as Array<Array<number>>;
 
         return arrayToMap(json);
+    };
+
+    /**
+     * Finds and enables filter for current browser locale
+     */
+    enableCurrentLanguageFilter = async () => {
+        const currentLocale = navigator.language.replace('-', '_');
+        const localeFilter = DEFAULT_FILTERS
+            .find((f) => f.localeCodes?.includes(currentLocale));
+
+        if (!localeFilter) {
+            return;
+        }
+
+        const localeFilterInMemory = this.filters.find((f) => f.id === localeFilter.id);
+        if (!localeFilterInMemory) {
+            return;
+        }
+
+        const rulesToEnable = localeFilterInMemory.declarativeRulesCounter;
+        const freeRules = await chrome.declarativeNetRequest.getAvailableStaticRuleCount();
+        const enabledFiltersCounter = this.filters.filter((f) => f.enabled).length;
+
+        if (rulesToEnable !== undefined
+            && rulesToEnable < freeRules
+            && enabledFiltersCounter < MAX_NUMBER_OF_ENABLED_STATIC_RULESETS
+        ) {
+            this.enableFilter(localeFilterInMemory.id);
+            log.debug('Enabled locale filter: ', localeFilterInMemory.id);
+        }
     };
 
     /**
@@ -301,7 +344,7 @@ class Filters {
     /**
      * Returns filters state from storage with mapped rules and regexps counters
      */
-    getFromStorage = async (): Promise<Filter[]> => {
+    getFiltersFromStorage = async (): Promise<Filter[]> => {
         const filtersFromStorage = await storage.get<Filter[]>(this.FILTERS_STORAGE_KEY);
         const filters = filtersFromStorage || DEFAULT_FILTERS;
 
@@ -312,11 +355,6 @@ class Filters {
             regexpRulesCounter: regexpCounters.get(f.id),
             declarativeRulesCounter: rulesCounters.get(f.id),
         }));
-    };
-
-    getFiltersFromStorage = async (): Promise<Filter[]> => {
-        const filters = await storage.get<Filter[]>(this.FILTERS_STORAGE_KEY);
-        return filters ?? DEFAULT_FILTERS;
     };
 
     enableFilter = async (filterId: number): Promise<void> => {

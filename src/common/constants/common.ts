@@ -23,6 +23,7 @@ export interface Filter {
     url?: string,
     regexpRulesCounter?: number,
     declarativeRulesCounter?: number,
+    localeCodes?: string[],
 }
 
 export interface FilterInfo {

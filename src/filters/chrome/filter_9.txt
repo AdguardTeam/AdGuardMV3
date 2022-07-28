@@ -1,8 +1,8 @@
-! Checksum: YZ1aKjsbvw6LPykWo8SZ5w
+! Checksum: jm547c7y1krdiV4PH5FMcg
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish and Portuguese languages.
-! Version: 2.0.14.35
-! TimeUpdated: 2022-07-18T15:32:18+00:00
+! Version: 2.0.14.38
+! TimeUpdated: 2022-07-25T14:48:35+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -285,6 +285,9 @@
 tunovelaligera.com#%#//scriptlet("abort-on-property-write", "adregain_wall")
 tunovelaligera.com#%#//scriptlet("abort-on-property-read", "ad_nodes")
 !
+! https://github.com/uBlockOrigin/uAssets/issues/14099
+raulprietofernandez.net#@#.adsbygoogle
+raulprietofernandez.net##ins.adsbygoogle
 ! https://github.com/uBlockOrigin/uAssets/issues/13696
 20minutos.es#%#//scriptlet("abort-on-property-read", "hb_now")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/120512
@@ -1465,6 +1468,8 @@ maisgasolina.com#?##main [id$="Block"][-ext-has='.adsbygoogle']
 !------- JS rules ---------------------!
 !--------------------------------------!
 !
+! https://github.com/uBlockOrigin/uAssets/issues/14099#issuecomment-1192722375
+raulprietofernandez.net#%#//scriptlet("abort-on-property-write", "pUrlArray")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/123894
 beachcam.meo.pt#%#//scriptlet('remove-class', 'bgPartners2019', '.videoContainer > div.beachPartners + div')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/122276
@@ -2012,6 +2017,7 @@ link.estadao.com.br,atomixhq.*,jc.ne10.uol.com.br,internetpasoapaso.com,acidadeo
 ! ##.ad
 atribuna.com.br,jovemnerd.com.br,laopiniondemurcia.es,larazon.es,dicio.com.br,band.uol.com.br,xataka.com,onyxplay.com,genbeta.com,vagalume.com.br,xatakandroid.com,abril.com.br##.ad
 !
+raulprietofernandez.net###k2Container > div[class^="item"] div[style*="background-color"]
 beachcam.meo.pt##.beachPartners
 beachcam.meo.pt##.dealer-block
 beachcam.meo.pt##.liveCamInfoContainer > div.sponsorContainer + div
@@ -3967,7 +3973,7 @@ peru.com##.marcopublicidad320250
 cadenaser.com##.marketplace2
 r7.com##.materia_coluna
 unam.mx##.medium-rectangle
-correiomanha.pt##.megaBanner
+muyinteresante.es,correiomanha.pt##.megaBanner
 filmixt.com##.midtopadd
 infobae.com##.mod-banner_300x50
 infobae.com##.mod-banner_650
