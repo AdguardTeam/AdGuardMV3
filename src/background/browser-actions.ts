@@ -14,8 +14,13 @@ class BrowserActions {
     /**
      * The extension may be in a third state - "broken" - when the browser has changed
      * the current list of active rule sets, and we must notify the user of this
-    */
+     */
     private broken: boolean = false;
+
+    /**
+     * Color of background for counter of blocked requests
+     */
+    static COUNTER_GREEN_COLOR = '#4d995f';
 
     setIcon = (details: TabIconDetails) => {
         return new Promise<void>((resolve) => {
@@ -36,6 +41,16 @@ class BrowserActions {
             await chrome.action.setBadgeBackgroundColor({ tabId, color: BADGE_COLOR });
         } catch (e: any) {
             log.debug(e.message);
+        }
+    };
+
+    setBadgeBlockedCounter = async (showCounter: boolean) => {
+        await chrome.declarativeNetRequest.setExtensionActionOptions({
+            displayActionCountAsBadgeText: showCounter,
+        });
+
+        if (showCounter) {
+            await chrome.action.setBadgeBackgroundColor({ color: BrowserActions.COUNTER_GREEN_COLOR });
         }
     };
 
@@ -111,20 +126,19 @@ class BrowserActions {
         }
     };
 
-    setIconBroken(value: boolean) {
+    async setIconBroken(value: boolean) {
         this.broken = value;
 
         if (this.broken) {
-            this.setIcon({ path: prefs.ICONS.BROKEN });
+            await this.setIcon({ path: prefs.ICONS.BROKEN });
         }
+
+        // Hide counter, when broken state is active and vice verse
+        await this.setBadgeBlockedCounter(!this.broken);
     }
 
-    init() {
-        const COUNTER_GREEN_COLOR = '#4d995f';
-        chrome.declarativeNetRequest.setExtensionActionOptions({
-            displayActionCountAsBadgeText: true,
-        });
-        chrome.action.setBadgeBackgroundColor({ color: COUNTER_GREEN_COLOR });
+    async init() {
+        await this.setBadgeBlockedCounter(this.broken);
 
         tabUtils.onActivated(() => this.onFilteringStateChange());
         tabUtils.onUpdated(() => this.onFilteringStateChange());
