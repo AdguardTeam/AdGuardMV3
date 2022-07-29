@@ -1,3 +1,4 @@
+import { getUrlDetails } from 'Common/helpers';
 import { tabUtils } from 'Common/tab-utils';
 import { log } from 'Common/logger';
 import { prefs } from 'Common/prefs';
@@ -6,6 +7,7 @@ import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
 
 import { settings } from './settings';
 import { notifier } from './notifier';
+import { userRules } from './userRules';
 
 type TabIconDetails = chrome.action.TabIconDetails;
 
@@ -95,8 +97,18 @@ class BrowserActions {
         if (!activeTab) {
             return;
         }
-        const isFilteringEnabled = settings.filteringEnabled && settings.protectionEnabled;
-        await this.setIconByFiltering(isFilteringEnabled, activeTab.id);
+
+        if (activeTab?.url) {
+            const urlDetails = getUrlDetails(activeTab.url);
+
+            if (urlDetails?.domainName) {
+                const currentAllowRule = userRules.getCurrentAllowRule(urlDetails.domainName);
+
+                const filteringEnabled = !currentAllowRule?.enabled && settings.protectionEnabled;
+
+                await this.setIconByFiltering(filteringEnabled, activeTab.id);
+            }
+        }
     };
 
     setIconBroken(value: boolean) {
