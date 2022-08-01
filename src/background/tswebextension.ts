@@ -74,7 +74,7 @@ class TsWebExtensionWrapper {
 
         const brokenState = isDifferent();
 
-        browserActions.setIconBroken(brokenState);
+        await browserActions.setIconBroken(brokenState);
 
         if (brokenState) {
             await filters.setEnabledFiltersIds(nowEnabledIds);

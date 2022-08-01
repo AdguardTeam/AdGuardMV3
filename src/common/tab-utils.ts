@@ -4,6 +4,7 @@ import { log } from 'Common/logger';
 import { prefs } from 'Common/prefs';
 import { getUrlWithQueryString } from 'Common/helpers';
 
+import { filters } from '../background/filters';
 import { scripting } from '../background/scripting';
 
 class TabUtils {
@@ -44,7 +45,7 @@ class TabUtils {
         await chrome.tabs.create({ url });
     };
 
-    openAbusePage = (url: string) => {
+    openAbusePage = async (url: string, from: string) => {
         const supportedBrowsers = ['Chrome', 'Firefox', 'Opera', 'Safari', 'IE', 'Edge', 'Yandex'];
 
         const browserUrlParams = (
@@ -55,13 +56,13 @@ class TabUtils {
 
         const { version } = chrome.runtime.getManifest();
 
-        // TODO: get enabled filters ids
-        const filtersIds: string[] = [];
+        const filtersIds = await filters.getEnableFiltersIds();
 
         const urlParams = {
             product_type: 'Ext',
             product_version: version,
             ...browserUrlParams,
+            from, // for tds
             url,
             filters: filtersIds.join('.'),
         };

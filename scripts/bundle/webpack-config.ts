@@ -66,7 +66,10 @@ const updateLocalesMSGName = (content: Buffer, buildEnv: BuildEnv) => {
     return JSON.stringify(messages, null, 4);
 };
 
-export const getWebpackConfig = (browser: Browser = BROWSERS.CHROME): Configuration => {
+export const getWebpackConfig = (
+    browser: Browser = BROWSERS.CHROME,
+    isWatchMode?: boolean,
+): Configuration => {
     const buildEnv = process.env.BUILD_ENV;
 
     const IS_DEV = buildEnv === BUILD_ENVS.DEV;
@@ -74,6 +77,7 @@ export const getWebpackConfig = (browser: Browser = BROWSERS.CHROME): Configurat
     const BUILD_PATH = '../../build';
     const SRC_PATH = '../../src';
     const FILTERS_PATH = `filters/${browser}`;
+    const OUTPUT_FILTERS_PATH = 'filters/';
     const OUTPUT_PATH = buildEnv;
     const BACKGROUND_PATH = path.resolve(__dirname, SRC_PATH, 'background');
     const POPUP_PATH = path.resolve(__dirname, SRC_PATH, 'popup');
@@ -84,12 +88,11 @@ export const getWebpackConfig = (browser: Browser = BROWSERS.CHROME): Configurat
     const ASSISTANT_PATH = path.resolve(CONTENT_SCRIPTS_PATH, 'assistant');
     const OUTPUT_DIR = path.resolve(__dirname, BUILD_PATH, OUTPUT_PATH, browser);
     const FILTERS_DIR = path.resolve(__dirname, SRC_PATH, FILTERS_PATH);
-    const OUTPUT_FILTERS_DIR = path.resolve(OUTPUT_DIR, 'filters/');
-    const OUTPUT_FILTERS_DECLARATIVE_DIR = path.resolve(OUTPUT_DIR, 'filters/declarative/');
+    const FILTERS_DECLARATIVE_DIR = path.resolve(__dirname, SRC_PATH, FILTERS_PATH, 'declarative/');
 
     const plugins: WebpackPluginInstance[] = [
         new ForkTsCheckerWebpackPlugin(),
-        new CollectFiltersVersionsPlugin(FILTERS_DIR, OUTPUT_FILTERS_DIR),
+        new CollectFiltersVersionsPlugin(FILTERS_DIR, OUTPUT_FILTERS_PATH),
         new CopyWebpackPlugin({
             patterns: [
                 {
@@ -98,7 +101,7 @@ export const getWebpackConfig = (browser: Browser = BROWSERS.CHROME): Configurat
                     transform: (content) => updateManifest(
                         IS_DEV,
                         content,
-                        OUTPUT_FILTERS_DECLARATIVE_DIR,
+                        FILTERS_DECLARATIVE_DIR,
                     ),
                 },
                 {
@@ -145,12 +148,18 @@ export const getWebpackConfig = (browser: Browser = BROWSERS.CHROME): Configurat
             filename: 'debugging.html',
             chunks: ['debugging'],
         }),
-        new ZipWebpackPlugin({
-            path: '../',
-            filename: `${browser}.zip`,
-        }),
         new MiniCssExtractPlugin(),
     ];
+
+    // If watch mode we don't need to generate zip
+    if (!isWatchMode) {
+        plugins.push(
+            new ZipWebpackPlugin({
+                path: '../',
+                filename: `${browser}.zip`,
+            }),
+        );
+    }
 
     if (IS_DEV) {
         plugins.push(

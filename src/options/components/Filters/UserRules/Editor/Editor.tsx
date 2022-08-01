@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import cn from 'classnames';
 import ReactResizeDetector from 'react-resize-detector';
 import AceEditor from 'react-ace';
+import { Ace, Range } from 'ace-builds';
 import { observer } from 'mobx-react';
 
 import { useStore } from 'Options/stores/useStore';
@@ -14,6 +15,8 @@ import styles from './Editor.module.pcss';
 import 'ace-builds/src-noconflict/ext-searchbox';
 import 'ace-builds/src-noconflict/theme-textmate';
 import 'Common/editor/mode-adguard';
+
+const MASK_COMMENT = '!';
 
 export const Editor = observer(() => {
     const { optionsStore } = useStore();
@@ -81,6 +84,53 @@ export const Editor = observer(() => {
         optionsStore.resetError();
     };
 
+    const shortcuts = [
+        {
+            name: 'save',
+            bindKey: { win: 'Ctrl-S', mac: 'Command-S' },
+            exec: (editor: Ace.Editor) => {
+                setUserRules(editor.getValue());
+            },
+        },
+        {
+            name: 'cancel',
+            bindKey: { win: 'Esc', mac: 'Esc' },
+            exec: onCancel,
+        },
+        {
+            name: 'togglecomment',
+            bindKey: { win: 'Ctrl-/', mac: 'Command-/' },
+            exec: (editor: Ace.Editor) => {
+                const selection = editor.getSelection();
+                const ranges = selection.getAllRanges();
+
+                const rowsSelected = ranges
+                    .map((range: Ace.Range) => {
+                        const [start, end] = [range.start.row, range.end.row];
+                        return Array.from({ length: end - start + 1 }, (_, idx) => idx + start);
+                    })
+                    .flat();
+
+                const allRowsCommented = rowsSelected.every((row: number) => {
+                    const rowLine = editor.session.getLine(row);
+                    return rowLine.trim().startsWith(MASK_COMMENT);
+                });
+
+                rowsSelected.forEach((row: number) => {
+                    const rawLine = editor.session.getLine(row);
+                    // if all lines start with comment mark we remove it
+                    if (allRowsCommented) {
+                        const lineWithRemovedComment = rawLine.replace(MASK_COMMENT, '');
+                        editor.session.replace(new Range(row, 0, row, rawLine.length), lineWithRemovedComment);
+                        // otherwise we add it
+                    } else {
+                        editor.session.insert({ row, column: 0 }, MASK_COMMENT);
+                    }
+                });
+            },
+        },
+    ];
+
     return (
         <div className={styles.container} style={editorStyles}>
             <AceEditor
@@ -102,6 +152,7 @@ export const Editor = observer(() => {
                     editor.renderer.setScrollMargin(offset, offset, 0, 0);
                 }}
                 onFocus={onFocus}
+                commands={shortcuts}
             />
             <ReactResizeDetector
                 skipOnMount

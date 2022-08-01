@@ -20,12 +20,12 @@ export const bundle = () => {
     };
 
     const bundleChrome: Task = (options: TaskOptions) => {
-        const webpackConfig = getWebpackConfig(BROWSERS.CHROME);
+        const webpackConfig = getWebpackConfig(BROWSERS.CHROME, options.watch);
         return bundleRunner(webpackConfig, options.watch);
     };
 
     const bundleEdge: Task = (options: TaskOptions) => {
-        const webpackConfig = getWebpackConfig(BROWSERS.EDGE);
+        const webpackConfig = getWebpackConfig(BROWSERS.EDGE, options.watch);
         return bundleRunner(webpackConfig, options.watch);
     };
 

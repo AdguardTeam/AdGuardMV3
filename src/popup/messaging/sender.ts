@@ -29,8 +29,9 @@ class Sender {
 
     /**
      * Asks background service worker to report site from active tab
+     * @param from string key for tds-link
      */
-    reportSite = () => sendMessage(MESSAGE_TYPES.REPORT_SITE);
+    reportSite = (from: string) => sendMessage(MESSAGE_TYPES.REPORT_SITE, { from });
 
     /**
      * Asks background service worker to reload active tab

@@ -71,9 +71,10 @@ export const extensionMessageHandler = async (
         }
         case MESSAGE_TYPES.REPORT_SITE: {
             const { url } = await tabUtils.getActiveTab();
+            const { from } = data;
 
             if (url) {
-                await tabUtils.openAbusePage(url);
+                await tabUtils.openAbusePage(url, from);
             }
 
             return null;
