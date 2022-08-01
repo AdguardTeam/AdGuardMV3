@@ -1,0 +1,60 @@
+---
+version: 2
+plan:
+  project-key: ADGEXT
+  key: BEMV3BETAINCR
+  name: browser extension mv3 - increment
+variables:
+  dockerNode: adguard/node-ssh:15.14--6
+
+stages:
+  - Increment:
+      manual: 'true'
+      final: 'false'
+      jobs:
+        - Increment
+
+Increment:
+  key: INCREMENT
+  other:
+    clean-working-dir: true
+  docker:
+    image: ${bamboo.dockerNode}
+    volumes:
+      ${system.YARN_DIR}: "${bamboo.cacheYarn}"
+  tasks:
+    - checkout:
+        force-clean-build: 'true'
+    - script:
+        interpreter: SHELL
+        scripts:
+          - |-
+            set -x
+            set -e
+
+            # Fix mixed logs
+            exec 2>&1
+
+            ls -la
+
+            yarn version --patch --no-git-tag-version
+    - any-task:
+        plugin-key: com.atlassian.bamboo.plugins.vcs:task.vcs.commit
+        configuration:
+          commitMessage: 'skipci: Automatic increment build number'
+          selectedRepository: defaultRepository
+  requirements:
+    - adg-docker: 'true'
+
+triggers: []
+
+notifications:
+  - events:
+      - plan-status-changed
+    recipients:
+      - webhook:
+          name: Build webhook
+          url: http://prod.jirahub.service.eu.consul/v1/webhook/bamboo
+labels: []
+other:
+  concurrent-build-plugin: system-default
