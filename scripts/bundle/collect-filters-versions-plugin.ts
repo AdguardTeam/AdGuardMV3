@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 
-import { Compiler } from 'webpack';
+import { Compiler, Compilation, sources } from 'webpack';
 import fse from 'fs-extra';
 
 import FiltersUtils from '../../src/common/utils/filters';
@@ -19,7 +19,7 @@ export default class CollectFiltersVersionsPlugin {
     // Path to original .txt filters
     private originalFiltersPath: string;
 
-    // Path to build folder with .txt filters
+    // Path to the location where the timestamp file of the filters will be saved
     private outputFiltersPath: string;
 
     // Extension of original filters
@@ -30,7 +30,7 @@ export default class CollectFiltersVersionsPlugin {
 
     /**
      * @param originalFiltersPath absolute path to folder with original filters
-     * @param outputFiltersPath absolute path to output build folder with original filters
+     * @param outputFiltersPath path to the location where the timestamp file of the filters will be saved
     */
     constructor(originalFiltersPath: string, outputFiltersPath: string) {
         this.filtersVersions = new Map<number, number>();
@@ -39,25 +39,22 @@ export default class CollectFiltersVersionsPlugin {
     }
 
     apply = async (compiler: Compiler) => {
-        // First scan
-        await this.collectFiltersVersions(this.originalFiltersPath);
-        console.log('filters versions: ');
-        Array.from(this.filtersVersions).forEach(([id, version]) => {
-            console.log(`filter ${id} updated at ${new Date(version).toISOString()} (${version})`);
-        });
-        await this.saveFiltersFilters();
+        const pluginName = this.constructor.name;
 
-        // Watch for changes
-        compiler.hooks.watchRun.tap('WatchRun', async (comp) => {
-            const promises = Array.from(comp.modifiedFiles)
-                .filter((p) => p.includes(this.originalFiltersPath) && p.endsWith(this.FILTERS_EXT))
-                .map((p) => this.saveTimestampForFilter(p));
+        compiler.hooks.thisCompilation.tap(pluginName, (compilation) => {
+            compilation.hooks.processAssets.tapAsync({
+                name: pluginName,
+                stage: compiler.webpack.Compilation.PROCESS_ASSETS_STAGE_ADDITIONS,
+            }, async (assets, callback) => {
+                await this.collectFiltersVersions(this.originalFiltersPath);
+                console.log('filters versions: ');
+                Array.from(this.filtersVersions).forEach(([id, version]) => {
+                    console.log(`filter ${id} updated at ${new Date(version).toISOString()} (${version})`);
+                });
+                this.saveFiltersTimestamps(compilation);
 
-            await Promise.all(promises);
-
-            if (promises.length > 0) {
-                await this.saveFiltersFilters();
-            }
+                callback();
+            });
         });
     };
 
@@ -113,14 +110,12 @@ export default class CollectFiltersVersionsPlugin {
      * Saves json-stringified array-version of Map with filters' ids and versions
      * to output build folder with original filters
      */
-    private saveFiltersFilters = async () => {
-        fse.ensureDirSync(this.outputFiltersPath);
-        const savePath = path.resolve(this.outputFiltersPath, FILTERS_VERSIONS_FILENAME);
-        fse.writeFileSync(
+    private saveFiltersTimestamps = (compilation: Compilation) => {
+        const savePath = path.join(this.outputFiltersPath, FILTERS_VERSIONS_FILENAME);
+        compilation.emitAsset(
             savePath,
-            JSON.stringify(Array.from(this.filtersVersions)),
+            new sources.RawSource(JSON.stringify(Array.from(this.filtersVersions))),
         );
-        const fileStats = fs.statSync(savePath);
-        console.log(`Filters timestamps saved to: ${savePath} (${fileStats.size}b)`);
+        console.log(`Filters timestamps added to assets: ${savePath}`);
     };
 }
