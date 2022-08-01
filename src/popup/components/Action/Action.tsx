@@ -16,7 +16,7 @@ export const Action = observer(() => {
     const blockedAdsCount = 354; // TODO replace with real number
 
     const reportSiteClickHandler = async () => {
-        await sender.reportSite();
+        await sender.reportSite('popup');
     };
 
     if (!isAllowlisted) {

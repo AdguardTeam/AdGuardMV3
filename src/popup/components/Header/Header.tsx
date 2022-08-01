@@ -7,6 +7,8 @@ import { reactTranslator } from 'Common/translators/reactTranslator';
 import { PROTECTION_PAUSE_TIMEOUT_MS, PROTECTION_PAUSE_TIMEOUT_S } from 'Common/constants/common';
 import { REPORT_SITE_BASE } from 'Common/constants/urls';
 import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
+import { getUrlWithQueryString } from 'Common/helpers';
+import { prefs } from 'Common/prefs';
 
 import { sender } from '../../messaging/sender';
 import { rootStore } from '../../stores';
@@ -47,6 +49,15 @@ export const Header = observer(() => {
         await sender.setPauseExpires(settingsStore.currentTime + PROTECTION_PAUSE_TIMEOUT_MS);
         setProtectionPausedTimer();
     };
+
+    const link = getUrlWithQueryString(REPORT_SITE_BASE, {
+        from: 'popup', // param for tds
+        product_version: chrome.runtime.getManifest().version,
+        url: currentUrl,
+        filters: enableFiltersIds.join('.'),
+        browser: prefs.browser,
+        product_type: 'Ext',
+    });
 
     // TODO remove fieldset child buttons disable after the bug is fixed https://github.com/facebook/react/issues/7711
     return (
@@ -113,10 +124,7 @@ export const Header = observer(() => {
                     <a
                         target="_blank"
                         rel="noreferrer"
-                        href={`${REPORT_SITE_BASE}?product_version=${chrome.runtime.getManifest().version
-                        }&url=${encodeURIComponent(currentUrl)
-                        }&filters=${encodeURIComponent(enableFiltersIds.join('.'))
-                        }&browser=Chrome&product_type=Ext`}
+                        href={link}
                         className={styles.item}
                     >
                         {reactTranslator.getMessage('popup_settings_report_issue')}

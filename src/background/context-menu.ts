@@ -52,7 +52,7 @@ const CONTEXT_MENU_MAP = {
     [CONTEXT_MENU_ITEMS.REPORT_AN_ISSUE]: {
         action: async (tab?: Tab) => {
             if (tab?.url) {
-                await tabUtils.openAbusePage(tab.url);
+                await tabUtils.openAbusePage(tab.url, 'context_menu');
             }
         },
         title: translator.getMessage(CONTEXT_MENU_ITEMS.REPORT_AN_ISSUE),
