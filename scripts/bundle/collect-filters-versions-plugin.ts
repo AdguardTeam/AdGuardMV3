@@ -41,6 +41,10 @@ export default class CollectFiltersVersionsPlugin {
     apply = async (compiler: Compiler) => {
         // First scan
         await this.collectFiltersVersions(this.originalFiltersPath);
+        console.log('filters versions: ');
+        Array.from(this.filtersVersions).forEach(([id, version]) => {
+            console.log(`filter ${id} updated at ${new Date(version).toISOString()} (${version})`);
+        });
         await this.saveFiltersFilters();
 
         // Watch for changes
@@ -111,9 +115,12 @@ export default class CollectFiltersVersionsPlugin {
      */
     private saveFiltersFilters = async () => {
         fse.ensureDirSync(this.outputFiltersPath);
+        const savePath = path.resolve(this.outputFiltersPath, FILTERS_VERSIONS_FILENAME);
         fse.writeFileSync(
-            path.resolve(this.outputFiltersPath, FILTERS_VERSIONS_FILENAME),
+            savePath,
             JSON.stringify(Array.from(this.filtersVersions)),
         );
+        const fileStats = fs.statSync(savePath);
+        console.log(`Filters timestamps saved to: ${savePath} (${fileStats.size}b)`);
     };
 }
