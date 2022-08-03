@@ -104,7 +104,7 @@ const addSeparator = async () => {
 };
 
 const addContextMenu = async () => {
-    const isBlockingEnabled = settings.filteringEnabled();
+    const isBlockingEnabled = settings.filteringEnabled;
 
     // TODO handle site specific filtering when it will be ready
     await addMenuItem(CONTEXT_MENU_ITEMS.DISABLE_FILTERING_ON_SITE);

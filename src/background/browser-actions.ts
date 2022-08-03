@@ -5,6 +5,7 @@ import { prefs } from 'Common/prefs';
 import { NOTIFIER_EVENTS } from 'Common/constants/common';
 import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
 
+import { settings } from './settings';
 import { notifier } from './notifier';
 import { userRules } from './userRules';
 
@@ -94,35 +95,34 @@ class BrowserActions {
         }
     };
 
-    setIconByFiltering(filteringEnabled: boolean, tabId?: number) {
+    async setIconByFiltering(filteringEnabled: boolean, tabId?: number) {
         if (filteringEnabled) {
-            this.setIconDisabled(tabId);
+            await this.setIconEnabled(tabId);
         } else {
-            this.setIconEnabled(tabId);
+            await this.setIconDisabled(tabId);
         }
     }
 
-    private onFilteringStateChange = async () => {
-        try {
-            if (this.broken) {
-                return;
+    onFilteringStateChange = async () => {
+        if (this.broken) {
+            return;
+        }
+
+        const activeTab = await tabUtils.getActiveTab();
+        if (!activeTab) {
+            return;
+        }
+
+        if (activeTab?.url) {
+            const urlDetails = getUrlDetails(activeTab.url);
+
+            if (urlDetails?.domainName) {
+                const currentAllowRule = userRules.getCurrentAllowRule(urlDetails.domainName);
+
+                const filteringEnabled = !currentAllowRule?.enabled && settings.protectionEnabled;
+
+                await this.setIconByFiltering(filteringEnabled, activeTab.id);
             }
-
-            const activeTab = await tabUtils.getActiveTab();
-
-            if (activeTab?.url) {
-                const urlDetails = getUrlDetails(activeTab.url);
-
-                if (urlDetails?.domainName) {
-                    const currentAllowRule = userRules.getCurrentAllowRule(urlDetails.domainName);
-
-                    const filteringEnabled = !!currentAllowRule?.enabled;
-
-                    this.setIconByFiltering(filteringEnabled, activeTab.id);
-                }
-            }
-        } catch (e) {
-            log.info(e);
         }
     };
 
@@ -145,10 +145,6 @@ class BrowserActions {
 
         notifier.addEventListener(NOTIFIER_EVENTS.SETTING_UPDATED, async (data) => {
             try {
-                if (this.broken) {
-                    return;
-                }
-
                 const { key } = data;
                 if (key !== SETTINGS_NAMES.FILTERING_ENABLED) {
                     return;
