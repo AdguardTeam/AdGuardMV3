@@ -45,6 +45,9 @@ export class SettingsStore {
     @observable
     availableStaticRulesCount: number = 0;
 
+    @observable
+    optionsDataReady = false;
+
     @action
     updateFilterState = (filterId: number, filterProps: Partial<Filter>) => {
         const filter = this.filters.find((f) => f.id === filterId);
@@ -145,6 +148,10 @@ export class SettingsStore {
         yield this.updateLimitations();
 
         setLoader(false);
+    }
+
+    @action setOptionsDataLoaded() {
+        this.optionsDataReady = true;
     }
 
     @action

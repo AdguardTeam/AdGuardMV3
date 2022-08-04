@@ -27,10 +27,6 @@ export const UserRules = observer(() => {
         return searchStore.closeSearch;
     }, []);
 
-    useEffect(() => {
-        optionsStore.fetchUserRules();
-    }, []);
-
     const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         searchStore.setSearchValue(e.currentTarget.value);
     };

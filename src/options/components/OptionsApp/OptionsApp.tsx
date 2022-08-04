@@ -23,12 +23,15 @@ import styles from './options-app.module.pcss';
 export const OptionsApp = observer(() => {
     const store = useContext(rootStore);
     const { settingsStore, optionsStore } = store;
+    const { optionsDataReady } = settingsStore;
 
     const checkAndNotifyDynamicRulesError = useNotifyDynamicRulesLimitsError();
 
     const getOptionsData = async () => {
         try {
             await settingsStore.getOptionsData();
+            await optionsStore.fetchUserRules();
+            settingsStore.setOptionsDataLoaded();
         } catch (e) {
             log.error(e);
         }
@@ -57,7 +60,7 @@ export const OptionsApp = observer(() => {
         return createLongLivedConnection('options', events, messageHandler);
     }, []);
 
-    return (
+    const content = (
         <HashRouter hashType="noslash">
             <Icons />
             <div className={styles.section}>
@@ -80,4 +83,13 @@ export const OptionsApp = observer(() => {
             </div>
         </HashRouter>
     );
+
+    return optionsDataReady
+        ? content
+        : (
+            <>
+                <Icons />
+                <LoaderOverlay />
+            </>
+        );
 });
