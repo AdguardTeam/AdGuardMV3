@@ -53,41 +53,34 @@ class Settings {
         await storage.set(this.SETTINGS_STORAGE_KEY, this.settings);
     }, this.SAVE_TO_STORAGE_THROTTLE_TIMEOUT_MS);
 
-    public getSetting = (key: SETTINGS_NAMES) => {
-        return this.settings[key];
+    public getSetting = <T extends SettingsValueType>(key: SETTINGS_NAMES): T => {
+        return this.settings[key] as T;
     };
 
     public getSettings = () => this.settings;
 
-    // TODO: Fix these types
-    public setSetting = (key: SETTINGS_NAMES, value: SettingsValueType) => {
-        if (key === SETTINGS_NAMES.FILTERS_CHANGED) {
-            this.settings[key] = value as unknown as number[];
-        } else if (key === SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES || key === SETTINGS_NAMES.VERSION) {
-            this.settings[key] = value as unknown as number;
-        } else {
-            this.settings[key] = value as unknown as boolean;
-        }
-
-        notifier.notify(NOTIFIER_EVENTS.SETTING_UPDATED, { key, value });
-        this.updateStorage();
+    public setSetting = async (update: Partial<SettingsType>) => {
+        Object.assign(this.settings, update);
+        await this.updateStorage();
     };
-
-    public enableFiltering = () => {
-        this.setSetting(SETTINGS_NAMES.FILTERING_ENABLED, true);
-    };
-
-    public disableFiltering = () => {
-        this.setSetting(SETTINGS_NAMES.FILTERING_ENABLED, false);
-    };
-
-    public get filteringEnabled() {
-        return this.settings[SETTINGS_NAMES.FILTERING_ENABLED];
-    }
 
     public get protectionEnabled() {
         return this.settings[SETTINGS_NAMES.PROTECTION_ENABLED];
     }
+
+    public setProtection = async (value: boolean) => {
+        await this.setSetting({ [SETTINGS_NAMES.PROTECTION_ENABLED]: value });
+        notifier.notify(NOTIFIER_EVENTS.PROTECTION_UPDATED, { value });
+    };
+
+    public setProtectionPauseExpires = async (value: number) => {
+        await this.setSetting({ [SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES]: value });
+        notifier.notify(NOTIFIER_EVENTS.PROTECTION_PAUSE_EXPIRES_UPDATED, { value });
+    };
+
+    public setFiltersChangedList = async (ids: number[]) => {
+        await this.setSetting({ [SETTINGS_NAMES.FILTERS_CHANGED]: ids });
+    };
 
     /**
      * Checks that settings is actual SettingsType

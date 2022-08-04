@@ -1,6 +1,6 @@
 import { sendMessage } from 'Common/helpers';
 import { PopupData, MESSAGE_TYPES } from 'Common/constants/common';
-import { SETTINGS_NAMES, SettingsValueType } from 'Common/constants/settings-constants';
+import { POPUP_SETTINGS } from 'Common/constants/settings-constants';
 import { tabUtils } from 'Common/tab-utils';
 
 /**
@@ -18,13 +18,12 @@ class Sender {
     openOptions = (path?: string) => sendMessage(MESSAGE_TYPES.OPEN_OPTIONS, { path });
 
     /**
-     * Sets setting value by key
+     * Sets settings value on background service worker by key
      * @param key
      * @param value
      */
-    setSetting = (key: SETTINGS_NAMES, value: SettingsValueType) => sendMessage(
-        MESSAGE_TYPES.SET_SETTING,
-        { key, value },
+    setSetting = (update: Partial<POPUP_SETTINGS>) => sendMessage(
+        MESSAGE_TYPES.SET_SETTING, { update },
     );
 
     /**
@@ -59,6 +58,10 @@ class Sender {
 
     setUserRules = (userRules: string): Promise<void> => {
         return sendMessage(MESSAGE_TYPES.SET_USER_RULES, { userRules });
+    };
+
+    toggleSiteAllowlistStatus = (domainName: string): Promise<string> => {
+        return sendMessage(MESSAGE_TYPES.TOGGLE_SITE_ALLOWLIST_STATUS, { domainName });
     };
 }
 

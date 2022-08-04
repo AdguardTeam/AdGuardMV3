@@ -1,6 +1,5 @@
 import React, { useContext, useLayoutEffect } from 'react';
 import { observer } from 'mobx-react';
-import cn from 'classnames';
 
 import { Icons } from 'Common/components/ui';
 import { log } from 'Common/logger';
@@ -25,7 +24,6 @@ export const PopupApp = observer(() => {
     const store = useContext(rootStore);
     const { settingsStore } = store;
     const {
-        filteringEnabled,
         getPopupData,
         popupDataReady,
         wizardEnabled,
@@ -45,16 +43,32 @@ export const PopupApp = observer(() => {
         })();
 
         const events = [
-            NOTIFIER_EVENTS.SETTING_UPDATED,
+            NOTIFIER_EVENTS.SET_RULES,
+            NOTIFIER_EVENTS.PROTECTION_UPDATED,
+            NOTIFIER_EVENTS.PROTECTION_PAUSE_EXPIRES_UPDATED,
         ];
 
-        const messageHandler = (message: any) => {
+        const messageHandler = async (message: any) => {
             const { type, data: [data] } = message;
 
             switch (type) {
-                case NOTIFIER_EVENTS.SETTING_UPDATED: {
-                    const { key, value } = data;
-                    settingsStore.updateSettingState(key, value);
+                // Actually, this event doesn't need, because if rules changed
+                // - popup will lost focus and will be closed
+                // And after opened - it will requests rules again
+                case NOTIFIER_EVENTS.SET_RULES: {
+                    await settingsStore.getPopupData();
+                    break;
+                }
+
+                case NOTIFIER_EVENTS.PROTECTION_UPDATED: {
+                    const { value } = data;
+                    await settingsStore.setProtection(value as boolean);
+                    break;
+                }
+
+                case NOTIFIER_EVENTS.PROTECTION_PAUSE_EXPIRES_UPDATED: {
+                    const { value } = data;
+                    await settingsStore.setProtectionPauseExpires(value as number);
                     break;
                 }
 
@@ -85,11 +99,6 @@ export const PopupApp = observer(() => {
         );
     }
 
-    const className = cn(styles.main, {
-        [styles.mainDisabled]: !filteringEnabled,
-        [styles.mainPaused]: !protectionEnabled,
-    });
-
     const isLimitsExceed = wasEnabledIds.length > 0;
 
     return (
@@ -97,19 +106,19 @@ export const PopupApp = observer(() => {
             <Icons />
             {!protectionEnabled && <div className={styles.overlay} />}
             <Header />
-            <main className={className}>
-                {protectionEnabled
-                    ? (
-                        <>
-                            <PageInfo />
-                            <Switcher />
-                            {/* TODO count blocked on the page */}
-                            {/* <Action /> */}
-                        </>
-                    )
-                    : (
-                        <DisabledProtectionScreen />
-                    )}
+            <main className={styles.main}>
+                {
+                    protectionEnabled
+                        ? (
+                            <>
+                                <PageInfo />
+                                <Switcher />
+                                {/* TODO count blocked on the page */}
+                                {/* <Action /> */}
+                            </>
+                        )
+                        : <DisabledProtectionScreen />
+                }
             </main>
             {
                 isLimitsExceed

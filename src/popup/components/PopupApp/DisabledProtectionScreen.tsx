@@ -4,7 +4,6 @@ import cn from 'classnames';
 
 import { theme } from 'Common/styles';
 import { reactTranslator } from 'Common/translators/reactTranslator';
-import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
 
 import { rootStore } from '../../stores';
 import { sender } from '../../messaging/sender';
@@ -23,7 +22,7 @@ export const DisabledProtectionScreen = observer(() => {
     const onEnableProtectionClick = async () => {
         await resetProtectionPausedTimeout();
         await sender.removeProtectionPauseTimer();
-        await settingsStore.setSetting(SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES, 0);
+        await settingsStore.setProtectionPauseExpires(0);
         await sender.reloadActiveTab();
     };
 

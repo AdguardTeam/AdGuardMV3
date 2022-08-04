@@ -6,7 +6,6 @@ import {
     runInAction,
 } from 'mobx';
 
-import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
 import { IconId } from 'Common/components/ui/Icons';
 
 import type { RootStore } from './RootStore';
@@ -82,10 +81,7 @@ export class WizardStore {
 
     @action
     skipWizard = async () => {
-        await this.rootStore.settingsStore.setSetting(
-            SETTINGS_NAMES.POPUP_V3_WIZARD_ENABLED,
-            false,
-        );
+        await this.rootStore.settingsStore.setWizardEnabled(false);
         runInAction(() => {
             this.step = INITIAL_STEP;
         });

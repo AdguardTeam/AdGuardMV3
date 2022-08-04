@@ -8,7 +8,7 @@ import {
 } from 'mobx';
 
 import { Filter, CategoriesType } from 'Common/constants/common';
-import { OPTION_SETTINGS_NAMES, SETTINGS_NAMES } from 'Common/constants/settings-constants';
+import { DEFAULT_SETTINGS, OPTION_SETTINGS, SETTINGS_NAMES } from 'Common/constants/settings-constants';
 import { log } from 'Common/logger';
 
 import { sender } from '../messaging/sender';
@@ -34,11 +34,7 @@ export class SettingsStore {
     }
 
     @observable
-    settings: OPTION_SETTINGS_NAMES = {
-        [SETTINGS_NAMES.FILTERING_ENABLED]: false,
-        [SETTINGS_NAMES.NOTICE_HIDDEN]: true,
-        [SETTINGS_NAMES.FILTERS_CHANGED]: [],
-    };
+    settings: OPTION_SETTINGS = DEFAULT_SETTINGS;
 
     @observable
     filters: Filter[] = [];
@@ -60,8 +56,8 @@ export class SettingsStore {
     };
 
     @action
-    closeWarning = () => {
-        this.setSetting(SETTINGS_NAMES.FILTERS_CHANGED, false);
+    closeUpdatedFiltersListWarning = () => {
+        this.setFiltersChangedList([]);
     };
 
     canEnableFilter = (filterId: number): STATIC_FILTERS_LIMITS_ERROR | null => {
@@ -151,29 +147,37 @@ export class SettingsStore {
         setLoader(false);
     }
 
-    setSetting = async (key: keyof OPTION_SETTINGS_NAMES, value: boolean | number[]) => {
-        await sender.setSetting(key, value);
-        this.updateSettingState(key, value);
+    @action
+    setNoticeHidden = async (value: boolean) => {
+        try {
+            await sender.setSetting({ [SETTINGS_NAMES.NOTICE_HIDDEN]: value });
+        } catch (e) {
+            log.error(e);
+            return;
+        }
+
+        runInAction(() => {
+            this.settings[SETTINGS_NAMES.NOTICE_HIDDEN] = value;
+        });
     };
 
     @action
-    updateSettingState = (key: keyof OPTION_SETTINGS_NAMES, value: boolean | number[]) => {
-        // TODO: Fix these types
-        if (key === SETTINGS_NAMES.FILTERS_CHANGED) {
-            this.settings[key] = value as number[];
-        } else {
-            this.settings[key] = value as boolean;
+    setFiltersChangedList = async (value: number[]) => {
+        try {
+            await sender.setSetting({ [SETTINGS_NAMES.FILTERS_CHANGED]: value });
+        } catch (e) {
+            log.error(e);
+            return;
         }
+
+        runInAction(() => {
+            this.settings[SETTINGS_NAMES.FILTERS_CHANGED] = value;
+        });
     };
 
     @computed
     get noticeHidden() {
         return this.settings[SETTINGS_NAMES.NOTICE_HIDDEN];
-    }
-
-    @computed
-    get filteringEnabled() {
-        return this.settings[SETTINGS_NAMES.FILTERING_ENABLED] as boolean;
     }
 
     @flow* addCustomFilterByContent(filterContent: string, title: string, url: string) {
@@ -212,7 +216,7 @@ export class SettingsStore {
 
         try {
             yield sender.relaunchFiltering(wasEnabledIds);
-            yield this.updateLimitations();
+            yield this.getOptionsData();
         } catch (e: any) {
             log.error(e.message);
         }

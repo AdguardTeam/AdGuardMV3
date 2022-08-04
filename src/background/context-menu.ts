@@ -4,11 +4,13 @@ import { nanoid } from 'nanoid';
 import { tabUtils } from 'Common/tab-utils';
 import { NOTIFIER_EVENTS } from 'Common/constants/common';
 import { translator } from 'Common/translators/translator';
+import { getUrlDetails } from 'Common/helpers';
 
 import { contextMenus } from './context-menus';
 import { settings } from './settings';
 import { notifier } from './notifier';
 import { tsWebExtensionWrapper } from './tswebextension';
+import { userRules } from './userRules';
 
 type Tab = chrome.tabs.Tab;
 
@@ -22,23 +24,34 @@ enum CONTEXT_MENU_ITEMS {
     ENABLE_BLOCKING = 'context_menu_enable_blocking',
 }
 
-// TODO translate context menu items, when this issue would be resolved
-//  https://bugs.chromium.org/p/chromium/issues/detail?id=1175053
+const toggleSiteAllowlistStatus = async (tab?: Tab) => {
+    if (!tab || !tab.url) {
+        return;
+    }
+
+    const { url, id } = tab;
+    const urlDetails = getUrlDetails(url);
+    if (urlDetails?.domainName) {
+        await userRules.toggleSiteAllowlistStatus(urlDetails.domainName);
+    }
+
+    await tsWebExtensionWrapper.configure(true);
+
+    if (id !== undefined) {
+        await tabUtils.reloadTab(id);
+    }
+
+    const updatedRules = await userRules.getRules();
+    notifier.notify(NOTIFIER_EVENTS.SET_RULES, { value: updatedRules });
+};
+
 const CONTEXT_MENU_MAP = {
     [CONTEXT_MENU_ITEMS.DISABLE_FILTERING_ON_SITE]: {
-        action: () => {
-            // FIXME add working actions
-            // eslint-disable-next-line no-console
-            console.error(CONTEXT_MENU_ITEMS.DISABLE_FILTERING_ON_SITE);
-        },
+        action: toggleSiteAllowlistStatus,
         title: translator.getMessage(CONTEXT_MENU_ITEMS.DISABLE_FILTERING_ON_SITE),
     },
     [CONTEXT_MENU_ITEMS.ENABLE_FILTERING_ON_SITE]: {
-        action: () => {
-            // FIXME add working actions
-            // eslint-disable-next-line no-console
-            console.error(CONTEXT_MENU_ITEMS.ENABLE_FILTERING_ON_SITE);
-        },
+        action: toggleSiteAllowlistStatus,
         title: translator.getMessage(CONTEXT_MENU_ITEMS.ENABLE_FILTERING_ON_SITE),
     },
     [CONTEXT_MENU_ITEMS.BLOCK_ADS_ON_SITE]: {
@@ -65,7 +78,7 @@ const CONTEXT_MENU_MAP = {
     },
     [CONTEXT_MENU_ITEMS.DISABLE_BLOCKING]: {
         action: async (tab?: Tab) => {
-            settings.disableFiltering();
+            await settings.setProtection(false);
             await tsWebExtensionWrapper.stop();
             if (tab?.id) {
                 await tabUtils.reloadTab(tab.id);
@@ -75,7 +88,7 @@ const CONTEXT_MENU_MAP = {
     },
     [CONTEXT_MENU_ITEMS.ENABLE_BLOCKING]: {
         action: async (tab?: Tab) => {
-            settings.enableFiltering();
+            await settings.setProtection(true);
             await tsWebExtensionWrapper.start();
             if (tab?.id) {
                 await tabUtils.reloadTab(tab.id);
@@ -104,17 +117,19 @@ const addSeparator = async () => {
 };
 
 const addContextMenu = async () => {
-    const isBlockingEnabled = settings.filteringEnabled;
-
-    // TODO handle site specific filtering when it will be ready
-    await addMenuItem(CONTEXT_MENU_ITEMS.DISABLE_FILTERING_ON_SITE);
+    const isAllowlisted = await tabUtils.isCurrentTabAllowlisted();
+    if (isAllowlisted) {
+        await addMenuItem(CONTEXT_MENU_ITEMS.ENABLE_FILTERING_ON_SITE);
+    } else {
+        await addMenuItem(CONTEXT_MENU_ITEMS.DISABLE_FILTERING_ON_SITE);
+    }
     await addSeparator();
     await addMenuItem(CONTEXT_MENU_ITEMS.BLOCK_ADS_ON_SITE);
     await addMenuItem(CONTEXT_MENU_ITEMS.REPORT_AN_ISSUE);
     await addSeparator();
     await addMenuItem(CONTEXT_MENU_ITEMS.OPEN_OPTIONS);
 
-    if (isBlockingEnabled) {
+    if (settings.protectionEnabled) {
         await addMenuItem(CONTEXT_MENU_ITEMS.DISABLE_BLOCKING);
     } else {
         await addMenuItem(CONTEXT_MENU_ITEMS.ENABLE_BLOCKING);
@@ -155,7 +170,10 @@ const init = () => {
     chrome.contextMenus.onClicked.addListener(contextMenuClickHandler);
     chrome.tabs.onUpdated.addListener(updateContextMenuThrottled);
     chrome.tabs.onActivated.addListener(updateContextMenuThrottled);
-    notifier.addEventListener(NOTIFIER_EVENTS.SETTING_UPDATED, () => {
+    notifier.addEventListener(NOTIFIER_EVENTS.PROTECTION_UPDATED, () => {
+        updateContextMenuThrottled();
+    });
+    notifier.addEventListener(NOTIFIER_EVENTS.SET_RULES, () => {
         updateContextMenuThrottled();
     });
 

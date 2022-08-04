@@ -11,6 +11,7 @@ import { sender } from 'Options/messaging/sender';
 import { UserRulesProcessor, UserRulesData } from 'Options/user-rules-processor';
 import { OTHER_DOMAIN_TITLE, NEW_LINE_SEPARATOR } from 'Common/constants/common';
 import { translator } from 'Common/translators/translator';
+import { log } from 'Common/logger';
 
 import type { UserRulesLimits } from '../../background/userRules';
 
@@ -37,6 +38,7 @@ const {
     MAX_NUMBER_OF_REGEX_RULES,
 } = chrome.declarativeNetRequest;
 
+// TODO: Remove when UI of Editor will be changed
 const ERROR_UI_MESSAGES: { [key: string]: string } = {
     1001: translator.getMessage('error_rule_is_invalid'),
     1002: translator.getMessage('error_rules_limit', { limit: MAX_NUMBER_OF_DYNAMIC_AND_SESSION_RULES }),
@@ -174,19 +176,17 @@ export class OptionsStore {
     };
 
     @action
-    setUserRules = async (userRules: string): Promise<DYNAMIC_RULES_LIMITS_ERROR | null> => {
+    /**
+     * This action, unlike 'setUserRules', only updates the rule counter and saves new user rules in the store,
+     * without calling the background to save the user rules
+     */
+    updateUserRules = async (userRules: string): Promise<DYNAMIC_RULES_LIMITS_ERROR | null> => {
         const { setLoader } = this.rootStore.uiStore;
-        if (this.userRules === userRules) {
-            return null;
-        }
-
         setLoader(true);
 
         let resError: DYNAMIC_RULES_LIMITS_ERROR | null = null;
 
         try {
-            await sender.setUserRules(userRules);
-
             const userRulesLimits = await sender.getDynamicRulesCounters();
             await this.setDynamicRulesCounters(userRulesLimits);
 
@@ -199,6 +199,28 @@ export class OptionsStore {
                 this.userRules = userRules;
             });
         } catch (e: any) {
+            log.error(e);
+        }
+
+        setLoader(false);
+
+        return resError;
+    };
+
+    @action
+    setUserRules = async (userRules: string): Promise<DYNAMIC_RULES_LIMITS_ERROR | null> => {
+        const { setLoader } = this.rootStore.uiStore;
+        if (this.userRules === userRules) {
+            return null;
+        }
+
+        setLoader(true);
+
+        try {
+            await sender.setUserRules(userRules);
+        } catch (e: any) {
+            log.error(e);
+
             const statusCode = e.message.match(/\d+/);
             const error = ERROR_UI_MESSAGES[statusCode]
                 ? ERROR_UI_MESSAGES[statusCode]
@@ -208,7 +230,7 @@ export class OptionsStore {
 
         setLoader(false);
 
-        return resError;
+        return this.updateUserRules(userRules);
     };
 
     checkLimitsAndNotify(): DYNAMIC_RULES_LIMITS_ERROR | null {

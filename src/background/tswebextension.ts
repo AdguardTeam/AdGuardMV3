@@ -79,11 +79,11 @@ class TsWebExtensionWrapper {
         if (brokenState) {
             await filters.setEnabledFiltersIds(nowEnabledIds);
             // Save last used filters ids to show user
-            settings.setSetting(SETTINGS_NAMES.FILTERS_CHANGED, wasEnabledIds);
+            await settings.setFiltersChangedList(wasEnabledIds);
 
             await this.configure(true);
-        } else if ((settings.getSetting(SETTINGS_NAMES.FILTERS_CHANGED) as number[]).length > 0) {
-            settings.setSetting(SETTINGS_NAMES.FILTERS_CHANGED, []);
+        } else if (settings.getSetting<number[]>(SETTINGS_NAMES.FILTERS_CHANGED).length > 0) {
+            await settings.setFiltersChangedList([]);
         }
     }
 

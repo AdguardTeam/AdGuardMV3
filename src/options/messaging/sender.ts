@@ -4,7 +4,7 @@ import {
     Filter,
     FilterInfo,
 } from 'Common/constants/common';
-import { OPTION_SETTINGS_NAMES } from 'Common/constants/settings-constants';
+import { OPTION_SETTINGS } from 'Common/constants/settings-constants';
 import { sendMessage } from 'Common/helpers';
 
 import type { UserRulesLimits } from '../../background/userRules';
@@ -18,8 +18,8 @@ class Sender {
      * @param key
      * @param value
      */
-    setSetting = (key: keyof OPTION_SETTINGS_NAMES, value: boolean | number[]) => sendMessage(
-        MESSAGE_TYPES.SET_SETTING, { key, value },
+    setSetting = (update: Partial<OPTION_SETTINGS>) => sendMessage(
+        MESSAGE_TYPES.SET_SETTING, { update },
     );
 
     /** Retrieves options data from background service worker */

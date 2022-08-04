@@ -5,7 +5,6 @@ import cn from 'classnames';
 import { theme } from 'Common/styles';
 import { IconId } from 'Common/constants/icons';
 import { reactTranslator } from 'Common/translators/reactTranslator';
-import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
 import { LEARN_MORE } from 'Common/constants/urls';
 import { rootStore } from 'Options/stores';
 import { Icon } from 'Common/components/ui';
@@ -18,7 +17,7 @@ export const Notice = observer(() => {
     const { noticeHidden } = settingsStore;
 
     const hide = async () => {
-        await settingsStore.setSetting(SETTINGS_NAMES.NOTICE_HIDDEN, true);
+        await settingsStore.setNoticeHidden(true);
     };
 
     if (noticeHidden) {

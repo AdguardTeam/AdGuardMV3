@@ -1,6 +1,7 @@
 import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
 
 import { settings } from './settings';
+import { tsWebExtensionWrapper } from './tswebextension';
 
 class ProtectionPause {
     private readonly alarmHandler: () => void;
@@ -12,21 +13,22 @@ class ProtectionPause {
     ) => void;
 
     constructor() {
-        this.alarmHandler = () => {
+        this.alarmHandler = async () => {
             chrome.alarms.onAlarm.removeListener(this.alarmHandler);
-            settings.setSetting(SETTINGS_NAMES.PROTECTION_ENABLED, true);
+            await settings.setProtection(true);
+            await tsWebExtensionWrapper.start();
         };
 
         /* Page can be reloaded without closing the popup.
         Clear SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES once it is expired on page reload. */
-        this.reloadPageHandler = (tabId, changeInfo) => {
+        this.reloadPageHandler = async (tabId, changeInfo) => {
             if (changeInfo.status === 'complete' || changeInfo.status === 'loading') {
-                const protectionPauseExpires = settings.getSetting(
+                const protectionPauseExpires = settings.getSetting<number>(
                     SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES,
                 );
 
                 if (protectionPauseExpires !== 0 && protectionPauseExpires <= Date.now()) {
-                    settings.setSetting(SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES, 0);
+                    await settings.setProtectionPauseExpires(0);
                 }
             }
         };

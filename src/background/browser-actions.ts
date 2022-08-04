@@ -2,11 +2,8 @@ import { getUrlDetails } from 'Common/helpers';
 import { tabUtils } from 'Common/tab-utils';
 import { log } from 'Common/logger';
 import { prefs } from 'Common/prefs';
-import { NOTIFIER_EVENTS } from 'Common/constants/common';
-import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
 
 import { settings } from './settings';
-import { notifier } from './notifier';
 import { userRules } from './userRules';
 
 type TabIconDetails = chrome.action.TabIconDetails;
@@ -117,7 +114,7 @@ class BrowserActions {
             const urlDetails = getUrlDetails(activeTab.url);
 
             if (urlDetails?.domainName) {
-                const currentAllowRule = userRules.getCurrentAllowRule(urlDetails.domainName);
+                const currentAllowRule = await userRules.getCurrentAllowRule(urlDetails.domainName);
 
                 const filteringEnabled = !currentAllowRule?.enabled && settings.protectionEnabled;
 
@@ -142,19 +139,6 @@ class BrowserActions {
 
         tabUtils.onActivated(() => this.onFilteringStateChange());
         tabUtils.onUpdated(() => this.onFilteringStateChange());
-
-        notifier.addEventListener(NOTIFIER_EVENTS.SETTING_UPDATED, async (data) => {
-            try {
-                const { key } = data;
-                if (key !== SETTINGS_NAMES.FILTERING_ENABLED) {
-                    return;
-                }
-
-                await this.onFilteringStateChange();
-            } catch (e) {
-                log.info(e);
-            }
-        });
     }
 }
 

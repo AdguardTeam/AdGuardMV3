@@ -8,18 +8,8 @@ import {
 
 import { log } from 'Common/logger';
 import { getUrlDetails, isHttpRequest } from 'Common/helpers';
-import {
-    UserRuleType,
-    MS_IN_SECOND,
-    PROTECTION_PAUSE_TIMEOUT_TICK_MS,
-    NEW_LINE_SEPARATOR,
-} from 'Common/constants/common';
-import {
-    SettingsType,
-    SettingsValueType,
-    DEFAULT_SETTINGS,
-    SETTINGS_NAMES,
-} from 'Common/constants/settings-constants';
+import { UserRuleType, MS_IN_SECOND, PROTECTION_PAUSE_TIMEOUT_TICK_MS } from 'Common/constants/common';
+import { DEFAULT_SETTINGS, POPUP_SETTINGS, SETTINGS_NAMES } from 'Common/constants/settings-constants';
 import { tabUtils } from 'Common/tab-utils';
 import { UserRulesData, UserRulesProcessor } from 'Options/user-rules-processor';
 
@@ -42,7 +32,7 @@ export class SettingsStore {
     currentUrl = '';
 
     @observable
-    settings: SettingsType = DEFAULT_SETTINGS;
+    settings: POPUP_SETTINGS = DEFAULT_SETTINGS;
 
     protectionPausedTimerId = 0;
 
@@ -68,8 +58,11 @@ export class SettingsStore {
     @action
     getCurrentTabUrl = async () => {
         const activeTab = await tabUtils.getActiveTab();
-        this.currentUrl = activeTab.url || '';
-        this.applicationAvailable = !!isHttpRequest(this.currentUrl);
+
+        runInAction(() => {
+            this.currentUrl = activeTab.url || '';
+            this.applicationAvailable = !!isHttpRequest(this.currentUrl);
+        });
     };
 
     @computed
@@ -103,15 +96,46 @@ export class SettingsStore {
         return this.currentUrl;
     }
 
-    setSetting = async (key: SETTINGS_NAMES, value: SettingsValueType) => {
+    @action
+    setProtection = async (value: boolean) => {
         try {
-            await sender.setSetting(key, value);
+            await sender.setSetting({ [SETTINGS_NAMES.PROTECTION_ENABLED]: value });
         } catch (e) {
             log.error(e);
             return;
         }
 
-        this.updateSettingState(key, value);
+        runInAction(() => {
+            this.settings[SETTINGS_NAMES.PROTECTION_ENABLED] = value;
+        });
+    };
+
+    @action
+    setProtectionPauseExpires = async (value: number) => {
+        try {
+            await sender.setSetting({ [SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES]: value });
+        } catch (e) {
+            log.error(e);
+            return;
+        }
+
+        runInAction(() => {
+            this.settings[SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES] = value;
+        });
+    };
+
+    @action
+    setWizardEnabled = async (value: boolean) => {
+        try {
+            await sender.setSetting({ [SETTINGS_NAMES.POPUP_V3_WIZARD_ENABLED]: value });
+        } catch (e) {
+            log.error(e);
+            return;
+        }
+
+        runInAction(() => {
+            this.settings[SETTINGS_NAMES.POPUP_V3_WIZARD_ENABLED] = value;
+        });
     };
 
     setProtectionPausedTimerId = (protectionPausedTimerId: number) => {
@@ -119,73 +143,47 @@ export class SettingsStore {
     };
 
     @action
-    updateSettingState = (key: SETTINGS_NAMES, value: SettingsValueType) => {
-        // TODO: Fix these types
-        if (key === SETTINGS_NAMES.FILTERS_CHANGED) {
-            this.settings[key] = value as unknown as number[];
-        } else if (key === SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES || key === SETTINGS_NAMES.VERSION) {
-            this.settings[key] = value as unknown as number;
-        } else {
-            this.settings[key] = value as unknown as boolean;
-        }
-    };
-
-    @action
-    setSettings = (settings: SettingsType) => {
-        this.settings = settings;
-    };
-
-    @action
-    setPopupDataReady = (popupDataReady: boolean) => {
-        this.popupDataReady = popupDataReady;
-    };
-
-    @action
-    updateAllowlist = async () => {
+    updateAllowlist = () => {
         const userRulesProcessor = new UserRulesProcessor(this.userRules);
         const userRulesData = userRulesProcessor.getData();
-        const allowlist = userRulesData.filter((rule) => rule.type === UserRuleType.SITE_ALLOWED);
+        const allowlist = userRulesData
+            .filter((rule) => rule.type === UserRuleType.SITE_ALLOWED);
         const currentAllowRule = allowlist.find(
             (rule) => rule.domain === this.currentSite,
         );
 
-        const filteringEnabled = !!(currentAllowRule && currentAllowRule?.enabled);
-
-        await this.setSetting(SETTINGS_NAMES.FILTERING_ENABLED, !filteringEnabled);
-
         runInAction(() => {
             this.currentAllowRule = currentAllowRule;
-            this.isAllowlisted = !!currentAllowRule?.enabled;
+            this.isAllowlisted = currentAllowRule?.enabled || false;
         });
     };
 
     @action
-    setEnableFiltersIds = (data: number[]) => {
-        this.enableFiltersIds = data;
-    };
-
-    @action
     getPopupData = async () => {
+        runInAction(() => {
+            this.popupDataReady = false;
+        });
+
         await this.getCurrentTabUrl();
 
         const { settings, userRules, enableFiltersIds } = await sender.getPopupData();
 
-        this.setPopupDataReady(true);
-        this.setSettings(settings);
-        this.userRules = userRules;
-        this.setEnableFiltersIds(enableFiltersIds);
+        runInAction(() => {
+            this.settings = settings;
+            this.userRules = userRules;
+            this.enableFiltersIds = enableFiltersIds;
+        });
 
         await this.updateAllowlist();
 
         if (this.protectionPaused) {
             this.setProtectionPausedTimer();
         }
-    };
 
-    @computed
-    get filteringEnabled() {
-        return this.settings[SETTINGS_NAMES.FILTERING_ENABLED] as boolean;
-    }
+        runInAction(() => {
+            this.popupDataReady = true;
+        });
+    };
 
     @computed
     get wizardEnabled() {
@@ -225,7 +223,7 @@ export class SettingsStore {
     resetProtectionPausedTimeout = async () => {
         clearTimeout(this.protectionPausedTimerId);
         this.setProtectionPausedTimerId(0);
-        await this.setSetting(SETTINGS_NAMES.PROTECTION_ENABLED, true);
+        await this.setProtection(true);
     };
 
     @action
@@ -242,22 +240,9 @@ export class SettingsStore {
     toggleAllowlisted = async () => {
         this.setLoader(true);
 
-        if (this.currentAllowRule && this.isAllowlisted) {
-            // remove rule
-            const userRulesProcessor = new UserRulesProcessor(this.userRules);
-            userRulesProcessor.deleteRule(this.currentAllowRule.id);
-            await this.setUserRules(userRulesProcessor.getUserRules());
-        } else if (this.currentAllowRule) {
-            // enable rule if disable
-            const userRulesProcessor = new UserRulesProcessor(this.userRules);
-            userRulesProcessor.enableRule(this.currentAllowRule.id);
-            await this.setUserRules(userRulesProcessor.getUserRules());
-        } else {
-            // add rule
-            const newRule = `@@||${this.currentSite}^$document`;
-            const newUserRules = `${this.userRules}${NEW_LINE_SEPARATOR}${newRule}`;
-            await this.setUserRules(newUserRules);
-        }
+        const newUserRules = await sender.toggleSiteAllowlistStatus(this.currentSite);
+        await this.setUserRules(newUserRules);
+
         await this.updateAllowlist();
 
         this.setLoader(false);

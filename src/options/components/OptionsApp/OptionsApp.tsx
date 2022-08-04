@@ -29,7 +29,6 @@ export const OptionsApp = observer(() => {
     const getOptionsData = async () => {
         try {
             await settingsStore.getOptionsData();
-            await optionsStore.getDynamicRulesCounters();
         } catch (e) {
             log.error(e);
         }
@@ -38,29 +37,15 @@ export const OptionsApp = observer(() => {
     useLayoutEffect(() => {
         getOptionsData();
 
-        const events = [
-            NOTIFIER_EVENTS.SETTING_UPDATED,
-            NOTIFIER_EVENTS.ADD_RULES,
-            NOTIFIER_EVENTS.SET_RULES,
-        ];
+        const events = [NOTIFIER_EVENTS.SET_RULES];
 
         const messageHandler = async (message: any) => {
             const { type, data: [data] } = message;
 
             switch (type) {
-                case NOTIFIER_EVENTS.SETTING_UPDATED: {
-                    const { key, value } = data;
-                    settingsStore.updateSettingState(key, value);
-                    break;
-                }
-                case NOTIFIER_EVENTS.ADD_RULES: {
-                    optionsStore.updateCreatedUserRule(data);
-                    const err = await optionsStore.addCreatedUserRule();
-                    checkAndNotifyDynamicRulesError(err);
-                    break;
-                }
                 case NOTIFIER_EVENTS.SET_RULES: {
-                    const err = await optionsStore.setUserRules(data);
+                    const { value } = data;
+                    const err = await optionsStore.updateUserRules(value);
                     checkAndNotifyDynamicRulesError(err);
                     break;
                 }

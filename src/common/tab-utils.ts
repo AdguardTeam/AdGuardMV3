@@ -2,10 +2,11 @@ import { MESSAGE_TYPES, Message, MessageType } from 'Common/constants/common';
 import { REPORT_SITE_BASE } from 'Common/constants/urls';
 import { log } from 'Common/logger';
 import { prefs } from 'Common/prefs';
-import { getUrlWithQueryString } from 'Common/helpers';
+import { getUrlDetails, getUrlWithQueryString } from 'Common/helpers';
 
 import { filters } from '../background/filters';
 import { scripting } from '../background/scripting';
+import { userRules } from '../background/userRules';
 
 class TabUtils {
     getActiveTab = (): Promise<chrome.tabs.Tab> => {
@@ -146,6 +147,26 @@ class TabUtils {
     onUpdated = (callback: (tabId: number) => void) => (
         chrome.tabs.onUpdated.addListener((tabId) => callback(tabId))
     );
+
+    isCurrentTabAllowlisted = async (): Promise<boolean> => {
+        let tab;
+        try {
+            tab = await this.getActiveTab();
+        } catch (e) {
+            return false;
+        }
+        if (!tab?.url) {
+            return false;
+        }
+
+        const urlDetails = getUrlDetails(tab.url);
+        if (!urlDetails) {
+            return false;
+        }
+
+        const currentAllowRule = await userRules.getCurrentAllowRule(urlDetails.domainName);
+        return currentAllowRule?.enabled || false;
+    };
 }
 
 export const tabUtils = new TabUtils();

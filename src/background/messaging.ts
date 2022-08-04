@@ -5,6 +5,7 @@ import {
     OptionsData,
     PopupData,
     Message,
+    NOTIFIER_EVENTS,
 } from 'Common/constants/common';
 import { CATEGORIES } from 'Common/constants/filters';
 import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
@@ -56,11 +57,13 @@ export const extensionMessageHandler = async (
             break;
         }
         case MESSAGE_TYPES.SET_SETTING: {
-            const { key, value } = data;
-            settings.setSetting(key, value);
+            const { update } = data;
+            await settings.setSetting(update);
 
-            if (key === SETTINGS_NAMES.PROTECTION_ENABLED) {
-                if (value) {
+            if (update[SETTINGS_NAMES.PROTECTION_ENABLED] !== undefined) {
+                const enable = update[SETTINGS_NAMES.PROTECTION_ENABLED];
+
+                if (enable) {
                     await tsWebExtensionWrapper.start();
                 } else {
                     await tsWebExtensionWrapper.stop();
@@ -91,6 +94,17 @@ export const extensionMessageHandler = async (
 
             break;
         }
+        case MESSAGE_TYPES.ADD_USER_RULE_FROM_ASSISTANT: {
+            const { ruleText } = data;
+            await userRules.addRule(ruleText);
+            await tsWebExtensionWrapper.configure();
+
+            const updatedRules = await userRules.getRules();
+            // Notify UI about changes
+            notifier.notify(NOTIFIER_EVENTS.SET_RULES, { value: updatedRules });
+
+            break;
+        }
         case MESSAGE_TYPES.ADD_FILTERING_SUBSCRIPTION: {
             const { url, title } = data;
 
@@ -108,7 +122,7 @@ export const extensionMessageHandler = async (
         }
         case MESSAGE_TYPES.SET_PAUSE_EXPIRES: {
             const { protectionPauseExpires } = data;
-            settings.setSetting(SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES, protectionPauseExpires);
+            await settings.setProtectionPauseExpires(protectionPauseExpires);
             protectionPause.addTimer(protectionPauseExpires);
             break;
         }
@@ -196,6 +210,14 @@ export const extensionMessageHandler = async (
             await tsWebExtensionWrapper.configure();
             break;
         }
+        case MESSAGE_TYPES.TOGGLE_SITE_ALLOWLIST_STATUS: {
+            const { domainName } = data;
+            await userRules.toggleSiteAllowlistStatus(domainName);
+            await tsWebExtensionWrapper.configure(true);
+
+            const updatedUserRules = await userRules.getRules();
+            return updatedUserRules;
+        }
         default: {
             throw new Error(`No message handler for type: ${type}`);
         }
@@ -264,7 +286,10 @@ export const initExtension = async (message?: any) => {
             await settings.init();
             await filters.init();
             await userRules.init();
-            await tsWebExtensionWrapper.start();
+
+            if (settings.protectionEnabled) {
+                await tsWebExtensionWrapper.start();
+            }
         };
         waitForInit = innerInit();
         await wait();

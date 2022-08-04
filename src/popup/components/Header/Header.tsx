@@ -6,7 +6,6 @@ import { Icon, TooltipIcon, IconId } from 'Common/components/ui';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { PROTECTION_PAUSE_TIMEOUT_MS, PROTECTION_PAUSE_TIMEOUT_S } from 'Common/constants/common';
 import { REPORT_SITE_BASE } from 'Common/constants/urls';
-import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
 import { getUrlWithQueryString } from 'Common/helpers';
 import { prefs } from 'Common/prefs';
 
@@ -20,7 +19,7 @@ export const Header = observer(() => {
     const {
         protectionEnabled,
         setProtectionPausedTimer,
-        setSetting,
+        setProtection,
         updateCurrentTime,
         currentUrl,
         enableFiltersIds,
@@ -38,12 +37,12 @@ export const Header = observer(() => {
     };
 
     const onPauseProtectionClick = async () => {
-        await setSetting(SETTINGS_NAMES.PROTECTION_ENABLED, false);
+        await setProtection(false);
         await sender.reloadActiveTab();
     };
 
     const onPauseProtectionTimeoutClick = async () => {
-        await setSetting(SETTINGS_NAMES.PROTECTION_ENABLED, false);
+        await setProtection(false);
         await sender.reloadActiveTab();
         updateCurrentTime();
         await sender.setPauseExpires(settingsStore.currentTime + PROTECTION_PAUSE_TIMEOUT_MS);

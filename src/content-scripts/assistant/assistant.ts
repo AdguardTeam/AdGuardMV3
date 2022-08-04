@@ -16,7 +16,7 @@ const init = () => {
 
             // TODO add selected element, when context menu will be ready
             assistant.start(null, async (ruleText: string) => {
-                await sendMessage(MESSAGE_TYPES.ADD_USER_RULE, { ruleText });
+                await sendMessage(MESSAGE_TYPES.ADD_USER_RULE_FROM_ASSISTANT, { ruleText });
             });
             sendResponse(true);
         }

@@ -41,11 +41,11 @@ export const Limits = observer(() => {
 
     const {
         filters,
-        closeWarning,
         enabledStaticRules,
         enabledFiltersRegexps,
         enabledFiltersCounter,
         availableStaticRulesCount,
+        closeUpdatedFiltersListWarning,
     } = settingsStore;
 
     useEffect(() => {
@@ -133,7 +133,7 @@ export const Limits = observer(() => {
                         nowEnabled={nowEnabledIds.map((id) => filtersNamesMap.get(id)).join(',')}
                         wasEnabled={wasEnabledIds.map((id) => filtersNamesMap.get(id)).join(',')}
                         onClickReactivateFilters={relaunchFilteringAndNotify}
-                        onClickCloseWarning={closeWarning}
+                        onClickCloseWarning={closeUpdatedFiltersListWarning}
                     />
                 )
             }

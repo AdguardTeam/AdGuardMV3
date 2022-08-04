@@ -1,7 +1,7 @@
 import { UserRuleType, NEW_LINE_SEPARATOR } from 'Common/constants/common';
 import { USER_RULES_STORAGE_KEY, USER_RULES_LIMITS_STORAGE_KEY } from 'Common/constants/storage-keys';
 import { log } from 'Common/logger';
-import { UserRulesProcessor } from 'Options/user-rules-processor';
+import { UserRulesData, UserRulesProcessor } from 'Options/user-rules-processor';
 
 import { storage } from './storage';
 
@@ -15,9 +15,12 @@ class UserRules {
 
     private limits: UserRulesLimits | undefined;
 
+    private userRulesProcessor: UserRulesProcessor | undefined;
+
     private setRules = async (rules: string) => {
         await this.saveRulesInStorage(rules);
         this.rules = rules;
+        this.userRulesProcessor = new UserRulesProcessor(this.rules);
     };
 
     private saveRulesInStorage = async (rules: string) => {
@@ -28,7 +31,7 @@ class UserRules {
         }
     };
 
-    getFromStorage = async () => {
+    private getFromStorage = async () => {
         const rules = await storage.get(USER_RULES_STORAGE_KEY) as string;
         return rules ?? this.rules;
     };
@@ -57,25 +60,28 @@ class UserRules {
         };
     };
 
-    getAllowlist() {
-        const userRulesProcessor = new UserRulesProcessor(this.rules);
-        const userRulesData = userRulesProcessor.getData();
+    getAllowlist = async () => {
+        if (!this.userRulesProcessor) {
+            return [];
+        }
+
+        const userRulesData = this.userRulesProcessor.getData();
         const allowlist = userRulesData.filter(
             (rule) => rule.type === UserRuleType.SITE_ALLOWED,
         );
 
         return allowlist;
-    }
+    };
 
-    getCurrentAllowRule(domainName: string) {
-        const allowlist = this.getAllowlist();
+    getCurrentAllowRule = async (domainName: string) => {
+        const allowlist = await this.getAllowlist();
 
         const currentAllowRule = allowlist.find(
             (rule) => rule.domain === domainName,
         );
 
         return currentAllowRule;
-    }
+    };
 
     setUserRules = async (userRules: string) => {
         await this.setRules(userRules);
@@ -85,6 +91,38 @@ class UserRules {
         const newUserRules = this.rules
             ? `${this.rules}${NEW_LINE_SEPARATOR}${ruleText}`
             : ruleText;
+
+        await this.setRules(newUserRules);
+    };
+
+    getSiteAllowRule = async (siteUrl: string): Promise<UserRulesData | undefined> => {
+        const allowlist = await this.getAllowlist();
+
+        return allowlist.find(
+            (rule) => rule.domain === siteUrl,
+        );
+    };
+
+    toggleSiteAllowlistStatus = async (siteUrl: string) => {
+        const allowRule = await this.getSiteAllowRule(siteUrl);
+
+        let newUserRules = '';
+
+        if (allowRule) {
+            const userRulesProcessor = new UserRulesProcessor(this.rules);
+
+            const allowlisted = allowRule?.enabled || false;
+            if (allowlisted) {
+                userRulesProcessor.deleteRule(allowRule.id);
+            } else {
+                userRulesProcessor.enableRule(allowRule.id);
+            }
+
+            newUserRules = userRulesProcessor.getUserRules();
+        } else {
+            const newRule = `@@||${siteUrl}^$document`;
+            newUserRules = this.rules.concat(NEW_LINE_SEPARATOR, newRule);
+        }
 
         await this.setRules(newUserRules);
     };

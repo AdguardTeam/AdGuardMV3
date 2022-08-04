@@ -74,6 +74,8 @@ export enum MESSAGE_TYPES {
     GET_DEBUG_INFO = 'GET_DEBUG_INFO',
     GET_DYNAMIC_RULES_LIMITS = 'GET_DYNAMIC_RULES_LIMITS',
     RELAUNCH_FILTERING = 'RELAUNCH_FILTERING',
+    TOGGLE_SITE_ALLOWLIST_STATUS = 'TOGGLE_SITE_ALLOWLIST_STATUS',
+    ADD_USER_RULE_FROM_ASSISTANT = 'ADD_USER_RULE_FROM_ASSISTANT',
 
     // TODO: Remove
     PING = 'PING',
@@ -90,10 +92,9 @@ export type Message = {
 };
 
 export enum NOTIFIER_EVENTS {
-    SETTING_UPDATED = 'event.setting.updated',
-    FILTERING_STATE_UPDATED = 'event.filtering.state.updated',
-    ADD_RULES = 'event.add.rules',
-    SET_RULES = 'event.set.rules',
+    PROTECTION_UPDATED,
+    PROTECTION_PAUSE_EXPIRES_UPDATED,
+    SET_RULES,
 }
 
 /* GLOBAL FILTERING */
