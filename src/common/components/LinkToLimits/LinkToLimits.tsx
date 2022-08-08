@@ -16,5 +16,3 @@ export const LinkToLimits = (s: string) => {
         </NavLink>
     );
 };
-
-export const NewLine = () => <br />;

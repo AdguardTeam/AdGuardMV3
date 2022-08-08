@@ -1,1 +1,1 @@
-export { LinkToLimits, NewLine } from './LinkToLimits';
+export { LinkToLimits } from './LinkToLimits';
