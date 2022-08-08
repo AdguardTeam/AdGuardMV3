@@ -14,7 +14,7 @@ export const DebuggingInfo = () => {
         : (
             <p>
                 {reactTranslator.getMessage('debugging_info', {
-                    'link-to-repo': (s: string) => (
+                    link: (s: string) => (
                         <a
                             href={REPO}
                             target="_blank"
