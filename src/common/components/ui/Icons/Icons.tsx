@@ -632,10 +632,10 @@ export const Icons = () => {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
             >
-                <path
-                    d="M4 6V4.5A1.5 1.5 0 002.5 6H4zm0 0H2.5A1.5 1.5 0 004 7.5V6zm16 0H4v1.5h16V6zm0 0v1.5A1.5 1.5 0 0021.5 6H20zm0 0h1.5A1.5 1.5 0 0020 4.5V6zM4 6h16V4.5H4V6zm0 4V8.5A1.5 1.5 0 002.5 10H4zm0 0H2.5A1.5 1.5 0 004 11.5V10zm12 0H4v1.5h12V10zm0 0v1.5a1.5 1.5 0 001.5-1.5H16zm0 0h1.5A1.5 1.5 0 0016 8.5V10zM4 10h12V8.5H4V10zm0 2.5A1.5 1.5 0 002.5 14H4v-1.5zm16 0H4V14h16v-1.5zm1.5 1.5a1.5 1.5 0 00-1.5-1.5V14h1.5zM20 15.5a1.5 1.5 0 001.5-1.5H20v1.5zm-16 0h16V14H4v1.5zM2.5 14A1.5 1.5 0 004 15.5V14H2.5zM4 18v-1.5A1.5 1.5 0 002.5 18H4zm0 0H2.5A1.5 1.5 0 004 19.5V18zm8 0H4v1.5h8V18zm0 0v1.5a1.5 1.5 0 001.5-1.5H12zm0 0h1.5a1.5 1.5 0 00-1.5-1.5V18zm-8 0h8v-1.5H4V18z"
-                    fill="#67B279"
-                />
+                <g fill="none" fillRule="evenodd" transform="translate(0 .5)">
+                    <path d="m0 0h24v26h-24z" fill="#878787" fillOpacity=".01" fillRule="evenodd" />
+                    <path d="m4 13h16m-16-5.41666667h16m-16 10.83333337h16" stroke="#888" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" />
+                </g>
             </svg>
 
             <svg id={IconId.MAGNIFIER} width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
