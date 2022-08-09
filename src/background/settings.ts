@@ -103,6 +103,19 @@ class Settings {
     };
 
     /**
+     * Remove unused field from settings object
+     */
+    private migrateFrom1to2 = (oldSettings: any): any => {
+        // Create deep copy
+        const copyObject = JSON.parse(JSON.stringify(oldSettings));
+
+        // Delete old key
+        delete copyObject['filtering.enabled'];
+
+        return copyObject;
+    };
+
+    /**
      * In order to add migration, create new function which modifies old settings into new
      * And add this migration under related old settings scheme version
      * For example if your migration function migrates your settings from scheme 4 to 5, then add
@@ -112,6 +125,7 @@ class Settings {
         [version: number]: (oldSettings: any) => any
     } = {
         0: this.migrateFrom0to1,
+        1: this.migrateFrom1to2,
     };
 
     /**

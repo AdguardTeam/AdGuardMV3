@@ -12,7 +12,7 @@ export enum SETTINGS_NAMES {
     FILTERS_CHANGED = 'filters.changed',
 }
 
-export const SCHEME_VERSION = 1;
+export const SCHEME_VERSION = 2;
 
 export const DEFAULT_SETTINGS = {
     [SETTINGS_NAMES.VERSION]: SCHEME_VERSION,
