@@ -105,6 +105,7 @@ export const Filters = observer(() => {
                     // FIXME: rule counters for popovers must be made in AG-15829
                     return (
                         <SwitcherOption
+                            key={filter.id}
                             iconId={IconId.CUSTOM_FILTERS}
                             id={filter.id.toString()}
                             message={filter.title}
