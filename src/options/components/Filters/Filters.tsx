@@ -5,7 +5,7 @@ import { observer } from 'mobx-react';
 import { translator } from 'Common/translators/translator';
 import { FiltersGroupId, QUERY_PARAM_NAMES } from 'Common/constants/common';
 import { Section, Header } from 'Common/components/Section';
-import { IconId, Popover } from 'Common/components/ui';
+import { IconId } from 'Common/components/ui';
 import { rootStore } from 'Options/stores';
 import { CustomFilterModal } from 'Options/components/Filters/CustomFilterModal';
 import { SwitcherOption } from 'Options/components/SwitcherOption';
@@ -90,10 +90,6 @@ export const Filters = observer(() => {
         }
     }, [urlToSubscribe, openModal]);
 
-    const getRulesMessage = (count: number) => (
-        translator.getPlural('options_filter_rules_counter', count, { count })
-    );
-
     const content = (
         <div className={styles.container}>
             {filtersByGroupId.length > 0
@@ -106,20 +102,16 @@ export const Filters = observer(() => {
                         }
                     };
 
+                    // FIXME: rule counters for popovers must be made in AG-15829
                     return (
-                        <Popover
-                            key={filter.id}
-                            text={getRulesMessage(filter.declarativeRulesCounter || 0)}
-                        >
-                            <SwitcherOption
-                                iconId={IconId.CUSTOM_FILTERS}
-                                id={filter.id.toString()}
-                                message={filter.title}
-                                checked={filter.enabled}
-                                onClick={() => { handleClickToFilter(filter.id); }}
-                                onChange={onChange}
-                            />
-                        </Popover>
+                        <SwitcherOption
+                            iconId={IconId.CUSTOM_FILTERS}
+                            id={filter.id.toString()}
+                            message={filter.title}
+                            checked={filter.enabled}
+                            onClick={() => { handleClickToFilter(filter.id); }}
+                            onChange={onChange}
+                        />
                     );
                 })
                 : <div className={styles.notFound}>{translator.getMessage('options_filters_not_found')}</div>}
