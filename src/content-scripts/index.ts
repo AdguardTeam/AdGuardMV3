@@ -1,6 +1,8 @@
 import '@adguard/tswebextension/mv3/content-script';
 import { MESSAGE_TYPES } from 'Common/constants/common';
 
+import { subscribe } from './subscribe';
+
 // TODO: Temporary construction for keeping alive service worker
 // via constantly standing message exchange
 if (window.top === window && (document.documentElement instanceof HTMLElement)) {
@@ -11,3 +13,5 @@ if (window.top === window && (document.documentElement instanceof HTMLElement)) 
         } catch (e) { }
     }, 10000);
 }
+
+subscribe.init();
