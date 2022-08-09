@@ -160,6 +160,7 @@ export const RequestsTable = ({
                     <p>
                         {originalRuleTxt}
                         <br />
+                        <br />
                         {`from filter ${filterName} (id - ${filterId})`}
                     </p>
                 </div>
