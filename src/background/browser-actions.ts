@@ -114,7 +114,7 @@ class BrowserActions {
             const urlDetails = getUrlDetails(activeTab.url);
 
             if (urlDetails?.domainName) {
-                const currentAllowRule = await userRules.getCurrentAllowRule(urlDetails.domainName);
+                const currentAllowRule = await userRules.getSiteAllowRule(urlDetails.domainName);
 
                 const filteringEnabled = !currentAllowRule?.enabled && settings.protectionEnabled;
 

@@ -2,6 +2,7 @@ import { sendMessage } from 'Common/helpers';
 import { PopupData, MESSAGE_TYPES } from 'Common/constants/common';
 import { POPUP_SETTINGS } from 'Common/constants/settings-constants';
 import { tabUtils } from 'Common/tab-utils';
+import { UserRulesData } from 'Options/user-rules-processor';
 
 /**
  * Module with methods used to communicate with background service worker
@@ -62,6 +63,10 @@ class Sender {
 
     toggleSiteAllowlistStatus = (domainName: string): Promise<string> => {
         return sendMessage(MESSAGE_TYPES.TOGGLE_SITE_ALLOWLIST_STATUS, { domainName });
+    };
+
+    checkSiteInAllowlist = (domainName: string): Promise<UserRulesData | undefined> => {
+        return sendMessage(MESSAGE_TYPES.CHECK_SITE_IN_ALLOWLIST, { domainName });
     };
 }
 

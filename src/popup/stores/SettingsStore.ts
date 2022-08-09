@@ -8,10 +8,10 @@ import {
 
 import { log } from 'Common/logger';
 import { getUrlDetails, isHttpRequest } from 'Common/helpers';
-import { UserRuleType, MS_IN_SECOND, PROTECTION_PAUSE_TIMEOUT_TICK_MS } from 'Common/constants/common';
+import { MS_IN_SECOND, PROTECTION_PAUSE_TIMEOUT_TICK_MS } from 'Common/constants/common';
 import { DEFAULT_SETTINGS, POPUP_SETTINGS, SETTINGS_NAMES } from 'Common/constants/settings-constants';
 import { tabUtils } from 'Common/tab-utils';
-import { UserRulesData, UserRulesProcessor } from 'Options/user-rules-processor';
+import { UserRulesData } from 'Options/user-rules-processor';
 
 import { sender } from '../messaging/sender';
 
@@ -143,14 +143,8 @@ export class SettingsStore {
     };
 
     @action
-    updateAllowlist = () => {
-        const userRulesProcessor = new UserRulesProcessor(this.userRules);
-        const userRulesData = userRulesProcessor.getData();
-        const allowlist = userRulesData
-            .filter((rule) => rule.type === UserRuleType.SITE_ALLOWED);
-        const currentAllowRule = allowlist.find(
-            (rule) => rule.domain === this.currentSite,
-        );
+    updateAllowlist = async () => {
+        const currentAllowRule = await sender.checkSiteInAllowlist(this.currentSite);
 
         runInAction(() => {
             this.currentAllowRule = currentAllowRule;

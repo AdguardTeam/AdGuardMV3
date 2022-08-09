@@ -10,6 +10,11 @@ export type UserRulesLimits = {
     regexpsCount: number
 };
 
+/**
+ * Returns the "full" document allow rule for the specified site url
+ */
+const getAllowRuleForUrl = (siteUrl: string) => `@@||${siteUrl}^$document`;
+
 class UserRules {
     private rules = '';
 
@@ -73,16 +78,6 @@ class UserRules {
         return allowlist;
     };
 
-    getCurrentAllowRule = async (domainName: string) => {
-        const allowlist = await this.getAllowlist();
-
-        const currentAllowRule = allowlist.find(
-            (rule) => rule.domain === domainName,
-        );
-
-        return currentAllowRule;
-    };
-
     setUserRules = async (userRules: string) => {
         await this.setRules(userRules);
     };
@@ -97,9 +92,10 @@ class UserRules {
 
     getSiteAllowRule = async (siteUrl: string): Promise<UserRulesData | undefined> => {
         const allowlist = await this.getAllowlist();
+        const documentAllowRule = getAllowRuleForUrl(siteUrl);
 
         return allowlist.find(
-            (rule) => rule.domain === siteUrl,
+            (rule) => rule.domain === siteUrl && rule.ruleText === documentAllowRule,
         );
     };
 
@@ -120,7 +116,7 @@ class UserRules {
 
             newUserRules = userRulesProcessor.getUserRules();
         } else {
-            const newRule = `@@||${siteUrl}^$document`;
+            const newRule = getAllowRuleForUrl(siteUrl);
             newUserRules = this.rules.concat(NEW_LINE_SEPARATOR, newRule);
         }
 

@@ -218,6 +218,11 @@ export const extensionMessageHandler = async (
             const updatedUserRules = await userRules.getRules();
             return updatedUserRules;
         }
+        case MESSAGE_TYPES.CHECK_SITE_IN_ALLOWLIST: {
+            const { domainName } = data;
+
+            return userRules.getSiteAllowRule(domainName);
+        }
         default: {
             throw new Error(`No message handler for type: ${type}`);
         }
