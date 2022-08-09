@@ -164,7 +164,7 @@ class TabUtils {
             return false;
         }
 
-        const currentAllowRule = await userRules.getCurrentAllowRule(urlDetails.domainName);
+        const currentAllowRule = await userRules.getSiteAllowRule(urlDetails.domainName);
         return currentAllowRule?.enabled || false;
     };
 }
