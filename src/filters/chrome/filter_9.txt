@@ -1,8 +1,8 @@
-! Checksum: jm547c7y1krdiV4PH5FMcg
+! Checksum: Aa6ZLWj5Ac8Z5hefnWQ1Sg
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish and Portuguese languages.
-! Version: 2.0.14.38
-! TimeUpdated: 2022-07-25T14:48:35+00:00
+! Version: 2.0.14.47
+! TimeUpdated: 2022-08-09T11:31:58+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -285,6 +285,11 @@
 tunovelaligera.com#%#//scriptlet("abort-on-property-write", "adregain_wall")
 tunovelaligera.com#%#//scriptlet("abort-on-property-read", "ad_nodes")
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/125852
+genshinpro.com.br#%#//scriptlet("prevent-setTimeout", "adsbygoogle")
+! https://github.com/AdguardTeam/AdguardFilters/issues/125496
+@@||static.ads-twitter.com/uwt.js$domain=notipostingt.com
+notipostingt.com#%#//scriptlet('prevent-fetch', 'static.ads-twitter.com')
 ! https://github.com/uBlockOrigin/uAssets/issues/14099
 raulprietofernandez.net#@#.adsbygoogle
 raulprietofernandez.net##ins.adsbygoogle
@@ -370,8 +375,7 @@ colextorhd.com#%#!function(){var f=function(a){for(var c=0;10>c;c++)try{a=atob(a
 @@||latinomg.live^$generichide
 latinomg.live#%#AG_onLoad(function(){if("function"===typeof decode_link&&"string"===typeof link_out)try{location.assign(decode_link(atob(link_out)))}catch(a){}});
 ! https://github.com/AdguardTeam/AdguardFilters/issues/101528
-! yes, this is anti-adblock rule)
-||sdk.privacy-center.org^$domain=lavanguardia.com
+||lavanguardia.com/suscripciones/dab-notifier
 ! https://github.com/AdguardTeam/AdguardFilters/issues/101140
 @@||infojobs.com.br/*/ads-prebid.js
 infojobs.com.br#%#//scriptlet("set-constant", "adBlockCheck", "true")
@@ -556,6 +560,7 @@ meuwindows.com#%#//scriptlet("abort-on-property-write", "ai_front")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/60999
 ||cdn.jsdelivr.net/*/dist/js/wgd-core.min.js
 ! https://github.com/AdguardTeam/AdguardFilters/issues/59758
+anihub.tv#%#//scriptlet('prevent-element-src-loading', 'script', 'st.bebi.com/bebi_')
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=anihub.tv
 ||st.bebi.com/bebi_v*.js$script,redirect=noopjs,domain=anihub.tv
 ! https://github.com/AdguardTeam/AdguardFilters/issues/57785
@@ -1238,6 +1243,9 @@ peru21.pe#@#.adstop
 ! https://github.com/AdguardTeam/AdguardFilters/issues/24801
 yahoo.com#?#ul[class^="Mb(0)"] > li.js-stream-content:has(> div > a[rel="nofollow noopener noreferrer"]+div:contains(Patrocinado))
 !
+genshinpro.com.br#?#.vc_col-sm-4 .wpb_wrapper > .sc_content_bordered:has(a[href="http://exitl.ag/genshinpro"])
+mangapt.com#?#div[id^="block-"]:has(> .widget__inner > .widget-content > .adsbygoogle)
+mangapt.com#?#div[id^="custom_html-"]:has(> .widget__inner > .widget-content > .textwidget > .adsbygoogle)
 adrenaline.com.br#?#.main > div[style*="height: 250px;"]
 adrenaline.com.br#?#.text-center > small:contains(/Publicidade|publicidade/)
 estadao.com.br#?#div[class^="styles__Container-"]:has(> p.ads-placeholder-label)
@@ -1468,6 +1476,10 @@ maisgasolina.com#?##main [id$="Block"][-ext-has='.adsbygoogle']
 !------- JS rules ---------------------!
 !--------------------------------------!
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/126442
+servernew.xyz,servertwo.xyz,megaseriesonline.pro#%#//scriptlet("prevent-window-open")
+! https://github.com/AdguardTeam/AdguardFilters/issues/125382
+pelisplushd.site#%#//scriptlet('remove-attr', 'href', 'a[href^="https://adalites.site/"]')
 ! https://github.com/uBlockOrigin/uAssets/issues/14099#issuecomment-1192722375
 raulprietofernandez.net#%#//scriptlet("abort-on-property-write", "pUrlArray")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/123894
@@ -2017,6 +2029,13 @@ link.estadao.com.br,atomixhq.*,jc.ne10.uol.com.br,internetpasoapaso.com,acidadeo
 ! ##.ad
 atribuna.com.br,jovemnerd.com.br,laopiniondemurcia.es,larazon.es,dicio.com.br,band.uol.com.br,xataka.com,onyxplay.com,genbeta.com,vagalume.com.br,xatakandroid.com,abril.com.br##.ad
 !
+dicionario.priberam.org##div[class*="pb-pub-"]:not(.pb-pub-6)
+servernew.xyz,servertwo.xyz,megaseriesonline.pro##div[style^="position: absolute;"][style*="z-index:"][onclick*="anunciotag"]
+eldiadezamora.es##.baterybanner
+eldiadezamora.es##.BANNER-image
+||genshinpro.com.br/wp-content/uploads/*/*/Exit-lag-*x*-*.gif
+mangapt.com##.body-wrap > .c-top-sidebar
+kimovil.com###user-sidebar div.kau
 raulprietofernandez.net###k2Container > div[class^="item"] div[style*="background-color"]
 beachcam.meo.pt##.beachPartners
 beachcam.meo.pt##.dealer-block
@@ -2891,7 +2910,6 @@ andro4all.com##.ad_featured
 ||ivpaste.com/*/pub-install_captcha.php
 file4go.com,file4go.net##.banner300b
 file4go.net###conteudo_download > .lateral
-jav-asia.top,universoformulas.com,daemon-hentai.com###custom_html-4
 ||tuhentaionline.com/qysfqwtqvcdg.php
 ||insurances.tips/insurances.html
 ||libros4.com/randomadm.php
@@ -3134,9 +3152,9 @@ dn.pt##.t-pubbox-ct-1
 compucalitv.com###text-11
 compucalitv.com##a[href^="https://goo.gl"] > img
 /qvncc.tvcanales.cf\/js\/[_-a-zA-Z0-9]{5,}.js/$domain=tvcanales.cf
-mundodebolso.me###custom_html-4
+genshinpro.com.br,jav-asia.top,universoformulas.com,daemon-hentai.com,mundodebolso.me###custom_html-4
 noticiasautomotivas.com.br,mundodebolso.me,segredosdomundo.r7.com,blogdoiphone.com###custom_html-6
-noticiasautomotivas.com.br###custom_html-7
+genshinpro.com.br,noticiasautomotivas.com.br###custom_html-7
 blogdoiphone.com###text-html-widget-15
 medianetto.com##.toppic > a[target="_blank"]
 superanimes.site##.adsInfo

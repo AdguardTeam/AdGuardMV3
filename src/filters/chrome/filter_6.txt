@@ -1,8 +1,8 @@
-! Checksum: rUhBUqpuoQs4pnFf/wcHSw
+! Checksum: +KejzZWRG1cjwvXpdno/9Q
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.28.87
-! TimeUpdated: 2022-07-25T17:03:24+00:00
+! Version: 2.0.28.96
+! TimeUpdated: 2022-08-09T09:31:51+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -487,6 +487,10 @@ essen-und-trinken.de,urbia.de#%#!function(){function b(){}function a(a){return{g
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/126613
+agrarwetter.net###body_opacity_overlay
+agrarwetter.net###DivdetectorContainer
+agrarwetter.net#%#//scriptlet("prevent-setTimeout", "adBlock")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/123855
 computerbase.de#%#//scriptlet("abort-current-inline-script", "document.createElement", "adblock")
 computerbase.de#@#.adbox
@@ -1015,6 +1019,8 @@ teleboy.ch#@#.adWrapper
 ! Good: example.org#?#main > div.row:has(> div.ad)
 ! Bad: example.org##main > div.ad (should be in specific.txt)
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/126610
+wetterkontor.de#?#.uk-text-center > .uk-text-small:contains(/^Anzeige$/)
 ! mopo.de - ticker ads
 mopo.de#?#.js-marquee:has(> a[href*="campaign"][target="_blank"])
 ! https://github.com/AdguardTeam/AdguardFilters/issues/124978
@@ -1344,7 +1350,7 @@ simply-yummy.de#?##zl_sidebar > .zl_widget[data-bid]:has(> div[id^="div-gpt-ad"]
 ! chefkoch.de - left-over at startpage
 chefkoch.de#?#div[amp-access^="NOT hasPaid"] +.ds-box:has(> .ds-hr:empty:first-child)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/53011
-gload.cc#?#.tm-main-top > .uk-width-1-1 > .widget_custom_html:has(> .textwidget > center > a[href][target="_blank"] > img)
+gload.to#?#.tm-main-top > .uk-width-1-1 > .widget_custom_html:has(> .textwidget > center > a[href][target="_blank"] > img)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/51710
 fitbook.de#?#.pb--three-small > .teaser--b:has(>a[href^="https://secure.adnxs.com/"])
 ! bayern-reporter.com - left-over in article
@@ -1816,6 +1822,7 @@ pcgames.de#?#.column > .module:has(> div[class] > div[class] > .item > span > a[
 ! https://github.com/AdguardTeam/AdguardFilters/issues/8048
 wallstreet-online.de#?#.extract > strong:contains(Anzeige)
 !
+rtl.de#?##showheroes-script-container:upward(1)
 caravaning.de##.v-A_-teaser:has(> div[ga-track-cl*="sponsoredBox"])
 amateurbusters.com#?#.sb_area > .sb_area_headline:contains(Urlaub)
 !---------------------------------------------------------------------------!
@@ -1903,7 +1910,7 @@ stern.de#%#//scriptlet("json-prune", "enabled", "testhide")
 !+ NOT_PLATFORM(windows, mac, android, ext_ff)
 chip.de#%#//scriptlet("json-prune", "enabled", "testhide")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/53011
-gload.cc#%#//scriptlet("abort-on-property-write", "bullads")
+gload.to#%#//scriptlet("abort-on-property-write", "bullads")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/52959
 !+ NOT_PLATFORM(windows, mac, android, ext_ff)
 tele5.de#%#//scriptlet("json-prune", "testhide")
@@ -2060,7 +2067,7 @@ dasoertliche.de#$#body > #oetbwrap[style="position:absolute;top:98px;"] { top: 0
 ! https://github.com/AdguardTeam/AdguardFilters/issues/17150
 woxikon.de#$#.ads-wrapper { position: absolute!important; left: -3000px!important; }
 ! https://forum.adguard.com/index.php?threads/freenet-de-ad-blocking.28729
-freenet.de#$##frnBanner { height: 25px!important; }
+freenet.de#$##frnBanner { height: 25px!important; min-height: 0px !important;}
 ! winfuture.de - video is vanishing after play button when hidden by normal means
 winfuture.de#$#.spoods-deeplinks { visibility: hidden!important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/10278
@@ -2253,12 +2260,14 @@ vergleich.focus.de,chip.de,gutefrage.net,reisefrage.net,motorradfrage.net,autofr
 ! ##.adsbygoogle
 winfuture.de,netzwelt.de,quoka.de,farmeramania.de,bravofly.de,computerbild.de,digitalfernsehen.de,hl-live.de,chinamobilemag.de,focus.de,pcwelt.de##.adsbygoogle
 !
-4kfilme.de###tdi_62
+rollingstone.de##.ph-ad-fallback-top-billboard
+||rtl.de/phoenix/images-loaded/local.js
 mopo.de##a[href*="campaign"][target="_blank"]
 chip.de##.l-DownloadDetail > div[style="min-height:250px;"]
 np-coburg.de###hcsb-topteaser-upper
 spiegel.de##div[data-area="heise-widget"]
 hausgarten.net##.block-body > article.message:not([data-author])
+4kfilme.de###tdi_57 + #tdi_62
 4kfilme.de##.tdi_104
 4kfilme.de##.tdi_132
 4kfilme.de##.tdi_70
@@ -2299,7 +2308,6 @@ promobil.de,caravaning.de##div[ga-track-cl="lists.sponsoredBox.cl"]
 tarnkappe.info##.columns > div[style^="min-height:"]:not([class$="is-one-third"])
 zentrum-der-gesundheit.de##div[id^="incontent-"]
 praxistipps.focus.de##.BC-Container
-gartentipps.com##div[class^="adunit-container"]
 zeit.de##.zon-teaser-standard--ad
 chip.de##.BC-Content
 11freunde.de##.ad_wrap--desktop-wide
@@ -2314,7 +2322,7 @@ winfuture.de##.wfv4_toolbar
 stadt-wien.at##.adsenseField
 mathepower.com##div[style="height: 250px"]
 mathepower.com##div[style="height: 600px"]
-mixed.de##div[class^="adunit-container"]
+wetterkontor.de,gartentipps.com,mixed.de##div[class^="adunit-container"]
 tech-story.net##div[id^="woocommerce_products"]
 tech-story.net###custom_html-54
 playcentral.de###news-content-block > .wp-block-buttons
@@ -2371,11 +2379,11 @@ dasinvestment.com##.ad-fireplace__wrapper
 dasinvestment.com##.billboard-ad_switcher
 mux.de##.google_ad_box
 wetter.com##div[class^="app-layout pb--"][class$="werbung"]
-filehorst.de##div[style="text-align:center"] > center
-filehorst.de##div[class^="WideSkyscraper"]
+abload.de,filehorst.de##div[style="text-align:center"] > center
+abload.de,filehorst.de##div[class^="WideSkyscraper"]
 filehorst.de###MediumRectangleRight
 filehorst.de###Billboard
-filehorst.de###LeaderboardUnderDownloadTop
+filehorst.de##div[id^="Leaderboard"]
 herbstlust.de###below-header
 herbstlust.de##.in-content
 herbstlust.de##.fc-ads
@@ -3195,7 +3203,7 @@ t-online.de##a[href][data-urlb^="aHR0cHM6Ly93d3cubG90dG8yNC5kZS93ZWJzaG9wL3Byb2R
 abendzeitung-muenchen.de##a[href^="/inhalt.onlineshop-einzelhandel-einfach-guenstig-umsetzen-wir-unterstuetzen-sie-schnell-einfach."]
 abendzeitung-muenchen.de##a[href^="/inhalt.zinserhoehung-statt-negativzinsen-kostenloses-weltsparen-eroeffnen-und-150-euro-bonus-sichern."]
 abendzeitung-muenchen.de##a[href^="/inhalt.zwei-felder-gratis-spielen-jackpot-nicht-geknackt-neuer-eurojackpot-90-mio."]
-gload.cc##center > a[href][target="_blank"] > img
+gload.to##center > a[href][target="_blank"] > img
 ||p.jwpcdn.com/*/vast.js$important,domain=tele5.de
 ||speedlounge.org/js/fasdjasdad.js
 ||speedlounge.org/images/partner^
@@ -3376,7 +3384,7 @@ meinestadt.de##div[class^="a-ettElement -dfp -n"][style^="min-height:"]
 emtb-news.de##.mtbnews-forum__banner
 chip.de##.Dl-Article__Text > .Screenshot ~ a[href^="https://www.chip.de/bestenlisten"]
 chip.de##.Downloads .Subchapter .Download-Buttons ~ .ButtonAuswahl + div > div[id][class]
-gload.cc##a[href^="https://gload.cc/"][href*="/strip"]
+gload.to##a[href^="https://gload.to/"][href*="/strip"]
 hifi-forum.de###widget_ad
 saarbruecker-zeitung.de##.park-section-portal-top > .park-portal--billboard
 tichyseinblick.de##div[id^="Ads_"]
@@ -3480,7 +3488,7 @@ chip.de##.l-Downloads__Content--HasSidebar > .Download-Buttons--Main + div[id][c
 t-online.de##.Tart__articleBody > .toiafl-container
 t-online.de##.Tart > #T-aboola-container + #Tasfeed3
 computerbase.de##.postbit-ad
-||gload.cc/*istripper.gif
+||gload.to/*istripper.gif
 tag24.de##a[href^="https://www.tag24.de/anzeige"]
 vw-page.com##div[id^="easyAdsMessageList_"]
 duden.de###block-dudende-d-970x250-1billboard
@@ -5248,6 +5256,10 @@ tagesspiegel.de###urban-teaser1
 !###############
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/125735
+freenet.de#@##frnBanner
+! https://github.com/AdguardTeam/AdguardFilters/issues/125221
+@@||ad71.adfarm1.adition.com/lt?nw=$domain=atv.at
 ! https://github.com/AdguardTeam/AdguardFilters/issues/125101
 @@||static.trbo.com/img/$domain=o2online.de
 ! berliner-zeitung.de - article hidden on main page which contains the word Anzeige in its header
