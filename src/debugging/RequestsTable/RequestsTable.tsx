@@ -53,10 +53,22 @@ export const RequestsTable = ({
     const getRuleInfo = (filterIdString: string, ruleId: number): RuleInfo => {
         const getHash = (n: number) => DeclarativeConverter.storageIdxToRuleListIdx(n);
         const getSourceRule = (filterContent: string, ruleIdx: number) => {
-            return filterContent.slice(
-                ruleIdx,
-                filterContent.indexOf(NEW_LINE_SEPARATOR, ruleIdx),
-            );
+            let posStartRule = ruleIdx;
+
+            // Skip spaces, tabs and new lines
+            while (['\n', '\t', '\r'].includes(filterContent[posStartRule])) {
+                posStartRule += 1;
+            }
+
+            // Check, that we didn't exit from string
+            if (posStartRule >= filterContent.length) {
+                posStartRule = filterContent.length - 1;
+            }
+
+            const posEndRule = filterContent.indexOf(NEW_LINE_SEPARATOR, posStartRule);
+            return posEndRule === -1 // end of file
+                ? filterContent.slice(posStartRule)
+                : filterContent.slice(posStartRule, posEndRule);
         };
 
         if (filterIdString === chrome.declarativeNetRequest.DYNAMIC_RULESET_ID) {
