@@ -9,7 +9,7 @@ import { translator } from 'Common/translators/translator';
 import { theme } from 'Common/styles';
 import { rootStore } from 'Options/stores';
 import { CheckboxOption } from 'Options/components/CheckboxOption';
-import { useNotifyDynamicRulesLimitsError } from 'Common/hooks/useNotifyDynamicRulesLimitError';
+import { useNotifyDynamicRulesLimitsError } from 'Options/hooks/useNotifyDynamicRulesLimitError';
 
 const buildBlockingRule = (domain: string, blockSubdomains: boolean): string => {
     if (blockSubdomains) {

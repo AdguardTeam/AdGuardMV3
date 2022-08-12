@@ -48,6 +48,8 @@ export interface OptionsData {
     categories: CategoriesType
 }
 
+// These enum must have string values because
+// we need to fast identify message in the log
 export enum MESSAGE_TYPES {
     GET_OPTIONS_DATA = 'GET_OPTIONS_DATA',
     GET_POPUP_DATA = 'GET_POPUP_DATA',
@@ -92,10 +94,12 @@ export type Message = {
     data?: any;
 };
 
+// These enum must have string values because
+// their values are used as keys in the object
 export enum NOTIFIER_EVENTS {
-    PROTECTION_UPDATED,
-    PROTECTION_PAUSE_EXPIRES_UPDATED,
-    SET_RULES,
+    PROTECTION_UPDATED = 'event.protection.updated',
+    PROTECTION_PAUSE_EXPIRES_UPDATED = 'event.protection.pause.expires.updated',
+    SET_RULES = 'event.set.rules',
 }
 
 /* GLOBAL FILTERING */

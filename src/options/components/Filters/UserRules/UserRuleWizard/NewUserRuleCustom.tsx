@@ -7,7 +7,7 @@ import { reactTranslator } from 'Common/translators/reactTranslator';
 import { theme } from 'Common/styles';
 import { useKeyPress } from 'Common/hooks/useKeyPress';
 import { KEY_ENTER } from 'Common/constants/keyboard';
-import { useNotifyDynamicRulesLimitsError } from 'Common/hooks/useNotifyDynamicRulesLimitError';
+import { useNotifyDynamicRulesLimitsError } from 'Options/hooks/useNotifyDynamicRulesLimitError';
 
 import { UserRuleEditor } from './UserRuleEditor';
 

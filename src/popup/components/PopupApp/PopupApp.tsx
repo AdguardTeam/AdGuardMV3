@@ -3,11 +3,10 @@ import { observer } from 'mobx-react';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 
 import { Icons } from 'Common/components/ui';
-import { log } from 'Common/logger';
 import { NOTIFIER_EVENTS } from 'Common/constants/common';
-import { createLongLivedConnection } from 'Common/messaging-utils';
 import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
 import { WithTimeout } from 'Common/components/WithTimeout';
+import { useEventListener } from 'Common/hooks/useEventListener';
 
 import { rootStore } from '../../stores';
 import { Header } from '../Header';
@@ -42,52 +41,22 @@ export const PopupApp = observer(() => {
     } = settingsStore;
 
     useLayoutEffect(() => {
-        (async () => {
-            try {
-                await getPopupData();
-            } catch (e) {
-                log.error(e);
-            }
-        })();
-
-        const events = [
-            NOTIFIER_EVENTS.SET_RULES,
-            NOTIFIER_EVENTS.PROTECTION_UPDATED,
-            NOTIFIER_EVENTS.PROTECTION_PAUSE_EXPIRES_UPDATED,
-        ];
-
-        const messageHandler = async (message: any) => {
-            const { type, data: [data] } = message;
-
-            switch (type) {
-                // Actually, this event doesn't need, because if rules changed
-                // - popup will lost focus and will be closed
-                // And after opened - it will requests rules again
-                case NOTIFIER_EVENTS.SET_RULES: {
-                    await settingsStore.getPopupData();
-                    break;
-                }
-
-                case NOTIFIER_EVENTS.PROTECTION_UPDATED: {
-                    const { value } = data;
-                    await settingsStore.setProtection(value as boolean);
-                    break;
-                }
-
-                case NOTIFIER_EVENTS.PROTECTION_PAUSE_EXPIRES_UPDATED: {
-                    const { value } = data;
-                    await settingsStore.setProtectionPauseExpires(value as number);
-                    break;
-                }
-
-                default: {
-                    throw new Error(`Non supported event type: ${type}`);
-                }
-            }
-        };
-
-        return createLongLivedConnection('popup', events, messageHandler);
+        getPopupData();
     }, []);
+
+    useEventListener('popup', {
+        [NOTIFIER_EVENTS.SET_RULES]: async () => {
+            await settingsStore.getPopupData();
+        },
+        [NOTIFIER_EVENTS.PROTECTION_UPDATED]: async (data: any) => {
+            const { value } = data;
+            await settingsStore.setProtection(value as boolean);
+        },
+        [NOTIFIER_EVENTS.PROTECTION_PAUSE_EXPIRES_UPDATED]: async (data: any) => {
+            const { value } = data;
+            await settingsStore.setProtectionPauseExpires(value as number);
+        },
+    });
 
     const isLimitsExceed = wasEnabledIds.length > 0;
 

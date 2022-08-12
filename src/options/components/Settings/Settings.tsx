@@ -5,8 +5,8 @@ import { translator } from 'Common/translators/translator';
 import { Filter, FiltersGroupId } from 'Common/constants/common';
 import { Section } from 'Common/components/Section';
 import { IconId, Popover } from 'Common/components/ui';
-import { useNotifyStaticFiltersLimitError } from 'Common/hooks/useNotifyStaticFiltersLimitError';
 
+import { useNotifyStaticFiltersLimitError } from '../../hooks/useNotifyStaticFiltersLimitError';
 import { rootStore } from '../../stores';
 import { SwitcherOption } from '../SwitcherOption';
 import { NavOption, NavOptionProps } from '../NavOption';

@@ -170,10 +170,11 @@ const init = () => {
     chrome.contextMenus.onClicked.addListener(contextMenuClickHandler);
     chrome.tabs.onUpdated.addListener(updateContextMenuThrottled);
     chrome.tabs.onActivated.addListener(updateContextMenuThrottled);
-    notifier.addEventListener(NOTIFIER_EVENTS.PROTECTION_UPDATED, () => {
-        updateContextMenuThrottled();
-    });
-    notifier.addEventListener(NOTIFIER_EVENTS.SET_RULES, () => {
+
+    notifier.addEventListener([
+        NOTIFIER_EVENTS.PROTECTION_UPDATED,
+        NOTIFIER_EVENTS.SET_RULES,
+    ], () => {
         updateContextMenuThrottled();
     });
 

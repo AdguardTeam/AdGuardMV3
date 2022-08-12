@@ -5,8 +5,6 @@ import { Route, Switch, HashRouter } from 'react-router-dom';
 import { Icons } from 'Common/components/ui';
 import { log } from 'Common/logger';
 import { NOTIFIER_EVENTS } from 'Common/constants/common';
-import { createLongLivedConnection } from 'Common/messaging-utils';
-import { useNotifyDynamicRulesLimitsError } from 'Common/hooks/useNotifyDynamicRulesLimitError';
 import { Sidebar } from 'Options/components/Sidebar';
 import { Notifications } from 'Options/components/Notifications';
 import { About } from 'Options/components/About';
@@ -17,6 +15,9 @@ import { Filters } from 'Options/components/Filters';
 import { UserRules } from 'Options/components/Filters/UserRules';
 import { Languages } from 'Options/components/Languages';
 import { LoaderOverlay } from 'Options/components/LoaderOverlay';
+import { useEventListener } from 'Common/hooks/useEventListener';
+
+import { useNotifyDynamicRulesLimitsError } from '../../hooks/useNotifyDynamicRulesLimitError';
 
 import styles from './options-app.module.pcss';
 
@@ -37,27 +38,16 @@ export const OptionsApp = observer(() => {
         }
     };
 
+    useEventListener('options', {
+        [NOTIFIER_EVENTS.SET_RULES]: async (data: any) => {
+            const { value } = data;
+            const err = await optionsStore.updateUserRules(value);
+            checkAndNotifyDynamicRulesError(err);
+        },
+    });
+
     useLayoutEffect(() => {
         getOptionsData();
-
-        const events = [NOTIFIER_EVENTS.SET_RULES];
-
-        const messageHandler = async (message: any) => {
-            const { type, data: [data] } = message;
-
-            switch (type) {
-                case NOTIFIER_EVENTS.SET_RULES: {
-                    const { value } = data;
-                    const err = await optionsStore.updateUserRules(value);
-                    checkAndNotifyDynamicRulesError(err);
-                    break;
-                }
-                default:
-                    throw new Error(`Non supported event type: ${type}`);
-            }
-        };
-
-        return createLongLivedConnection('options', events, messageHandler);
     }, []);
 
     const content = (
