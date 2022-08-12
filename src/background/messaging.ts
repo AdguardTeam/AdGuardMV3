@@ -20,6 +20,7 @@ import { filters, CUSTOM_FILTERS_START_ID } from './filters';
 import { backend } from './backend';
 import { userRules } from './userRules';
 import { tsWebExtensionWrapper } from './tswebextension';
+import { filteringLog } from './filtering-log';
 
 /**
  * Message handler used to receive messages and send responses back on background service worker
@@ -222,6 +223,19 @@ export const extensionMessageHandler = async (
             const { domainName } = data;
 
             return userRules.getSiteAllowRule(domainName);
+        }
+        case MESSAGE_TYPES.START_LOG: {
+            await filteringLog.start();
+
+            break;
+        }
+        case MESSAGE_TYPES.STOP_LOG: {
+            await filteringLog.stop();
+
+            break;
+        }
+        case MESSAGE_TYPES.GET_COLLECTED_LOG: {
+            return filteringLog.getCollected();
         }
         default: {
             throw new Error(`No message handler for type: ${type}`);
