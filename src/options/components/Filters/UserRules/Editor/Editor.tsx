@@ -8,7 +8,7 @@ import { observer } from 'mobx-react';
 import { useStore } from 'Options/stores/useStore';
 import { theme } from 'Common/styles';
 import { reactTranslator } from 'Common/translators/reactTranslator';
-import { useNotifyDynamicRulesLimitsError } from 'Common/hooks/useNotifyDynamicRulesLimitError';
+import { useNotifyDynamicRulesLimitsError } from 'Options/hooks/useNotifyDynamicRulesLimitError';
 
 import styles from './Editor.module.pcss';
 

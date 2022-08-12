@@ -5,8 +5,8 @@ import { UserRuleTypeComponent } from 'Options/components/Filters/UserRules/User
 import { UserRuleType } from 'Common/constants/common';
 import styles from 'Options/components/Filters/UserRules/UserRule/UserRule.module.pcss';
 import { rootStore } from 'Options/stores';
+import { useNotifyDynamicRulesLimitsError } from 'Options/hooks/useNotifyDynamicRulesLimitError';
 import { theme } from 'Common/styles';
-import { useNotifyDynamicRulesLimitsError } from 'Common/hooks/useNotifyDynamicRulesLimitError';
 
 import { HighlightSearch } from '../../../HighlightSearch';
 

@@ -12,7 +12,7 @@ type Listener = {
 export class Notifier<T, U> {
     private listeners: { [key: string]: Listener } = {};
 
-    private listenersEvents: { [key: string]: T | T[] } = {};
+    private listenersEvents: { [key: string]: T[] } = {};
 
     /**
      * Used for easier access to notifier events, e.g.
@@ -26,20 +26,14 @@ export class Notifier<T, U> {
         });
     }
 
-    addListener(listener: Listener): string {
-        const listenerId = nanoid();
-        this.listeners[listenerId] = listener;
-        return listenerId;
-    }
-
     addEventListener(events: T | T[], listener: Listener): string {
         const listenerId = nanoid();
         this.listeners[listenerId] = listener;
-        this.listenersEvents[listenerId] = events;
+        this.listenersEvents[listenerId] = Array.isArray(events) ? events : [events];
         return listenerId;
     }
 
-    removeListener(listenerId: string) {
+    removeEventListener(listenerId: string) {
         delete this.listeners[listenerId];
         delete this.listenersEvents[listenerId];
     }
@@ -48,21 +42,13 @@ export class Notifier<T, U> {
         // eslint-disable-next-line no-restricted-syntax
         for (const [listenerId, listener] of Object.entries(this.listeners)) {
             const listenersEvents = this.listenersEvents[listenerId];
-            if (!listenersEvents) {
+            if (listenersEvents.indexOf(event) < 0) {
                 // eslint-disable-next-line no-continue
                 continue;
             }
-            if (Array.isArray(listenersEvents) && listenersEvents.indexOf(event) < 0) {
-                // eslint-disable-next-line no-continue
-                continue;
-            }
+
             try {
-                if (Array.isArray(listenersEvents)) {
-                    // if listener was added for many events, notify with event title
-                    listener.apply(listener, [event, ...args]);
-                } else {
-                    listener.apply(listener, args);
-                }
+                listener.apply(listener, [event, ...args]);
             } catch (e) {
                 const message = `Error invoking listener for event: "${event}" cause: ${e}`;
                 throw new Error(message);

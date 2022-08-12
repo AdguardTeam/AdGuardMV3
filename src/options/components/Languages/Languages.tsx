@@ -7,8 +7,8 @@ import { Category } from 'Options/components/Category';
 import { translator } from 'Common/translators/translator';
 import { Filter, FiltersGroupId } from 'Common/constants/common';
 import { Popover } from 'Common/components/ui';
-import { useNotifyStaticFiltersLimitError } from 'Common/hooks/useNotifyStaticFiltersLimitError';
 
+import { useNotifyStaticFiltersLimitError } from '../../hooks/useNotifyStaticFiltersLimitError';
 import { StaticRulelistsLimitation } from '../StaticRulelistsLimitation';
 
 import styles from './Languages.module.pcss';

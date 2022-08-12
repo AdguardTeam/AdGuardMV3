@@ -8,8 +8,8 @@ import { useKeyPress } from 'Common/hooks/useKeyPress';
 import { translator } from 'Common/translators/translator';
 import { CheckboxOption } from 'Options/components/CheckboxOption';
 import { rootStore } from 'Options/stores';
+import { useNotifyDynamicRulesLimitsError } from 'Options/hooks/useNotifyDynamicRulesLimitError';
 import { theme } from 'Common/styles';
-import { useNotifyDynamicRulesLimitsError } from 'Common/hooks/useNotifyDynamicRulesLimitError';
 
 enum UNBLOCK_OPTIONS {
     LINKS = 'LINKS',

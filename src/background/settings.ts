@@ -68,11 +68,17 @@ class Settings {
         return this.settings[SETTINGS_NAMES.PROTECTION_ENABLED];
     }
 
+    /**
+     * Sets protections and notifies UI via NOTIFIER_EVENTS.PROTECTION_UPDATED
+     */
     public setProtection = async (value: boolean) => {
         await this.setSetting({ [SETTINGS_NAMES.PROTECTION_ENABLED]: value });
         notifier.notify(NOTIFIER_EVENTS.PROTECTION_UPDATED, { value });
     };
 
+    /**
+     * Sets protection pause expires and notifies UI via NOTIFIER_EVENTS.PROTECTION_PAUSE_EXPIRES_UPDATED
+     */
     public setProtectionPauseExpires = async (value: number) => {
         await this.setSetting({ [SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES]: value });
         notifier.notify(NOTIFIER_EVENTS.PROTECTION_PAUSE_EXPIRES_UPDATED, { value });
