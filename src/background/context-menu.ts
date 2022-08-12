@@ -11,6 +11,7 @@ import { settings } from './settings';
 import { notifier } from './notifier';
 import { tsWebExtensionWrapper } from './tswebextension';
 import { userRules } from './userRules';
+import { filteringLog } from './filtering-log';
 
 type Tab = chrome.tabs.Tab;
 
@@ -36,6 +37,7 @@ const toggleSiteAllowlistStatus = async (tab?: Tab) => {
     }
 
     await tsWebExtensionWrapper.configure(true);
+    await filteringLog.collectRulesInfo();
 
     if (id !== undefined) {
         await tabUtils.reloadTab(id);

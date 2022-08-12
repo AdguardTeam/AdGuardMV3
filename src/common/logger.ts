@@ -32,7 +32,7 @@ const print = (level: Level, method: ConsoleMethod, args: string[]) => {
     const now = new Date();
     const formatted = `${now.toISOString()}:`;
     // eslint-disable-next-line no-console
-    console[method](formatted, ...args.concat((new Error().stack)!.replace('Error', 'Stacktrace:')));
+    console[method](formatted, ...args);
 };
 
 // TODO make possible to log objects or another complicated objects like errors

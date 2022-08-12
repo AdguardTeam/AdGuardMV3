@@ -16,7 +16,7 @@ import FiltersUtils from 'Common/utils/filters';
 import { settings } from './settings';
 import { notifier } from './notifier';
 import { protectionPause } from './protectionPause';
-import { filters, CUSTOM_FILTERS_START_ID } from './filters';
+import { filters } from './filters';
 import { backend } from './backend';
 import { userRules } from './userRules';
 import { tsWebExtensionWrapper } from './tswebextension';
@@ -66,6 +66,7 @@ export const extensionMessageHandler = async (
 
                 if (enable) {
                     await tsWebExtensionWrapper.start();
+                    await filteringLog.collectRulesInfo();
                 } else {
                     await tsWebExtensionWrapper.stop();
                 }
@@ -92,6 +93,7 @@ export const extensionMessageHandler = async (
             const { ruleText } = data;
             await userRules.addRule(ruleText);
             await tsWebExtensionWrapper.configure();
+            await filteringLog.collectRulesInfo();
 
             break;
         }
@@ -99,6 +101,7 @@ export const extensionMessageHandler = async (
             const { ruleText } = data;
             await userRules.addRule(ruleText);
             await tsWebExtensionWrapper.configure();
+            await filteringLog.collectRulesInfo();
 
             const updatedRules = await userRules.getRules();
             // Notify UI about changes
@@ -134,12 +137,14 @@ export const extensionMessageHandler = async (
         case MESSAGE_TYPES.ENABLE_FILTER: {
             await filters.enableFilter(data.filterId);
             await tsWebExtensionWrapper.configure();
+            await filteringLog.collectRulesInfo();
 
             break;
         }
         case MESSAGE_TYPES.DISABLE_FILTER: {
             await filters.disableFilter(data.filterId);
             await tsWebExtensionWrapper.configure();
+            await filteringLog.collectRulesInfo();
 
             break;
         }
@@ -163,6 +168,7 @@ export const extensionMessageHandler = async (
                 url,
             );
             await tsWebExtensionWrapper.configure();
+            await filteringLog.collectRulesInfo();
 
             return updatedFilters;
         }
@@ -175,6 +181,7 @@ export const extensionMessageHandler = async (
             const { filterId } = data;
             const updatedFilters = await filters.removeFilter(filterId);
             await tsWebExtensionWrapper.configure();
+            await filteringLog.collectRulesInfo();
 
             return updatedFilters;
         }
@@ -184,6 +191,7 @@ export const extensionMessageHandler = async (
         case MESSAGE_TYPES.SET_USER_RULES: {
             await userRules.setUserRules(data.userRules);
             await tsWebExtensionWrapper.configure();
+            await filteringLog.collectRulesInfo();
 
             break;
         }
@@ -191,15 +199,6 @@ export const extensionMessageHandler = async (
         // via constantly standing message exchange
         case MESSAGE_TYPES.PING: {
             break;
-        }
-        case MESSAGE_TYPES.GET_DEBUG_INFO: {
-            return {
-                convertedSourceMap: Array.from(tsWebExtensionWrapper.convertedSourceMap),
-                customFilters: filters.rules.filter(({ id }) => id >= CUSTOM_FILTERS_START_ID),
-                userRules: await userRules.getRules(),
-                filtersInfo: filters.filters,
-                currentDeclarativeRules: await chrome.declarativeNetRequest.getDynamicRules(),
-            };
         }
         case MESSAGE_TYPES.GET_DYNAMIC_RULES_LIMITS: {
             const userRulesCounters = await userRules.getUserRulesCounters();
@@ -209,12 +208,14 @@ export const extensionMessageHandler = async (
             const { filterIds } = data;
             await filters.setEnabledFiltersIds(filterIds);
             await tsWebExtensionWrapper.configure();
+            await filteringLog.collectRulesInfo();
             break;
         }
         case MESSAGE_TYPES.TOGGLE_SITE_ALLOWLIST_STATUS: {
             const { domainName } = data;
             await userRules.toggleSiteAllowlistStatus(domainName);
             await tsWebExtensionWrapper.configure(true);
+            await filteringLog.collectRulesInfo();
 
             const updatedUserRules = await userRules.getRules();
             return updatedUserRules;
@@ -309,6 +310,8 @@ export const initExtension = async (message?: any) => {
             if (settings.protectionEnabled) {
                 await tsWebExtensionWrapper.start();
             }
+
+            await filteringLog.checkStatus();
         };
         waitForInit = innerInit();
         await wait();

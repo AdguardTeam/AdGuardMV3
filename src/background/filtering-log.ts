@@ -4,11 +4,13 @@ import { DeclarativeConverter } from '@adguard/tsurlfilter';
 import { NEW_LINE_SEPARATOR, RULESET_NAME } from 'Common/constants/common';
 import { ADGUARD_FILTERS_IDS } from 'Common/constants/filters';
 import { arrayToMap } from 'Common/utils/arrays';
+import { IS_COLLECTING_LOG } from 'Common/constants/storage-keys';
 
 import { COMMON_FILTERS_DIR } from './backend';
 import { CUSTOM_FILTERS_START_ID, filters } from './filters';
 import { tsWebExtensionWrapper } from './tswebextension';
 import { userRules } from './userRules';
+import { storage } from './storage';
 
 type FilterId = number;
 type ConvertedSourceMaps = Map<FilterId, FilterConvertedSourceMap>;
@@ -50,21 +52,29 @@ class FilteringLog {
 
     private filters: chrome.declarativeNetRequest.Rule[][] = [];
 
-    // Load converted declarative json rules
+    private isCollecting: boolean | undefined;
+
+    /**
+     * Load converted declarative json rules
+     */
     private getFilterDeclarative = async (id: number) => {
         const url = chrome.runtime.getURL(`${COMMON_FILTERS_DIR}/declarative/filter_${id}.json`);
         const file = await fetch(url);
         this.filters[id] = await file.json() as chrome.declarativeNetRequest.Rule[];
     };
 
-    // Load original filters
+    /**
+     * Load original filters
+     */
     private getFilterSourceRules = async (id: number) => {
         const url = chrome.runtime.getURL(`${COMMON_FILTERS_DIR}/filter_${id}.txt`);
         const file = await fetch(url);
         this.sourceFilters[id] = await file.text();
     };
 
-    // Load dictionary of converted rules
+    /**
+     * Load dictionary of converted rules
+     */
     private getFilterSourceMap = async (id: number) => {
         const url = chrome.runtime.getURL(`${COMMON_FILTERS_DIR}/filter_${id}.json.map`);
         const file = await fetch(url);
@@ -72,9 +82,14 @@ class FilteringLog {
         this.convertedSourceMaps.set(id, arrayToMap(arr));
     };
 
-    // TODO: Update dynamic rules after configure tswebextension
-    // Collect info about static, custom filters and user rules
-    private collectRulesInfo = async () => {
+    /**
+     * Collect filter names, custom filter rules, custom rules, and source maps for them
+     */
+    public collectRulesInfo = async () => {
+        if (!this.isCollecting) {
+            return;
+        }
+
         this.convertedSourceMap = tsWebExtensionWrapper.convertedSourceMap;
         this.filters[USER_FILTER_ID] = await chrome.declarativeNetRequest.getDynamicRules();
         filters.rules
@@ -88,7 +103,23 @@ class FilteringLog {
         this.filtersNames.set(USER_FILTER_ID, 'userrules');
     };
 
-    private init = async () => {
+    /**
+     * Retrieves filtering status from storage and save to private field
+     * and starts collecting if enabled
+     */
+    public checkStatus = async () => {
+        this.isCollecting = await storage.get<boolean>(IS_COLLECTING_LOG) || false;
+
+        if (this.isCollecting) {
+            await this.start();
+        }
+    };
+
+    /**
+     * If collection is enabled - then get rules (transformed, declarative and source maps)
+     * from filters and the same information about dynamic rules
+     */
+    public init = async () => {
         const requests = ADGUARD_FILTERS_IDS
             .map(async ({ id }) => Promise.all([
                 this.getFilterDeclarative(id),
@@ -100,6 +131,12 @@ class FilteringLog {
         await this.collectRulesInfo();
     };
 
+    /**
+     * Returns converted declarative json rule, original txt rule, filter name and id
+     * @param filterIdString filter id
+     * @param ruleId rule id in this filter
+     * @returns converted declarative json rule, original txt rule, filter name and id
+     */
     private getRuleInfo = (filterIdString: string, ruleId: number): RuleInfo => {
         const getHash = (n: number) => DeclarativeConverter.storageIdxToRuleListIdx(n);
         const getSourceRule = (filterContent: string, ruleIdx: number) => {
@@ -196,16 +233,26 @@ class FilteringLog {
     };
 
     public start = async () => {
+        this.isCollecting = true;
+        await storage.set(IS_COLLECTING_LOG, true);
         await this.init();
         onRuleMatchedDebug.addListener(this.addNewRecord);
     };
 
-    public stop = () => {
+    // TODO: Needs to clean collected log after stop or not?
+    public stop = async () => {
+        this.isCollecting = false;
+        await storage.set(IS_COLLECTING_LOG, false);
         onRuleMatchedDebug.removeListener(this.addNewRecord);
     };
 
     public getCollected = (): RecordFiltered[] => {
-        const collected = JSON.parse(JSON.stringify(this.collected)) as RecordFiltered[];
+        // To display newer requests on the top
+        const reverseOrderRuleLog = [];
+        for (let i = this.collected.length - 1; i >= 0; i -= 1) {
+            reverseOrderRuleLog.push(this.collected[i]);
+        }
+        const collected = JSON.parse(JSON.stringify(reverseOrderRuleLog)) as RecordFiltered[];
         this.collected = [];
         return collected;
     };

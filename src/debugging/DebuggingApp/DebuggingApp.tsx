@@ -12,6 +12,7 @@ const UPDATE_LOG_INTERVAL_MS = 3000;
 export const DebuggingApp = () => {
     const [ruleLog, setRuleLog] = useState<RecordFiltered[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [isError, setIsError] = useState(false);
 
     const crawlerTimer: { current: NodeJS.Timeout | null } = useRef(null);
 
@@ -19,14 +20,21 @@ export const DebuggingApp = () => {
         sendMessage(MESSAGE_TYPES.START_LOG);
 
         const fetchCollected = async () => {
-            const collected = await sendMessage<RecordFiltered[]>(MESSAGE_TYPES.GET_COLLECTED_LOG);
-            setRuleLog((items) => items.concat(collected));
+            setIsLoading(true);
+
+            try {
+                const collected = await sendMessage<RecordFiltered[]>(MESSAGE_TYPES.GET_COLLECTED_LOG);
+                // TODO: drop focus on repaint
+                setRuleLog((items) => items.concat(collected));
+            } catch (e) {
+                setIsError(true);
+            }
+
+            setIsLoading(false);
         };
 
         crawlerTimer.current = setInterval(fetchCollected, UPDATE_LOG_INTERVAL_MS);
         fetchCollected();
-
-        setIsLoading(false);
 
         return () => {
             clearInterval(crawlerTimer.current as NodeJS.Timeout);
@@ -34,15 +42,22 @@ export const DebuggingApp = () => {
         };
     }, []);
 
+    const content = isLoading
+        ? <h1>{translator.getMessage('debugging_loading_sourcemap')}</h1>
+        : (
+            <RequestsTable
+                ruleLog={ruleLog}
+                cleanLog={() => setRuleLog(() => [])}
+            />
+        );
+
     return (
         <section>
-            { isLoading && (<h1>{translator.getMessage('debugging_loading_sourcemap')}</h1>) }
-            { !isLoading && (
-                <RequestsTable
-                    ruleLog={ruleLog}
-                    cleanLog={() => {}}
-                />
-            ) }
+            {
+                isError
+                    ? translator.getMessage('debugging_title_reload_page')
+                    : content
+            }
         </section>
     );
 };

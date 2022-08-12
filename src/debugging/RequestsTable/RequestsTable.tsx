@@ -78,7 +78,7 @@ export const RequestsTable = ({
         } = record;
 
         return (
-            <div className={style.row} key={`${rulesetId}_${ruleId}_${requestId}`}>
+            <div className={style.row} key={`${rulesetId}_${ruleId}_${requestId}_${url}`}>
                 <div className={style.cell}>{ruleId}</div>
                 <div className={style.cell}>{rulesetId}</div>
                 <div className={style.cell}>{frameId}</div>
@@ -112,7 +112,6 @@ export const RequestsTable = ({
 
                 <div className={style.wrapper}>
                     {getTableHeader()}
-                    {/* Make reverse order */}
                     {ruleLog.map((i) => getTableBodyLine(i))}
                 </div>
             </>
