@@ -1,39 +1,18 @@
-import { FilterConvertedSourceMap, HashOriginalRule, USER_FILTER_ID } from '@adguard/tswebextension/mv3';
-import { DeclarativeConverter } from '@adguard/tsurlfilter';
 import React from 'react';
 import cn from 'classnames';
 
-import { RULESET_NAME, NEW_LINE_SEPARATOR } from 'Common/constants/common';
 import { translator } from 'Common/translators/translator';
-
-import type { ConvertedSourceMaps } from '../DebuggingApp';
+import { RecordFiltered } from 'background/filtering-log';
 
 import style from './requests-table.module.pcss';
 
 type RequestsTableType = {
-    ruleLog: chrome.declarativeNetRequest.MatchedRuleInfoDebug[],
-    filters: chrome.declarativeNetRequest.Rule[][],
-    filtersNames: Map<number, string>,
-    sourceFilters: string[],
-    convertedDynamicRulesSourceMap: FilterConvertedSourceMap,
-    convertedSourceMaps: ConvertedSourceMaps,
+    ruleLog: RecordFiltered[],
     cleanLog: () => void,
-};
-
-type RuleInfo = {
-    originalRuleTxt?: string,
-    filterName?: string,
-    filterId?: number,
-    declarativeRuleJson: chrome.declarativeNetRequest.Rule,
 };
 
 export const RequestsTable = ({
     ruleLog,
-    filters,
-    filtersNames,
-    sourceFilters,
-    convertedDynamicRulesSourceMap,
-    convertedSourceMaps,
     cleanLog,
 }: RequestsTableType) => {
     const titles = [
@@ -49,62 +28,6 @@ export const RequestsTable = ({
         'Original rule',
         'JSON Rule',
     ];
-
-    const getRuleInfo = (filterIdString: string, ruleId: number): RuleInfo => {
-        const getHash = (n: number) => DeclarativeConverter.storageIdxToRuleListIdx(n);
-        const getSourceRule = (filterContent: string, ruleIdx: number) => {
-            let posStartRule = ruleIdx;
-
-            // Skip spaces, tabs and new lines
-            while (['\n', '\t', '\r'].includes(filterContent[posStartRule])) {
-                posStartRule += 1;
-            }
-
-            // Check, that we didn't exit from string
-            if (posStartRule >= filterContent.length) {
-                posStartRule = filterContent.length - 1;
-            }
-
-            const posEndRule = filterContent.indexOf(NEW_LINE_SEPARATOR, posStartRule);
-            return posEndRule === -1 // end of file
-                ? filterContent.slice(posStartRule)
-                : filterContent.slice(posStartRule, posEndRule);
-        };
-
-        if (filterIdString === chrome.declarativeNetRequest.DYNAMIC_RULESET_ID) {
-            const res = {
-                declarativeRuleJson: filters[USER_FILTER_ID].find(({ id }) => id === ruleId),
-            } as RuleInfo;
-
-            const ruleHash = convertedDynamicRulesSourceMap.get(ruleId);
-            if (ruleHash !== undefined) {
-                const [ruleFilterId, ruleIdx] = getHash(ruleHash);
-                const filterName = filtersNames.get(ruleFilterId);
-                res.originalRuleTxt = getSourceRule(sourceFilters[ruleFilterId], ruleIdx);
-                res.filterId = ruleFilterId;
-                res.filterName = filterName;
-            }
-
-            return res;
-        }
-
-        const filterId = Number.parseInt(filterIdString.slice(RULESET_NAME.length), 10);
-
-        const res = {
-            declarativeRuleJson: filters[filterId]?.find(({ id }) => id === ruleId),
-        } as RuleInfo;
-
-        const convertedInfo = convertedSourceMaps.get(filterId);
-        if (convertedInfo) {
-            const ruleIdx = convertedInfo.get(ruleId) as HashOriginalRule;
-            const filterName = filtersNames.get(filterId);
-            res.originalRuleTxt = getSourceRule(sourceFilters[filterId], ruleIdx);
-            res.filterId = filterId;
-            res.filterName = filterName;
-        }
-
-        return res;
-    };
 
     const getActionsBlock = () => {
         return (
@@ -137,10 +60,10 @@ export const RequestsTable = ({
         );
     };
 
-    const getTableBodyLine = (matchedRule: chrome.declarativeNetRequest.MatchedRuleInfoDebug) => {
-        const { request, rule } = matchedRule;
-        const { rulesetId, ruleId } = rule;
+    const getTableBodyLine = (record: RecordFiltered) => {
         const {
+            ruleId,
+            rulesetId,
             frameId,
             initiator,
             method,
@@ -148,17 +71,14 @@ export const RequestsTable = ({
             tabId,
             type,
             url,
-        } = request;
-
-        const {
             originalRuleTxt,
             filterName,
             filterId,
             declarativeRuleJson,
-        } = getRuleInfo(rulesetId, ruleId);
+        } = record;
 
         return (
-            <div className={style.row} key={`${rulesetId}_${ruleId}_${requestId}`}>
+            <div className={style.row} key={`${rulesetId}_${ruleId}_${requestId}_${url}`}>
                 <div className={style.cell}>{ruleId}</div>
                 <div className={style.cell}>{rulesetId}</div>
                 <div className={style.cell}>{frameId}</div>
@@ -178,7 +98,7 @@ export const RequestsTable = ({
                 </div>
                 <div className={style.cell}>
                     <pre>
-                        {JSON.stringify(declarativeRuleJson, null, 4)}
+                        {declarativeRuleJson}
                     </pre>
                 </div>
             </div>

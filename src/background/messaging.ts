@@ -16,11 +16,12 @@ import FiltersUtils from 'Common/utils/filters';
 import { settings } from './settings';
 import { notifier } from './notifier';
 import { protectionPause } from './protectionPause';
-import { filters, CUSTOM_FILTERS_START_ID } from './filters';
+import { filters } from './filters';
 import { backend } from './backend';
 import { userRules } from './userRules';
 import { tsWebExtensionWrapper } from './tswebextension';
 import { longLivedMessageHandler } from './longLivedMessageHandler';
+import { filteringLog } from './filtering-log';
 
 /**
  * Message handler used to receive messages and send responses back on background service worker
@@ -192,15 +193,6 @@ export const extensionMessageHandler = async (
         case MESSAGE_TYPES.PING: {
             break;
         }
-        case MESSAGE_TYPES.GET_DEBUG_INFO: {
-            return {
-                convertedSourceMap: Array.from(tsWebExtensionWrapper.convertedSourceMap),
-                customFilters: filters.rules.filter(({ id }) => id >= CUSTOM_FILTERS_START_ID),
-                userRules: await userRules.getRules(),
-                filtersInfo: filters.filters,
-                currentDeclarativeRules: await chrome.declarativeNetRequest.getDynamicRules(),
-            };
-        }
         case MESSAGE_TYPES.GET_DYNAMIC_RULES_LIMITS: {
             const userRulesCounters = await userRules.getUserRulesCounters();
             return userRulesCounters;
@@ -223,6 +215,19 @@ export const extensionMessageHandler = async (
             const { domainName } = data;
 
             return userRules.getSiteAllowRule(domainName);
+        }
+        case MESSAGE_TYPES.START_LOG: {
+            await filteringLog.start(tsWebExtensionWrapper.convertedSourceMap);
+
+            break;
+        }
+        case MESSAGE_TYPES.STOP_LOG: {
+            await filteringLog.stop();
+
+            break;
+        }
+        case MESSAGE_TYPES.GET_COLLECTED_LOG: {
+            return filteringLog.getCollected();
         }
         default: {
             throw new Error(`No message handler for type: ${type}`);

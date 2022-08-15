@@ -29,17 +29,17 @@ export const Popover = ({
         },
     });
 
-    const timer: { current: NodeJS.Timeout | null } = useRef(null);
+    const timer = useRef<number>();
 
     // clear timer on unmounting
     useEffect(() => {
         return () => {
-            clearTimeout(timer.current as NodeJS.Timeout);
+            clearTimeout(timer.current);
         };
     }, []);
 
     const handleMouseEnter = (e: React.MouseEvent) => {
-        timer.current = setTimeout(() => {
+        timer.current = window.setTimeout(() => {
             setTooltip({
                 visible: true,
                 position: {
@@ -51,7 +51,7 @@ export const Popover = ({
     };
 
     const handleMouseLeave = () => {
-        clearTimeout(timer.current as NodeJS.Timeout);
+        clearTimeout(timer.current);
         setTooltip({
             visible: false,
             position: { x: 0, y: 0 },

@@ -7,6 +7,7 @@ import { CUSTOM_FILTERS_START_ID, filters } from './filters';
 import { settings } from './settings';
 import { userRules } from './userRules';
 import { browserActions } from './browser-actions';
+import { filteringLog } from './filtering-log';
 
 class TsWebExtensionWrapper {
     private tsWebExtension: TsWebExtension;
@@ -21,6 +22,8 @@ class TsWebExtensionWrapper {
         await TsWebExtensionWrapper.saveDynamicRulesCounters(res);
 
         await this.checkFiltersLimitsChange();
+
+        await filteringLog.checkStatus(this.convertedSourceMap);
     }
 
     async stop() {
@@ -36,6 +39,8 @@ class TsWebExtensionWrapper {
             return;
         }
         await this.checkFiltersLimitsChange();
+
+        await filteringLog.collectRulesInfo(this.convertedSourceMap);
     }
 
     static async saveDynamicRulesCounters({ dynamicRules }: ConfigurationResult) {

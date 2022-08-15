@@ -1,132 +1,72 @@
 import React, { useState, useEffect } from 'react';
-import { FilterConvertedSourceMap, USER_FILTER_ID } from '@adguard/tswebextension/mv3';
 
-import type { Rules } from 'Common/constants/common';
-import { MESSAGE_TYPES, Filter } from 'Common/constants/common';
+import { MESSAGE_TYPES } from 'Common/constants/common';
 import { translator } from 'Common/translators/translator';
-import { arrayToMap } from 'Common/utils/arrays';
-import { ADGUARD_FILTERS_IDS } from 'Common/constants/filters';
+import { RecordFiltered } from 'background/filtering-log';
+import { sendMessage } from 'Common/helpers';
 
 import { RequestsTable } from '../RequestsTable';
-import { COMMON_FILTERS_DIR } from '../../background/backend';
-import { sendMessage } from '../../common/helpers';
 
-export type FilterId = number;
-export type ConvertedSourceMaps = Map<FilterId, FilterConvertedSourceMap>;
-
-type DebugInfo = {
-    convertedSourceMap: Array<Array<number>>,
-    customFilters: Rules[],
-    userRules: string,
-    currentDeclarativeRules: chrome.declarativeNetRequest.Rule[],
-    filtersInfo: Filter[],
-};
+const UPDATE_LOG_INTERVAL_MS = 1000;
 
 export const DebuggingApp = () => {
-    const [ruleLog, setRuleLog] = useState<chrome.declarativeNetRequest.MatchedRuleInfoDebug[]>([]);
-    const [filters, setFilters] = useState<chrome.declarativeNetRequest.Rule[][]>([]);
-    const [filtersNames, setFiltersNames] = useState<Map<number, string>>(new Map());
-    const [sourceFilters, setSourceFilters] = useState<string[]>([]);
-    const [
-        convertedDynamicRulesSourceMap,
-        setConvertedDynamicRulesSourceMap,
-    ] = useState<FilterConvertedSourceMap>(new Map());
-    const [convertedSourceMaps, setConvertedSourceMaps] = useState<ConvertedSourceMaps>(new Map());
+    const [ruleLog, setRuleLog] = useState<RecordFiltered[]>([]);
     const [isLoading, setIsLoading] = useState(true);
-
-    const newLog = new Set(ruleLog);
-    const setNewRuleLog = (i: chrome.declarativeNetRequest.MatchedRuleInfoDebug) => {
-        newLog.add(i);
-        setRuleLog(Array.from(newLog));
-    };
+    const [isError, setIsError] = useState(false);
 
     useEffect(() => {
-        // Getting filter names and information about dynamic rules
-        const fetchRulesInfo = async () => {
-            const {
-                convertedSourceMap,
-                customFilters,
-                userRules,
-                currentDeclarativeRules,
-                filtersInfo,
-            } = await sendMessage<DebugInfo>(MESSAGE_TYPES.GET_DEBUG_INFO);
+        let isActive = true;
+        let timer: number;
 
-            // O(n) for deserialize to map
-            setConvertedDynamicRulesSourceMap(arrayToMap(convertedSourceMap));
+        const startAndUpdate = async () => {
+            await sendMessage(MESSAGE_TYPES.START_LOG);
 
-            customFilters.forEach(({ id, rules }) => {
-                sourceFilters[id] = rules;
-            });
-            sourceFilters[USER_FILTER_ID] = userRules;
-            setSourceFilters(sourceFilters);
+            const fetchCollected = async () => {
+                // To abort mutate state on unmounted component
+                if (!isActive) {
+                    clearInterval(timer);
+                    return;
+                }
+                try {
+                    const collected = await sendMessage<RecordFiltered[]>(MESSAGE_TYPES.GET_COLLECTED_LOG);
+                    // TODO: drop focus on repaint
+                    setRuleLog((items) => items.concat(collected));
+                } catch (e) {
+                    setIsError(true);
+                }
+            };
 
-            filters[USER_FILTER_ID] = currentDeclarativeRules;
-            setFilters(filters);
-
-            const filtersNamesMap = new Map(filtersInfo.map(({ id, title }) => [id, title]));
-            filtersNamesMap.set(USER_FILTER_ID, 'userrules');
-            setFiltersNames(filtersNamesMap);
-
+            await fetchCollected();
+            timer = window.setInterval(fetchCollected, UPDATE_LOG_INTERVAL_MS);
             setIsLoading(false);
         };
-        fetchRulesInfo();
 
-        // Load converted declarative json rules
-        const getFilterDeclarative = async (id: number) => {
-            const url = chrome.runtime.getURL(`${COMMON_FILTERS_DIR}/declarative/filter_${id}.json`);
-            const file = await fetch(url);
-            filters[id] = await file.json() as chrome.declarativeNetRequest.Rule[];
-            setFilters(filters);
-        };
+        startAndUpdate();
 
-        // Load original filters
-        const getFilterSourceRules = async (id: number) => {
-            const url = chrome.runtime.getURL(`${COMMON_FILTERS_DIR}/filter_${id}.txt`);
-            const file = await fetch(url);
-            sourceFilters[id] = await file.text();
-            setSourceFilters(sourceFilters);
-        };
-
-        // Load dictionary of converted rules
-        const getFilterSourceMap = async (id: number) => {
-            const url = chrome.runtime.getURL(`${COMMON_FILTERS_DIR}/filter_${id}.json.map`);
-            const file = await fetch(url);
-            const arr = await file.json() as Array<Array<number>>;
-            convertedSourceMaps.set(id, arrayToMap(arr));
-            setConvertedSourceMaps(convertedSourceMaps);
-        };
-
-        ADGUARD_FILTERS_IDS
-            .forEach(async ({ id }) => {
-                await Promise.all([
-                    getFilterDeclarative(id),
-                    getFilterSourceRules(id),
-                    getFilterSourceMap(id),
-                ]);
-            });
-    }, []);
-
-    useEffect(() => {
-        chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(setNewRuleLog);
         return () => {
-            chrome.declarativeNetRequest.onRuleMatchedDebug.removeListener(setNewRuleLog);
+            isActive = false;
+
+            clearInterval(timer);
+            sendMessage(MESSAGE_TYPES.STOP_LOG);
         };
     }, []);
+
+    const content = isLoading
+        ? <h1>{translator.getMessage('debugging_loading_sourcemap')}</h1>
+        : (
+            <RequestsTable
+                ruleLog={ruleLog}
+                cleanLog={() => setRuleLog(() => [])}
+            />
+        );
 
     return (
         <section>
-            { isLoading && (<h1>{translator.getMessage('debugging_loading_sourcemap')}</h1>) }
-            { !isLoading && (
-                <RequestsTable
-                    ruleLog={ruleLog}
-                    filters={filters}
-                    filtersNames={filtersNames}
-                    sourceFilters={sourceFilters}
-                    convertedDynamicRulesSourceMap={convertedDynamicRulesSourceMap}
-                    convertedSourceMaps={convertedSourceMaps}
-                    cleanLog={() => setRuleLog([])}
-                />
-            ) }
+            {
+                isError
+                    ? translator.getMessage('debugging_title_reload_page')
+                    : content
+            }
         </section>
     );
 };

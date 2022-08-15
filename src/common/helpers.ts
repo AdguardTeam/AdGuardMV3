@@ -6,6 +6,7 @@ export const sendMessage = <T = void>(type: MessageType, data?: any): Promise<T>
         if (data) {
             message.data = data;
         }
+        // TODO: Remove callback and return promise as result of call sendMessage
         chrome.runtime.sendMessage(message, (response) => {
             if (chrome.runtime.lastError) {
                 reject(new Error(chrome.runtime.lastError.message));
