@@ -1,14 +1,15 @@
 import React, { useContext } from 'react';
 import cn from 'classnames';
 
-import { UserRuleTypeComponent } from 'Options/components/Filters/UserRules/UserRule/UserRuleTypeComponent';
+import { UserRuleTypeComponent } from 'Options/components/UserRules/UserRule/UserRuleTypeComponent';
 import { UserRuleType } from 'Common/constants/common';
-import styles from 'Options/components/Filters/UserRules/UserRule/UserRule.module.pcss';
 import { rootStore } from 'Options/stores';
 import { useNotifyDynamicRulesLimitsError } from 'Options/hooks/useNotifyDynamicRulesLimitError';
 import { theme } from 'Common/styles';
 
-import { HighlightSearch } from '../../../HighlightSearch';
+import { HighlightSearch } from '../../HighlightSearch';
+
+import styles from './UserRule.module.pcss';
 
 interface UserRuleProps {
     id: number;

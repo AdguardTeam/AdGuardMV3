@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { observer } from 'mobx-react';
 
 import { reactTranslator } from 'Common/translators/reactTranslator';
-import { UserRuleEditor } from 'Options/components/Filters/UserRules/UserRuleWizard/UserRuleEditor';
+import { UserRuleEditor } from 'Options/components/UserRules/UserRuleWizard/UserRuleEditor';
 import { rootStore } from 'Options/stores';
 import { useNotifyDynamicRulesLimitsError } from 'Options/hooks/useNotifyDynamicRulesLimitError';
 import { theme } from 'Common/styles';

@@ -4,8 +4,8 @@ import { observer } from 'mobx-react';
 import { rootStore } from 'Options/stores';
 import { Modal } from 'Common/components/Modal';
 import { UserRuleWizardAction } from 'Options/stores/OptionsStore';
-import { EditUserRule } from 'Options/components/Filters/UserRules/UserRuleWizard/EditUserRule';
-import { NewUserRule } from 'Options/components/Filters/UserRules/UserRuleWizard/NewUserRule';
+import { EditUserRule } from 'Options/components/UserRules/UserRuleWizard/EditUserRule';
+import { NewUserRule } from 'Options/components/UserRules/UserRuleWizard/NewUserRule';
 
 export const UserRuleWizard = observer(() => {
     const { optionsStore } = useContext(rootStore);

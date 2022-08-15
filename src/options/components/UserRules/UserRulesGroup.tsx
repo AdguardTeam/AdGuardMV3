@@ -1,10 +1,11 @@
 import React from 'react';
 
-import styles from 'Options/components/Filters/UserRules/UserRules.module.pcss';
 import { UserRulesData } from 'Options/user-rules-processor';
-import { UserRule } from 'Options/components/Filters/UserRules/UserRule';
+import { UserRule } from 'Options/components/UserRules/UserRule';
 import { OTHER_DOMAIN_TITLE } from 'Common/constants/common';
 import { translator } from 'Common/translators/translator';
+
+import styles from './UserRules.module.pcss';
 
 interface UserRulesGroupProps {
     domain: string;

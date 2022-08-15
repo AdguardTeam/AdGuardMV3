@@ -13,13 +13,13 @@ import { Button } from 'Common/components/Button/Button';
 
 import { DynamicRulesLimitation } from '../DynamicRulesLimitation';
 
-import styles from './Filters.module.pcss';
+import styles from './CustomFilters.module.pcss';
 
 const useQuery = () => {
     return new URLSearchParams(useLocation().search);
 };
 
-export const Filters = observer(() => {
+export const CustomFilters = observer(() => {
     const history = useHistory();
 
     const {

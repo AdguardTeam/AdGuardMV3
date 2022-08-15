@@ -5,12 +5,12 @@ import { translator } from 'Common/translators/translator';
 import { Button } from 'Common/components/Button';
 import { Section, Header } from 'Common/components/Section';
 import { IconId } from 'Common/components/ui';
-import { Editor } from 'Options/components/Filters/UserRules/Editor';
+import { Editor } from 'Options/components/UserRules/Editor';
 import { useStore } from 'Options/stores/useStore';
-import { UserRulesGroups } from 'Options/components/Filters/UserRules/UserRulesGroups';
-import { UserRuleWizard } from 'Options/components/Filters/UserRules/UserRuleWizard';
+import { UserRulesGroups } from 'Options/components/UserRules/UserRulesGroups';
+import { UserRuleWizard } from 'Options/components/UserRules/UserRuleWizard';
 
-import { DynamicRulesLimitation } from '../../DynamicRulesLimitation';
+import { DynamicRulesLimitation } from '../DynamicRulesLimitation';
 
 export const UserRules = observer(() => {
     const {

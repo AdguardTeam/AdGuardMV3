@@ -1,11 +1,11 @@
 import { observer } from 'mobx-react';
 import React from 'react';
 
-import { UserRulesGroup } from 'Options/components/Filters/UserRules/UserRulesGroup';
+import { UserRulesGroup } from 'Options/components/UserRules/UserRulesGroup';
 import { useStore } from 'Options/stores/useStore';
 import { translator } from 'Common/translators/translator';
 
-import styles from '../Filters.module.pcss';
+import styles from './UserRules.module.pcss';
 
 export const UserRulesGroups = observer(() => {
     const { optionsStore: { userRulesGroups } } = useStore();

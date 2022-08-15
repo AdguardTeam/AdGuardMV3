@@ -3,7 +3,8 @@ import cn from 'classnames';
 
 import { translator } from 'Common/translators/translator';
 import { UserRuleType } from 'Common/constants/common';
-import styles from 'Options/components/Filters/UserRules/UserRule/UserRuleStatus.module.pcss';
+
+import styles from './UserRuleStatus.module.pcss';
 
 type TypeProps = {
     message: string,

@@ -7,7 +7,7 @@ import {
     runInAction,
 } from 'mobx';
 
-import { Filter, CategoriesType } from 'Common/constants/common';
+import { Filter, CategoriesType, FiltersGroupId } from 'Common/constants/common';
 import { DEFAULT_SETTINGS, OPTION_SETTINGS, SETTINGS_NAMES } from 'Common/constants/settings-constants';
 import { log } from 'Common/logger';
 
@@ -79,39 +79,41 @@ export class SettingsStore {
 
     @action
     enableFilter = async (filterId: number): Promise<STATIC_FILTERS_LIMITS_ERROR | null> => {
-        const err = this.canEnableFilter(filterId);
-        if (err !== null) {
-            return err;
+        // Check for limits only static filters
+        const filterToEnable = this.filters.find((f) => f.id === filterId);
+        if (filterToEnable?.groupId !== FiltersGroupId.CUSTOM) {
+            const err = this.canEnableFilter(filterId);
+            if (err !== null) {
+                return err;
+            }
         }
 
-        const { setLoader } = this.rootStore.uiStore;
-        setLoader(true);
-        this.updateFilterState(filterId, { enabled: true });
-        try {
-            await sender.enableFilter(filterId);
-            await this.updateLimitations();
-            this.rootStore.optionsStore.checkLimitsAndNotify();
-        } catch (e: any) {
-            log.debug(e.message);
-            this.updateFilterState(filterId, { enabled: false });
-        }
-        setLoader(false);
+        await this.toggleFilter(filterId, true);
 
         return null;
     };
 
     @action
     disableFilter = async (filterId: number) => {
+        await this.toggleFilter(filterId, false);
+    };
+
+    @action
+    toggleFilter = async (filterId: number, value: boolean) => {
         const { setLoader } = this.rootStore.uiStore;
         setLoader(true);
-        this.updateFilterState(filterId, { enabled: false });
+        this.updateFilterState(filterId, { enabled: value });
         try {
-            await sender.disableFilter(filterId);
+            if (value) {
+                await sender.enableFilter(filterId);
+            } else {
+                await sender.disableFilter(filterId);
+            }
             await this.updateLimitations();
             this.rootStore.optionsStore.checkLimitsAndNotify();
         } catch (e: any) {
             log.debug(e.message);
-            this.updateFilterState(filterId, { enabled: true });
+            this.updateFilterState(filterId, { enabled: !value });
         }
         setLoader(false);
     };

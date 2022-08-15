@@ -11,8 +11,8 @@ import { About } from 'Options/components/About';
 import { Limits } from 'Options/components/Limits';
 import { rootStore } from 'Options/stores';
 import { Settings } from 'Options/components/Settings';
-import { Filters } from 'Options/components/Filters';
-import { UserRules } from 'Options/components/Filters/UserRules';
+import { CustomFilters } from 'Options/components/Filters';
+import { UserRules } from 'Options/components/UserRules';
 import { Languages } from 'Options/components/Languages';
 import { LoaderOverlay } from 'Options/components/LoaderOverlay';
 import { useEventListener } from 'Common/hooks/useEventListener';
@@ -62,7 +62,7 @@ export const OptionsApp = observer(() => {
                             <Route path="/about" component={About} />
                             <Route path="/limits" component={Limits} />
                             <Route path="/userrules" component={UserRules} />
-                            <Route path="/customfilters" component={Filters} />
+                            <Route path="/customfilters" component={CustomFilters} />
                             <Route path="/languages" component={Languages} />
                             <Route />
                         </Switch>
