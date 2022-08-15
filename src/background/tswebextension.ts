@@ -95,6 +95,8 @@ class TsWebExtensionWrapper {
                 allowlistEnabled: false,
                 allowlistInverted: false,
                 collectStats: true,
+                stealthModeEnabled: false,
+                filteringEnabled: false,
                 // TODO: check fields needed in the mv3
                 stealth: {
                     blockChromeClientData: false,
