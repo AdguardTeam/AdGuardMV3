@@ -129,7 +129,7 @@ export const PopupApp = observer(() => {
     return (
         <WithTimeout
             dummy={<div className={styles.popup} />}
-            timeoutMS={600}
+            timeoutMS={50}
         >
             <SwitchTransition>
                 <CSSTransition
