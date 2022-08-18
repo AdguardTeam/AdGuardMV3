@@ -16,7 +16,7 @@ interface SwitcherProps {
 export const Switcher = observer(({ disabled }: SwitcherProps) => {
     const { settingsStore } = useContext(rootStore);
     const {
-        toggleAllowlisted, isAllowlisted, applicationAvailable,
+        toggleAllowlisted, isAllowlisted, isWebSiteTab,
     } = settingsStore;
 
     const onClick = async () => {
@@ -28,7 +28,7 @@ export const Switcher = observer(({ disabled }: SwitcherProps) => {
 
     const className = cn(styles.switcher, {
         [styles.disabled]: isAllowlisted,
-        [styles.noActive]: disabled || !applicationAvailable,
+        [styles.noActive]: disabled || !isWebSiteTab,
     });
 
     return (

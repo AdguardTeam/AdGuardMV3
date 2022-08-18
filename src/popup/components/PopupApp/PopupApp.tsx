@@ -10,15 +10,14 @@ import { useEventListener } from 'Common/hooks/useEventListener';
 
 import { rootStore } from '../../stores';
 import { Header } from '../Header';
-import { Switcher } from '../Switcher';
-import { PageInfo } from '../PageInfo';
 import { Footer } from '../Footer';
 import { Wizard } from '../Wizard';
 import { Loader as InitialLoader } from '../Loader';
 import { LoaderOverlay } from '../LoaderOverlay';
 import { LimitsExceed } from '../LimitsExceed';
+import { EnabledProtectionScreen } from '../EnabledProtectionScreen';
+import { DisabledProtectionScreen } from '../DisabledProtectionScreen';
 
-import { DisabledProtectionScreen } from './DisabledProtectionScreen';
 import styles from './PopupApp.module.pcss';
 
 enum CONTENT_KEYS {
@@ -31,10 +30,13 @@ export const PopupApp = observer(() => {
     const store = useContext(rootStore);
     const { settingsStore } = store;
     const {
+        setLoader,
         getPopupData,
         popupDataReady,
         wizardEnabled,
         protectionEnabled,
+        setProtectionValue,
+        setProtectionPauseExpiresValue,
         settings: {
             [SETTINGS_NAMES.FILTERS_CHANGED]: wasEnabledIds,
         },
@@ -46,29 +48,24 @@ export const PopupApp = observer(() => {
 
     useEventListener('popup', {
         [NOTIFIER_EVENTS.SET_RULES]: async () => {
-            await settingsStore.getPopupData();
+            await settingsStore.updatePopupData();
         },
-        [NOTIFIER_EVENTS.PROTECTION_UPDATED]: async (data: any) => {
-            const { value } = data;
-            await settingsStore.setProtection(value as boolean);
+        [NOTIFIER_EVENTS.PROTECTION_PAUSE_EXPIRED]: async () => {
+            // The loader will be hidden only after resuming protection
+            // in the NOTIFIER_EVENTS.PROTECTION_RESUMED listener
+            setLoader(true);
         },
-        [NOTIFIER_EVENTS.PROTECTION_PAUSE_EXPIRES_UPDATED]: async (data: any) => {
-            const { value } = data;
-            await settingsStore.setProtectionPauseExpires(value as number);
+        [NOTIFIER_EVENTS.PROTECTION_RESUMED]: async () => {
+            setProtectionValue(true);
+            setProtectionPauseExpiresValue(0);
+            setLoader(false);
         },
     });
 
     const isLimitsExceed = wasEnabledIds.length > 0;
 
     const mainContent = protectionEnabled
-        ? (
-            <>
-                <PageInfo />
-                <Switcher />
-                {/* TODO count blocked on the page */}
-                {/* <Action /> */}
-            </>
-        )
+        ? <EnabledProtectionScreen />
         : <DisabledProtectionScreen />;
 
     const footer = isLimitsExceed

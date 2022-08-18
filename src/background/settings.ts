@@ -77,11 +77,10 @@ class Settings {
     };
 
     /**
-     * Sets protection pause expires and notifies UI via NOTIFIER_EVENTS.PROTECTION_PAUSE_EXPIRES_UPDATED
+     * Sets protection pause expires
      */
     public setProtectionPauseExpires = async (value: number) => {
         await this.setSetting({ [SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES]: value });
-        notifier.notify(NOTIFIER_EVENTS.PROTECTION_PAUSE_EXPIRES_UPDATED, { value });
     };
 
     public setFiltersChangedList = async (ids: number[]) => {

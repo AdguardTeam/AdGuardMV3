@@ -6,77 +6,54 @@ import { reactTranslator } from 'Common/translators/reactTranslator';
 import { theme } from 'Common/styles';
 
 import { rootStore } from '../../stores';
-import { sender } from '../../messaging/sender';
 
 import styles from './PageInfo.module.pcss';
-
-type ProtectionStatusType = {
-    key: string,
-    params?: {
-        [key: string]: (payload: string) => JSX.Element
-    }
-};
-
-const PROTECTION_STATUS: { [key: string]: ProtectionStatusType } = {
-    ENABLED: {
-        key: 'popup_protection_enabled_status',
-    },
-    DISABLED: {
-        key: 'popup_protection_disabled_status',
-    },
-    SECURE: {
-        key: 'popup_protection_secure_page',
-    },
-    REFRESH_NEEDED: {
-        key: 'popup_protection_enabled_refresh',
-        params: {
-            button: (payload: string) => (
-                <button
-                    type="button"
-                    className={styles.refreshButton}
-                    onClick={sender.reloadActiveTab}
-                >
-                    {payload}
-                </button>
-            ),
-        },
-    },
-};
-
-const getProtectionStatusProps = (
-    filteringEnabled: boolean,
-    protectionPauseExpired: boolean,
-    applicationAvailable: boolean,
-) => {
-    if (!applicationAvailable) {
-        return PROTECTION_STATUS.SECURE;
-    }
-    if (protectionPauseExpired) {
-        return PROTECTION_STATUS.REFRESH_NEEDED;
-    }
-    if (filteringEnabled) {
-        return PROTECTION_STATUS.ENABLED;
-    }
-    return PROTECTION_STATUS.DISABLED;
-};
 
 export const PageInfo = observer(() => {
     const { settingsStore } = useContext(rootStore);
     const {
+        refreshPage,
         currentSite,
-        protectionPauseExpires,
-        protectionPauseExpired,
+        protectionPauseExpiresSec,
+        refreshAfterResumeProtection,
         isAllowlisted,
-        applicationAvailable,
+        isWebSiteTab,
     } = settingsStore;
 
-    const {
-        key,
-        params,
-    } = getProtectionStatusProps(
+    const getProtectionStatusMessage = (
+        filteringEnabled: boolean,
+        protectionPauseExpired: boolean,
+        securePage: boolean,
+    ) => {
+        if (securePage) {
+            return reactTranslator.getMessage('popup_protection_secure_page');
+        }
+        if (protectionPauseExpired) {
+            return reactTranslator.getMessage(
+                'popup_protection_enabled_refresh',
+                {
+                    button: (payload: string) => (
+                        <button
+                            type="button"
+                            className={styles.refreshButton}
+                            onClick={refreshPage}
+                        >
+                            {payload}
+                        </button>
+                    ),
+                },
+            );
+        }
+        if (filteringEnabled) {
+            return reactTranslator.getMessage('popup_protection_enabled_status');
+        }
+        return reactTranslator.getMessage('popup_protection_disabled_status');
+    };
+
+    const message = getProtectionStatusMessage(
         !isAllowlisted,
-        protectionPauseExpires > 0 && protectionPauseExpired,
-        applicationAvailable,
+        refreshAfterResumeProtection && protectionPauseExpiresSec === 0,
+        !isWebSiteTab,
     );
 
     const className = cn(styles.mainSection, {
@@ -87,7 +64,7 @@ export const PageInfo = observer(() => {
         <section className={className}>
             <h1 className={theme.common.pageInfoMain}>{currentSite}</h1>
             <h6 className={theme.common.pageInfoAdditional}>
-                {reactTranslator.getMessage(key, params)}
+                {message}
             </h6>
         </section>
     );

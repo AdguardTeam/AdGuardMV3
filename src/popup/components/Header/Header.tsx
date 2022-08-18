@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 import { translator } from 'Common/translators/translator';
 import { Icon, TooltipIcon, IconId } from 'Common/components/ui';
 import { reactTranslator } from 'Common/translators/reactTranslator';
-import { PROTECTION_PAUSE_TIMEOUT_MS, PROTECTION_PAUSE_TIMEOUT_S } from 'Common/constants/common';
+import { PROTECTION_PAUSE_TIMEOUT_S } from 'Common/constants/common';
 import { REPORT_SITE_BASE } from 'Common/constants/urls';
 import { getUrlWithQueryString } from 'Common/helpers';
 import { prefs } from 'Common/prefs';
@@ -17,36 +17,32 @@ import styles from './Header.module.pcss';
 export const Header = observer(() => {
     const { settingsStore } = useContext(rootStore);
     const {
-        protectionEnabled,
-        setProtectionPausedTimer,
-        setProtection,
-        updateCurrentTime,
         currentUrl,
         enableFiltersIds,
+        protectionEnabled,
+        pauseProtection,
+        pauseProtectionWithTimeout,
     } = settingsStore;
 
-    const handleBlockAdsClick = async () => {
+    const openAssistant = async () => {
         await sender.openAssistant();
         window.close();
     };
 
-    const handleSettingsClick = async (e: React.SyntheticEvent) => {
+    const openExtensionSettings = async (e: React.SyntheticEvent) => {
         e.preventDefault();
         await sender.openOptions();
         window.close();
     };
 
     const onPauseProtectionClick = async () => {
-        await setProtection(false);
+        await pauseProtection();
         await sender.reloadActiveTab();
     };
 
     const onPauseProtectionTimeoutClick = async () => {
-        await setProtection(false);
+        await pauseProtectionWithTimeout();
         await sender.reloadActiveTab();
-        updateCurrentTime();
-        await sender.setPauseExpires(settingsStore.currentTime + PROTECTION_PAUSE_TIMEOUT_MS);
-        setProtectionPausedTimer();
     };
 
     const link = getUrlWithQueryString(REPORT_SITE_BASE, {
@@ -68,7 +64,7 @@ export const Header = observer(() => {
                 <button
                     className={styles.popupHeaderButton}
                     type="button"
-                    onClick={handleBlockAdsClick}
+                    onClick={openAssistant}
                     title={translator.getMessage('options_block_ads_on_website')}
                     disabled={!protectionEnabled}
                 >
@@ -77,7 +73,7 @@ export const Header = observer(() => {
                 <button
                     className={styles.popupHeaderButton}
                     type="button"
-                    onClick={handleSettingsClick}
+                    onClick={openExtensionSettings}
                     title={translator.getMessage('options_open_settings')}
                     disabled={!protectionEnabled}
                 >

@@ -3,12 +3,12 @@ import { RuleConverter } from '@adguard/tsurlfilter';
 import {
     MESSAGE_TYPES,
     OptionsData,
-    PopupData,
     Message,
     NOTIFIER_EVENTS,
+    PROTECTION_PAUSE_TIMEOUT_MS,
+    PopupData,
 } from 'Common/constants/common';
 import { CATEGORIES } from 'Common/constants/filters';
-import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
 import { log } from 'Common/logger';
 import { tabUtils } from 'Common/tab-utils';
 import FiltersUtils from 'Common/utils/filters';
@@ -47,9 +47,12 @@ export const extensionMessageHandler = async (
             return tabUtils.openOptionsPage(data.path);
         }
         case MESSAGE_TYPES.GET_POPUP_DATA: {
+            const { domainName } = data;
+            const allowListRule = await userRules.getSiteAllowRule(domainName);
+
             const popupData: PopupData = {
                 settings: settings.getSettings(),
-                userRules: await userRules.getRules(),
+                isAllowlisted: allowListRule?.enabled || false,
                 enableFiltersIds: await filters.getEnableFiltersIds(),
             };
             return popupData;
@@ -61,17 +64,6 @@ export const extensionMessageHandler = async (
         case MESSAGE_TYPES.SET_SETTING: {
             const { update } = data;
             await settings.setSetting(update);
-
-            if (update[SETTINGS_NAMES.PROTECTION_ENABLED] !== undefined) {
-                const enable = update[SETTINGS_NAMES.PROTECTION_ENABLED];
-
-                if (enable) {
-                    await tsWebExtensionWrapper.start();
-                } else {
-                    await tsWebExtensionWrapper.stop();
-                }
-            }
-
             break;
         }
         case MESSAGE_TYPES.REPORT_SITE: {
@@ -122,15 +114,29 @@ export const extensionMessageHandler = async (
 
             break;
         }
-        case MESSAGE_TYPES.SET_PAUSE_EXPIRES: {
-            const { protectionPauseExpires } = data;
-            await settings.setProtectionPauseExpires(protectionPauseExpires);
-            protectionPause.addTimer(protectionPauseExpires);
+        case MESSAGE_TYPES.TOGGLE_PROTECTION: {
+            const { value } = data;
+
+            if (value) {
+                await tsWebExtensionWrapper.start();
+                await protectionPause.removeTimer();
+                await settings.setProtectionPauseExpires(0);
+            } else {
+                await tsWebExtensionWrapper.stop();
+            }
+
+            await settings.setProtection(value);
+
             break;
         }
-        case MESSAGE_TYPES.REMOVE_PROTECTION_PAUSE_TIMER: {
-            protectionPause.removeTimer();
-            break;
+        case MESSAGE_TYPES.PAUSE_PROTECTION_WITH_TIMEOUT: {
+            await tsWebExtensionWrapper.stop();
+            const protectionPauseExpiresMs = Date.now() + PROTECTION_PAUSE_TIMEOUT_MS;
+            await settings.setProtection(false);
+            await settings.setProtectionPauseExpires(protectionPauseExpiresMs);
+            protectionPause.addTimer(protectionPauseExpiresMs);
+
+            return protectionPauseExpiresMs;
         }
         case MESSAGE_TYPES.ENABLE_FILTER: {
             await filters.enableFilter(data.filterId);
@@ -205,16 +211,10 @@ export const extensionMessageHandler = async (
         }
         case MESSAGE_TYPES.TOGGLE_SITE_ALLOWLIST_STATUS: {
             const { domainName } = data;
-            await userRules.toggleSiteAllowlistStatus(domainName);
+            const isAllowlisted = await userRules.toggleSiteAllowlistStatus(domainName);
             await tsWebExtensionWrapper.configure(true);
 
-            const updatedUserRules = await userRules.getRules();
-            return updatedUserRules;
-        }
-        case MESSAGE_TYPES.CHECK_SITE_IN_ALLOWLIST: {
-            const { domainName } = data;
-
-            return userRules.getSiteAllowRule(domainName);
+            return isAllowlisted;
         }
         case MESSAGE_TYPES.START_LOG: {
             await filteringLog.start(tsWebExtensionWrapper.convertedSourceMap);
@@ -267,6 +267,7 @@ export const initExtension = async (message?: any) => {
             await settings.init();
             await filters.init();
             await userRules.init();
+            await protectionPause.init();
 
             if (settings.protectionEnabled) {
                 await tsWebExtensionWrapper.start();

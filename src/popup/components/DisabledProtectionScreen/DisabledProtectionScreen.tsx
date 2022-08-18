@@ -6,7 +6,6 @@ import { theme } from 'Common/styles';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 
 import { rootStore } from '../../stores';
-import { sender } from '../../messaging/sender';
 import { Switcher } from '../Switcher';
 
 import styles from './DisabledProtectionScreen.module.pcss';
@@ -14,27 +13,24 @@ import styles from './DisabledProtectionScreen.module.pcss';
 export const DisabledProtectionScreen = observer(() => {
     const { settingsStore } = useContext(rootStore);
     const {
-        protectionPaused,
-        protectionPausedTimer,
-        resetProtectionPausedTimeout,
+        resumeProtection,
+        protectionPauseExpiresSec,
     } = settingsStore;
 
-    const onEnableProtectionClick = async () => {
-        await resetProtectionPausedTimeout();
-        await sender.removeProtectionPauseTimer();
-        await settingsStore.setProtectionPauseExpires(0);
-        await sender.reloadActiveTab();
-    };
-
-    const title = protectionPaused
-        ? reactTranslator.getMessage('popup_protection_will_be_resumed_after', { count: protectionPausedTimer })
-        : reactTranslator.getMessage('popup_protection_paused_for_all_');
+    const title = protectionPauseExpiresSec > 0
+        ? reactTranslator.getMessage(
+            'popup_protection_will_be_resumed_after',
+            { count: protectionPauseExpiresSec },
+        )
+        : reactTranslator.getMessage('popup_protection_paused_for_all');
 
     return (
         <>
             <div className={styles.sectionContainer}>
                 <section className={styles.section}>
-                    <h1 className={styles.pageInfoMain}>{reactTranslator.getMessage('popup_protection_is_paused')}</h1>
+                    <h1 className={styles.pageInfoMain}>
+                        {reactTranslator.getMessage('popup_protection_is_paused')}
+                    </h1>
                     <h6 className={cn(theme.common.pageInfoAdditional, styles.pageInfoAdditional)}>
                         {title}
                     </h6>
@@ -43,7 +39,7 @@ export const DisabledProtectionScreen = observer(() => {
                 <button
                     type="button"
                     className={cn(theme.common.actionButton, styles.buttonGreen)}
-                    onClick={onEnableProtectionClick}
+                    onClick={resumeProtection}
                 >
                     {reactTranslator.getMessage('popup_protection_resume_now')}
                 </button>

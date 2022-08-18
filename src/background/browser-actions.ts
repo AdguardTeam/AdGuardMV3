@@ -20,7 +20,7 @@ class BrowserActions {
      */
     static COUNTER_GREEN_COLOR = '#4d995f';
 
-    setIcon = (details: TabIconDetails) => {
+    private setIcon = (details: TabIconDetails) => {
         return new Promise<void>((resolve) => {
             chrome.action.setIcon(details, () => {
                 if (chrome.runtime.lastError) {
@@ -31,18 +31,7 @@ class BrowserActions {
         });
     };
 
-    setBadge = async (details: chrome.action.BadgeTextDetails) => {
-        const BADGE_COLOR = '#ffffff';
-        try {
-            await chrome.action.setBadgeText(details);
-            const { tabId } = details;
-            await chrome.action.setBadgeBackgroundColor({ tabId, color: BADGE_COLOR });
-        } catch (e: any) {
-            log.debug(e.message);
-        }
-    };
-
-    setBadgeBlockedCounter = async (showCounter: boolean) => {
+    private setBadgeBlockedCounter = async (showCounter: boolean) => {
         await chrome.declarativeNetRequest.setExtensionActionOptions({
             displayActionCountAsBadgeText: showCounter,
         });
@@ -57,7 +46,7 @@ class BrowserActions {
      * 1. for general browser action
      * 2. for tab browser action if tabId is provided
      */
-    setIconEnabled = async (tabId?: number) => {
+    private setIconEnabled = async (tabId?: number) => {
         try {
             const details: TabIconDetails = { path: prefs.ICONS.ENABLED };
 
@@ -78,7 +67,7 @@ class BrowserActions {
      * @param {number|null} tabId
      * @returns {Promise<void>}
      */
-    setIconDisabled = async (tabId?: number) => {
+    private setIconDisabled = async (tabId?: number) => {
         try {
             const details: TabIconDetails = { path: prefs.ICONS.DISABLED };
 
@@ -92,7 +81,7 @@ class BrowserActions {
         }
     };
 
-    async setIconByFiltering(filteringEnabled: boolean, tabId?: number) {
+    private async setIconByFiltering(filteringEnabled: boolean, tabId?: number) {
         if (filteringEnabled) {
             await this.setIconEnabled(tabId);
         } else {
@@ -100,7 +89,7 @@ class BrowserActions {
         }
     }
 
-    onFilteringStateChange = async () => {
+    private onFilteringStateChange = async () => {
         if (this.broken) {
             return;
         }
@@ -110,13 +99,18 @@ class BrowserActions {
             return;
         }
 
+        if (!settings.protectionEnabled) {
+            await this.setIconByFiltering(settings.protectionEnabled, activeTab.id);
+            return;
+        }
+
         if (activeTab?.url) {
             const urlDetails = getUrlDetails(activeTab.url);
 
             if (urlDetails?.domainName) {
                 const currentAllowRule = await userRules.getSiteAllowRule(urlDetails.domainName);
 
-                const filteringEnabled = !currentAllowRule?.enabled && settings.protectionEnabled;
+                const filteringEnabled = !currentAllowRule?.enabled;
 
                 await this.setIconByFiltering(filteringEnabled, activeTab.id);
             }

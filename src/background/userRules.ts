@@ -1,8 +1,9 @@
-import { UserRuleType, NEW_LINE_SEPARATOR } from 'Common/constants/common';
+import { UserRuleType, NEW_LINE_SEPARATOR, NOTIFIER_EVENTS } from 'Common/constants/common';
 import { USER_RULES_STORAGE_KEY, USER_RULES_LIMITS_STORAGE_KEY } from 'Common/constants/storage-keys';
 import { log } from 'Common/logger';
 import { UserRulesData, UserRulesProcessor } from 'Options/user-rules-processor';
 
+import { notifier } from './notifier';
 import { storage } from './storage';
 
 export type UserRulesLimits = {
@@ -99,10 +100,15 @@ class UserRules {
         });
     };
 
-    toggleSiteAllowlistStatus = async (siteUrl: string) => {
+    /**
+     * Enables, creates or deletes allowlist rule for provided site url
+     * @returns allowlisted site or not
+     */
+    toggleSiteAllowlistStatus = async (siteUrl: string): Promise<boolean> => {
         const allowRule = await this.getSiteAllowRule(siteUrl);
 
         let newUserRules = '';
+        let isAllowlisted: boolean;
 
         if (allowRule) {
             const userRulesProcessor = new UserRulesProcessor(this.rules);
@@ -110,17 +116,24 @@ class UserRules {
             const allowlisted = allowRule?.enabled || false;
             if (allowlisted) {
                 userRulesProcessor.deleteRule(allowRule.id);
+                isAllowlisted = false;
             } else {
                 userRulesProcessor.enableRule(allowRule.id);
+                isAllowlisted = true;
             }
 
             newUserRules = userRulesProcessor.getUserRules();
         } else {
             const newRule = getDocumentAllowRuleForUrl(siteUrl);
             newUserRules = this.rules.concat(NEW_LINE_SEPARATOR, newRule);
+            isAllowlisted = true;
         }
 
         await this.setRules(newUserRules);
+        // Notify UI and context-menu about changes
+        notifier.notify(NOTIFIER_EVENTS.SET_RULES, { value: newUserRules });
+
+        return isAllowlisted;
     };
 
     public async init() {

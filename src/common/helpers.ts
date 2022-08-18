@@ -98,8 +98,8 @@ export const groupByKeyValue = (arr: Obj[], key: keyof Obj): Obj => {
     );
 };
 
-export const isHttpRequest = (url: string) => {
-    return url && url.indexOf('http') === 0;
+export const isHttpRequest = (url: string): boolean => {
+    return url.indexOf('http') === 0;
 };
 
 /**

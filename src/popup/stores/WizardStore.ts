@@ -81,7 +81,7 @@ export class WizardStore {
 
     @action
     skipWizard = async () => {
-        await this.rootStore.settingsStore.setWizardEnabled(false);
+        await this.rootStore.settingsStore.hideWizard();
         runInAction(() => {
             this.step = INITIAL_STEP;
         });

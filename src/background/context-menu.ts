@@ -40,9 +40,6 @@ const toggleSiteAllowlistStatus = async (tab?: Tab) => {
     if (id !== undefined) {
         await tabUtils.reloadTab(id);
     }
-
-    const updatedRules = await userRules.getRules();
-    notifier.notify(NOTIFIER_EVENTS.SET_RULES, { value: updatedRules });
 };
 
 const CONTEXT_MENU_MAP = {

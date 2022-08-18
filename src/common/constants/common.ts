@@ -3,7 +3,7 @@ import { IconId } from './icons';
 
 export interface PopupData {
     settings: SettingsType,
-    userRules: string,
+    isAllowlisted: boolean,
     enableFiltersIds: number[],
 }
 
@@ -60,8 +60,8 @@ export enum MESSAGE_TYPES {
     START_ASSISTANT = 'START_ASSISTANT',
     ADD_USER_RULE = 'ADD_USER_RULE',
     RELOAD_ACTIVE_TAB = 'RELOAD_ACTIVE_TAB',
-    REMOVE_PROTECTION_PAUSE_TIMER = 'REMOVE_PROTECTION_PAUSE_TIMER',
-    SET_PAUSE_EXPIRES = 'SET_PAUSE_EXPIRES',
+    TOGGLE_PROTECTION = 'TOGGLE_PROTECTION',
+    PAUSE_PROTECTION_WITH_TIMEOUT = 'PAUSE_PROTECTION_WITH_TIMEOUT',
     ENABLE_FILTER = 'ENABLE_FILTER',
     DISABLE_FILTER = 'DISABLE_FILTER',
     UPDATE_FILTER_TITLE = 'UPDATE_FILTER_TITLE',
@@ -76,7 +76,6 @@ export enum MESSAGE_TYPES {
     RELAUNCH_FILTERING = 'RELAUNCH_FILTERING',
     TOGGLE_SITE_ALLOWLIST_STATUS = 'TOGGLE_SITE_ALLOWLIST_STATUS',
     ADD_USER_RULE_FROM_ASSISTANT = 'ADD_USER_RULE_FROM_ASSISTANT',
-    CHECK_SITE_IN_ALLOWLIST = 'CHECK_SITE_IN_ALLOWLIST',
     GET_COLLECTED_LOG = 'GET_COLLECTED_LOG',
     START_LOG = 'START_LOG',
     STOP_LOG = 'STOP_LOG',
@@ -95,20 +94,19 @@ export type Message = {
     data?: any;
 };
 
-// These enum must have string values because
+// These enumerations must have string values because
 // their values are used as keys in the object
 export enum NOTIFIER_EVENTS {
     PROTECTION_UPDATED = 'event.protection.updated',
-    PROTECTION_PAUSE_EXPIRES_UPDATED = 'event.protection.pause.expires.updated',
+    PROTECTION_RESUMED = 'event.protection.resumed',
+    PROTECTION_PAUSE_EXPIRED = 'event.protection.pause.expired',
     SET_RULES = 'event.set.rules',
 }
 
 /* GLOBAL FILTERING */
 export const MS_IN_SECOND = 10 ** 3;
 export const PROTECTION_PAUSE_TIMEOUT_S = 30;
-export const PROTECTION_PAUSE_TIMEOUT_TICK_S = 1;
 export const PROTECTION_PAUSE_TIMEOUT_MS = PROTECTION_PAUSE_TIMEOUT_S * MS_IN_SECOND;
-export const PROTECTION_PAUSE_TIMEOUT_TICK_MS = PROTECTION_PAUSE_TIMEOUT_TICK_S * MS_IN_SECOND;
 
 export const NEW_LINE_SEPARATOR = '\n';
 

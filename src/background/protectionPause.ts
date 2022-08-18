@@ -1,51 +1,48 @@
+import { NOTIFIER_EVENTS } from 'Common/constants/common';
 import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
 
+import { notifier } from './notifier';
 import { settings } from './settings';
 import { tsWebExtensionWrapper } from './tswebextension';
 
 class ProtectionPause {
-    private readonly alarmHandler: () => void;
+    private alarmHandler = async (alarm: chrome.alarms.Alarm) => {
+        if (alarm.name !== SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES) {
+            return;
+        }
 
-    private readonly reloadPageHandler: (
-        tabId: number,
-        changeInfo: chrome.tabs.TabChangeInfo,
-        tab: chrome.tabs.Tab
-    ) => void;
+        notifier.notify(NOTIFIER_EVENTS.PROTECTION_PAUSE_EXPIRED);
+        await tsWebExtensionWrapper.start();
 
-    constructor() {
-        this.alarmHandler = async () => {
-            chrome.alarms.onAlarm.removeListener(this.alarmHandler);
-            await settings.setProtection(true);
-            await tsWebExtensionWrapper.start();
-        };
+        await settings.setProtection(true);
+        await settings.setProtectionPauseExpires(0);
+        notifier.notify(NOTIFIER_EVENTS.PROTECTION_RESUMED);
 
-        /* Page can be reloaded without closing the popup.
-        Clear SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES once it is expired on page reload. */
-        this.reloadPageHandler = async (tabId, changeInfo) => {
-            if (changeInfo.status === 'complete' || changeInfo.status === 'loading') {
-                const protectionPauseExpires = settings.getSetting<number>(
-                    SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES,
-                );
+        await this.removeTimer();
+    };
 
-                if (protectionPauseExpires !== 0 && protectionPauseExpires <= Date.now()) {
-                    await settings.setProtectionPauseExpires(0);
-                }
-            }
-        };
-    }
-
-    addTimer = (protectionPauseExpires: number) => {
+    addTimer = (protectionPauseExpiresMs: number) => {
         chrome.alarms.onAlarm.addListener(this.alarmHandler);
         chrome.alarms.create(
             SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES,
-            { when: protectionPauseExpires },
+            { when: protectionPauseExpiresMs },
         );
-        chrome.tabs.onUpdated.addListener(this.reloadPageHandler);
     };
 
-    removeTimer = () => {
+    removeTimer = (): Promise<boolean> => {
         chrome.alarms.onAlarm.removeListener(this.alarmHandler);
-        chrome.tabs.onUpdated.removeListener(this.reloadPageHandler);
+        return chrome.alarms.clear(SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES);
+    };
+
+    /**
+     * Checks the protection pause timer and, if it does not exist, creates a new one
+     */
+    init = async () => {
+        const expiresMs = settings.getSetting<number>(SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES);
+        const alarm = await chrome.alarms.get(SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES);
+        if (expiresMs > 0 && !alarm) {
+            this.addTimer(expiresMs);
+        }
     };
 }
 

@@ -1,8 +1,7 @@
 import { sendMessage } from 'Common/helpers';
-import { PopupData, MESSAGE_TYPES } from 'Common/constants/common';
-import { POPUP_SETTINGS } from 'Common/constants/settings-constants';
+import { MESSAGE_TYPES, PopupData } from 'Common/constants/common';
+import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
 import { tabUtils } from 'Common/tab-utils';
-import { UserRulesData } from 'Options/user-rules-processor';
 
 /**
  * Module with methods used to communicate with background service worker
@@ -11,7 +10,7 @@ class Sender {
     /**
      * Retrieves popup data from background service worker
      */
-    getPopupData = () => sendMessage<PopupData>(MESSAGE_TYPES.GET_POPUP_DATA);
+    getPopupData = (domainName: string) => sendMessage<PopupData>(MESSAGE_TYPES.GET_POPUP_DATA, { domainName });
 
     /**
      * Asks background service worker to open options page
@@ -19,12 +18,10 @@ class Sender {
     openOptions = (path?: string) => sendMessage(MESSAGE_TYPES.OPEN_OPTIONS, { path });
 
     /**
-     * Sets settings value on background service worker by key
-     * @param key
-     * @param value
+     * Hides wizard
      */
-    setSetting = (update: Partial<POPUP_SETTINGS>) => sendMessage(
-        MESSAGE_TYPES.SET_SETTING, { update },
+    hideWizard = () => sendMessage(
+        MESSAGE_TYPES.SET_SETTING, { [SETTINGS_NAMES.POPUP_V3_WIZARD_ENABLED]: false },
     );
 
     /**
@@ -46,27 +43,31 @@ class Sender {
         return sendMessage(MESSAGE_TYPES.OPEN_ASSISTANT, { tab: currentTab });
     };
 
-    removeProtectionPauseTimer = () => sendMessage(MESSAGE_TYPES.REMOVE_PROTECTION_PAUSE_TIMER);
+    /**
+     * Suspends protection
+     */
+    pauseProtection = () => sendMessage(MESSAGE_TYPES.TOGGLE_PROTECTION, { value: false });
 
-    setPauseExpires = (protectionPauseExpires: number) => sendMessage(
-        MESSAGE_TYPES.SET_PAUSE_EXPIRES,
-        { protectionPauseExpires },
-    );
+    /**
+     * Enables protection
+     */
+    enableProtection = () => sendMessage(MESSAGE_TYPES.TOGGLE_PROTECTION, { value: true });
 
-    getUserRules = (): Promise<string> => {
-        return sendMessage(MESSAGE_TYPES.GET_USER_RULES);
+    /**
+     * Suspends protection for the PROTECTION_PAUSE_TIMEOUT_MS time
+     * @returns the date when the protection will be enabled again
+     */
+    pauseProtectionWithTimeout = (): Promise<number> => {
+        return sendMessage<number>(MESSAGE_TYPES.PAUSE_PROTECTION_WITH_TIMEOUT);
     };
 
-    setUserRules = (userRules: string): Promise<void> => {
-        return sendMessage(MESSAGE_TYPES.SET_USER_RULES, { userRules });
-    };
-
-    toggleSiteAllowlistStatus = (domainName: string): Promise<string> => {
+    /**
+     * Enables, creates or deletes allowlist rule for provided site url
+     * and notifies UI via NOTIFIER_EVENTS.SET_RULES
+     * @returns allowlisted site or not
+     */
+    toggleSiteAllowlistStatus = (domainName: string): Promise<boolean> => {
         return sendMessage(MESSAGE_TYPES.TOGGLE_SITE_ALLOWLIST_STATUS, { domainName });
-    };
-
-    checkSiteInAllowlist = (domainName: string): Promise<UserRulesData | undefined> => {
-        return sendMessage(MESSAGE_TYPES.CHECK_SITE_IN_ALLOWLIST, { domainName });
     };
 }
 
