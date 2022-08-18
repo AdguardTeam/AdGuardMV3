@@ -2,12 +2,12 @@ import { FilterConvertedSourceMap, USER_FILTER_ID, HashOriginalRule } from '@adg
 import { DeclarativeConverter } from '@adguard/tsurlfilter';
 
 import { NEW_LINE_SEPARATOR, RULESET_NAME } from 'Common/constants/common';
-import { ADGUARD_FILTERS_IDS } from 'Common/constants/filters';
+import { translator } from 'Common/translators/translator';
 import { arrayToMap } from 'Common/utils/arrays';
 import { IS_COLLECTING_LOG } from 'Common/constants/storage-keys';
 
 import { COMMON_FILTERS_DIR } from './backend';
-import { CUSTOM_FILTERS_START_ID, filters } from './filters';
+import { filters } from './filters';
 import { userRules } from './userRules';
 import { storage } from './storage';
 
@@ -44,6 +44,8 @@ class FilteringLog {
     private convertedSourceMap: FilterConvertedSourceMap = new Map();
 
     private filtersNames: Map<number, string> = new Map();
+
+    private staticFiltersIds: Set<number> = new Set();
 
     private sourceFilters: string[] = [];
 
@@ -93,7 +95,8 @@ class FilteringLog {
         this.convertedSourceMap = convertedSourceMap;
         this.filters[USER_FILTER_ID] = await chrome.declarativeNetRequest.getDynamicRules();
         filters.rules
-            .filter(({ id }) => id >= CUSTOM_FILTERS_START_ID)
+            // Stays only custom filters
+            .filter(({ id }) => !this.staticFiltersIds.has(id))
             .forEach(({ id, rules }) => {
                 this.sourceFilters[id] = rules;
             });
@@ -120,8 +123,14 @@ class FilteringLog {
      * from filters and the same information about dynamic rules
      */
     public init = async (convertedSourceMap: FilterConvertedSourceMap) => {
-        const requests = ADGUARD_FILTERS_IDS
-            .map(async ({ id }) => Promise.all([
+        const staticFiltersIds = filters.getManifestRulesets()
+            .map(({ id }: ManifestRulesetInfo) => {
+                return Number.parseInt(id.slice(RULESET_NAME.length), 10);
+            });
+
+        this.staticFiltersIds = new Set(staticFiltersIds);
+        const requests = staticFiltersIds
+            .map(async (id) => Promise.all([
                 this.getFilterDeclarative(id),
                 this.getFilterSourceRules(id),
                 this.getFilterSourceMap(id),
@@ -158,6 +167,7 @@ class FilteringLog {
                 : filterContent.slice(posStartRule, posEndRule);
         };
 
+        // Custom filter or user rules
         if (filterIdString === chrome.declarativeNetRequest.DYNAMIC_RULESET_ID) {
             const declarativeRule = this.filters[USER_FILTER_ID].find(({ id }) => id === ruleId);
             const res = {
@@ -176,6 +186,7 @@ class FilteringLog {
             return res;
         }
 
+        // Static filters
         const filterId = Number.parseInt(filterIdString.slice(RULESET_NAME.length), 10);
 
         const declarativeRule = this.filters[filterId]?.find(({ id }) => id === ruleId);
@@ -189,7 +200,10 @@ class FilteringLog {
             const filterName = this.filtersNames.get(filterId);
             res.originalRuleTxt = getSourceRule(this.sourceFilters[filterId], ruleIdx);
             res.filterId = filterId;
-            res.filterName = filterName;
+            // TODO: Get rid of the message evaluation key at runtime
+            res.filterName = filterName
+                ? translator.getMessage(filterName)
+                : '';
         }
 
         return res;

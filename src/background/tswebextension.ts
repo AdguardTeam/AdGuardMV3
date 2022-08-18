@@ -1,9 +1,9 @@
 import { TsWebExtension, Configuration, ConfigurationResult } from '@adguard/tswebextension/mv3';
 
-import { RULESET_NAME } from 'Common/constants/common';
+import { FiltersGroupId, RULESET_NAME } from 'Common/constants/common';
 import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
 
-import { CUSTOM_FILTERS_START_ID, filters } from './filters';
+import { filters } from './filters';
 import { settings } from './settings';
 import { userRules } from './userRules';
 import { browserActions } from './browser-actions';
@@ -55,9 +55,9 @@ class TsWebExtensionWrapper {
      * and save list of last used filters
      */
     async checkFiltersLimitsChange() {
-        const wasEnabledIds = (await filters.getEnableFiltersIds())
-            // TODO: Maybe not best way to check for Custom filter
-            .filter((id) => id < CUSTOM_FILTERS_START_ID)
+        const wasEnabledIds = (await filters.getFilters())
+            .filter(({ groupId, enabled }) => enabled && groupId !== FiltersGroupId.CUSTOM)
+            .map(({ id }) => id)
             .sort((a: number, b:number) => a - b);
         const nowEnabledIds = (await chrome.declarativeNetRequest.getEnabledRulesets())
             .map((s) => Number.parseInt(s.slice(RULESET_NAME.length), 10))

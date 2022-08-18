@@ -93,7 +93,7 @@ export const RequestsTable = ({
                         {originalRuleTxt}
                         <br />
                         <br />
-                        {`from filter ${filterName} (id - ${filterId})`}
+                        {`from filter '${filterName}' with id - ${filterId}`}
                     </p>
                 </div>
                 <div className={style.cell}>

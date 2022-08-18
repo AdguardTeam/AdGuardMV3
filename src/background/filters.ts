@@ -17,7 +17,7 @@ import { arrayToMap } from 'Common/utils/arrays';
 import { backend, COMMON_FILTERS_DIR } from './backend';
 import { storage } from './storage';
 
-export const CUSTOM_FILTERS_START_ID = 1000;
+const CUSTOM_FILTERS_START_ID = 1000;
 
 // Titles and descriptions are set to English by default.
 // TODO: Translations with watch for change language
@@ -138,15 +138,15 @@ class Filters {
     enableFiltersIds: number[] = [];
 
     async init() {
+        this.filters = await this.getFiltersFromStorage();
+        await this.setEnabledIds();
+
         // TODO: add to storage only those rules that applied by the content script;
         // Read the rules from the storages for each download background sw,
         // if there are no rules, then get the rules from the files;
         // If the rules have changed, get them (on the first lines + check time)
-        this.rules = await this.getRules();
+        this.rules = await this.getRules(this.filters);
         await storage.set(RULES_STORAGE_KEY, this.rules);
-
-        this.filters = await this.getFiltersFromStorage();
-        await this.setEnabledIds();
     }
 
     getRulesFromFiles = async (): Promise<Rules[]> => {
@@ -203,7 +203,7 @@ class Filters {
     /**
      * Returns a list of information about the rule sets specified in the V3 manifest
      */
-    private getManifestRulesets = (): ManifestRulesetInfo[] => {
+    public getManifestRulesets = (): ManifestRulesetInfo[] => {
         const {
             declarative_net_request: { rule_resources },
         } = chrome.runtime.getManifest() as chrome.runtime.ManifestV3;
@@ -225,20 +225,19 @@ class Filters {
      * Returns a list of the newest filters (from the storage or from the extension bundle)
      * with their IDs and contents
      */
-    private getRules = async (): Promise<Rules[]> => {
+    private getRules = async (filtersInfo: Filter[]): Promise<Rules[]> => {
         const filtersTimestamps = await this.getFiltersTimestamps();
-        const rules = await storage.get<Rules[]>(RULES_STORAGE_KEY);
-        const manifestRulesets = this.getManifestRulesets();
+        const filtersRules = await storage.get<Rules[]>(RULES_STORAGE_KEY);
 
         // Parse manifest's rulesets' ids
-        const filtersIds: number[] = manifestRulesets
+        const filtersIds: number[] = this.getManifestRulesets()
             .map(({ id }: ManifestRulesetInfo) => {
                 return Number.parseInt(id.slice(RULESET_NAME.length), 10);
             });
 
         // For each filters return newest version: from storage or load newest from extension bundle
         const promisesWithRules: Promise<Rules>[] = filtersIds.map((filterId) => {
-            const rulesFromStorage = rules?.find(({ id }) => id === filterId);
+            const rulesFromStorage = filtersRules?.find(({ id }) => id === filterId);
             if (!rulesFromStorage) {
                 return backend.downloadFilterRules(filterId);
             }
@@ -253,7 +252,20 @@ class Filters {
             return new Promise((resolve) => { resolve(rulesFromStorage); });
         });
 
-        return Promise.all(promisesWithRules);
+        const staticFiltersRules = await Promise.all(promisesWithRules);
+
+        const customFiltersIds = filtersInfo
+            .filter(({ groupId }) => groupId === FiltersGroupId.CUSTOM)
+            .map(({ id }) => id);
+        const customFiltersIdsSet = new Set<number>(customFiltersIds);
+        const customFiltersRules = filtersRules?.filter(({ id }) => {
+            return customFiltersIdsSet.has(id);
+        }) || [];
+
+        return [
+            ...staticFiltersRules,
+            ...customFiltersRules,
+        ];
     };
 
     // TODO add tests
