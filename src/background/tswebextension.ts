@@ -99,6 +99,8 @@ class TsWebExtensionWrapper {
 
     private getConfiguration = async (): Promise<Configuration> => {
         const rules = await filters.getEnabledRules();
+        const { installType } = await chrome.management.getSelf();
+        const isUnpacked = installType === 'development';
 
         return {
             settings: {
@@ -130,7 +132,7 @@ class TsWebExtensionWrapper {
             userrules: (await userRules.getRules())
                 .split('\n')
                 .filter((rule) => rule),
-            verbose: true,
+            verbose: isUnpacked,
         };
     };
 
