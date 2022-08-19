@@ -3,7 +3,7 @@ import { log } from 'Common/logger';
 import { messaging, initExtension } from './messaging';
 import { contextMenu } from './context-menu';
 import { browserActions } from './browser-actions';
-import { filters } from './filters';
+import { tsWebExtensionWrapper } from './tswebextension';
 
 log.debug('Background service worker has loaded via Manifest V3.');
 
@@ -12,14 +12,15 @@ messaging.init();
 contextMenu.init();
 browserActions.init();
 
-// To start the extension immediately after installing it,
-// to avoid waiting for the service worker to wake up
 chrome.runtime.onInstalled.addListener(async ({ reason }) => {
+    // Start the service worker immediately after installing the extension
+    // to reduce the waiting time for the service worker to wake up
+    // on the message handler
     await initExtension();
 
     // Enable language filter only on first install
     if (reason === chrome.runtime.OnInstalledReason.INSTALL) {
-        await filters.enableCurrentLanguageFilter();
+        await tsWebExtensionWrapper.enableCurrentLanguagesFilters();
     }
 });
 

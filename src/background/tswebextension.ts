@@ -2,12 +2,17 @@ import { TsWebExtension, Configuration, ConfigurationResult } from '@adguard/tsw
 
 import { FiltersGroupId, RULESET_NAME } from 'Common/constants/common';
 import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
+import { log } from 'Common/logger';
 
-import { filters } from './filters';
+import { DEFAULT_FILTERS, filters } from './filters';
 import { settings } from './settings';
 import { userRules } from './userRules';
 import { browserActions } from './browser-actions';
 import { filteringLog } from './filtering-log';
+
+const {
+    MAX_NUMBER_OF_ENABLED_STATIC_RULESETS,
+} = chrome.declarativeNetRequest;
 
 class TsWebExtensionWrapper {
     private tsWebExtension: TsWebExtension;
@@ -136,6 +141,46 @@ class TsWebExtensionWrapper {
     get convertedSourceMap() {
         return this.tsWebExtension.convertedSourceMap;
     }
+
+    /**
+     * Finds and enables filters for current browser locales
+     */
+    enableCurrentLanguagesFilters = async () => {
+        const navigatorLocales = navigator.languages
+            .map(((locale) => locale.replace('-', '_')));
+        const locales = new Set(navigatorLocales);
+        const localeFilters = DEFAULT_FILTERS
+            .filter((f) => f.localeCodes?.some((code) => locales.has(code)))
+            .map((f) => filters.filters.find(({ id }) => id === f.id));
+
+        // A loop is needed to step through the asynchronous filter enable operation,
+        // because each filter enable changes the constraints of the rules.
+        for (let i = 0; i < localeFilters.length; i += 1) {
+            const localeFilterInMemory = localeFilters[i];
+            if (!localeFilterInMemory || localeFilterInMemory.enabled) {
+                return;
+            }
+
+            const { id, localeCodes, declarativeRulesCounter } = localeFilterInMemory;
+
+            // eslint-disable-next-line no-await-in-loop
+            const freeRules = await chrome.declarativeNetRequest.getAvailableStaticRuleCount();
+            const enabledFiltersCounter = filters.filters.filter((f) => f.enabled).length;
+
+            if (declarativeRulesCounter !== undefined
+                    && declarativeRulesCounter < freeRules
+                    && enabledFiltersCounter < MAX_NUMBER_OF_ENABLED_STATIC_RULESETS
+            ) {
+                log.debug(`Trying enable locale filter with id ${id} for locales: ${localeCodes}`);
+                // eslint-disable-next-line no-await-in-loop
+                await filters.enableFilter(id);
+                // eslint-disable-next-line no-await-in-loop
+                await this.configure();
+            } else {
+                log.debug(`Cannot enable locale filter with id ${id} for locales: ${localeCodes}`);
+            }
+        }
+    };
 }
 
 export const tsWebExtensionWrapper = new TsWebExtensionWrapper();

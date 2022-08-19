@@ -21,7 +21,7 @@ class Sender {
      * Hides wizard
      */
     hideWizard = () => sendMessage(
-        MESSAGE_TYPES.SET_SETTING, { [SETTINGS_NAMES.POPUP_V3_WIZARD_ENABLED]: false },
+        MESSAGE_TYPES.SET_SETTING, { update: { [SETTINGS_NAMES.POPUP_V3_WIZARD_ENABLED]: false } },
     );
 
     /**

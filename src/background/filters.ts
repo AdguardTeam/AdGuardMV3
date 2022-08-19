@@ -11,7 +11,6 @@ import {
 import { ADGUARD_FILTERS_IDS, FILTER_RULESET, RulesetType } from 'Common/constants/filters';
 import { RULES_STORAGE_KEY, ENABLED_FILTERS_IDS } from 'Common/constants/storage-keys';
 import FiltersUtils from 'Common/utils/filters';
-import { log } from 'Common/logger';
 import { arrayToMap } from 'Common/utils/arrays';
 
 import { backend, COMMON_FILTERS_DIR } from './backend';
@@ -22,7 +21,7 @@ const CUSTOM_FILTERS_START_ID = 1000;
 // Titles and descriptions are set to English by default.
 // TODO: Translations with watch for change language
 // TODO: The language will be determined by the browser and changed to English if necessary.
-const DEFAULT_FILTERS: Filter[] = [
+export const DEFAULT_FILTERS: Filter[] = [
     {
         id: FILTER_RULESET[RulesetType.RULESET_1].id,
         enabled: FILTER_RULESET[RulesetType.RULESET_1].enabled,
@@ -124,10 +123,6 @@ const DEFAULT_FILTERS: Filter[] = [
     },
 ];
 
-const {
-    MAX_NUMBER_OF_ENABLED_STATIC_RULESETS,
-} = chrome.declarativeNetRequest;
-
 class Filters {
     FILTERS_STORAGE_KEY = 'filters';
 
@@ -168,36 +163,6 @@ class Filters {
         const json = await file.json() as Array<Array<number>>;
 
         return arrayToMap(json);
-    };
-
-    /**
-     * Finds and enables filter for current browser locale
-     */
-    enableCurrentLanguageFilter = async () => {
-        const currentLocale = navigator.language.replace('-', '_');
-        const localeFilter = DEFAULT_FILTERS
-            .find((f) => f.localeCodes?.includes(currentLocale));
-
-        if (!localeFilter) {
-            return;
-        }
-
-        const localeFilterInMemory = this.filters.find((f) => f.id === localeFilter.id);
-        if (!localeFilterInMemory) {
-            return;
-        }
-
-        const rulesToEnable = localeFilterInMemory.declarativeRulesCounter;
-        const freeRules = await chrome.declarativeNetRequest.getAvailableStaticRuleCount();
-        const enabledFiltersCounter = this.filters.filter((f) => f.enabled).length;
-
-        if (rulesToEnable !== undefined
-            && rulesToEnable < freeRules
-            && enabledFiltersCounter < MAX_NUMBER_OF_ENABLED_STATIC_RULESETS
-        ) {
-            this.enableFilter(localeFilterInMemory.id);
-            log.debug('Enabled locale filter: ', localeFilterInMemory.id);
-        }
     };
 
     /**
