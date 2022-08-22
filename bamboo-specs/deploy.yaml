@@ -1,9 +1,9 @@
 ---
 version: 2
 deployment:
-  name: browser extension mv3 - deploy beta
-  source-plan: ADGEXT-BEMV3BETASPECS
-release-naming: ${bamboo.inject.version}-beta
+  name: browser extension mv3 - deploy
+  source-plan: ADGEXT-MV3BUILD
+release-naming: ${bamboo.inject.version}
 environments:
   - Chrome WebStore
 
@@ -30,7 +30,7 @@ Chrome WebStore:
             exec 2>&1
             ls -la
 
-            ./bamboo-deploy-publisher/deploy.sh browser-extension-v3-webstore-beta
+            ./bamboo-deploy-publisher/deploy.sh browser-extension-v3-webstore
   final-tasks: []
   variables: {}
   requirements:

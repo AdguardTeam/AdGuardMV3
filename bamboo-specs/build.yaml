@@ -2,8 +2,8 @@
 version: 2
 plan:
   project-key: ADGEXT
-  key: BEMV3BETASPECS
-  name: browser extension mv3 - build beta
+  key: MV3BUILD
+  name: browser extension mv3 - build
 variables:
   dockerNode: adguard/node-ssh:15.14--6
 
@@ -36,30 +36,30 @@ Build:
             ls -la
 
             yarn install ${bamboo.varsYarn}
-            CREDENTIALS_PASSWORD="${bamboo.extensionsPassphrase}" yarn beta
+            CREDENTIALS_PASSWORD="${bamboo.extensionsPassphrase}" yarn release
             rm -rf node_modules
     - inject-variables:
-        file: build/beta/build.txt
+        file: build/release/build.txt
         scope: RESULT
         namespace: inject
     - any-task:
         plugin-key: com.atlassian.bamboo.plugins.vcs:task.vcs.tagging
         configuration:
           selectedRepository: defaultRepository
-          tagName: v${bamboo.inject.version}-beta
+          tagName: v${bamboo.inject.version}
   artifacts:
     - name: build.txt
-      location: build/beta
+      location: build/release
       pattern: build.txt
       shared: true
       required: true
     - name: chrome.zip
-      location: build/beta
+      location: build/release
       pattern: chrome.zip
       shared: true
       required: true
     - name: edge.zip
-      location: build/beta
+      location: build/release
       pattern: edge.zip
       shared: true
       required: true

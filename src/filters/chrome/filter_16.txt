@@ -1,8 +1,8 @@
-! Checksum: jgNK/9/mYvjIPUq/WgsLPw
+! Checksum: H0oWaXDmLv+xIWaUfOp7eQ
 ! Title: AdGuard French filter
 ! Description: Liste FR + AdGuard French filter. Filter list that specifically removes ads on websites in French language.
-! Version: 2.0.34.30
-! TimeUpdated: 2022-08-09T12:30:51+00:00
+! Version: 2.0.34.43
+! TimeUpdated: 2022-08-22T06:30:46+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -127,6 +127,16 @@ capital.fr#@#.plainAd
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/127591
+@@||empire-streaming.co^$generichide
+! https://github.com/AdguardTeam/AdguardFilters/issues/127381
+dhnet.be#%#//scriptlet('set-constant', 'bAdBlocker', 'false')
+@@||service.videoplaza.tv/proxy/pulse-sdk-html5/*/latest.min.js$domain=dhnet.be
+! https://github.com/AdguardTeam/AdguardFilters/issues/126858
+@@||service.videoplaza.tv/proxy/bwtest.jpg$domain=lesoir.be
+@@||service.videoplaza.tv/proxy/pulse-sdk-html5^$domain=lesoir.be
+! https://github.com/AdguardTeam/AdguardFilters/issues/125968
+radio.fr#%#//scriptlet("abort-on-property-read", "Object.prototype.autoRecov")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/125261
 animationdigitalnetwork.fr#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima3,important,domain=animationdigitalnetwork.fr
@@ -555,6 +565,12 @@ tf1info.fr#%#AG_defineProperty('__NEXT_DATA__.runtimeConfig.adBlock.serverReques
 ! Good: example.org#?#main > div.row:has(> div.ad)
 ! Bad: example.org##main > div.ad (should be in specific.txt)
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/127381
+dhnet.be#?#main > section.ap-Chain:has(> div.ap-Chain-body iframe[src^="//immobox.logic-immo.be/"])
+dhnet.be#?#main > div.ap-Box:has(> div.ap-Box-content > div.is-boxContentGroup  div#digitekaSmartPlayer)
+dhnet.be#?#main > section.ap-Chain:has(> div.ap-Chain-body iframe[src^="https://www.jobat.be/"])
+! https://github.com/AdguardTeam/AdguardFilters/issues/125968
+radio.fr#?#div[class^="sc-"] > div[class^="sc-"] > div[id^="RAD_"]:upward(2)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/114163
 lemonde.fr#?#.aside__iso > .friend__container:has(> .friend--sticky > .OUTBRAIN)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/105651
@@ -709,6 +725,8 @@ tf1.fr#%#AG_defineProperty('tv.freewheel.SDK.Util.sendAdRequestWithXMLHTTPReques
 !------- CSS fixes --------------------!
 !--------------------------------------!
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/127367
+journaldesfemmes.fr#$#@media (min-width: 768px) { body .layout.layout--offcanvas:not(#style_important) { margin-top: -200px !important; } }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/118970
 funradio.fr,rtl2.fr,rtl.fr#$#body .container-ads + *:not(#style_important) { padding-top: 0 !important; }
 funradio.fr,rtl2.fr,rtl.fr#$#body .container-ads + .tranche:not(#style_important) { padding-top: 50px !important; }
@@ -791,6 +809,11 @@ all-stadium.net#$##layer2 {top:50px!important; left:950px!important;}
 /^(?!.*(bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yandex.|yastatic.net|ytimg.com|zencdn.net|player|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com)).*$/$third-party,script,domain=scan-fr.cc
 !
 !
+empire-streaming.co##.direct-lads
+journaldesfemmes.fr###ctn_position2
+dhnet.be###selligent-ads
+||jobat.be^$subdocument,third-party
+challenges.fr##.pub-container-haut
 francebleu.fr##.SadSlot
 elle.fr##div[class$="--placeholder"]
 sudouest.fr##.pub_dfp
@@ -799,7 +822,7 @@ sudouest.fr##.pub_with_light_background.sidebar-section
 voici.fr##.offsetCardGrid-cardsContainer > .offsetCardGrid-card.nativeCard
 paroles.net##div[id^="trg_"]
 paroles.net##div[style="width:300px;height:600px;"]
-lepoint.fr##.slotpub
+lepoint.fr##body .slotpub:not(#style_important)
 cnews.fr##div[id^="block-dm-services-ads-"]
 lesoir.be##.rossel-ads
 analyticsinsight.net##.widget-5
@@ -916,7 +939,7 @@ montorrent.com##a[href^="#"].btn-fastest
 jeuxvideo.com##.sideWootbox
 actu-environnement.com##.module_annonce
 orange.fr##.autopromo-prospect
-voici.fr,gala.fr,sante.journaldesfemmes.fr##.OUTBRAIN
+voici.fr,gala.fr,journaldesfemmes.fr##.OUTBRAIN
 developpez.com###colonneDroite > aside > #encart_droite > div[class^="dvpb"][style^="display: inline-block; width:"]
 windsurfjournal.com##.right-pub-zone
 windsurfjournal.com##.megabanner-container
@@ -1215,6 +1238,10 @@ place.ge#@#.simple-ad
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/127797
+@@||thumbnails.roblox.com/v*/assets?assetIds=*=250x250
+! https://github.com/AdguardTeam/AdguardFilters/issues/126514
+cnet.com#@#div[data-ad]
 ! https://github.com/AdguardTeam/AdguardFilters/issues/126659
 ||player-cdn.com^$badfilter
 ! https://github.com/AdguardTeam/AdguardFilters/issues/125832
@@ -7079,6 +7106,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||10bdjhq100.monster^
 ||10d0wnl0ad10.com^
 ||10jdbjkfdf10.monster^
+||10kasbkda100.monster^
 ||10kjdbfksdf10.monster^
 ||10kjdbkfsd0.monster^
 ||10kjdbkfsdf10.monster^
@@ -7123,6 +7151,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||1ce3806147.com^
 ||1d4e81684f.com^
 ||1dbjhsjdfbj1.monster^
+||1dhbfjgdhj11.monster^
 ||1e46e721dc.com^
 ||1exefleready1.com^
 ||1f935d910e.com^
@@ -7144,6 +7173,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||1sdfhhh2.monster^
 ||1sdfjhsdvbfj1.monster^
 ||1sdfssfdas1.monster^
+||1sdjfhsdf1.monster^
 ||1sdjhsvdjf1.monster^
 ||1sjdgjfhsdf12.monster^
 ||1sjhdvfhsdf1.monster^
@@ -7151,6 +7181,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||1starwarstx1.com^
 ||1ttv.net^
 ||1uno1xkktau4.com^
+||1waitingd0wn.com^
 ||1werterew1.com^
 ||1wkvvts8is.com^
 ||1xdtscudjemp.com^
@@ -7164,6 +7195,8 @@ _zoneid=*/rel/index.cfm?$popup
 ||20sjndkfs32.monster^
 ||216996b326.com^
 ||22domainforwork22.com^
+||22downl0ad22x.com^
+||22filexstarted22.com^
 ||233fa9221f.com^
 ||235630618b.com^
 ||24df420ec6.com^
@@ -7190,7 +7223,9 @@ _zoneid=*/rel/index.cfm?$popup
 ||2jahsbvjdsd22.monster^
 ||2jasdfjsdf2.monster^
 ||2jgavshdasd22.monster^
+||2jhajsda22.monster^
 ||2jhavsjdas2.monster^
+||2jhawjda22.monster^
 ||2jhbsjhdf22.monster^
 ||2jhjsadss3.monster^
 ||2jhsdfs2.monster^
@@ -7231,12 +7266,15 @@ _zoneid=*/rel/index.cfm?$popup
 ||3ac46b4f5a.com^
 ||3ahgsdasd33.monster^
 ||3ajhbjdad33.monster^
+||3ajhsdjawd3.monster^
+||3ajhsvjdasd12.monster^
 ||3ba87e4828c5a95.com^
 ||3cba8b24a1.com^
 ||3cdafa6f67.com^
 ||3e41501a36.com^
 ||3e61gdwn1r.com^
 ||3gsvdhf334.monster^
+||3jahbsjdasd33.monster^
 ||3jhbsjhdfs33.monster^
 ||3jhbvsjdas3.monster^
 ||3jhsvdasd3.monster^
@@ -7250,6 +7288,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||3kshdbfjks3.monster^
 ||3rpagb7k11.com^
 ||3sdbfjsdf3.monster^
+||3sjdvfhsdf33.monster^
 ||3sjhdfjs3.monster^
 ||3sjhdfjsdf34.monster^
 ||3sjhdjfsdf13.monster^
@@ -7289,6 +7328,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||4jahsdsd44.monster^
 ||4jhbjdfgsdf4.monster^
 ||4jhbjgdfg4.monster^
+||4jhdfvhjsdf4.monster^
 ||4jhsbdjhfsdf4.monster^
 ||4jhsdjhfsd4.monster^
 ||4jhsvdjfsdf4.monster^
@@ -7300,6 +7340,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||4sdfhsdjf44.monster^
 ||4sdfsdbfksdjb4.monster^
 ||4sgvdhgfsf44.monster^
+||4shjdfsdf4.monster^
 ||4sjdbvfhjsdf44.monster^
 ||4sjdjsfdf4.monster^
 ||4sjydbjfhsdf44.monster^
@@ -7338,6 +7379,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||5hvsdhgvahsd15.monster^
 ||5jahbsjdasd15.monster^
 ||5jhbsjhdbfsd5.monster^
+||5jhdbfjgdfg5.monster^
 ||5jhdsfbjgdfg5.monster^
 ||5jhsgbdhjfsdf55.monster^
 ||5jshbdjfsdf5.monster^
@@ -7383,6 +7425,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||6hsjvdhjfsdf6.monster^
 ||6hvhjsdww6.monster^
 ||6jhavhsd16.monster^
+||6jhdbfjdfg6.monster^
 ||6jhdfbjgdfg6.monster^
 ||6jhsbdfsdf66.monster^
 ||6jshbdhjf6.monster^
@@ -7428,6 +7471,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||7jqhbjdq77s.monster^
 ||7jshbdjfsdf7.monster^
 ||7jsvdhjfsdf77.monster^
+||7jvajhsvd17.monster^
 ||7khsbjhdsdf77.monster^
 ||7kjdfkjgdf7.monster^
 ||7kjsbdfsdf7.monster^
@@ -7461,9 +7505,13 @@ _zoneid=*/rel/index.cfm?$popup
 ||8jhsvdhjfsdf88.monster^
 ||8jhwbjhfws8.monster^
 ||8kabwda88.monster^
+||8kajhvsjda198.monster^
+||8kbasjkda898.monster^
 ||8kfjbgkjhfgh8.monster^
 ||8khjsbjdfsdf88.monster^
 ||8kjdbfkgdfgdd88.monster^
+||8ksbdjsdf88.monster^
+||8kshbdfsdf88.monster^
 ||8mdphsb8fm.com^
 ||8ozhygzz5eke.com^
 ||8pvgabnulk.com^
@@ -7515,6 +7563,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||9rendezvous-l.com^
 ||9sjhdvjfsd99.monster^
 ||9skdjbfksdf99.monster^
+||9skdjbfskdf19.monster^
 ||9skjbdkfsdf0.monster^
 ||9sudkfsdf99.monster^
 ||9tumza4dp4o9.com^
@@ -7798,6 +7847,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||ancmbghxkui.com^
 ||anddecoyblizzard.com^
 ||andmwirunoswv.com^
+||anfilm.mobi^
 ||angerdefinitionboredom.com^
 ||angersteerpad.com^
 ||angocbgeqs.xyz^
@@ -8004,6 +8054,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||ayivvjanbb.com^
 ||ayvpagsvdvh.com^
 ||azaipsee.com^
+||azclip.co.ua^
 ||azj57rjy.com^
 ||azn55btbp3a4.com^
 ||b0216dfdeb.com^
@@ -8040,6 +8091,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||baldwhizhens.com^
 ||baledenseabbreviation.com^
 ||balledalloy.com^
+||bamboss.ru^
 ||banalbjar.com^
 ||bandsaislevow.com^
 ||bangalsskfyuflc.xyz^
@@ -8118,6 +8170,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||bestfreecounterstat.com^
 ||besti.ga^
 ||bestialjames.com^
+||bestwayoflife.top^
 ||betalonflamechan.com^
 ||betjoltiktor.com^
 ||betklefkior.com^
@@ -8534,6 +8587,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||chautcho.com^
 ||cheapenleaving.com^
 ||checkfilter.biz^
+||checkmymedia.biz^
 ||cheesydebatablepantomime.com^
 ||chegramt.com^
 ||chekajie.com^
@@ -8840,6 +8894,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||cyuexerncokifav.xyz^
 ||cyxukrtaloe.com^
 ||d0mainnam3.com^
+||d0mainsletsg0.com^
 ||d0p21g2fep.com^
 ||d0wnl0ad2233.com^
 ||d0wnload1x11.com^
@@ -9101,6 +9156,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||doubtaroma.com^
 ||doubtfulnationsunmoved.com^
 ||dousingethiop.com^
+||downloadoffice2010.org^
 ||downloadxfasterx1.com^
 ||downysewersettle.com^
 ||dowtyler.com^
@@ -9731,6 +9787,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||fqxhvxnlivs.com^
 ||fqyevgrklcj.xyz^
 ||fr0moursidex.com^
+||fr33d0main.com^
 ||fr33f1lex1.com^
 ||fr33xinstallx.com^
 ||fractureboyishherring.com^
@@ -9827,6 +9884,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||gaizipol.com^
 ||galeyaidful.com^
 ||gambar123.com^
+||gameawin.com^
 ||gameragematt.com^
 ||gamersterritory.com^
 ||gangismemunct.com^
@@ -9875,12 +9933,18 @@ _zoneid=*/rel/index.cfm?$popup
 ||gepbvbwsbolbgqc.xyz^
 ||geraflows.com^
 ||getcoder.me^
+||getf1leonc3.com^
 ||getidglutton.com^
 ||getstart3d12.monster^
 ||getsurv2you.com^
 ||getsurv2you.net^
 ||getsurv2you.org^
+||getter.fun^
 ||gettingfik322.com^
+||getvideoabc.ru^
+||getvideoace.ru^
+||getvideoair.ru^
+||getvideoall.ru^
 ||gewwnbhmr.xyz^
 ||gfgixev3d4.com^
 ||gfgvydscbf.com^
@@ -10032,6 +10096,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||greenpaperlist.com^
 ||greerlies.pro^
 ||greetham.net^
+||greysummergo.biz^
 ||grfcdrupuyfceim.com^
 ||grimdiscord.com^
 ||grimechethy.pro^
@@ -10060,6 +10125,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||gsitosridtj.com^
 ||gsnfuhviyamlkea.com^
 ||gspopgpxwokiy.com^
+||gsvhdgfsdf55.monster^
 ||gsvtbuhyprf.com^
 ||gsxfemnjf.xyz^
 ||gtcycrsxnub.com^
@@ -10180,12 +10246,15 @@ _zoneid=*/rel/index.cfm?$popup
 ||headerporkfloral.com^
 ||headlightbailey.com^
 ||headyblockadebuyer.com^
+||heartbiddotnet.monster^
 ||heartbiddotnet2022.monster^
 ||heartbiddotnet22.monster^
 ||heartbiddotnetssp.monster^
 ||heartbidnetsspxl.monster^
 ||heartbidnetxmlfeeds.monster^
 ||heartbidnetxmlfeedss.monster^
+||heartbidnetxmlx.monster^
+||heartbidxmlfeed.monster^
 ||heartilylassitude.com^
 ||heavedmealock.com^
 ||hedgehogseparated.com^
@@ -10533,6 +10602,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||insideoftech.com^
 ||inspirationhistorical.com^
 ||insta11butt0n.com^
+||installandus3d22.com^
 ||installnow.pro^
 ||institutehopelessbeck.com^
 ||instructscornfulshoes.com^
@@ -10862,6 +10932,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||jrwmmmswxb.com^
 ||jryjyjbnno.xyz^
 ||jsakmsfuqdp.com^
+||jshdbfjsdf122.monster^
 ||jsmeolkoleoviq.com^
 ||jsmrpxwj.xyz^
 ||jstabccimvbw.com^
@@ -10881,11 +10952,15 @@ _zoneid=*/rel/index.cfm?$popup
 ||judiciousbloke.com^
 ||juferinnsxapbj.com^
 ||jugjetwok.com^
+||juicydataadvance.ru^
 ||juicydataage.ru^
+||juicydataair.ru^
+||juicydataalt.ru^
 ||julolecalve.website^
 ||jumpsite.vip^
 ||juringupstage.com^
 ||jussiwhauds.com^
+||justpush.biz^
 ||jutkdsqox.com^
 ||juvcsgdf.com^
 ||juxhvujnljqekxa.xyz^
@@ -10929,6 +11004,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||kantiwl.com^
 ||kaqbesov.xyz^
 ||karayarillock.cam^
+||karopoly.de^
 ||kaseine.info^
 ||katebugs.com^
 ||kaunairu.net^
@@ -11009,6 +11085,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||kinak.top^
 ||kinieambwmso.com^
 ||kino-zone.su^
+||kinogo-zone.su^
 ||kipwdbcyagb.xyz^
 ||kiretafly.com^
 ||kisfjbewlqdt.xyz^
@@ -11091,6 +11168,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||ktyplhmsuhthjwt.com^
 ||kumspawstwkyqxr.com^
 ||kurlichan.com^
+||kursnews.ru^
 ||kuttbcfqtlxggn.xyz^
 ||kvevv.com^
 ||kvhaaa.top^
@@ -11170,6 +11248,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||leontyche.com^
 ||lerrdoriak.com^
 ||letaikay.net^
+||letimavie.ru^
 ||letmewatchthis.pl^
 ||leucdqvemholt.com^
 ||leuxq.com^
@@ -11558,6 +11637,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||mojqwggw.xyz^
 ||moleculardiplomatic.com^
 ||monasawaw.com^
+||moneyhate.biz^
 ||monklerm.pro^
 ||monkposseacre.casa^
 ||moreinfo.support^
@@ -11673,6 +11753,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||n33d0nem0re.com^
 ||n33d1domain22.com^
 ||n33dcomd0mainx.com^
+||n33didfordomainx.com^
 ||n3wman3wdomain.com^
 ||n6kux3ys3lhv.com^
 ||n7565.com^
@@ -11830,8 +11911,10 @@ _zoneid=*/rel/index.cfm?$popup
 ||notcotal.com^
 ||nothingnightingalejuly.com^
 ||notificationallow.com^
+||notificator.site^
 ||notiksio.com^
 ||notixio.com^
+||notspecial.biz^
 ||nouadbpimmdk.com^
 ||noucoush.net^
 ||nougacoush.com^
@@ -12342,6 +12425,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||platitudezeal.com^
 ||plausibleharrietkid.com^
 ||play5play1.com^
+||playattack.biz^
 ||player-cdn.com^
 ||playhydrax.com^
 ||playurbano.com^
@@ -12354,6 +12438,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||pltepufsjco.xyz^
 ||pludjugqg.com^
 ||plumposterity.com^
+||plusgo.win^
 ||plxbrlukcqrfw.xyz^
 ||plxnxnlqilcdy.com^
 ||plywoodso.com^
@@ -12460,6 +12545,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||pseepsoo.com^
 ||pselygliwho.com^
 ||psevaulr.net^
+||pshdom.ru^
 ||psidsucm.com^
 ||psigozouns.com^
 ||psiksais.com^
@@ -12476,6 +12562,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||psughooy.com^
 ||psxpxltrxloqd.com^
 ||psyiqhpxrjwsmve.com^
+||psylist.net^
 ||ptdbkljcuhxljmr.com^
 ||ptewhustophe.com^
 ||ptidsezi.com^
@@ -12686,6 +12773,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||queidyqnedvw.com^
 ||qufkcqbksycw.com^
 ||quickenquave.com^
+||quickwriter.com^
 ||quilee.pw^
 ||quintag.com^
 ||qutcsouvuclkm.com^
@@ -12741,6 +12829,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||ravalamin.com^
 ||ravaynore.com^
 ||ravenpit.com^
+||ravenprinter.com^
 ||rawconstitutionnan.com^
 ||raylnk.com^
 ||rbfvtiqnd.com^
@@ -12785,6 +12874,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||reechokelvin.casa^
 ||reelnk.com^
 ||reeshlesunweed.cam^
+||refpa47525.top^
 ||refreshingfluctuateboxes.com^
 ||refuzzlizing.pro^
 ||regardwhenever.com^
@@ -12894,6 +12984,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||roambedroom.com^
 ||roamthrivecaviar.com^
 ||roarscoifscrap.com^
+||robotzdorov.site^
 ||rodirgix.com^
 ||rodumuvj.com^
 ||roduster.com^
@@ -13151,6 +13242,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||shootoax.com^
 ||shootpatagainjogging.com^
 ||shopboxshopping.com^
+||shopintoponline.ru^
 ||shorantonto.com^
 ||shoreexi.net^
 ||shoresblared.com^
@@ -13203,6 +13295,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||skrrxmmqlhxfxr.xyz^
 ||skspettteliar.com^
 ||skumuphopuhkun.com^
+||skygone.biz^
 ||skylowhat.site^
 ||skymedia7.me^
 ||skytraf.xyz^
@@ -13375,6 +13468,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||stoppageresistprodigy.com^
 ||stopthoughrelent.com^
 ||storoukr.net^
+||storyends.biz^
 ||storylnk.com^
 ||stosvjoubvhhbg.com^
 ||stouceey.net^
@@ -13443,6 +13537,10 @@ _zoneid=*/rel/index.cfm?$popup
 ||svrabgvpyb.com^
 ||svthslnvyaqm.com^
 ||swatledgesling.com^
+||sweetanswer.ru^
+||sweetarena.ru^
+||sweetarticles.ru^
+||sweetband.ru^
 ||swellknife.com^
 ||swevenscrater.cam^
 ||swhcmxsmk.com^
@@ -13670,6 +13768,10 @@ _zoneid=*/rel/index.cfm?$popup
 ||tombspyelates.com^
 ||tomjqjjoq.com^
 ||tomorrowhardshippamphlet.com^
+||tomoviesable.ru^
+||tomoviesace.ru^
+||tomoviesactive.ru^
+||tomoviesalt.ru^
 ||tongyongdeyigeyuminghenchang.top^
 ||toninjaska.com^
 ||tonsilyearling.com^
@@ -13703,6 +13805,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||tqqjk.top^
 ||tqqnkcybcidyx.com^
 ||tqqppkbiow.com^
+||trackwin.net^
 ||trade46-q.com^
 ||trading21s.com^
 ||trafficglobe.com^
@@ -14081,10 +14184,25 @@ _zoneid=*/rel/index.cfm?$popup
 ||vibsouss.net^
 ||vickovules.com^
 ||vid95vl24x.com^
+||videoau.ru^
+||videoauthor.ru^
+||videoavenue.ru^
+||videoback.ru^
+||videochanelaccess.ru^
+||videochanelace.ru^
+||videochanelact.ru^
 ||videochanelair.ru^
 ||videolookable.ru^
+||videolookace.ru^
+||videolookact.ru^
+||videolookalt.ru^
 ||videomixable.ru^
+||videomixace.ru^
+||videomixact.ru^
+||videomixair.ru^
 ||videosprofit.com^
+||videovoiceact.ru^
+||videovoiceaid.ru^
 ||vidhos.com^
 ||vidhwvegbikd.xyz^
 ||vidsplay.net^
@@ -14228,6 +14346,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||wahfiwadp.xyz^
 ||wakeacsyfackrhl.com^
 ||walkedcreak.com^
+||wantd0main22.com^
 ||warilyaggregation.com^
 ||warmstod.com^
 ||warning.support^
@@ -14336,6 +14455,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||windsattributeron.com^
 ||windychinese.com^
 ||winnerkur.com^
+||winslinks.com^
 ||wipeunauthorized.com^
 ||wiqglrgkwbdjo.com^
 ||wishfulinsecurereplace.com^
@@ -14509,6 +14629,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||x95general.com^
 ||x9socptyr.com^
 ||xaahojkg.com^
+||xadstruct0rx.com^
 ||xahdkstf.com^
 ||xaiaxkektbjfqxf.com^
 ||xaioujvlxusvo.com^
@@ -14547,6 +14668,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||xelgffqftgorin.com^
 ||xeqyvxvs.com^
 ||xf0ren0wonex.com^
+||xf1lenewma.com^
 ||xfallout1x.com^
 ||xfb00.com^
 ||xfgmosvesua.xyz^
@@ -15057,6 +15179,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||besstahete.info^
 ||bestcoinsignals.com^$third-party
 ||bestsecurepractice.com^$third-party
+||bestsrv.de^$third-party
 ||bewaslac.com
 ||bewhoyouare.gq^$third-party
 ||bhzejltg.info^$third-party
@@ -15132,6 +15255,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||devphp.org.ua^$third-party
 ||directprimal.com^$websocket
 ||dontbeevils.de^$third-party
+||donttbeevils.de^
 ||dovinate.top^$third-party
 ||dubester.pw
 ||dubester.site
@@ -15151,6 +15275,7 @@ _zoneid=*/rel/index.cfm?$popup
 ||ethtrader.de^$third-party
 ||etzbnfuigipwvs.ru
 ||eucsoft.com^$third-party
+||evilsbedont.de^
 ||ewtuyytdf45.com^$third-party
 ||f1tbit.com
 ||ffinwwfpqi.gq^$third-party
@@ -15327,6 +15452,8 @@ _zoneid=*/rel/index.cfm?$popup
 ||tokyodrift.ga^$third-party
 ||traviilo.com^$third-party
 ||trezor.io^$third-party
+||trustaproiam.de^$third-party
+||trusteverything.de^$third-party
 ||trustiseverything.de^$third-party
 ||trustmeiamapro.de^$third-party
 ||tubetitties.com^$third-party
@@ -24124,7 +24251,7 @@ lacanausurfinfo.com###promo
 journaldemontreal.com###promo-pkp
 net-iris.fr###promote
 youtube.com###promotion-shelf
-01streaming.net,aliasdmc.fr,allocine.fr,annuaire-streaming.com,blablastream.com,blablastream.rip,centerblog.net,dadyflix.co,elbilad.net,filmgratuit.net,illimitestreaming.net,iphonesoft.fr,jeu.info,jeux-2-filles.com,mac2sell.net,nrj.be,nrj.fr,nuked-klan.org,olivierdauvers.fr,orange.fr,planet-casio.com,redirection-web.net,science-et-vie.com,service-public.fr,sortir47.fr,terre.tv,toutpratique.com,turf-fr.com,val-de-marne.gouv.fr,virtuoflash.com,voirfilm-vf.com,voirfilms.al,voirfilms.bz,voirfilms.live,wareziens.net###pub
+01streaming.net,aliasdmc.fr,allocine.fr,annuaire-streaming.com,blablastream.com,blablastream.rip,centerblog.net,dadyflix.co,elbilad.net,film01stream.ws,filmgratuit.net,illimitestreaming.net,iphonesoft.fr,jeu.info,jeux-2-filles.com,mac2sell.net,nrj.be,nrj.fr,nuked-klan.org,olivierdauvers.fr,orange.fr,planet-casio.com,redirection-web.net,science-et-vie.com,service-public.fr,sortir47.fr,terre.tv,toutpratique.com,turf-fr.com,val-de-marne.gouv.fr,virtuoflash.com,voirfilm-vf.com,voirfilms.al,voirfilms.bz,voirfilms.live,wareziens.net###pub
 dici.fr###pub-background
 francebleu.fr,franceinfo.fr###pub-ftv-top
 jeu.net###pub0
@@ -25141,7 +25268,7 @@ free-reseau.fr##a[href*="&tag=freereseaufr-"]
 3dnatives.com,audiofanzine.com,lesimprimantes3d.fr##a[href*="&utm_"]
 meilleures-grandes-ecoles.com,meilleures-licences.com,meilleurs-masters.com##a[href*="&utm_campaign="]
 streaming-series.me##a[href*=".html"]
-1001ebooks.com,1337x.st,1337x.to,agence-webside.fr,amairgil.cz,arciam.fr,blablastream.com,blablastream.rip,cpasbien.gg,dadyflix.co,dpstreaming.to,espace-ehce.fr,extreme-down.art,extreme-down.blue,extreme-down.plus,extreme-down.site,film01stream.com,filmcomplet.cam,filmgratuit.net,films-telecharger.eu,filmstreaming01.org,filmstreaming1.in,filmzenstream.cloud,filmzenstream.xyz,free-telecharger.net,free-telecharger.org,free-telecharger.xyz,fullstream.plus,gktorrents.org,guitare-luthier.fr,hdss.la,illimitestreaming.net,lemondedekevin.fr,lemonlemag.fr,moulins-de-flandre.fr,nemours-medieval.fr,ostreaming.biz,oxtorrent.cc,papadustream.co,papystreaming.black,papystreaming.stream,planet-streaming1.com,planetevideos.xyz,protect-stream.com,rent2016.fr,sawstream.com,serie-streaming.watch,series-en-streaming.xyz,sillonsdeculture.fr,sokrostream.tube,streaming-films-hd.com,streamonsport.club,streamonsport.net,superchataigne2017.fr,topsddns.net,torrent9-super.com,torrent9ph.fr,torrent9uno.fr,vfcomplet.vip,voir-films-series.com,voirfilm-vf.com,voirfilm.top,voirfilms.al,voirfilms.bz,voirfilms.live,voirfilmstreaming.tv,wawacity.red,wo2viral.com,x1337x.eu,x1337x.se,x1337x.ws,yggtorrent.co,youwatch-serie.com,youwatch-series.com,zone-annuaire.xyz##a[href*=".php"]
+1001ebooks.com,1337x.st,1337x.to,agence-webside.fr,amairgil.cz,arciam.fr,blablastream.com,blablastream.rip,cpasbien.gg,dadyflix.co,dpstreaming.to,espace-ehce.fr,extreme-down.art,extreme-down.blue,extreme-down.plus,extreme-down.site,film01stream.com,film01stream.ws,filmcomplet.cam,filmgratuit.net,films-telecharger.eu,filmstreaming01.org,filmstreaming1.in,filmzenstream.cloud,filmzenstream.xyz,free-telecharger.net,free-telecharger.org,free-telecharger.xyz,fullstream.plus,gktorrents.org,guitare-luthier.fr,hdss.la,illimitestreaming.net,lemondedekevin.fr,lemonlemag.fr,moulins-de-flandre.fr,nemours-medieval.fr,ostreaming.biz,oxtorrent.cc,papadustream.co,papystreaming.black,papystreaming.stream,planet-streaming1.com,planetevideos.xyz,protect-stream.com,rent2016.fr,sawstream.com,serie-streaming.watch,series-en-streaming.xyz,sillonsdeculture.fr,sokrostream.tube,streaming-films-hd.com,streamonsport.club,streamonsport.net,superchataigne2017.fr,topsddns.net,torrent9-super.com,torrent9ph.fr,torrent9uno.fr,vfcomplet.vip,voir-films-series.com,voirfilm-vf.com,voirfilm.top,voirfilms.al,voirfilms.bz,voirfilms.live,voirfilmstreaming.tv,wawacity.red,wo2viral.com,x1337x.eu,x1337x.se,x1337x.ws,yggtorrent.co,youwatch-serie.com,youwatch-series.com,zone-annuaire.xyz##a[href*=".php"]
 leparticulier.fr,paruvendu.fr##a[href*=".xiti.com/go.click?"]
 meilleurs-hebergeurs.com##a[href*="/-"] > img
 7-up.net,abidjan.net,algerie-eco.com,algerie-focus.com,algerie360.com,bigbike-magazine.com,bismirabbika.com,brain-magazine.fr,cnetfrance.fr,coran-francais.com,doukkalia.press.ma,filmstreaming.la,freeonline.org,grimper.com,hentai-paradise.fr,hentaifr.net,igen.fr,internetparsatellite.net,kiteboarder-mag.com,ktotv.com,lebonfap.com,letagparfait.com,macg.co,montagnes-magazine.com,mubawab.ma,nintendo-master.com,niveales.com,portail.free.fr,public.fr,skieur.com,skimagazine.fr,snowsurf.com,streaming-one.com,supmag.fr,tahiti-infos.com,telecharger-jeuxpc.fr,telesatellite.com,topito.com,trekmag.com,unleashed.fr,upload.ac,urlcero.net,vakarm.net,watchgeneration.fr,widermag.com,windmag.com##a[href*="//bit.ly/"]

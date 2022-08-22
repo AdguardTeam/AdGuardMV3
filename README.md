@@ -98,7 +98,7 @@ Do the following:
 
 ## Debugging declarative rules
 1. Clone this repository
-2. Run `yarn dev chrome --watch` (or `beta`/`release` instead of `dev`)
+2. Run `yarn dev chrome --watch` (or `release` instead of `dev`)
 3. Go to `chrome://extensions/` and install extension from folder `build`
 3.1. Enable Developer's mode in the upper right corner of your browser
 3.2. Install the unpacked extension

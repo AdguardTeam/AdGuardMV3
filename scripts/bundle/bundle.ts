@@ -36,13 +36,6 @@ export const bundle = () => {
         buildInfo,
     ];
 
-    const betaPlan = [
-        copyExternal,
-        bundleChrome,
-        bundleEdge,
-        buildInfo,
-    ];
-
     const releasePlan = [
         copyExternal,
         bundleChrome,
@@ -62,10 +55,6 @@ export const bundle = () => {
         switch (process.env.BUILD_ENV) {
             case BUILD_ENVS.DEV: {
                 await runBuild(devPlan, watch);
-                break;
-            }
-            case BUILD_ENVS.BETA: {
-                await runBuild(betaPlan, watch);
                 break;
             }
             case BUILD_ENVS.RELEASE: {

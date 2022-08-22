@@ -1,8 +1,8 @@
-! Checksum: IU9/7ptf3BsiurvI1egGAA
+! Checksum: +4jbX2NPDNAJJbu8wy/abQ
 ! Title: AdGuard Dutch filter
 ! Description: EasyList Dutch + AdGuard Dutch filter. Filter list that specifically removes ads on websites in Dutch language.
-! Version: 2.0.4.11
-! TimeUpdated: 2022-08-03T09:04:15+00:00
+! Version: 2.0.4.12
+! TimeUpdated: 2022-08-20T12:31:57+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1302,21 +1302,34 @@ klusidee.nl#?#tr.table-row[-ext-has=".td-ad"]
 !--------------------------------------!
 !------- JS rules ---------------------!
 !--------------------------------------!
+! SECTION: Dutch - JS
+!
 ! https://github.com/AdguardTeam/AdguardFilters/issues/120455
 tweakers.net#%#//scriptlet("set-constant", "BannerManager", "undefined")
+! NOTE: JS end ⬆️
+! !SECTION: Dutch - JS
+!
 !--------------------------------------!
 !------- CSS fixes --------------------!
 !--------------------------------------!
+! SECTION: Dutch - CSS
+!
 ! https://github.com/AdguardTeam/AdguardFilters/issues/3226
 omroepbrabant.nl#$#.ad-banner-container { position: absolute!important; left: -3000px!important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/26718
 handbalstartpunt.nl#$##advertentie-top { height: 0!important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/14714
 omroepwest.nl#$#.adcontainer-Rectangle { position: absolute!important; left: -4000px!important; }
+! NOTE: CSS end ⬆️
+! !SECTION: Dutch - CSS
+!
 !--------------------------------------!
 !------- Content filtering rules ------!
 !--------------------------------------!
+! SECTION: Dutch - HTML
 !
+! NOTE: HTML end ⬆️
+! !SECTION: Dutch - HTML
 !---------------------------------------------------------------------------!
 !-------------- General URL blocking rules ---------------------------------!
 !---------------------------------------------------------------------------!
@@ -1478,6 +1491,8 @@ klusidee.nl##td.td-ad
 ||pcnltelecom.tdsapi.com/portal/iframe.js
 ||serving-sys.com/*.mp4^$domain=kijk.nl
 ||totaaltv.nl/upload/Banner-sep-astrasat.gif
+!
+! NOTE: Dutch - specific - HINTS
 ! https://github.com/AdguardTeam/AdguardFilters/issues/10738
 !---------------------------------------------------------------------------!
 !------ White list. Fixing filtration errors (false-positive) --------------!
