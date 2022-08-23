@@ -8,11 +8,10 @@
 }
 
 .notification {
+    position: relative;
     top: 0;
     left: 0;
     width: 100%;
-    max-width: 370px;
-    min-height: 50px;
     padding: 12px 16px;
     border-radius: 5px;
     margin-top: 15px;
@@ -24,6 +23,10 @@
     overflow: hidden;
     animation: notify-show 0.3s ease-in;
     opacity: 0.5;
+
+    @media (min-width: 640px) {
+        width: 370px;
+    }
 
     &:last-child {
         opacity: 1;
@@ -42,6 +45,9 @@
 
 .notificationClose {
     padding: 0;
+    position: absolute;
+    top: 8px;
+    right: 8px;
 }
 
 .description {

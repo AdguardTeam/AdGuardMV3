@@ -75,6 +75,9 @@ export class SettingsStore {
     @computed
     get currentSite() {
         const urlDetails = getUrlDetails(this.currentUrl);
+        if (urlDetails?.domainName.includes(chrome.runtime.id)) {
+            return this.currentUrl;
+        }
         if (urlDetails?.domainName) {
             return urlDetails.domainName;
         }

@@ -52,7 +52,7 @@ export const AddCustomFilter = ({
         .filter((filter) => filter.groupId === FiltersGroupId.CUSTOM)
         .map((filter) => filter.url);
 
-    const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const handleTextareaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
         setTextareaValue(value);
     };
@@ -133,9 +133,10 @@ export const AddCustomFilter = ({
                 <div className={theme.modal.label}>
                     {reactTranslator.getMessage('options_paste_filter_label')}
                 </div>
-                <textarea
+                <input
                     // eslint-disable-next-line jsx-a11y/no-autofocus
                     autoFocus
+                    type="text"
                     className={theme.modal.modalInput}
                     defaultValue={textareaValue}
                     onChange={handleTextareaChange}
@@ -161,6 +162,7 @@ export const AddCustomFilter = ({
                 <button
                     type="button"
                     className={cn(theme.button.middle, theme.button.transparent)}
+                    disabled={textareaValue.trim().length > 0}
                 >
                     <label htmlFor="file-input">
                         {reactTranslator.getMessage('options_custom_filter_modal_add_browse_button')}

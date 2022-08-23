@@ -14,13 +14,20 @@ const Nav = ({ closeSidebar }: NavProps) => {
         closeSidebar();
     };
 
+    const NAVIGATION_LINKS = {
+        ABOUT: '/about',
+        LIMITS: '/limits',
+    };
+
     return (
         <div className={styles.nav}>
             <NavLink
                 className={styles.item}
-                exact
                 activeClassName={styles.active}
                 to="/"
+                isActive={(match, location) => {
+                    return !Object.values(NAVIGATION_LINKS).some((link) => location.pathname.includes(link));
+                }}
                 onClick={onClick}
             >
                 {reactTranslator.getMessage('options_nav_link_general')}
@@ -28,7 +35,7 @@ const Nav = ({ closeSidebar }: NavProps) => {
             <NavLink
                 className={styles.item}
                 activeClassName={styles.active}
-                to="/about"
+                to={NAVIGATION_LINKS.ABOUT}
                 onClick={onClick}
             >
                 {reactTranslator.getMessage('options_nav_link_about')}
@@ -36,7 +43,7 @@ const Nav = ({ closeSidebar }: NavProps) => {
             <NavLink
                 className={styles.item}
                 activeClassName={styles.active}
-                to="/limits"
+                to={NAVIGATION_LINKS.LIMITS}
                 onClick={onClick}
             >
                 {reactTranslator.getMessage('options_nav_link_rule_limits')}

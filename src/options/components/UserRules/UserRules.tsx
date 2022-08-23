@@ -35,8 +35,20 @@ export const UserRules = observer(() => {
         optionsStore.openEditor();
     };
 
+    const closeEditor = () => {
+        optionsStore.closeEditor();
+    };
+
     const openAddUserRuleWizard = () => {
         optionsStore.openNewUserRuleWizard();
+    };
+
+    const handleBackClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        if (optionsStore.editorOpen) {
+            e.preventDefault();
+            closeEditor();
+        }
+        closeSearch();
     };
 
     const renderContent = (editorOpen: boolean) => {
@@ -65,7 +77,7 @@ export const UserRules = observer(() => {
             header={(
                 <Header
                     isOpen={searchStore.isSearchOpen}
-                    handleBackClick={closeSearch}
+                    handleBackClick={handleBackClick}
                     handleSearchClick={optionsStore.editorOpen ? undefined : openSearch}
                     pageTitle={
                         optionsStore.editorOpen

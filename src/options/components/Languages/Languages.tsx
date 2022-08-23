@@ -7,6 +7,7 @@ import { Category } from 'Options/components/Category';
 import { translator } from 'Common/translators/translator';
 import { Filter, FiltersGroupId } from 'Common/constants/common';
 import { Popover } from 'Common/components/ui';
+import { FILTER_RULESET, RulesetType } from 'Common/constants/filters';
 
 import { useNotifyStaticFiltersLimitError } from '../../hooks/useNotifyStaticFiltersLimitError';
 import { StaticRulelistsLimitation } from '../StaticRulelistsLimitation';
@@ -41,6 +42,10 @@ export const Languages = observer(() => {
         filter.groupId === FiltersGroupId.LANGUAGES
         || filter.groupId === FiltersGroupId.INTEGRATED));
 
+    const integratedFilter = filters.find((filter: Filter) => (
+        filter.id === FILTER_RULESET[RulesetType.RULESET_2].id
+    ));
+
     const getRulesMessage = (count: number) => (
         translator.getPlural('options_filter_rules_counter', count, { count })
     );
@@ -53,13 +58,18 @@ export const Languages = observer(() => {
         >
             <>
                 <StaticRulelistsLimitation />
-                <SwitcherOption
-                    integrated
-                    key="english_integrated"
-                    id="english_integrated"
-                    messageKey="options_languages_english"
-                />
                 <div className={styles.container}>
+                    <Popover
+                        key={integratedFilter?.id || 'english_integrated_popover'}
+                        text={getRulesMessage(integratedFilter?.declarativeRulesCounter || 0)}
+                    >
+                        <SwitcherOption
+                            integrated
+                            key="english_integrated"
+                            id="english_integrated"
+                            messageKey="options_languages_english"
+                        />
+                    </Popover>
                     {languagesFilters.map((filter) => (
                         <Popover
                             key={filter.id}

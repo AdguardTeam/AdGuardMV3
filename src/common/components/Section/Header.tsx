@@ -9,7 +9,7 @@ import styles from './Section.module.pcss';
 
 interface HeaderProps {
     isOpen: boolean,
-    handleBackClick: () => void,
+    handleBackClick: (e: React.MouseEvent<HTMLAnchorElement>) => void,
     handleSearchClick?: () => void,
     handleCloseSearchClick: () => void,
     handleSearchInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
