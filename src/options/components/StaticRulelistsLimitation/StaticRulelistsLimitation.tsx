@@ -14,7 +14,7 @@ export const StaticRulelistsLimitation = observer(() => {
     const {
         brokenFiltersList,
         isMaxEnabledFilters,
-        enabledFiltersCounter,
+        enabledStaticFiltersCounter,
     } = settingsStore;
 
     const maxEnabledFiltersError = isMaxEnabledFilters
@@ -22,7 +22,7 @@ export const StaticRulelistsLimitation = observer(() => {
             'options_static_filters_limits_by_filters',
             {
                 'link-to-limits': LinkToLimits,
-                'current-enabled': enabledFiltersCounter,
+                'current-enabled': enabledStaticFiltersCounter,
                 maximum: chrome.declarativeNetRequest.MAX_NUMBER_OF_ENABLED_STATIC_RULESETS,
             },
         );

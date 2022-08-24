@@ -166,12 +166,14 @@ class TsWebExtensionWrapper {
             const { id, localeCodes, declarativeRulesCounter } = localeFilterInMemory;
 
             // eslint-disable-next-line no-await-in-loop
-            const freeRules = await chrome.declarativeNetRequest.getAvailableStaticRuleCount();
-            const enabledFiltersCounter = filters.filters.filter((f) => f.enabled).length;
+            const availableStaticRulesCount = await chrome.declarativeNetRequest.getAvailableStaticRuleCount();
+            const enabledStaticFiltersCount = filters.filters
+                .filter((f) => f.enabled && f.groupId !== FiltersGroupId.CUSTOM)
+                .length;
 
             if (declarativeRulesCounter !== undefined
-                    && declarativeRulesCounter < freeRules
-                    && enabledFiltersCounter < MAX_NUMBER_OF_ENABLED_STATIC_RULESETS
+                    && declarativeRulesCounter < availableStaticRulesCount
+                    && enabledStaticFiltersCount < MAX_NUMBER_OF_ENABLED_STATIC_RULESETS
             ) {
                 log.debug(`Trying enable locale filter with id ${id} for locales: ${localeCodes}`);
                 // eslint-disable-next-line no-await-in-loop

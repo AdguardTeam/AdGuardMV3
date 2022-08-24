@@ -42,8 +42,8 @@ export const Limits = observer(() => {
     const {
         filters,
         enabledStaticRules,
-        enabledFiltersRegexps,
-        enabledFiltersCounter,
+        enabledStaticFiltersRegexps,
+        enabledStaticFiltersCounter,
         availableStaticRulesCount,
         closeUpdatedFiltersListWarning,
     } = settingsStore;
@@ -166,7 +166,7 @@ export const Limits = observer(() => {
                         'options_limits_static_rulesets_desc',
                         { count: MAX_NUMBER_OF_ENABLED_STATIC_RULESETS },
                     ),
-                    enabledFiltersCounter,
+                    enabledStaticFiltersCounter,
                     MAX_NUMBER_OF_ENABLED_STATIC_RULESETS,
                 )}
             </div>
@@ -187,7 +187,7 @@ export const Limits = observer(() => {
 
                 {descWithCounter(
                     reactTranslator.getMessage('options_limits_regex'),
-                    enabledFiltersRegexps,
+                    enabledStaticFiltersRegexps,
                     MAX_NUMBER_OF_REGEX_RULES,
                 )}
             </div>

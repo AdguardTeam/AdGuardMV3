@@ -59,8 +59,13 @@ export class SettingsStore {
     };
 
     @action
-    closeUpdatedFiltersListWarning = () => {
-        this.setFiltersChangedList([]);
+    closeUpdatedFiltersListWarning = async () => {
+        const { setLoader } = this.rootStore.uiStore;
+        setLoader(true);
+
+        await this.setFiltersChangedList([]);
+
+        setLoader(false);
     };
 
     canEnableFilter = (filterId: number): STATIC_FILTERS_LIMITS_ERROR | null => {
@@ -236,7 +241,7 @@ export class SettingsStore {
     @computed
     get enabledStaticRules(): number {
         return this.filters
-            .filter((f) => f.enabled)
+            .filter((f) => f.enabled && f.groupId !== FiltersGroupId.CUSTOM)
             .reduce((sum, filter) => {
                 const { declarativeRulesCounter } = filter;
 
@@ -249,15 +254,15 @@ export class SettingsStore {
     }
 
     @computed
-    get enabledFiltersCounter(): number {
+    get enabledStaticFiltersCounter(): number {
         return this.filters
-            .filter((f) => f.enabled)
+            .filter((f) => f.enabled && f.groupId !== FiltersGroupId.CUSTOM)
             .length;
     }
 
     @computed
     get isMaxEnabledFilters(): boolean {
-        return this.enabledFiltersCounter === chrome.declarativeNetRequest.MAX_NUMBER_OF_ENABLED_STATIC_RULESETS;
+        return this.enabledStaticFiltersCounter >= chrome.declarativeNetRequest.MAX_NUMBER_OF_ENABLED_STATIC_RULESETS;
     }
 
     @computed
@@ -266,9 +271,9 @@ export class SettingsStore {
     }
 
     @computed
-    get enabledFiltersRegexps(): number {
+    get enabledStaticFiltersRegexps(): number {
         return this.filters
-            .filter((f) => f.enabled)
+            .filter((f) => f.enabled && f.groupId !== FiltersGroupId.CUSTOM)
             .reduce((sum, filter) => {
                 const { regexpRulesCounter } = filter;
 
@@ -301,6 +306,6 @@ export class SettingsStore {
             return false;
         }
 
-        return this.enabledFiltersRegexps + filterToEnable.regexpRulesCounter <= MAX_NUMBER_OF_REGEX_RULES;
+        return this.enabledStaticFiltersRegexps + filterToEnable.regexpRulesCounter <= MAX_NUMBER_OF_REGEX_RULES;
     };
 }
