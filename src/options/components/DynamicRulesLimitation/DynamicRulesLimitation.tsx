@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react';
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 
 import { reactTranslator } from 'Common/translators/reactTranslator';
-import { LinkToLimits } from 'Common/components/LinkToLimits';
 
 import { rootStore } from '../../stores';
 
@@ -19,15 +19,13 @@ export const DynamicRulesLimitation = observer(() => {
     } = optionsStore;
 
     const maxEnabledRulesError = isMaxEnabledDynamicRules
-        && reactTranslator.getMessage('options_dynamic_rules_limit', {
-            'link-to-limits': LinkToLimits,
+        && reactTranslator.getMessage('options_dynamic_rules_limit_on_page', {
             'current-enabled': userRulesDeclarativeRulesCount,
             maximum: chrome.declarativeNetRequest.MAX_NUMBER_OF_DYNAMIC_AND_SESSION_RULES,
         });
 
     const maxEnabledRegexpsError = isMaxEnabledDynamicRulesRegexps
-        && reactTranslator.getMessage('options_dynamic_rules_regexps_limit', {
-            'link-to-limits': LinkToLimits,
+        && reactTranslator.getMessage('options_dynamic_rules_regexps_limit_on_page', {
             'current-enabled': userRulesRegexpsCount,
             maximum: chrome.declarativeNetRequest.MAX_NUMBER_OF_REGEX_RULES,
         });
@@ -36,12 +34,22 @@ export const DynamicRulesLimitation = observer(() => {
     return isErrors
         ? (
             <section className={styles.limits}>
-                <span className={styles.limit}>
-                    {maxEnabledRulesError}
-                </span>
-                <span className={styles.limit}>
-                    {maxEnabledRegexpsError}
-                </span>
+                {maxEnabledRulesError && (
+                    <div className={styles.limit}>
+                        {maxEnabledRulesError}
+                    </div>
+                )}
+                {maxEnabledRegexpsError && (
+                    <div className={styles.limit}>
+                        {maxEnabledRegexpsError}
+                    </div>
+                )}
+                <Link
+                    className={styles.notificationLink}
+                    to="/limits"
+                >
+                    {reactTranslator.getMessage('options_limits_title')}
+                </Link>
             </section>
         )
         : null;
