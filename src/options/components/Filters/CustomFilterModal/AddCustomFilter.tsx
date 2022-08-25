@@ -134,8 +134,11 @@ export const AddCustomFilter = ({
                     {reactTranslator.getMessage('options_paste_filter_label')}
                 </div>
                 <input
+                    // Disable autofocus if the popup opens after subscribing to a filter,
+                    // the text in the input may not be displayed correctly
                     // eslint-disable-next-line jsx-a11y/no-autofocus
-                    autoFocus
+                    autoFocus={textareaValue.trim().length === 0}
+                    autoComplete="off"
                     type="text"
                     className={theme.modal.modalInput}
                     defaultValue={textareaValue}
