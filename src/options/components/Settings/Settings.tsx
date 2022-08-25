@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 import { translator } from 'Common/translators/translator';
 import { Filter, FiltersGroupId } from 'Common/constants/common';
 import { Section } from 'Common/components/Section';
-import { IconId, Popover } from 'Common/components/ui';
+import { IconId } from 'Common/components/ui';
 
 import { useNotifyStaticFiltersLimitError } from '../../hooks/useNotifyStaticFiltersLimitError';
 import { rootStore } from '../../stores';
@@ -82,20 +82,17 @@ export const Settings = observer(() => {
             >
                 <StaticRulelistsLimitation />
                 {mainFilters.map((filter) => (
-                    <Popover
+                    <SwitcherOption
                         key={filter.id}
-                        text={getRulesMessage(filter.declarativeRulesCounter || 0)}
-                    >
-                        <SwitcherOption
-                            iconId={filter.iconId}
-                            id={filter.id.toString()}
-                            className={styles.optionLabel}
-                            messageKey={filter.title}
-                            messageKeyDesc={filter.description}
-                            checked={filter.enabled}
-                            onChange={() => { onChange(filter); }}
-                        />
-                    </Popover>
+                        iconId={filter.iconId}
+                        id={filter.id.toString()}
+                        className={styles.optionLabel}
+                        messageKey={filter.title}
+                        messageKeyDesc={filter.description}
+                        checked={filter.enabled}
+                        onChange={() => { onChange(filter); }}
+                        title={getRulesMessage(filter.declarativeRulesCounter || 0)}
+                    />
                 ))}
                 {navOptions.map(NavOption)}
             </Section>

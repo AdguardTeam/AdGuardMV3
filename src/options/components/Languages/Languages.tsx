@@ -6,7 +6,6 @@ import { SwitcherOption } from 'Options/components/SwitcherOption';
 import { Category } from 'Options/components/Category';
 import { translator } from 'Common/translators/translator';
 import { Filter, FiltersGroupId } from 'Common/constants/common';
-import { Popover } from 'Common/components/ui';
 import { FILTER_RULESET, RulesetType } from 'Common/constants/filters';
 
 import { useNotifyStaticFiltersLimitError } from '../../hooks/useNotifyStaticFiltersLimitError';
@@ -59,30 +58,23 @@ export const Languages = observer(() => {
             <>
                 <StaticRulelistsLimitation />
                 <div className={styles.container}>
-                    <Popover
-                        key={integratedFilter?.id || 'english_integrated_popover'}
-                        text={getRulesMessage(integratedFilter?.declarativeRulesCounter || 0)}
-                    >
-                        <SwitcherOption
-                            integrated
-                            key="english_integrated"
-                            id="english_integrated"
-                            messageKey="options_languages_english"
-                        />
-                    </Popover>
+                    <SwitcherOption
+                        integrated
+                        key="english_integrated"
+                        id="english_integrated"
+                        messageKey="options_languages_english"
+                        title={getRulesMessage(integratedFilter?.declarativeRulesCounter || 0)}
+                    />
                     {languagesFilters.map((filter) => (
-                        <Popover
+                        <SwitcherOption
                             key={filter.id}
-                            text={getRulesMessage(filter.declarativeRulesCounter || 0)}
-                        >
-                            <SwitcherOption
-                                integrated={filter.groupId === FiltersGroupId.INTEGRATED}
-                                id={filter.id.toString()}
-                                message={filter.title}
-                                checked={filter.enabled}
-                                onChange={() => { onChange(filter); }}
-                            />
-                        </Popover>
+                            integrated={filter.groupId === FiltersGroupId.INTEGRATED}
+                            id={filter.id.toString()}
+                            message={filter.title}
+                            checked={filter.enabled}
+                            onChange={() => { onChange(filter); }}
+                            title={getRulesMessage(filter.declarativeRulesCounter || 0)}
+                        />
                     ))}
                 </div>
             </>

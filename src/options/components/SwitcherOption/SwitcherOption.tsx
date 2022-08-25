@@ -27,6 +27,7 @@ export interface IProps {
     iconClass?: string,
     containerClass?: string,
     integrated?: boolean,
+    title?: string,
 }
 
 export const SwitcherOption = ({
@@ -42,6 +43,7 @@ export const SwitcherOption = ({
     iconClass = '',
     containerClass = '',
     integrated = false,
+    title = '',
 }: IProps) => {
     const content = () => {
         return (
@@ -71,6 +73,7 @@ export const SwitcherOption = ({
             )}
             htmlFor={id}
             key={id}
+            title={title}
         >
             {onClick ? (
                 <button

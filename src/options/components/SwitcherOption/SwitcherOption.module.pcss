@@ -10,13 +10,16 @@
     transition: 0.3s ease background-color;
     user-select: none;
 
-    &.disabled {
-        cursor: default;
-        pointer-events: none;
-    }
-
     &:hover {
         background-color: var(--gray4d);
+    }
+
+    &.disabled {
+        cursor: default;
+
+        &:hover {
+            background-color: transparent;
+        }
     }
 }
 
@@ -38,7 +41,6 @@
 .optionLabel {
     font-size: 1.6rem;
     color: var(--white);
-    cursor: pointer;
     flex-grow: 1;
     transition: 0.1s ease color;
 }
