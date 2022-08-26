@@ -39,8 +39,10 @@ export const RemoveCustomFilter = ({
                         <div className={theme.modal.label}>
                             {reactTranslator.getMessage('options_custom_filter_add_label_description')}
                         </div>
-                        <div className={cn(theme.modal.filterDescription, theme.modal.name)}>
-                            {description}
+                        <div className={theme.modal.filterDescriptionWrapper}>
+                            <div className={cn(theme.modal.filterDescription, theme.modal.name)}>
+                                {description}
+                            </div>
                         </div>
                     </div>
                 )

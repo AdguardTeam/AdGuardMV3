@@ -20,12 +20,14 @@ export const AddCustomFilterConfirm = ({
     return (
         <>
             {description && (
-                <div className={theme.modal.itemWrapper}>
+                <div className={cn(theme.modal.itemWrapper, theme.modal.disabled)}>
                     <div className={theme.modal.label}>
                         {reactTranslator.getMessage('options_custom_filter_add_label_description')}
                     </div>
-                    <div className={cn(theme.modal.filterDescription, theme.modal.name)}>
-                        {description}
+                    <div className={theme.modal.filterDescriptionWrapper}>
+                        <div className={cn(theme.modal.filterDescription, theme.modal.name)}>
+                            {description}
+                        </div>
                     </div>
                 </div>
             )}
