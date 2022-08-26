@@ -6,6 +6,7 @@ import { FiltersGroupId, FilterInfo } from 'Common/constants/common';
 import { log } from 'Common/logger';
 import { theme } from 'Common/styles';
 import { translator } from 'Common/translators/translator';
+import { IconId } from 'Common/components/ui';
 import { rootStore } from 'Options/stores';
 import { sender } from 'Options/messaging/sender';
 
@@ -40,7 +41,7 @@ export const AddCustomFilter = ({
     initialTitle,
     setUrlToSubscribe,
 }: AddCustomProps) => {
-    const { settingsStore } = useContext(rootStore);
+    const { settingsStore, uiStore } = useContext(rootStore);
     const { filters } = settingsStore;
     const [textareaValue, setTextareaValue] = useState(urlToSubscribe);
 
@@ -70,12 +71,17 @@ export const AddCustomFilter = ({
         e.target.value = '';
 
         try {
+            const isCorrectExtension = file.name.endsWith('.txt');
+            if (!isCorrectExtension) {
+                const message = translator.getMessage('options_custom_filter_modal_incorrect_format');
+                uiStore.addNotification(message, IconId.WARNING);
+                throw new Error(message);
+            }
             const fileContent = await readFile(file);
             const filterInfo = await sender.getFilterInfoByContent(fileContent,
                 initialTitle || file.name);
             if (!filterInfo) {
-                log.error(ERROR_FORMAT_IS_BROKEN);
-                onError(ERROR_FORMAT_IS_BROKEN);
+                throw new Error('failed to get filterInfo');
             }
             onSuccess(filterInfo, fileContent);
         } catch (error: any) {
@@ -92,6 +98,11 @@ export const AddCustomFilter = ({
         if (filtersUrls.includes(url)) {
             onError(ERROR_URL_ALREADY_UPLOADED);
         }
+        if (!url.endsWith('.txt')) {
+            const message = translator.getMessage('options_custom_filter_modal_incorrect_format');
+            uiStore.addNotification(message, IconId.WARNING);
+            onError(ERROR_FORMAT_IS_BROKEN);
+        }
         setUrlToSubscribe(url);
         try {
             const filterContent = await sender.getFilterContentByUrl(url);
@@ -103,6 +114,8 @@ export const AddCustomFilter = ({
             }
             onSuccess(filterInfo, filterContent);
         } catch (error: any) {
+            const message = translator.getMessage('options_custom_filter_modal_incorrect_url');
+            uiStore.addNotification(message, IconId.WARNING);
             log.error(`${ERROR_FORMAT_IS_BROKEN} ${error.message}`);
             onError(ERROR_FORMAT_IS_BROKEN);
         }
