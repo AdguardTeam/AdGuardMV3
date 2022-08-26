@@ -153,6 +153,7 @@ export const Editor = observer(() => {
                 }}
                 onFocus={onFocus}
                 commands={shortcuts}
+                fontSize="0.87rem"
             />
             <ReactResizeDetector
                 skipOnMount

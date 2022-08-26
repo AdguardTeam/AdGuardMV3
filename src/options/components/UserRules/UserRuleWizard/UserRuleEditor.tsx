@@ -51,6 +51,7 @@ export const UserRuleEditor = ({ ruleText, onChange, mod }: UserRuleEditorProps)
                 className={cn(styles.editor, styles.editorUserRules, 'editor')}
                 onFocus={onFocus}
                 maxLines={1}
+                fontSize="1rem"
             />
         </div>
     );
