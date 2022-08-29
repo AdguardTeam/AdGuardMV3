@@ -3,7 +3,6 @@ import {
     computed,
     makeObservable,
     observable,
-    runInAction,
 } from 'mobx';
 
 import { IconId } from 'Common/components/ui/Icons';
@@ -82,8 +81,5 @@ export class WizardStore {
     @action
     skipWizard = async () => {
         await this.rootStore.settingsStore.hideWizard();
-        runInAction(() => {
-            this.step = INITIAL_STEP;
-        });
     };
 }
