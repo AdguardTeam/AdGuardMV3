@@ -8,7 +8,9 @@
     "scripts": {
         "dev": "BUILD_ENV=dev ts-node scripts/bundle",
         "release": "BUILD_ENV=release ts-node scripts/bundle",
-        "filters": "ts-node scripts/filters",
+        "filters": "ts-node scripts/filters update && ts-node scripts/filters convert",
+        "filters-update": "ts-node scripts/filters update",
+        "filters-convert": "ts-node scripts/filters convert",
         "lint": "eslint . && tsc",
         "test": "jest",
         "locales": "ts-node scripts/locales",

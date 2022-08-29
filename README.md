@@ -1,37 +1,81 @@
-# Browser extension MV3
+# AdGuard MV3 Extension
 
-## Implementation of AdGuard Browser extension with Manifest V3
+<br/>
+<div align="center">
+    <img alt="AdGuard DNS" src="https://cdn.adtidy.org/website/images/adguard_main_logo.png" width="300px"/>
+</div>
+<br/>
+<div align="center">
+    <a href="https://adguard.com/">AdGuard Website</a> |
+    <a href="https://reddit.com/r/Adguard">Reddit</a> |
+    <a href="https://twitter.com/AdGuard">Twitter</a>
+</div>
+<br/>
 
-## Development
-To build release, run:
-```
-yarn release
-```
+Starting from January 2023 the old Manifest V2 extensions will be deprecated
+and the only way to achieve content blocking in Chrome would be to use the new
+[Manifest V3][v3timeline].
 
-To build dev, run:
-```
-yarn dev
-```
+In mid-2021, we started working on the prototype of a new extension that would
+be able to block ads even within the strict limits of Manifest V3. The task was
+not easy, but we're finally able to present the first working prototype of an
+MV3-enabled ad blocker.
 
-To build dev for Chrome, run:
-```
-yarn dev chrome
-```
+The prototype is fully functional and if you're not a power-user, you may feel
+little difference with the existing MV2-blockers. Unfortunately, this does not
+mean that everything is great and we suggest you to read the [blog post][blog]
+to learn about all the limitations.
 
-To build dev for Chrome in watch mode, run:
-```
-yarn dev chrome --watch
-```
+* [Install the extension][install]
+* [Read the blog post about it][blog]
 
-Download and convert filters into declarative rules:
-```
-yarn filters update
-```
+[v3timeline]: https://developer.chrome.com/blog/mv2-transition/
+[install]: https://agrd.io/adguard_mv3
+[blog]: https://agrd.io/blogpost_mv3
 
-Convert filters into declarative rules:
-```
-yarn filters convert
-```
+## How to build
+
+## Requirements
+
+* `nodejs` - **only version 16**.
+* `yarn` - nodejs package manager.
+
+### Prepare
+
+* `yarn install` - install necessary dependencies.
+* `yarn filters` - download the latest versions of the filter lists built-in the
+  extension and convert them to declarative format.
+
+### Build
+
+* `yarn release` - release build.
+* `yarn dev` - dev build.
+* `yarn dev --watch` - prepare the dev build and monitor the files for changes.
+  Note, that this command will not run filters conversion, you'll need to do it
+  manually.
+
+### For Filters Maintainers
+
+Some of the extension capabilities are only available when you install it as an
+"unpacked" extension. Also, if you want to test how it works with a different
+version of your filter, you need to make changes to your list manually and then
+rebuild & reload the extension.
+
+So here's what you need to do:
+1. Build the extension with `yarn dev chrome --watch`.
+2. Go to `chrome://extensions`, enable "Developer mode", click "Load unpacked"
+   and choose the newly built extension (it will be located in
+   `build/dev/chrome`).
+3. In order to see how it works, open Chrome's Developer Tools and switch to the
+   "AdGuard" tab. Refresh the page to see what has been blocked and by which
+   rule.
+4. Let's try changing something. For instance, you may want to change the Base
+   list. Open `src/filters/chrome/filter_1.txt` and implement your changes.
+5. Run `yarn filters-convert` to prepare the static lists.
+6. Since you're running with `--watch`, the extension will be re-built
+   automatically, but you still need to reload the extension in Chrome. You will
+   also need to reload the "AdGuard" tab in Dev Tools or simply reopen Dev Tools
+   to make it work.
 
 ## Permissions required
 - `tabs`                          - this permission is required in order to get the URL of the options page tab
@@ -43,68 +87,6 @@ yarn filters convert
 - `declarativeNetRequestFeedback` - this permission is required in order to create a log of the blocked, redirected or modified URL requests
 - `unlimitedStorage`              - this permission is required in order to save large filters
 - `webNavigation`                 - this permission is required in order to catch the moment for injecting scriptlets
-
-## Problems
-- Regexp is not supported in remove params
-- We cannot implement inversion in remove params
-- We cannot filter by request methods
-- Only one rule applies for a redirect. For this reason, different rules with the same URL may not work.
-
-A few examples:
-```
-Works   ||testcases.adguard.com$removeparam=p1case6|p2case6
-Failed  ||testcases.adguard.com$removeparam=p1case6
-Works   ||testcases.adguard.com$removeparam=p2case6
-```
-- [Tests](http://testcases.adguard.com/) may fail due to delayed injection of cosmetic rules
-- $badfilter doesn't work in MV3, you should manually toggle "bad filters" in the settings to turn them off or leave their .txt files empty
-
-## How to build, run and test (for developers)
-Filters currently in use are placed in the path 'src/filters/chrome'
-
-### Edit static filters
-To change the list of filters, go to 'src/common/constants/filters.ts'
-
-For a single test:
-1. Run `yarn filters convert`
-2. Run `yarn dev chrome`
-3. Reload the extension on `chrome://extensions/`
-
-If you want to continuously edit & test filters after that, you can do it differently:
-1. Run `yarn dev chrome --watch`
-2. In the second terminal but in the same root project directory, run `yarn filters conver` right after you are done with editing filters and want to test results
-3. Reload extension on `chrome://extensions/`
-
-### List of IDs and names of static filters:
-1. Russian
-2. Block ads (AdGuard Base filter)
-3. Block trackers
-4. Block social widgets
-6. German
-7. Japanese
-8. Dutch
-9. Spanish
-13. Turkish
-14. Block annoyances
-16. French
-224. Chinese
-
-### Update filters
-Do the following:
-1. `yarn filters update`
-2. `yarn filters convert`
-3. `yarn dev chrome`
-3. Reload extension on `chrome://extensions/`
-
-## Debugging declarative rules
-1. Clone this repository
-2. Run `yarn dev chrome --watch` (or `release` instead of `dev`)
-3. Go to `chrome://extensions/` and install extension from folder `build`
-3.1. Enable Developer's mode in the upper right corner of your browser
-3.2. Install the unpacked extension
-4. After installation open any filtered website
-5. Open Developer Tools in Chrome and click the AdGuard icon in the upper right corner
-6. Here will be displayed all matching requests that were blocked or modified by declarative rules. You will see the full information about each request, including the source blocking rule in plain text format and the declarative rule in JSON format
 
 ## Dependencies
 1. `nodejs` - https://nodejs.org/en/download/, **only version 16**
