@@ -1,3 +1,6 @@
+import browser from 'webextension-polyfill';
+import * as TSUrlFilter from '@adguard/tsurlfilter';
+
 import { IconId } from 'Common/components/ui';
 import {
     FiltersGroupId,
@@ -15,6 +18,8 @@ import { arrayToMap } from 'Common/utils/arrays';
 
 import { backend, COMMON_FILTERS_DIR } from './backend';
 import { storage } from './storage';
+import { engine } from './engine';
+import { RequestTypes } from './request-types';
 
 const CUSTOM_FILTERS_START_ID = 1000;
 
@@ -123,6 +128,39 @@ export const DEFAULT_FILTERS: Filter[] = [
     },
 ];
 
+const getRequestType = (details:any) => {
+    let requestType;
+
+    switch (details.type) {
+        case 'main_frame':
+            requestType = RequestTypes.DOCUMENT;
+            break;
+        case 'sub_frame':
+            requestType = RequestTypes.SUBDOCUMENT;
+            break;
+        default:
+            requestType = details.type.toUpperCase();
+            break;
+    }
+
+    if (requestType === 'IMAGESET') {
+        requestType = RequestTypes.IMAGE;
+    }
+
+    if (requestType === RequestTypes.OTHER) {
+        requestType = RequestTypes.OBJECT;
+    }
+
+    if (requestType === 'BEACON') {
+        requestType = RequestTypes.PING;
+    }
+
+    if (!(requestType in RequestTypes)) {
+        requestType = RequestTypes.OTHER;
+    }
+
+    return requestType;
+};
 class Filters {
     FILTERS_STORAGE_KEY = 'filters';
 
@@ -131,6 +169,8 @@ class Filters {
     rules: Rules[] = [];
 
     enableFiltersIds: number[] = [];
+
+    logs :Record<number, any[]> = {};
 
     async init() {
         this.filters = await this.getFiltersFromStorage();
@@ -142,6 +182,56 @@ class Filters {
         // If the rules have changed, get them (on the first lines + check time)
         this.rules = await this.getRules(this.filters);
         await storage.set(RULES_STORAGE_KEY, this.rules);
+
+        await this.startTSUrlFilterEngine();
+
+        browser.webRequest.onBeforeRequest.addListener(
+            (requestDetails:any) => {
+                const result = engine.matchRequest({
+                    requestUrl: requestDetails.url,
+                    frameUrl: requestDetails.initiator,
+                    requestType: getRequestType(requestDetails),
+
+                });
+
+                if (result?.getBasicResult()) {
+                    const { tabId } = requestDetails;
+                    if (tabId) {
+                        if (!this.logs[tabId]) {
+                            this.logs[tabId] = [result.getBasicResult()];
+                        } else {
+                            this.logs[tabId].push(result.getBasicResult());
+                        }
+                    }
+                    //
+                }
+            },
+            { urls: ['<all_urls>'] },
+            ['requestBody', 'extraHeaders'],
+        );
+    }
+
+    async startTSUrlFilterEngine() {
+        const lists = [];
+
+        // eslint-disable-next-line no-plusplus
+        for (let i = 0; i < this.rules.length; i++) {
+            const rule = this.rules[i];
+            const filterId = rule.id;
+            const rulesTexts = rule.rules;
+
+            const filterList = new TSUrlFilter.StringRuleList(
+                filterId,
+                rulesTexts,
+                true,
+                true,
+                true,
+            );
+
+            lists.push(filterList);
+        }
+
+        await engine.startEngine(lists);
     }
 
     getRulesFromFiles = async (): Promise<Rules[]> => {
@@ -370,6 +460,10 @@ class Filters {
         };
         await this.addFilter(filter, filterStrings.join('\n'));
         return this.getFilters();
+    };
+
+    public getDomainCounter = (tabId:number) => {
+        return this.logs[tabId] || [];
     };
 }
 

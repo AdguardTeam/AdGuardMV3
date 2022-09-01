@@ -5,6 +5,7 @@ export interface PopupData {
     settings: SettingsType,
     isAllowlisted: boolean,
     enableFiltersIds: number[],
+    domainCounter:any[]
 }
 
 export type CategoriesType = {

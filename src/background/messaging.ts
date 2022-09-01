@@ -47,13 +47,14 @@ export const extensionMessageHandler = async (
             return tabUtils.openOptionsPage(data.path);
         }
         case MESSAGE_TYPES.GET_POPUP_DATA: {
-            const { domainName } = data;
+            const { domainName, tabId } = data;
             const allowListRule = await userRules.getSiteAllowRule(domainName);
 
             const popupData: PopupData = {
                 settings: settings.getSettings(),
                 isAllowlisted: allowListRule?.enabled || false,
                 enableFiltersIds: await filters.getEnableFiltersIds(),
+                domainCounter: filters.getDomainCounter(tabId),
             };
             return popupData;
         }

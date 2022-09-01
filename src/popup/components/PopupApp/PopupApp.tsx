@@ -1,6 +1,7 @@
 import React, { useContext, useLayoutEffect } from 'react';
 import { observer } from 'mobx-react';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
+import { counting } from 'radash';
 
 import { Icons } from 'Common/components/ui';
 import { NOTIFIER_EVENTS } from 'Common/constants/common';
@@ -30,6 +31,7 @@ export const PopupApp = observer(() => {
     const store = useContext(rootStore);
     const { settingsStore } = store;
     const {
+        domainCounter,
         setLoader,
         getPopupData,
         popupDataReady,
@@ -37,13 +39,26 @@ export const PopupApp = observer(() => {
         protectionEnabled,
         setProtectionValue,
         setProtectionPauseExpiresValue,
+        getBadgeText,
         settings: {
             [SETTINGS_NAMES.FILTERS_CHANGED]: wasEnabledIds,
         },
     } = settingsStore;
 
+    const [badgeText, setBadgeText] = React.useState('0');
+
+    const list = counting(domainCounter, (g) => g.pattern.hostname);
+    const countDomains = Object.keys(list).length;
+    const count = Object.keys(list)
+        .filter((d) => d !== 'undefined')
+        .map((d) => list[d])
+        .reduce((p, c) => p + c, 0);
+
     useLayoutEffect(() => {
         getPopupData();
+        getBadgeText().then((v) => {
+            setBadgeText(v);
+        });
     }, []);
 
     useEventListener('popup', {
@@ -111,7 +126,24 @@ export const PopupApp = observer(() => {
                         <Icons />
                         {!protectionEnabled && <div className={styles.overlay} />}
                         <Header />
-                        <main className={styles.main}>{ mainContent }</main>
+                        <main className={styles.main}>
+                            { mainContent }
+
+                            <div className={styles.count}>
+                                {`Blocked: ${badgeText} / ${countDomains} / ${count}`}
+                            </div>
+                            <ul className={styles.list}>
+                                {Object.keys(list)
+                                    .filter((d) => d !== 'undefined')
+                                    .map((d) => (
+                                        <li key={d}>
+                                            {d}
+                                            :
+                                            {list[d]}
+                                        </li>
+                                    ))}
+                            </ul>
+                        </main>
                         {footer}
                         <LoaderOverlay />
                     </div>

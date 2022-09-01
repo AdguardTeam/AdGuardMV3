@@ -10,7 +10,8 @@ class Sender {
     /**
      * Retrieves popup data from background service worker
      */
-    getPopupData = (domainName: string) => sendMessage<PopupData>(MESSAGE_TYPES.GET_POPUP_DATA, { domainName });
+    // eslint-disable-next-line max-len
+    getPopupData = (domainName: string, tabId?: number) => sendMessage<PopupData>(MESSAGE_TYPES.GET_POPUP_DATA, { domainName, tabId });
 
     /**
      * Asks background service worker to open options page

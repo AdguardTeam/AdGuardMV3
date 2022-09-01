@@ -53,6 +53,23 @@ export class SettingsStore {
     @observable
     loader = false;
 
+    @observable
+    logs = {};
+
+    @observable
+    domainCounter :any[] = [];
+
+    @action
+    getBadgeText = async () => {
+        const activeTab = await tabUtils.getActiveTab();
+        const tabId = activeTab?.id;
+        if (!tabId) return '-1';
+        const badgeText = await chrome.action.getBadgeText(
+            { tabId },
+        );
+        return badgeText;
+    };
+
     @action
     getCurrentTabUrl = async () => {
         const activeTab = await tabUtils.getActiveTab();
@@ -180,13 +197,17 @@ export class SettingsStore {
     @action
     updatePopupData = async () => {
         await this.getCurrentTabUrl();
+        const activeTab = await tabUtils.getActiveTab();
 
-        const { settings, isAllowlisted, enableFiltersIds } = await sender.getPopupData(this.currentSite);
+        const {
+            settings, isAllowlisted, enableFiltersIds, domainCounter,
+        } = await sender.getPopupData(this.currentSite, activeTab.id);
 
         runInAction(() => {
             this.settings = settings;
             this.isAllowlisted = isAllowlisted;
             this.enableFiltersIds = enableFiltersIds;
+            this.domainCounter = domainCounter;
         });
 
         this.clearOrSetUpdateTime(this.settings[SETTINGS_NAMES.PROTECTION_PAUSE_EXPIRES]);
