@@ -62,7 +62,7 @@ export const Languages = observer(() => {
                         integrated
                         key="english_integrated"
                         id="english_integrated"
-                        messageKey="options_languages_english"
+                        message={translator.getMessage('options_languages_english')}
                         title={getRulesMessage(integratedFilter?.declarativeRulesCounter || 0)}
                     />
                     {languagesFilters.map((filter) => (

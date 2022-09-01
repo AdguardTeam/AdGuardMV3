@@ -29,22 +29,22 @@ export const Settings = observer(() => {
         LANGUAGES: {
             id: 'languages_option',
             iconId: IconId.LANGUAGES,
-            messageKey: 'options_languages_option',
-            messageKeyDesc: 'options_languages_option_desc',
+            message: translator.getMessage('options_languages_option'),
+            messageDesc: translator.getMessage('options_languages_option_desc'),
             to: '/languages',
         },
         CUSTOM_FILTERS: {
             id: 'custom_filters',
             iconId: IconId.CUSTOM_FILTERS,
-            messageKey: 'options_custom_filters_option',
-            messageKeyDesc: 'options_custom_filters_option_desc',
+            message: translator.getMessage('options_custom_filters_option'),
+            messageDesc: translator.getMessage('options_custom_filters_option_desc'),
             to: '/customfilters',
         },
         USER_RULES: {
             id: 'user_rules_option',
             iconId: IconId.USER_RULES,
-            messageKey: 'options_user_rules_option',
-            messageKeyDesc: 'options_user_rules_option_desc',
+            message: translator.getMessage('options_user_rules_option'),
+            messageDesc: translator.getMessage('options_user_rules_option_desc'),
             // TODO: make enum
             to: '/userrules',
         },
@@ -87,8 +87,8 @@ export const Settings = observer(() => {
                         iconId={filter.iconId}
                         id={filter.id.toString()}
                         className={styles.optionLabel}
-                        messageKey={filter.title}
-                        messageKeyDesc={filter.description}
+                        message={filter.title}
+                        messageDesc={filter.description ? filter.description : ''}
                         checked={filter.enabled}
                         onChange={() => { onChange(filter); }}
                         title={getRulesMessage(filter.declarativeRulesCounter || 0)}

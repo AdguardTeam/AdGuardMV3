@@ -3,23 +3,22 @@ import cn from 'classnames';
 import { NavLink } from 'react-router-dom';
 
 import { Icon, IconId } from 'Common/components/ui';
-import { reactTranslator } from 'Common/translators/reactTranslator';
 
 import styles from './NavOption.module.pcss';
 
 export interface IProps {
     id: string;
     iconId?: IconId;
-    messageKey: string;
-    messageKeyDesc: string;
+    message: string;
+    messageDesc: string;
     to: string;
 }
 
 export const NavOption = ({
     id,
     iconId,
-    messageKey,
-    messageKeyDesc,
+    message,
+    messageDesc,
     to = '',
 }: IProps) => (
     <NavLink
@@ -34,10 +33,10 @@ export const NavOption = ({
                     htmlFor={id}
                     className={styles.optionLabel}
                 >
-                    {reactTranslator.getMessage(messageKey)}
-                    {messageKeyDesc && (
+                    {message}
+                    {messageDesc && (
                         <div className={styles.optionLabelDesc}>
-                            {reactTranslator.getMessage(messageKeyDesc) as string}
+                            {messageDesc}
                         </div>
                     )}
                 </label>

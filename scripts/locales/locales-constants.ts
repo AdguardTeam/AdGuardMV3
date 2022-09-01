@@ -10,7 +10,8 @@ export type localeMessageType = { [key: string]: { message: string } };
 export type translationResultType = {
     locale: string,
     level: number,
-    untranslatedStrings: string[]
+    untranslatedStrings: string[],
+    invalidTranslations: { key: string, error: any }[],
 };
 
 const {

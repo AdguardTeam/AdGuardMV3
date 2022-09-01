@@ -1,8 +1,491 @@
 {
     "name": {
-        "message": "AdGuard Browser Extension v3"
+        "message": "AdGuard AdBlocker MV3 Experimental"
     },
     "description": {
-        "message": "Experimental version of unmatched adblock extension built on Manifest V3."
+        "message": "Experimentální verze bezkonkurenčního rozšíření blokování reklam na základě Manifest V3."
+    },
+    "popup_protection_enabled_status": {
+        "message": "Ochrana je povolena"
+    },
+    "popup_protection_enabled_refresh": {
+        "message": "Ochrana je zapnuta <button>Obnovte stránku<\/button> pro použití změn"
+    },
+    "popup_protection_disabled_status": {
+        "message": "Ochrana je vypnuta. Aktualizace nejsou dostupné."
+    },
+    "popup_protection_secure_page": {
+        "message": "Zabezpečená stránka"
+    },
+    "popup_blocked_on_this_page": {
+        "message": "blokováno na této stránce"
+    },
+    "popup_report_site_option": {
+        "message": "Nahlásit webovou stránku"
+    },
+    "popup_steps_experimental_title": {
+        "message": "Experimentální"
+    },
+    "popup_steps_experimental_description": {
+        "message": "Naši alchymisté znají způsoby, jak zkrotit výzvy MV3. AdGuard nyní pracuje s Manifest V3."
+    },
+    "popup_steps_new_tech_title": {
+        "message": "Inovativní"
+    },
+    "popup_steps_new_tech_description": {
+        "message": "Používáme špičkové přístupy, abychom se přizpůsobili rychle se vyvíjejícímu a stále se zdokonalujícímu rámci MV3."
+    },
+    "popup_steps_fast_work_title": {
+        "message": "Rychlý"
+    },
+    "popup_steps_fast_work_description": {
+        "message": "Zvýšili jsme výkon AdGuard refaktorizací našich knihoven pro blokování obsahu a využitím funkcí MV3."
+    },
+    "popup_steps_v3_manifest_title": {
+        "message": "Manifest V3"
+    },
+    "popup_steps_v3_manifest_description": {
+        "message": "Možná jste si všimli jediného výsledku přechodu AdGuard na MV3: ještě lepšího výkonu."
+    },
+    "popup_learn_more_link": {
+        "message": "Zjistit více"
+    },
+    "popup_skip_wizard": {
+        "message": "Přeskočit"
+    },
+    "popup_wizard_next_button": {
+        "message": "Další"
+    },
+    "popup_wizard_start_button": {
+        "message": "Štíty vzhůru!"
+    },
+    "options_block_ads_option": {
+        "message": "Blokování reklam"
+    },
+    "options_block_annoyances_option": {
+        "message": "Blokování obtěžování"
+    },
+    "options_block_annoyances_option_desc": {
+        "message": "Odstranění vyskakovacích oken a plovoucích prvků"
+    },
+    "options_block_trackers_option": {
+        "message": "Blokování slídičů"
+    },
+    "options_block_trackers_option_desc": {
+        "message": "Odstranění sledovacích souborů cookie"
+    },
+    "options_block_social_widgets_option": {
+        "message": "Blokování widgetů sociálních sítí"
+    },
+    "options_block_social_widgets_option_desc": {
+        "message": "Odstranění tlačítek widgetů sociálních sítí"
+    },
+    "options_languages_option": {
+        "message": "Jazykově specifické filtry"
+    },
+    "options_languages_option_desc": {
+        "message": "Odstranění reklam pro jazykově specifické webové stránky"
+    },
+    "options_languages_option_header_desc": {
+        "message": "Blokování reklam na webových stránkách v těchto jazycích"
+    },
+    "options_languages_english": {
+        "message": "Czech"
+    },
+    "options_base_filter": {
+        "message": "Základní filtr AdGuardu"
+    },
+    "options_custom_filters_option": {
+        "message": "Vlastní filtry"
+    },
+    "options_custom_filters_option_desc": {
+        "message": "Přidání vlastních filtrů na základě pravidel filtrování AdGuardu"
+    },
+    "options_static_filters_limits_by_rules": {
+        "message": "Dosáhli jste limitu aktivních vestavěných pravidel. Chcete-li aktivovat nová pravidla, vypněte některé vestavěné filtry. <newline><\/newline> <link-to-limits>Limity pravidel<\/link-to-limits>"
+    },
+    "options_static_filters_limits_by_filters": {
+        "message": "Dosáhli jste limitu aktivních vestavěných filtrů. Je zapnuto %current-enabled% z %maximum% vestavěných filtrů. <newline><\/newline> <link-to-limits>Limity pravidel<\/link-to-limits>"
+    },
+    "options_static_filters_limits_by_filters_notification": {
+        "message": "Dosáhli jste limitu aktivních vestavěných filtrů. Před aktivací nových filtrů vypněte některé vestavěné filtry. <newline><\/newline> <link-to-limits>Limity pravidel<\/link-to-limits>"
+    },
+    "options_static_filters_limits_by_regexp": {
+        "message": "Dosáhli jste limitu aktivních vestavěných regex pravidel. Je zapnuto %current-enabled% z %maximum% vestavěných filtrů. <newline><\/newline> <link-to-limits>Limity pravidel<\/link-to-limits>"
+    },
+    "options_static_filters_limits_after_update": {
+        "message": "Prohlížeč upravil seznam aktivních vestavěných filtrů. <newline><\/newline> <link-to-limits>Zobrazit podrobnosti<\/link-to-limits>"
+    },
+    "options_dynamic_rules_limit": {
+        "message": "Dosáhli jste limitu pravidel přidaných uživatelem. Je zapnuto %current-enabled% z %maximum% pravidel. Pravidla nad prahovou hodnotou nejsou aktivní. <newline><\/newline> <link-to-limits>Limity pravidel<\/link-to-limits>"
+    },
+    "options_dynamic_rules_regexps_limit": {
+        "message": "Dosáhli jste limitu regex pravidel přidaných uživatelem. Je zapnuto %current-enabled% z %maximum% regex pravidel. Pravidla nad prahovou hodnotou nejsou aktivní. <newline><\/newline> <link-to-limits>Limity pravidel<\/link-to-limits>"
+    },
+    "options_filter_rules_counter": {
+        "message": "| <count\/> pravidlo | <count\/> pravidla | <count\/> pravidel"
+    },
+    "options_user_rules_option": {
+        "message": "Uživatelská pravidla"
+    },
+    "options_user_rules_option_editor": {
+        "message": "Editor uživatelských pravidel"
+    },
+    "options_user_rules_option_desc": {
+        "message": "Přidání vlastních pravidel"
+    },
+    "options_nav_link_general": {
+        "message": "Nastavení"
+    },
+    "options_nav_link_about": {
+        "message": "O programu"
+    },
+    "options_nav_link_rule_limits": {
+        "message": "Limity pravidel"
+    },
+    "options_works_with_v3": {
+        "message": "Pracuje s Manifest <span>V3<\/span>"
+    },
+    "options_block_ads_on_website": {
+        "message": "Zablokovat reklamy na této stránce"
+    },
+    "options_open_settings": {
+        "message": "Nastavení AdGuardu"
+    },
+    "options_settings_title": {
+        "message": "Nastavení"
+    },
+    "options_about_title": {
+        "message": "O programu"
+    },
+    "options_about_product": {
+        "message": "Rozšíření prohlížeče AdGuard MV3"
+    },
+    "options_about_version": {
+        "message": "Verze"
+    },
+    "options_privacy_policy": {
+        "message": "Zásady ochrany osobních údajů"
+    },
+    "options_acknowledgment": {
+        "message": "Poděkování"
+    },
+    "options_github": {
+        "message": "GitHub"
+    },
+    "options_site": {
+        "message": "Oficiální stránka"
+    },
+    "options_discuss": {
+        "message": "Diskuse AdGuard"
+    },
+    "options_about_rights_reserved": {
+        "message": "Všechna práva vyhrazena."
+    },
+    "options_notice_program": {
+        "message": "Toto rozšíření je experimentálním projektem týmu AdGuard"
+    },
+    "options_notice_compare_link": {
+        "message": "Zjistit více"
+    },
+    "popup_settings_pause_protection": {
+        "message": "Pozastavit ochranu"
+    },
+    "popup_settings_report_issue": {
+        "message": "Nahlásit problém"
+    },
+    "popup_settings_pause_protection_temporarily": {
+        "message": "Pozastavit na %count% sek."
+    },
+    "popup_settings_disable_site_temporarily": {
+        "message": "Vypnout na tomto webu na %count% sek."
+    },
+    "popup_protection_is_paused": {
+        "message": "Ochrana je vypnuta. Aktualizace nejsou dostupné."
+    },
+    "popup_protection_will_be_resumed_after": {
+        "message": "Obnovit za %count% sek."
+    },
+    "popup_protection_paused_for_all": {
+        "message": "pro všechny webové stránky"
+    },
+    "popup_protection_resume_now": {
+        "message": "Obnovit nyní"
+    },
+    "popup_limits_warning": {
+        "message": "Prohlížeč upravil seznam aktivních vestavěných filtrů."
+    },
+    "popup_limits_warning_link": {
+        "message": " Zobrazit podrobnosti"
+    },
+    "context_menu_disable_filtering_on_site": {
+        "message": "Vypnout filtrování na této stránce"
+    },
+    "context_menu_enable_filtering_on_site": {
+        "message": "Zapnout filtrování na této stránce"
+    },
+    "context_menu_block_ads_on_site": {
+        "message": "Zablokovat reklamy na této stránce..."
+    },
+    "context_menu_report_an_issue": {
+        "message": "Nahlásit problém..."
+    },
+    "context_menu_open_options": {
+        "message": "Nastavení AdGuardu..."
+    },
+    "context_menu_disable_blocking": {
+        "message": "Pozastavit ochranu AdGuard"
+    },
+    "context_menu_enable_blocking": {
+        "message": "Zapnout AdGuard ochranu"
+    },
+    "options_add_custom_filter": {
+        "message": "Přidat vlastní filtr"
+    },
+    "options_custom_filter_modal_remove_button": {
+        "message": "Vymazat"
+    },
+    "options_custom_filter_modal_remove_title": {
+        "message": "Jste si jistý?"
+    },
+    "options_custom_filter_modal_add_title": {
+        "message": "Přidat vlastní filtr"
+    },
+    "options_custom_filter_add_label_name": {
+        "message": "Název"
+    },
+    "options_custom_filter_add_label_type": {
+        "message": "Typ"
+    },
+    "options_custom_filter_add_label_rule": {
+        "message": "Pravidlo"
+    },
+    "options_custom_filter_add_label_description": {
+        "message": "Popis"
+    },
+    "options_custom_filter_modal_edit_title": {
+        "message": "Upravit název filtru"
+    },
+    "options_custom_filter_modal_removed": {
+        "message": "Trvale odstranit tento filtr?"
+    },
+    "options_custom_filter_modal_removed_desc": {
+        "message": "Odstraněné filtry nelze obnovit"
+    },
+    "options_custom_filter_modal_save_changes": {
+        "message": "Uložit změny?"
+    },
+    "options_custom_filter_modal_confirm_cancel_button": {
+        "message": "Zrušit"
+    },
+    "options_custom_filter_modal_confirm_save_button": {
+        "message": "Uložit"
+    },
+    "options_custom_filter_modal_add_add_button": {
+        "message": "Přidat"
+    },
+    "options_custom_filter_modal_retry_title": {
+        "message": "Import souboru se nezdařil"
+    },
+    "options_custom_filter_modal_retry_button": {
+        "message": "Zpět"
+    },
+    "options_custom_filter_modal_retry_description": {
+        "message": "Soubor může být poškozený nebo má nesprávný formát."
+    },
+    "options_custom_filter_modal_url_already_uploaded": {
+        "message": "Filtr na této adrese URL byl již nahrán."
+    },
+    "options_custom_filter_modal_add_browse_button": {
+        "message": "Procházet"
+    },
+    "options_custom_filter_add_notification": {
+        "message": "Pravidlo %name% bylo přidáno"
+    },
+    "options_user_rule_add_user_rule": {
+        "message": "Přidat uživ. pravidlo"
+    },
+    "options_user_rule_open_editor": {
+        "message": "Otevřít editor"
+    },
+    "options_user_rule_status_website_blocked": {
+        "message": "Doména je blokována"
+    },
+    "options_user_rule_status_website_allowed": {
+        "message": "Doména je odblokována"
+    },
+    "options_user_rule_status_element_blocked": {
+        "message": "Prvek je zablokován"
+    },
+    "options_user_rule_status_custom_rule": {
+        "message": "Vlastní pravidlo"
+    },
+    "options_user_rule_wizard_custom": {
+        "message": "Ostatní"
+    },
+    "options_user_rule_wizard_blocking": {
+        "message": "Zablokovat doménu"
+    },
+    "options_user_rule_wizard_unblocking": {
+        "message": "Přidat doménu do seznamu povolených"
+    },
+    "options_user_rule_delete": {
+        "message": "Vymazat"
+    },
+    "options_user_rule_save": {
+        "message": "Uložit"
+    },
+    "options_user_rule_block_domain": {
+        "message": "Název domény"
+    },
+    "options_user_rule_block_all_subdomains": {
+        "message": "Blokovat všechny subdomény"
+    },
+    "options_user_rule_wrong_domain_format": {
+        "message": "Nesprávný formát domény"
+    },
+    "options_user_rule_unblock_subrequests": {
+        "message": "Odblokovat požadavky z této adresy"
+    },
+    "options_user_rule_unhide_elements": {
+        "message": "Nepoužívat kosmetická pravidla"
+    },
+    "options_user_rule_removing_elements": {
+        "message": "Nepoužívat pokročilá pravidla"
+    },
+    "options_user_rule_advanced_rules": {
+        "message": "Pokročilá pravidla"
+    },
+    "options_user_rule_add_rule": {
+        "message": "Přidat uživ. pravidlo"
+    },
+    "options_user_rule_edit_rule": {
+        "message": "Upravit uživ. pravidlo"
+    },
+    "options_user_magnifier": {
+        "message": "Lupa"
+    },
+    "options_user_menu": {
+        "message": "Nabídka"
+    },
+    "options_filters_not_found": {
+        "message": "Nebyly nalezeny žádné filtry"
+    },
+    "options_filters_not_rules": {
+        "message": "Nebyla nalezena žádná pravidla"
+    },
+    "options_paste_filter_label": {
+        "message": "URL filtru nebo cesta k místnímu souboru"
+    },
+    "options_paste_filter_url": {
+        "message": "Vložit URL filtru nebo cestu k místnímu souboru"
+    },
+    "options_rules_search": {
+        "message": "Hledat"
+    },
+    "options_editor_save": {
+        "message": "Uložit"
+    },
+    "options_editor_cancel": {
+        "message": "Zrušit"
+    },
+    "options_user_rule_wizard_button_add": {
+        "message": "Přidat"
+    },
+    "options_user_rules_other_domain": {
+        "message": "ostatní"
+    },
+    "error_rule_is_invalid": {
+        "message": "Pravidlo je neplatné. Kontrola nepodporovaných modifikátorů, příliš složitých regulárních výrazů nebo syntaktických chyb."
+    },
+    "error_rules_limit": {
+        "message": "Nepodařilo se přidat pravidlo. Byl překročen limit pravidel: %limit%."
+    },
+    "error_regexp_rules_limit": {
+        "message": "Nepodařilo se přidat pravidlo. Byl překročen regex pravidel: %limit%."
+    },
+    "debugging_title_reload_page": {
+        "message": "Otevřít nástroje pro vývojáře a znovu načíst stránku"
+    },
+    "debugging_clean": {
+        "message": "Vyčistit"
+    },
+    "debugging_loading_sourcemap": {
+        "message": "Načítání zdrojových map..."
+    },
+    "debugging_info": {
+        "message": "Podrobné informace o požadavcích s použitými deklarativními pravidly jsou k dispozici v ladicí verzi rozšíření. Chcete-li nainstalovat ladící verzi, <link>naklonujte repozitář a sestavte rozšíření<\/link>."
+    },
+    "options_limits_warning_title": {
+        "message": "Prohlížeč upravil seznam aktivních filtrů"
+    },
+    "options_limits_warning_title_what_happened": {
+        "message": "Co se stalo?"
+    },
+    "options_limits_warning_desc_what_happened": {
+        "message": "Po aktualizaci nebo přidání nového rozšíření byl překročen limit aktivních vestavěných pravidel. Podle Manifest V3 prohlížeč Chrome reagoval tak, že zakázal všechny vestavěné filtry rozšíření kromě výchozích."
+    },
+    "options_limits_warning_title_filters_enabled": {
+        "message": "Filtry povolené před aktualizací"
+    },
+    "options_limits_warning_title_filters_enabled_now": {
+        "message": "Filtry jsou nyní aktivovány"
+    },
+    "options_limits_warning_title_possible_actions": {
+        "message": "Vaše možné akce"
+    },
+    "options_limits_warning_desc_possible_actions": {
+        "message": "Možnost 1. Odstraňte z prohlížeče nepotřebná rozšíření blokování reklam. Chcete-li znovu aktivovat filtry uvedené v části \"Filtry povolené před aktualizací\", klikněte na tlačítko <button>znovu aktivovat filtry<\/button>."
+    },
+    "options_limits_warning_desc_app": {
+        "message": "Možnost 2. Nainstalujte si aplikaci blokátor reklam AdGuard: nemá žádná omezení pravidel filtrování. <link>Získat blokátor reklam AdGuard<\/link>"
+    },
+    "options_limits_warning_desc_close": {
+        "message": "Možnost 3. Pokud vám vyhovují aktuálně povolené výchozí filtry, <button>zavřete toto upozornění<\/button>."
+    },
+    "options_nav_better_than_extension": {
+        "message": "Na rozdíl od rozšíření blokuje aplikace AdGuard reklamy bez omezení."
+    },
+    "options_nav_compare": {
+        "message": "Porovnat"
+    },
+    "options_limits_title": {
+        "message": "Limity pravidel"
+    },
+    "options_limits_desc_specifications": {
+        "message": "Toto rozšíření je v souladu s Manifest V3."
+    },
+    "options_limits_link_about_mv3": {
+        "message": "Další informace o Manifest V3"
+    },
+    "options_limits_dynamic_title": {
+        "message": "Dynamická pravidla"
+    },
+    "options_limits_dynamic_added": {
+        "message": "Pravidla přidaná uživatelem, například uživatelská pravidla a vlastní filtry"
+    },
+    "options_limits_regex": {
+        "message": "Pravidla regex (zahrnuta výše)"
+    },
+    "options_value_of_value": {
+        "message": "%current% z %max%"
+    },
+    "options_limits_static_title": {
+        "message": "Statické sady pravidel"
+    },
+    "options_limits_static_rulesets_desc": {
+        "message": "Vestavěné filtry (např. blokování obtěžování nebo jazykově specifické filtry). Najednou můžete povolit až %count% statických sad pravidel."
+    },
+    "options_limits_static_rules_title": {
+        "message": "Statická pravidla"
+    },
+    "options_limits_static_rules_desc": {
+        "message": "Pravidla z vestavěných filtrů. Všechna rozšíření v prohlížeči Chrome mohou používat %count% statických pravidel najednou."
+    },
+    "options_limits_static_filters_reactivated": {
+        "message": "Filtry jsou znovu aktivovány."
+    },
+    "options_limits_static_filters_limit_still_exceed": {
+        "message": "Filtry nelze znovu aktivovat: limit pravidel je stále překročen."
     }
 }

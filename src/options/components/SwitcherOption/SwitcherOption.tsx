@@ -4,7 +4,6 @@ import cn from 'classnames';
 import { Icon, IconId } from 'Common/components/ui';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { Checkbox } from 'Common/components/Checkbox';
-import { translator } from 'Common/translators/translator';
 
 import { HighlightSearch } from '../HighlightSearch';
 
@@ -19,7 +18,7 @@ export interface IProps {
     iconId?: IconId;
     checked?: boolean;
     messageKey?: string;
-    messageKeyDesc?: string;
+    messageDesc?: string;
     message?: string;
     onClick?: () => void;
     onChange?: ChangeHandler;
@@ -34,9 +33,8 @@ export const SwitcherOption = ({
     id,
     iconId,
     checked,
-    messageKey,
-    messageKeyDesc,
-    message = messageKey && translator.getMessage(messageKey),
+    messageDesc,
+    message,
     onClick,
     onChange,
     className = '',
@@ -57,9 +55,9 @@ export const SwitcherOption = ({
                     {message && (
                         <HighlightSearch str={message} />
                     )}
-                    {messageKeyDesc && (
+                    {messageDesc && (
                         <div className={styles.optionLabelDesc}>
-                            {reactTranslator.getMessage(messageKeyDesc) as string}
+                            {messageDesc}
                         </div>
                     )}
                 </div>

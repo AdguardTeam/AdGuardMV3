@@ -81,7 +81,7 @@ const downloadLocales = async (locales: string[]) => {
     // Decrease this value if you encounter error:
     // "Maximum number of concurrent requests for this endpoint is reached"
     // https://support.crowdin.com/api/api-integration-setup/#rate-limits
-    const LOCALES_DOWNLOAD_BATCH_SIZE = 20;
+    const LOCALES_DOWNLOAD_BATCH_SIZE = 2;
 
     return promiseBatchMap(localeUrlPairs, LOCALES_DOWNLOAD_BATCH_SIZE,
         async (localeUrlPair) => {

@@ -8,6 +8,7 @@ import {
     RULESET_NAME,
     FILTERS_VERSIONS_FILENAME,
 } from 'Common/constants/common';
+import { translator } from 'Common/translators/translator';
 import { ADGUARD_FILTERS_IDS, FILTER_RULESET, RulesetType } from 'Common/constants/filters';
 import { RULES_STORAGE_KEY, ENABLED_FILTERS_IDS } from 'Common/constants/storage-keys';
 import FiltersUtils from 'Common/utils/filters';
@@ -34,31 +35,31 @@ export const DEFAULT_FILTERS: Filter[] = [
         id: FILTER_RULESET[RulesetType.RULESET_2].id,
         enabled: FILTER_RULESET[RulesetType.RULESET_2].enabled,
         iconId: IconId.AD_BLOCKING,
-        title: 'options_block_ads_option',
+        title: translator.getMessage('options_block_ads_option'),
         groupId: FiltersGroupId.MAIN,
     },
     {
         id: FILTER_RULESET[RulesetType.RULESET_14].id,
         enabled: FILTER_RULESET[RulesetType.RULESET_14].enabled,
         iconId: IconId.ANNOYANCES,
-        title: 'options_block_annoyances_option',
-        description: 'options_block_annoyances_option_desc',
+        title: translator.getMessage('options_block_annoyances_option'),
+        description: translator.getMessage('options_block_annoyances_option_desc'),
         groupId: FiltersGroupId.MAIN,
     },
     {
         id: FILTER_RULESET[RulesetType.RULESET_3].id,
         enabled: FILTER_RULESET[RulesetType.RULESET_3].enabled,
         iconId: IconId.TRACKERS_BLOCKING,
-        title: 'options_block_trackers_option',
-        description: 'options_block_trackers_option_desc',
+        title: translator.getMessage('options_block_trackers_option'),
+        description: translator.getMessage('options_block_trackers_option_desc'),
         groupId: FiltersGroupId.MAIN,
     },
     {
         id: FILTER_RULESET[RulesetType.RULESET_4].id,
         enabled: FILTER_RULESET[RulesetType.RULESET_4].enabled,
         iconId: IconId.SOCIAL_WIDGETS,
-        title: 'options_block_social_widgets_option',
-        description: 'options_block_social_widgets_option_desc',
+        title: translator.getMessage('options_block_social_widgets_option'),
+        description: translator.getMessage('options_block_social_widgets_option_desc'),
         groupId: FiltersGroupId.MAIN,
     },
     {
