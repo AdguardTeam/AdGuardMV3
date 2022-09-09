@@ -6,8 +6,8 @@
     "author": "adguard@adguard.com",
     "license": "GPL-3.0",
     "scripts": {
-        "dev": "BUILD_ENV=dev ts-node scripts/bundle",
-        "release": "BUILD_ENV=release ts-node scripts/bundle",
+        "dev": "cross-env BUILD_ENV=dev ts-node scripts/bundle",
+        "release": "cross-env BUILD_ENV=release ts-node scripts/bundle",
         "filters": "ts-node scripts/filters update && ts-node scripts/filters convert",
         "filters-update": "ts-node scripts/filters update",
         "filters-convert": "ts-node scripts/filters convert",
@@ -79,6 +79,7 @@
         "clean-webpack-plugin": "^3.0.0",
         "commander": "^8.3.0",
         "copy-webpack-plugin": "^7.0.0",
+        "cross-env": "^7.0.3",
         "css-loader": "^5.0.1",
         "cssnano": "^4.1.10",
         "eslint": "^7.18.0",
