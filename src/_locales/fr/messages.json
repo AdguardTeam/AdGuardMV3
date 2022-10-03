@@ -1,4 +1,10 @@
 {
+    "name": {
+        "message": "AdGuard AdBlocker MV3 Expérimental"
+    },
+    "description": {
+        "message": "Extension de navigateur AdGuard conçue sur le Manifeste V3."
+    },
     "popup_protection_enabled_status": {
         "message": "La protection est activée"
     },
@@ -74,6 +80,9 @@
     "options_block_social_widgets_option_desc": {
         "message": "Supprimer les boutons des widgets de réseaux sociaux"
     },
+    "options_languages_option": {
+        "message": "Filtres spécifiques à la langue"
+    },
     "options_languages_option_desc": {
         "message": "Supprimer les publicités de sites web spécifiques à une langue"
     },
@@ -84,13 +93,37 @@
         "message": "French"
     },
     "options_base_filter": {
-        "message": "Filtre Anglais AdGuard"
+        "message": "Filtre de base AdGuard"
     },
     "options_custom_filters_option": {
         "message": "Filtres personnalisés"
     },
     "options_custom_filters_option_desc": {
         "message": "Ajouter des filtres personnalisés basés sur les règles de filtrage d’AdGuard"
+    },
+    "options_static_filters_limits_by_rules": {
+        "message": "Vous avez atteint la limite des règles intégrées actives. Pour activer de nouvelles règles, désactivez certains filtres intégrés. <newline><\/newline> <link-to-limits>Limites des règles<\/link-to-limits>"
+    },
+    "options_static_filters_limits_by_filters": {
+        "message": "Vous avez atteint la limite des filtres intégrés actifs. %current-enabled% de %maximum% filtres intégrés sont activés. <newline><\/newline> <link-to-limits>Limites des règles<\/link-to-limits>"
+    },
+    "options_static_filters_limits_by_filters_notification": {
+        "message": "Vous avez atteint la limite des filtres intégrés actifs. Désactivez certains filtres intégrés avant d'en activer de nouveaux. <newline><\/newline> <link-to-limits>Limites des règles<\/link-to-limits>"
+    },
+    "options_static_filters_limits_by_regexp": {
+        "message": "Vous avez atteint la limite des règles regex intégrées actives. %current-enabled% de %maximum% filtres intégrés sont activés. <newline><\/newline> <link-to-limits>Limites des règles<\/link-to-limits>"
+    },
+    "options_static_filters_limits_after_update": {
+        "message": "Le navigateur a modifié la liste des filtres intégrés actifs. <newline><\/newline> <link-to-limits>Voir les détails<\/link-to-limits>"
+    },
+    "options_dynamic_rules_limit": {
+        "message": "Vous avez atteint la limite des règles ajoutées par l'utilisateur. %current-enabled% règles sur %maximum% sont activées. Les règles dépassant le seuil ne sont pas actives. <newline><\/newline> <link-to-limits>Limites des règles<\/link-to-limits>"
+    },
+    "options_dynamic_rules_regexps_limit": {
+        "message": "Vous avez atteint la limite des règles regex ajoutées par l'utilisateur. %current-enabled% des %maximum% règles regex sont activées. Les règles dépassant le seuil ne sont pas actives. <newline><\/newline> <link-to-limits>Limites des règles<\/link-to-limits>"
+    },
+    "options_filter_rules_counter": {
+        "message": "| <count\/> règle | <count\/> règles"
     },
     "options_user_rules_option": {
         "message": "Règles d'utilisateur"
@@ -107,6 +140,9 @@
     "options_nav_link_about": {
         "message": "À propos"
     },
+    "options_nav_link_rule_limits": {
+        "message": "Limites des règles"
+    },
     "options_works_with_v3": {
         "message": "Fonctionne avec le Manifeste <span>V3<\/span>"
     },
@@ -121,6 +157,9 @@
     },
     "options_about_title": {
         "message": "À propos"
+    },
+    "options_about_product": {
+        "message": "Extension de navigateur AdGuard MV3"
     },
     "options_about_version": {
         "message": "Version"
@@ -167,8 +206,17 @@
     "popup_protection_will_be_resumed_after": {
         "message": "Reprise dans %count% s"
     },
+    "popup_protection_paused_for_all": {
+        "message": "pour tous les sites web"
+    },
     "popup_protection_resume_now": {
         "message": "Reprendre maintenant"
+    },
+    "popup_limits_warning": {
+        "message": "Le navigateur a modifié la liste des filtres intégrés actifs."
+    },
+    "popup_limits_warning_link": {
+        "message": " Voir les détails"
     },
     "context_menu_disable_filtering_on_site": {
         "message": "Désactiver le filtrage sur ce site"
@@ -235,6 +283,9 @@
     },
     "options_custom_filter_modal_add_add_button": {
         "message": "Ajouter"
+    },
+    "options_custom_filter_modal_retry_title": {
+        "message": "Échec d'importation du fichier"
     },
     "options_custom_filter_modal_retry_button": {
         "message": "Retour"
@@ -314,10 +365,37 @@
     "options_nav_compare": {
         "message": "Comparer"
     },
-    "name": {
-        "message": "AdGuard AdBlocker MV3 Experimental"
+    "options_limits_title": {
+        "message": "Limites des règles"
     },
-    "description": {
-        "message": "Experimental version of unmatched adblock extension built on Manifest V3."
+    "options_limits_dynamic_title": {
+        "message": "Règles dynamiques"
+    },
+    "options_limits_dynamic_added": {
+        "message": "Règles ajoutées par l'utilisateur, telles que les règles utilisateur et les filtres personnalisés"
+    },
+    "options_limits_regex": {
+        "message": "Règles Regex (incluses dans ce qui précède)"
+    },
+    "options_value_of_value": {
+        "message": "%current% de %max%"
+    },
+    "options_limits_static_title": {
+        "message": "Ensembles de règles statiques"
+    },
+    "options_limits_static_rulesets_desc": {
+        "message": "Filtres intégrés (p. ex. Bloquer les nuisances ou Filtres spécifiques à la langue). Vous pouvez activer jusqu'à %count% ensembles de règles statiques à la fois."
+    },
+    "options_limits_static_rules_title": {
+        "message": "Règles statiques"
+    },
+    "options_limits_static_rules_desc": {
+        "message": "Règles des filtres intégrés. Toutes les extensions de votre navigateur Chrome peuvent utiliser %count% règles statiques à la fois."
+    },
+    "options_limits_static_filters_reactivated": {
+        "message": "Les filtres sont réactivés."
+    },
+    "options_limits_static_filters_limit_still_exceed": {
+        "message": "Impossible de réactiver les filtres : la limite de règles est toujours dépassée."
     }
 }

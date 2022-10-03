@@ -5,6 +5,7 @@ import { translator } from 'Common/translators/translator';
 import { Filter, FiltersGroupId } from 'Common/constants/common';
 import { Section } from 'Common/components/Section';
 import { IconId } from 'Common/components/ui';
+import { FILTER_RULESET, RulesetType } from 'Common/constants/filters';
 
 import { useNotifyStaticFiltersLimitError } from '../../hooks/useNotifyStaticFiltersLimitError';
 import { rootStore } from '../../stores';
@@ -13,6 +14,29 @@ import { NavOption, NavOptionProps } from '../NavOption';
 import { StaticRulelistsLimitation } from '../StaticRulelistsLimitation';
 
 import styles from './Settings.module.pcss';
+
+// constant declared outside the component to prevent unnecessary work on re-renders
+export const FILTERS_TRANSLATIONS = {
+    [FILTER_RULESET[RulesetType.RULESET_2].id]: {
+        id: FILTER_RULESET[RulesetType.RULESET_2].id,
+        title: translator.getMessage('options_block_ads_option'),
+    },
+    [FILTER_RULESET[RulesetType.RULESET_14].id]: {
+        id: FILTER_RULESET[RulesetType.RULESET_14].id,
+        title: translator.getMessage('options_block_annoyances_option'),
+        description: translator.getMessage('options_block_annoyances_option_desc'),
+    },
+    [FILTER_RULESET[RulesetType.RULESET_3].id]: {
+        id: FILTER_RULESET[RulesetType.RULESET_3].id,
+        title: translator.getMessage('options_block_trackers_option'),
+        description: translator.getMessage('options_block_trackers_option_desc'),
+    },
+    [FILTER_RULESET[RulesetType.RULESET_4].id]: {
+        id: FILTER_RULESET[RulesetType.RULESET_4].id,
+        title: translator.getMessage('options_block_social_widgets_option'),
+        description: translator.getMessage('options_block_social_widgets_option_desc'),
+    },
+};
 
 export const Settings = observer(() => {
     const { settingsStore } = useContext(rootStore);
@@ -69,7 +93,17 @@ export const Settings = observer(() => {
         }
     };
 
-    const mainFilters = filters.filter((i: Filter) => i.groupId === FiltersGroupId.MAIN);
+    const mainFilters = filters
+        .filter((i: Filter) => i.groupId === FiltersGroupId.MAIN)
+        .map((f: Filter) => {
+            // do not save translations in the storage, otherwise on language change they won't be updated
+            const { title, description } = FILTERS_TRANSLATIONS[f.id];
+            return {
+                ...f,
+                title,
+                description,
+            };
+        });
 
     const getRulesMessage = (count: number) => (
         translator.getPlural('options_filter_rules_counter', count, { count })

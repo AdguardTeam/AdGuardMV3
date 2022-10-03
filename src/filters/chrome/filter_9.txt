@@ -1,8 +1,8 @@
-! Checksum: Ljnn2sDLl3KApnEVswLoPg
+! Checksum: tIpWE1snAvspDXTOXRzvWQ
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish and Portuguese languages.
-! Version: 2.0.14.88
-! TimeUpdated: 2022-09-21T21:26:06+00:00
+! Version: 2.0.15.5
+! TimeUpdated: 2022-10-03T09:25:59+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -89,6 +89,7 @@
 ! https://forum.adguard.com/index.php?threads/ivoox-com-podcasts-issues.29530/
 ! ||addevweb.com^$third-party
 !
+||banners.inforchannel.com.br^
 ||popunder.online^$third-party
 ||juicebarads.com^$third-party
 ||adcains.com^$third-party
@@ -280,6 +281,12 @@
 ! Good: @@/adblocker/detect.js$domain=example.org
 ! Bad: ||ad.doubleclick.net^ (should be in adservers.txt)
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/131238
+escplus.es##.background-aviso-adblock
+escplus.es#%#//scriptlet("prevent-setTimeout", ".adsbygoogle")
+! https://github.com/AdguardTeam/AdguardFilters/issues/130539
+emperorscan.com#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
+@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js|$xmlhttprequest,domain=emperorscan.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/129242
 ||lavoz.com.ar/pf/resources/js/adsUtils.js
 ||lavoz.com.ar/pf/resources/js/a-block.js
@@ -1245,6 +1252,9 @@ peru21.pe#@#.adstop
 ! https://github.com/AdguardTeam/AdguardFilters/issues/24801
 yahoo.com#?#ul[class^="Mb(0)"] > li.js-stream-content:-abp-has(> div > a[rel="nofollow noopener noreferrer"]+div:contains(Patrocinado))
 !
+inforchannel.com.br#?#.col-md-4 > .height-item:-abp-has(> .img-fluid > iframe[src^="https://banners.inforchannel.com.br/"])
+inforchannel.com.br#?#.sidebar-secondary > .height-item:-abp-has(> .img-fluid > iframe[src^="https://banners.inforchannel.com.br/"])
+inforchannel.com.br#?##main-content_home > div > .height-size-sidebar:-abp-has(> .img-fluid > iframe[src^="https://banners.inforchannel.com.br/"])
 odigital.sapo.pt#?#div[id^="odigi"] > div.odigi-adlabel:upward(1)
 taurusfansub.com#?#.body-wrap > .c-top-sidebar:not(:-abp-has(.widget-manga-popular-slider))
 gauchazh.clicrbs.com.br#?#.gzh-content > section:-abp-has(> div.l-row > div.ads-area)
@@ -1621,10 +1631,10 @@ pepeliculas.org#%#//scriptlet("remove-attr", "href", "a[href]#clickfakeplayer")
 pepeliculas.org#%#AG_onLoad(function(){setTimeout(function(){var a=document.querySelector("a#clickfakeplayer");a&&a.click()},500)});
 ! https://github.com/AdguardTeam/AdguardFilters/issues/69883
 verdragonball.online#%#//scriptlet("prevent-window-open")
-! https://github.com/AdguardTeam/AdguardFilters/issues/69735
-otakustv.com#%#//scriptlet('set-cookie', '2020ads', '1')
-otakustv.com#%#//scriptlet('set-cookie', '2020ads_download', '1')
-otakustv.com#%#//scriptlet("prevent-window-open", "profitablegate.com")
+! https://github.com/AdguardTeam/AdguardFilters/issues/130882
+otakustv.com#%#//scriptlet("set-constant", "click", "1")
+otakustv.com#%#//scriptlet("set-constant", "clickd", "1")
+otakustv.com#%#//scriptlet("prevent-window-open")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/69050
 comicspornohentai.com#%#//scriptlet("prevent-eval-if", "_impspcabe")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/67763
@@ -1761,6 +1771,10 @@ repelis.net#%#Object.defineProperty(window,'adbClick',{value:function(){}});
 !------- CSS fixes --------------------!
 !--------------------------------------!
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/130463
+inforchannel.com.br#$#.modal__banner { display: none !important; }
+inforchannel.com.br#$#.modal-backdrop { display: none !important; }
+inforchannel.com.br#$#body { overflow: auto !important; padding-right: 0 !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/130240
 diariodepernambuco.com.br#$#.main__corpo { margin-top: 160px!important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/128048
@@ -2035,13 +2049,36 @@ http://adw.
 !
 ! For URL shorteners or simple sites with frequently changed ad servers.
 ! Incorrectly blocked domains can be excluded using regex(synchronize this regexp in all filters)
-/^(?!.*(bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yandex.|yastatic.net|ytimg.com|zencdn.net|player|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com)).*$/$third-party,script,domain=thepiratefilmestorrent.biz|serieslatinoamerica.tv|pelispoptv.com|superflix.net
+/^(?!.*(bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yandex.|yastatic.net|ytimg.com|zencdn.net|player|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com)).*$/$third-party,script,domain=thepiratefilmestorrent.biz|serieslatinoamerica.tv|pelispoptv.com|superflix.net
 !
-! ##.ads
-sbt.com.br,link.estadao.com.br,atomixhq.*,jc.ne10.uol.com.br,internetpasoapaso.com,acidadeon.com,leouve.com.br,larazon.es,infoescola.com,quatrorodas.abril.com.br,cbn.globoradio.globo.com,maxitorrent.com,veja.abril.com.br,odia.ig.com.br,especiais.g1.globo.com,tribunapr.com.br,novelasd.com,anime-tube.tv##.ads
 ! ##.ad
 atribuna.com.br,jovemnerd.com.br,laopiniondemurcia.es,larazon.es,dicio.com.br,band.uol.com.br,xataka.com,onyxplay.com,genbeta.com,vagalume.com.br,xatakandroid.com,abril.com.br##.ad
+! ##.ads
+tribunapr.uol.com.br,diariodonordeste.verdesmares.com.br,sbt.com.br,link.estadao.com.br,atomixhq.*,jc.ne10.uol.com.br,internetpasoapaso.com,acidadeon.com,leouve.com.br,larazon.es,infoescola.com,quatrorodas.abril.com.br,cbn.globoradio.globo.com,maxitorrent.com,veja.abril.com.br,odia.ig.com.br,especiais.g1.globo.com,tribunapr.com.br,novelasd.com,anime-tube.tv##.ads
+! ##.banner
+eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.com.ar,mundotecnologias.com,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##.banner
 !
+webmotors.com.br##.BannerDfp
+webmotors.com.br##.Prebid-media-short
+tribunapr.uol.com.br##body > #__next > footer ~ .fixed.bottom-0
+especiaisg1.globo##.banner-publicidade
+g1.globo.com##.apuracao-outros-locais-ads
+hola.com##body[data-pub] div[data-js-ad-manager-slot]
+elperiodico.com##._mo_recs_cti
+elperiodico.com##.add
+otakustv.com###result_server > .playing:empty
+bloomberglinea.com,bloomberglinea.com.br##.arcad-feature-custom
+meteorologiaenred.com###text-8
+||diariodonordeste.verdesmares.com.br/static/assets/scripts/advertisingSticky.js
+emperorscan.com###custom_html-31
+ig.com.br##[id*="ad_mrec"]
+ig.com.br##.iGh__small-ad
+ig.com.br##.iG_componente_taboola_containerTitulo
+||cuevana.fm/register$all
+cuevana.fm##a[href^="/register"]
+inforchannel.com.br##body .height-ads
+inforchannel.com.br##iframe[src^="https://banners.inforchannel.com.br/"]
+folhavitoria.com.br##.card-advertising
 uol.com.br##.up-floating
 redesuldenoticias.com.br##div[id="modal-noticias"][visualizacoes="69502"]
 redesuldenoticias.com.br##.modal-backdrop
@@ -2370,7 +2407,7 @@ pobre.tv##a[href^="https://btt-pt.toldmeroc.com/"]
 ||pobre.tv/images/bettilt-*.png
 ||landings.toldmeroc.com^$domain=pobre.tv
 ||pobre.tv/videos/BT.mp4$media,redirect=noopmp3-0.1s
-taurusfansub.com,miauscan.com,knightnoscanlation.com,pelisplaygratis.info###fixedban
+emperorscan.com,taurusfansub.com,miauscan.com,knightnoscanlation.com,pelisplaygratis.info###fixedban
 pelisplaygratis.info##.mvic-btn > a.btn-successful
 observatoriodatv.uol.com.br##.obx-ad
 observatoriodatv.uol.com.br##.BannerUOLPlay__Container
@@ -3921,7 +3958,6 @@ lared.cl##.aviso728x90
 laprensa.com.ni##.baner_centro
 laprensa.com.ni##.baner_superior
 terra.es##.bann
-metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.com.ar,mundotecnologias.com,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##.banner
 iol.pt##.banner-area
 series-br.com##.banner-home
 ionline.pt##.banner-obj
@@ -4101,7 +4137,7 @@ iol.pt##.pub_full
 iol.pt##.pub_half
 yucatan.com.mx##.pubcuad
 abril.com.br##.publSquare
-desdelinux.net,lawebdelprogramador.com,soydemac.com,as.com,cadenaser.com,cincodias.com,destinia.com,elpais.com,lavozlibre.com,marca.com##.publi
+meteorologiaenred.com,desdelinux.net,lawebdelprogramador.com,soydemac.com,as.com,cadenaser.com,cincodias.com,destinia.com,elpais.com,lavozlibre.com,marca.com##.publi
 infochannel.com.mx##.publi-int-cuadro
 marca.com##.publi-resultados
 jornalagora.com.br##.publi178_2
@@ -4641,6 +4677,8 @@ uol.com.br##ul.produtos
 ! Bad:  @@||example.org^$stealth (should be in AdGuard Base - allowlist_stealth.txt)
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/131251
+elsuperfullhd.com#@#.vertical-ads
 ! https://github.com/AdguardTeam/AdguardFilters/issues/123894
 @@||consensu.org^$domain=beachcam.meo.pt
 @@||cmp.quantcast.com^$domain=beachcam.meo.pt
