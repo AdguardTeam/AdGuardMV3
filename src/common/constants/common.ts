@@ -13,8 +13,13 @@ export type CategoriesType = {
     displayNumber: number,
 }[];
 
-// FIXME: rename to FilterInfo
-export interface Filter {
+export type RuleSetCounters = {
+    filterId: number,
+    rulesCount: number,
+    regexpRulesCount: number
+};
+
+export interface FilterInfo {
     id: number,
     iconId?: IconId,
     title: string,
@@ -25,7 +30,7 @@ export interface Filter {
     localeCodes?: string[],
 }
 
-export interface FilterInfo {
+export interface FilterMetaData {
     title: string,
     description?: string,
     homepage?: string,
@@ -45,8 +50,9 @@ export const FILTERS_VERSIONS_FILENAME = 'filters_versions.json';
 
 export interface OptionsData {
     settings: SettingsType,
-    filters: Filter[],
-    categories: CategoriesType
+    filters: FilterInfo[],
+    categories: CategoriesType,
+    ruleSetsCounters: RuleSetCounters[],
 }
 
 // These enum must have string values because
@@ -125,7 +131,6 @@ export enum UserRuleType {
 // TODO: Rename enum
 export enum FiltersGroupId {
     CUSTOM = 0,
-    INTEGRATED = 2, // TODO: remove INTEGRATED
     MAIN = 3,
     LANGUAGES = 7,
 }
@@ -144,3 +149,5 @@ export const OTHER_DOMAIN_TITLE = 'other';
 export const REGEX_DOMAIN = /^(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+[A-Za-z0-9][A-Za-z0-9-]{0,61}[A-Za-z0-9]$/;
 
 export const REGEX_DOMAIN_IN_RULE = /(?<=\|\|)(.*?)(?=\^|\/|:|\$)/g;
+
+export const WEB_ACCESSIBLE_RESOURCES_PATH = '/web-accessible-resources/redirects';

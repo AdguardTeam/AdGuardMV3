@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import cn from 'classnames';
 
 import { reactTranslator } from 'Common/translators/reactTranslator';
-import { FiltersGroupId, FilterInfo } from 'Common/constants/common';
+import { FiltersGroupId, FilterMetaData } from 'Common/constants/common';
 import { log } from 'Common/logger';
 import { theme } from 'Common/styles';
 import { translator } from 'Common/translators/translator';
@@ -26,7 +26,7 @@ const readFile = (file: File): Promise<string> => {
 
 type AddCustomProps = {
     onError: (error: string) => void,
-    onSuccess: (filterInfo: FilterInfo, fileContent: string) => void,
+    onSuccess: (filterInfo: FilterMetaData, fileContent: string) => void,
     addCustomFilterError: string,
     urlToSubscribe: string,
     setUrlToSubscribe: (url: string) => void,

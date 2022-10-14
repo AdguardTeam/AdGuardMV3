@@ -92,6 +92,7 @@ export const getWebpackConfig = (
 
     const plugins: WebpackPluginInstance[] = [
         new ForkTsCheckerWebpackPlugin(),
+        // FIXME: Remove this plugin
         new CollectFiltersVersionsPlugin(FILTERS_DIR, OUTPUT_FILTERS_PATH),
         new CopyWebpackPlugin({
             patterns: [

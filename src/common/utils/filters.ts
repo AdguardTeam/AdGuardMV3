@@ -1,4 +1,4 @@
-import { FilterInfo } from 'Common/constants/common';
+import { FilterMetaData } from 'Common/constants/common';
 
 export default class FiltersUtils {
     // Look up no more than 50 first lines
@@ -11,7 +11,7 @@ export default class FiltersUtils {
      * @param title - string to be used as title if title tag wouldn't be found
      * @returns object
      */
-    public static parseFilterInfo = (rules: string[], title: string): FilterInfo => {
+    public static parseFilterInfo = (rules: string[], title: string): FilterMetaData => {
         const parseTag = (tagName: string): string => {
             let result = '';
 

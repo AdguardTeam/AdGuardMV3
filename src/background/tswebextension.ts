@@ -1,6 +1,11 @@
 import { TsWebExtension, Configuration, ConfigurationResult } from '@adguard/tswebextension/mv3';
 
-import { FiltersGroupId, RULESET_NAME } from 'Common/constants/common';
+import {
+    FiltersGroupId,
+    RuleSetCounters,
+    RULESET_NAME,
+    WEB_ACCESSIBLE_RESOURCES_PATH,
+} from 'Common/constants/common';
 import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
 import { log } from 'Common/logger';
 import { IS_COLLECTING_LOG } from 'Common/constants/storage-keys';
@@ -18,14 +23,25 @@ const {
 class TsWebExtensionWrapper {
     private tsWebExtension: TsWebExtension;
 
+    private configurationResult: ConfigurationResult | undefined;
+
     constructor() {
-        this.tsWebExtension = new TsWebExtension('/web-accessible-resources/redirects');
+        this.tsWebExtension = new TsWebExtension(WEB_ACCESSIBLE_RESOURCES_PATH);
+    }
+
+    public get ruleSetsCounters(): RuleSetCounters[] {
+        return this.configurationResult?.staticFilters
+            .map((ruleset) => ({
+                filterId: Number(ruleset.getId().slice(RULESET_NAME.length)),
+                rulesCount: ruleset.getRulesCount(),
+                regexpRulesCount: ruleset.getRegexpRulesCount(),
+            })) || [];
     }
 
     async start() {
         const config = await this.getConfiguration();
-        const res = await this.tsWebExtension.start(config);
-        await TsWebExtensionWrapper.saveDynamicRulesCounters(res);
+        this.configurationResult = await this.tsWebExtension.start(config);
+        await TsWebExtensionWrapper.saveDynamicRulesCounters(this.configurationResult);
 
         await this.checkFiltersLimitsChange();
     }
@@ -36,8 +52,8 @@ class TsWebExtensionWrapper {
 
     async configure(skipCheck?: boolean) {
         const config = await this.getConfiguration();
-        const res = await this.tsWebExtension.configure(config);
-        await TsWebExtensionWrapper.saveDynamicRulesCounters(res);
+        this.configurationResult = await this.tsWebExtension.configure(config);
+        await TsWebExtensionWrapper.saveDynamicRulesCounters(this.configurationResult);
 
         if (skipCheck) {
             return;
@@ -63,7 +79,7 @@ class TsWebExtensionWrapper {
      * If changed - save new values to store for show warning to user
      * and save list of last used filters
      */
-    async checkFiltersLimitsChange() {
+    private async checkFiltersLimitsChange() {
         const wasEnabledIds = (await filters.getFiltersInfo())
             .filter(({ groupId, enabled }) => enabled && groupId !== FiltersGroupId.CUSTOM)
             .map(({ id }) => id)
@@ -91,11 +107,12 @@ class TsWebExtensionWrapper {
         await browserActions.setIconBroken(brokenState);
 
         if (brokenState) {
-            await filters.setEnabledFiltersIds(nowEnabledIds);
             // Save last used filters ids to show user
             await settings.setFiltersChangedList(wasEnabledIds);
+            await filters.setEnabledFiltersIds(nowEnabledIds);
 
             await this.configure(true);
+        // If state is not broken - clear list of "broken" filters
         } else if (settings.getSetting<number[]>(SETTINGS_NAMES.FILTERS_CHANGED).length > 0) {
             await settings.setFiltersChangedList([]);
         }
@@ -166,6 +183,11 @@ class TsWebExtensionWrapper {
      * Finds and enables filters for current browser locales
      */
     enableCurrentLanguagesFilters = async () => {
+        // Cannot check rule sets counters
+        if (!this.configurationResult) {
+            return;
+        }
+
         const navigatorLocales = navigator.languages
             .map(((locale) => locale.replace('-', '_')));
         const locales = new Set(navigatorLocales);
@@ -181,11 +203,12 @@ class TsWebExtensionWrapper {
                 return;
             }
 
-            // TODO: Export RuleSetsLoaderApi from tswebextension
-            // and create rule sets here to have access to theirs counters
             const { id, localeCodes } = localeFilterInMemory;
-            // FIXME:
-            const declarativeRulesCounter = 0;
+            const ruleSet = this.configurationResult.staticFilters.find((r) => {
+                // TODO: Seems like weak relation, not too reliably
+                return r.getId() === `${RULESET_NAME}_${id}`;
+            });
+            const declarativeRulesCounter = ruleSet?.getRulesCount();
 
             // eslint-disable-next-line no-await-in-loop
             const availableStaticRulesCount = await chrome.declarativeNetRequest.getAvailableStaticRuleCount();

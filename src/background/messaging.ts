@@ -38,6 +38,7 @@ export const extensionMessageHandler = async (
                 settings: settings.getSettings(),
                 filters: await filters.getFiltersInfo(),
                 categories: CATEGORIES,
+                ruleSetsCounters: tsWebExtensionWrapper.ruleSetsCounters,
             };
 
             return optionsData;

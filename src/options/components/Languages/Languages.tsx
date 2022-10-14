@@ -5,7 +5,8 @@ import { rootStore } from 'Options/stores';
 import { SwitcherOption } from 'Options/components/SwitcherOption';
 import { Category } from 'Options/components/Category';
 import { translator } from 'Common/translators/translator';
-import { Filter, FiltersGroupId } from 'Common/constants/common';
+import { FilterInfo, FiltersGroupId } from 'Common/constants/common';
+import { FILTER_RULESET, RulesetType } from 'Common/constants/filters';
 
 import { useNotifyStaticFiltersLimitError } from '../../hooks/useNotifyStaticFiltersLimitError';
 import { StaticRulelistsLimitation } from '../StaticRulelistsLimitation';
@@ -19,6 +20,7 @@ export const Languages = observer(() => {
 
     const {
         filters,
+        ruleSetsCounters,
         enableFilter,
         disableFilter,
     } = settingsStore;
@@ -28,7 +30,7 @@ export const Languages = observer(() => {
         checkAndNotifyStaticFiltersError(err);
     };
 
-    const onChange = async (filter: Filter) => {
+    const onChange = async (filter: FilterInfo) => {
         if (filter.enabled) {
             await disableFilter(filter.id);
         } else {
@@ -36,17 +38,18 @@ export const Languages = observer(() => {
         }
     };
 
-    const languagesFilters = filters.filter((filter: Filter) => (
-        filter.groupId === FiltersGroupId.LANGUAGES
-        || filter.groupId === FiltersGroupId.INTEGRATED));
+    const languagesFilters = filters.filter(({ groupId }) => (
+        groupId === FiltersGroupId.LANGUAGES
+    ));
 
-    // const integratedFilter = filters.find((filter: Filter) => (
-    //     filter.id === FILTER_RULESET[RulesetType.RULESET_2].id
-    // ));
+    const getRulesMessage = (filterId: number) => {
+        const ruleSet = ruleSetsCounters.find((r) => r.filterId === filterId);
+        const count = ruleSet?.rulesCount;
 
-    const getRulesMessage = (count: number) => (
-        translator.getPlural('options_filter_rules_counter', count, { count })
-    );
+        return count !== undefined
+            ? translator.getPlural('options_filter_rules_counter', count, { count })
+            : '';
+    };
 
     return (
         <Category
@@ -62,19 +65,16 @@ export const Languages = observer(() => {
                         key="english_integrated"
                         id="english_integrated"
                         message={translator.getMessage('options_languages_english')}
-                        // FIXME:
-                        title={getRulesMessage(0)}
+                        title={getRulesMessage(FILTER_RULESET[RulesetType.RULESET_2].id)}
                     />
                     {languagesFilters.map((filter) => (
                         <SwitcherOption
                             key={filter.id}
-                            integrated={filter.groupId === FiltersGroupId.INTEGRATED}
                             id={filter.id.toString()}
                             message={filter.title}
                             checked={filter.enabled}
                             onChange={() => { onChange(filter); }}
-                            // FIXME:
-                            title={getRulesMessage(0)}
+                            title={getRulesMessage(filter.id)}
                         />
                     ))}
                 </div>

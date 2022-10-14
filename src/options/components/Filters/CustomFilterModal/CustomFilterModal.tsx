@@ -13,7 +13,7 @@ import { STEPS } from 'Options/stores/CustomFilterModalStore';
 import { AddCustomFilter } from 'Options/components/Filters/CustomFilterModal/AddCustomFilter';
 import { AddCustomFilterConfirm } from 'Options/components/Filters/CustomFilterModal/AddCustomFilterConfirm';
 import { RemoveCustomFilter } from 'Options/components/Filters/CustomFilterModal/RemoveCustomFilter';
-import { FilterInfo, Filter } from 'Common/constants/common';
+import { FilterMetaData, FilterInfo } from 'Common/constants/common';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 
 type CustomFilterModalProps = {
@@ -46,11 +46,11 @@ export const CustomFilterModal = observer(({
         openRemoveCustomFilterModal,
     } = customFilterModalStore;
 
-    const [filterInfo, setFilterInfo] = useState<FilterInfo | null>(null);
+    const [filterInfo, setFilterInfo] = useState<FilterMetaData | null>(null);
 
     const [filterContent, setFilterContent] = useState<string | null>(null);
 
-    const [currentFilter, setCurrentFilter] = useState<Filter | null>(null);
+    const [currentFilter, setCurrentFilter] = useState<FilterInfo | null>(null);
 
     const [filterTitle, setFilterTitle] = useState(filterInfo?.title || '');
 
@@ -101,7 +101,7 @@ export const CustomFilterModal = observer(({
         }
     };
 
-    const onAddCustomFilterSuccess = (filterInfo: FilterInfo, filterContent: string) => {
+    const onAddCustomFilterSuccess = (filterInfo: FilterMetaData, filterContent: string) => {
         setFilterInfo(filterInfo);
         setFilterTitle(filterInfo.title);
         // save filter content for next steps

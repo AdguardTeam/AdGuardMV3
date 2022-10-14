@@ -1,5 +1,5 @@
 import { IconId } from 'Common/components/ui';
-import { FiltersGroupId, Filter, Rules } from 'Common/constants/common';
+import { FiltersGroupId, FilterInfo, Rules } from 'Common/constants/common';
 import { translator } from 'Common/translators/translator';
 import { FILTER_RULESET, RulesetType } from 'Common/constants/filters';
 import { RULES_STORAGE_KEY, ENABLED_FILTERS_IDS, FILTERS_STORAGE_KEY } from 'Common/constants/storage-keys';
@@ -11,7 +11,7 @@ const CUSTOM_FILTERS_START_ID = 1000;
 
 // Titles and descriptions are set to English by default.
 // TODO: Translations with watch for change language
-export const DEFAULT_FILTERS: Filter[] = [
+export const DEFAULT_FILTERS: FilterInfo[] = [
     {
         id: FILTER_RULESET[RulesetType.RULESET_1].id,
         enabled: FILTER_RULESET[RulesetType.RULESET_1].enabled,
@@ -117,7 +117,7 @@ export const DEFAULT_FILTERS: Filter[] = [
  * Filters class contains information about static and custom filters
  */
 class Filters {
-    private filtersInfo: Filter[] = [];
+    private filtersInfo: FilterInfo[] = [];
 
     private customFiltersRules: Rules[] = [];
 
@@ -141,7 +141,7 @@ class Filters {
     /**
      * Returns rules for custom filters
      */
-    private getCustomFiltersRules = async (filtersInfo: Filter[]): Promise<Rules[]> => {
+    private getCustomFiltersRules = async (filtersInfo: FilterInfo[]): Promise<Rules[]> => {
         const filtersRules = await storage.get<Rules[]>(RULES_STORAGE_KEY);
 
         const customFiltersIds = filtersInfo
@@ -157,7 +157,7 @@ class Filters {
      * @param filterId
      * @returns
      */
-    removeCustomFilter = async (filterId: number): Promise<Filter[]> => {
+    removeCustomFilter = async (filterId: number): Promise<FilterInfo[]> => {
         this.filtersInfo = this.filtersInfo.filter((f) => f.id !== filterId);
         this.customFiltersRules = this.customFiltersRules.filter((f) => f.id !== filterId);
 
@@ -222,7 +222,7 @@ class Filters {
      * @param filterId
      * @param filterProps
      */
-    private updateFilterState = async (filterId: number, filterProps: Partial<Filter>): Promise<void> => {
+    private updateFilterState = async (filterId: number, filterProps: Partial<FilterInfo>): Promise<void> => {
         const filter = this.filtersInfo.find((f) => f.id === filterId);
         if (!filter) {
             throw new Error(`There is filter with id: ${filterId}`);
@@ -237,8 +237,8 @@ class Filters {
     /**
      * Returns filters state from storage
      */
-    getFiltersInfoFromStorage = async (): Promise<Filter[]> => {
-        const filtersFromStorage = await storage.get<Filter[]>(FILTERS_STORAGE_KEY);
+    getFiltersInfoFromStorage = async (): Promise<FilterInfo[]> => {
+        const filtersFromStorage = await storage.get<FilterInfo[]>(FILTERS_STORAGE_KEY);
         const filters = filtersFromStorage || DEFAULT_FILTERS;
 
         return filters;
@@ -293,7 +293,7 @@ class Filters {
     addCustomFilter = async (content: string[], title: string, url: string) => {
         const filterInfo = FiltersUtils.parseFilterInfo(content, title);
 
-        const filter: Filter = {
+        const filter: FilterInfo = {
             id: this.getCustomFilterId(),
             title: title || filterInfo.title,
             enabled: true,

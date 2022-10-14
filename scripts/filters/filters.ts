@@ -6,7 +6,7 @@ import { convertFilters } from '@adguard/tsurlfilter/cli';
 import fse from 'fs-extra';
 
 import { ADGUARD_FILTERS_IDS } from '../../src/common/constants/filters';
-import { FILTERS_I18N_FILENAME } from '../../src/common/constants/common';
+import { FILTERS_I18N_FILENAME, WEB_ACCESSIBLE_RESOURCES_PATH } from '../../src/common/constants/common';
 import { cliLog } from '../cli-log';
 
 const COMMON_FILTERS_DIR = 'src/filters';
@@ -47,7 +47,7 @@ const startConvert = async (browser: string) => {
     const declarativeFiltersDir = `${DECLARATIVE_FILTERS_DIR.replace('%browser%', browser)}`;
     await convertFilters(
         filtersDir,
-        '/web-accessible-resources/redirects',
+        WEB_ACCESSIBLE_RESOURCES_PATH,
         declarativeFiltersDir,
         false,
     );

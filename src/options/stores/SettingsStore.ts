@@ -7,7 +7,13 @@ import {
     runInAction,
 } from 'mobx';
 
-import { Filter, CategoriesType, FiltersGroupId } from 'Common/constants/common';
+import {
+    FilterInfo,
+    CategoriesType,
+    FiltersGroupId,
+    OptionsData,
+    RuleSetCounters,
+} from 'Common/constants/common';
 import { DEFAULT_SETTINGS, OPTION_SETTINGS, SETTINGS_NAMES } from 'Common/constants/settings-constants';
 import { log } from 'Common/logger';
 
@@ -37,7 +43,7 @@ export class SettingsStore {
     settings: OPTION_SETTINGS = DEFAULT_SETTINGS;
 
     @observable
-    filters: Filter[] = [];
+    filters: FilterInfo[] = [];
 
     @observable
     categories: CategoriesType = [];
@@ -48,8 +54,11 @@ export class SettingsStore {
     @observable
     optionsDataReady = false;
 
+    @observable
+    ruleSetsCounters: RuleSetCounters[] = [];
+
     @action
-    updateFilterState = (filterId: number, filterProps: Partial<Filter>) => {
+    updateFilterState = (filterId: number, filterProps: Partial<FilterInfo>) => {
         const filter = this.filters.find((f) => f.id === filterId);
         if (!filter) {
             throw new Error('filterId should be in the list of filters');
@@ -147,10 +156,13 @@ export class SettingsStore {
     @flow* getOptionsData() {
         const { setLoader } = this.rootStore.uiStore;
         setLoader(true);
-        const { settings, filters, categories } = yield sender.getOptionsData();
+        const {
+            settings, filters, categories, ruleSetsCounters,
+        }: OptionsData = yield sender.getOptionsData();
         this.settings = settings;
         this.filters = filters;
         this.categories = categories;
+        this.ruleSetsCounters = ruleSetsCounters;
 
         yield this.updateLimitations();
 
@@ -243,8 +255,8 @@ export class SettingsStore {
         return this.filters
             .filter((f) => f.enabled && f.groupId !== FiltersGroupId.CUSTOM)
             .reduce((sum, filter) => {
-                // FIXME:
-                const declarativeRulesCounter = 0;
+                const ruleSet = this.ruleSetsCounters.find((r) => r.filterId === filter.id);
+                const declarativeRulesCounter = ruleSet?.rulesCount;
 
                 if (declarativeRulesCounter) {
                     return sum + declarativeRulesCounter;
@@ -276,8 +288,8 @@ export class SettingsStore {
         return this.filters
             .filter((f) => f.enabled && f.groupId !== FiltersGroupId.CUSTOM)
             .reduce((sum, filter) => {
-                // FIXME:
-                const regexpRulesCounter = 0;
+                const ruleSet = this.ruleSetsCounters.find((r) => r.filterId === filter.id);
+                const regexpRulesCounter = ruleSet?.regexpRulesCount;
 
                 if (regexpRulesCounter) {
                     return sum + regexpRulesCounter;
@@ -287,31 +299,38 @@ export class SettingsStore {
             }, 0);
     }
 
-    getFilterById = (filterId: number): Filter | null => {
+    getFilterById = (filterId: number): FilterInfo | null => {
         return this.filters.find((filter) => filter.id === filterId) || null;
     };
 
     canEnableFilterRules = (filterId: number): boolean => {
-        const filterToEnable = this.filters
-            .find((f) => f.id === filterId);
-        // FIXME:  || filterToEnable.declarativeRulesCounter === undefined
+        const filterToEnable = this.filters.find((f) => f.id === filterId);
         if (!filterToEnable) {
             return false;
         }
 
-        // FIXME: filterToEnable.declarativeRulesCounter <= this.availableStaticRulesCount
-        return false;
+        const ruleSet = this.ruleSetsCounters.find((r) => r.filterId === filterToEnable.id);
+        const declarativeRulesCounter = ruleSet?.rulesCount;
+        if (declarativeRulesCounter === undefined) {
+            return false;
+        }
+
+        return declarativeRulesCounter <= this.availableStaticRulesCount;
     };
 
     canEnableFilterRegexps = (filterId: number): boolean => {
         const filterToEnable = this.filters
             .find((f) => f.id === filterId);
-        // FIXME: || filterToEnable.regexpRulesCounter === undefined
         if (!filterToEnable) {
             return false;
         }
 
-        // FIXME: this.enabledStaticFiltersRegexps + filterToEnable.regexpRulesCounter <= MAX_NUMBER_OF_REGEX_RULES
-        return false;
+        const ruleSet = this.ruleSetsCounters.find((r) => r.filterId === filterToEnable.id);
+        const regexpRulesCounter = ruleSet?.regexpRulesCount;
+        if (regexpRulesCounter === undefined) {
+            return false;
+        }
+
+        return this.enabledStaticFiltersRegexps + regexpRulesCounter <= MAX_NUMBER_OF_REGEX_RULES;
     };
 }

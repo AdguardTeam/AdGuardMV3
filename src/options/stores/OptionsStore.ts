@@ -177,8 +177,9 @@ export class OptionsStore {
 
     @action
     /**
-     * This action, unlike 'setUserRules', only updates the rule counter and saves new user rules in the store,
-     * without calling the background to save the user rules
+     * This action, unlike 'setUserRules', only updates the rule counter
+     * and saves new user rules in the store, without calling the background
+     * to save the user rules
      */
     updateUserRules = async (userRules: string): Promise<DYNAMIC_RULES_LIMITS_ERROR | null> => {
         const { setLoader } = this.rootStore.uiStore;
