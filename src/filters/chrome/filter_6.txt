@@ -1,8 +1,8 @@
-! Checksum: zOEsHt8WR/BoLak8KYXJng
+! Checksum: 92dlNjnaPDLlLmr8Oz09NQ
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.29.98
-! TimeUpdated: 2022-10-03T07:40:10+00:00
+! Version: 2.0.30.10
+! TimeUpdated: 2022-10-13T12:40:11+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -85,6 +85,7 @@
 ! Bad: ||adssubdomain.legitwebsite.com^ (should be in adservers_firstparty.txt)
 !
 !
+||plx.eispop.com^
 ||oddsserve.com^$third-party
 ||widget.marktjagd.de^
 ||cwi.re^$third-party
@@ -509,12 +510,13 @@ beste-freundin-gesucht.de##.bfgad
 agrarwetter.net###body_opacity_overlay
 agrarwetter.net###DivdetectorContainer
 agrarwetter.net#%#//scriptlet("prevent-setTimeout", "adBlock")
-! https://github.com/AdguardTeam/AdguardFilters/issues/123855
-computerbase.de#%#//scriptlet("abort-current-inline-script", "document.createElement", "adblock")
+! https://github.com/AdguardTeam/AdguardFilters/issues/131952
+computerbase.de#%#//scriptlet("abort-current-inline-script", "document.createElement", "/adblock|googlesyndication\.com/")
+computerbase.de#%#//scriptlet('prevent-element-src-loading', 'img', 'pagead2.googlesyndication.com')
 computerbase.de#@#.adbox
 computerbase.de#@#.adbox1
+computerbase.de#@#.adbox2
 @@||computerbase.de/img/ads/
-@@||pagead2.googlesyndication.com/pagead/images/transparent.png$domain=computerbase.de
 ! https://github.com/AdguardTeam/AdguardFilters/issues/123326
 gutekueche.at#%#//scriptlet("set-constant", "gkAdsWerbung", "0")
 @@||gutekueche.at/mix/js/app/ads.js
@@ -739,7 +741,6 @@ suedkurier.de#@#.Ligatus
 !suedkurier.de#@#.adforge
 ! https://github.com/AdguardTeam/AdguardFilters/issues/11553
 ||spiegel.de/*/messaging-*.js
-! https://github.com/AdguardTeam/AdguardFilters/issues/12324
 ! https://github.com/AdguardTeam/AdguardFilters/issues/11644
 caravaning.de#%#//scriptlet("set-constant", "adblockActive", "false")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/11545
@@ -1897,6 +1898,8 @@ amateurbusters.com#?#.sb_area > .sb_area_headline:contains(Urlaub)
 !------- JS rules ---------------------!
 !--------------------------------------!
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/131890
+eispop.com#%#//scriptlet('set-constant', 'Object.prototype.AdOverlay', 'noopFunc')
 ! https://github.com/uBlockOrigin/uAssets/issues/6541#issuecomment-1140420880
 vip.de#%#//scriptlet('prevent-xhr', 'svonm')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/117511
@@ -2306,6 +2309,17 @@ vergleich.focus.de,chip.de,gutefrage.net,reisefrage.net,motorradfrage.net,autofr
 ! ##.adsbygoogle
 winfuture.de,netzwelt.de,quoka.de,farmeramania.de,bravofly.de,computerbild.de,digitalfernsehen.de,hl-live.de,chinamobilemag.de,focus.de,pcwelt.de##.adsbygoogle
 !
+stol.it##div[class^="AdSuperBanner"]
+blick.de##div[id^="CAD"]
+infranken.de##.mj-pf-widget
+eispop.com##.footer_partner_container_wrapper
+eispop.com##.vjs-toolbar[style]
+selbst.de##body .adAnything:not(#style_important)
+pornohirsch.net##.video > div[id][style^="background-image:"] + aside[id]
+pornohirsch.net###wrapper_content > div.cf + aside[id]
+portugal360.de###block-adsenseleaderboard
+firstname.de##.mod_footer_werbung
+firstname.de##iframe[src^="https://api.heise.de/svc/pvg-widget/"]
 immowelt.de##div[class^="BillboardBanner"]
 kurier.de,np-coburg.de,frankenpost.de##a[data-tags*="Advertorial"]
 kurier.de,np-coburg.de,frankenpost.de##div[data-b-title^="HCSB - HTML"]
@@ -5300,6 +5314,7 @@ tagesspiegel.de###urban-teaser1
 !
 ! Bad:  ||example.org/video-links (should be in specific.txt)
 !
+! https://github.com/AdguardTeam/CoreLibs/issues/1671
 ! Glomex video ads - kabeleins.de,prosieben.de,prosiebenmaxx.de,ran.de,sat1.de,sat1gold.de,sixx.de,the-voice-of-germany.de,wetter.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/21525
 ! https://github.com/AdguardTeam/AdguardFilters/issues/21494
@@ -6191,6 +6206,7 @@ kombi.de,viply.de#@##top-ad
 filmmakers.de#@##werbung
 regenwald-schuetzen.org#@#.Werbung
 ebay-kleinanzeigen.de#@#.ad-active
+stern.de#@#.ad-element
 cash.ch#@#.ad-enabled
 xdate.ch#@#.ad-item
 11freunde.de#@#.ad_sidebar
@@ -6240,6 +6256,7 @@ wetter.com#@#div[id^="div-gpt-"]
 ||a3h.de^$third-party
 ||ablida-rotation.com^$third-party
 ||active-tracking.de^$third-party
+||ad-mix.de^$third-party
 ||ad-pay.de^$third-party
 ||ad-serving.de^$third-party
 ||ad-sun.de^$third-party
@@ -7970,6 +7987,7 @@ $stylesheet,subdocument,third-party,xmlhttprequest,domain=canna-power.to|canna.t
 ||wordpress.com^*/k5_banner_excom_255x60-gif.gif$domain=excitingcommerce.de
 ||wordpress.com^*/k5_klub_255x60_ec.gif$domain=excitingcommerce.de
 ||wortfilter.de/wp-content/uploads/*_300x250px-
+||woz.ch/files/banner/
 ||wp.com/custombike.de/wp-content/uploads/sites/*/banner_
 ||wp.com/nh24.de/wp-content/uploads*/Gundlach_Liefern.jpg
 ||wp.com/nh24.de/wp-content/uploads/*-Banner_
@@ -8224,6 +8242,7 @@ testedich.ch,testedich.de###banner-top-all-viewports
 kriminalpolizei.de###banner-wrapper-right-v3
 kriminalpolizei.de###banner-wrapper-top-v1
 altertuemliches.at###banner5
+erotik.quoka.de###bannerResultRegio
 nrhz.de###banner_container_rc
 geemag.de###banner_content
 saiten.ch###banner_leaderboard
@@ -9015,6 +9034,7 @@ deutscherskiverband.de##.container-banner-2
 1000ps.at,1000ps.de##.container-billboard
 goslarsche.de##.container_skyscraper
 hoerzu.de##.content-amazon
+woz.ch##.content-fragment-banner
 kostenlosspielen.net##.content-main-box-300x250
 kostenlosspielen.net##.content-main-box-728x90
 kostenlosspielen.net##.content-right-box-300x250right
@@ -9109,6 +9129,7 @@ scdhfk-handball.de##.footer_sponsor_row
 fruchtportal.de##.fp-banner
 arboe.at##.frame-type-mask_toolboxcontentad1
 freenet.de##.frn_contAmazon
+woz.ch##.frontpage-card-banner
 puls24.at##.fullbanner-wrapper
 raidrush.net##.funbox
 99ers.at##.fusion-builder-row-14
@@ -9188,7 +9209,7 @@ gamepro.de,gamestar.de##.jad-placeholder
 interaktiv.tagesspiegel.de##.jobunion-container
 nur-positive-nachrichten.de##.jrCardBanner
 eurocampings.de##.js-mock-banner
-eurogirlsescort.de##.js-stats-click
+eurogirlsescort.de##.js-stt-click
 chip.de##.kasperskyclick
 kochbar.de##.kb-home-medrec-halfpage
 kauperts.de##.kca-wrapper
@@ -9430,6 +9451,7 @@ popkultur.de##.sc-button[href^="https://www.amazon.de/"]
 servus.com,terramatermagazin.com##.sda
 sport.sky.de##.sdc-site-au__leaderboard
 sport.sky.de##.sdc-site-au__mpu-1
+t-online.de##.sdgSlotContainer
 sportdeutschland.tv##.sdtv-gothaer
 mytastedeu.com##.search-affiliate__part
 trvlcounter.de##.second_slot
@@ -10238,12 +10260,12 @@ zwischengas.com#?#.row.mt-0.mb-3.d-print-none:-abp-has(.fa-ad)
 @@||focus.de^$generichide
 @@||football-aktuell.de/links/banner_oben.png
 @@||g.doubleclick.net/gampad/$xmlhttprequest,domain=kochbar.de
-@@||g.doubleclick.net/gampad/ads?$script,xmlhttprequest,domain=11freunde.de|n-tv.de
+@@||g.doubleclick.net/gampad/ads?$script,xmlhttprequest,domain=11freunde.de|n-tv.de|stern.de
 @@||g.doubleclick.net/gampad/ads?$xmlhttprequest,domain=auto-motor-und-sport.de|gala.de|gamepro.de|gamestar.de
 @@||g.doubleclick.net/gampad/ads?*&iu_parts=6032%2Ckochbar.de%2Chomepage&$domain=kochbar.de
-@@||g.doubleclick.net/gpt/pubads_impl_$script,domain=11freunde.de|auto-motor-und-sport.de|gala.de|gamepro.de|gamestar.de|gentside.de|kochbar.de|n-tv.de|ohmymag.de
+@@||g.doubleclick.net/gpt/pubads_impl_$script,domain=11freunde.de|auto-motor-und-sport.de|gala.de|gamepro.de|gamestar.de|gentside.de|kochbar.de|n-tv.de|ohmymag.de|stern.de
 @@||g.doubleclick.net/pagead/ppub_config?ippd=$xmlhttprequest,domain=gamepro.de|gamestar.de
-@@||g.doubleclick.net/tag/js/gpt.js$script,xmlhttprequest,domain=11freunde.de|auto-motor-und-sport.de|gala.de|gamepro.de|gamestar.de|gentside.de|kochbar.de|n-tv.de|ohmymag.de
+@@||g.doubleclick.net/tag/js/gpt.js$script,xmlhttprequest,domain=11freunde.de|auto-motor-und-sport.de|gala.de|gamepro.de|gamestar.de|gentside.de|kochbar.de|n-tv.de|ohmymag.de|stern.de
 @@||gamestar.de^$generichide
 @@||getjad.io/library/$script,domain=gamepro.de|gamestar.de
 @@||getjad.io/prebid/$script,domain=gamepro.de|gamestar.de
