@@ -44,7 +44,7 @@ const updateManifest = (isDev: boolean, content: Buffer, filtersDir: string): st
                 return {
                     id,
                     enabled,
-                    path: `filters/declarative/${name}`,
+                    path: `filters/declarative/${name}/${name}.json`,
                 };
             }),
         };

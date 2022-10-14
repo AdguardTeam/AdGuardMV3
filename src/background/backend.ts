@@ -13,6 +13,7 @@ const FILTER_COMPILER_OPTIONS: DefinedExpressions = {
     adguard_ext_opera: browserUtils.isOperaBrowser(),
 };
 
+// FIXME: Maybe delete ?
 export const COMMON_FILTERS_DIR = 'filters';
 
 class Backend {

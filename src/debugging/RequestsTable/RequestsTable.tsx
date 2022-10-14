@@ -1,8 +1,8 @@
 import React from 'react';
 import cn from 'classnames';
+import { RecordFiltered } from '@adguard/tswebextension/mv3';
 
 import { translator } from 'Common/translators/translator';
-import { RecordFiltered } from 'background/filtering-log';
 
 import style from './requests-table.module.pcss';
 
@@ -71,11 +71,21 @@ export const RequestsTable = ({
             tabId,
             type,
             url,
-            originalRuleTxt,
-            filterName,
-            filterId,
+            sourceRules,
             declarativeRuleJson,
         } = record;
+
+        const sourceRulesTxt = sourceRules.map(({ sourceRule, filterId }) => {
+            return (
+                <p>
+                    {`Rule ${sourceRule} from filter with id ${filterId}`}
+                </p>
+            );
+        });
+
+        const beautifyJson = declarativeRuleJson
+            ? JSON.stringify(JSON.parse(declarativeRuleJson), null, '\t')
+            : '';
 
         return (
             <div className={style.row} key={`${rulesetId}_${ruleId}_${requestId}_${url}`}>
@@ -88,17 +98,10 @@ export const RequestsTable = ({
                 <div className={style.cell}>{tabId}</div>
                 <div className={style.cell}>{type}</div>
                 <div className={style.cell}>{url}</div>
-                <div className={style.cell}>
-                    <p>
-                        {originalRuleTxt}
-                        <br />
-                        <br />
-                        {`from filter '${filterName}' with id - ${filterId}`}
-                    </p>
-                </div>
+                <div className={style.cell}>{sourceRulesTxt}</div>
                 <div className={style.cell}>
                     <pre>
-                        {declarativeRuleJson}
+                        {beautifyJson}
                     </pre>
                 </div>
             </div>

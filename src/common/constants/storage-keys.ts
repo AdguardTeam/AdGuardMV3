@@ -1,3 +1,5 @@
+export const FILTERS_STORAGE_KEY = 'filters';
+
 export const RULES_STORAGE_KEY = 'rules';
 
 export const USER_RULES_STORAGE_KEY = 'user_rules';

@@ -25,7 +25,8 @@ class Settings {
     }
 
     public init = async () => {
-        // The settings in the storage may be of an older version, so the type is 'any'
+        // The settings in the storage may be of an older version,
+        // so the type is 'unknown'
         const storedSettings = await storage.get<unknown>(this.SETTINGS_STORAGE_KEY);
 
         if (!storedSettings) {

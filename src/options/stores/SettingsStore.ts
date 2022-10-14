@@ -243,7 +243,8 @@ export class SettingsStore {
         return this.filters
             .filter((f) => f.enabled && f.groupId !== FiltersGroupId.CUSTOM)
             .reduce((sum, filter) => {
-                const { declarativeRulesCounter } = filter;
+                // FIXME:
+                const declarativeRulesCounter = 0;
 
                 if (declarativeRulesCounter) {
                     return sum + declarativeRulesCounter;
@@ -275,7 +276,8 @@ export class SettingsStore {
         return this.filters
             .filter((f) => f.enabled && f.groupId !== FiltersGroupId.CUSTOM)
             .reduce((sum, filter) => {
-                const { regexpRulesCounter } = filter;
+                // FIXME:
+                const regexpRulesCounter = 0;
 
                 if (regexpRulesCounter) {
                     return sum + regexpRulesCounter;
@@ -292,20 +294,24 @@ export class SettingsStore {
     canEnableFilterRules = (filterId: number): boolean => {
         const filterToEnable = this.filters
             .find((f) => f.id === filterId);
-        if (!filterToEnable || filterToEnable.declarativeRulesCounter === undefined) {
+        // FIXME:  || filterToEnable.declarativeRulesCounter === undefined
+        if (!filterToEnable) {
             return false;
         }
 
-        return filterToEnable.declarativeRulesCounter <= this.availableStaticRulesCount;
+        // FIXME: filterToEnable.declarativeRulesCounter <= this.availableStaticRulesCount
+        return false;
     };
 
     canEnableFilterRegexps = (filterId: number): boolean => {
         const filterToEnable = this.filters
             .find((f) => f.id === filterId);
-        if (!filterToEnable || filterToEnable.regexpRulesCounter === undefined) {
+        // FIXME: || filterToEnable.regexpRulesCounter === undefined
+        if (!filterToEnable) {
             return false;
         }
 
-        return this.enabledStaticFiltersRegexps + filterToEnable.regexpRulesCounter <= MAX_NUMBER_OF_REGEX_RULES;
+        // FIXME: this.enabledStaticFiltersRegexps + filterToEnable.regexpRulesCounter <= MAX_NUMBER_OF_REGEX_RULES
+        return false;
     };
 }

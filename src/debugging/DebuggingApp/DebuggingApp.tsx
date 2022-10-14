@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { ExtendedMV3MessageType, RecordFiltered } from '@adguard/tswebextension/mv3';
 
-import { MESSAGE_TYPES } from 'Common/constants/common';
 import { translator } from 'Common/translators/translator';
-import { RecordFiltered } from 'background/filtering-log';
-import { sendMessage } from 'Common/helpers';
+import { sendInnerMessage } from 'Common/helpers';
 
 import { RequestsTable } from '../RequestsTable';
 
@@ -19,7 +18,7 @@ export const DebuggingApp = () => {
         let timer: number;
 
         const startAndUpdate = async () => {
-            await sendMessage(MESSAGE_TYPES.START_LOG);
+            await sendInnerMessage(ExtendedMV3MessageType.StartLog);
 
             const fetchCollected = async () => {
                 // To abort mutate state on unmounted component
@@ -28,7 +27,7 @@ export const DebuggingApp = () => {
                     return;
                 }
                 try {
-                    const collected = await sendMessage<RecordFiltered[]>(MESSAGE_TYPES.GET_COLLECTED_LOG);
+                    const collected = await sendInnerMessage<RecordFiltered[]>(ExtendedMV3MessageType.GetCollectedLog);
                     // TODO: drop focus on repaint
                     setRuleLog((items) => items.concat(collected));
                 } catch (e) {
@@ -47,7 +46,7 @@ export const DebuggingApp = () => {
             isActive = false;
 
             clearInterval(timer);
-            sendMessage(MESSAGE_TYPES.STOP_LOG);
+            sendInnerMessage(ExtendedMV3MessageType.StopLog);
         };
     }, []);
 

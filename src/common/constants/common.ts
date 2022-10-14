@@ -13,6 +13,7 @@ export type CategoriesType = {
     displayNumber: number,
 }[];
 
+// FIXME: rename to FilterInfo
 export interface Filter {
     id: number,
     iconId?: IconId,
@@ -21,8 +22,6 @@ export interface Filter {
     description?: string,
     groupId: FiltersGroupId,
     url?: string,
-    regexpRulesCounter?: number,
-    declarativeRulesCounter?: number,
     localeCodes?: string[],
 }
 
@@ -37,6 +36,8 @@ export interface FilterInfo {
 }
 
 export const FILTERS_I18N_FILENAME = 'filters_i18n.json';
+
+// FIXME: remove
 export const FILTERS_RULES_COUNTER_FILENAME = 'filters_rules_counter.json';
 export const FILTERS_REGEXP_COUNTER_FILENAME = 'filters_regexp_counter.json';
 
@@ -76,9 +77,6 @@ export enum MESSAGE_TYPES {
     RELAUNCH_FILTERING = 'RELAUNCH_FILTERING',
     TOGGLE_SITE_ALLOWLIST_STATUS = 'TOGGLE_SITE_ALLOWLIST_STATUS',
     ADD_USER_RULE_FROM_ASSISTANT = 'ADD_USER_RULE_FROM_ASSISTANT',
-    GET_COLLECTED_LOG = 'GET_COLLECTED_LOG',
-    START_LOG = 'START_LOG',
-    STOP_LOG = 'STOP_LOG',
 
     // TODO: Remove
     PING = 'PING',
@@ -116,6 +114,7 @@ export const QUERY_PARAM_NAMES = {
     SUBSCRIBE: 'subscribe',
 };
 
+// TODO: Rename enum
 export enum UserRuleType {
     SITE_BLOCKED = 'SITE_BLOCKED',
     ELEMENT_BLOCKED = 'ELEMENT_BLOCKED',
@@ -123,13 +122,15 @@ export enum UserRuleType {
     CUSTOM = 'CUSTOM',
 }
 
+// TODO: Rename enum
 export enum FiltersGroupId {
     CUSTOM = 0,
-    INTEGRATED = 2,
+    INTEGRATED = 2, // TODO: remove INTEGRATED
     MAIN = 3,
     LANGUAGES = 7,
 }
 
+// TODO: Change with migration
 export interface Rules {
     id: number,
     rules: string,

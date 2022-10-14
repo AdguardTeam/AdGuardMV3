@@ -6,7 +6,6 @@ import { SwitcherOption } from 'Options/components/SwitcherOption';
 import { Category } from 'Options/components/Category';
 import { translator } from 'Common/translators/translator';
 import { Filter, FiltersGroupId } from 'Common/constants/common';
-import { FILTER_RULESET, RulesetType } from 'Common/constants/filters';
 
 import { useNotifyStaticFiltersLimitError } from '../../hooks/useNotifyStaticFiltersLimitError';
 import { StaticRulelistsLimitation } from '../StaticRulelistsLimitation';
@@ -41,9 +40,9 @@ export const Languages = observer(() => {
         filter.groupId === FiltersGroupId.LANGUAGES
         || filter.groupId === FiltersGroupId.INTEGRATED));
 
-    const integratedFilter = filters.find((filter: Filter) => (
-        filter.id === FILTER_RULESET[RulesetType.RULESET_2].id
-    ));
+    // const integratedFilter = filters.find((filter: Filter) => (
+    //     filter.id === FILTER_RULESET[RulesetType.RULESET_2].id
+    // ));
 
     const getRulesMessage = (count: number) => (
         translator.getPlural('options_filter_rules_counter', count, { count })
@@ -63,7 +62,8 @@ export const Languages = observer(() => {
                         key="english_integrated"
                         id="english_integrated"
                         message={translator.getMessage('options_languages_english')}
-                        title={getRulesMessage(integratedFilter?.declarativeRulesCounter || 0)}
+                        // FIXME:
+                        title={getRulesMessage(0)}
                     />
                     {languagesFilters.map((filter) => (
                         <SwitcherOption
@@ -73,7 +73,8 @@ export const Languages = observer(() => {
                             message={filter.title}
                             checked={filter.enabled}
                             onChange={() => { onChange(filter); }}
-                            title={getRulesMessage(filter.declarativeRulesCounter || 0)}
+                            // FIXME:
+                            title={getRulesMessage(0)}
                         />
                     ))}
                 </div>

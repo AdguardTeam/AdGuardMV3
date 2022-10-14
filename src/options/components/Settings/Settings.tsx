@@ -125,7 +125,8 @@ export const Settings = observer(() => {
                         messageDesc={filter.description ? filter.description : ''}
                         checked={filter.enabled}
                         onChange={() => { onChange(filter); }}
-                        title={getRulesMessage(filter.declarativeRulesCounter || 0)}
+                        // FIXME:
+                        title={getRulesMessage(0)}
                     />
                 ))}
                 {navOptions.map(NavOption)}

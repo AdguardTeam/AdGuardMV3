@@ -21,7 +21,6 @@ import { backend } from './backend';
 import { userRules } from './userRules';
 import { tsWebExtensionWrapper } from './tswebextension';
 import { longLivedMessageHandler } from './longLivedMessageHandler';
-import { filteringLog } from './filtering-log';
 
 /**
  * Message handler used to receive messages and send responses back on background service worker
@@ -37,7 +36,7 @@ export const extensionMessageHandler = async (
         case MESSAGE_TYPES.GET_OPTIONS_DATA: {
             const optionsData: OptionsData = {
                 settings: settings.getSettings(),
-                filters: await filters.getFilters(),
+                filters: await filters.getFiltersInfo(),
                 categories: CATEGORIES,
             };
 
@@ -164,7 +163,7 @@ export const extensionMessageHandler = async (
             const { filterContent, title, url } = data;
             const convertedRule = RuleConverter.convertRules(filterContent);
             const filterStrings = convertedRule.split('\n');
-            const updatedFilters = await filters.addCustomFilterByContent(
+            const updatedFilters = await filters.addCustomFilter(
                 filterStrings,
                 title,
                 url,
@@ -180,7 +179,7 @@ export const extensionMessageHandler = async (
         }
         case MESSAGE_TYPES.REMOVE_CUSTOM_FILTER_BY_ID: {
             const { filterId } = data;
-            const updatedFilters = await filters.removeFilter(filterId);
+            const updatedFilters = await filters.removeCustomFilter(filterId);
             await tsWebExtensionWrapper.configure();
 
             return updatedFilters;
@@ -216,19 +215,6 @@ export const extensionMessageHandler = async (
 
             return isAllowlisted;
         }
-        case MESSAGE_TYPES.START_LOG: {
-            await filteringLog.start(tsWebExtensionWrapper.convertedSourceMap);
-
-            break;
-        }
-        case MESSAGE_TYPES.STOP_LOG: {
-            await filteringLog.stop();
-
-            break;
-        }
-        case MESSAGE_TYPES.GET_COLLECTED_LOG: {
-            return filteringLog.getCollected();
-        }
         default: {
             throw new Error(`No message handler for type: ${type}`);
         }
@@ -246,6 +232,7 @@ let waitForInit: Promise<void> | undefined;
  * Initialize and wait for initialization of the service worker and its modules
  */
 export const initExtension = async (message?: any) => {
+    // TODO: (dseregin) check usage waitForInit & initialized
     const wait = async () => {
         await waitForInit;
         waitForInit = undefined;
@@ -260,7 +247,7 @@ export const initExtension = async (message?: any) => {
 
     if (!initialized) {
         log.debug('[messageHandlerWrapper]: start init', message);
-        const innerInit = async () => {
+        const init = async () => {
             // BUG: filters should initialized before userrules,
             // because otherwise filters will be initialize with
             // one filter from storage - userrules
@@ -273,7 +260,7 @@ export const initExtension = async (message?: any) => {
                 await tsWebExtensionWrapper.start();
             }
         };
-        waitForInit = innerInit();
+        waitForInit = init();
         await wait();
     }
 };
