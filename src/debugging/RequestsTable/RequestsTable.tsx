@@ -88,7 +88,7 @@ export const RequestsTable = ({
             : '';
 
         return (
-            <div className={style.row} key={`${rulesetId}_${ruleId}_${requestId}_${url}`}>
+            <div className={style.row} key={requestId}>
                 <div className={style.cell}>{ruleId}</div>
                 <div className={style.cell}>{rulesetId}</div>
                 <div className={style.cell}>{frameId}</div>

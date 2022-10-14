@@ -128,11 +128,11 @@ class Filters {
      */
     async init() {
         this.filtersInfo = await this.getFiltersInfoFromStorage();
-        // TODO: maybe delete?
+        // FIXME: maybe delete?
         await this.saveEnabledFilterIds();
 
         this.customFiltersRules = await this.getCustomFiltersRules(this.filtersInfo);
-        // TODO: maybe delete?
+        // FIXME: maybe delete?
         await storage.set(RULES_STORAGE_KEY, this.customFiltersRules);
 
         this.enableFiltersIds = await storage.get(ENABLED_FILTERS_IDS) || [];
