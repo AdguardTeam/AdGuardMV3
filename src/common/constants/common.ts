@@ -42,12 +42,6 @@ export interface FilterMetaData {
 
 export const FILTERS_I18N_FILENAME = 'filters_i18n.json';
 
-// FIXME: remove
-export const FILTERS_RULES_COUNTER_FILENAME = 'filters_rules_counter.json';
-export const FILTERS_REGEXP_COUNTER_FILENAME = 'filters_regexp_counter.json';
-
-export const FILTERS_VERSIONS_FILENAME = 'filters_versions.json';
-
 export interface OptionsData {
     settings: SettingsType,
     filters: FilterInfo[],

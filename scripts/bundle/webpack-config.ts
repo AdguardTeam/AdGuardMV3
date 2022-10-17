@@ -13,9 +13,6 @@ import fse from 'fs-extra';
 import { FILTER_RULESET, RulesetType } from '../../src/common/constants/filters';
 import type { Browser, BuildEnv } from '../build-constants';
 import { BROWSERS, BUILD_ENVS, RULESET_NAME } from '../build-constants';
-import { FILTERS_VERSIONS_FILENAME } from '../../src/common/constants/common';
-
-import CollectFiltersVersionsPlugin from './collect-filters-versions-plugin';
 
 const packageJson = require('../../package.json');
 const tsconfig = require('../../tsconfig.json');
@@ -77,7 +74,6 @@ export const getWebpackConfig = (
     const BUILD_PATH = '../../build';
     const SRC_PATH = '../../src';
     const FILTERS_PATH = `filters/${browser}`;
-    const OUTPUT_FILTERS_PATH = 'filters/';
     const OUTPUT_PATH = buildEnv;
     const BACKGROUND_PATH = path.resolve(__dirname, SRC_PATH, 'background');
     const POPUP_PATH = path.resolve(__dirname, SRC_PATH, 'popup');
@@ -87,13 +83,10 @@ export const getWebpackConfig = (
     const CONTENT_SCRIPTS_PATH = path.resolve(__dirname, SRC_PATH, 'content-scripts');
     const ASSISTANT_PATH = path.resolve(CONTENT_SCRIPTS_PATH, 'assistant');
     const OUTPUT_DIR = path.resolve(__dirname, BUILD_PATH, OUTPUT_PATH, browser);
-    const FILTERS_DIR = path.resolve(__dirname, SRC_PATH, FILTERS_PATH);
     const FILTERS_DECLARATIVE_DIR = path.resolve(__dirname, SRC_PATH, FILTERS_PATH, 'declarative/');
 
     const plugins: WebpackPluginInstance[] = [
         new ForkTsCheckerWebpackPlugin(),
-        // FIXME: Remove this plugin
-        new CollectFiltersVersionsPlugin(FILTERS_DIR, OUTPUT_FILTERS_PATH),
         new CopyWebpackPlugin({
             patterns: [
                 {
@@ -165,11 +158,7 @@ export const getWebpackConfig = (
     if (IS_DEV) {
         plugins.push(
             new CleanWebpackPlugin({
-                cleanOnceBeforeBuildPatterns: [
-                    `!**/${FILTERS_VERSIONS_FILENAME}`,
-                ],
                 cleanAfterEveryBuildPatterns: [
-                    `!**/${FILTERS_VERSIONS_FILENAME}`,
                     '!**/*.json',
                     '!assets/**/*',
                 ],

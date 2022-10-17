@@ -74,12 +74,4 @@ export default class FiltersUtils {
 
         return multiplier * parseInt(num, 10);
     };
-
-    /**
-     * Returns the parsed version of the specified rules or creates a new one with the current date
-     */
-    public static getTimestampForFilter(rules: string[]) {
-        const { timeUpdated } = FiltersUtils.parseFilterInfo(rules, '');
-        return timeUpdated?.trim() || new Date().toISOString();
-    }
 }
