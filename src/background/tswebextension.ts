@@ -1,11 +1,11 @@
-import { TsWebExtension, Configuration, ConfigurationResult } from '@adguard/tswebextension/mv3';
-
 import {
-    FiltersGroupId,
-    RuleSetCounters,
-    RULESET_NAME,
-    WEB_ACCESSIBLE_RESOURCES_PATH,
-} from 'Common/constants/common';
+    TsWebExtension,
+    Configuration,
+    ConfigurationResult,
+    RULESET_NAME_PREFIX,
+} from '@adguard/tswebextension/mv3';
+
+import { FiltersGroupId, RuleSetCounters, WEB_ACCESSIBLE_RESOURCES_PATH } from 'Common/constants/common';
 import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
 import { log } from 'Common/logger';
 import { IS_COLLECTING_LOG } from 'Common/constants/storage-keys';
@@ -32,7 +32,7 @@ class TsWebExtensionWrapper {
     public get ruleSetsCounters(): RuleSetCounters[] {
         return this.configurationResult?.staticFilters
             .map((ruleset) => ({
-                filterId: Number(ruleset.getId().slice(RULESET_NAME.length)),
+                filterId: Number(ruleset.getId().slice(RULESET_NAME_PREFIX.length)),
                 rulesCount: ruleset.getRulesCount(),
                 regexpRulesCount: ruleset.getRegexpRulesCount(),
             })) || [];
@@ -85,7 +85,7 @@ class TsWebExtensionWrapper {
             .map(({ id }) => id)
             .sort((a: number, b:number) => a - b);
         const nowEnabledIds = (await chrome.declarativeNetRequest.getEnabledRulesets())
-            .map((s) => Number.parseInt(s.slice(RULESET_NAME.length), 10))
+            .map((s) => Number.parseInt(s.slice(RULESET_NAME_PREFIX.length), 10))
             .sort((a: number, b:number) => a - b);
 
         const isDifferent = () => {
@@ -206,7 +206,7 @@ class TsWebExtensionWrapper {
             const { id, localeCodes } = localeFilterInMemory;
             const ruleSet = this.configurationResult.staticFilters.find((r) => {
                 // TODO: Seems like weak relation, not too reliably
-                return r.getId() === `${RULESET_NAME}_${id}`;
+                return r.getId() === `${RULESET_NAME_PREFIX}${id}`;
             });
             const declarativeRulesCounter = ruleSet?.getRulesCount();
 

@@ -12,12 +12,13 @@ import fse from 'fs-extra';
 
 import { FILTER_RULESET, RulesetType } from '../../src/common/constants/filters';
 import type { Browser, BuildEnv } from '../build-constants';
-import { BROWSERS, BUILD_ENVS, RULESET_NAME } from '../build-constants';
+import { BROWSERS, BUILD_ENVS } from '../build-constants';
 
 const packageJson = require('../../package.json');
 const tsconfig = require('../../tsconfig.json');
 
 const APP_DIR = path.resolve(__dirname, '../../src');
+const RULESET_NAME_PREFIX = 'ruleset_';
 
 const updateManifest = (isDev: boolean, content: Buffer, filtersDir: string): string => {
     const manifest = JSON.parse(content.toString());
@@ -30,13 +31,11 @@ const updateManifest = (isDev: boolean, content: Buffer, filtersDir: string): st
     }
 
     if (fse.existsSync(filtersDir)) {
-        const nameList = fse.readdirSync(filtersDir)
-            .filter((filePath) => filePath && !filePath.endsWith('.map'));
-
+        const nameList = fse.readdirSync(filtersDir);
         const rules = {
             rule_resources: nameList.map((name: string) => {
                 const rulesetIndex = Number.parseInt(name.match(/\d+/)![0], 10);
-                const id = `${RULESET_NAME}${rulesetIndex}` as RulesetType;
+                const id = `${RULESET_NAME_PREFIX}${rulesetIndex}` as RulesetType;
                 const { enabled } = FILTER_RULESET[id];
                 return {
                     id,

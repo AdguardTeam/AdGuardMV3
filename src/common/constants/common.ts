@@ -135,8 +135,6 @@ export interface Rules {
     rules: string,
 }
 
-export const RULESET_NAME = 'ruleset_';
-
 export const OTHER_DOMAIN_TITLE = 'other';
 
 // eslint-disable-next-line max-len
