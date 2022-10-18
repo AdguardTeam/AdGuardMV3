@@ -77,6 +77,7 @@ export const RequestsTable = ({
 
         const sourceRulesTxt = sourceRules.map(({ sourceRule, filterId }) => {
             return (
+                // FIXME: Add filters names
                 <p>
                     {`Rule ${sourceRule} from filter with id ${filterId}`}
                 </p>
