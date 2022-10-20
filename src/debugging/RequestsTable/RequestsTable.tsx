@@ -3,16 +3,19 @@ import cn from 'classnames';
 import { RecordFiltered } from '@adguard/tswebextension/mv3';
 
 import { translator } from 'Common/translators/translator';
+import { FiltersNames } from 'background/filters';
 
 import style from './requests-table.module.pcss';
 
 type RequestsTableType = {
     ruleLog: RecordFiltered[],
+    filtersNames: FiltersNames,
     cleanLog: () => void,
 };
 
 export const RequestsTable = ({
     ruleLog,
+    filtersNames,
     cleanLog,
 }: RequestsTableType) => {
     const titles = [
@@ -76,10 +79,11 @@ export const RequestsTable = ({
         } = record;
 
         const sourceRulesTxt = sourceRules.map(({ sourceRule, filterId }) => {
+            const filterName = filtersNames[filterId] || 'not_found';
+
             return (
-                // FIXME: Add filters names
                 <p>
-                    {`Rule ${sourceRule} from filter with id ${filterId}`}
+                    {`Rule ${sourceRule} from filter "${filterName}" with id ${filterId}`}
                 </p>
             );
         });

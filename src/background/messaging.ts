@@ -215,6 +215,9 @@ export const extensionMessageHandler = async (
 
             return isAllowlisted;
         }
+        case MESSAGE_TYPES.GET_FILTERS_NAMES: {
+            return filters.getFiltersNames();
+        }
         default: {
             throw new Error(`No message handler for type: ${type}`);
         }

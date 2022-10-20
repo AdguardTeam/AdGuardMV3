@@ -1,3 +1,5 @@
+import { USER_FILTER_ID } from '@adguard/tswebextension/mv3';
+
 import { IconId } from 'Common/components/ui';
 import { FiltersGroupId, FilterInfo, Rules } from 'Common/constants/common';
 import { translator } from 'Common/translators/translator';
@@ -6,6 +8,10 @@ import { RULES_STORAGE_KEY, ENABLED_FILTERS_IDS, FILTERS_STORAGE_KEY } from 'Com
 import FiltersUtils from 'Common/utils/filters';
 
 import { storage } from './storage';
+
+export type FiltersNames = {
+    [filterId in number]: string;
+};
 
 const CUSTOM_FILTERS_START_ID = 1000;
 
@@ -123,6 +129,8 @@ class Filters {
 
     private enableFiltersIds: number[] = [];
 
+    private filtersNames: FiltersNames = {};
+
     /**
      * Initializes filters module
      */
@@ -136,6 +144,11 @@ class Filters {
         await storage.set(RULES_STORAGE_KEY, this.customFiltersRules);
 
         this.enableFiltersIds = await storage.get(ENABLED_FILTERS_IDS) || [];
+
+        this.filtersInfo.forEach(({ id, title }) => {
+            this.filtersNames[id] = title;
+        });
+        this.filtersNames[USER_FILTER_ID] = 'user rules';
     }
 
     /**
@@ -284,6 +297,15 @@ class Filters {
     };
 
     /**
+     * Returns an object where the filter id is the key and the filter name
+     * is the value
+     * @returns @see {@link FiltersNames}
+     */
+    public getFiltersNames(): FiltersNames {
+        return this.filtersNames;
+    }
+
+    /**
      * Adds custom filter
      * @param filterStrings
      * @param title
@@ -291,24 +313,24 @@ class Filters {
      * @returns
      */
     addCustomFilter = async (content: string[], title: string, url: string) => {
-        const filterInfo = FiltersUtils.parseFilterInfo(content, title);
+        const filterMetaData = FiltersUtils.parseFilterInfo(content, title);
 
-        const filter: FilterInfo = {
+        const filterInfo: FilterInfo = {
             id: this.getCustomFilterId(),
-            title: title || filterInfo.title,
+            title: title || filterMetaData.title,
             enabled: true,
-            description: filterInfo.description || '',
+            description: filterMetaData.description || '',
             groupId: FiltersGroupId.CUSTOM,
             url,
         };
 
-        this.filtersInfo.push(filter);
+        this.filtersInfo.push(filterInfo);
+        await storage.set(FILTERS_STORAGE_KEY, this.filtersInfo);
+
         this.customFiltersRules.push({
-            id: filter.id,
+            id: filterInfo.id,
             rules: content.join('\n'),
         });
-
-        await storage.set(FILTERS_STORAGE_KEY, this.filtersInfo);
         await storage.set(RULES_STORAGE_KEY, this.customFiltersRules);
 
         await this.saveEnabledFilterIds();
