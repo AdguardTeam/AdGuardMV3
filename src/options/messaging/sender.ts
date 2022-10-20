@@ -7,7 +7,7 @@ import {
 import { OPTION_SETTINGS } from 'Common/constants/settings-constants';
 import { sendMessage } from 'Common/helpers';
 
-import type { UserRulesLimits } from '../../background/userRules';
+import type { UserRulesStatus } from '../../background/userRules';
 
 /**
  * Module with methods used to communicate with background service worker
@@ -25,8 +25,8 @@ class Sender {
     /** Retrieves options data from background service worker */
     getOptionsData = () => sendMessage<OptionsData>(MESSAGE_TYPES.GET_OPTIONS_DATA);
 
-    /** Retrieves dynamic rules counters */
-    getDynamicRulesCounters = () => sendMessage<UserRulesLimits>(MESSAGE_TYPES.GET_DYNAMIC_RULES_LIMITS);
+    /** Retrieves dynamic rules status */
+    getDynamicRulesStatus = () => sendMessage<UserRulesStatus>(MESSAGE_TYPES.GET_DYNAMIC_RULES_STATUS);
 
     /** Relaunch tswebextension after possible filters limit release */
     relaunchFiltering = (filterIds: number[]) => sendMessage(MESSAGE_TYPES.RELAUNCH_FILTERING, { filterIds });

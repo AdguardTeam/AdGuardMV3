@@ -150,7 +150,7 @@ export class SettingsStore {
             this.availableStaticRulesCount = availableStaticRulesCount;
         });
 
-        await this.rootStore.optionsStore.getDynamicRulesCounters();
+        await this.rootStore.optionsStore.updateDynamicRulesStatus();
     };
 
     @flow* getOptionsData() {

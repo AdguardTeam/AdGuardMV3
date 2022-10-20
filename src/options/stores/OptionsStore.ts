@@ -13,7 +13,7 @@ import { OTHER_DOMAIN_TITLE, NEW_LINE_SEPARATOR } from 'Common/constants/common'
 import { translator } from 'Common/translators/translator';
 import { log } from 'Common/logger';
 
-import type { UserRulesLimits } from '../../background/userRules';
+import type { UserRulesStatus } from '../../background/userRules';
 
 import type { RootStore } from './RootStore';
 
@@ -63,10 +63,28 @@ export class OptionsStore {
     userRules = '';
 
     @observable
-    userRulesDeclarativeRulesCount: number = 0;
+    userRulesEnabledCount: number = 0;
 
     @observable
-    userRulesRegexpsCount: number = 0;
+    userRulesMaxNumber: number = 0;
+
+    @observable
+    isUserRulesLimitExceed: boolean = false;
+
+    @observable
+    userRulesExcludedIds: number[] = [];
+
+    @observable
+    userRulesRegexpsEnabledCount: number = 0;
+
+    @observable
+    userRulesRegexpsMaxNumber: number = 0;
+
+    @observable
+    isUserRulesRegexpsLimitExceed: boolean = false;
+
+    @observable
+    userRulesRegexpsExcludedIds: number[] = [];
 
     @observable
     editorOpen = false;
@@ -88,18 +106,6 @@ export class OptionsStore {
 
     @observable
     error = '';
-
-    @computed
-    get isMaxEnabledDynamicRules() {
-        const max = MAX_NUMBER_OF_DYNAMIC_AND_SESSION_RULES;
-        return this.userRulesDeclarativeRulesCount > max;
-    }
-
-    @computed
-    get isMaxEnabledDynamicRulesRegexps() {
-        const max = MAX_NUMBER_OF_REGEX_RULES;
-        return this.userRulesRegexpsCount > max;
-    }
 
     @computed
     get userRulesGroups() {
@@ -154,25 +160,32 @@ export class OptionsStore {
     }
 
     @action
-    getDynamicRulesCounters = async () => {
+    updateDynamicRulesStatus = async () => {
         const { setLoader } = this.rootStore.uiStore;
         setLoader(true);
 
-        const userRulesLimits = await sender.getDynamicRulesCounters();
-        await this.setDynamicRulesCounters(userRulesLimits);
+        const userRulesStatus = await sender.getDynamicRulesStatus();
+        await this.setDynamicRulesStatus(userRulesStatus);
 
         setLoader(false);
     };
 
     @action
-    setDynamicRulesCounters = async (userRulesLimits: UserRulesLimits) => {
+    setDynamicRulesStatus = async (userRulesStatus: UserRulesStatus) => {
         const {
-            declarativeRulesCount,
-            regexpsCount,
-        } = userRulesLimits;
+            rules,
+            regexpsRules,
+        } = userRulesStatus;
 
-        this.userRulesDeclarativeRulesCount = declarativeRulesCount;
-        this.userRulesRegexpsCount = regexpsCount;
+        this.userRulesEnabledCount = rules.enabledCount;
+        this.userRulesMaxNumber = rules.maxNumberOfRules;
+        this.isUserRulesLimitExceed = rules.limitExceed;
+        this.userRulesExcludedIds = rules.excludedRulesIds;
+
+        this.userRulesRegexpsEnabledCount = regexpsRules.enabledCount;
+        this.userRulesRegexpsMaxNumber = regexpsRules.maxNumberOfRules;
+        this.isUserRulesRegexpsLimitExceed = regexpsRules.limitExceed;
+        this.userRulesRegexpsExcludedIds = regexpsRules.excludedRulesIds;
     };
 
     @action
@@ -188,8 +201,8 @@ export class OptionsStore {
         let resError: DYNAMIC_RULES_LIMITS_ERROR | null = null;
 
         try {
-            const userRulesLimits = await sender.getDynamicRulesCounters();
-            await this.setDynamicRulesCounters(userRulesLimits);
+            const userRulesStatus = await sender.getDynamicRulesStatus();
+            await this.setDynamicRulesStatus(userRulesStatus);
 
             this.closeEditor();
             this.closeUserRuleWizard();
@@ -235,11 +248,11 @@ export class OptionsStore {
     };
 
     checkLimitsAndNotify(): DYNAMIC_RULES_LIMITS_ERROR | null {
-        if (this.isMaxEnabledDynamicRules) {
+        if (this.isUserRulesLimitExceed) {
             return DYNAMIC_RULES_LIMITS_ERROR.MAX_DYNAMIC_REGEXPS_EXCEED;
         }
 
-        if (this.isMaxEnabledDynamicRulesRegexps) {
+        if (this.isUserRulesRegexpsLimitExceed) {
             return DYNAMIC_RULES_LIMITS_ERROR.MAX_DYNAMIC_RULES_EXCEED;
         }
 

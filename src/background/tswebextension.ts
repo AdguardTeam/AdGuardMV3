@@ -3,6 +3,8 @@ import {
     Configuration,
     ConfigurationResult,
     RULESET_NAME_PREFIX,
+    TooManyRulesError,
+    TooManyRegexpRulesError,
 } from '@adguard/tswebextension/mv3';
 
 import { FiltersGroupId, RuleSetCounters, WEB_ACCESSIBLE_RESOURCES_PATH } from 'Common/constants/common';
@@ -17,6 +19,8 @@ import { browserActions } from './browser-actions';
 import { storage } from './storage';
 
 const {
+    MAX_NUMBER_OF_REGEX_RULES,
+    MAX_NUMBER_OF_DYNAMIC_AND_SESSION_RULES,
     MAX_NUMBER_OF_ENABLED_STATIC_RULESETS,
 } = chrome.declarativeNetRequest;
 
@@ -41,7 +45,7 @@ class TsWebExtensionWrapper {
     async start() {
         const config = await this.getConfiguration();
         this.configurationResult = await this.tsWebExtension.start(config);
-        await TsWebExtensionWrapper.saveDynamicRulesCounters(this.configurationResult);
+        await TsWebExtensionWrapper.saveDynamicRulesInfo(this.configurationResult);
 
         await this.checkFiltersLimitsChange();
     }
@@ -53,7 +57,7 @@ class TsWebExtensionWrapper {
     async configure(skipCheck?: boolean) {
         const config = await this.getConfiguration();
         this.configurationResult = await this.tsWebExtension.configure(config);
-        await TsWebExtensionWrapper.saveDynamicRulesCounters(this.configurationResult);
+        await TsWebExtensionWrapper.saveDynamicRulesInfo(this.configurationResult);
 
         if (skipCheck) {
             return;
@@ -61,18 +65,33 @@ class TsWebExtensionWrapper {
         await this.checkFiltersLimitsChange();
     }
 
-    static async saveDynamicRulesCounters({ dynamicRules }: ConfigurationResult) {
-        if (dynamicRules) {
-            const { ruleSets: [ruleset] } = dynamicRules;
+    static async saveDynamicRulesInfo({ dynamicRules }: ConfigurationResult) {
+        const { ruleSets: [ruleset], limitations } = dynamicRules;
 
-            const declarativeRulesCount = ruleset.getRulesCount();
-            const regexpsCount = ruleset.getRegexpRulesCount();
+        const declarativeRulesCount = ruleset.getRulesCount();
+        const regexpsCount = ruleset.getRegexpRulesCount();
 
-            await userRules.setUserRulesCounters({
-                declarativeRulesCount,
-                regexpsCount,
-            });
-        }
+        const rulesLimitExceedErr = limitations
+            .find((e) => e instanceof TooManyRulesError);
+        const regexpRulesLimitExceedErr = limitations
+            .find((e) => e instanceof TooManyRegexpRulesError);
+
+        // TODO: Perhaps there is a better way of counting
+        // the total number of declarative rules
+        await userRules.setUserRulesStatus({
+            rules: {
+                enabledCount: declarativeRulesCount + (rulesLimitExceedErr?.excludedRulesIds.length || 0),
+                maxNumberOfRules: rulesLimitExceedErr?.numberOfMaximumRules || MAX_NUMBER_OF_DYNAMIC_AND_SESSION_RULES,
+                limitExceed: rulesLimitExceedErr !== undefined,
+                excludedRulesIds: rulesLimitExceedErr?.excludedRulesIds || [],
+            },
+            regexpsRules: {
+                enabledCount: regexpsCount + (regexpRulesLimitExceedErr?.excludedRulesIds.length || 0),
+                maxNumberOfRules: regexpRulesLimitExceedErr?.numberOfMaximumRules || MAX_NUMBER_OF_REGEX_RULES,
+                limitExceed: regexpRulesLimitExceedErr !== undefined,
+                excludedRulesIds: regexpRulesLimitExceedErr?.excludedRulesIds || [],
+            },
+        });
     }
 
     /**

@@ -12,22 +12,24 @@ export const DynamicRulesLimitation = observer(() => {
     const { optionsStore } = useContext(rootStore);
 
     const {
-        userRulesRegexpsCount,
-        userRulesDeclarativeRulesCount,
-        isMaxEnabledDynamicRules,
-        isMaxEnabledDynamicRulesRegexps,
+        userRulesEnabledCount,
+        userRulesMaxNumber,
+        userRulesRegexpsEnabledCount,
+        userRulesRegexpsMaxNumber,
+        isUserRulesLimitExceed,
+        isUserRulesRegexpsLimitExceed,
     } = optionsStore;
 
-    const maxEnabledRulesError = isMaxEnabledDynamicRules
+    const maxEnabledRulesError = isUserRulesLimitExceed
         && reactTranslator.getMessage('options_dynamic_rules_limit_on_page', {
-            'current-enabled': userRulesDeclarativeRulesCount,
-            maximum: chrome.declarativeNetRequest.MAX_NUMBER_OF_DYNAMIC_AND_SESSION_RULES,
+            'current-enabled': userRulesEnabledCount,
+            maximum: userRulesMaxNumber,
         });
 
-    const maxEnabledRegexpsError = isMaxEnabledDynamicRulesRegexps
+    const maxEnabledRegexpsError = isUserRulesRegexpsLimitExceed
         && reactTranslator.getMessage('options_dynamic_rules_regexps_limit_on_page', {
-            'current-enabled': userRulesRegexpsCount,
-            maximum: chrome.declarativeNetRequest.MAX_NUMBER_OF_REGEX_RULES,
+            'current-enabled': userRulesRegexpsEnabledCount,
+            maximum: userRulesRegexpsMaxNumber,
         });
 
     const isErrors = maxEnabledRulesError || maxEnabledRegexpsError;

@@ -22,7 +22,6 @@ import { Warning } from './Warning';
 
 const {
     MAX_NUMBER_OF_REGEX_RULES,
-    MAX_NUMBER_OF_DYNAMIC_AND_SESSION_RULES,
     MAX_NUMBER_OF_ENABLED_STATIC_RULESETS,
 } = chrome.declarativeNetRequest;
 
@@ -36,8 +35,10 @@ export const Limits = observer(() => {
     } = useContext(rootStore);
 
     const {
-        userRulesRegexpsCount,
-        userRulesDeclarativeRulesCount,
+        userRulesEnabledCount,
+        userRulesMaxNumber,
+        userRulesRegexpsEnabledCount,
+        userRulesRegexpsMaxNumber,
     } = optionsStore;
 
     const {
@@ -148,14 +149,14 @@ export const Limits = observer(() => {
 
                 {descWithCounter(
                     reactTranslator.getMessage('options_limits_dynamic_added'),
-                    userRulesDeclarativeRulesCount,
-                    MAX_NUMBER_OF_DYNAMIC_AND_SESSION_RULES,
+                    userRulesEnabledCount,
+                    userRulesMaxNumber,
                 )}
 
                 {descWithCounter(
                     reactTranslator.getMessage('options_limits_regex'),
-                    userRulesRegexpsCount,
-                    MAX_NUMBER_OF_REGEX_RULES,
+                    userRulesRegexpsEnabledCount,
+                    userRulesRegexpsMaxNumber,
                 )}
             </div>
 

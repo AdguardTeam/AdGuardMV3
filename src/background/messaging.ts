@@ -199,9 +199,8 @@ export const extensionMessageHandler = async (
         case MESSAGE_TYPES.PING: {
             break;
         }
-        case MESSAGE_TYPES.GET_DYNAMIC_RULES_LIMITS: {
-            const userRulesCounters = await userRules.getUserRulesCounters();
-            return userRulesCounters;
+        case MESSAGE_TYPES.GET_DYNAMIC_RULES_STATUS: {
+            return userRules.getUserRulesStatus();
         }
         case MESSAGE_TYPES.RELAUNCH_FILTERING: {
             const { filterIds } = data;
@@ -249,10 +248,10 @@ export const initExtension = async (message?: any) => {
     if (!initialized) {
         log.debug('[messageHandlerWrapper]: start init', message);
         const init = async () => {
-            // BUG: filters should initialized before userrules,
-            // because otherwise filters will be initialize with
-            // one filter from storage - userrules
+            // The settings must be initialized first, because this module
+            // checks the version of the schema and runs migrations if necessary
             await settings.init();
+
             await filters.init();
             await userRules.init();
             await protectionPause.init();

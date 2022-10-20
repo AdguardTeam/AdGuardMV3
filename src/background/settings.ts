@@ -9,6 +9,7 @@ import {
     DEFAULT_SETTINGS,
     SCHEME_VERSION,
 } from 'Common/constants/settings-constants';
+import { USER_RULES_LIMITS_STORAGE_KEY } from 'Common/constants/storage-keys';
 
 import { storage } from './storage';
 import { notifier } from './notifier';
@@ -122,6 +123,15 @@ class Settings {
     };
 
     /**
+     * Removing obsolete counters of user rules
+     */
+    private migrateFrom2to3 = async (oldSettings: any): Promise<any> => {
+        await storage.remove(USER_RULES_LIMITS_STORAGE_KEY);
+
+        return oldSettings;
+    };
+
+    /**
      * In order to add migration, create new function which modifies old settings into new
      * And add this migration under related old settings scheme version
      * For example if your migration function migrates your settings from scheme 4 to 5, then add
@@ -132,6 +142,7 @@ class Settings {
     } = {
         0: this.migrateFrom0to1,
         1: this.migrateFrom1to2,
+        2: this.migrateFrom2to3,
     };
 
     /**
