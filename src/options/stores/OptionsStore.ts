@@ -66,25 +66,25 @@ export class OptionsStore {
     userRulesEnabledCount: number = 0;
 
     @observable
-    userRulesMaxNumber: number = 0;
+    userRulesTotalCount: number = 0;
+
+    @observable
+    userRulesMaximumCount: number = 0;
 
     @observable
     isUserRulesLimitExceed: boolean = false;
 
     @observable
-    userRulesExcludedIds: number[] = [];
-
-    @observable
     userRulesRegexpsEnabledCount: number = 0;
 
     @observable
-    userRulesRegexpsMaxNumber: number = 0;
+    userRulesRegexpsTotalCount: number = 0;
+
+    @observable
+    userRulesRegexpsMaximumCount: number = 0;
 
     @observable
     isUserRulesRegexpsLimitExceed: boolean = false;
-
-    @observable
-    userRulesRegexpsExcludedIds: number[] = [];
 
     @observable
     editorOpen = false;
@@ -178,14 +178,14 @@ export class OptionsStore {
         } = userRulesStatus;
 
         this.userRulesEnabledCount = rules.enabledCount;
-        this.userRulesMaxNumber = rules.maxNumberOfRules;
+        this.userRulesTotalCount = rules.totalCount;
+        this.userRulesMaximumCount = rules.maximumCount;
         this.isUserRulesLimitExceed = rules.limitExceed;
-        this.userRulesExcludedIds = rules.excludedRulesIds;
 
         this.userRulesRegexpsEnabledCount = regexpsRules.enabledCount;
-        this.userRulesRegexpsMaxNumber = regexpsRules.maxNumberOfRules;
+        this.userRulesRegexpsTotalCount = regexpsRules.totalCount;
+        this.userRulesRegexpsMaximumCount = regexpsRules.maximumCount;
         this.isUserRulesRegexpsLimitExceed = regexpsRules.limitExceed;
-        this.userRulesRegexpsExcludedIds = regexpsRules.excludedRulesIds;
     };
 
     @action

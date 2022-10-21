@@ -8,7 +8,8 @@ import { storage } from './storage';
 
 type RulesStatus = {
     enabledCount: number,
-    maxNumberOfRules: number,
+    totalCount: number,
+    maximumCount: number,
     limitExceed: boolean,
     excludedRulesIds: number[],
 };
@@ -29,13 +30,15 @@ class UserRules {
     private status: UserRulesStatus = {
         rules: {
             enabledCount: 0,
-            maxNumberOfRules: 0,
+            totalCount: 0,
+            maximumCount: 0,
             limitExceed: false,
             excludedRulesIds: [],
         },
         regexpsRules: {
             enabledCount: 0,
-            maxNumberOfRules: 0,
+            totalCount: 0,
+            maximumCount: 0,
             limitExceed: false,
             excludedRulesIds: [],
         },

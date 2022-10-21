@@ -18,9 +18,9 @@ export const useNotifyDynamicRulesLimitsError = () => {
 
     const {
         userRulesEnabledCount,
-        userRulesMaxNumber,
+        userRulesTotalCount,
         userRulesRegexpsEnabledCount,
-        userRulesRegexpsMaxNumber,
+        userRulesRegexpsTotalCount,
     } = optionsStore;
 
     return (error: DYNAMIC_RULES_LIMITS_ERROR | null) => {
@@ -33,7 +33,7 @@ export const useNotifyDynamicRulesLimitsError = () => {
                 const message = reactTranslator.getMessage('options_dynamic_rules_limit', {
                     'link-to-limits': LinkToLimits,
                     'current-enabled': userRulesEnabledCount,
-                    maximum: userRulesMaxNumber,
+                    maximum: userRulesTotalCount,
                 });
                 uiStore.addNotification(message, IconId.RED_WARNING);
                 break;
@@ -42,7 +42,7 @@ export const useNotifyDynamicRulesLimitsError = () => {
                 const message = reactTranslator.getMessage('options_dynamic_rules_regexps_limit', {
                     'link-to-limits': LinkToLimits,
                     'current-enabled': userRulesRegexpsEnabledCount,
-                    maximum: userRulesRegexpsMaxNumber,
+                    maximum: userRulesRegexpsTotalCount,
                 });
                 uiStore.addNotification(message, IconId.RED_WARNING);
                 break;

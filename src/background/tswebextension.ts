@@ -76,18 +76,18 @@ class TsWebExtensionWrapper {
         const regexpRulesLimitExceedErr = limitations
             .find((e) => e instanceof TooManyRegexpRulesError);
 
-        // TODO: Perhaps there is a better way of counting
-        // the total number of declarative rules
         await userRules.setUserRulesStatus({
             rules: {
-                enabledCount: declarativeRulesCount + (rulesLimitExceedErr?.excludedRulesIds.length || 0),
-                maxNumberOfRules: rulesLimitExceedErr?.numberOfMaximumRules || MAX_NUMBER_OF_DYNAMIC_AND_SESSION_RULES,
+                enabledCount: rulesLimitExceedErr?.numberOfMaximumRules || declarativeRulesCount,
+                totalCount: declarativeRulesCount + (rulesLimitExceedErr?.numberOfExcludedDeclarativeRules || 0),
+                maximumCount: rulesLimitExceedErr?.numberOfMaximumRules || MAX_NUMBER_OF_DYNAMIC_AND_SESSION_RULES,
                 limitExceed: rulesLimitExceedErr !== undefined,
                 excludedRulesIds: rulesLimitExceedErr?.excludedRulesIds || [],
             },
             regexpsRules: {
                 enabledCount: regexpsCount + (regexpRulesLimitExceedErr?.excludedRulesIds.length || 0),
-                maxNumberOfRules: regexpRulesLimitExceedErr?.numberOfMaximumRules || MAX_NUMBER_OF_REGEX_RULES,
+                totalCount: declarativeRulesCount + (regexpRulesLimitExceedErr?.numberOfExcludedDeclarativeRules || 0),
+                maximumCount: regexpRulesLimitExceedErr?.numberOfMaximumRules || MAX_NUMBER_OF_REGEX_RULES,
                 limitExceed: regexpRulesLimitExceedErr !== undefined,
                 excludedRulesIds: regexpRulesLimitExceedErr?.excludedRulesIds || [],
             },

@@ -36,9 +36,9 @@ export const Limits = observer(() => {
 
     const {
         userRulesEnabledCount,
-        userRulesMaxNumber,
+        userRulesMaximumCount,
         userRulesRegexpsEnabledCount,
-        userRulesRegexpsMaxNumber,
+        userRulesRegexpsMaximumCount,
     } = optionsStore;
 
     const {
@@ -150,13 +150,13 @@ export const Limits = observer(() => {
                 {descWithCounter(
                     reactTranslator.getMessage('options_limits_dynamic_added'),
                     userRulesEnabledCount,
-                    userRulesMaxNumber,
+                    userRulesMaximumCount,
                 )}
 
                 {descWithCounter(
                     reactTranslator.getMessage('options_limits_regex'),
                     userRulesRegexpsEnabledCount,
-                    userRulesRegexpsMaxNumber,
+                    userRulesRegexpsMaximumCount,
                 )}
             </div>
 
