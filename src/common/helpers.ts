@@ -25,6 +25,13 @@ const promisifiedSendMessage = <T = void>(
     );
 };
 
+/**
+ * Sends message client handler
+ * @param type type of message from {@link MessageType}
+ * @param data data for handler
+ *
+ * @returns Specified generic type
+ */
 export const sendMessage = <T = void>(
     type: MessageType,
     data?: any,
@@ -43,6 +50,13 @@ type InnerMessage = {
     data?: any;
 };
 
+/**
+ * Sends message directly to inner tswebextension handler
+ * @param type type of message from {@link ExtendedMV3MessageType}
+ * @param data data for handler
+ *
+ * @returns Specified generic type
+ */
 export const sendInnerMessage = <T = void>(
     type: ExtendedMV3MessageType,
     data?: any,

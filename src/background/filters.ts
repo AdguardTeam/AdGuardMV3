@@ -10,7 +10,7 @@ import FiltersUtils from 'Common/utils/filters';
 import { storage } from './storage';
 
 export type FiltersNames = {
-    [filterId in number]: string;
+    [filterId: number]: string;
 };
 
 const CUSTOM_FILTERS_START_ID = 1000;
