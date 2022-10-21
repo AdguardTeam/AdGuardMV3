@@ -1,13 +1,8 @@
-export const FILTERS_STORAGE_KEY = 'filters';
+export const FILTERS_INFO_STORAGE_KEY = 'filters_info';
 
-export const RULES_STORAGE_KEY = 'rules';
+export const CUSTOM_FILTERS_RULES_STORAGE_KEY = 'custom_filters_rules';
 
 export const USER_RULES_STORAGE_KEY = 'user_rules';
-
-/**
- * @obsolete Use USER_RULES_STATUS_STORAGE_KEY
- */
-export const USER_RULES_LIMITS_STORAGE_KEY = 'user_rules_limits';
 
 export const USER_RULES_STATUS_STORAGE_KEY = 'user_rules_status';
 

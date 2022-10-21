@@ -4,7 +4,11 @@ import { IconId } from 'Common/components/ui';
 import { FiltersGroupId, FilterInfo, Rules } from 'Common/constants/common';
 import { translator } from 'Common/translators/translator';
 import { FILTER_RULESET, RulesetType } from 'Common/constants/filters';
-import { RULES_STORAGE_KEY, ENABLED_FILTERS_IDS, FILTERS_STORAGE_KEY } from 'Common/constants/storage-keys';
+import {
+    CUSTOM_FILTERS_RULES_STORAGE_KEY,
+    ENABLED_FILTERS_IDS,
+    FILTERS_INFO_STORAGE_KEY,
+} from 'Common/constants/storage-keys';
 import FiltersUtils from 'Common/utils/filters';
 
 import { storage } from './storage';
@@ -139,7 +143,7 @@ class Filters {
         await this.saveEnabledFilterIds();
 
         this.customFiltersRules = await this.getCustomFiltersRules(this.filtersInfo);
-        await storage.set(RULES_STORAGE_KEY, this.customFiltersRules);
+        await storage.set(CUSTOM_FILTERS_RULES_STORAGE_KEY, this.customFiltersRules);
 
         this.enableFiltersIds = await storage.get(ENABLED_FILTERS_IDS) || [];
 
@@ -153,7 +157,7 @@ class Filters {
      * Returns rules for custom filters
      */
     private getCustomFiltersRules = async (filtersInfo: FilterInfo[]): Promise<Rules[]> => {
-        const filtersRules = await storage.get<Rules[]>(RULES_STORAGE_KEY);
+        const filtersRules = await storage.get<Rules[]>(CUSTOM_FILTERS_RULES_STORAGE_KEY);
 
         const customFiltersIds = filtersInfo
             .filter(({ groupId }) => groupId === FiltersGroupId.CUSTOM)
@@ -172,8 +176,8 @@ class Filters {
         this.filtersInfo = this.filtersInfo.filter((f) => f.id !== filterId);
         this.customFiltersRules = this.customFiltersRules.filter((f) => f.id !== filterId);
 
-        await storage.set(FILTERS_STORAGE_KEY, this.filtersInfo);
-        await storage.set(RULES_STORAGE_KEY, this.customFiltersRules);
+        await storage.set(FILTERS_INFO_STORAGE_KEY, this.filtersInfo);
+        await storage.set(CUSTOM_FILTERS_RULES_STORAGE_KEY, this.customFiltersRules);
 
         await this.saveEnabledFilterIds();
 
@@ -198,7 +202,7 @@ class Filters {
             f.enabled = ids.includes(f.id);
         }
 
-        await storage.set(FILTERS_STORAGE_KEY, this.filtersInfo);
+        await storage.set(FILTERS_INFO_STORAGE_KEY, this.filtersInfo);
         await this.saveEnabledFilterIds();
     };
 
@@ -241,7 +245,7 @@ class Filters {
         const filterIdx = this.filtersInfo.indexOf(filter);
         this.filtersInfo[filterIdx] = { ...filter, ...filterProps };
 
-        await storage.set(FILTERS_STORAGE_KEY, this.filtersInfo);
+        await storage.set(FILTERS_INFO_STORAGE_KEY, this.filtersInfo);
         await this.saveEnabledFilterIds();
     };
 
@@ -249,7 +253,7 @@ class Filters {
      * Returns filters state from storage
      */
     getFiltersInfoFromStorage = async (): Promise<FilterInfo[]> => {
-        const filtersFromStorage = await storage.get<FilterInfo[]>(FILTERS_STORAGE_KEY);
+        const filtersFromStorage = await storage.get<FilterInfo[]>(FILTERS_INFO_STORAGE_KEY);
         const filters = filtersFromStorage || DEFAULT_FILTERS;
 
         return filters;
@@ -323,13 +327,13 @@ class Filters {
         };
 
         this.filtersInfo.push(filterInfo);
-        await storage.set(FILTERS_STORAGE_KEY, this.filtersInfo);
+        await storage.set(FILTERS_INFO_STORAGE_KEY, this.filtersInfo);
 
         this.customFiltersRules.push({
             id: filterInfo.id,
             rules: content.join('\n'),
         });
-        await storage.set(RULES_STORAGE_KEY, this.customFiltersRules);
+        await storage.set(CUSTOM_FILTERS_RULES_STORAGE_KEY, this.customFiltersRules);
 
         await this.saveEnabledFilterIds();
 

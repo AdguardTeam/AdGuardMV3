@@ -1,7 +1,7 @@
 import { throttle } from 'lodash';
 
 import { log } from 'Common/logger';
-import { NOTIFIER_EVENTS } from 'Common/constants/common';
+import { FiltersGroupId, NOTIFIER_EVENTS, Rules } from 'Common/constants/common';
 import {
     SettingsType,
     SETTINGS_NAMES,
@@ -9,10 +9,11 @@ import {
     DEFAULT_SETTINGS,
     SCHEME_VERSION,
 } from 'Common/constants/settings-constants';
-import { USER_RULES_LIMITS_STORAGE_KEY } from 'Common/constants/storage-keys';
+import { CUSTOM_FILTERS_RULES_STORAGE_KEY, FILTERS_INFO_STORAGE_KEY } from 'Common/constants/storage-keys';
 
 import { storage } from './storage';
 import { notifier } from './notifier';
+import Obsoleted from './obsoleted';
 
 class Settings {
     private SETTINGS_STORAGE_KEY = 'settings';
@@ -119,16 +120,62 @@ class Settings {
         // Delete old key
         delete copyObject['filtering.enabled'];
 
-        return copyObject;
+        return {
+            ...copyObject,
+            [SETTINGS_NAMES.VERSION]: 2,
+        };
     };
 
     /**
-     * Removing obsolete counters of user rules
+     * Removing obsolete counters of user rules, counters of filters rules and
+     * static filters rules
      */
     private migrateFrom2to3 = async (oldSettings: any): Promise<any> => {
-        await storage.remove(USER_RULES_LIMITS_STORAGE_KEY);
+        /**
+         * Remove counters from filter objects, since these counters are now
+         * stored in rule sets that will be returned from tswebextension as
+         * a result of the configuration
+         *
+         * @see {@link TsWebExtensionWrapper.configurationResult}
+         */
+        const filters = await storage.get<Obsoleted.Filter[]>(Obsoleted.FILTERS_STORAGE_KEY);
+        if (filters) {
+            const filtersInfo = filters.map((filter) => {
+                // eslint-disable-next-line no-param-reassign
+                delete filter.regexpRulesCounter;
+                // eslint-disable-next-line no-param-reassign
+                delete filter.declarativeRulesCounter;
 
-        return oldSettings;
+                return filter;
+            });
+
+            await storage.set(FILTERS_INFO_STORAGE_KEY, filtersInfo);
+        }
+
+        // Remove static filter rules from the storage.
+        // Save only the rules from the custom filters.
+        const rules = await storage.get<Rules[]>(Obsoleted.RULES_STORAGE_KEY);
+        if (rules) {
+            const customFiltersRules = rules.filter(({ id }) => {
+                return filters?.find((f) => f.id === id && f.groupId === FiltersGroupId.CUSTOM);
+            });
+
+            await storage.set(CUSTOM_FILTERS_RULES_STORAGE_KEY, customFiltersRules);
+        }
+
+        // Remove obsoleted user rules limits
+        await storage.remove(Obsoleted.FILTERS_STORAGE_KEY);
+
+        // Remove obsoleted user rules limits
+        await storage.remove(Obsoleted.RULES_STORAGE_KEY);
+
+        // Remove obsoleted user rules limits
+        await storage.remove(Obsoleted.USER_RULES_LIMITS_STORAGE_KEY);
+
+        return {
+            ...oldSettings,
+            [SETTINGS_NAMES.VERSION]: 3,
+        };
     };
 
     /**
