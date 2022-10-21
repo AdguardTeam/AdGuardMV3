@@ -88,7 +88,7 @@ export const RequestsTable = ({
             );
         });
 
-        const beautifyJson = declarativeRuleJson
+        const formattedJson = declarativeRuleJson
             ? JSON.stringify(JSON.parse(declarativeRuleJson), null, '\t')
             : '';
 
@@ -106,7 +106,7 @@ export const RequestsTable = ({
                 <div className={style.cell}>{sourceRulesTxt}</div>
                 <div className={style.cell}>
                     <pre>
-                        {beautifyJson}
+                        {formattedJson}
                     </pre>
                 </div>
             </div>
