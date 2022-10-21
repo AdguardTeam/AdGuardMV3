@@ -2,7 +2,7 @@ import { useContext } from 'react';
 
 import { rootStore } from 'Options/stores';
 import { reactTranslator } from 'Common/translators/reactTranslator';
-import { DYNAMIC_RULES_LIMITS_ERROR } from 'Options/stores/OptionsStore';
+import { DYNAMIC_RULES_LIMITS_ERROR, OptionsStore } from 'Options/stores/OptionsStore';
 import { LinkToLimits } from 'Common/components/LinkToLimits';
 import { IconId } from 'Common/components/ui/Icons';
 
@@ -11,25 +11,22 @@ import { IconId } from 'Common/components/ui/Icons';
  * and display a notification to the user in this case
  */
 export const useNotifyDynamicRulesLimitsError = () => {
-    const {
-        uiStore,
-        optionsStore,
-    } = useContext(rootStore);
+    const { uiStore } = useContext(rootStore);
 
-    const {
-        userRulesEnabledCount,
-        userRulesTotalCount,
-        userRulesRegexpsEnabledCount,
-        userRulesRegexpsTotalCount,
-    } = optionsStore;
+    return (optionsStore: OptionsStore, error: DYNAMIC_RULES_LIMITS_ERROR | null) => {
+        const {
+            userRulesEnabledCount,
+            userRulesTotalCount,
+            userRulesRegexpsEnabledCount,
+            userRulesRegexpsTotalCount,
+        } = optionsStore;
 
-    return (error: DYNAMIC_RULES_LIMITS_ERROR | null) => {
         if (error === null) {
             return;
         }
 
         switch (error) {
-            case DYNAMIC_RULES_LIMITS_ERROR.MAX_DYNAMIC_REGEXPS_EXCEED: {
+            case DYNAMIC_RULES_LIMITS_ERROR.MAX_DYNAMIC_RULES_EXCEED: {
                 const message = reactTranslator.getMessage('options_dynamic_rules_limit', {
                     'link-to-limits': LinkToLimits,
                     'current-enabled': userRulesEnabledCount,
@@ -38,7 +35,7 @@ export const useNotifyDynamicRulesLimitsError = () => {
                 uiStore.addNotification(message, IconId.RED_WARNING);
                 break;
             }
-            case DYNAMIC_RULES_LIMITS_ERROR.MAX_DYNAMIC_RULES_EXCEED: {
+            case DYNAMIC_RULES_LIMITS_ERROR.MAX_DYNAMIC_REGEXPS_EXCEED: {
                 const message = reactTranslator.getMessage('options_dynamic_rules_regexps_limit', {
                     'link-to-limits': LinkToLimits,
                     'current-enabled': userRulesRegexpsEnabledCount,

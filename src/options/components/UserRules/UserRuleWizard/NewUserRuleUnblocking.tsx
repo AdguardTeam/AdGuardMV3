@@ -74,7 +74,7 @@ export const NewUserRuleUnblocking = observer(() => {
         if (domain.match(REGEX_DOMAIN)) {
             const rule = buildUnblockingRule(domain, unblockOptions);
             const err = await optionsStore.addNewUserRule(rule);
-            checkAndNotifyDynamicRulesError(err);
+            checkAndNotifyDynamicRulesError(optionsStore, err);
         } else {
             optionsStore.setError(translator.getMessage('options_user_rule_wrong_domain_format'));
         }

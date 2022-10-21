@@ -40,7 +40,7 @@ export const NewUserRuleBlocking = observer(() => {
         if (domain.match(REGEX_DOMAIN)) {
             const rule = buildBlockingRule(domain, blockSubdomains);
             const err = await optionsStore.addNewUserRule(rule);
-            checkAndNotifyDynamicRulesError(err);
+            checkAndNotifyDynamicRulesError(optionsStore, err);
             setDomain(DEFAULT_DOMAIN);
             setBlockSubdomains(DEFAULT_BLOCK_SUBDOMAINS);
         } else {

@@ -24,7 +24,7 @@ export const NewUserRuleCustom = observer(() => {
 
     const addRule = async () => {
         const err = await optionsStore.addCreatedUserRule();
-        checkAndNotifyDynamicRulesError(err);
+        checkAndNotifyDynamicRulesError(optionsStore, err);
     };
 
     useKeyPress(KEY_ENTER, () => addRule(), [createdUserRuleText]);

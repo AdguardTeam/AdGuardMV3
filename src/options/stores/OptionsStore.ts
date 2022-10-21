@@ -249,11 +249,11 @@ export class OptionsStore {
 
     checkLimitsAndNotify(): DYNAMIC_RULES_LIMITS_ERROR | null {
         if (this.isUserRulesLimitExceed) {
-            return DYNAMIC_RULES_LIMITS_ERROR.MAX_DYNAMIC_REGEXPS_EXCEED;
+            return DYNAMIC_RULES_LIMITS_ERROR.MAX_DYNAMIC_RULES_EXCEED;
         }
 
         if (this.isUserRulesRegexpsLimitExceed) {
-            return DYNAMIC_RULES_LIMITS_ERROR.MAX_DYNAMIC_RULES_EXCEED;
+            return DYNAMIC_RULES_LIMITS_ERROR.MAX_DYNAMIC_REGEXPS_EXCEED;
         }
 
         return null;

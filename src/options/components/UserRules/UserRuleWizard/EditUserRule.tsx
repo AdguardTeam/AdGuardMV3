@@ -23,13 +23,13 @@ export const EditUserRule = observer(() => {
 
     const onDeleteClick = async () => {
         const err = await optionsStore.deleteUserRuleInWizard();
-        checkAndNotifyDynamicRulesError(err);
+        checkAndNotifyDynamicRulesError(optionsStore, err);
     };
 
     // TODO add some validation
     const onSaveClick = async () => {
         const err = await optionsStore.saveUserRuleInWizard();
-        checkAndNotifyDynamicRulesError(err);
+        checkAndNotifyDynamicRulesError(optionsStore, err);
     };
 
     return (
