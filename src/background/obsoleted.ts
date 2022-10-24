@@ -4,7 +4,7 @@ import { IconId } from 'Common/constants/icons';
 /**
  * This namespace contains only obsoleted types
  */
-namespace Obsoleted {
+namespace Obsolete {
     /**
      * @obsolete Describes filter information
      */
@@ -37,4 +37,4 @@ namespace Obsoleted {
     export const USER_RULES_LIMITS_STORAGE_KEY = 'user_rules_limits';
 }
 
-export default Obsoleted;
+export default Obsolete;

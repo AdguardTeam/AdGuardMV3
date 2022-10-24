@@ -13,7 +13,7 @@ import { CUSTOM_FILTERS_RULES_STORAGE_KEY, FILTERS_INFO_STORAGE_KEY } from 'Comm
 
 import { storage } from './storage';
 import { notifier } from './notifier';
-import Obsoleted from './obsoleted';
+import Obsolete from './obsoleted';
 
 class Settings {
     private SETTINGS_STORAGE_KEY = 'settings';
@@ -138,7 +138,7 @@ class Settings {
          *
          * @see {@link TsWebExtensionWrapper.configurationResult}
          */
-        const filters = await storage.get<Obsoleted.Filter[]>(Obsoleted.FILTERS_STORAGE_KEY);
+        const filters = await storage.get<Obsolete.Filter[]>(Obsolete.FILTERS_STORAGE_KEY);
         if (filters) {
             const filtersInfo = filters.map((filter) => {
                 // eslint-disable-next-line no-param-reassign
@@ -154,7 +154,7 @@ class Settings {
 
         // Remove static filter rules from the storage.
         // Save only the rules from the custom filters.
-        const rules = await storage.get<Rules[]>(Obsoleted.RULES_STORAGE_KEY);
+        const rules = await storage.get<Rules[]>(Obsolete.RULES_STORAGE_KEY);
         if (rules) {
             const customFiltersRules = rules.filter(({ id }) => {
                 return filters?.find((f) => f.id === id && f.groupId === FiltersGroupId.CUSTOM);
@@ -164,13 +164,13 @@ class Settings {
         }
 
         // Remove obsoleted user rules limits
-        await storage.remove(Obsoleted.FILTERS_STORAGE_KEY);
+        await storage.remove(Obsolete.FILTERS_STORAGE_KEY);
 
         // Remove obsoleted user rules limits
-        await storage.remove(Obsoleted.RULES_STORAGE_KEY);
+        await storage.remove(Obsolete.RULES_STORAGE_KEY);
 
         // Remove obsoleted user rules limits
-        await storage.remove(Obsoleted.USER_RULES_LIMITS_STORAGE_KEY);
+        await storage.remove(Obsolete.USER_RULES_LIMITS_STORAGE_KEY);
 
         return {
             ...oldSettings,
