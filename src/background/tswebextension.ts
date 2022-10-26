@@ -122,6 +122,7 @@ class TsWebExtensionWrapper {
                     selfDestructFirstPartyCookiesTime: 0,
                 },
             },
+            trustedDomains: [],
             filters: rules
                 .map((r) => ({
                     filterId: r.id,
