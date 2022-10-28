@@ -1,8 +1,8 @@
-! Checksum: Ob38i39+gbshLFR+ZyBjPg
+! Checksum: 6HtFbaWv67RivEeix6GPYw
 ! Title: AdGuard Dutch filter
 ! Description: EasyList Dutch + AdGuard Dutch filter. Filter list that specifically removes ads on websites in Dutch language.
-! Version: 2.0.4.19
-! TimeUpdated: 2022-09-30T11:40:08+00:00
+! Version: 2.0.4.26
+! TimeUpdated: 2022-10-25T15:32:00+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -131,6 +131,7 @@ _advertentieleaderboardhome.
 ||vpscash.nl^$third-party
 ||xpartners.nl^$third-party
 .nl/adurl/$xmlhttprequest,domain=start-player.npo.nl
+||adcdn.ster.nl^$third-party
 ||advertising-cdn.dpgmedia.cloud^
 ||advertising-module.api.dpgmedia.cloud^
 ||bnpparibasmarkets.nl/widget/$third-party
@@ -841,7 +842,6 @@ rendez-vous.be##.leaderBoard
 atletiekkrant.be,autosportkrant.be,basketbalkrant.be,handbalkrant.be,hockeykrant.be,pcactive.nl,psv.nl,sport-planet.eu,sportid.be,tenniskrant.be,tradeidee.nl,voetbalkrant.com,volleybalkrant.be,vrouwenvoetbalkrant.be,wielerkrant.be##.leaderboard
 atv.be,robtv.be,tvl.be,tvoost.be##.leaderboardWrap
 blikopnieuws.nl##.ligatus-sidebar-block
-buienradar.nl##.linklist
 roulettefm.nl,rtvstichtsevecht.nl##.list-sponsors
 businessinsider.nl##.ll_partnerexpert
 sparta-rotterdam.nl##.logo_main_sponsor_image
@@ -868,6 +868,7 @@ iex.nl##.network:nth-of-type(2)
 nieuws.nl##.nieuws-banner
 tijd.be##.o-hpgrid__row-sponsoredcombo
 vlaamskijken.nl##.order-book
+autoscout24.be,autoscout24.nl##.osa-as24-placeholder
 hardware.info##.overview-item--success
 classicstogo.nl##.owl-carousel
 lekkercryptisch.nl##.p-footer__randomPartner
@@ -878,7 +879,7 @@ atv.be,robtv.be,tvl.be,tvoost.be##.parallaxBnnr
 qmusic.nl##.partner
 sc-heerenveen.nl##.partner-grid
 sc-heerenveen.nl##.partnerlink
-clubbrugge.be,feyenoord.nl,ftm.nl,royalantwerpfc.be##.partners
+clubbrugge.be,feyenoord.nl,ftm.nl,royalantwerpfc.be,voetbalindebollenstreek.nl##.partners
 golf.be##.partners-holder
 weespernieuws.nl##.pbph
 denachtvlinders.nl##.plek-boven-artikel
@@ -1114,6 +1115,7 @@ landenweb.nl##table[style="margin-left: auto; margin-right: auto; border: 1px so
 radiocaramba.nl##table[width="120"][height="600"]
 feijenoordnieuws.nl##.cv-table-left > a:not([target="_blank"]):not([rel="nofollow"]):not(a[href^="https://feijenoordnieuws.nl/"])
 autobahn.eu#?#.d-none.d-md-block.mb-3:-abp-has(a[target="_blank"][rel="noopener"])
+buienradar.nl#?#.linklist:-abp-has(h1:-abp-contains(Lekker Dichtbij Deals))
 businessinsider.nl#?#.widget_custom_html:-abp-has(h2:-abp-contains(Beter Beleggen))
 fcupdate.nl#?#p:-abp-has(a[href^="https://fcupdate.nl/jacks?"])
 geenstijl.nl#?#.article.row.no-image:-abp-has(.row.compost-warn:-abp-contains(- ingezonden mededeling -))
@@ -1175,6 +1177,8 @@ vakantieplaats.nl#@#.topAds
 !
 !
 ||content2.nrc.nl^
+||aa.hwigroup.com^
+||ab.hwigroup.com^
 ||aa.tweakers.nl^
 ||ab.tweakers.nl^
 !---------------------------------------------------------------------------!
@@ -1279,6 +1283,7 @@ pcmweb.nl#?#.site__sidebar > .block[-ext-has='div#marketingcarrousseluitingen']
 computertotaal.nl#?##sidebar > .sidebarBlock[-ext-has='div#marketingcarrousseluitingen']
 computertotaal.nl#?##sidebar > .sidebarBlock[-ext-has='div.banner']
 !
+bnnvara.nl#?#div[id^="ster-ad-bnnvara-"]:upward(1)
 gfcnieuws.com#?#.entry-content div[class]:-abp-has(> ins.adsbygoogle)
 ad.nl#?#.tile[-ext-has=">.ankeiler--advertisement"]
 gelderlander.nl#?#.page-content > .theme-default[-ext-has='div.ad']
@@ -1305,6 +1310,8 @@ klusidee.nl#?#tr.table-row[-ext-has=".td-ad"]
 !--------------------------------------!
 ! SECTION: Dutch - JS
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/131530
+hardware.info#%#//scriptlet("set-constant", "BannerManager", "undefined")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/120455
 tweakers.net#%#//scriptlet("set-constant", "BannerManager", "undefined")
 ! NOTE: JS end ⬆️
@@ -1359,6 +1366,8 @@ omroepwest.nl#$#.adcontainer-Rectangle { position: absolute!important; left: -40
 ! Good: example.org###rek; ||example.com/ads/
 ! Bad: example.org#$##rek { display: none !important; } (for instance, should be in general_extensions.txt)
 !
+hardware.info##div[class^="bnr-"]
+security.nl##.banner_leaderboard
 iculture.nl##.ad-top-desktop
 iculture.nl##.feed-ad-wrapper
 tweakers.net###b_re
@@ -1505,6 +1514,7 @@ klusidee.nl##td.td-ad
 ! Bad:  @@||example.org^$stealth (should be in AdGuard Base - allowlist_stealth.txt)
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/131712
 ! https://github.com/AdguardTeam/AdguardFilters/issues/130694
 underarmour.nl#@#.b-header-banner
 ! https://github.com/AdguardTeam/AdguardFilters/issues/115999
