@@ -1,8 +1,8 @@
-! Checksum: wGS1rnGkGhcf3iHsp/ZbpQ
+! Checksum: /W8iUDv7vGGxfwM22heeGw
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.30.53
-! TimeUpdated: 2022-10-27T16:32:12+00:00
+! Version: 2.0.30.59
+! TimeUpdated: 2022-11-01T15:32:01+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -533,7 +533,6 @@ windowspro.de#%#//scriptlet("abort-on-property-read", "window.abpblocked")
 lecker.de#@#.adSense
 lecker.de#@#.adContent
 lecker.de#@#.adBlock
-lecker.de#@#.adBanner
 lecker.de#@#.ad-text
 ! https://github.com/AdguardTeam/AdguardFilters/issues/115907
 proplanta.de###body_opacity_overlay
@@ -1043,6 +1042,9 @@ teleboy.ch#@#.adWrapper
 ! Good: example.org#?#main > div.row:-abp-has(> div.ad)
 ! Bad: example.org##main > div.ad (should be in specific.txt)
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/133812
+motorsport-total.com#?#.innercontent > div.mt30:-abp-has(> div.f1de-container > div.OUTBRAIN)
+motorsport-total.com#?#.flex-boxes > div.block-320:-abp-has(> div.teaser_container span.ads-anzeige)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/132504
 blick.ch#?#article > div.unblurred:-abp-has(> div:contains(Werbung))
 ! t-online.de ad in article and cleanup
@@ -2324,6 +2326,7 @@ vergleich.focus.de,chip.de,gutefrage.net,reisefrage.net,motorradfrage.net,autofr
 ! ##.adsbygoogle
 winfuture.de,netzwelt.de,quoka.de,farmeramania.de,bravofly.de,computerbild.de,digitalfernsehen.de,hl-live.de,chinamobilemag.de,focus.de,pcwelt.de##.adsbygoogle
 !
+motorsport-total.com##.mtn_ob
 summoners-inn.de##.donkey-container
 tarnkappe.info##div[style="min-height: 300px;"]
 spiegel.de##.sm\:min-h-400
@@ -6942,6 +6945,7 @@ $stylesheet,subdocument,third-party,xmlhttprequest,domain=canna-power.to|canna.t
 ||anisearch.de/amazon?
 ||anti-spiegel.ru/banner/
 ||apfeltalk.de/banner/
+||apfeltalk.de/magazin/wp-content/uploads/*_Banner_
 ||arbeitstage.at/pub_
 ||arbeitstage.ch/pub_
 ||arbeitstage.de/pub_
@@ -9364,6 +9368,7 @@ winfuture.de##.ob_what
 liveticker.com##.odds
 maschinensucher.at,maschinensucher.ch,maschinensucher.de##.ofni
 onmeda.de##.on-top-banner-wrapper
+autoscout24.at,autoscout24.de##.osa-as24-placeholder
 ssv-brixen.info##.owl-carousel
 oz-online.de##.ox
 6navi.ch##.p-banners-withborder
@@ -9482,7 +9487,7 @@ desired.de,familie.de##.sad_rectangle
 desired.de,familie.de##.sad_rectangle_2
 desired.de,familie.de##.sad_sky
 desired.de,familie.de##.sad_topmobile
-digital-eliteboard.com,woodworker.de##.samBannerUnit
+digital-eliteboard.com,musiker-board.de,woodworker.de##.samBannerUnit
 digital-eliteboard.com,musiker-board.de,vielfliegertreff.de##.samCodeUnit
 metal.de##.sb
 wallstreet-online.de##.sb_popularleverageproducts
@@ -9660,6 +9665,7 @@ lolabrause.ch##.tx-admanager
 hamburg-pride.de##.tx-imagecycle-pi1
 astronomie.de##.tx-sf-banners
 bayernwelle.de##.type-banner
+boersen-zeitung.de##.u-ad
 uhrenratgeber.com##.uhren-widget
 funcloud.club##.underContentA
 hausgeraete-test.de,heimwerker-test.de,hifitest.de##.unserePartner
@@ -10172,6 +10178,8 @@ t-online.de##section[data-stage-layout^="custom_nativendo_"]
 stol.it#?##ContainerFull:-abp-has(a:-abp-contains(Anzeige))
 abendzeitung-muenchen.de#?#article[class^="teaser nummer-"]:-abp-has(span.specialfeature)
 android-hilfe.de#?#article.message--post:-abp-has(span.username:-abp-contains(Anzeige))
+apfeltalk.de#?#div.wpb_text_column:-abp-has(h5:-abp-contains(Werbung))
+apfeltalk.de#?#div.wpb_text_column:-abp-has(h6:-abp-contains(Werbung))
 avguide.ch#?#.avgrid_1_of_1.viewlet-bottom:-abp-has(h2:-abp-contains(Advertorials))
 avguide.ch#?#.gridteaser.gridteaser-m:-abp-has(h4:-abp-contains(Sponsored Post))
 az.com.na#?#aside:-abp-has(img[src*="/adverts/"])
@@ -10271,6 +10279,7 @@ satvision.de#?#.mod_flexicontent_standard_wrapper:-abp-has(span:-abp-contains(Ad
 skodacommunity.de#?#article.message--post:-abp-has(a:-abp-contains(Anzeige))
 smartphonemag.de#?#.td_module_wrap:-abp-has(.td-post-author-name:-abp-contains(Werbung))
 swz.it#?#.jeg_post.jeg_pl_md_2.pr.format-standard:-abp-has(span:-abp-contains(PR-INFO))
+t-online.de#?#div[data-testid="StreamLayout.Companion"]:-abp-has(a[href^="https://ad.doubleclick.net/"])
 t-online.de,www-t--online-de.cdn.ampproject.org#?#div[id^="T-"][onfocus^="A('zid="]:-abp-has(a:-abp-contains(Anzeige))
 tag24.de#?#article.article-tile:-abp-has(span.article-tile__badge2:-abp-contains(ANZEIGE))
 tonight.de#?#.td_block_wrap:-abp-has(a:-abp-contains(Anzeige))

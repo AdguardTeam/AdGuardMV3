@@ -80,7 +80,7 @@ const startDownload = async (browser: BROWSERS) => {
     const filtersDir = FILTERS_DIR.replace('%browser', browser);
     fse.ensureDirSync(filtersDir);
 
-    await downloadTranslations(browser, filtersDir);
+    await downloadTranslations(browser, COMMON_FILTERS_DIR);
 
     const urls = getUrlsOfFiltersResources(browser);
     await Promise.all(urls.map((url) => downloadFilter(url, filtersDir)));
