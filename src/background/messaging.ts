@@ -36,7 +36,7 @@ export const extensionMessageHandler = async (
         case MESSAGE_TYPES.GET_OPTIONS_DATA: {
             const optionsData: OptionsData = {
                 settings: settings.getSettings(),
-                filters: await filters.getFiltersInfo(),
+                filters: filters.getFiltersInfo(),
                 categories: CATEGORIES,
                 ruleSetsCounters: tsWebExtensionWrapper.ruleSetsCounters,
             };

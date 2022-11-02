@@ -99,7 +99,7 @@ class TsWebExtensionWrapper {
      * and save list of last used filters
      */
     private async checkFiltersLimitsChange() {
-        const wasEnabledIds = (await filters.getFiltersInfo())
+        const wasEnabledIds = filters.getFiltersInfo()
             .filter(({ groupId, enabled }) => enabled && groupId !== FiltersGroupId.CUSTOM)
             .map(({ id }) => id)
             .sort((a: number, b:number) => a - b);
@@ -192,7 +192,6 @@ class TsWebExtensionWrapper {
 
     /**
      * Returns tswebextension messages handler
-     * @returns
      */
     getMessageHandler() {
         return this.tsWebExtension.getMessageHandler();

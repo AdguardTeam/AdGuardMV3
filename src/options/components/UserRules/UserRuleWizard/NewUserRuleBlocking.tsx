@@ -19,7 +19,6 @@ const buildBlockingRule = (domain: string, blockSubdomains: boolean): string => 
 };
 
 const DEFAULT_BLOCK_SUBDOMAINS = true;
-const DEFAULT_DOMAIN = '';
 
 export const NewUserRuleBlocking = observer(() => {
     const { optionsStore } = useContext(rootStore);
@@ -41,8 +40,6 @@ export const NewUserRuleBlocking = observer(() => {
             const rule = buildBlockingRule(domain, blockSubdomains);
             const err = await optionsStore.addNewUserRule(rule);
             checkAndNotifyDynamicRulesError(optionsStore, err);
-            setDomain(DEFAULT_DOMAIN);
-            setBlockSubdomains(DEFAULT_BLOCK_SUBDOMAINS);
         } else {
             optionsStore.setError(translator.getMessage('options_user_rule_wrong_domain_format'));
         }

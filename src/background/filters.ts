@@ -170,7 +170,6 @@ class Filters {
     /**
      * Removes custom filter
      * @param filterId
-     * @returns
      */
     removeCustomFilter = async (filterId: number): Promise<FilterInfo[]> => {
         this.filtersInfo = this.filtersInfo.filter((f) => f.id !== filterId);
@@ -208,7 +207,6 @@ class Filters {
 
     /**
      * Returns enabled filters ids
-     * @returns
      */
     getEnableFiltersIds = () => {
         return this.enableFiltersIds;
@@ -216,7 +214,6 @@ class Filters {
 
     /**
      * Returns filters info
-     * @returns
      */
     getFiltersInfo = () => {
         return this.filtersInfo;
@@ -224,7 +221,6 @@ class Filters {
 
     /**
      * Returns text rules for enabled custom filters
-     * @returns
      */
     getEnabledCustomFiltersRules = () => {
         const enabledIds = this.getEnableFiltersIds();
@@ -285,7 +281,6 @@ class Filters {
 
     /**
      * Gets available custom filter id
-     * @returns
      */
     private getCustomFilterId = () => {
         let max = 0;
@@ -312,7 +307,6 @@ class Filters {
      * @param filterStrings
      * @param title
      * @param url
-     * @returns
      */
     addCustomFilter = async (content: string[], title: string, url: string) => {
         const filterMetaData = FiltersUtils.parseFilterInfo(content, title);

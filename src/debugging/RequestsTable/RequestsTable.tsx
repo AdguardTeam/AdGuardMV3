@@ -83,7 +83,7 @@ export const RequestsTable = ({
 
             return (
                 <p>
-                    {`Rule ${sourceRule} from filter "${filterName}" with id ${filterId}`}
+                    {`Rule "${sourceRule}" from filter "${filterName}" with id ${filterId}`}
                 </p>
             );
         });
