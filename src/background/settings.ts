@@ -15,6 +15,9 @@ import { storage } from './storage';
 import { notifier } from './notifier';
 import Obsolete from './obsoleted';
 
+// TODO: Move the migration to a separate module. This is not currently needed
+// since the current application is a prototype and there are several modules,
+// each with their own properties in the repository.
 class Settings {
     private SETTINGS_STORAGE_KEY = 'settings';
 

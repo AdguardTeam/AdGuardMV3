@@ -27,7 +27,7 @@ export const DebuggingApp = () => {
 
         const startAndUpdate = async () => {
             try {
-                await sendInnerMessage(ExtendedMV3MessageType.StartLog);
+                await sendMessage(MESSAGE_TYPES.START_LOG);
                 await updateFiltersNames();
             } catch (e) {
                 setIsError(true);
@@ -60,7 +60,7 @@ export const DebuggingApp = () => {
             isActive = false;
 
             clearInterval(timer);
-            sendInnerMessage(ExtendedMV3MessageType.StopLog);
+            sendMessage(MESSAGE_TYPES.STOP_LOG);
         };
     }, []);
 

@@ -218,6 +218,18 @@ export const extensionMessageHandler = async (
         case MESSAGE_TYPES.GET_FILTERS_NAMES: {
             return filters.getFiltersNames();
         }
+        case MESSAGE_TYPES.START_LOG: {
+            tsWebExtensionWrapper.filteringLogEnabled = true;
+            await tsWebExtensionWrapper.configure();
+
+            break;
+        }
+        case MESSAGE_TYPES.STOP_LOG: {
+            tsWebExtensionWrapper.filteringLogEnabled = false;
+            await tsWebExtensionWrapper.configure();
+
+            break;
+        }
         default: {
             throw new Error(`No message handler for type: ${type}`);
         }

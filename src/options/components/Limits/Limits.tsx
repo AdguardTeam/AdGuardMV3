@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 import cn from 'classnames';
 import { observer } from 'mobx-react';
-import { RULESET_NAME_PREFIX } from '@adguard/tswebextension/mv3';
+import { RULE_SET_NAME_PREFIX } from '@adguard/tswebextension/mv3';
 
 import { theme } from 'Common/styles';
 import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
@@ -54,7 +54,7 @@ export const Limits = observer(() => {
         const f = async () => {
             const enabledRulesets = await chrome.declarativeNetRequest.getEnabledRulesets();
             const ids = enabledRulesets.map((s) => {
-                return Number.parseInt(s.slice(RULESET_NAME_PREFIX.length), 10);
+                return Number.parseInt(s.slice(RULE_SET_NAME_PREFIX.length), 10);
             });
             setNowEnabledIds(ids);
         };

@@ -7,7 +7,7 @@ import { FiltersNames } from 'background/filters';
 
 import style from './requests-table.module.pcss';
 
-type RequestsTableType = {
+type RequestsTableProps = {
     ruleLog: RecordFiltered[],
     filtersNames: FiltersNames,
     cleanLog: () => void,
@@ -17,7 +17,7 @@ export const RequestsTable = ({
     ruleLog,
     filtersNames,
     cleanLog,
-}: RequestsTableType) => {
+}: RequestsTableProps) => {
     const titles = [
         'Rule ID',
         'Ruleset ID',
@@ -51,10 +51,10 @@ export const RequestsTable = ({
         );
     };
 
-    const getTableHeader = () => {
+    const getTableHeader = (titlesArr: string[]) => {
         return (
             <div className={cn(style.row, style.rowHead)}>
-                {titles.map((title) => (
+                {titlesArr.map((title) => (
                     <div key={title} className={style.cell}>
                         {title}
                     </div>
@@ -119,7 +119,7 @@ export const RequestsTable = ({
                 {getActionsBlock()}
 
                 <div className={style.wrapper}>
-                    {getTableHeader()}
+                    {getTableHeader(titles)}
                     {ruleLog.map((i) => getTableBodyLine(i))}
                 </div>
             </>

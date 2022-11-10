@@ -2,7 +2,7 @@ import {
     TsWebExtension,
     Configuration,
     ConfigurationResult,
-    RULESET_NAME_PREFIX,
+    RULE_SET_NAME_PREFIX,
     TooManyRulesError,
     TooManyRegexpRulesError,
 } from '@adguard/tswebextension/mv3';
@@ -10,13 +10,11 @@ import {
 import { FiltersGroupId, RuleSetCounters, WEB_ACCESSIBLE_RESOURCES_PATH } from 'Common/constants/common';
 import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
 import { log } from 'Common/logger';
-import { IS_COLLECTING_LOG } from 'Common/constants/storage-keys';
 
 import { DEFAULT_FILTERS, filters } from './filters';
 import { settings } from './settings';
 import { userRules } from './userRules';
 import { browserActions } from './browser-actions';
-import { storage } from './storage';
 
 const {
     MAX_NUMBER_OF_REGEX_RULES,
@@ -29,6 +27,8 @@ class TsWebExtensionWrapper {
 
     private configurationResult: ConfigurationResult | undefined;
 
+    public filteringLogEnabled: boolean = false;
+
     constructor() {
         this.tsWebExtension = new TsWebExtension(WEB_ACCESSIBLE_RESOURCES_PATH);
     }
@@ -36,7 +36,7 @@ class TsWebExtensionWrapper {
     public get ruleSetsCounters(): RuleSetCounters[] {
         return this.configurationResult?.staticFilters
             .map((ruleset) => ({
-                filterId: Number(ruleset.getId().slice(RULESET_NAME_PREFIX.length)),
+                filterId: Number(ruleset.getId().slice(RULE_SET_NAME_PREFIX.length)),
                 rulesCount: ruleset.getRulesCount(),
                 regexpRulesCount: ruleset.getRegexpRulesCount(),
             })) || [];
@@ -104,7 +104,7 @@ class TsWebExtensionWrapper {
             .map(({ id }) => id)
             .sort((a: number, b:number) => a - b);
         const nowEnabledIds = (await chrome.declarativeNetRequest.getEnabledRulesets())
-            .map((s) => Number.parseInt(s.slice(RULESET_NAME_PREFIX.length), 10))
+            .map((s) => Number.parseInt(s.slice(RULE_SET_NAME_PREFIX.length), 10))
             .sort((a: number, b:number) => a - b);
 
         const isDifferent = () => {
@@ -150,8 +150,6 @@ class TsWebExtensionWrapper {
                 content: r.rules,
             }));
 
-        const filteringLogEnabled = await storage.get<boolean>(IS_COLLECTING_LOG) || false;
-
         const { installType } = await chrome.management.getSelf();
         const isUnpacked = installType === 'development';
 
@@ -175,7 +173,7 @@ class TsWebExtensionWrapper {
                     selfDestructFirstPartyCookiesTime: 0,
                 },
             },
-            filteringLogEnabled,
+            filteringLogEnabled: this.filteringLogEnabled,
             filtersPath: 'filters',
             ruleSetsPath: 'filters/declarative',
             staticFiltersIds,
@@ -224,7 +222,7 @@ class TsWebExtensionWrapper {
             const { id, localeCodes } = localeFilterInMemory;
             const ruleSet = this.configurationResult.staticFilters.find((r) => {
                 // TODO: Seems like weak relation, not too reliably
-                return r.getId() === `${RULESET_NAME_PREFIX}${id}`;
+                return r.getId() === `${RULE_SET_NAME_PREFIX}${id}`;
             });
             const declarativeRulesCounter = ruleSet?.getRulesCount();
 
