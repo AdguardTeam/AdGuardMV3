@@ -1,27 +1,77 @@
+import { ExtendedMV3MessageType } from '@adguard/tswebextension/mv3';
+
 import { Message, MessageType } from 'Common/constants/common';
 
-export const sendMessage = <T = void>(type: MessageType, data?: any): Promise<T> => new Promise(
-    (resolve, reject) => {
-        const message: Message = { type };
-        if (data) {
-            message.data = data;
-        }
+const promisifiedSendMessage = <T = void>(
+    message: Message | InnerMessage,
+): Promise<T> => {
+    return new Promise(
+        (resolve, reject) => {
         // TODO: Remove callback and return promise as result of call sendMessage
-        chrome.runtime.sendMessage(message, (response) => {
-            if (chrome.runtime.lastError) {
-                reject(new Error(chrome.runtime.lastError.message));
-                return;
-            }
+            chrome.runtime.sendMessage(message, (response) => {
+                if (chrome.runtime.lastError) {
+                    reject(new Error(chrome.runtime.lastError.message));
+                    return;
+                }
 
-            if (response?.error) {
-                reject(new Error(response.error.message));
-                return;
-            }
+                if (response?.error) {
+                    reject(new Error(response.error.message));
+                    return;
+                }
 
-            resolve(response);
-        });
-    },
-);
+                resolve(response);
+            });
+        },
+    );
+};
+
+/**
+ * Sends message client handler
+ * @param type type of message from {@link MessageType}
+ * @param data data for handler
+ *
+ * @returns Specified generic type
+ */
+export const sendMessage = <T = void>(
+    type: MessageType,
+    data?: any,
+): Promise<T> => {
+    const message: Message = { type };
+    if (data) {
+        message.data = data;
+    }
+
+    return promisifiedSendMessage<T>(message);
+};
+
+type InnerMessage = {
+    type: ExtendedMV3MessageType;
+    handlerName: string;
+    data?: any;
+};
+
+/**
+ * Sends message directly to inner tswebextension handler
+ * @param type type of message from {@link ExtendedMV3MessageType}
+ * @param data data for handler
+ *
+ * @returns Specified generic type
+ */
+export const sendInnerMessage = <T = void>(
+    type: ExtendedMV3MessageType,
+    data?: any,
+): Promise<T> => {
+    const message: InnerMessage = {
+        type,
+        // TODO: use MESSAGE_HANDLER_NAME
+        handlerName: 'tsWebExtension',
+    };
+    if (data) {
+        message.data = data;
+    }
+
+    return promisifiedSendMessage<T>(message);
+};
 
 // Check if there are query parameters in the url
 const hasQueryParameters = (url: string) => {

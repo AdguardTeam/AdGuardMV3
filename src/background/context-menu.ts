@@ -37,6 +37,10 @@ const toggleSiteAllowlistStatus = async (tab?: Tab) => {
 
     await tsWebExtensionWrapper.configure(true);
 
+    const updatedRules = await userRules.getRules();
+    // Notify UI and context-menu about changes
+    notifier.notify(NOTIFIER_EVENTS.SET_RULES, { value: updatedRules });
+
     if (id !== undefined) {
         await tabUtils.reloadTab(id);
     }

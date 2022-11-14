@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
 
 import { translator } from 'Common/translators/translator';
-import { Filter, FiltersGroupId } from 'Common/constants/common';
+import { FilterInfo, FiltersGroupId } from 'Common/constants/common';
 import { Section } from 'Common/components/Section';
 import { IconId } from 'Common/components/ui';
 import { FILTER_RULESET, RulesetType } from 'Common/constants/filters';
@@ -45,6 +45,7 @@ export const Settings = observer(() => {
 
     const {
         filters,
+        ruleSetsCounters,
         enableFilter,
         disableFilter,
     } = settingsStore;
@@ -85,7 +86,7 @@ export const Settings = observer(() => {
         checkAndNotifyStaticFiltersError(err);
     };
 
-    const onChange = async (filter: Filter) => {
+    const onChange = async (filter: FilterInfo) => {
         if (filter.enabled) {
             await disableFilter(filter.id);
         } else {
@@ -94,9 +95,10 @@ export const Settings = observer(() => {
     };
 
     const mainFilters = filters
-        .filter((i: Filter) => i.groupId === FiltersGroupId.MAIN)
-        .map((f: Filter) => {
-            // do not save translations in the storage, otherwise on language change they won't be updated
+        .filter((i: FilterInfo) => i.groupId === FiltersGroupId.MAIN)
+        .map((f: FilterInfo) => {
+            // do not save translations in the storage,
+            // otherwise on language change they won't be updated
             const { title, description } = FILTERS_TRANSLATIONS[f.id];
             return {
                 ...f,
@@ -105,9 +107,14 @@ export const Settings = observer(() => {
             };
         });
 
-    const getRulesMessage = (count: number) => (
-        translator.getPlural('options_filter_rules_counter', count, { count })
-    );
+    const getRulesMessage = (filterId: number) => {
+        const ruleSet = ruleSetsCounters.find((r) => r.filterId === filterId);
+        const count = ruleSet?.rulesCount;
+
+        return count !== undefined
+            ? translator.getPlural('options_filter_rules_counter', count, { count })
+            : '';
+    };
 
     return (
         <>
@@ -125,7 +132,7 @@ export const Settings = observer(() => {
                         messageDesc={filter.description ? filter.description : ''}
                         checked={filter.enabled}
                         onChange={() => { onChange(filter); }}
-                        title={getRulesMessage(filter.declarativeRulesCounter || 0)}
+                        title={getRulesMessage(filter.id)}
                     />
                 ))}
                 {navOptions.map(NavOption)}

@@ -1,20 +1,23 @@
 import React from 'react';
 import cn from 'classnames';
+import { RecordFiltered } from '@adguard/tswebextension/mv3';
 
 import { translator } from 'Common/translators/translator';
-import { RecordFiltered } from 'background/filtering-log';
+import { FiltersNames } from 'background/filters';
 
 import style from './requests-table.module.pcss';
 
-type RequestsTableType = {
+type RequestsTableProps = {
     ruleLog: RecordFiltered[],
+    filtersNames: FiltersNames,
     cleanLog: () => void,
 };
 
 export const RequestsTable = ({
     ruleLog,
+    filtersNames,
     cleanLog,
-}: RequestsTableType) => {
+}: RequestsTableProps) => {
     const titles = [
         'Rule ID',
         'Ruleset ID',
@@ -48,10 +51,10 @@ export const RequestsTable = ({
         );
     };
 
-    const getTableHeader = () => {
+    const getTableHeader = (titlesArr: string[]) => {
         return (
             <div className={cn(style.row, style.rowHead)}>
-                {titles.map((title) => (
+                {titlesArr.map((title) => (
                     <div key={title} className={style.cell}>
                         {title}
                     </div>
@@ -71,14 +74,26 @@ export const RequestsTable = ({
             tabId,
             type,
             url,
-            originalRuleTxt,
-            filterName,
-            filterId,
+            sourceRules,
             declarativeRuleJson,
         } = record;
 
+        const sourceRulesTxt = sourceRules.map(({ sourceRule, filterId }) => {
+            const filterName = filtersNames[filterId] || 'not_found';
+
+            return (
+                <p>
+                    {`Rule "${sourceRule}" from filter "${filterName}" with id ${filterId}`}
+                </p>
+            );
+        });
+
+        const formattedJson = declarativeRuleJson
+            ? JSON.stringify(JSON.parse(declarativeRuleJson), null, '\t')
+            : '';
+
         return (
-            <div className={style.row} key={`${rulesetId}_${ruleId}_${requestId}_${url}`}>
+            <div className={style.row} key={requestId}>
                 <div className={style.cell}>{ruleId}</div>
                 <div className={style.cell}>{rulesetId}</div>
                 <div className={style.cell}>{frameId}</div>
@@ -88,17 +103,10 @@ export const RequestsTable = ({
                 <div className={style.cell}>{tabId}</div>
                 <div className={style.cell}>{type}</div>
                 <div className={style.cell}>{url}</div>
-                <div className={style.cell}>
-                    <p>
-                        {originalRuleTxt}
-                        <br />
-                        <br />
-                        {`from filter '${filterName}' with id - ${filterId}`}
-                    </p>
-                </div>
+                <div className={style.cell}>{sourceRulesTxt}</div>
                 <div className={style.cell}>
                     <pre>
-                        {declarativeRuleJson}
+                        {formattedJson}
                     </pre>
                 </div>
             </div>
@@ -111,7 +119,7 @@ export const RequestsTable = ({
                 {getActionsBlock()}
 
                 <div className={style.wrapper}>
-                    {getTableHeader()}
+                    {getTableHeader(titles)}
                     {ruleLog.map((i) => getTableBodyLine(i))}
                 </div>
             </>

@@ -42,7 +42,7 @@ export const OptionsApp = observer(() => {
         [NOTIFIER_EVENTS.SET_RULES]: async (data: any) => {
             const { value } = data;
             const err = await optionsStore.updateUserRules(value);
-            checkAndNotifyDynamicRulesError(err);
+            checkAndNotifyDynamicRulesError(optionsStore, err);
         },
     });
 

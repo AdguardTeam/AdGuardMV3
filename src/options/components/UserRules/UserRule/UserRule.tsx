@@ -40,7 +40,7 @@ export const UserRule = ({
             error = await optionsStore.disableRule(ruleId);
         }
 
-        checkAndNotifyDynamicRulesError(error);
+        checkAndNotifyDynamicRulesError(optionsStore, error);
     };
 
     const handleRuleClick = () => {

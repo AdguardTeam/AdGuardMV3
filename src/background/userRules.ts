@@ -1,14 +1,21 @@
-import { UserRuleType, NEW_LINE_SEPARATOR, NOTIFIER_EVENTS } from 'Common/constants/common';
-import { USER_RULES_STORAGE_KEY, USER_RULES_LIMITS_STORAGE_KEY } from 'Common/constants/storage-keys';
+import { UserRuleType, NEW_LINE_SEPARATOR } from 'Common/constants/common';
+import { USER_RULES_STORAGE_KEY, USER_RULES_STATUS_STORAGE_KEY } from 'Common/constants/storage-keys';
 import { log } from 'Common/logger';
 import { UserRulesData, UserRulesProcessor } from 'Options/user-rules-processor';
 
-import { notifier } from './notifier';
 import { storage } from './storage';
 
-export type UserRulesLimits = {
-    declarativeRulesCount: number,
-    regexpsCount: number
+type RulesStatus = {
+    enabledCount: number,
+    totalCount: number,
+    maximumCount: number,
+    limitExceed: boolean,
+    excludedRulesIds: number[],
+};
+
+export type UserRulesStatus = {
+    rules: RulesStatus,
+    regexpsRules: RulesStatus
 };
 
 /**
@@ -19,7 +26,22 @@ const getDocumentAllowRuleForUrl = (siteUrl: string) => `@@||${siteUrl}^$documen
 class UserRules {
     private rules = '';
 
-    private limits: UserRulesLimits | undefined;
+    private status: UserRulesStatus = {
+        rules: {
+            enabledCount: 0,
+            totalCount: 0,
+            maximumCount: 0,
+            limitExceed: false,
+            excludedRulesIds: [],
+        },
+        regexpsRules: {
+            enabledCount: 0,
+            totalCount: 0,
+            maximumCount: 0,
+            limitExceed: false,
+            excludedRulesIds: [],
+        },
+    };
 
     private userRulesProcessor: UserRulesProcessor | undefined;
 
@@ -33,7 +55,7 @@ class UserRules {
         try {
             await storage.set(USER_RULES_STORAGE_KEY, rules);
         } catch (e: any) {
-            log.error(e.message);
+            log.error('Cannot save user rules to storage: ', e.message);
         }
     };
 
@@ -50,20 +72,13 @@ class UserRules {
         return this.rules;
     };
 
-    setUserRulesCounters = async (limits: UserRulesLimits) => {
-        await storage.set(USER_RULES_LIMITS_STORAGE_KEY, limits);
-        this.limits = limits;
+    setUserRulesStatus = async (status: UserRulesStatus) => {
+        await storage.set(USER_RULES_STATUS_STORAGE_KEY, status);
+        this.status = status;
     };
 
-    getUserRulesCounters = async (): Promise<UserRulesLimits> => {
-        if (!this.limits) {
-            this.limits = await storage.get<UserRulesLimits>(USER_RULES_LIMITS_STORAGE_KEY);
-        }
-
-        return this.limits || {
-            declarativeRulesCount: 0,
-            regexpsCount: 0,
-        };
+    getUserRulesStatus = (): UserRulesStatus => {
+        return this.status;
     };
 
     getAllowlist = async () => {
@@ -105,20 +120,20 @@ class UserRules {
      * @returns allowlisted site or not
      */
     toggleSiteAllowlistStatus = async (siteUrl: string): Promise<boolean> => {
-        const allowRule = await this.getSiteAllowRule(siteUrl);
+        const existingAllowRule = await this.getSiteAllowRule(siteUrl);
 
         let newUserRules = '';
         let isAllowlisted: boolean;
 
-        if (allowRule) {
+        if (existingAllowRule) {
             const userRulesProcessor = new UserRulesProcessor(this.rules);
 
-            const allowlisted = allowRule?.enabled || false;
+            const allowlisted = existingAllowRule?.enabled || false;
             if (allowlisted) {
-                userRulesProcessor.deleteRule(allowRule.id);
+                userRulesProcessor.deleteRule(existingAllowRule.id);
                 isAllowlisted = false;
             } else {
-                userRulesProcessor.enableRule(allowRule.id);
+                userRulesProcessor.enableRule(existingAllowRule.id);
                 isAllowlisted = true;
             }
 
@@ -130,16 +145,18 @@ class UserRules {
         }
 
         await this.setRules(newUserRules);
-        // Notify UI and context-menu about changes
-        notifier.notify(NOTIFIER_EVENTS.SET_RULES, { value: newUserRules });
 
         return isAllowlisted;
     };
 
     public async init() {
-        const storedRules = await storage.get(USER_RULES_STORAGE_KEY) as string || this.rules;
-
+        const storedRules = await storage.get<string>(USER_RULES_STORAGE_KEY) || this.rules;
         await this.setRules(storedRules);
+
+        const savedStatus = await storage.get<UserRulesStatus>(USER_RULES_STATUS_STORAGE_KEY);
+        if (savedStatus) {
+            this.status = savedStatus;
+        }
     }
 }
 

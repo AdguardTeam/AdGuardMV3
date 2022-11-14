@@ -6,10 +6,11 @@ import React, {
 } from 'react';
 import cn from 'classnames';
 import { observer } from 'mobx-react';
+import { RULE_SET_NAME_PREFIX } from '@adguard/tswebextension/mv3';
 
 import { theme } from 'Common/styles';
 import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
-import { FiltersGroupId, RULESET_NAME } from 'Common/constants/common';
+import { FiltersGroupId } from 'Common/constants/common';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { MV3 } from 'Common/constants/urls';
 import { IconId } from 'Common/components/ui';
@@ -21,7 +22,6 @@ import { Warning } from './Warning';
 
 const {
     MAX_NUMBER_OF_REGEX_RULES,
-    MAX_NUMBER_OF_DYNAMIC_AND_SESSION_RULES,
     MAX_NUMBER_OF_ENABLED_STATIC_RULESETS,
 } = chrome.declarativeNetRequest;
 
@@ -35,8 +35,10 @@ export const Limits = observer(() => {
     } = useContext(rootStore);
 
     const {
-        userRulesRegexpsCount,
-        userRulesDeclarativeRulesCount,
+        userRulesEnabledCount,
+        userRulesMaximumCount,
+        userRulesRegexpsEnabledCount,
+        userRulesRegexpsMaximumCount,
     } = optionsStore;
 
     const {
@@ -51,7 +53,9 @@ export const Limits = observer(() => {
     useEffect(() => {
         const f = async () => {
             const enabledRulesets = await chrome.declarativeNetRequest.getEnabledRulesets();
-            const ids = enabledRulesets.map((s) => Number.parseInt(s.slice(RULESET_NAME.length), 10));
+            const ids = enabledRulesets.map((s) => {
+                return Number.parseInt(s.slice(RULE_SET_NAME_PREFIX.length), 10);
+            });
             setNowEnabledIds(ids);
         };
         f();
@@ -145,14 +149,14 @@ export const Limits = observer(() => {
 
                 {descWithCounter(
                     reactTranslator.getMessage('options_limits_dynamic_added'),
-                    userRulesDeclarativeRulesCount,
-                    MAX_NUMBER_OF_DYNAMIC_AND_SESSION_RULES,
+                    userRulesEnabledCount,
+                    userRulesMaximumCount,
                 )}
 
                 {descWithCounter(
                     reactTranslator.getMessage('options_limits_regex'),
-                    userRulesRegexpsCount,
-                    MAX_NUMBER_OF_REGEX_RULES,
+                    userRulesRegexpsEnabledCount,
+                    userRulesRegexpsMaximumCount,
                 )}
             </div>
 

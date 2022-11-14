@@ -13,7 +13,13 @@ export type CategoriesType = {
     displayNumber: number,
 }[];
 
-export interface Filter {
+export type RuleSetCounters = {
+    filterId: number,
+    rulesCount: number,
+    regexpRulesCount: number
+};
+
+export interface FilterInfo {
     id: number,
     iconId?: IconId,
     title: string,
@@ -21,12 +27,10 @@ export interface Filter {
     description?: string,
     groupId: FiltersGroupId,
     url?: string,
-    regexpRulesCounter?: number,
-    declarativeRulesCounter?: number,
     localeCodes?: string[],
 }
 
-export interface FilterInfo {
+export interface FilterMetaData {
     title: string,
     description?: string,
     homepage?: string,
@@ -37,15 +41,12 @@ export interface FilterInfo {
 }
 
 export const FILTERS_I18N_FILENAME = 'filters_i18n.json';
-export const FILTERS_RULES_COUNTER_FILENAME = 'filters_rules_counter.json';
-export const FILTERS_REGEXP_COUNTER_FILENAME = 'filters_regexp_counter.json';
-
-export const FILTERS_VERSIONS_FILENAME = 'filters_versions.json';
 
 export interface OptionsData {
     settings: SettingsType,
-    filters: Filter[],
-    categories: CategoriesType
+    filters: FilterInfo[],
+    categories: CategoriesType,
+    ruleSetsCounters: RuleSetCounters[],
 }
 
 // These enum must have string values because
@@ -72,11 +73,11 @@ export enum MESSAGE_TYPES {
     ADD_FILTERING_SUBSCRIPTION = 'ADD_FILTERING_SUBSCRIPTION',
     GET_USER_RULES = 'GET_USER_RULES',
     SET_USER_RULES = 'SET_USER_RULES',
-    GET_DYNAMIC_RULES_LIMITS = 'GET_DYNAMIC_RULES_LIMITS',
+    GET_DYNAMIC_RULES_STATUS = 'GET_DYNAMIC_RULES_STATUS',
     RELAUNCH_FILTERING = 'RELAUNCH_FILTERING',
     TOGGLE_SITE_ALLOWLIST_STATUS = 'TOGGLE_SITE_ALLOWLIST_STATUS',
     ADD_USER_RULE_FROM_ASSISTANT = 'ADD_USER_RULE_FROM_ASSISTANT',
-    GET_COLLECTED_LOG = 'GET_COLLECTED_LOG',
+    GET_FILTERS_NAMES = 'GET_FILTERS_NAMES',
     START_LOG = 'START_LOG',
     STOP_LOG = 'STOP_LOG',
 
@@ -116,6 +117,7 @@ export const QUERY_PARAM_NAMES = {
     SUBSCRIBE: 'subscribe',
 };
 
+// TODO: Rename enum
 export enum UserRuleType {
     SITE_BLOCKED = 'SITE_BLOCKED',
     ELEMENT_BLOCKED = 'ELEMENT_BLOCKED',
@@ -123,19 +125,18 @@ export enum UserRuleType {
     CUSTOM = 'CUSTOM',
 }
 
+// TODO: Rename enum
 export enum FiltersGroupId {
     CUSTOM = 0,
-    INTEGRATED = 2,
     MAIN = 3,
     LANGUAGES = 7,
 }
 
+// TODO: Change with migration
 export interface Rules {
     id: number,
     rules: string,
 }
-
-export const RULESET_NAME = 'ruleset_';
 
 export const OTHER_DOMAIN_TITLE = 'other';
 
@@ -143,3 +144,5 @@ export const OTHER_DOMAIN_TITLE = 'other';
 export const REGEX_DOMAIN = /^(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+[A-Za-z0-9][A-Za-z0-9-]{0,61}[A-Za-z0-9]$/;
 
 export const REGEX_DOMAIN_IN_RULE = /(?<=\|\|)(.*?)(?=\^|\/|:|\$)/g;
+
+export const WEB_ACCESSIBLE_RESOURCES_PATH = '/web-accessible-resources/redirects';

@@ -2,15 +2,11 @@ import path from 'path';
 
 import { program } from 'commander';
 import axios from 'axios';
-import { DeclarativeConverter, StringRuleList } from '@adguard/tsurlfilter';
+import { convertFilters } from '@adguard/tsurlfilter/cli';
 import fse from 'fs-extra';
 
 import { ADGUARD_FILTERS_IDS } from '../../src/common/constants/filters';
-import {
-    FILTERS_I18N_FILENAME,
-    FILTERS_RULES_COUNTER_FILENAME,
-    FILTERS_REGEXP_COUNTER_FILENAME,
-} from '../../src/common/constants/common';
+import { FILTERS_I18N_FILENAME, WEB_ACCESSIBLE_RESOURCES_PATH } from '../../src/common/constants/common';
 import { cliLog } from '../cli-log';
 
 const COMMON_FILTERS_DIR = 'src/filters';
@@ -46,75 +42,15 @@ const getUrlsOfFiltersResources = (browser: string) => {
     }));
 };
 
-const startConvert = (browser: string) => {
-    const converter = new DeclarativeConverter();
+const startConvert = async (browser: string) => {
     const filtersDir = FILTERS_DIR.replace('%browser', browser);
     const declarativeFiltersDir = `${DECLARATIVE_FILTERS_DIR.replace('%browser%', browser)}`;
-    fse.ensureDirSync(declarativeFiltersDir);
-
-    const regexpCounterMap = new Map<number, number>();
-    const rulesCounterMap = new Map<number, number>();
-
-    fse.readdirSync(filtersDir).forEach((filePath) => {
-        cliLog.info(`Convert ${filePath}...`);
-
-        if (filePath.endsWith('.map')) {
-            cliLog.info(`Convert ${filePath} skipped - it is sourcemap`);
-            return;
-        }
-
-        if (filePath.indexOf(FILTERS_I18N_FILENAME) !== -1) {
-            return;
-        }
-
-        const foundRegexps = filePath.match(/\d+/);
-        if (foundRegexps && foundRegexps[0] !== null) {
-            const rulesetIndex = Number.parseInt(foundRegexps[0], 10);
-            const data = fse.readFileSync(`${filtersDir}/${filePath}`, { encoding: 'utf-8' });
-            const list = new StringRuleList(rulesetIndex, data);
-            const {
-                declarativeRules,
-                convertedSourceMap,
-                regexpRulesCounter,
-            } = converter.convert(
-                list,
-                { resourcesPath: '/web-accessible-resources/redirects' },
-            );
-
-            const fileDeclarative = filePath.replace('.txt', '.json');
-            fse.writeFileSync(
-                `${declarativeFiltersDir}/${fileDeclarative}`,
-                JSON.stringify(declarativeRules, null, '\t'),
-            );
-
-            const sourceMapPath = filePath
-                .replace('/declarative', '')
-                .replace('.txt', '.json.map');
-            fse.writeFileSync(
-                `${filtersDir}/${sourceMapPath}`,
-                JSON.stringify(Array.from(convertedSourceMap)),
-            );
-
-            regexpCounterMap.set(rulesetIndex, regexpRulesCounter);
-            rulesCounterMap.set(rulesetIndex, declarativeRules.length);
-
-            cliLog.info(`Convert ${filePath} done`);
-        } else {
-            cliLog.info(`Convert ${filePath} skipped`);
-        }
-    });
-
-    fse.writeFileSync(
-        `${filtersDir}/${FILTERS_REGEXP_COUNTER_FILENAME}`,
-        JSON.stringify(Array.from(regexpCounterMap)),
+    await convertFilters(
+        filtersDir,
+        WEB_ACCESSIBLE_RESOURCES_PATH,
+        declarativeFiltersDir,
+        false,
     );
-    cliLog.info(`Regexp counters saved to ${FILTERS_REGEXP_COUNTER_FILENAME}`);
-
-    fse.writeFileSync(
-        `${filtersDir}/${FILTERS_RULES_COUNTER_FILENAME}`,
-        JSON.stringify(Array.from(rulesCounterMap)),
-    );
-    cliLog.info(`Rules counters saved to ${FILTERS_RULES_COUNTER_FILENAME}`);
 };
 
 const downloadFilter = async (url: UrlType, filtersDir: string) => {
@@ -144,7 +80,7 @@ const startDownload = async (browser: BROWSERS) => {
     const filtersDir = FILTERS_DIR.replace('%browser', browser);
     fse.ensureDirSync(filtersDir);
 
-    await downloadTranslations(browser, filtersDir);
+    await downloadTranslations(browser, COMMON_FILTERS_DIR);
 
     const urls = getUrlsOfFiltersResources(browser);
     await Promise.all(urls.map((url) => downloadFilter(url, filtersDir)));

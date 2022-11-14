@@ -22,6 +22,8 @@ const getTitle = (domain: string) => {
 export const UserRulesGroup = ({ domain, userRules }: UserRulesGroupProps) => {
     const title = getTitle(domain);
 
+    // TODO: When there are too many rules in a group - rendering takes too
+    // long and stops event loop - looks like freezing
     return (
         <div key={domain} className={styles.domainGroup}>
             <div className={styles.domain}>{title}</div>

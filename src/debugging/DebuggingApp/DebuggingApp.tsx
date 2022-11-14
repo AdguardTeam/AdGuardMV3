@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { ExtendedMV3MessageType, RecordFiltered } from '@adguard/tswebextension/mv3';
 
-import { MESSAGE_TYPES } from 'Common/constants/common';
 import { translator } from 'Common/translators/translator';
-import { RecordFiltered } from 'background/filtering-log';
-import { sendMessage } from 'Common/helpers';
+import { sendInnerMessage, sendMessage } from 'Common/helpers';
+import { MESSAGE_TYPES } from 'Common/constants/common';
+import { FiltersNames } from 'background/filters';
 
 import { RequestsTable } from '../RequestsTable';
 
@@ -11,6 +12,7 @@ const UPDATE_LOG_INTERVAL_MS = 1000;
 
 export const DebuggingApp = () => {
     const [ruleLog, setRuleLog] = useState<RecordFiltered[]>([]);
+    const [filtersNames, setFiltersNames] = useState<FiltersNames>({});
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
 
@@ -18,8 +20,18 @@ export const DebuggingApp = () => {
         let isActive = true;
         let timer: number;
 
+        const updateFiltersNames = async () => {
+            const filtersNamesMessage = await sendMessage<FiltersNames>(MESSAGE_TYPES.GET_FILTERS_NAMES);
+            setFiltersNames(filtersNamesMessage);
+        };
+
         const startAndUpdate = async () => {
-            await sendMessage(MESSAGE_TYPES.START_LOG);
+            try {
+                await sendMessage(MESSAGE_TYPES.START_LOG);
+                await updateFiltersNames();
+            } catch (e) {
+                setIsError(true);
+            }
 
             const fetchCollected = async () => {
                 // To abort mutate state on unmounted component
@@ -28,7 +40,8 @@ export const DebuggingApp = () => {
                     return;
                 }
                 try {
-                    const collected = await sendMessage<RecordFiltered[]>(MESSAGE_TYPES.GET_COLLECTED_LOG);
+                    const collected = await sendInnerMessage<RecordFiltered[]>(ExtendedMV3MessageType.GetCollectedLog);
+                    await updateFiltersNames();
                     // TODO: drop focus on repaint
                     setRuleLog((items) => items.concat(collected));
                 } catch (e) {
@@ -56,6 +69,7 @@ export const DebuggingApp = () => {
         : (
             <RequestsTable
                 ruleLog={ruleLog}
+                filtersNames={filtersNames}
                 cleanLog={() => setRuleLog(() => [])}
             />
         );

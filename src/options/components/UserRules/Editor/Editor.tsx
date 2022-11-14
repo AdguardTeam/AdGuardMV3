@@ -40,7 +40,7 @@ export const Editor = observer(() => {
 
     const onSave = async () => {
         const err = await setUserRules(text);
-        checkAndNotifyDynamicRulesError(err);
+        checkAndNotifyDynamicRulesError(optionsStore, err);
     };
 
     const onCancel = () => {

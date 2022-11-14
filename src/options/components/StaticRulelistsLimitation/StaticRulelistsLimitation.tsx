@@ -8,6 +8,7 @@ import { rootStore } from '../../stores';
 
 import styles from './StaticRulelistsLimitation.module.pcss';
 
+// TODO: Change name to StaticRuleSetsLimitation
 export const StaticRulelistsLimitation = observer(() => {
     const { settingsStore } = useContext(rootStore);
 
