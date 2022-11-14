@@ -1,8 +1,8 @@
-! Checksum: hHDzrq5e2tOi2OwDY90eSA
+! Checksum: O+XqCoPuFvxrjRz9SwbD1w
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.30.76
-! TimeUpdated: 2022-11-08T19:31:47+00:00
+! Version: 2.0.30.79
+! TimeUpdated: 2022-11-13T21:04:22+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1044,6 +1044,8 @@ teleboy.ch#@#.adWrapper
 ! Good: example.org#?#main > div.row:-abp-has(> div.ad)
 ! Bad: example.org##main > div.ad (should be in specific.txt)
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/134617
+mein-schoener-garten.de#?#.contentbird-ignore-import.paragraph:-abp-has(> .no-assets > .container-content > .teaser-list > .teaser-item > article > .caption > .custom-teaser__label:contains(Anzeige))
 ! https://github.com/AdguardTeam/AdguardFilters/issues/133812
 motorsport-total.com#?#.innercontent > div.mt30:-abp-has(> div.f1de-container > div.OUTBRAIN)
 motorsport-total.com#?#.flex-boxes > div.block-320:-abp-has(> div.teaser_container span.ads-anzeige)
@@ -2328,6 +2330,10 @@ vergleich.focus.de,chip.de,gutefrage.net,reisefrage.net,motorradfrage.net,autofr
 ! ##.adsbygoogle
 winfuture.de,netzwelt.de,quoka.de,farmeramania.de,bravofly.de,computerbild.de,digitalfernsehen.de,hl-live.de,chinamobilemag.de,focus.de,pcwelt.de##.adsbygoogle
 !
+heizsparer.de###leaderboard-bg
+heizsparer.de##.cadheight
+heizsparer.de##.vidheight
+heizsparer.de##.flbheight
 myboerse.bz##.body_wrapper > center
 tagesspiegel.de##main div[class^="Wd"]
 siegener-zeitung.de###piano-sticky-template-article-siz
@@ -5355,6 +5361,7 @@ tagesspiegel.de###urban-teaser1
 !
 ! Bad:  ||example.org/video-links (should be in specific.txt)
 !
+! t-online.de ad video
 ! https://github.com/AdguardTeam/CoreLibs/issues/1671
 ! Glomex video ads - kabeleins.de,prosieben.de,prosiebenmaxx.de,ran.de,sat1.de,sat1gold.de,sixx.de,the-voice-of-germany.de,wetter.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/21525
