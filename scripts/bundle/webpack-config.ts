@@ -5,14 +5,19 @@ import CopyWebpackPlugin from 'copy-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ZipWebpackPlugin from 'zip-webpack-plugin';
-import { Configuration, WebpackPluginInstance } from 'webpack';
+import { Configuration, DefinePlugin, WebpackPluginInstance } from 'webpack';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import _ from 'lodash';
 import fse from 'fs-extra';
 
 import { FILTER_RULESET, RulesetType } from '../../src/common/constants/filters';
-import type { Browser, BuildEnv } from '../build-constants';
-import { BROWSERS, BUILD_ENVS } from '../build-constants';
+import {
+    Browser,
+    BuildEnv,
+    GLOBAL_WORKER_ENVS,
+    BROWSERS,
+    BUILD_ENVS,
+} from '../build-constants';
 
 const packageJson = require('../../package.json');
 const tsconfig = require('../../tsconfig.json');
@@ -142,6 +147,11 @@ export const getWebpackConfig = (
             chunks: ['debugging'],
         }),
         new MiniCssExtractPlugin(),
+        new DefinePlugin({
+            'process.env': {
+                GLOBAL_WORKER: process.env.GLOBAL_WORKER === GLOBAL_WORKER_ENVS.ENABLE,
+            },
+        }),
     ];
 
     // If watch mode we don't need to generate zip

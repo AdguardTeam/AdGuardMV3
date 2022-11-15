@@ -22,13 +22,19 @@ export const BUILD_ENVS = {
     RELEASE: 'release',
 } as const;
 
+export const GLOBAL_WORKER_ENVS = {
+    ENABLE: 'true',
+} as const;
+
 export type BuildEnv = typeof BUILD_ENVS[keyof typeof BUILD_ENVS];
+export type GlobalWorkerEnv = typeof GLOBAL_WORKER_ENVS[keyof typeof GLOBAL_WORKER_ENVS];
 export type Browser = typeof BROWSERS[keyof typeof BROWSERS];
 
 declare global {
     namespace NodeJS {
         export interface ProcessEnv {
             BUILD_ENV: BuildEnv,
+            GLOBAL_WORKER: GlobalWorkerEnv | undefined,
             BROWSER: Browser,
         }
     }

@@ -22,6 +22,13 @@ const {
     MAX_NUMBER_OF_ENABLED_STATIC_RULESETS,
 } = chrome.declarativeNetRequest;
 
+// For tests
+declare global {
+    interface Window {
+        tsWebExtension: TsWebExtension | undefined;
+    }
+}
+
 class TsWebExtensionWrapper {
     private tsWebExtension: TsWebExtension;
 
@@ -31,6 +38,11 @@ class TsWebExtensionWrapper {
 
     constructor() {
         this.tsWebExtension = new TsWebExtension(WEB_ACCESSIBLE_RESOURCES_PATH);
+
+        if (process.env.GLOBAL_WORKER) {
+            // eslint-disable-next-line no-restricted-globals
+            self.tsWebExtension = this.tsWebExtension;
+        }
     }
 
     public get ruleSetsCounters(): RuleSetCounters[] {

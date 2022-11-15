@@ -7,6 +7,7 @@ import {
     NOTIFIER_EVENTS,
     PROTECTION_PAUSE_TIMEOUT_MS,
     PopupData,
+    EXTENSION_INITIALIZED_EVENT,
 } from 'Common/constants/common';
 import { CATEGORIES } from 'Common/constants/filters';
 import { log } from 'Common/logger';
@@ -253,6 +254,7 @@ export const initExtension = async (message?: any) => {
         waitForInit = undefined;
 
         initialized = true;
+        dispatchEvent(new Event(EXTENSION_INITIALIZED_EVENT));
     };
 
     if (waitForInit) {
