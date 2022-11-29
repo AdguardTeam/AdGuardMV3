@@ -7,12 +7,18 @@ import {
     TooManyRegexpRulesError,
 } from '@adguard/tswebextension/mv3';
 
-import { FiltersGroupId, RuleSetCounters, WEB_ACCESSIBLE_RESOURCES_PATH } from 'Common/constants/common';
+import {
+    FiltersGroupId,
+    NOTIFIER_EVENTS,
+    RuleSetCounters,
+    WEB_ACCESSIBLE_RESOURCES_PATH,
+} from 'Common/constants/common';
 import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
 import { log } from 'Common/logger';
 
 import { DEFAULT_FILTERS, filters } from './filters';
 import { settings } from './settings';
+import { notifier } from './notifier';
 import { userRules } from './userRules';
 import { browserActions } from './browser-actions';
 
@@ -31,6 +37,15 @@ class TsWebExtensionWrapper {
 
     constructor() {
         this.tsWebExtension = new TsWebExtension(WEB_ACCESSIBLE_RESOURCES_PATH);
+
+        this.tsWebExtension.onAssistantCreateRule.subscribe(async (ruleText: string) => {
+            await userRules.addRule(ruleText);
+            await this.configure();
+
+            const updatedRules = await userRules.getRules();
+            // Notify UI about changes
+            notifier.notify(NOTIFIER_EVENTS.SET_RULES, { value: updatedRules });
+        });
     }
 
     public get ruleSetsCounters(): RuleSetCounters[] {
@@ -193,6 +208,26 @@ class TsWebExtensionWrapper {
      */
     getMessageHandler() {
         return this.tsWebExtension.getMessageHandler();
+    }
+
+    /**
+     * Opens AdGuard Assistant for help in creating a rule.
+     * @param tabId Identifier of the tab where the open assistant is located.
+     *
+     * @returns void
+     */
+    public async openAssistant(tabId: number): Promise<void> {
+        return this.tsWebExtension.openAssistant(tabId);
+    }
+
+    /**
+     * Closes AdGuard Assistant.
+     * @param tabId Identifier of the tab where the open assistant is located.
+     *
+     * @returns void
+     */
+    public async closeAssistant(tabId: number): Promise<void> {
+        return this.tsWebExtension.closeAssistant(tabId);
     }
 
     /**

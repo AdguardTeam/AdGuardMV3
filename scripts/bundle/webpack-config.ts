@@ -80,7 +80,6 @@ export const getWebpackConfig = (
     const DEVTOOLS_PATH = path.resolve(__dirname, SRC_PATH, 'devtools');
     const DEBUGGING_PATH = path.resolve(__dirname, SRC_PATH, 'debugging');
     const CONTENT_SCRIPTS_PATH = path.resolve(__dirname, SRC_PATH, 'content-scripts');
-    const ASSISTANT_PATH = path.resolve(CONTENT_SCRIPTS_PATH, 'assistant');
     const OUTPUT_DIR = path.resolve(__dirname, BUILD_PATH, OUTPUT_PATH, browser);
     const FILTERS_DECLARATIVE_DIR = path.resolve(__dirname, SRC_PATH, FILTERS_PATH, 'declarative/');
 
@@ -181,7 +180,6 @@ export const getWebpackConfig = (
             devtools: DEVTOOLS_PATH,
             // content-scripts
             'content-scripts': CONTENT_SCRIPTS_PATH,
-            assistant: ASSISTANT_PATH,
         },
         output: {
             path: OUTPUT_DIR,

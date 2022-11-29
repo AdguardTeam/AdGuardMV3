@@ -1,11 +1,9 @@
-import { MESSAGE_TYPES, Message, MessageType } from 'Common/constants/common';
+import { Message, MessageType } from 'Common/constants/common';
 import { REPORT_SITE_BASE } from 'Common/constants/urls';
-import { log } from 'Common/logger';
 import { prefs } from 'Common/prefs';
 import { getUrlDetails, getUrlWithQueryString } from 'Common/helpers';
 
 import { filters } from '../background/filters';
-import { scripting } from '../background/scripting';
 import { userRules } from '../background/userRules';
 
 class TabUtils {
@@ -71,33 +69,6 @@ class TabUtils {
         const abuseUrl = getUrlWithQueryString(REPORT_SITE_BASE, urlParams);
 
         return this.openPage(abuseUrl);
-    };
-
-    /**
-     * Sends message to assistant by tab id in order to activate it.
-     * If no answer received tries to inject assistant script and send message again.
-     * @param tabId
-     */
-    openAssistantWithInject = async (tabId: number) => {
-        try {
-            await this.sendMessageToTab(tabId, MESSAGE_TYPES.START_ASSISTANT);
-        } catch (e) {
-            // if assistant wasn't injected yet sendMessageToTab will throw an error
-            await scripting.executeScript(tabId, { file: 'assistant.js' });
-            await this.sendMessageToTab(tabId, MESSAGE_TYPES.START_ASSISTANT);
-        }
-    };
-
-    /**
-     * Launches assistant context by tab id
-     * @param tabId
-     */
-    openAssistant = async (tabId: number) => {
-        try {
-            await this.openAssistantWithInject(tabId);
-        } catch (e) {
-            log.error(e);
-        }
     };
 
     /**

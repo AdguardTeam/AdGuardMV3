@@ -58,7 +58,7 @@ const CONTEXT_MENU_MAP = {
     [CONTEXT_MENU_ITEMS.BLOCK_ADS_ON_SITE]: {
         action: async (tab?: Tab) => {
             if (tab?.id) {
-                await tabUtils.openAssistant(tab.id);
+                await tsWebExtensionWrapper.openAssistant(tab.id);
             }
         },
         title: translator.getMessage(CONTEXT_MENU_ITEMS.BLOCK_ADS_ON_SITE),
