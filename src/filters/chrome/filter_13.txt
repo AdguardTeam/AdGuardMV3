@@ -1,8 +1,8 @@
-! Checksum: 8CRGmvZWZyLxdGX1Lp4UNw
+! Checksum: LGcDcHhOKM5PWfgl/39QuA
 ! Title: AdGuard Turkish filter
 ! Description: Filter list that specifically removes ads on websites in Turkish language.
-! Version: 2.0.38.80
-! TimeUpdated: 2022-11-14T08:30:32+00:00
+! Version: 2.0.40.5
+! TimeUpdated: 2022-12-27T14:30:45+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -85,8 +85,10 @@
 ! Bad: ||adssubdomain.legitwebsite.com^ (should be in adservers_firstparty.txt)
 !
 !
+||storj.cloud^
+||clbanners9.com^$all
+||my.urdreama.cfd^$third-party
 ||referans.xyz^
-||jetv.xyz^
 ||lider90.com^$third-party
 ||friendshipmale.com^
 ||gloaphoo.net^
@@ -107,7 +109,6 @@
 ://r.reklam*.com^$third-party
 ://say.ac^$third-party
 ||venediktaciri.com^$third-party
-||1686607364.rsc.cdn77.org^
 ||88.150.149.92/~cosiker/$third-party
 ||aadserving.com^$third-party
 ||acxdyn.com^$third-party
@@ -206,7 +207,6 @@
 ||citireklam.com^$third-party
 ||clickmerkez.com^$third-party
 ||clinicsofturkey.com/attachment/$third-party
-||cmsbetconstruct.com^$third-party
 ||cntadvertising.com^$third-party
 ||coderturk.com^$third-party
 ||contema.ru^$third-party
@@ -384,6 +384,7 @@
 ! Bad: ||legitwebsite.com^$third-party (should be in adservers.txt)
 !
 !
+||ads.dygdigital.com^
 ||ads.igfhaber.com^
 ||ad.hepsiburada.com^
 ||ad.reklm.com^
@@ -411,14 +412,11 @@
 ||ads.o-networkaffiliates.com^
 ||ads.oyungemisi.com^
 ||ads.pivol.net^
-||ads.sabah.com.tr^
 ||ads.skorfikstur.com^
 ||ads.sondakika.com^
-||ads5.sabah.com.tr^
 ||adserve.donanimhaber.com^
 ||adserver.a24.com.tr^
 ||adserver.bafrahaber.com^
-||adsim.sabah.com.tr^
 ||adsp.ciner.com.tr^
 ||adsp.haberturk.com^
 ||androidads23.adcolony.com^
@@ -464,6 +462,12 @@ zamaninvarken.com,kredi.biz.tr,kriptoradar.com,morlevha.com,bakimlikadin.net,kor
 iyibeslenme.net,teknop.net,kirtkirtla.com,buneymis.net,ozgunbilgi.com#%#//scriptlet("set-constant", "adblock.check", "noopFunc")
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/137393
+serilerim.com#%#//scriptlet('prevent-element-src-loading', 'script', 'adsbygoogle')
+! https://github.com/AdguardTeam/AdguardFilters/issues/135479
+uzaymanga.com#@#.adsBanner
+uzaymanga.com#%#//scriptlet('set-constant', 'eazy_ad_unblocker_msg_var', '')
+uzaymanga.com#%#//scriptlet('prevent-xhr', 'pagead2.googlesyndication.com')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/134259
 bikifi.com#%#//scriptlet('prevent-fetch', 'www3.doubleclick.net')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/133010
@@ -821,7 +825,7 @@ r10.net#%#//scriptlet('abort-on-property-write', 'rInt')
 dizipal1.cloud,dizipal2.cloud,dizipal3.cloud,dizipal4.cloud,dizipal5.cloud,dizipal6.cloud,dizipal7.cloud,dizipal8.cloud,dizipal9.cloud,dizipal10.cloud,dizipal11.cloud,dizipal12.cloud,dizipal13.cloud,dizipal14.cloud,dizipal15.cloud,dizipal16.cloud,dizipal17.cloud,dizipal18.cloud,dizipal19.cloud,dizipal20.cloud,dizipal21.cloud,dizipal22.cloud,dizipal23.cloud,dizipal24.cloud,dizipal25.cloud,dizipal26.cloud,dizipal27.cloud,dizipal28.cloud,dizipal29.cloud,dizipal30.cloud,dizipal31.cloud,dizipal32.cloud,dizipal33.cloud,dizipal34.cloud,dizipal35.cloud,dizipal36.cloud,dizipal37.cloud,dizipal38.cloud,dizipal39.cloud,dizipal40.cloud,dizipal41.cloud,dizipal42.cloud,dizipal43.cloud,dizipal44.cloud,dizipal45.cloud,dizipal46.cloud,dizipal47.cloud,dizipal48.cloud,dizipal49.cloud,dizipal50.cloud,dizipal51.cloud,dizipal52.cloud,dizipal53.cloud,dizipal54.cloud,dizipal55.cloud,dizipal56.cloud,dizipal57.cloud,dizipal58.cloud,dizipal59.cloud,dizipal60.cloud,dizipal61.cloud,dizipal62.cloud,dizipal63.cloud,dizipal64.cloud,dizipal65.cloud,dizipal66.cloud,dizipal67.cloud,dizipal68.cloud,dizipal69.cloud,dizipal70.cloud,dizipal71.cloud,dizipal72.cloud,dizipal73.cloud,dizipal74.cloud,dizipal75.cloud,dizipal76.cloud,dizipal77.cloud,dizipal78.cloud,dizipal79.cloud,dizipal80.cloud,dizipal81.cloud,dizipal82.cloud,dizipal83.cloud,dizipal84.cloud,dizipal85.cloud,dizipal86.cloud,dizipal87.cloud,dizipal88.cloud,dizipal89.cloud,dizipal90.cloud,dizipal91.cloud,dizipal92.cloud,dizipal93.cloud,dizipal94.cloud,dizipal95.cloud,dizipal96.cloud,dizipal97.cloud,dizipal98.cloud,dizipal99.cloud,dizipal100.cloud,dizipal101.cloud,dizipal102.cloud,dizipal103.cloud,dizipal104.cloud,dizipal105.cloud,dizipal106.cloud,dizipal107.cloud,dizipal108.cloud,dizipal109.cloud,dizipal110.cloud,dizipal111.cloud,dizipal112.cloud,dizipal113.cloud,dizipal114.cloud,dizipal115.cloud,dizipal116.cloud,dizipal117.cloud,dizipal118.cloud,dizipal119.cloud,dizipal120.cloud,dizipal121.cloud,dizipal122.cloud,dizipal123.cloud,dizipal124.cloud,dizipal125.cloud,dizipal126.cloud,dizipal127.cloud,dizipal128.cloud,dizipal129.cloud,dizipal130.cloud,dizipal131.cloud,dizipal132.cloud,dizipal133.cloud,dizipal134.cloud,dizipal135.cloud,dizipal136.cloud,dizipal137.cloud,dizipal138.cloud,dizipal139.cloud,dizipal140.cloud,dizipal141.cloud,dizipal142.cloud,dizipal143.cloud,dizipal144.cloud,dizipal145.cloud,dizipal146.cloud,dizipal147.cloud,dizipal148.cloud,dizipal149.cloud,dizipal150.cloud,dizipal151.cloud,dizipal152.cloud,dizipal153.cloud,dizipal154.cloud,dizipal155.cloud,dizipal156.cloud,dizipal157.cloud,dizipal158.cloud,dizipal159.cloud,dizipal160.cloud,dizipal161.cloud,dizipal162.cloud,dizipal163.cloud,dizipal164.cloud,dizipal165.cloud,dizipal166.cloud,dizipal167.cloud,dizipal168.cloud,dizipal169.cloud,dizipal170.cloud,dizipal171.cloud,dizipal172.cloud,dizipal173.cloud,dizipal174.cloud,dizipal175.cloud,dizipal176.cloud,dizipal177.cloud,dizipal178.cloud,dizipal179.cloud,dizipal180.cloud,dizipal181.cloud,dizipal182.cloud,dizipal183.cloud,dizipal184.cloud,dizipal185.cloud,dizipal186.cloud,dizipal187.cloud,dizipal188.cloud,dizipal189.cloud,dizipal190.cloud,dizipal191.cloud,dizipal192.cloud,dizipal193.cloud,dizipal194.cloud,dizipal195.cloud,dizipal196.cloud,dizipal197.cloud,dizipal198.cloud,dizipal199.cloud,dizipal200.cloud#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/130871
 ! dizipal*.com - frequently changed domains
-dizipal300.com,dizipal301.com,dizipal302.com,dizipal303.com,dizipal304.com,dizipal305.com,dizipal306.com,dizipal307.com,dizipal308.com,dizipal309.com,dizipal310.com,dizipal311.com,dizipal312.com,dizipal313.com,dizipal314.com,dizipal315.com,dizipal316.com,dizipal317.com,dizipal318.com,dizipal319.com,dizipal320.com,dizipal321.com,dizipal322.com,dizipal323.com,dizipal324.com,dizipal325.com,dizipal326.com,dizipal327.com,dizipal328.com,dizipal329.com,dizipal330.com,dizipal331.com,dizipal332.com,dizipal333.com,dizipal334.com,dizipal335.com,dizipal336.com,dizipal337.com,dizipal338.com,dizipal339.com,dizipal340.com,dizipal341.com,dizipal342.com,dizipal343.com,dizipal344.com,dizipal345.com,dizipal346.com,dizipal347.com,dizipal348.com,dizipal349.com,dizipal350.com,dizipal351.com,dizipal352.com,dizipal353.com,dizipal354.com,dizipal355.com,dizipal356.com,dizipal357.com,dizipal358.com,dizipal359.com,dizipal360.com,dizipal361.com,dizipal362.com,dizipal363.com,dizipal364.com,dizipal365.com,dizipal366.com,dizipal367.com,dizipal368.com,dizipal369.com,dizipal370.com,dizipal371.com,dizipal372.com,dizipal373.com,dizipal374.com,dizipal375.com,dizipal376.com,dizipal377.com,dizipal378.com,dizipal379.com,dizipal380.com,dizipal381.com,dizipal382.com,dizipal383.com,dizipal384.com,dizipal385.com,dizipal386.com,dizipal387.com,dizipal388.com,dizipal389.com,dizipal390.com,dizipal391.com,dizipal392.com,dizipal393.com,dizipal394.com,dizipal395.com,dizipal396.com,dizipal397.com,dizipal398.com,dizipal399.com,dizipal400.com,dizipal401.com,dizipal402.com,dizipal403.com,dizipal404.com,dizipal405.com,dizipal406.com,dizipal407.com,dizipal408.com,dizipal409.com,dizipal410.com,dizipal411.com,dizipal412.com,dizipal413.com,dizipal414.com,dizipal415.com,dizipal416.com,dizipal417.com,dizipal418.com,dizipal419.com,dizipal420.com,dizipal421.com,dizipal422.com,dizipal423.com,dizipal424.com,dizipal425.com,dizipal426.com,dizipal427.com,dizipal428.com,dizipal429.com,dizipal430.com,dizipal431.com,dizipal432.com,dizipal433.com#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
+dizipal400.com,dizipal401.com,dizipal402.com,dizipal403.com,dizipal404.com,dizipal405.com,dizipal406.com,dizipal407.com,dizipal408.com,dizipal409.com,dizipal410.com,dizipal411.com,dizipal412.com,dizipal413.com,dizipal414.com,dizipal415.com,dizipal416.com,dizipal417.com,dizipal418.com,dizipal419.com,dizipal420.com,dizipal421.com,dizipal422.com,dizipal423.com,dizipal424.com,dizipal425.com,dizipal426.com,dizipal427.com,dizipal428.com,dizipal429.com,dizipal430.com,dizipal431.com,dizipal432.com,dizipal433.com,dizipal434.com,dizipal435.com,dizipal436.com,dizipal437.com,dizipal438.com,dizipal439.com,dizipal440.com,dizipal441.com,dizipal442.com,dizipal443.com,dizipal444.com,dizipal445.com,dizipal446.com,dizipal447.com,dizipal448.com,dizipal449.com,dizipal450.com,dizipal451.com,dizipal452.com,dizipal453.com,dizipal454.com,dizipal455.com,dizipal456.com,dizipal457.com,dizipal458.com,dizipal459.com,dizipal460.com,dizipal461.com,dizipal462.com,dizipal463.com,dizipal464.com,dizipal465.com,dizipal466.com,dizipal467.com,dizipal468.com,dizipal469.com,dizipal470.com,dizipal471.com,dizipal472.com,dizipal473.com,dizipal474.com,dizipal475.com,dizipal476.com,dizipal477.com,dizipal478.com,dizipal479.com,dizipal480.com,dizipal481.com,dizipal482.com,dizipal483.com,dizipal484.com,dizipal485.com,dizipal486.com,dizipal487.com,dizipal488.com,dizipal489.com,dizipal490.com,dizipal491.com,dizipal492.com,dizipal493.com,dizipal494.com,dizipal495.com,dizipal496.com,dizipal497.com,dizipal498.com,dizipal499.com,dizipal500.com,dizipal501.com,dizipal502.com,dizipal503.com,dizipal504.com,dizipal505.com,dizipal506.com,dizipal507.com,dizipal508.com,dizipal509.com,dizipal510.com,dizipal511.com,dizipal512.com,dizipal513.com,dizipal514.com,dizipal515.com,dizipal516.com,dizipal517.com,dizipal518.com,dizipal519.com,dizipal520.com,dizipal521.com,dizipal522.com,dizipal523.com,dizipal524.com,dizipal525.com,dizipal526.com,dizipal527.com,dizipal528.com,dizipal529.com,dizipal530.com,dizipal531.com,dizipal532.com,dizipal533.com,dizipal534.com,dizipal535.com,dizipal536.com,dizipal537.com,dizipal538.com,dizipal539.com,dizipal540.com,dizipal541.com,dizipal542.com,dizipal543.com,dizipal544.com,dizipal545.com,dizipal546.com,dizipal547.com,dizipal548.com,dizipal549.com,dizipal550.com#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
 !
 !
 ! START: Yandex
@@ -841,8 +845,11 @@ dizipal300.com,dizipal301.com,dizipal302.com,dizipal303.com,dizipal304.com,dizip
 ! Bad: example.org##main > div.ad (should be in specific.txt)
 !
 !
-cimri.com#?#div[id^="adslot-"]:upward(1)
-90min.com#?#.viewablity-block > figure:-abp-has(div#mm-player-placeholder-large-screen)
+dizipal515.com,ad-manager.cloud#?##oframeplayerjs > pjsdiv:-abp-has(> pjsdiv[style] > pjsdiv:contains(FREESPİN))
+trwebtoon.com#?#.right-wrapper > div.grid-margin:-abp-has(> div.card > div.card-header:contains(Sponsor))
+mangagecesi.com#?#.d-flex:-abp-has(> .error_screen)
+epey.com#?#.fiyatlar > div.fiyat > a[rel="nofollow"]:-abp-has(> span.site_logo > span.sponsorlu)
+haberler.com#?#.bullets > div.bullet:-abp-has(> a[href^="https://rd.yenimedya.com.tr/"])
 1000kitap.com#?#section > .dr.flex-center:-abp-has(> .flex-row > a[href="/reklamlar"])
 bikifi.com#?#.grid .mb-2[class*="min-h-"]:-abp-has(> .bikifi_fluid)
 bikifi.com#?#.grid > .my-3[class*="min-h-"]:-abp-has(>.mb-2[class*="min-h-"] > .bikifi_fluid)
@@ -872,7 +879,6 @@ vitoporno.com#?#.entry-content > div.film-content > div.film-share:upward(1)
 sorumatik.co#?#.theiaStickySidebar span.stream-title:contains(/^Reklam$/)
 teknoblog.com#?#.vc_column > div.wpb_wrapper:-abp-has(> div.td-a-rec-id-header)
 teknoblog.com#?#.tdc_zone > div.tdc-row:-abp-has( > div.vc_row div.wpb_wrapper > div.td-fix-index > div[class^="tekno-banner-alani-"])
-teknoblog.com#?#.wpb_wrapper > div.vc_row_inner:-abp-has(> div.vc_column_inner div.wpb_wrapper > div.td-fix-index > div[id^="tekno-"])
 filmizletv.*#?#.content-container .fw_playerAlti:-abp-has(> a[target="_blank"])
 filmizletv.*#?#.side-box > .fw_playerYaniKat2Ustu:-abp-has(> iframe[src*="filmizletv."][src*="/sidrek.htm"])
 discordsunucu.com#?#.columns.is-multiline > .column > center > .adsbygoogle:upward(2)
@@ -1202,6 +1208,9 @@ videoseyredin.net#?#.widget_text[-ext-contains="Reklamları"]
 ##.fuck-ivr
 ##.fuck-ivr ~ p[style^="background-color:"]
 !
+##body > div#pageskin
+##body > div.pgskn
+##body > div#footerFixedDiv
 ##.bey-video-reklam
 ##.saniye-reklam
 ##.reklamcontainer
@@ -1375,19 +1384,19 @@ videoseyredin.net#?#.widget_text[-ext-contains="Reklamları"]
 !*****
 ! START: Clickunders
 ! puShown
-! #%#//scriptlet("set-constant", "puShown", "true")
-yabancidizilertv.com,1080hdfilmizle.com,vipfilmlerizle.me,hdfilmcehennemi.buzz,erotikizle123.com,dipfilmizle.com,erotikizlefilm.com,turkerotikizle.com,yabancidizibax.com,sinemangoo.org,sexfilmleriizle.com,fullhdfilmizle.cc,fullhdfilm.pro,pembetv18.com,geziforumu.com,ddizipal.com,efendim.xyz,dizipaltv.org,dizispeed.net,filmjr1.com,fluffcore.com,filmpaf.com,hdfilmfullizle.com,hdfilmcehennemizle.com,netfullfilmizle3.com,pifilmizle.*,filmmodu.info,izlekolik.com,dizipaltv.com,dizifilm.pro,dizivid.net,arrowizle.com,hdfilmifullizle.com,erotik123.com,jokerfilmizle.com,720pfilmiizle.net,seehdfilm.com,dizirun1.com,filmfiz.net,filmcus.com,hazirfilm.com,filmizlew.org,zoof1.xyz,sinemakolik.net,sinefilmizlesen.com,zarize.com,pornobuna.com,zarizeporno.com,burdenfly.com,diziking.vip,elzemfilmizle.*,filmdelisi.org,1080pfilmizle.me,zzerotik.com,filmgo.org,filmiifullizlee.net,sinemafilmizle.net,fullhdfilmiizle.org,hdfilmw.org,buzfilmizle1.com,filmkuzusu1.com,hdfilmcix.net,sinemadelisi.com,yetiskinfilmizle.net,hdsexfilmizle.com,erotik-film.org,erotikfilmtube.com,erotik-filmler.net,erotikfilms.net,erotizmfilmleri.net,sezonlukdizi2.com,dizipal.*,siyahfilmizle.*,filmizletv.*,tekparthdfilmizle.*,filmbabasi.com,dizisup.*,pornoanne.com,dizikorea.com,diziyo.*,koredizileri.tv,diziboxx.com,dafflix.*,yabancidizitv.*,turkaliz.com,jetdiziizle.net,hddiziport.*,vkfilmizle.net,dizimom.live,dizimov.*,yerlidizi.pw,fullhdfilmizleyin.com,filmizlet.net,torrentarsivi.*,baglanfilme.com,filmgooo.com,pornorips.com,bumfilmizle.com,bestdizi.com,setfilmizle.*,shirl.club,evrenselfilmlerim.org,turkcealtyazilipornom.com,fullhdfilmmodu.*,sinema.cc,hdfilmizletv.net,filmmom.pro,torrent-oyun.com,shortz.club,pembetv18.com,sinemaizle.co,filmlane.com,netfilmtvizle.com,hdfilmcehennem.live,filmyani.*,xbox360torrent.com,efullizle.com,morfilmizle.com,asyafanatiklerim.com,guncelhdfilm.com,dizilost.com,fileru.net,dizitube.net,fullhdfilmdeposu.com,tranimeizle.*,volsex.com,torba.info,erotiksexizle.com,altyazilifilm.live,divx720pfilmizle.org#%#//scriptlet("set-constant", "puShown", "true")
+! #%#//scriptlet('set-constant', 'puShown', 'true')
+filmizletv1.*,dizipall.org,diziyou.co,fullhdfilmizle5.com,filmizlew.net,tafdi.net,fullfilmizle.net,sinepal.*,dizimag.eu,erotikfilmler.live,bumfilmizle1.com,yabancidizilertv.com,1080hdfilmizle.com,vipfilmlerizle.me,hdfilmcehennemi.buzz,erotikizle123.com,dipfilmizle.com,erotikizlefilm.com,turkerotikizle.com,yabancidizibax.com,sinemangoo.org,sexfilmleriizle.com,fullhdfilmizle.cc,fullhdfilm.pro,pembetv18.com,geziforumu.com,ddizipal.com,efendim.xyz,dizipaltv.org,dizispeed.net,filmjr1.com,fluffcore.com,filmpaf.com,hdfilmfullizle.com,hdfilmcehennemizle.com,netfullfilmizle3.com,pifilmizle.*,filmmodu.info,izlekolik.com,dizipaltv.com,dizifilm.pro,dizivid.net,arrowizle.com,hdfilmifullizle.com,erotik123.com,jokerfilmizle.com,720pfilmiizle.net,seehdfilm.com,dizirun1.com,filmfiz.net,filmcus.com,hazirfilm.com,filmizlew.org,zoof1.xyz,sinemakolik.net,sinefilmizlesen.com,zarize.com,pornobuna.com,zarizeporno.com,burdenfly.com,diziking.vip,elzemfilmizle.*,filmdelisi.org,1080pfilmizle.me,zzerotik.com,filmgo.org,filmiifullizlee.net,sinemafilmizle.net,fullhdfilmiizle.org,hdfilmw.org,buzfilmizle1.com,filmkuzusu1.com,hdfilmcix.net,sinemadelisi.com,yetiskinfilmizle.net,hdsexfilmizle.com,erotik-film.org,erotikfilmtube.com,erotik-filmler.net,erotikfilms.net,erotizmfilmleri.net,sezonlukdizi2.com,dizipal.*,siyahfilmizle.*,filmizletv.*,tekparthdfilmizle.*,filmbabasi.com,dizisup.*,pornoanne.com,dizikorea.com,diziyo.*,koredizileri.tv,diziboxx.com,dafflix.*,yabancidizitv.*,turkaliz.com,jetdiziizle.net,hddiziport.*,vkfilmizle.net,dizimom.live,dizimov.*,yerlidizi.pw,fullhdfilmizleyin.com,filmizlet.net,torrentarsivi.*,baglanfilme.com,filmgooo.com,pornorips.com,bumfilmizle.com,bestdizi.com,setfilmizle.*,shirl.club,evrenselfilmlerim.org,turkcealtyazilipornom.com,fullhdfilmmodu.*,sinema.cc,hdfilmizletv.net,filmmom.pro,torrent-oyun.com,shortz.club,pembetv18.com,sinemaizle.co,filmlane.com,netfilmtvizle.com,hdfilmcehennem.live,filmyani.*,xbox360torrent.com,efullizle.com,morfilmizle.com,asyafanatiklerim.com,guncelhdfilm.com,dizilost.com,fileru.net,dizitube.net,fullhdfilmdeposu.com,tranimeizle.*,volsex.com,torba.info,erotiksexizle.com,altyazilifilm.live,divx720pfilmizle.org#%#//scriptlet('set-constant', 'puShown', 'true')
 ! isShow
-! #%#//scriptlet("set-constant", "isShow", "true")
-tekfullfilmizle5.com,yovmiyelazim.com,tekfullfilmizle3.com,filmmom.pro,izleorg2.org,webteizle.*#%#//scriptlet("set-constant", "isShow", "true")
+! #%#//scriptlet('set-constant', 'isShow', 'true')
+trgoalshosting.cf,tekfullfilmizle5.com,yovmiyelazim.com,tekfullfilmizle3.com,filmmom.pro,izleorg2.org,webteizle.*#%#//scriptlet('set-constant', 'isShow', 'true')
 ! initPu
-! #%#//scriptlet("abort-on-property-read", "initPu")
-breakingbadizle.com,diziday.com,filmgezegeni.live,zipfilmizle.com,bamfilmizle.com,sinemadafilm.com,netflixcehennemi.com,diziizles.com,hdizlefilmleri.com,filmmoduu.com,abifilmizle.org,hdfilmhit.com,filmla.org,trfilm.net,dolufilm.org,netflix-izle.com,turkifsaalemi.com,netfilmtvizle.com#%#//scriptlet("abort-on-property-read", "initPu")
+! #%#//scriptlet('abort-on-property-read', 'initPu')
+dizipall.org,dizimax1.com,yenierotikfilm.xyz,breakingbadizle.com,diziday.com,filmgezegeni.live,zipfilmizle.com,bamfilmizle.com,sinemadafilm.com,netflixcehennemi.com,diziizles.com,hdizlefilmleri.com,filmmoduu.com,abifilmizle.org,hdfilmhit.com,filmla.org,trfilm.net,dolufilm.org,netflix-izle.com,turkifsaalemi.com,netfilmtvizle.com#%#//scriptlet('abort-on-property-read', 'initPu')
 ! initAd
-! #%#//scriptlet("abort-on-property-read", "initAd")
-dizirun1.com,fullfilmcibaba1.com,fullfilmcidayi1.com,filmsezonu.com,fullhdfilmizleabi.com,hdfreeizle.com,erotikfilmsitesi.net,fullfilmcidayim.com,hdrealfilmizle.com,hdmixfilim.com,fullhdfilmizlepala.com#%#//scriptlet("abort-on-property-read", "initAd")
+! #%#//scriptlet('abort-on-property-read', 'initAd')
+fullhdfilmizlett.com,fullhdfilmcibaba1.com,dizirun1.com,fullfilmcibaba1.com,fullfilmcidayi1.com,filmsezonu.com,fullhdfilmizleabi.com,hdfreeizle.com,erotikfilmsitesi.net,fullfilmcidayim.com,hdrealfilmizle.com,hdmixfilim.com,fullhdfilmizlepala.com#%#//scriptlet('abort-on-property-read', 'initAd')
 !
-720pfilmizlesene.com,filmmakinesi1.*,yabancidizitv.*,diziwatch.net,fullhd720pizle.live,filmizlemax.*,videoseyred.in,hdfilmcehennem.live,yerlifilmizletir.com#%#//scriptlet("prevent-addEventListener", "click", "checkTarget")
+720pfilmizletir.com,1080pfilmizletir.com,720pfilmizlesene.com,filmmakinesi1.*,yabancidizitv.*,diziwatch.net,fullhd720pizle.live,filmizlemax.*,videoseyred.in,hdfilmcehennem.live,yerlifilmizletir.com#%#//scriptlet("prevent-addEventListener", "click", "checkTarget")
 diziroll.me,dizilla4.com,dizimini.com,filmizlehub.com,yabancidiziizlesene.*,dizisup.*,roketdizi.pw,1080hdfilmizle.com#%#//scriptlet("abort-on-property-read", "initPop")
 shirl.club,altporno.xyz,ovpvideo.com#%#//scriptlet("abort-on-property-read", "oV1")
 agarz.com#%#(function(){var b=window.setTimeout;window.setTimeout=function(a,c){if(!/RTCPeerConnection[\s\S]*?new MouseEvent\("click"/.test(a.toString()))return b(a,c)};})();
@@ -1396,10 +1405,28 @@ technopat.net#%#(function() { var w_open = window.open, regex = /goo.gl/; window
 ! END: Clickunders
 !
 !
+! trgoals*.xyz - frequently changed domains
+trgoals185.xyz,trgoals186.xyz,trgoals187.xyz,trgoals188.xyz,trgoals189.xyz,trgoals190.xyz,trgoals191.xyz,trgoals192.xyz,trgoals193.xyz,trgoals194.xyz,trgoals195.xyz,trgoals196.xyz,trgoals197.xyz,trgoals198.xyz,trgoals199.xyz,trgoals200.xyz,trgoals201.xyz,trgoals202.xyz,trgoals203.xyz,trgoals204.xyz,trgoals205.xyz,trgoals206.xyz,trgoals207.xyz,trgoals208.xyz,trgoals209.xyz,trgoals210.xyz,trgoals211.xyz,trgoals212.xyz,trgoals213.xyz,trgoals214.xyz,trgoals215.xyz,trgoals216.xyz,trgoals217.xyz,trgoals218.xyz,trgoals219.xyz,trgoals220.xyz,trgoals221.xyz,trgoals222.xyz,trgoals223.xyz,trgoals224.xyz,trgoals225.xyz,trgoals226.xyz,trgoals227.xyz,trgoals228.xyz,trgoals229.xyz,trgoals230.xyz,trgoals231.xyz,trgoals232.xyz,trgoals233.xyz,trgoals234.xyz,trgoals235.xyz,trgoals236.xyz,trgoals237.xyz,trgoals238.xyz,trgoals239.xyz,trgoals240.xyz,trgoals241.xyz,trgoals242.xyz,trgoals243.xyz,trgoals244.xyz,trgoals245.xyz,trgoals246.xyz,trgoals247.xyz,trgoals248.xyz,trgoals249.xyz,trgoals250.xyz#%#//scriptlet("set-constant", "isShow", "true")
+!
 ! dizipal*.cloud - frequently changed domains
 dizipal73.cloud,dizipal70.cloud,dizipal71.cloud,dizipal72.cloud,dizipal73.cloud,dizipal74.cloud,dizipal75.cloud,dizipal76.cloud,dizipal77.cloud,dizipal78.cloud,dizipal79.cloud,dizipal80.cloud,dizipal81.cloud,dizipal82.cloud,dizipal83.cloud,dizipal84.cloud,dizipal85.cloud,dizipal86.cloud,dizipal87.cloud,dizipal88.cloud,dizipal89.cloud,dizipal90.cloud,dizipal91.cloud,dizipal92.cloud,dizipal93.cloud,dizipal94.cloud,dizipal95.cloud,dizipal96.cloud,dizipal97.cloud,dizipal98.cloud,dizipal99.cloud,dizipal100.cloud,dizipal101.cloud,dizipal102.cloud,dizipal103.cloud,dizipal104.cloud,dizipal105.cloud,dizipal106.cloud,dizipal107.cloud,dizipal108.cloud,dizipal109.cloud,dizipal110.cloud,dizipal111.cloud,dizipal112.cloud,dizipal113.cloud,dizipal114.cloud,dizipal115.cloud,dizipal116.cloud,dizipal117.cloud,dizipal118.cloud,dizipal119.cloud,dizipal120.cloud,dizipal121.cloud,dizipal122.cloud,dizipal123.cloud,dizipal124.cloud,dizipal125.cloud,dizipal126.cloud,dizipal127.cloud,dizipal128.cloud,dizipal129.cloud,dizipal130.cloud,dizipal131.cloud,dizipal132.cloud,dizipal133.cloud,dizipal134.cloud,dizipal135.cloud,dizipal136.cloud,dizipal137.cloud,dizipal138.cloud,dizipal139.cloud,dizipal140.cloud,dizipal141.cloud,dizipal142.cloud,dizipal143.cloud,dizipal144.cloud,dizipal145.cloud,dizipal146.cloud,dizipal147.cloud,dizipal148.cloud,dizipal149.cloud,dizipal150.cloud,dizipal151.cloud,dizipal152.cloud,dizipal153.cloud,dizipal154.cloud,dizipal155.cloud,dizipal156.cloud,dizipal157.cloud,dizipal158.cloud,dizipal159.cloud,dizipal160.cloud,dizipal161.cloud,dizipal162.cloud,dizipal163.cloud,dizipal164.cloud,dizipal165.cloud,dizipal166.cloud,dizipal167.cloud,dizipal168.cloud,dizipal169.cloud,dizipal170.cloud,dizipal171.cloud,dizipal172.cloud,dizipal173.cloud,dizipal174.cloud,dizipal175.cloud,dizipal176.cloud,dizipal177.cloud,dizipal178.cloud,dizipal179.cloud,dizipal180.cloud,dizipal181.cloud,dizipal182.cloud,dizipal183.cloud,dizipal184.cloud,dizipal185.cloud,dizipal186.cloud,dizipal187.cloud,dizipal188.cloud,dizipal189.cloud,dizipal190.cloud,dizipal191.cloud,dizipal192.cloud,dizipal193.cloud,dizipal194.cloud,dizipal195.cloud,dizipal196.cloud,dizipal197.cloud,dizipal198.cloud,dizipal199.cloud,dizipal200.cloud#%#//scriptlet("set-constant", "isShow", "true")
 dizipal73.cloud,dizipal70.cloud,dizipal71.cloud,dizipal72.cloud,dizipal73.cloud,dizipal74.cloud,dizipal75.cloud,dizipal76.cloud,dizipal77.cloud,dizipal78.cloud,dizipal79.cloud,dizipal80.cloud,dizipal81.cloud,dizipal82.cloud,dizipal83.cloud,dizipal84.cloud,dizipal85.cloud,dizipal86.cloud,dizipal87.cloud,dizipal88.cloud,dizipal89.cloud,dizipal90.cloud,dizipal91.cloud,dizipal92.cloud,dizipal93.cloud,dizipal94.cloud,dizipal95.cloud,dizipal96.cloud,dizipal97.cloud,dizipal98.cloud,dizipal99.cloud,dizipal100.cloud,dizipal101.cloud,dizipal102.cloud,dizipal103.cloud,dizipal104.cloud,dizipal105.cloud,dizipal106.cloud,dizipal107.cloud,dizipal108.cloud,dizipal109.cloud,dizipal110.cloud,dizipal111.cloud,dizipal112.cloud,dizipal113.cloud,dizipal114.cloud,dizipal115.cloud,dizipal116.cloud,dizipal117.cloud,dizipal118.cloud,dizipal119.cloud,dizipal120.cloud,dizipal121.cloud,dizipal122.cloud,dizipal123.cloud,dizipal124.cloud,dizipal125.cloud,dizipal126.cloud,dizipal127.cloud,dizipal128.cloud,dizipal129.cloud,dizipal130.cloud,dizipal131.cloud,dizipal132.cloud,dizipal133.cloud,dizipal134.cloud,dizipal135.cloud,dizipal136.cloud,dizipal137.cloud,dizipal138.cloud,dizipal139.cloud,dizipal140.cloud,dizipal141.cloud,dizipal142.cloud,dizipal143.cloud,dizipal144.cloud,dizipal145.cloud,dizipal146.cloud,dizipal147.cloud,dizipal148.cloud,dizipal149.cloud,dizipal150.cloud,dizipal151.cloud,dizipal152.cloud,dizipal153.cloud,dizipal154.cloud,dizipal155.cloud,dizipal156.cloud,dizipal157.cloud,dizipal158.cloud,dizipal159.cloud,dizipal160.cloud,dizipal161.cloud,dizipal162.cloud,dizipal163.cloud,dizipal164.cloud,dizipal165.cloud,dizipal166.cloud,dizipal167.cloud,dizipal168.cloud,dizipal169.cloud,dizipal170.cloud,dizipal171.cloud,dizipal172.cloud,dizipal173.cloud,dizipal174.cloud,dizipal175.cloud,dizipal176.cloud,dizipal177.cloud,dizipal178.cloud,dizipal179.cloud,dizipal180.cloud,dizipal181.cloud,dizipal182.cloud,dizipal183.cloud,dizipal184.cloud,dizipal185.cloud,dizipal186.cloud,dizipal187.cloud,dizipal188.cloud,dizipal189.cloud,dizipal190.cloud,dizipal191.cloud,dizipal192.cloud,dizipal193.cloud,dizipal194.cloud,dizipal195.cloud,dizipal196.cloud,dizipal197.cloud,dizipal198.cloud,dizipal199.cloud,dizipal200.cloud#%#//scriptlet("remove-attr", "data-money", "div[data-money]")
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/137944
+dizilla2.org#%#//scriptlet('abort-on-property-write', 'coreWorker')
+! https://github.com/AdguardTeam/AdguardFilters/issues/137694
+play.diziyou.co#%#//scriptlet("set-constant", "player.vroll", "noopFunc")
+! https://github.com/AdguardTeam/AdguardFilters/issues/137710
+trgoalshosting.cf#%#//scriptlet("set-constant", "config.adv.enabled", "0")
+! https://github.com/AdguardTeam/AdguardFilters/issues/137079
+dizimax1.com#%#//scriptlet("abort-on-property-read", "degiskens")
+! https://github.com/AdguardTeam/AdguardFilters/issues/137080
+fullhdfilm.pro#%#//scriptlet('set-constant', 'reklamsayisi', '0')
+fullhdfilm.pro#%#//scriptlet("adjust-setInterval", "reklam", "*", "0.02")
+! https://github.com/AdguardTeam/AdguardFilters/issues/136520
+tranimeci.com#%#//scriptlet('set-constant', 'volumeClearInterval', '0')
+! https://github.com/AdguardTeam/AdguardFilters/issues/136393
+yabancidizi.co#%#//scriptlet("adjust-setInterval", "timeleft", "*", "0.02")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/133864
 xbox360torrent.com#%#//scriptlet("abort-on-property-write", "popcent_config")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/133824
@@ -1409,7 +1436,7 @@ turkanime.co#%#//scriptlet('set-local-storage-item', 'lscache-pop', '1')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/131619
 turkanime.co#%#//scriptlet("set-constant", "clicked", "true")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/130821
-sinepal.biz#%#//scriptlet("remove-attr", "data-money", "div[data-money]")
+sinepal.*#%#//scriptlet("remove-attr", "data-money", "div[data-money]")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/130370
 forum.donanimhaber.com#%#//scriptlet('set-constant', 'adSearchTitle', 'undefined')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/130373
@@ -1458,7 +1485,7 @@ fox.com.tr#%#//scriptlet("prevent-setInterval", ".addClass('getir')")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/108601
 yukfilmizle.com#%#//scriptlet("set-cookie", "popundr", "1")
 ! filmmodu.com - frequently changed domains
-filmmodu2.com,filmmodu3.com,filmmodu4.com,filmmodu5.com,filmmodu6.com,filmmodu7.com,filmmodu8.com#%#//scriptlet("set-constant", "Object.prototype.ads", "noopFunc")
+filmmodu9.com,filmmodu10.com,filmmodu11.com,filmmodu12.com,filmmodu13.com,filmmodu14.com,filmmodu15.com,filmmodu16.com,filmmodu17.com,filmmodu18.com,filmmodu19.com,filmmodu20.com#%#//scriptlet("set-constant", "Object.prototype.ads", "noopFunc")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/103996
 atv.com.tr#%#//scriptlet("set-constant", "HBiddings.vastUrl", "")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/100352
@@ -1553,7 +1580,7 @@ belgeselizlesene.com#%#//scriptlet("set-constant", "Object.prototype.ads_enable"
 technopat.net#%#//scriptlet('set-constant', 'td_ad_background_click_link', '')
 technopat.net#%#//scriptlet("abort-on-property-read", "wpsite_clickable_data")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/49451
-strmrdrfrogh.site,strmrdrfroge.site,strmrdrfrogd.site,strmrdrfrofg.site,strmrdrfrofd.site,strmrdrfrofc.site,strmrdrfroei.site,strmrdrfroeg.site,strmrdrfroed.site,strmrdrfrodg.xyz,strmrdrfrocj.xyz,strmrdrfrode.xyz,strmrdrfrodd.xyz,strmrdrfrobc.xyz#%#//scriptlet("set-constant", "adsConfig.enabled", "false")
+strmrdrfrogj.site,strmrdrfrogi.site,strmrdrfrogh.site,strmrdrfroge.site,strmrdrfrogd.site,strmrdrfrofg.site,strmrdrfrofd.site,strmrdrfrofc.site,strmrdrfroei.site,strmrdrfroeg.site,strmrdrfroed.site,strmrdrfrodg.xyz,strmrdrfrocj.xyz,strmrdrfrode.xyz,strmrdrfrodd.xyz,strmrdrfrobc.xyz#%#//scriptlet("set-constant", "adsConfig.enabled", "false")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/48892
 dizitube.net#%#document.cookie = "gosterilen_popup=1; path=/";
 ! https://github.com/AdguardTeam/AdguardFilters/issues/48476
@@ -1657,6 +1684,26 @@ r10.net#%#document.cookie = 'r10LeftHide=1';
 !------- CSS fixes --------------------!
 !--------------------------------------!
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/137930
+diziall.com#%#//scriptlet("set-constant", "popup", "noopFunc")
+! https://github.com/AdguardTeam/AdguardFilters/issues/137573
+1080pizle.net#$#body { background: none !important; }
+! https://github.com/AdguardTeam/AdguardFilters/issues/137079
+dizimax1.com#$#.swal2-container { display: none !important; }
+dizimax1.com#$#body { overflow: auto !important; padding-right: 0 !important; }
+! https://github.com/AdguardTeam/AdguardFilters/issues/137075
+dizitime.pro#$##iframe-video { display: block !important; }
+! https://github.com/AdguardTeam/AdguardFilters/issues/136393
+yabancidizi.co#$##preroll_skip_btn { display: block !important; }
+yabancidizi.co#$#.player { display: block !important; }
+! https://github.com/AdguardTeam/AdguardFilters/issues/137059
+gazetevatan.com#$#.global-header { margin-bottom: 24px !important; }
+! https://github.com/AdguardTeam/AdguardFilters/issues/135357
+radyofenomen.com#$##adModal { display: none !important; }
+radyofenomen.com#$#.modal-backdrop { display: none !important; }
+radyofenomen.com#$#.modal-open { overflow: visible !important; }
+! https://github.com/AdguardTeam/AdguardFilters/issues/135147
+gratis.com#$#html.async-hide { opacity: 1 !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/134519
 turkce-brosurler.com#$#body.no-scroll { overflow: auto !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/133918
@@ -1699,7 +1746,7 @@ ssport.tv#$#html.uk-modal-page { overflow: auto !important; }
 ssport.tv#$#html.uk-modal-page > body { overflow: auto !important; }
 ssport.tv#$##mainpage-modal[data-galabel="bankoligappdownload"] { display: none !important; }
 ! filmmodu.com - frequently changed domains
-filmmodu2.com,filmmodu3.com,filmmodu4.com,filmmodu5.com,filmmodu6.com,filmmodu7.com,filmmodu8.com#$#body { background-color: #0E0E0E !important; }
+filmmodu9.com,filmmodu10.com,filmmodu11.com,filmmodu12.com,filmmodu13.com,filmmodu14.com,filmmodu15.com,filmmodu16.com,filmmodu17.com,filmmodu18.com,filmmodu19.com,filmmodu20.com#$#body { background-color: #0E0E0E !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/108514
 fullhdfilmizlesene.*#$#div.duyuru-izle.duyuru-izle { margin-top: 20px !important; }
 fullhdfilmizlesene.*#$#div.orta[style^="margin-top:"]:not(.izle) { margin-top: 131px !important; }
@@ -1934,6 +1981,18 @@ sabah.com.tr#$#header.advertControlArea { top: 0!important; }
 !
 ! Unhide the player while ads timeout
 !
+1080pizle.net#$##rk-content { display: none !important; }
+1080pizle.net#$##cn-content { display: block !important; }
+dizifilmbox.pw#$##reki { display: none !important; }
+dizifilmbox.pw#$##kendisi { display: block !important; }
+fullhd720pizle.live#$#.video { display: block !important; }
+fullhd720pizle.live#$##VideOnrekLam { display: none !important; }
+erotikfilmtube.com#$#body div#player { display: block !important; }
+erotikfilmtube.com#$#.play-that-video { display: none !important; }
+erotikizlefilm.com#$#.play-that-video { display: none !important; }
+erotikizlefilm.com#$#.videoTab { display: block !important; }
+fullfilmizle.net#$##rk-content { display: none !important; }
+fullfilmizle.net#$##cn-content { display: block !important; }
 filmiifullizlee.net#$##cn-content { display: block!important; }
 filmiifullizlee.net#$##rk-content { display: none!important; }
 guncelhdfilm.com#$##reki2 { display: none !important; }
@@ -1975,8 +2034,8 @@ tekparthdfilmizle.com#$##cn-content { display: block !important; }
 tekparthdfilmizle.com#$##rk-content { display: none !important; }
 safirfilmizle1.com#$#.tab-embed { display: block !important; }
 safirfilmizle1.com#$#.tab-reklam { display: none !important; }
-filmmodu2.com,filmmodu3.com,filmmodu4.com,filmmodu5.com,filmmodu6.com,filmmodu7.com,filmmodu8.com#$#.embed-responsive { display: block !important; }
-filmmodu2.com,filmmodu3.com,filmmodu4.com,filmmodu5.com,filmmodu6.com,filmmodu7.com,filmmodu8.com#$##mobile-preroll { display: none !important; }
+filmmodu9.com,filmmodu10.com,filmmodu11.com,filmmodu12.com,filmmodu13.com,filmmodu14.com,filmmodu15.com,filmmodu16.com,filmmodu17.com,filmmodu18.com,filmmodu19.com,filmmodu20.com#$#.embed-responsive { display: block !important; }
+filmmodu9.com,filmmodu10.com,filmmodu11.com,filmmodu12.com,filmmodu13.com,filmmodu14.com,filmmodu15.com,filmmodu16.com,filmmodu17.com,filmmodu18.com,filmmodu19.com,filmmodu20.com#$##mobile-preroll { display: none !important; }
 elzemfilmizle.*#$##kendisi { display: block !important; }
 elzemfilmizle.*#$##reki2 { display: none !important; }
 altyazilifilm.cc#$##rk-content { display: none !important; }
@@ -1999,8 +2058,8 @@ filmbabasi.com#$##rk-content { display: none !important; }
 filmbabasi.com#$##cn-content { display: block !important; }
 fullhdizle.*#$##kendisi { display: block !important; }
 fullhdizle.*#$##vrklm { display: none !important; }
-filmizletv.*#$##reki1 { display: none !important; }
-filmizletv.*#$##kendisi { display: block !important; }
+filmizletv1.com,filmizletv.*#$##reki1 { display: none !important; }
+filmizletv1.com,filmizletv.*#$##kendisi { display: block !important; }
 fullhdfilmmodu.*#$##reki1 { display: none !important; }
 fullhdfilmmodu.*#$##kendisi { display: block !important; }
 hdfilmcehennem.live#$##reki1 { display: none!important; }
@@ -2015,10 +2074,10 @@ filmizletix.com#$#.tab-embed { display: block!important; }
 filmizletix.com#$#.tab-reklam { display: none!important; }
 !
 ! dizipal*.com - frequently changed domains
-dizipal300.com,dizipal301.com,dizipal302.com,dizipal303.com,dizipal304.com,dizipal305.com,dizipal306.com,dizipal307.com,dizipal308.com,dizipal309.com,dizipal310.com,dizipal311.com,dizipal312.com,dizipal313.com,dizipal314.com,dizipal315.com,dizipal316.com,dizipal317.com,dizipal318.com,dizipal319.com,dizipal320.com,dizipal321.com,dizipal322.com,dizipal323.com,dizipal324.com,dizipal325.com,dizipal326.com,dizipal327.com,dizipal328.com,dizipal329.com,dizipal330.com,dizipal331.com,dizipal332.com,dizipal333.com,dizipal334.com,dizipal335.com,dizipal336.com,dizipal337.com,dizipal338.com,dizipal339.com,dizipal340.com,dizipal341.com,dizipal342.com,dizipal343.com,dizipal344.com,dizipal345.com,dizipal346.com,dizipal347.com,dizipal348.com,dizipal349.com,dizipal350.com,dizipal351.com,dizipal352.com,dizipal353.com,dizipal354.com,dizipal355.com,dizipal356.com,dizipal357.com,dizipal358.com,dizipal359.com,dizipal360.com,dizipal361.com,dizipal362.com,dizipal363.com,dizipal364.com,dizipal365.com,dizipal366.com,dizipal367.com,dizipal368.com,dizipal369.com,dizipal370.com,dizipal371.com,dizipal372.com,dizipal373.com,dizipal374.com,dizipal375.com,dizipal376.com,dizipal377.com,dizipal378.com,dizipal379.com,dizipal380.com,dizipal381.com,dizipal382.com,dizipal383.com,dizipal384.com,dizipal385.com,dizipal386.com,dizipal387.com,dizipal388.com,dizipal389.com,dizipal390.com,dizipal391.com,dizipal392.com,dizipal393.com,dizipal394.com,dizipal395.com,dizipal396.com,dizipal397.com,dizipal398.com,dizipal399.com,dizipal400.com,dizipal401.com,dizipal402.com,dizipal403.com,dizipal404.com,dizipal405.com,dizipal406.com,dizipal407.com,dizipal408.com,dizipal409.com,dizipal410.com,dizipal411.com,dizipal412.com,dizipal413.com,dizipal414.com,dizipal415.com,dizipal416.com,dizipal417.com,dizipal418.com,dizipal419.com,dizipal420.com,dizipal421.com,dizipal422.com,dizipal423.com,dizipal424.com,dizipal425.com,dizipal426.com,dizipal427.com,dizipal428.com,dizipal429.com,dizipal430.com,dizipal431.com,dizipal432.com,dizipal433.com#%#//scriptlet("set-constant", "puShown", "true")
-dizipal300.com,dizipal301.com,dizipal302.com,dizipal303.com,dizipal304.com,dizipal305.com,dizipal306.com,dizipal307.com,dizipal308.com,dizipal309.com,dizipal310.com,dizipal311.com,dizipal312.com,dizipal313.com,dizipal314.com,dizipal315.com,dizipal316.com,dizipal317.com,dizipal318.com,dizipal319.com,dizipal320.com,dizipal321.com,dizipal322.com,dizipal323.com,dizipal324.com,dizipal325.com,dizipal326.com,dizipal327.com,dizipal328.com,dizipal329.com,dizipal330.com,dizipal331.com,dizipal332.com,dizipal333.com,dizipal334.com,dizipal335.com,dizipal336.com,dizipal337.com,dizipal338.com,dizipal339.com,dizipal340.com,dizipal341.com,dizipal342.com,dizipal343.com,dizipal344.com,dizipal345.com,dizipal346.com,dizipal347.com,dizipal348.com,dizipal349.com,dizipal350.com,dizipal351.com,dizipal352.com,dizipal353.com,dizipal354.com,dizipal355.com,dizipal356.com,dizipal357.com,dizipal358.com,dizipal359.com,dizipal360.com,dizipal361.com,dizipal362.com,dizipal363.com,dizipal364.com,dizipal365.com,dizipal366.com,dizipal367.com,dizipal368.com,dizipal369.com,dizipal370.com,dizipal371.com,dizipal372.com,dizipal373.com,dizipal374.com,dizipal375.com,dizipal376.com,dizipal377.com,dizipal378.com,dizipal379.com,dizipal380.com,dizipal381.com,dizipal382.com,dizipal383.com,dizipal384.com,dizipal385.com,dizipal386.com,dizipal387.com,dizipal388.com,dizipal389.com,dizipal390.com,dizipal391.com,dizipal392.com,dizipal393.com,dizipal394.com,dizipal395.com,dizipal396.com,dizipal397.com,dizipal398.com,dizipal399.com,dizipal400.com,dizipal401.com,dizipal402.com,dizipal403.com,dizipal404.com,dizipal405.com,dizipal406.com,dizipal407.com,dizipal408.com,dizipal409.com,dizipal410.com,dizipal411.com,dizipal412.com,dizipal413.com,dizipal414.com,dizipal415.com,dizipal416.com,dizipal417.com,dizipal418.com,dizipal419.com,dizipal420.com,dizipal421.com,dizipal422.com,dizipal423.com,dizipal424.com,dizipal425.com,dizipal426.com,dizipal427.com,dizipal428.com,dizipal429.com,dizipal430.com,dizipal431.com,dizipal432.com,dizipal433.com#$##preRollBd { display: none !important }
-dizipal300.com,dizipal301.com,dizipal302.com,dizipal303.com,dizipal304.com,dizipal305.com,dizipal306.com,dizipal307.com,dizipal308.com,dizipal309.com,dizipal310.com,dizipal311.com,dizipal312.com,dizipal313.com,dizipal314.com,dizipal315.com,dizipal316.com,dizipal317.com,dizipal318.com,dizipal319.com,dizipal320.com,dizipal321.com,dizipal322.com,dizipal323.com,dizipal324.com,dizipal325.com,dizipal326.com,dizipal327.com,dizipal328.com,dizipal329.com,dizipal330.com,dizipal331.com,dizipal332.com,dizipal333.com,dizipal334.com,dizipal335.com,dizipal336.com,dizipal337.com,dizipal338.com,dizipal339.com,dizipal340.com,dizipal341.com,dizipal342.com,dizipal343.com,dizipal344.com,dizipal345.com,dizipal346.com,dizipal347.com,dizipal348.com,dizipal349.com,dizipal350.com,dizipal351.com,dizipal352.com,dizipal353.com,dizipal354.com,dizipal355.com,dizipal356.com,dizipal357.com,dizipal358.com,dizipal359.com,dizipal360.com,dizipal361.com,dizipal362.com,dizipal363.com,dizipal364.com,dizipal365.com,dizipal366.com,dizipal367.com,dizipal368.com,dizipal369.com,dizipal370.com,dizipal371.com,dizipal372.com,dizipal373.com,dizipal374.com,dizipal375.com,dizipal376.com,dizipal377.com,dizipal378.com,dizipal379.com,dizipal380.com,dizipal381.com,dizipal382.com,dizipal383.com,dizipal384.com,dizipal385.com,dizipal386.com,dizipal387.com,dizipal388.com,dizipal389.com,dizipal390.com,dizipal391.com,dizipal392.com,dizipal393.com,dizipal394.com,dizipal395.com,dizipal396.com,dizipal397.com,dizipal398.com,dizipal399.com,dizipal400.com,dizipal401.com,dizipal402.com,dizipal403.com,dizipal404.com,dizipal405.com,dizipal406.com,dizipal407.com,dizipal408.com,dizipal409.com,dizipal410.com,dizipal411.com,dizipal412.com,dizipal413.com,dizipal414.com,dizipal415.com,dizipal416.com,dizipal417.com,dizipal418.com,dizipal419.com,dizipal420.com,dizipal421.com,dizipal422.com,dizipal423.com,dizipal424.com,dizipal425.com,dizipal426.com,dizipal427.com,dizipal428.com,dizipal429.com,dizipal430.com,dizipal431.com,dizipal432.com,dizipal433.com#$#*:not(#cstk) > *:not(#player-wrapper) > .pre-player:not(div[data-org] + .pre-player) { display: none !important; }
-dizipal300.com,dizipal301.com,dizipal302.com,dizipal303.com,dizipal304.com,dizipal305.com,dizipal306.com,dizipal307.com,dizipal308.com,dizipal309.com,dizipal310.com,dizipal311.com,dizipal312.com,dizipal313.com,dizipal314.com,dizipal315.com,dizipal316.com,dizipal317.com,dizipal318.com,dizipal319.com,dizipal320.com,dizipal321.com,dizipal322.com,dizipal323.com,dizipal324.com,dizipal325.com,dizipal326.com,dizipal327.com,dizipal328.com,dizipal329.com,dizipal330.com,dizipal331.com,dizipal332.com,dizipal333.com,dizipal334.com,dizipal335.com,dizipal336.com,dizipal337.com,dizipal338.com,dizipal339.com,dizipal340.com,dizipal341.com,dizipal342.com,dizipal343.com,dizipal344.com,dizipal345.com,dizipal346.com,dizipal347.com,dizipal348.com,dizipal349.com,dizipal350.com,dizipal351.com,dizipal352.com,dizipal353.com,dizipal354.com,dizipal355.com,dizipal356.com,dizipal357.com,dizipal358.com,dizipal359.com,dizipal360.com,dizipal361.com,dizipal362.com,dizipal363.com,dizipal364.com,dizipal365.com,dizipal366.com,dizipal367.com,dizipal368.com,dizipal369.com,dizipal370.com,dizipal371.com,dizipal372.com,dizipal373.com,dizipal374.com,dizipal375.com,dizipal376.com,dizipal377.com,dizipal378.com,dizipal379.com,dizipal380.com,dizipal381.com,dizipal382.com,dizipal383.com,dizipal384.com,dizipal385.com,dizipal386.com,dizipal387.com,dizipal388.com,dizipal389.com,dizipal390.com,dizipal391.com,dizipal392.com,dizipal393.com,dizipal394.com,dizipal395.com,dizipal396.com,dizipal397.com,dizipal398.com,dizipal399.com,dizipal400.com,dizipal401.com,dizipal402.com,dizipal403.com,dizipal404.com,dizipal405.com,dizipal406.com,dizipal407.com,dizipal408.com,dizipal409.com,dizipal410.com,dizipal411.com,dizipal412.com,dizipal413.com,dizipal414.com,dizipal415.com,dizipal416.com,dizipal417.com,dizipal418.com,dizipal419.com,dizipal420.com,dizipal421.com,dizipal422.com,dizipal423.com,dizipal424.com,dizipal425.com,dizipal426.com,dizipal427.com,dizipal428.com,dizipal429.com,dizipal430.com,dizipal431.com,dizipal432.com,dizipal433.com#$#.video-banner { display: block !important; }
+dizipal400.com,dizipal401.com,dizipal402.com,dizipal403.com,dizipal404.com,dizipal405.com,dizipal406.com,dizipal407.com,dizipal408.com,dizipal409.com,dizipal410.com,dizipal411.com,dizipal412.com,dizipal413.com,dizipal414.com,dizipal415.com,dizipal416.com,dizipal417.com,dizipal418.com,dizipal419.com,dizipal420.com,dizipal421.com,dizipal422.com,dizipal423.com,dizipal424.com,dizipal425.com,dizipal426.com,dizipal427.com,dizipal428.com,dizipal429.com,dizipal430.com,dizipal431.com,dizipal432.com,dizipal433.com,dizipal434.com,dizipal435.com,dizipal436.com,dizipal437.com,dizipal438.com,dizipal439.com,dizipal440.com,dizipal441.com,dizipal442.com,dizipal443.com,dizipal444.com,dizipal445.com,dizipal446.com,dizipal447.com,dizipal448.com,dizipal449.com,dizipal450.com,dizipal451.com,dizipal452.com,dizipal453.com,dizipal454.com,dizipal455.com,dizipal456.com,dizipal457.com,dizipal458.com,dizipal459.com,dizipal460.com,dizipal461.com,dizipal462.com,dizipal463.com,dizipal464.com,dizipal465.com,dizipal466.com,dizipal467.com,dizipal468.com,dizipal469.com,dizipal470.com,dizipal471.com,dizipal472.com,dizipal473.com,dizipal474.com,dizipal475.com,dizipal476.com,dizipal477.com,dizipal478.com,dizipal479.com,dizipal480.com,dizipal481.com,dizipal482.com,dizipal483.com,dizipal484.com,dizipal485.com,dizipal486.com,dizipal487.com,dizipal488.com,dizipal489.com,dizipal490.com,dizipal491.com,dizipal492.com,dizipal493.com,dizipal494.com,dizipal495.com,dizipal496.com,dizipal497.com,dizipal498.com,dizipal499.com,dizipal500.com,dizipal501.com,dizipal502.com,dizipal503.com,dizipal504.com,dizipal505.com,dizipal506.com,dizipal507.com,dizipal508.com,dizipal509.com,dizipal510.com,dizipal511.com,dizipal512.com,dizipal513.com,dizipal514.com,dizipal515.com,dizipal516.com,dizipal517.com,dizipal518.com,dizipal519.com,dizipal520.com,dizipal521.com,dizipal522.com,dizipal523.com,dizipal524.com,dizipal525.com,dizipal526.com,dizipal527.com,dizipal528.com,dizipal529.com,dizipal530.com,dizipal531.com,dizipal532.com,dizipal533.com,dizipal534.com,dizipal535.com,dizipal536.com,dizipal537.com,dizipal538.com,dizipal539.com,dizipal540.com,dizipal541.com,dizipal542.com,dizipal543.com,dizipal544.com,dizipal545.com,dizipal546.com,dizipal547.com,dizipal548.com,dizipal549.com,dizipal550.com#%#//scriptlet("set-constant", "puShown", "true")
+dizipal400.com,dizipal401.com,dizipal402.com,dizipal403.com,dizipal404.com,dizipal405.com,dizipal406.com,dizipal407.com,dizipal408.com,dizipal409.com,dizipal410.com,dizipal411.com,dizipal412.com,dizipal413.com,dizipal414.com,dizipal415.com,dizipal416.com,dizipal417.com,dizipal418.com,dizipal419.com,dizipal420.com,dizipal421.com,dizipal422.com,dizipal423.com,dizipal424.com,dizipal425.com,dizipal426.com,dizipal427.com,dizipal428.com,dizipal429.com,dizipal430.com,dizipal431.com,dizipal432.com,dizipal433.com,dizipal434.com,dizipal435.com,dizipal436.com,dizipal437.com,dizipal438.com,dizipal439.com,dizipal440.com,dizipal441.com,dizipal442.com,dizipal443.com,dizipal444.com,dizipal445.com,dizipal446.com,dizipal447.com,dizipal448.com,dizipal449.com,dizipal450.com,dizipal451.com,dizipal452.com,dizipal453.com,dizipal454.com,dizipal455.com,dizipal456.com,dizipal457.com,dizipal458.com,dizipal459.com,dizipal460.com,dizipal461.com,dizipal462.com,dizipal463.com,dizipal464.com,dizipal465.com,dizipal466.com,dizipal467.com,dizipal468.com,dizipal469.com,dizipal470.com,dizipal471.com,dizipal472.com,dizipal473.com,dizipal474.com,dizipal475.com,dizipal476.com,dizipal477.com,dizipal478.com,dizipal479.com,dizipal480.com,dizipal481.com,dizipal482.com,dizipal483.com,dizipal484.com,dizipal485.com,dizipal486.com,dizipal487.com,dizipal488.com,dizipal489.com,dizipal490.com,dizipal491.com,dizipal492.com,dizipal493.com,dizipal494.com,dizipal495.com,dizipal496.com,dizipal497.com,dizipal498.com,dizipal499.com,dizipal500.com,dizipal501.com,dizipal502.com,dizipal503.com,dizipal504.com,dizipal505.com,dizipal506.com,dizipal507.com,dizipal508.com,dizipal509.com,dizipal510.com,dizipal511.com,dizipal512.com,dizipal513.com,dizipal514.com,dizipal515.com,dizipal516.com,dizipal517.com,dizipal518.com,dizipal519.com,dizipal520.com,dizipal521.com,dizipal522.com,dizipal523.com,dizipal524.com,dizipal525.com,dizipal526.com,dizipal527.com,dizipal528.com,dizipal529.com,dizipal530.com,dizipal531.com,dizipal532.com,dizipal533.com,dizipal534.com,dizipal535.com,dizipal536.com,dizipal537.com,dizipal538.com,dizipal539.com,dizipal540.com,dizipal541.com,dizipal542.com,dizipal543.com,dizipal544.com,dizipal545.com,dizipal546.com,dizipal547.com,dizipal548.com,dizipal549.com,dizipal550.com#$##preRollBd { display: none !important }
+dizipal400.com,dizipal401.com,dizipal402.com,dizipal403.com,dizipal404.com,dizipal405.com,dizipal406.com,dizipal407.com,dizipal408.com,dizipal409.com,dizipal410.com,dizipal411.com,dizipal412.com,dizipal413.com,dizipal414.com,dizipal415.com,dizipal416.com,dizipal417.com,dizipal418.com,dizipal419.com,dizipal420.com,dizipal421.com,dizipal422.com,dizipal423.com,dizipal424.com,dizipal425.com,dizipal426.com,dizipal427.com,dizipal428.com,dizipal429.com,dizipal430.com,dizipal431.com,dizipal432.com,dizipal433.com,dizipal434.com,dizipal435.com,dizipal436.com,dizipal437.com,dizipal438.com,dizipal439.com,dizipal440.com,dizipal441.com,dizipal442.com,dizipal443.com,dizipal444.com,dizipal445.com,dizipal446.com,dizipal447.com,dizipal448.com,dizipal449.com,dizipal450.com,dizipal451.com,dizipal452.com,dizipal453.com,dizipal454.com,dizipal455.com,dizipal456.com,dizipal457.com,dizipal458.com,dizipal459.com,dizipal460.com,dizipal461.com,dizipal462.com,dizipal463.com,dizipal464.com,dizipal465.com,dizipal466.com,dizipal467.com,dizipal468.com,dizipal469.com,dizipal470.com,dizipal471.com,dizipal472.com,dizipal473.com,dizipal474.com,dizipal475.com,dizipal476.com,dizipal477.com,dizipal478.com,dizipal479.com,dizipal480.com,dizipal481.com,dizipal482.com,dizipal483.com,dizipal484.com,dizipal485.com,dizipal486.com,dizipal487.com,dizipal488.com,dizipal489.com,dizipal490.com,dizipal491.com,dizipal492.com,dizipal493.com,dizipal494.com,dizipal495.com,dizipal496.com,dizipal497.com,dizipal498.com,dizipal499.com,dizipal500.com,dizipal501.com,dizipal502.com,dizipal503.com,dizipal504.com,dizipal505.com,dizipal506.com,dizipal507.com,dizipal508.com,dizipal509.com,dizipal510.com,dizipal511.com,dizipal512.com,dizipal513.com,dizipal514.com,dizipal515.com,dizipal516.com,dizipal517.com,dizipal518.com,dizipal519.com,dizipal520.com,dizipal521.com,dizipal522.com,dizipal523.com,dizipal524.com,dizipal525.com,dizipal526.com,dizipal527.com,dizipal528.com,dizipal529.com,dizipal530.com,dizipal531.com,dizipal532.com,dizipal533.com,dizipal534.com,dizipal535.com,dizipal536.com,dizipal537.com,dizipal538.com,dizipal539.com,dizipal540.com,dizipal541.com,dizipal542.com,dizipal543.com,dizipal544.com,dizipal545.com,dizipal546.com,dizipal547.com,dizipal548.com,dizipal549.com,dizipal550.com#$#*:not(#cstk) > *:not(#player-wrapper) > .pre-player:not(div[data-org] + .pre-player) { display: none !important; }
+dizipal400.com,dizipal401.com,dizipal402.com,dizipal403.com,dizipal404.com,dizipal405.com,dizipal406.com,dizipal407.com,dizipal408.com,dizipal409.com,dizipal410.com,dizipal411.com,dizipal412.com,dizipal413.com,dizipal414.com,dizipal415.com,dizipal416.com,dizipal417.com,dizipal418.com,dizipal419.com,dizipal420.com,dizipal421.com,dizipal422.com,dizipal423.com,dizipal424.com,dizipal425.com,dizipal426.com,dizipal427.com,dizipal428.com,dizipal429.com,dizipal430.com,dizipal431.com,dizipal432.com,dizipal433.com,dizipal434.com,dizipal435.com,dizipal436.com,dizipal437.com,dizipal438.com,dizipal439.com,dizipal440.com,dizipal441.com,dizipal442.com,dizipal443.com,dizipal444.com,dizipal445.com,dizipal446.com,dizipal447.com,dizipal448.com,dizipal449.com,dizipal450.com,dizipal451.com,dizipal452.com,dizipal453.com,dizipal454.com,dizipal455.com,dizipal456.com,dizipal457.com,dizipal458.com,dizipal459.com,dizipal460.com,dizipal461.com,dizipal462.com,dizipal463.com,dizipal464.com,dizipal465.com,dizipal466.com,dizipal467.com,dizipal468.com,dizipal469.com,dizipal470.com,dizipal471.com,dizipal472.com,dizipal473.com,dizipal474.com,dizipal475.com,dizipal476.com,dizipal477.com,dizipal478.com,dizipal479.com,dizipal480.com,dizipal481.com,dizipal482.com,dizipal483.com,dizipal484.com,dizipal485.com,dizipal486.com,dizipal487.com,dizipal488.com,dizipal489.com,dizipal490.com,dizipal491.com,dizipal492.com,dizipal493.com,dizipal494.com,dizipal495.com,dizipal496.com,dizipal497.com,dizipal498.com,dizipal499.com,dizipal500.com,dizipal501.com,dizipal502.com,dizipal503.com,dizipal504.com,dizipal505.com,dizipal506.com,dizipal507.com,dizipal508.com,dizipal509.com,dizipal510.com,dizipal511.com,dizipal512.com,dizipal513.com,dizipal514.com,dizipal515.com,dizipal516.com,dizipal517.com,dizipal518.com,dizipal519.com,dizipal520.com,dizipal521.com,dizipal522.com,dizipal523.com,dizipal524.com,dizipal525.com,dizipal526.com,dizipal527.com,dizipal528.com,dizipal529.com,dizipal530.com,dizipal531.com,dizipal532.com,dizipal533.com,dizipal534.com,dizipal535.com,dizipal536.com,dizipal537.com,dizipal538.com,dizipal539.com,dizipal540.com,dizipal541.com,dizipal542.com,dizipal543.com,dizipal544.com,dizipal545.com,dizipal546.com,dizipal547.com,dizipal548.com,dizipal549.com,dizipal550.com#$#.video-banner { display: block !important; }
 !
 ! dizipal*.cloud- frequently changed domains
 dizipal1.cloud,dizipal2.cloud,dizipal3.cloud,dizipal4.cloud,dizipal5.cloud,dizipal6.cloud,dizipal7.cloud,dizipal8.cloud,dizipal9.cloud,dizipal10.cloud,dizipal11.cloud,dizipal12.cloud,dizipal13.cloud,dizipal14.cloud,dizipal15.cloud,dizipal16.cloud,dizipal17.cloud,dizipal18.cloud,dizipal19.cloud,dizipal20.cloud,dizipal21.cloud,dizipal22.cloud,dizipal23.cloud,dizipal24.cloud,dizipal25.cloud,dizipal26.cloud,dizipal27.cloud,dizipal28.cloud,dizipal29.cloud,dizipal30.cloud,dizipal31.cloud,dizipal32.cloud,dizipal33.cloud,dizipal34.cloud,dizipal35.cloud,dizipal36.cloud,dizipal37.cloud,dizipal38.cloud,dizipal39.cloud,dizipal40.cloud,dizipal41.cloud,dizipal42.cloud,dizipal43.cloud,dizipal44.cloud,dizipal45.cloud,dizipal46.cloud,dizipal47.cloud,dizipal48.cloud,dizipal49.cloud,dizipal50.cloud,dizipal51.cloud,dizipal52.cloud,dizipal53.cloud,dizipal54.cloud,dizipal55.cloud,dizipal56.cloud,dizipal57.cloud,dizipal58.cloud,dizipal59.cloud,dizipal60.cloud,dizipal61.cloud,dizipal62.cloud,dizipal63.cloud,dizipal64.cloud,dizipal65.cloud,dizipal66.cloud,dizipal67.cloud,dizipal68.cloud,dizipal69.cloud,dizipal70.cloud,dizipal71.cloud,dizipal72.cloud,dizipal73.cloud,dizipal74.cloud,dizipal75.cloud,dizipal76.cloud,dizipal77.cloud,dizipal78.cloud,dizipal79.cloud,dizipal80.cloud,dizipal81.cloud,dizipal82.cloud,dizipal83.cloud,dizipal84.cloud,dizipal85.cloud,dizipal86.cloud,dizipal87.cloud,dizipal88.cloud,dizipal89.cloud,dizipal90.cloud,dizipal91.cloud,dizipal92.cloud,dizipal93.cloud,dizipal94.cloud,dizipal95.cloud,dizipal96.cloud,dizipal97.cloud,dizipal98.cloud,dizipal99.cloud,dizipal100.cloud,dizipal101.cloud,dizipal102.cloud,dizipal103.cloud,dizipal104.cloud,dizipal105.cloud,dizipal106.cloud,dizipal107.cloud,dizipal108.cloud,dizipal109.cloud,dizipal110.cloud,dizipal111.cloud,dizipal112.cloud,dizipal113.cloud,dizipal114.cloud,dizipal115.cloud,dizipal116.cloud,dizipal117.cloud,dizipal118.cloud,dizipal119.cloud,dizipal120.cloud,dizipal121.cloud,dizipal122.cloud,dizipal123.cloud,dizipal124.cloud,dizipal125.cloud,dizipal126.cloud,dizipal127.cloud,dizipal128.cloud,dizipal129.cloud,dizipal130.cloud,dizipal131.cloud,dizipal132.cloud,dizipal133.cloud,dizipal134.cloud,dizipal135.cloud,dizipal136.cloud,dizipal137.cloud,dizipal138.cloud,dizipal139.cloud,dizipal140.cloud,dizipal141.cloud,dizipal142.cloud,dizipal143.cloud,dizipal144.cloud,dizipal145.cloud,dizipal146.cloud,dizipal147.cloud,dizipal148.cloud,dizipal149.cloud,dizipal150.cloud,dizipal151.cloud,dizipal152.cloud,dizipal153.cloud,dizipal154.cloud,dizipal155.cloud,dizipal156.cloud,dizipal157.cloud,dizipal158.cloud,dizipal159.cloud,dizipal160.cloud,dizipal161.cloud,dizipal162.cloud,dizipal163.cloud,dizipal164.cloud,dizipal165.cloud,dizipal166.cloud,dizipal167.cloud,dizipal168.cloud,dizipal169.cloud,dizipal170.cloud,dizipal171.cloud,dizipal172.cloud,dizipal173.cloud,dizipal174.cloud,dizipal175.cloud,dizipal176.cloud,dizipal177.cloud,dizipal178.cloud,dizipal179.cloud,dizipal180.cloud,dizipal181.cloud,dizipal182.cloud,dizipal183.cloud,dizipal184.cloud,dizipal185.cloud,dizipal186.cloud,dizipal187.cloud,dizipal188.cloud,dizipal189.cloud,dizipal190.cloud,dizipal191.cloud,dizipal192.cloud,dizipal193.cloud,dizipal194.cloud,dizipal195.cloud,dizipal196.cloud,dizipal197.cloud,dizipal198.cloud,dizipal199.cloud,dizipal200.cloud#$#.card-video { display: block !important; }
@@ -2028,6 +2087,8 @@ dizipal1.cloud,dizipal2.cloud,dizipal3.cloud,dizipal4.cloud,dizipal5.cloud,dizip
 !
 ! Removing branded background
 !
+fullhdfilmizle5.com#$#body { background-image: none !important; }
+fullhdfilmizlesenebox.org#$#body { background-image: none !important; }
 fullhdfilmizle.cc#$#body { background-image: none !important; }
 itemci.com#$#body { background: none!important; }
 pchocasi.com.tr#$#body { background-image: none!important; }
@@ -2035,7 +2096,7 @@ vipfilmlerizle.*#$#html > body { background-image: none !important; }
 sezonlukdizi2.com#$#body { background-image: none !important; }
 jetfilmizle.*#$#body { background-image: none !important; }
 dizilab9.*,dizilab8.*#$#body { background-image: none !important; }
-filmizletv.*#$#body { background-image: none !important; }
+filmizletv1.com,filmizletv.*#$#body { background-image: none !important; }
 turkcealtyazi.org#$#body { background-image: none !important; }
 !
 !
@@ -2179,9 +2240,9 @@ tarsusakdeniz.com,havaturkiye.com,mersinhaber.com,merhabahaber.com##div[class^="
 ! ##div[class^="advert_"]
 larende.com,sonses.tv,anamurekspres.com,avrupabulten.com,sakinca.com,gazetebanka.com,habereko.com,aktifhabergazetesi.com,gazetegolbasi.com,elazighaberkent.com,haberetanik.com,kemergozcu.com,omedyam.com,kayseritempo.org,agazete.com.tr,olayrize.com,sirineregli.org,elazigharputgazetesi.com,samsunhaberhatti.com,yurtspor.com,hayat.ro##div[class^="advert_"]
 ! ##.ads
-dinimizislam.com,tarihiyolculuk.com,geziforumu.com,kadinloji.com,donghuatr.com,havadurumu15gunluk.xyz,eksisozluk.com,tafdi1.com,sonhaber16.com,bifikir.com,fox.com.tr,haber228.com,diyarbakirhaber.com.tr,diyarbakirgazete.com,konupara.com,cumrapostasi.com,yeniakit.com.tr,sinemafilmizle.net,degisimgazetesi.com.tr,esporlab.com,havadurumu15gunluk.org,voleybolmagazin.com,londragazete.com,bursahayat.com.tr,trt1.com.tr,noktabursa.com.tr,anlikaltinfiyatlari.com,imzagazetesi.com.tr,pasada.com.tr,guzelankaram.com,biricerik.com,memoryhackers.org,haberank.net,yenidonem.com.tr,kediportal.com,slideplayer.biz.tr,sakarya360.com,yeniakit.com.tr,bigunhaber.com,trendoa.com,son32.com,emlaknews.com.tr,cagingazetesi.com.tr,sabahhaberi.com,sonsaat.com.tr,medyaankara.com,erotikfilmtube.com,anadolugunluk.com,kentgazetesi.com,kesinkarar.com,davetmedya.com,fatsaduruhaber.com,bursverenkurumlar.com,mengen.gen.tr,bodrummuhabiri.com,capital.com.tr,canlimobeseizle.com,kadinhalleri.com,nallihanhaber.com,muhabir26.com,gundembursa.com,pgnhaber.com,genmedya.com,uyan32.com,selcukhaber.com,webhakim.com,ibrala.com,hatayzafer.com.tr,ulakci.com,haberyum.com,yozgatses.com,turkulus.com,forumotomobil.com,bodrumolay.com,akvaryum.com,zobakit.com,uyumhaber.com,kmarashaber.com,yenimeram.com.tr,vivaldimagazin.com,gzt.com,thebrandage.com,gamer.com.tr,direkizleyin.com,medyafaresi.com,indir.com,bjk.com.tr,bursadabugun.com,emlakeki.com,gercekgundem.com,haber7.com,internethaber.com,memurhaber.com,webtekno.com##.ads
+enbursa.com,dinimizislam.com,tarihiyolculuk.com,geziforumu.com,kadinloji.com,donghuatr.com,havadurumu15gunluk.xyz,eksisozluk.com,tafdi1.com,sonhaber16.com,bifikir.com,fox.com.tr,haber228.com,diyarbakirhaber.com.tr,diyarbakirgazete.com,konupara.com,cumrapostasi.com,yeniakit.com.tr,sinemafilmizle.net,degisimgazetesi.com.tr,esporlab.com,havadurumu15gunluk.org,voleybolmagazin.com,londragazete.com,bursahayat.com.tr,trt1.com.tr,noktabursa.com.tr,anlikaltinfiyatlari.com,imzagazetesi.com.tr,pasada.com.tr,guzelankaram.com,biricerik.com,memoryhackers.org,haberank.net,yenidonem.com.tr,kediportal.com,slideplayer.biz.tr,sakarya360.com,yeniakit.com.tr,bigunhaber.com,trendoa.com,son32.com,emlaknews.com.tr,cagingazetesi.com.tr,sabahhaberi.com,sonsaat.com.tr,medyaankara.com,erotikfilmtube.com,anadolugunluk.com,kentgazetesi.com,kesinkarar.com,davetmedya.com,fatsaduruhaber.com,bursverenkurumlar.com,mengen.gen.tr,bodrummuhabiri.com,capital.com.tr,canlimobeseizle.com,kadinhalleri.com,nallihanhaber.com,muhabir26.com,gundembursa.com,pgnhaber.com,genmedya.com,uyan32.com,selcukhaber.com,webhakim.com,ibrala.com,hatayzafer.com.tr,ulakci.com,haberyum.com,yozgatses.com,turkulus.com,forumotomobil.com,bodrumolay.com,akvaryum.com,zobakit.com,uyumhaber.com,kmarashaber.com,yenimeram.com.tr,vivaldimagazin.com,gzt.com,thebrandage.com,gamer.com.tr,direkizleyin.com,medyafaresi.com,indir.com,bjk.com.tr,bursadabugun.com,emlakeki.com,gercekgundem.com,haber7.com,internethaber.com,memurhaber.com,webtekno.com##.ads
 ! ##.footer-sticky
-filmiifullizlee.net,tekparthdfilmizle.com,1080pfilmizle.me,xxfilmizle.com,fullhdizle.*,altyazilifilm.*,sineturk1.com,fullhizlifilmizlesen.com##.footer-sticky
+1080pizle.net,filmiifullizlee.net,tekparthdfilmizle.com,1080pfilmizle.me,xxfilmizle.com,fullhdizle.*,altyazilifilm.*,sineturk1.com,fullhizlifilmizlesen.com##.footer-sticky
 ! ##.rek
 kadikoygazetesi.com,oyunrota.com,imzagazetesi.com.tr,davahaber.com,sabahhaberi.com,canlihaber.com,milligazete.com.tr,bidunyahaber.net,kadikoygazetesi.com,kartalgazetesi.com,kirkbir.com,cagdaskocaeli.com.tr,kocaelihaberdunyasi.com##.rek
 ! div[class*="reklam"]
@@ -2189,14 +2250,14 @@ bilecik11.com,liderbursa.com,mebehliyetsinavsorulari.com,haberler33.com,mygazete
 ! ##.rkm
 medyabaskent.com,bolugundem.com,duzceparantez.com,turkuazgazetesi.net,gaziantepgunes.com,mardinhaber.com.tr,gidahatti.com,ajansurfa.com,sigortahaber.com,ozgunkocaeli.com.tr,karamandan.com,olaymedya.com,kocaelifikir.com,dirilispostasi.com,kocaelidenge.com,kocaelibarisgazetesi.com,nevsehirkenthaber.com,gazianteptime.com.tr,canlihaber.com,rhaajans.com,nazillipost.com,spor264.com.tr,geyvelim.com,hbrcaldiran.com,nnchaber.com,turkiyehaberi.com,habertakvimi.com,yesilgiresun.com.tr,ozgurkocaeli.com.tr,buyukkocaeli.com.tr,vanhavadis.com,kpsscafe.com.tr,forapost.com,okuhaber.com,akyazi.net,cagdaskocaeli.com.tr,haberlerankara.com,seskocaeli.com,kocaelizirve.com,yenialanya.com,t54.com.tr,haber266.com,safihaber.com,nazilliadalet.com,bizimyaka.com,akdeniztelgraf.com,ispartamhaber.com,haberhurriyeti.com,mercekhabergazetesi.com,gaziantepinhabercisi.com,gurbettekierzurum.com.tr,haberaydin.com,lidergazetesi.com,haberso.com,aydingazetesi.com,aydinyenihaber.com,haber28.com,netgaste.com,sakaryadanhaber.com,erzurumhaber.com.tr,yenidevir.com.tr,golcukgundem.com,elbistanolay.com,cthaber.com,mihraphaber.com,pamukovahalk.com,medyabar.com,bgazete.com.tr,kartepegazetesi.com.tr,istekocaeli.com,mansetaydin.com,sesgazetesi.com.tr,bugunkocaeli.com.tr,kocaeligazetesi.com.tr,milligazete.com.tr,hbrma.com,tanisgazetesi.com.tr,elbistankaynarca.com,guncelkocaeli.com,enkocaeli.com##.rkm
 ! ##.ad
-sozcu.com.tr,megahaber27.com,yemektarifleri.org,lifebursa.com,mshowto.org,macizlee.ne,dunyaatlasi.com,ensonhaber.com,gayrimenkulhaber.com,internethaber.com,gercekgundem.com,cevapla.tv,cinemadran.com,ranini.tv,oggito.com,kocaeligazetesi.com.tr,rumma.org,kitaptansanattan.com,aydindenge.com.tr,gecmisgazete.com##.ad
+bursa.com,sozcu.com.tr,megahaber27.com,yemektarifleri.org,lifebursa.com,mshowto.org,macizlee.ne,dunyaatlasi.com,ensonhaber.com,gayrimenkulhaber.com,internethaber.com,gercekgundem.com,cevapla.tv,cinemadran.com,ranini.tv,oggito.com,kocaeligazetesi.com.tr,rumma.org,kitaptansanattan.com,aydindenge.com.tr,gecmisgazete.com##.ad
 ! ###adStarter
-fullfilmcidayi1.com,dizimax.plus,diziday.com,fullfilmcidayim.com,dizispeed.net###adStarter
+realfilmizle3.com,fullhdfilmizlett.com,fullhdfilmcibaba1.com,dizimax1.com,dizifilm.pro,fullfilmcidayi1.com,dizimax.plus,diziday.com,fullfilmcidayim.com,dizispeed.net###adStarter
 !
 !
 ! For URL shorteners or simple sites with frequently changed ad servers.
 ! Incorrectly blocked domains can be excluded using regex(synchronize this regexp in all filters)
-/^(?!.*(bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yandex.|yastatic.net|ytimg.com|zencdn.net|player|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com)).*$/$third-party,script,domain=erotik-film.org|pollos.cyou|dizigom1.com|fullindirsene.net
+/^(?!.*(bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|cdn.staticfile.org|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yandex.|yastatic.net|ytimg.com|zencdn.net|player|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com)).*$/$third-party,script,domain=erotik-film.org|pollos.cyou|dizigom1.com|fullindirsene.net
 !
 ! Turkish digital magazines
 /service/advertchannels?$domain=ozgunkocaeli.com.tr|urfanatik.com|dirilispostasi.com|turkuazgazetesi.net|yenialanya.com|bugunkocaeli.com.tr|cagdaskocaeli.com.tr|mansetaydin.com|enkocaeli.com|kocaelikoz.com|kocaelibarisgazetesi.com|seskocaeli.com|sigortahaber.com|gaziantepgunes.com
@@ -2204,6 +2265,119 @@ fullfilmcidayi1.com,dizimax.plus,diziday.com,fullfilmcidayim.com,dizispeed.net##
 /service/advertchannels?$xmlhttprequest,redirect=nooptext,domain=mardinhaber.com.tr|gidahatti.com|bolugundem.com
 dirilispostasi.com,turkuazgazetesi.net,yenialanya.com,bugunkocaeli.com.tr,cagdaskocaeli.com.tr,mansetaydin.com,seskocaeli.com,kocaelibarisgazetesi.com,kocaelikoz.com,enkocaeli.com##.block-pano > div.us
 !
+yabanci-dizi.me###footerFixedDivWrapper
+ye-mek.net##.addForMainPage
+donanimhaber.com##.giydirme-container
+4kfilmizlesene.xyz##div[class^="vpre"]
+diziyo.*##.dzy-pageskin
+gartic.io###videoContainer
+||cdnx.assetstmedia.net/cdn/$third-party,media,image
+netspor100.live,netspor1.live,netspor6.live,netspor16.live,netsportv166.com,netsportv158.com##.banner_area
+tarotscans.com##body > div#footer + p[style="text-align: center;"]
+dizipal515.com,ad-manager.cloud###play_limit_box
+trwebtoon.com##.page-content > a.links[href]
+ruyamanga.com##.body-wrap > p[style="text-align: center;"]
+cizgiromanarsivi.com###custom_html-45
+realfilmizle3.com##[class^="rotorfon-"]
+fullhdfilmizlett.com,fullfilmcidayi1.com##body > div[id^="filmcidayi"]
+720pizlemek1.com##[class^="rotorfon-"]
+||cdn.discordapp.com/attachments/*/turkanime_animemmorpg_2022_playforfree3.png
+cizgiromanarsivi.com##.c-top-sidebar
+||mangacim.com/wp-content/uploads/*/20221207_193639_0000.png
+fullhdfilmcibaba1.com##[class^="rotorfon-"]
+||fullhdfilmcibaba1.com/wp-content/cache/min/*/rotorfon/*/rotorfon-*.min.js
+diziyou.co##.diziyouFooter
+||diskstore.xyz/*.mp4$domain=diziyou.co
+milliyet.com.tr##a[href^="https://www.misli.com?ref="]
+||trgoalshosting.cf/trgoals/pop/*.js
+||tranimeizle.co/js/trapop2.js
+tranimeizle.co##.page-left-ad
+tranimeizle.co##.page-right-ad
+tranimeizle.co##div[onclick^="window.open"][style^="position:fixed"]
+||1080pizle.net/wp-content/uploads/*/Gala-video.mp4
+mangagecesi.com##.sp_container
+||cdn.discordapp.com/attachments/*/Lokma_Ads_
+||cdn.swordflake.com/*/conversions/999-lg.jpg
+||vizyonpanel.xyz/demo*/preroll.php
+tgrthaber.com.tr##div[id^="dfp-homepage-masthead"]
+tgrthaber.com.tr##.js-load-next-ad
+||ruyamanga.com/wp-content/uploads/*/reklamsizokuma.webp
+hayalistic.com,clover-manga.com##a[href*="&utm_medium=banner"][target="_blank"] > picture
+||cdn.discordapp.com/attachments/*/Lokma_Ads_$domain=clover-manga.com|hayalistic.com
+realfilmizle3.com,fullhdfilmcibaba1.com##div[id^="filmcidayi"]
+||apptospace.com/dizimom*/*.php
+||apptospace.com/*/vastson.php
+vkfilmizle.net##div[id^="video-ust-rek"]
+hesapkurdu.com##.product-card--has-badge-sponsored
+hesapkurdu.com##.product-card.product-card--border
+||dizimax1.com/wp-content/*/js/popcom*.js
+fullhdfilm.pro###reklamCode video
+fullhdfilm.pro###reklamCode ~ #rekgecyen
+fullhdfilm.pro##div[style^="margin:"] > a[target="_blank"] > img
+||filmbari.com^$domain=fullhdfilm.pro
+evrensel.net##.bulten_sidebar
+evrensel.net##.haber-ici-reklam
+pusulagazetesi.com.tr###tdsAdContainer
+forum.donanimarsivi.com##.p-body-content > a[target="_blank"] > img
+forum.donanimarsivi.com##.p-body-sideNavContent > a[target="_blank"] > img
+||donanimarsivi.com/wp-content/uploads/2022/12/da-forum-amd-banner-3.jpg
+dizipal999.com##div[class^="ustreklam"]
+dizipal999.com##center > a[target="_blank"]
+dizilla2.org##.watchRight
+eksisozluk.com###search-box-ad
+||apptospace.com/dizipal*/*.php
+||cosmomedya.com/addserver/banners/
+cosmoturk.com##.rightBanners
+||sezonlukdizi2.com/i/vid-onu-2022-kasim.mp4
+t24.com.tr##._3amny
+sinefy.io##img[src$=".gif"][style="width: 100%; height: auto"]
+sinefy.io##img[width="728px"]
+||finema-net.cdn.ampproject.org/i/s/finema.net/file/uploads/king300-250--
+||stage-api-rotorfon.go.dogt.xyz^
+||diken.xyz/pop.php
+realfilmizle3.com##.rkads
+/rek/*$domain=realfilmizle3.com
+/maintabs$script,domain=realfilmizle3.com|fullhdfilmizlett.com|fullhdabifilm.com
+realfilmizle3.com###myVideo0ad
+realfilmizle3.com##video[onclick^="playAndAd("]
+turkiyegazetesi.com.tr##.next-news-ads
+airlinehaber.com##.kanews-banner > a[target="_blank"] > img
+airlinehaber.com##.kanews-banner:not(.kanews-banner-widget)
+||sexfilmleriizle.com/*.mp4$domain=erotikfilmtube.com
+elazigonline.com,sha.com.tr##div[class*="-adv"].text-center
+erotikizle123.com##div[style="height:px;clear:both"]
+||filemoon.sx/js/mehmed.js
+||erosfilmizle.org/gif.gif
+erosfilmizle.org##.body-clickable
+erosfilmizle.org##.videoalt
+eksiduyuru.com##.content > div[onclick^="window.open("]
+||tafdi.net/ad9.js
+fullfilmizle.net###sidebarreklam
+||fullfilmizle.net/rabona.gif
+||fullfilmizle.net/Prive.mp4
+konhaber.com##.rkl
+||jetv.xyz/jetKontrol/j.js
+||diskstore.xyz^$media,redirect=noopmp3-0.1s,domain=play.diziyou.com
+cnnturk.com##body .cls-edit-kutu
+||dvapizle.*/assets/jquery/jquery-3.2.min.js
+||diziloop.com/wp-content/uploads/*0x*.gif
+||dizimag.eu/wp-content/themes/dizimag/assets/css/i/binance.gif
+enbursa.com##.ads-area
+enbursa.com##img[alt="ad826x90"]
+wmaraci.com##p[class^="wmads"]
+turkiyegazetesi.com.tr##div[style^="min-width: 300px; min-height: 250px; display:flex;"]
+mangarose.com###teaser3
+mangarose.com###floatcenter
+dovizgrafik.com##div[align="center"][style*="height:300px;"]
+cimri.com##div[id^="adslot-"]
+||yetiskinfilmizle.xyz/wp-content/uploads/*/Adsiz.png
+salom.com.tr##div[class*="-yapiskan-reklam"]
+salom.com.tr##div[class^="mobilde"]
+hurriyet.com.tr##a[href^="https://pubads.g.doubleclick.net/gampad/"]
+bolgegundem.com##.fixed-pub
+haberler.com##.rekkklam
+||dizitime.pro/obilet.png
+||cdn.staticmoly.me/imgc.php?r=https://www.dizibox.tv/
 ||dinimizislam.com/*/Banners/
 mangagecesi.com##.sponsor_reklam_container
 doviz.com###featured-bottom-ad
@@ -2218,14 +2392,13 @@ voleybolmagazin.com##.stream-item
 paratic.com##.all-page-ad-frame
 ||yabancidizi.fun/assets/js/a.js
 yasemin.com##.subdetail-content > div.row > div.sidebar-column > div.sidebar
-hderotikfilmizle1.com##.happy-sidebar
+turkerotikizle.com,hderotikfilmizle1.com##.happy-sidebar
 buyuktorbali.com##.add
 buyuktorbali.com##.top-add > .navbar-right > img
 coin-turk.com##.clickout-banner-native_table_box
-||stage-api-rotorfon.go.dogt.xyz/rotorfon/
 yabancidiziizle.pro,filmizlehub.co,4kfilmizlesene.xyz##.fbnx
-sezonlukdizi2.com###site > div#header
-erotikizle123.com##center > a[href^="https://www.google.com/"]
+sezonlukdizi10.com,sezonlukdizi9.com,sezonlukdizi8.com,sezonlukdizi7.com,sezonlukdizi6.com,sezonlukdizi5.com,sezonlukdizi4.com,sezonlukdizi3.com,sezonlukdizi2.com###site > div#header
+erotikfilmizle1.com,erotikizle123.com##center > a[href^="https://www.google.com/"]
 ||fullfilmcibaba1.com/video_ob55.js
 fullfilmcibaba1.com##a[href^="http://refpa2502294.top/"]
 ||turkerotikizle.com/wp-content/themes/*/assets/img/banners/
@@ -2234,23 +2407,24 @@ eniyifilms.com###wptpageskin
 ||filmpaf.com/1/takipcilerisatinal.jpg
 elzemfilmizle.live##div[id^="gotorek"]
 fullhdfilmizlett.com##video[onclick^="playAndAd"]
-fullhdfilmizlett.com##div[class^="code-block code-block-"][style="margin: 8px 0; clear: both;"]
+realfilmizle3.com,fullhdfilmizlett.com##div[class^="code-block code-block-"][style="margin: 8px 0; clear: both;"]
 ||erotikfilmtube.com/osfer.mp4
 gazeteduvar.com.tr##body .desktop-ad
 ||baglanbize.net^$third-party,script
 ||erotikfilmtube.com/*.mp4
 turkiyegazetesi.com.tr###sidebar-advert
-setfilmizle.*##a[href^="https://bit.ly/"]
 atv.com.tr##.video-right > div.video-right-content > div[id][data-ub-carousel][style]
 fotomac.com.tr##.ub-notification-ad
 ||molystream.net/obilet.png
 ||manga-tr.com/instatakip.gif
 filmizlesene.pro##.rsidebar
 ||filmizlesene.pro/images/vylike.gif
-fullhdfilmizle.cc##.rlcp
-fullhdfilmizle.cc##.player ~ div[style="margin:3px 0px;height:90px"]
+||filmbari.com/fow.webp
+fullhdfilmizle5.com,fullhdfilmizle.cc##body > a[target="_blank"] > div[style]
+fullhdfilmizle5.com,fullhdfilmizle.cc##.rlcp
+fullhdfilmizle5.com,fullhdfilmizle.cc##.player ~ div[style="margin:3px 0px;height:90px"]
 fullhdfilmizle.cc##a[href^="https://redirect.bkaff.net/"]
-||fullhdfilmizle.cc/bons.js
+/bons.js$domain=fullhdfilmizle5.com|fullhdfilmizle.cc
 sozcu.com.tr##.has-ad div[class*="bitay"]
 ||breakingbadizle.com/diziyotvm.js
 ogznet.com###main > .header[style^="height:"]
@@ -2260,19 +2434,19 @@ fotomac.com.tr##.icrypex-wrap
 sozcu.com.tr##.sidebar-related
 ||fullhdfilm.pro/binss.js
 ||hdplayersystem.live/player/walpaperss.jpg
-hotit.link##a[target="_blank"]
+trgoalshosting.cf,hotit.link##a[target="_blank"]
 ||fullerotikfilm.net/tob.js
 hepsiburada.com###DESKTOP_MASTHEAD-googleAdvertisement
-deardefaler.cloud,contentx.me##.playerinads
+burunplayer.lol,coldit.in,deardefaler.cloud,contentx.me##.playerinads
 turkiyegazetesi.com.tr###dfp-kare-1
 turkiyegazetesi.com.tr##.masthead-container
 yasemin.com##div[id^="dfp-anasayfa-masthead-"]
 ||musluman.cfd/popmyshake*.js
-fullfilmcidayi1.com##.code-block
+fullhdfilmcibaba1.com,tatil.net.tr,fullfilmcidayi1.com##.code-block
 ||r.resimlink.com/ZyRYl.jpg
 ||sexfilmleriizle.com/mostvid.mp4
 erotikizlefilm.com,erotikfilmtube.com##.money--video
-trendyol.com##.search-store-advs-container
+trendyol.com##[class^="search-store-advs"]
 derstarih.com###mcx-12
 derstarih.com###mcx-10
 ||pazarlamasyon.com/images/_ads/
@@ -2310,11 +2484,11 @@ emlakjet.com##.-JTEJb
 internethaber.com##a[href^="https://pubads.g.doubleclick.net/"]
 mavikadin.com##.widget_General_Advert_HomePageskin
 mavikadin.com###dfp-homepage-masthead-container
-mavikadin.com##div[id^="dfp-kare"]
-mavikadin.com##.advert-desktop
+tgrthaber.com.tr,mavikadin.com##div[id^="dfp-kare"]
+tgrthaber.com.tr,mavikadin.com##.advert-desktop
 mavikadin.com###dfp-masthead-container
 mavikadin.com##div[class^="dfp-kare"]
-mavikadin.com##div[class^="dfp-galeri-masthead"]
+tgrthaber.com.tr,turkiyegazetesi.com.tr,mavikadin.com##div[class^="dfp-galeri-masthead"]
 mavikadin.com###dfp-homepage-kare-container
 haberler.com###detay_masthead
 bartinhergungazetesi.com,bartinolay.com##div[class*="-adv"][class$=" text-center"]
@@ -2351,7 +2525,7 @@ offtherecord.com.tr,enpolitik.com,ispartamhaber.com,bomba15.com,tarsusgazetesi.c
 fullindirsene.net###myButtonx
 ||kibrisgazetesi.com/kibrisgazetesi/index.php
 telegramgruplari.com##amp-carousel[aria-label="Reklam Alanı"]
-.gif$third-party,domain=filmgo.org
+.gif$third-party,domain=filmgo.org|sinefy.io
 tele1.com.tr##.sagsutunaru
 tele1.com.tr###mansetust
 biacaip.com##div[class^="reklam"] .sponsorlu
@@ -2379,7 +2553,7 @@ maksatbilgi.com##.theiaStickySidebar > .stream-item-widget
 ||zf00.cloud/popmyshake.js
 theflashizle.com##img[src^="https://www.cdnco.net/"]
 haberglobe.com##.leftr
-haberglobe.com##.righttr
+enbursa.com,haberglobe.com##.righttr
 bolununsesi.com##.divdivediv
 ||filmizlesene.pw/images/vylike.gif
 ||youtube.com/embed/q_PyWNKsD9c?$domain=mygazete.com
@@ -2392,7 +2566,7 @@ burdurweb.com,balikesir24saat.com##div[class^="reklam"]
 ||dizimini.com/rokko.js
 hthayat.haberturk.com##.sidebar .zone
 ||denizlimetropol.com/uploads/images/advertisement/
-kayseriolay.com##div[class*="_greklam"]
+sha.com.tr,kayseriolay.com##div[class*="_greklam"]
 ||dizimax.plus/adservice/
 ||dizimax.plus/wp-content/uploads/2022/08/realbahis.gif
 ||silifkehavadis.com/temalar/ilter/islem/rklm.php
@@ -2448,9 +2622,7 @@ diziyou.com,sinemadelisi.com##.playerTop
 ||filmsitesi.tv/wp-content/uploads/12.png
 pifilmizle.*##.ustrek
 ||kultfilmler.com/kod*.js
-||fullhdfilmizlett.com/maintabs*.js
 ||filmmakinesi*.com/ucurbeni/lazyload-ucurbeni.js
-vidmoly.to##.notification-list
 muglayenigun.com##div[class^="kanews-banner"]
 muglayenigun.com##.row > div.widget_text
 muglayenigun.com##div[id^="kanews_widget_ads"]
@@ -2462,7 +2634,7 @@ lidergazete.com##div[class*="reklam"]
 sandalca.com##.widget_sponsor_150
 ||canyouseem3.github.io/dosyalar/
 dergicin.com##.piki-ads
-hdfilmifullizle.com,hdfilmfullizle.com##.footerkyn
+fullhdfilmizle5.com,fullhdfilmizle.cc,hdfilmifullizle.com,hdfilmfullizle.com##.footerkyn
 hdfilmfullizle.com##.filmicerik ~ div[style^="margin:"]
 /\/(1xbbb|bettogoal)\.webp/$domain=hdfilmifullizle.com|hdfilmfullizle.com
 rarefivem.com###basladi
@@ -2532,13 +2704,14 @@ myburc.com##div[style="height:280px;"]
 canlitv.center###sidebar_reklam
 ||erotik123.com/top.js
 filmifullizle.club##a[href="/filmifullizle.php"]
-/main_tabs*.js$domain=720pizlemek1.com
-/video_ob*.js$domain=720pizlemek1.com
-/ft*.js$domain=720pizlemek1.com
+/s-mi*.js$domain=fullhdfilmcibaba1.com|720pizlemek1.com|fullhdfilmizlett.com
+/main_tabs*.js$domain=fullfilmcidayi1.com|720pizlemek1.com
+/video_ob*.js$domain=fullfilmcidayi1.com|fullhdfilmcibaba1.com|fullhdfilmizlett.com|realfilmizle3.com|720pizlemek1.com
+/ft*.js$domain=fullfilmcidayi1.com|fullhdfilmizlett.com|realfilmizle3.com|fullhdfilmcibaba1.com|720pizlemek1.com
 /js/minipop*.js$domain=webteizle.one|sezonlukdizi2.com
 /speed/like-ajax.php$domain=filmizlemetv.org
 /binanceps.jpg$domain=filmmakinesi.*|turkcealtyazi.org
-/files/uploads/advert/*$domain=larende.com|anamurekspres.com|kemergozcu.com|kenthaber27.com|agazete.com.tr
+/files/uploads/advert/*$domain=larende.com|anamurekspres.com|kemergozcu.com|kenthaber27.com|agazete.com.tr|bursa.com|malatyasonsoz.com.tr
 /wp-content/uploads/*/video*.gif$domain=hulali.net|nikecr7.com
 /wp-content/uploads/*.gif$domain=cdn.diziyou.com|hdfilmcehennemi2.*|geyvemedya.com
 /wp-content/uploads/*.mp4$domain=siyahfilmizle.*
@@ -2586,7 +2759,7 @@ mangagecesi.com##.mangagecesi_reklam
 altyazilifilmizle3.com,evrenselfilm1.com,seyredeger.com,altyazilifilmizle2.com,indirmedenfilmizle.vip##.zfc-ads
 jetfilmizle.*###movie-sidebar > a[target="_blank"]
 yenihaberden.com##.fixed-pub
-tekfullfilmizle.org,yetiskinfilmizle.xyz,yabancidizici.net,burasiduzce.com,gazetem.ru,coin-turk.com,turkerotikfilm.com##center > a[target="_blank"] > img
+erotikfilmleri.org,erotikfilmsitesi.online,erotikfilmler.live,tekfullfilmizle.org,yetiskinfilmizle.xyz,yabancidizici.net,burasiduzce.com,gazetem.ru,coin-turk.com,turkerotikfilm.com##center > a[target="_blank"] > img
 yeniakit.com.tr##.sticky-ads
 ||telgraf.net/uploads/data/Advertisement/
 movietube32.xyz,sinema.cc##.pppx
@@ -2660,14 +2833,13 @@ canlitv.center###channel_reklam
 haberturk.com##.w300x250
 mp3indirdur.life##a[href^="https://www.gecemilano.com/"]
 mp3indirdur.life,muzikmp3indir.com,mp3yukleindir.com##.yeni-bnnr
-fullfilmcidayi1.com,fullfilmcidayim.com##img[src^="/rek/"]
+fullhdfilmcibaba1.com,fullfilmcidayi1.com,fullfilmcidayim.com##img[src^="/rek/"]
 ||whdfilmizle.net/popz/
 altyazilifilm.cc###vs
 ||sinefilmizlesen.com/mac12.js
 ||sinefilmizlesen.com/filmg.js
 randomovie.co##a[href^="https://media.tebanner1.com/"]
 ||play.dizigom1.com/oreklam.png
-hderotikfilmizle1.com,turkerotikizle.com,hderotikfilmizle.net##.happy-under-player
 ||erotizmfilmleri.net/rek*.png
 ||hderotikfilmizle.net/wp-content/themes/retrotube/assets/img/banners/
 sporx.com##a[href^="https://iddaa.sporx.com/"]
@@ -2681,7 +2853,7 @@ tozlumagazin.net##body > section#primary[style^="width:"][style*="height:"]
 brickfanatics.com##.pw-ph-leaderboard
 brickfanatics.com###secondary
 brickfanatics.com###home-banner-dt
-sinepal.*###reki
+fullhdfilmizlesenebox.org,sinepal.*###reki
 sinepal.*##body .ads-skin
 ||filmmoduu.com/wp-content/uploads/*/*/supertotobet.gif
 ||morethanpost.com/wp-content/uploads/2022/01/mrtryl.mp4$media,redirect=noopmp3-0.1s
@@ -2694,7 +2866,6 @@ kamubulten.com##header > div[style="height: 300px;"]
 buyurindir.org##center a[onclick^="window.open("]
 ||adownload9.online//style.css
 ||fullhd720pizle.live/f7/f7.php
-||fullhdabifilm.com/maintabs13.js
 ||filmkuzusu1.com/pops5.js
 ensonhaber.com##a[href^="https://ensonhaber.me/r"][target="_blank"][rel="sponsored"]
 mynet.com##.ad-home-masthead-wrapper
@@ -2702,7 +2873,7 @@ paratic.com##.p-bnr
 webteizle.one,sezonlukdizi2.com,sezonlukdizi3.com,sezonlukdizi4.com,sezonlukdizi5.com,sezonlukdizi6.com,sezonlukdizi7.com,sezonlukdizi8.com,sezonlukdizi9.com,sezonlukdizi10.com##a[alt="reklam"]
 aspor.com.tr##.adbImg
 beyaztv.com.tr##div[id^="tv-ads-"]
-dizimodu.com###adContentWrapper
+dizimag.eu,dizimodu.com###adContentWrapper
 ||dizimodu.com/olderfolder/
 bilgileri.net##div[style="height: 300px;"]
 fragman-tv.com##div[style="min-height:260px"]
@@ -2728,7 +2899,7 @@ zamaninvarken.com###custom_html-6
 becer.net,kredi.biz.tr###custom_html-4
 milliyet.com.tr##p > a[href*="&utm_medium="][href*="&utm_campaign="][target="_blank"] > img
 ||i2.milimaj.com/i/milliyet/75/770x0/61efcb5686b24a11e046229a.jpg$domain=milliyet.com.tr
-sezonlukdizi2.com,webteizle.one###freebie
+sezonlukdizi10.com,sezonlukdizi9.com,sezonlukdizi8.com,sezonlukdizi7.com,sezonlukdizi6.com,sezonlukdizi5.com,sezonlukdizi4.com,sezonlukdizi3.com,sezonlukdizi2.com,webteizle.one###freebie
 seyredelim.com###home-content > div[style^="background: rgb(14,33,84)"]
 ||prestashopturkiye.com/ucretsiz-sanal-pos.jpg
 ekonomist.com.tr,korsanedebiyat.com###custom_html-10
@@ -2770,7 +2941,7 @@ tlkur.com##div[style="display:block;height:290px;margin:10px 0;"]
 filmizleme.live,filmkovasi.org###likexajax
 ||filmizleme.live/speed/like-ajax.php
 ||filmkovasi.org/integration/like-ajax.php
-dizispeed.net,filmzal.*##.mst_ad
+dizimax1.com,dizifilm.pro,dizispeed.net,filmzal.*##.mst_ad
 incisozluk.com.tr##.soz_layout_reklam
 ||play.dizigom1.com/reklammobil.png
 yenidonem.com.tr###mastheadads
@@ -2793,9 +2964,8 @@ uludagsozluk.com##.justify-content-center[style="width:100%;overflow:hidden;"]
 cnnturk.com##.adv-masthead
 320volt.com##a[rel$="sponsored"]
 ||altyazilifilm.*/ad.js
-forum.donanimhaber.com##.kl-icerik > .sayfacik  > div[style="display: inline-block; width: 100%; text-align: center; padding: 10px 0; float: left"]
+forum.donanimhaber.com##.kl-icerik > .sayfacik div[style="display: inline-block; width: 100%; text-align: center; padding: 10px 0; float: left"]
 sozcu.com.tr##.news-item > a[href^="https://bit.ly/"]
-||izleorg2.org/pop3.js
 beyazgazete.com##div[id^="ads-div-"]
 mp3semti.com##div[bvm-banner-id]
 sanalyer.com,webtekno.com##.wt-masthead__horizontal
@@ -2825,7 +2995,7 @@ inegolonline.com##.boxStyle[style^="height:"]
 inegolonline.com##iframe[src^="https://ads.inegolonline.com/"]
 41saat.com##.genel > div[style^="width: 980px; height: auto; margin:"]
 ||41saat.com/wp-content/uploads/*/*/toraman-reklam-980.jpg
-dizivap.net,dizivid.co,diziday.com,dizivid.net,filmzal.*,dizispeed.net,dizisup.*##.player-top-ad a
+dizivap.*,dizivid.co,diziday.com,dizivid.net,filmzal.*,dizispeed.net,dizisup.*##.player-top-ad a
 arabamkacyakar.com##.ads_aky
 memurlar.net##.widget-970x250
 memurlar.net##.widget-336x280
@@ -2849,7 +3019,7 @@ vipingilizce.net##.UstReklamKisa
 vipingilizce.net##.YaziIciReklamSol
 ||hipodromx.com/AygirReklam/
 ||hipodromx.com/TjkReklam/
-repertuarim.com##.empower-ad
+tarotscans.com,ruyamanga.com,repertuarim.com##.empower-ad
 jukeduke.com,stargamescasinoonline.com##img[height="250"][width="300"]
 dizibox.*##.pull-right > div.box-sidebar
 dizibox.*##.adv.full-width.pull-left
@@ -2879,19 +3049,19 @@ saglikpersoneli.com.tr##.p_ad
 fullfilmcidayim.com##a[href="https://onwinn.com/"]
 fullfilmcidayim.com##footer ~ a[href*="bet"][title*="bet"]
 ||makroo.haber7.net/creative/makroo-hb.js
-dizivap.net,dizimax.plus,diziday.com,dizispeed.net,dizisup.*,filmzal.*##.st_ad
-filmizletv.*##.fw_footerFixed
-filmizletv.*##.ustheadreklam
-filmizletv.*##div[style^="min-height:"]
-filmizletv.*##.fw_anaRklm
-filmizletv.*##.fw_headerRklm
-filmizletv.*##.side-box > .fw_playerYaniKat2Ustu:empty
-filmizletv.*##.content-container > .fw_playerAlti[style]:empty
-filmizletv.*##iframe[src*="filmizletv."][src*="/sidrek.htm"]
-filmizletv.*##.footerFixReklam
-filmizletv.*##.footerKapat
-filmizletv.*###mysite > div > a > img
-filmizletv.*##.content-container > div > a > img
+dizimax1.com,dizifilm.pro,dizivap.*,dizimax.plus,diziday.com,dizispeed.net,dizisup.*,filmzal.*##.st_ad
+filmizletv1.com,filmizletv.*##.fw_footerFixed
+filmizletv1.com,filmizletv.*##.ustheadreklam
+filmizletv1.com,filmizletv.*##div[style^="min-height:"]
+filmizletv1.com,filmizletv.*##.fw_anaRklm
+filmizletv1.com,filmizletv.*##.fw_headerRklm
+filmizletv1.com,filmizletv.*##.side-box > .fw_playerYaniKat2Ustu:empty
+filmizletv1.com,filmizletv.*##.content-container > .fw_playerAlti[style]:empty
+filmizletv1.com,filmizletv.*##iframe[src*="filmizletv."][src*="/sidrek.htm"]
+filmizletv1.com,filmizletv.*##.footerFixReklam
+filmizletv1.com,filmizletv.*##.footerKapat
+filmizletv1.com,filmizletv.*###mysite > div > a > img
+filmizletv1.com,filmizletv.*##.content-container > div > a > img
 ||filmizletv.*/minibus.js
 ||filmizletv.*/wp-content/uploads/skin2.jpg
 ||filmizletv.*/sidrek.htm
@@ -2911,7 +3081,8 @@ kayserihaber38.com###reklamHD
 yenibiris.com##div[class^="text-center list-ban-"]
 arabalar.com.tr###sag-reklam
 bantmag.com###MenuAlti
-sozcu.com.tr##.adInitRemove
+sozcu.com.tr##.gunun_mansetleri_nativo_ads
+sozcu.com.tr##body .adInitRemove
 sozcu.com.tr##.nativo
 sozcu.com.tr##.content-inner-ad
 sozcu.com.tr##.currencyAdArea
@@ -3080,7 +3251,6 @@ haberlerim.com.tr##.bannerContainer
 belgeselizlesene.com##.dynamic-ads-container
 belgeselizlesene.com##div[id^="media_image-"]
 724indir.com##a[target="_blank"][rel*="sponsored"] > img
-dizivid.co,filmzal.*,hdfilmcehennemi.*##.pgskn
 hdfilmcehennemi.*##.money
 shiftdelete.net##.thb-article-bottom-ad
 shiftdelete.net##.thb-sponsored-content-container
@@ -3114,8 +3284,8 @@ ajansspor.com##.sidebar__point-status-rk
 ajansspor.com##.news__bottom
 ajansspor.com##.btcturk__banner
 ajansspor.com##.big-point__status-rk
-kriptoparahaber.com##.kanews_widget_ads
-kriptoparahaber.com,coinotag.com##.kanews-banner
+surajans.com,kriptoparahaber.com##.kanews_widget_ads
+surajans.com,kriptoparahaber.com,coinotag.com##.kanews-banner
 eminellere.com##tr[class^="satir_link"][class*="_reklam"]
 ||static.haber8.pro/reklam8.js
 solidshare.net###babaslik
@@ -3315,7 +3485,7 @@ filmmakinesi.*###benzerler
 /wp-content/tanitim/*$domain=filmmakinesi.*
 ekonomist.com.tr##div[class$="-ad-area"]
 turkce-brosurler.com##div.banner-outer
-haberglobe.com,haber228.com,ufukgazetesi.net,uyan32.com,imzagazetesi.com.tr,izmirsondakika.com,sakaryamedyaajans.com,sakarya360.com,trendoa.com,sonsaat.com.tr##.rk
+enbursa.com,haberglobe.com,haber228.com,ufukgazetesi.net,uyan32.com,imzagazetesi.com.tr,izmirsondakika.com,sakaryamedyaajans.com,sakarya360.com,trendoa.com,sonsaat.com.tr##.rk
 log.com.tr##.custom-html-widget > div[style^="clear:both;margin:10px auto;"]
 bilgicik.com##a[href^="https://www.acilkitap.com/"] > img
 zirvedehaber.com##.header-ainfo
@@ -3335,7 +3505,7 @@ turizmgazetesi.com##.widget-adver
 haberturk.com##.photo-page-ads
 kriptoarena.com##.geniseleman
 kriptoteknikhaber.com##.code-block > a[target="_blank"] > img
-fullfilmcidayim.com,720pizlemek1.com###filmcidayidesktop
+fullfilmcibaba1.com,fullfilmcidayim.com,720pizlemek1.com###filmcidayidesktop
 /(dikey|horay)\.jpg/$domain=pusuhaber.net
 goster.co##div.reklam
 korezin.com##.type-ads
@@ -3372,7 +3542,7 @@ havaforum.com##.cbp_ads
 e-kitap.site,ekitap.site##div[class^="popstk"]
 indirdur.ist##a[class="download-share"] + center
 indirdur.ist##a[class="download-share"]
-lojistikhatti.com##img[alt="Banner"]
+betgootv3.store,lojistikhatti.com##img[alt="Banner"]
 ||lojistikhatti.com/images/WCA-Digital-Banner.jpg
 bakimlikadin.net##.extra-posts
 ||indirmedenfilmizle.vip/pop06.js
@@ -3743,7 +3913,7 @@ lezzet.com.tr##.banner-box
 lezzet.com.tr##div[id^="medyanet/"]
 ||storage.oyungezer.com.tr/ogz-public/ads/
 playerbros.com###mvp-leader-cont
-playerbros.com###custom_html-16
+guncelmanga.com,playerbros.com###custom_html-16
 playerbros.com###custom_html-22
 karnaval.com##.temp_interstitial_ad
 turkeyforum.com###ad_global_below_navbar
@@ -3794,7 +3964,7 @@ bodrumhaber.com##a[target="\"_blank\""]:not([href^="https://bodrumhaber.com/"]) 
 ||i.emlaktasondakika.com/files/banners/
 ||emlakhaberajansi.com/wp-content/uploads/*Banner.jpg
 ||emlakhaberajansi.com/wp-content/uploads/2020/04/Tam.jpg
-fullindirsene.net,brickfanatics.com,emlakdergisi.net##div[class^="code-block code-block-"]
+ruyamanga.com,fullindirsene.net,brickfanatics.com,emlakdergisi.net##div[class^="code-block code-block-"]
 ||emlakmagazin.net/wp-content/uploads/Cekmekoy-Umraniye-Sancaktepe-Satilik-Daireler.jpg
 -970X250-$domain=emlakmanset.com|emlakhaberajansi.com
 emlakmanset.com##div[id^="nuifm-"]
@@ -3854,7 +4024,7 @@ uludagsozluk.com##.popup
 uludagsozluk.com##.sag_in > div[class*="300x250"][style*="width: 300px"]
 uludagsozluk.com##a[class^="rklm"]
 uludagsozluk.com##iframe[src^="\\theme\\resy\\v2\\"][src*="\\index.html"]
-koreanturk.com,filmsezonu.com,fullhdizle.*,bizevdeyokuz.com,dizispeed.net,hdfilmcehennemi2.*,incisozluk.com.tr,filmyani.*,emlaktuel.com,tercihrobotu.com.tr,donanimarsivi.com,yeniisfikirleri.net,uludagsozluk.com,pasada.com.tr,enerjigazetesi.ist,diziwatch.net,kanalfinans.com##a[href^="https://bit.ly/"]
+dizimag.eu,setfilmizle.*,koreanturk.com,filmsezonu.com,fullhdizle.*,bizevdeyokuz.com,dizispeed.net,hdfilmcehennemi2.*,incisozluk.com.tr,filmyani.*,emlaktuel.com,tercihrobotu.com.tr,donanimarsivi.com,yeniisfikirleri.net,uludagsozluk.com,pasada.com.tr,enerjigazetesi.ist,diziwatch.net,kanalfinans.com##a[href^="https://bit.ly/"]
 ||uludagsozluk.com/theme/*/v*/video-rkl/
 ||uludagsozluk.com/theme/resy/v2/*/index.html
 ||uludagsozluk.com/*/widget/sponsor*.php
@@ -3919,8 +4089,6 @@ hwp.com.tr##a[href^="https://bitly.com/"]
 mynet.com##.adv-height250
 mynet.com###maxAdContainer
 ||turkiyegunlugu.net/uploads/blocks/
-||dunya.com/widget/sigorta-reklam
-dunya.com##iframe[src="https://www.dunya.com/widget/sigorta-reklam"]
 ||ajandakolik.com/wp-content/uploads/*/ajandakolik-min.gif
 bumudur.com##.bu-ad
 poki.com##div[class*="advertisement-"]
@@ -3951,7 +4119,6 @@ olimpikspor.com##.stnz_reklam_blok
 /uploads/ad/*$domain=caytvhaber.com|bozkirpostasi.com
 avrupaturkgazetesi.com##img[alt="Ad"]
 /\/(orka-hotels-sentido|Werken-Bij-300x250|corendon-banner-reclame)\.(gif|jpg)/$domain=avrupaturkgazetesi.com
-diziday.com,dizimax.plus,dizisup.*,dizilla.*###footerFixedDiv
 ||oley.com/asist-analiz/*-piyango$third-party
 ||oley.com/asist-analiz/$domain=asistanaliz.com
 ||asistanaliz.com/static/images/oley-
@@ -4110,7 +4277,7 @@ motosiklet.net##.mansetaltisol
 motosiklet.net##.bannerhaberalt
 motosiklet.net##.footerrek
 turkedebiyati.org,forum.grandepuntotr.com###ad_global_below_navbar
-dizitime.*##.prevideo
+yabancidizi.co,dizitime.*##.prevideo
 malzemebilimi.net,scroll.com.tr,lafmacun.net##.content-in-ads
 r10.net##.threadList > div.head + form[action] > div.announcements ~ div[class][data-type]
 gazeteyenigun.com.tr###header-advertise
@@ -4440,7 +4607,7 @@ coin-turk.com##a[rel="noopener noreferrer nofollow"] > img
 tvaktuel.com##.rek300
 coinotag.com##div[style*="width: 970px;height: 250px;"]
 fotomac.com.tr,coinotag.com##div[style^="width: 728px; height: 90px;"]
-dizilla.*###preRollBd
+sinefy.io,dizilla.*###preRollBd
 ||dizimov.*/taksi.js
 konhaber.com##.sagSabitKose
 konhaber.com##.ziledoviz
@@ -5313,7 +5480,7 @@ coin-turk.com##.header_banner
 coin-turk.com##.theiaStickySidebar > #meta-2
 onedio.com##div[orig-id][data-google-query-id][id][class]:not([data-version])
 gazeteduvar.com.tr###gdad_leaderboard
-canlitv.com,canlitv.biz###sabit_reklam
+canlitv.*###sabit_reklam
 dosyauzantisi.com###ozel_reklam
 ||dosyauzantisi.com/js/ozel_reklam
 nedir.com###content > div[style*="height:250px"][style*="width:"][style*="margin-left:"]
@@ -5702,7 +5869,7 @@ akillitelefon.com###page > a[class^="pageskin"]
 cumhuriyet.com.tr###page-wrapper > div#headeresque > [class^="hdr-"]
 r10.net###pagenav_menu + center
 r10.net###pagenav_menu + center + .tborder
-fullfilmcidayi1.com,fullfilmcidayim.com,hdfilmcehennemi2.*,yabancidizi.*,dizibox.*,yeniakit.com.tr,dogruses.com###pageskin
+betgootv3.store,fullfilmcidayi1.com,fullfilmcidayim.com,hdfilmcehennemi2.*,yabancidizi.*,dizibox.*,yeniakit.com.tr,dogruses.com###pageskin
 haberler.com###pageskin_ng
 hurriyet.com.tr###plusNewsListRightBlock
 yeniduzen.com###pnlFanbox
@@ -5749,7 +5916,7 @@ akademikpersonel.org,halkinhabercisi.com##.adsWidgetSidebar
 kanal7.com##.ads_kare
 kanal7.com##.ads_kule
 borsagundem.com##.adsnd
-diziboxx.com,mynet.com,aksam.com.tr,yemektekeyifvar.com,ttf.org.tr,perakende.org,akyazihaber.com,futbolarena.com##.adv
+dizipal999.com,milliyet.com.tr,diziboxx.com,mynet.com,aksam.com.tr,yemektekeyifvar.com,ttf.org.tr,perakende.org,akyazihaber.com,futbolarena.com##.adv
 arkeolojikhaber.com,iha.com.tr##.advbox
 ahaber.com.tr##.advertItem
 gazeteyenigun.com.tr##.advertisement > a:not([href="https://gazeteyenigun.com.tr/gazete-arsiv"])
@@ -5971,7 +6138,7 @@ repertuarim.com##div[class^="mobileAds"]
 esgazete.com##div[class^="modal-backdrop"]
 istiklal.com.tr##div[class^="n-d-as-adv"]
 androidegel.com##div[class^="r-single-"]
-yarisdergisi.com,kayseriolay.com,afyonhaberturk.com,denizli20haber.com,egegundem.com.tr,elazigyenihaber.com,fragmanlar.com,malatyanethaber.com.tr,basketdergisi.com,donanimhaber.com,gezginler.net##div[class^="reklam-"]
+elazigyerelhaber.com,yarisdergisi.com,kayseriolay.com,afyonhaberturk.com,denizli20haber.com,egegundem.com.tr,elazigyenihaber.com,fragmanlar.com,malatyanethaber.com.tr,basketdergisi.com,donanimhaber.com,gezginler.net##div[class^="reklam-"]
 gmdergi.com,buyuksivas.com,kirsehirhakimiyet.com,61medya.net,kanal15.com.tr,ebrosur.com,iyihaberci.com,balkangunlugu.com.tr,bilardooyna.com,rekoroyun.com,icn.com.tr,gidagundemi.com,bursa.com,muglagazetesi.com.tr,neguzelsozler.com,orduyorum.com##div[class^="reklam"]
 magazinmax.com##div[class^="sagBanner"]
 gecce.com##div[class^="yataybanner"]
@@ -6037,7 +6204,7 @@ r10.net##table[id^="post"] + div[style^="padding: 6px 0px 0px"]
 erzurumgazetesi.com.tr##table[width="468"]
 isguc.org##td[width="200"] a[target="_blank"] img[width="200"][alt]
 guncelgazete.com##td[width="215"][valign="top"] > table[width="200"][border="0"]
-strmrdrfrogh.site,strmrdrfroge.site,strmrdrfrogd.site,strmrdrfrofg.site,strmrdrfrofd.site,strmrdrfrofc.site,strmrdrfroei.site,strmrdrfroeg.site,strmrdrfroed.site,strmrdrfrodg.xyz,strmrdrfrocj.xyz,strmrdrfrode.xyz,strmrdrfrodd.xyz,strmrdrfrobc.xyz##div[data-fr33-b4nn3r]
+strmrdrfrogj.site,strmrdrfrogi.site,strmrdrfrogh.site,strmrdrfroge.site,strmrdrfrogd.site,strmrdrfrofg.site,strmrdrfrofd.site,strmrdrfrofc.site,strmrdrfroei.site,strmrdrfroeg.site,strmrdrfroed.site,strmrdrfrodg.xyz,strmrdrfrocj.xyz,strmrdrfrode.xyz,strmrdrfrodd.xyz,strmrdrfrobc.xyz##div[data-fr33-b4nn3r]
 ||ads.o-networkaffiliates.com^$popup
 ||affiliatelanding.*.com
 ||airporthaber.com/wk-uploads/banners/
@@ -6115,12 +6282,26 @@ strmrdrfrogh.site,strmrdrfroge.site,strmrdrfrogd.site,strmrdrfrofg.site,strmrdrf
 ||ulasimonline.com/*/banner/
 ||vidout.net/vidoutMedia/ads/
 ||bolununsesi.com/ilangorsel/
+!
+! canlimacizle*.xyz - frequently changed domain
+canlimacizle133.xyz##div[class^="hidden-xs"]
+||canlimacizle*.xyz/wp-content/uploads/*/ony$image
+!
+! canlibeinizle*.com - frequently changed domain
+canlibeinizle11.com,canlibeinizle12.com,canlibeinizle13.com,canlibeinizle14.com,canlibeinizle15.com,canlibeinizle16.com,canlibeinizle17.com,canlibeinizle18.com,canlibeinizle19.com,canlibeinizle20.com,canlibeinizle21.com,canlibeinizle22.com,canlibeinizle23.com,canlibeinizle24.com,canlibeinizle25.com,canlibeinizle26.com,canlibeinizle27.com,canlibeinizle28.com,canlibeinizle29.com,canlibeinizle30.com,canlibeinizle31.com,canlibeinizle32.com,canlibeinizle33.com,canlibeinizle34.com,canlibeinizle35.com,canlibeinizle36.com,canlibeinizle37.com,canlibeinizle38.com,canlibeinizle39.com,canlibeinizle40.com,canlibeinizle41.com,canlibeinizle42.com##a[href^="https://bit.ly/"]
+||canlibeinizle*.com/Uploads/*-pageskin-
+!
+! trgoals*.xyz - frequently changed domains
+trgoals185.xyz,trgoals186.xyz,trgoals187.xyz,trgoals188.xyz,trgoals189.xyz,trgoals190.xyz,trgoals191.xyz,trgoals192.xyz,trgoals193.xyz,trgoals194.xyz,trgoals195.xyz,trgoals196.xyz,trgoals197.xyz,trgoals198.xyz,trgoals199.xyz,trgoals200.xyz,trgoals201.xyz,trgoals202.xyz,trgoals203.xyz,trgoals204.xyz,trgoals205.xyz,trgoals206.xyz,trgoals207.xyz,trgoals208.xyz,trgoals209.xyz,trgoals210.xyz,trgoals211.xyz,trgoals212.xyz,trgoals213.xyz,trgoals214.xyz,trgoals215.xyz,trgoals216.xyz,trgoals217.xyz,trgoals218.xyz,trgoals219.xyz,trgoals220.xyz,trgoals221.xyz,trgoals222.xyz,trgoals223.xyz,trgoals224.xyz,trgoals225.xyz,trgoals226.xyz,trgoals227.xyz,trgoals228.xyz,trgoals229.xyz,trgoals230.xyz,trgoals231.xyz,trgoals232.xyz,trgoals233.xyz,trgoals234.xyz,trgoals235.xyz,trgoals236.xyz,trgoals237.xyz,trgoals238.xyz,trgoals239.xyz,trgoals240.xyz,trgoals241.xyz,trgoals242.xyz,trgoals243.xyz,trgoals244.xyz,trgoals245.xyz,trgoals246.xyz,trgoals247.xyz,trgoals248.xyz,trgoals249.xyz,trgoals250.xyz###yayinSection > marquee
+trgoals185.xyz,trgoals186.xyz,trgoals187.xyz,trgoals188.xyz,trgoals189.xyz,trgoals190.xyz,trgoals191.xyz,trgoals192.xyz,trgoals193.xyz,trgoals194.xyz,trgoals195.xyz,trgoals196.xyz,trgoals197.xyz,trgoals198.xyz,trgoals199.xyz,trgoals200.xyz,trgoals201.xyz,trgoals202.xyz,trgoals203.xyz,trgoals204.xyz,trgoals205.xyz,trgoals206.xyz,trgoals207.xyz,trgoals208.xyz,trgoals209.xyz,trgoals210.xyz,trgoals211.xyz,trgoals212.xyz,trgoals213.xyz,trgoals214.xyz,trgoals215.xyz,trgoals216.xyz,trgoals217.xyz,trgoals218.xyz,trgoals219.xyz,trgoals220.xyz,trgoals221.xyz,trgoals222.xyz,trgoals223.xyz,trgoals224.xyz,trgoals225.xyz,trgoals226.xyz,trgoals227.xyz,trgoals228.xyz,trgoals229.xyz,trgoals230.xyz,trgoals231.xyz,trgoals232.xyz,trgoals233.xyz,trgoals234.xyz,trgoals235.xyz,trgoals236.xyz,trgoals237.xyz,trgoals238.xyz,trgoals239.xyz,trgoals240.xyz,trgoals241.xyz,trgoals242.xyz,trgoals243.xyz,trgoals244.xyz,trgoals245.xyz,trgoals246.xyz,trgoals247.xyz,trgoals248.xyz,trgoals249.xyz,trgoals250.xyz##.topDuyuru
+trgoals185.xyz,trgoals186.xyz,trgoals187.xyz,trgoals188.xyz,trgoals189.xyz,trgoals190.xyz,trgoals191.xyz,trgoals192.xyz,trgoals193.xyz,trgoals194.xyz,trgoals195.xyz,trgoals196.xyz,trgoals197.xyz,trgoals198.xyz,trgoals199.xyz,trgoals200.xyz,trgoals201.xyz,trgoals202.xyz,trgoals203.xyz,trgoals204.xyz,trgoals205.xyz,trgoals206.xyz,trgoals207.xyz,trgoals208.xyz,trgoals209.xyz,trgoals210.xyz,trgoals211.xyz,trgoals212.xyz,trgoals213.xyz,trgoals214.xyz,trgoals215.xyz,trgoals216.xyz,trgoals217.xyz,trgoals218.xyz,trgoals219.xyz,trgoals220.xyz,trgoals221.xyz,trgoals222.xyz,trgoals223.xyz,trgoals224.xyz,trgoals225.xyz,trgoals226.xyz,trgoals227.xyz,trgoals228.xyz,trgoals229.xyz,trgoals230.xyz,trgoals231.xyz,trgoals232.xyz,trgoals233.xyz,trgoals234.xyz,trgoals235.xyz,trgoals236.xyz,trgoals237.xyz,trgoals238.xyz,trgoals239.xyz,trgoals240.xyz,trgoals241.xyz,trgoals242.xyz,trgoals243.xyz,trgoals244.xyz,trgoals245.xyz,trgoals246.xyz,trgoals247.xyz,trgoals248.xyz,trgoals249.xyz,trgoals250.xyz##span[id^="ornekReklam"]
+!
 ! filmmodu.com - frequently changed domains
 ||filmmodu*.com/ph/$image
 ||filmmodu*.com/uploads/$media,redirect=noopmp4-1s
-filmmodu2.com,filmmodu3.com,filmmodu4.com,filmmodu5.com,filmmodu6.com,filmmodu7.com,filmmodu8.com##body > a[target="_blank"]
-filmmodu2.com,filmmodu3.com,filmmodu4.com,filmmodu5.com,filmmodu6.com,filmmodu7.com,filmmodu8.com###sb
-filmmodu2.com,filmmodu3.com,filmmodu4.com,filmmodu5.com,filmmodu6.com,filmmodu7.com,filmmodu8.com##.text-center > a[target="_blank"] > img
+filmmodu9.com,filmmodu10.com,filmmodu11.com,filmmodu12.com,filmmodu13.com,filmmodu14.com,filmmodu15.com,filmmodu16.com,filmmodu17.com,filmmodu18.com,filmmodu19.com,filmmodu20.com##body > a[target="_blank"]
+filmmodu9.com,filmmodu10.com,filmmodu11.com,filmmodu12.com,filmmodu13.com,filmmodu14.com,filmmodu15.com,filmmodu16.com,filmmodu17.com,filmmodu18.com,filmmodu19.com,filmmodu20.com###sb
+filmmodu9.com,filmmodu10.com,filmmodu11.com,filmmodu12.com,filmmodu13.com,filmmodu14.com,filmmodu15.com,filmmodu16.com,filmmodu17.com,filmmodu18.com,filmmodu19.com,filmmodu20.com##.text-center > a[target="_blank"] > img
 !
 ! sportradar*.com - frequently changed domains
 ||sportradar*.com/wp-content/uploads/*/mrtpsg.jpg
@@ -6136,30 +6317,31 @@ dizipal1.cloud,dizipal2.cloud,dizipal3.cloud,dizipal4.cloud,dizipal5.cloud,dizip
 !
 ! dizipal*.com - frequently changed domains
 ||awscdn-xyz.cdn.ampproject.org/i/s/awscdn.xyz/
-dizipal300.com,dizipal301.com,dizipal302.com,dizipal303.com,dizipal304.com,dizipal305.com,dizipal306.com,dizipal307.com,dizipal308.com,dizipal309.com,dizipal310.com,dizipal311.com,dizipal312.com,dizipal313.com,dizipal314.com,dizipal315.com,dizipal316.com,dizipal317.com,dizipal318.com,dizipal319.com,dizipal320.com,dizipal321.com,dizipal322.com,dizipal323.com,dizipal324.com,dizipal325.com,dizipal326.com,dizipal327.com,dizipal328.com,dizipal329.com,dizipal330.com,dizipal331.com,dizipal332.com,dizipal333.com,dizipal334.com,dizipal335.com,dizipal336.com,dizipal337.com,dizipal338.com,dizipal339.com,dizipal340.com,dizipal341.com,dizipal342.com,dizipal343.com,dizipal344.com,dizipal345.com,dizipal346.com,dizipal347.com,dizipal348.com,dizipal349.com,dizipal350.com,dizipal351.com,dizipal352.com,dizipal353.com,dizipal354.com,dizipal355.com,dizipal356.com,dizipal357.com,dizipal358.com,dizipal359.com,dizipal360.com,dizipal361.com,dizipal362.com,dizipal363.com,dizipal364.com,dizipal365.com,dizipal366.com,dizipal367.com,dizipal368.com,dizipal369.com,dizipal370.com,dizipal371.com,dizipal372.com,dizipal373.com,dizipal374.com,dizipal375.com,dizipal376.com,dizipal377.com,dizipal378.com,dizipal379.com,dizipal380.com,dizipal381.com,dizipal382.com,dizipal383.com,dizipal384.com,dizipal385.com,dizipal386.com,dizipal387.com,dizipal388.com,dizipal389.com,dizipal390.com,dizipal391.com,dizipal392.com,dizipal393.com,dizipal394.com,dizipal395.com,dizipal396.com,dizipal397.com,dizipal398.com,dizipal399.com,dizipal400.com,dizipal401.com,dizipal402.com,dizipal403.com,dizipal404.com,dizipal405.com,dizipal406.com,dizipal407.com,dizipal408.com,dizipal409.com,dizipal410.com,dizipal411.com,dizipal412.com,dizipal413.com,dizipal414.com,dizipal415.com,dizipal416.com,dizipal417.com,dizipal418.com,dizipal419.com,dizipal420.com,dizipal421.com,dizipal422.com,dizipal423.com,dizipal424.com,dizipal425.com,dizipal426.com,dizipal427.com,dizipal428.com,dizipal429.com,dizipal430.com,dizipal431.com,dizipal432.com,dizipal433.com##.reklam-top
-dizipal300.com,dizipal301.com,dizipal302.com,dizipal303.com,dizipal304.com,dizipal305.com,dizipal306.com,dizipal307.com,dizipal308.com,dizipal309.com,dizipal310.com,dizipal311.com,dizipal312.com,dizipal313.com,dizipal314.com,dizipal315.com,dizipal316.com,dizipal317.com,dizipal318.com,dizipal319.com,dizipal320.com,dizipal321.com,dizipal322.com,dizipal323.com,dizipal324.com,dizipal325.com,dizipal326.com,dizipal327.com,dizipal328.com,dizipal329.com,dizipal330.com,dizipal331.com,dizipal332.com,dizipal333.com,dizipal334.com,dizipal335.com,dizipal336.com,dizipal337.com,dizipal338.com,dizipal339.com,dizipal340.com,dizipal341.com,dizipal342.com,dizipal343.com,dizipal344.com,dizipal345.com,dizipal346.com,dizipal347.com,dizipal348.com,dizipal349.com,dizipal350.com,dizipal351.com,dizipal352.com,dizipal353.com,dizipal354.com,dizipal355.com,dizipal356.com,dizipal357.com,dizipal358.com,dizipal359.com,dizipal360.com,dizipal361.com,dizipal362.com,dizipal363.com,dizipal364.com,dizipal365.com,dizipal366.com,dizipal367.com,dizipal368.com,dizipal369.com,dizipal370.com,dizipal371.com,dizipal372.com,dizipal373.com,dizipal374.com,dizipal375.com,dizipal376.com,dizipal377.com,dizipal378.com,dizipal379.com,dizipal380.com,dizipal381.com,dizipal382.com,dizipal383.com,dizipal384.com,dizipal385.com,dizipal386.com,dizipal387.com,dizipal388.com,dizipal389.com,dizipal390.com,dizipal391.com,dizipal392.com,dizipal393.com,dizipal394.com,dizipal395.com,dizipal396.com,dizipal397.com,dizipal398.com,dizipal399.com,dizipal400.com,dizipal401.com,dizipal402.com,dizipal403.com,dizipal404.com,dizipal405.com,dizipal406.com,dizipal407.com,dizipal408.com,dizipal409.com,dizipal410.com,dizipal411.com,dizipal412.com,dizipal413.com,dizipal414.com,dizipal415.com,dizipal416.com,dizipal417.com,dizipal418.com,dizipal419.com,dizipal420.com,dizipal421.com,dizipal422.com,dizipal423.com,dizipal424.com,dizipal425.com,dizipal426.com,dizipal427.com,dizipal428.com,dizipal429.com,dizipal430.com,dizipal431.com,dizipal432.com,dizipal433.com##img[src^="https://finema-net.cdn.ampproject.org/"]
-dizipal300.com,dizipal301.com,dizipal302.com,dizipal303.com,dizipal304.com,dizipal305.com,dizipal306.com,dizipal307.com,dizipal308.com,dizipal309.com,dizipal310.com,dizipal311.com,dizipal312.com,dizipal313.com,dizipal314.com,dizipal315.com,dizipal316.com,dizipal317.com,dizipal318.com,dizipal319.com,dizipal320.com,dizipal321.com,dizipal322.com,dizipal323.com,dizipal324.com,dizipal325.com,dizipal326.com,dizipal327.com,dizipal328.com,dizipal329.com,dizipal330.com,dizipal331.com,dizipal332.com,dizipal333.com,dizipal334.com,dizipal335.com,dizipal336.com,dizipal337.com,dizipal338.com,dizipal339.com,dizipal340.com,dizipal341.com,dizipal342.com,dizipal343.com,dizipal344.com,dizipal345.com,dizipal346.com,dizipal347.com,dizipal348.com,dizipal349.com,dizipal350.com,dizipal351.com,dizipal352.com,dizipal353.com,dizipal354.com,dizipal355.com,dizipal356.com,dizipal357.com,dizipal358.com,dizipal359.com,dizipal360.com,dizipal361.com,dizipal362.com,dizipal363.com,dizipal364.com,dizipal365.com,dizipal366.com,dizipal367.com,dizipal368.com,dizipal369.com,dizipal370.com,dizipal371.com,dizipal372.com,dizipal373.com,dizipal374.com,dizipal375.com,dizipal376.com,dizipal377.com,dizipal378.com,dizipal379.com,dizipal380.com,dizipal381.com,dizipal382.com,dizipal383.com,dizipal384.com,dizipal385.com,dizipal386.com,dizipal387.com,dizipal388.com,dizipal389.com,dizipal390.com,dizipal391.com,dizipal392.com,dizipal393.com,dizipal394.com,dizipal395.com,dizipal396.com,dizipal397.com,dizipal398.com,dizipal399.com,dizipal400.com,dizipal401.com,dizipal402.com,dizipal403.com,dizipal404.com,dizipal405.com,dizipal406.com,dizipal407.com,dizipal408.com,dizipal409.com,dizipal410.com,dizipal411.com,dizipal412.com,dizipal413.com,dizipal414.com,dizipal415.com,dizipal416.com,dizipal417.com,dizipal418.com,dizipal419.com,dizipal420.com,dizipal421.com,dizipal422.com,dizipal423.com,dizipal424.com,dizipal425.com,dizipal426.com,dizipal427.com,dizipal428.com,dizipal429.com,dizipal430.com,dizipal431.com,dizipal432.com,dizipal433.com##pjsdiv[style*="top: 17px; opacity: 1; font-size: 14px; line-height: 1em;"]
-dizipal300.com,dizipal301.com,dizipal302.com,dizipal303.com,dizipal304.com,dizipal305.com,dizipal306.com,dizipal307.com,dizipal308.com,dizipal309.com,dizipal310.com,dizipal311.com,dizipal312.com,dizipal313.com,dizipal314.com,dizipal315.com,dizipal316.com,dizipal317.com,dizipal318.com,dizipal319.com,dizipal320.com,dizipal321.com,dizipal322.com,dizipal323.com,dizipal324.com,dizipal325.com,dizipal326.com,dizipal327.com,dizipal328.com,dizipal329.com,dizipal330.com,dizipal331.com,dizipal332.com,dizipal333.com,dizipal334.com,dizipal335.com,dizipal336.com,dizipal337.com,dizipal338.com,dizipal339.com,dizipal340.com,dizipal341.com,dizipal342.com,dizipal343.com,dizipal344.com,dizipal345.com,dizipal346.com,dizipal347.com,dizipal348.com,dizipal349.com,dizipal350.com,dizipal351.com,dizipal352.com,dizipal353.com,dizipal354.com,dizipal355.com,dizipal356.com,dizipal357.com,dizipal358.com,dizipal359.com,dizipal360.com,dizipal361.com,dizipal362.com,dizipal363.com,dizipal364.com,dizipal365.com,dizipal366.com,dizipal367.com,dizipal368.com,dizipal369.com,dizipal370.com,dizipal371.com,dizipal372.com,dizipal373.com,dizipal374.com,dizipal375.com,dizipal376.com,dizipal377.com,dizipal378.com,dizipal379.com,dizipal380.com,dizipal381.com,dizipal382.com,dizipal383.com,dizipal384.com,dizipal385.com,dizipal386.com,dizipal387.com,dizipal388.com,dizipal389.com,dizipal390.com,dizipal391.com,dizipal392.com,dizipal393.com,dizipal394.com,dizipal395.com,dizipal396.com,dizipal397.com,dizipal398.com,dizipal399.com,dizipal400.com,dizipal401.com,dizipal402.com,dizipal403.com,dizipal404.com,dizipal405.com,dizipal406.com,dizipal407.com,dizipal408.com,dizipal409.com,dizipal410.com,dizipal411.com,dizipal412.com,dizipal413.com,dizipal414.com,dizipal415.com,dizipal416.com,dizipal417.com,dizipal418.com,dizipal419.com,dizipal420.com,dizipal421.com,dizipal422.com,dizipal423.com,dizipal424.com,dizipal425.com,dizipal426.com,dizipal427.com,dizipal428.com,dizipal429.com,dizipal430.com,dizipal431.com,dizipal432.com,dizipal433.com##body > div[onclick^="window.open("]
+dizipal400.com,dizipal401.com,dizipal402.com,dizipal403.com,dizipal404.com,dizipal405.com,dizipal406.com,dizipal407.com,dizipal408.com,dizipal409.com,dizipal410.com,dizipal411.com,dizipal412.com,dizipal413.com,dizipal414.com,dizipal415.com,dizipal416.com,dizipal417.com,dizipal418.com,dizipal419.com,dizipal420.com,dizipal421.com,dizipal422.com,dizipal423.com,dizipal424.com,dizipal425.com,dizipal426.com,dizipal427.com,dizipal428.com,dizipal429.com,dizipal430.com,dizipal431.com,dizipal432.com,dizipal433.com,dizipal434.com,dizipal435.com,dizipal436.com,dizipal437.com,dizipal438.com,dizipal439.com,dizipal440.com,dizipal441.com,dizipal442.com,dizipal443.com,dizipal444.com,dizipal445.com,dizipal446.com,dizipal447.com,dizipal448.com,dizipal449.com,dizipal450.com,dizipal451.com,dizipal452.com,dizipal453.com,dizipal454.com,dizipal455.com,dizipal456.com,dizipal457.com,dizipal458.com,dizipal459.com,dizipal460.com,dizipal461.com,dizipal462.com,dizipal463.com,dizipal464.com,dizipal465.com,dizipal466.com,dizipal467.com,dizipal468.com,dizipal469.com,dizipal470.com,dizipal471.com,dizipal472.com,dizipal473.com,dizipal474.com,dizipal475.com,dizipal476.com,dizipal477.com,dizipal478.com,dizipal479.com,dizipal480.com,dizipal481.com,dizipal482.com,dizipal483.com,dizipal484.com,dizipal485.com,dizipal486.com,dizipal487.com,dizipal488.com,dizipal489.com,dizipal490.com,dizipal491.com,dizipal492.com,dizipal493.com,dizipal494.com,dizipal495.com,dizipal496.com,dizipal497.com,dizipal498.com,dizipal499.com,dizipal500.com,dizipal501.com,dizipal502.com,dizipal503.com,dizipal504.com,dizipal505.com,dizipal506.com,dizipal507.com,dizipal508.com,dizipal509.com,dizipal510.com,dizipal511.com,dizipal512.com,dizipal513.com,dizipal514.com,dizipal515.com,dizipal516.com,dizipal517.com,dizipal518.com,dizipal519.com,dizipal520.com,dizipal521.com,dizipal522.com,dizipal523.com,dizipal524.com,dizipal525.com,dizipal526.com,dizipal527.com,dizipal528.com,dizipal529.com,dizipal530.com,dizipal531.com,dizipal532.com,dizipal533.com,dizipal534.com,dizipal535.com,dizipal536.com,dizipal537.com,dizipal538.com,dizipal539.com,dizipal540.com,dizipal541.com,dizipal542.com,dizipal543.com,dizipal544.com,dizipal545.com,dizipal546.com,dizipal547.com,dizipal548.com,dizipal549.com,dizipal550.com##.reklam-top
+dizipal400.com,dizipal401.com,dizipal402.com,dizipal403.com,dizipal404.com,dizipal405.com,dizipal406.com,dizipal407.com,dizipal408.com,dizipal409.com,dizipal410.com,dizipal411.com,dizipal412.com,dizipal413.com,dizipal414.com,dizipal415.com,dizipal416.com,dizipal417.com,dizipal418.com,dizipal419.com,dizipal420.com,dizipal421.com,dizipal422.com,dizipal423.com,dizipal424.com,dizipal425.com,dizipal426.com,dizipal427.com,dizipal428.com,dizipal429.com,dizipal430.com,dizipal431.com,dizipal432.com,dizipal433.com,dizipal434.com,dizipal435.com,dizipal436.com,dizipal437.com,dizipal438.com,dizipal439.com,dizipal440.com,dizipal441.com,dizipal442.com,dizipal443.com,dizipal444.com,dizipal445.com,dizipal446.com,dizipal447.com,dizipal448.com,dizipal449.com,dizipal450.com,dizipal451.com,dizipal452.com,dizipal453.com,dizipal454.com,dizipal455.com,dizipal456.com,dizipal457.com,dizipal458.com,dizipal459.com,dizipal460.com,dizipal461.com,dizipal462.com,dizipal463.com,dizipal464.com,dizipal465.com,dizipal466.com,dizipal467.com,dizipal468.com,dizipal469.com,dizipal470.com,dizipal471.com,dizipal472.com,dizipal473.com,dizipal474.com,dizipal475.com,dizipal476.com,dizipal477.com,dizipal478.com,dizipal479.com,dizipal480.com,dizipal481.com,dizipal482.com,dizipal483.com,dizipal484.com,dizipal485.com,dizipal486.com,dizipal487.com,dizipal488.com,dizipal489.com,dizipal490.com,dizipal491.com,dizipal492.com,dizipal493.com,dizipal494.com,dizipal495.com,dizipal496.com,dizipal497.com,dizipal498.com,dizipal499.com,dizipal500.com,dizipal501.com,dizipal502.com,dizipal503.com,dizipal504.com,dizipal505.com,dizipal506.com,dizipal507.com,dizipal508.com,dizipal509.com,dizipal510.com,dizipal511.com,dizipal512.com,dizipal513.com,dizipal514.com,dizipal515.com,dizipal516.com,dizipal517.com,dizipal518.com,dizipal519.com,dizipal520.com,dizipal521.com,dizipal522.com,dizipal523.com,dizipal524.com,dizipal525.com,dizipal526.com,dizipal527.com,dizipal528.com,dizipal529.com,dizipal530.com,dizipal531.com,dizipal532.com,dizipal533.com,dizipal534.com,dizipal535.com,dizipal536.com,dizipal537.com,dizipal538.com,dizipal539.com,dizipal540.com,dizipal541.com,dizipal542.com,dizipal543.com,dizipal544.com,dizipal545.com,dizipal546.com,dizipal547.com,dizipal548.com,dizipal549.com,dizipal550.com##img[src^="https://finema-net.cdn.ampproject.org/"]
+dizipal400.com,dizipal401.com,dizipal402.com,dizipal403.com,dizipal404.com,dizipal405.com,dizipal406.com,dizipal407.com,dizipal408.com,dizipal409.com,dizipal410.com,dizipal411.com,dizipal412.com,dizipal413.com,dizipal414.com,dizipal415.com,dizipal416.com,dizipal417.com,dizipal418.com,dizipal419.com,dizipal420.com,dizipal421.com,dizipal422.com,dizipal423.com,dizipal424.com,dizipal425.com,dizipal426.com,dizipal427.com,dizipal428.com,dizipal429.com,dizipal430.com,dizipal431.com,dizipal432.com,dizipal433.com,dizipal434.com,dizipal435.com,dizipal436.com,dizipal437.com,dizipal438.com,dizipal439.com,dizipal440.com,dizipal441.com,dizipal442.com,dizipal443.com,dizipal444.com,dizipal445.com,dizipal446.com,dizipal447.com,dizipal448.com,dizipal449.com,dizipal450.com,dizipal451.com,dizipal452.com,dizipal453.com,dizipal454.com,dizipal455.com,dizipal456.com,dizipal457.com,dizipal458.com,dizipal459.com,dizipal460.com,dizipal461.com,dizipal462.com,dizipal463.com,dizipal464.com,dizipal465.com,dizipal466.com,dizipal467.com,dizipal468.com,dizipal469.com,dizipal470.com,dizipal471.com,dizipal472.com,dizipal473.com,dizipal474.com,dizipal475.com,dizipal476.com,dizipal477.com,dizipal478.com,dizipal479.com,dizipal480.com,dizipal481.com,dizipal482.com,dizipal483.com,dizipal484.com,dizipal485.com,dizipal486.com,dizipal487.com,dizipal488.com,dizipal489.com,dizipal490.com,dizipal491.com,dizipal492.com,dizipal493.com,dizipal494.com,dizipal495.com,dizipal496.com,dizipal497.com,dizipal498.com,dizipal499.com,dizipal500.com,dizipal501.com,dizipal502.com,dizipal503.com,dizipal504.com,dizipal505.com,dizipal506.com,dizipal507.com,dizipal508.com,dizipal509.com,dizipal510.com,dizipal511.com,dizipal512.com,dizipal513.com,dizipal514.com,dizipal515.com,dizipal516.com,dizipal517.com,dizipal518.com,dizipal519.com,dizipal520.com,dizipal521.com,dizipal522.com,dizipal523.com,dizipal524.com,dizipal525.com,dizipal526.com,dizipal527.com,dizipal528.com,dizipal529.com,dizipal530.com,dizipal531.com,dizipal532.com,dizipal533.com,dizipal534.com,dizipal535.com,dizipal536.com,dizipal537.com,dizipal538.com,dizipal539.com,dizipal540.com,dizipal541.com,dizipal542.com,dizipal543.com,dizipal544.com,dizipal545.com,dizipal546.com,dizipal547.com,dizipal548.com,dizipal549.com,dizipal550.com##pjsdiv[style*="top: 17px; opacity: 1; font-size: 14px; line-height: 1em;"]
+dizipal400.com,dizipal401.com,dizipal402.com,dizipal403.com,dizipal404.com,dizipal405.com,dizipal406.com,dizipal407.com,dizipal408.com,dizipal409.com,dizipal410.com,dizipal411.com,dizipal412.com,dizipal413.com,dizipal414.com,dizipal415.com,dizipal416.com,dizipal417.com,dizipal418.com,dizipal419.com,dizipal420.com,dizipal421.com,dizipal422.com,dizipal423.com,dizipal424.com,dizipal425.com,dizipal426.com,dizipal427.com,dizipal428.com,dizipal429.com,dizipal430.com,dizipal431.com,dizipal432.com,dizipal433.com,dizipal434.com,dizipal435.com,dizipal436.com,dizipal437.com,dizipal438.com,dizipal439.com,dizipal440.com,dizipal441.com,dizipal442.com,dizipal443.com,dizipal444.com,dizipal445.com,dizipal446.com,dizipal447.com,dizipal448.com,dizipal449.com,dizipal450.com,dizipal451.com,dizipal452.com,dizipal453.com,dizipal454.com,dizipal455.com,dizipal456.com,dizipal457.com,dizipal458.com,dizipal459.com,dizipal460.com,dizipal461.com,dizipal462.com,dizipal463.com,dizipal464.com,dizipal465.com,dizipal466.com,dizipal467.com,dizipal468.com,dizipal469.com,dizipal470.com,dizipal471.com,dizipal472.com,dizipal473.com,dizipal474.com,dizipal475.com,dizipal476.com,dizipal477.com,dizipal478.com,dizipal479.com,dizipal480.com,dizipal481.com,dizipal482.com,dizipal483.com,dizipal484.com,dizipal485.com,dizipal486.com,dizipal487.com,dizipal488.com,dizipal489.com,dizipal490.com,dizipal491.com,dizipal492.com,dizipal493.com,dizipal494.com,dizipal495.com,dizipal496.com,dizipal497.com,dizipal498.com,dizipal499.com,dizipal500.com,dizipal501.com,dizipal502.com,dizipal503.com,dizipal504.com,dizipal505.com,dizipal506.com,dizipal507.com,dizipal508.com,dizipal509.com,dizipal510.com,dizipal511.com,dizipal512.com,dizipal513.com,dizipal514.com,dizipal515.com,dizipal516.com,dizipal517.com,dizipal518.com,dizipal519.com,dizipal520.com,dizipal521.com,dizipal522.com,dizipal523.com,dizipal524.com,dizipal525.com,dizipal526.com,dizipal527.com,dizipal528.com,dizipal529.com,dizipal530.com,dizipal531.com,dizipal532.com,dizipal533.com,dizipal534.com,dizipal535.com,dizipal536.com,dizipal537.com,dizipal538.com,dizipal539.com,dizipal540.com,dizipal541.com,dizipal542.com,dizipal543.com,dizipal544.com,dizipal545.com,dizipal546.com,dizipal547.com,dizipal548.com,dizipal549.com,dizipal550.com##body > div[onclick^="window.open("]
+dizipal400.com,dizipal401.com,dizipal402.com,dizipal403.com,dizipal404.com,dizipal405.com,dizipal406.com,dizipal407.com,dizipal408.com,dizipal409.com,dizipal410.com,dizipal411.com,dizipal412.com,dizipal413.com,dizipal414.com,dizipal415.com,dizipal416.com,dizipal417.com,dizipal418.com,dizipal419.com,dizipal420.com,dizipal421.com,dizipal422.com,dizipal423.com,dizipal424.com,dizipal425.com,dizipal426.com,dizipal427.com,dizipal428.com,dizipal429.com,dizipal430.com,dizipal431.com,dizipal432.com,dizipal433.com,dizipal434.com,dizipal435.com,dizipal436.com,dizipal437.com,dizipal438.com,dizipal439.com,dizipal440.com,dizipal441.com,dizipal442.com,dizipal443.com,dizipal444.com,dizipal445.com,dizipal446.com,dizipal447.com,dizipal448.com,dizipal449.com,dizipal450.com,dizipal451.com,dizipal452.com,dizipal453.com,dizipal454.com,dizipal455.com,dizipal456.com,dizipal457.com,dizipal458.com,dizipal459.com,dizipal460.com,dizipal461.com,dizipal462.com,dizipal463.com,dizipal464.com,dizipal465.com,dizipal466.com,dizipal467.com,dizipal468.com,dizipal469.com,dizipal470.com,dizipal471.com,dizipal472.com,dizipal473.com,dizipal474.com,dizipal475.com,dizipal476.com,dizipal477.com,dizipal478.com,dizipal479.com,dizipal480.com,dizipal481.com,dizipal482.com,dizipal483.com,dizipal484.com,dizipal485.com,dizipal486.com,dizipal487.com,dizipal488.com,dizipal489.com,dizipal490.com,dizipal491.com,dizipal492.com,dizipal493.com,dizipal494.com,dizipal495.com,dizipal496.com,dizipal497.com,dizipal498.com,dizipal499.com,dizipal500.com,dizipal501.com,dizipal502.com,dizipal503.com,dizipal504.com,dizipal505.com,dizipal506.com,dizipal507.com,dizipal508.com,dizipal509.com,dizipal510.com,dizipal511.com,dizipal512.com,dizipal513.com,dizipal514.com,dizipal515.com,dizipal516.com,dizipal517.com,dizipal518.com,dizipal519.com,dizipal520.com,dizipal521.com,dizipal522.com,dizipal523.com,dizipal524.com,dizipal525.com,dizipal526.com,dizipal527.com,dizipal528.com,dizipal529.com,dizipal530.com,dizipal531.com,dizipal532.com,dizipal533.com,dizipal534.com,dizipal535.com,dizipal536.com,dizipal537.com,dizipal538.com,dizipal539.com,dizipal540.com,dizipal541.com,dizipal542.com,dizipal543.com,dizipal544.com,dizipal545.com,dizipal546.com,dizipal547.com,dizipal548.com,dizipal549.com,dizipal550.com##center > a[target="_blank"] > img
 ! video player
 dizipal200.com,t7uut9s.xyz##pjsdiv[style^="position: absolute; top: -12px; left: -277px; pointer-events: none; opacity: 1; transition: opacity 0.1s linear 0s, transform 0.1s linear 0s; color: "]
 dizipal200.com,t7uut9s.xyz##pjsdiv[style^="position: absolute; top: -17px; left: -282.5px; width: 565px; height: 34px; border-radius: 0px; background: rgb(255, 0, 0); opacity: 1;"]
 !
 ! izlemac*.xyz - frequently changed domains
-izlemac110.xyz,izlemac111.xyz,izlemac112.xyz,izlemac113.xyz,izlemac114.xyz,izlemac115.xyz,izlemac116.xyz,izlemac117.xyz,izlemac118.xyz,izlemac119.xyz,izlemac120.xyz,izlemac121.xyz,izlemac122.xyz,izlemac123.xyz,izlemac124.xyz,izlemac125.xyz,izlemac126.xyz,izlemac127.xyz,izlemac128.xyz,izlemac129.xyz,izlemac130.xyz,izlemac131.xyz,izlemac132.xyz,izlemac133.xyz,izlemac134.xyz,izlemac135.xyz,izlemac136.xyz,izlemac137.xyz,izlemac138.xyz,izlemac139.xyz,izlemac140.xyz,izlemac141.xyz,izlemac142.xyz,izlemac143.xyz,izlemac144.xyz,izlemac145.xyz,izlemac146.xyz,izlemac147.xyz,izlemac148.xyz,izlemac149.xyz,izlemac150.xyz##a[onclick*="window.setTimeout"]
-izlemac110.xyz,izlemac111.xyz,izlemac112.xyz,izlemac113.xyz,izlemac114.xyz,izlemac115.xyz,izlemac116.xyz,izlemac117.xyz,izlemac118.xyz,izlemac119.xyz,izlemac120.xyz,izlemac121.xyz,izlemac122.xyz,izlemac123.xyz,izlemac124.xyz,izlemac125.xyz,izlemac126.xyz,izlemac127.xyz,izlemac128.xyz,izlemac129.xyz,izlemac130.xyz,izlemac131.xyz,izlemac132.xyz,izlemac133.xyz,izlemac134.xyz,izlemac135.xyz,izlemac136.xyz,izlemac137.xyz,izlemac138.xyz,izlemac139.xyz,izlemac140.xyz,izlemac141.xyz,izlemac142.xyz,izlemac143.xyz,izlemac144.xyz,izlemac145.xyz,izlemac146.xyz,izlemac147.xyz,izlemac148.xyz,izlemac149.xyz,izlemac150.xyz##body > div.hidden-xs > img
-izlemac110.xyz,izlemac111.xyz,izlemac112.xyz,izlemac113.xyz,izlemac114.xyz,izlemac115.xyz,izlemac116.xyz,izlemac117.xyz,izlemac118.xyz,izlemac119.xyz,izlemac120.xyz,izlemac121.xyz,izlemac122.xyz,izlemac123.xyz,izlemac124.xyz,izlemac125.xyz,izlemac126.xyz,izlemac127.xyz,izlemac128.xyz,izlemac129.xyz,izlemac130.xyz,izlemac131.xyz,izlemac132.xyz,izlemac133.xyz,izlemac134.xyz,izlemac135.xyz,izlemac136.xyz,izlemac137.xyz,izlemac138.xyz,izlemac139.xyz,izlemac140.xyz,izlemac141.xyz,izlemac142.xyz,izlemac143.xyz,izlemac144.xyz,izlemac145.xyz,izlemac146.xyz,izlemac147.xyz,izlemac148.xyz,izlemac149.xyz,izlemac150.xyz##div[data-footer-4ds]
+izlemac182.xyz,izlemac183.xyz,izlemac184.xyz,izlemac185.xyz,izlemac186.xyz,izlemac187.xyz,izlemac188.xyz,izlemac189.xyz,izlemac190.xyz,izlemac191.xyz,izlemac192.xyz,izlemac193.xyz,izlemac194.xyz,izlemac195.xyz,izlemac196.xyz,izlemac197.xyz,izlemac198.xyz,izlemac199.xyz,izlemac200.xyz,izlemac201.xyz,izlemac202.xyz,izlemac203.xyz,izlemac204.xyz,izlemac205.xyz,izlemac206.xyz,izlemac207.xyz,izlemac208.xyz,izlemac209.xyz,izlemac210.xyz,izlemac211.xyz,izlemac212.xyz,izlemac213.xyz,izlemac214.xyz,izlemac215.xyz,izlemac216.xyz,izlemac217.xyz,izlemac218.xyz,izlemac219.xyz,izlemac220.xyz,izlemac221.xyz,izlemac222.xyz,izlemac223.xyz,izlemac224.xyz,izlemac225.xyz,izlemac226.xyz,izlemac227.xyz,izlemac228.xyz,izlemac229.xyz,izlemac230.xyz,izlemac231.xyz,izlemac232.xyz,izlemac233.xyz,izlemac234.xyz,izlemac235.xyz,izlemac236.xyz,izlemac237.xyz,izlemac238.xyz,izlemac239.xyz,izlemac240.xyz,izlemac241.xyz,izlemac242.xyz,izlemac243.xyz,izlemac244.xyz,izlemac245.xyz,izlemac246.xyz,izlemac247.xyz,izlemac248.xyz,izlemac249.xyz,izlemac250.xyz##a[onclick*="window.setTimeout"]
+izlemac182.xyz,izlemac183.xyz,izlemac184.xyz,izlemac185.xyz,izlemac186.xyz,izlemac187.xyz,izlemac188.xyz,izlemac189.xyz,izlemac190.xyz,izlemac191.xyz,izlemac192.xyz,izlemac193.xyz,izlemac194.xyz,izlemac195.xyz,izlemac196.xyz,izlemac197.xyz,izlemac198.xyz,izlemac199.xyz,izlemac200.xyz,izlemac201.xyz,izlemac202.xyz,izlemac203.xyz,izlemac204.xyz,izlemac205.xyz,izlemac206.xyz,izlemac207.xyz,izlemac208.xyz,izlemac209.xyz,izlemac210.xyz,izlemac211.xyz,izlemac212.xyz,izlemac213.xyz,izlemac214.xyz,izlemac215.xyz,izlemac216.xyz,izlemac217.xyz,izlemac218.xyz,izlemac219.xyz,izlemac220.xyz,izlemac221.xyz,izlemac222.xyz,izlemac223.xyz,izlemac224.xyz,izlemac225.xyz,izlemac226.xyz,izlemac227.xyz,izlemac228.xyz,izlemac229.xyz,izlemac230.xyz,izlemac231.xyz,izlemac232.xyz,izlemac233.xyz,izlemac234.xyz,izlemac235.xyz,izlemac236.xyz,izlemac237.xyz,izlemac238.xyz,izlemac239.xyz,izlemac240.xyz,izlemac241.xyz,izlemac242.xyz,izlemac243.xyz,izlemac244.xyz,izlemac245.xyz,izlemac246.xyz,izlemac247.xyz,izlemac248.xyz,izlemac249.xyz,izlemac250.xyz##body > div.hidden-xs > img
+izlemac182.xyz,izlemac183.xyz,izlemac184.xyz,izlemac185.xyz,izlemac186.xyz,izlemac187.xyz,izlemac188.xyz,izlemac189.xyz,izlemac190.xyz,izlemac191.xyz,izlemac192.xyz,izlemac193.xyz,izlemac194.xyz,izlemac195.xyz,izlemac196.xyz,izlemac197.xyz,izlemac198.xyz,izlemac199.xyz,izlemac200.xyz,izlemac201.xyz,izlemac202.xyz,izlemac203.xyz,izlemac204.xyz,izlemac205.xyz,izlemac206.xyz,izlemac207.xyz,izlemac208.xyz,izlemac209.xyz,izlemac210.xyz,izlemac211.xyz,izlemac212.xyz,izlemac213.xyz,izlemac214.xyz,izlemac215.xyz,izlemac216.xyz,izlemac217.xyz,izlemac218.xyz,izlemac219.xyz,izlemac220.xyz,izlemac221.xyz,izlemac222.xyz,izlemac223.xyz,izlemac224.xyz,izlemac225.xyz,izlemac226.xyz,izlemac227.xyz,izlemac228.xyz,izlemac229.xyz,izlemac230.xyz,izlemac231.xyz,izlemac232.xyz,izlemac233.xyz,izlemac234.xyz,izlemac235.xyz,izlemac236.xyz,izlemac237.xyz,izlemac238.xyz,izlemac239.xyz,izlemac240.xyz,izlemac241.xyz,izlemac242.xyz,izlemac243.xyz,izlemac244.xyz,izlemac245.xyz,izlemac246.xyz,izlemac247.xyz,izlemac248.xyz,izlemac249.xyz,izlemac250.xyz##div[data-footer-4ds]
 !
 ! mackeyfi*.xyz - frequently changed domains
-mackeyfi53.xyz,mackeyfi54.xyz,mackeyfi55.xyz,mackeyfi56.xyz,mackeyfi57.xyz,mackeyfi58.xyz,mackeyfi59.xyz,mackeyfi60.xyz,mackeyfi61.xyz,mackeyfi62.xyz,mackeyfi63.xyz,mackeyfi64.xyz,mackeyfi65.xyz,mackeyfi66.xyz,mackeyfi67.xyz,mackeyfi68.xyz,mackeyfi69.xyz,mackeyfi70.xyz,mackeyfi71.xyz,mackeyfi72.xyz,mackeyfi73.xyz,mackeyfi74.xyz,mackeyfi75.xyz,mackeyfi76.xyz,mackeyfi77.xyz,mackeyfi78.xyz,mackeyfi79.xyz,mackeyfi80.xyz,mackeyfi81.xyz,mackeyfi82.xyz,mackeyfi83.xyz,mackeyfi84.xyz,mackeyfi85.xyz,mackeyfi86.xyz,mackeyfi87.xyz,mackeyfi88.xyz,mackeyfi89.xyz,mackeyfi90.xyz##a[onclick*="window.setTimeout"]
-mackeyfi53.xyz,mackeyfi54.xyz,mackeyfi55.xyz,mackeyfi56.xyz,mackeyfi57.xyz,mackeyfi58.xyz,mackeyfi59.xyz,mackeyfi60.xyz,mackeyfi61.xyz,mackeyfi62.xyz,mackeyfi63.xyz,mackeyfi64.xyz,mackeyfi65.xyz,mackeyfi66.xyz,mackeyfi67.xyz,mackeyfi68.xyz,mackeyfi69.xyz,mackeyfi70.xyz,mackeyfi71.xyz,mackeyfi72.xyz,mackeyfi73.xyz,mackeyfi74.xyz,mackeyfi75.xyz,mackeyfi76.xyz,mackeyfi77.xyz,mackeyfi78.xyz,mackeyfi79.xyz,mackeyfi80.xyz,mackeyfi81.xyz,mackeyfi82.xyz,mackeyfi83.xyz,mackeyfi84.xyz,mackeyfi85.xyz,mackeyfi86.xyz,mackeyfi87.xyz,mackeyfi88.xyz,mackeyfi89.xyz,mackeyfi90.xyz##body > div.hidden-xs > img
-mackeyfi53.xyz,mackeyfi54.xyz,mackeyfi55.xyz,mackeyfi56.xyz,mackeyfi57.xyz,mackeyfi58.xyz,mackeyfi59.xyz,mackeyfi60.xyz,mackeyfi61.xyz,mackeyfi62.xyz,mackeyfi63.xyz,mackeyfi64.xyz,mackeyfi65.xyz,mackeyfi66.xyz,mackeyfi67.xyz,mackeyfi68.xyz,mackeyfi69.xyz,mackeyfi70.xyz,mackeyfi71.xyz,mackeyfi72.xyz,mackeyfi73.xyz,mackeyfi74.xyz,mackeyfi75.xyz,mackeyfi76.xyz,mackeyfi77.xyz,mackeyfi78.xyz,mackeyfi79.xyz,mackeyfi80.xyz,mackeyfi81.xyz,mackeyfi82.xyz,mackeyfi83.xyz,mackeyfi84.xyz,mackeyfi85.xyz,mackeyfi86.xyz,mackeyfi87.xyz,mackeyfi88.xyz,mackeyfi89.xyz,mackeyfi90.xyz##div[data-footer-4ds]
+mackeyfi136.xyz,mackeyfi137.xyz,mackeyfi138.xyz,mackeyfi139.xyz,mackeyfi140.xyz,mackeyfi141.xyz,mackeyfi142.xyz,mackeyfi143.xyz,mackeyfi144.xyz,mackeyfi145.xyz,mackeyfi146.xyz,mackeyfi147.xyz,mackeyfi148.xyz,mackeyfi149.xyz,mackeyfi150.xyz,mackeyfi151.xyz,mackeyfi152.xyz,mackeyfi153.xyz,mackeyfi154.xyz,mackeyfi155.xyz,mackeyfi156.xyz,mackeyfi157.xyz,mackeyfi158.xyz,mackeyfi159.xyz,mackeyfi160.xyz,mackeyfi161.xyz,mackeyfi162.xyz,mackeyfi163.xyz,mackeyfi164.xyz,mackeyfi165.xyz,mackeyfi166.xyz,mackeyfi167.xyz,mackeyfi168.xyz,mackeyfi169.xyz,mackeyfi170.xyz,mackeyfi171.xyz,mackeyfi172.xyz,mackeyfi173.xyz,mackeyfi174.xyz,mackeyfi175.xyz,mackeyfi176.xyz,mackeyfi177.xyz,mackeyfi178.xyz,mackeyfi179.xyz,mackeyfi180.xyz,mackeyfi181.xyz,mackeyfi182.xyz,mackeyfi183.xyz,mackeyfi184.xyz,mackeyfi185.xyz,mackeyfi186.xyz,mackeyfi187.xyz,mackeyfi188.xyz,mackeyfi189.xyz,mackeyfi190.xyz,mackeyfi191.xyz,mackeyfi192.xyz,mackeyfi193.xyz,mackeyfi194.xyz,mackeyfi195.xyz,mackeyfi196.xyz,mackeyfi197.xyz,mackeyfi198.xyz,mackeyfi199.xyz,mackeyfi200.xyz##a[onclick*="window.setTimeout"]
+mackeyfi136.xyz,mackeyfi137.xyz,mackeyfi138.xyz,mackeyfi139.xyz,mackeyfi140.xyz,mackeyfi141.xyz,mackeyfi142.xyz,mackeyfi143.xyz,mackeyfi144.xyz,mackeyfi145.xyz,mackeyfi146.xyz,mackeyfi147.xyz,mackeyfi148.xyz,mackeyfi149.xyz,mackeyfi150.xyz,mackeyfi151.xyz,mackeyfi152.xyz,mackeyfi153.xyz,mackeyfi154.xyz,mackeyfi155.xyz,mackeyfi156.xyz,mackeyfi157.xyz,mackeyfi158.xyz,mackeyfi159.xyz,mackeyfi160.xyz,mackeyfi161.xyz,mackeyfi162.xyz,mackeyfi163.xyz,mackeyfi164.xyz,mackeyfi165.xyz,mackeyfi166.xyz,mackeyfi167.xyz,mackeyfi168.xyz,mackeyfi169.xyz,mackeyfi170.xyz,mackeyfi171.xyz,mackeyfi172.xyz,mackeyfi173.xyz,mackeyfi174.xyz,mackeyfi175.xyz,mackeyfi176.xyz,mackeyfi177.xyz,mackeyfi178.xyz,mackeyfi179.xyz,mackeyfi180.xyz,mackeyfi181.xyz,mackeyfi182.xyz,mackeyfi183.xyz,mackeyfi184.xyz,mackeyfi185.xyz,mackeyfi186.xyz,mackeyfi187.xyz,mackeyfi188.xyz,mackeyfi189.xyz,mackeyfi190.xyz,mackeyfi191.xyz,mackeyfi192.xyz,mackeyfi193.xyz,mackeyfi194.xyz,mackeyfi195.xyz,mackeyfi196.xyz,mackeyfi197.xyz,mackeyfi198.xyz,mackeyfi199.xyz,mackeyfi200.xyz##body > div.hidden-xs > img
+mackeyfi136.xyz,mackeyfi137.xyz,mackeyfi138.xyz,mackeyfi139.xyz,mackeyfi140.xyz,mackeyfi141.xyz,mackeyfi142.xyz,mackeyfi143.xyz,mackeyfi144.xyz,mackeyfi145.xyz,mackeyfi146.xyz,mackeyfi147.xyz,mackeyfi148.xyz,mackeyfi149.xyz,mackeyfi150.xyz,mackeyfi151.xyz,mackeyfi152.xyz,mackeyfi153.xyz,mackeyfi154.xyz,mackeyfi155.xyz,mackeyfi156.xyz,mackeyfi157.xyz,mackeyfi158.xyz,mackeyfi159.xyz,mackeyfi160.xyz,mackeyfi161.xyz,mackeyfi162.xyz,mackeyfi163.xyz,mackeyfi164.xyz,mackeyfi165.xyz,mackeyfi166.xyz,mackeyfi167.xyz,mackeyfi168.xyz,mackeyfi169.xyz,mackeyfi170.xyz,mackeyfi171.xyz,mackeyfi172.xyz,mackeyfi173.xyz,mackeyfi174.xyz,mackeyfi175.xyz,mackeyfi176.xyz,mackeyfi177.xyz,mackeyfi178.xyz,mackeyfi179.xyz,mackeyfi180.xyz,mackeyfi181.xyz,mackeyfi182.xyz,mackeyfi183.xyz,mackeyfi184.xyz,mackeyfi185.xyz,mackeyfi186.xyz,mackeyfi187.xyz,mackeyfi188.xyz,mackeyfi189.xyz,mackeyfi190.xyz,mackeyfi191.xyz,mackeyfi192.xyz,mackeyfi193.xyz,mackeyfi194.xyz,mackeyfi195.xyz,mackeyfi196.xyz,mackeyfi197.xyz,mackeyfi198.xyz,mackeyfi199.xyz,mackeyfi200.xyz##div[data-footer-4ds]
 !
 ! selcuksportshd - frequently changed domains
 ! don't add foreign domains
 ||selcuksportshd*.*/img/m-ad-
 ||selcuksportshd*.*/img/elexusbet_yeni.gif
-selcuksportshd200.xyz,selcuksportshd201.xyz,selcuksportshd202.xyz,selcuksportshd203.xyz,selcuksportshd204.xyz,selcuksportshd205.xyz,selcuksportshd206.xyz,selcuksportshd207.xyz,selcuksportshd208.xyz,selcuksportshd209.xyz,selcuksportshd210.xyz,selcuksportshd211.xyz,selcuksportshd212.xyz,selcuksportshd213.xyz,selcuksportshd214.xyz,selcuksportshd215.xyz,selcuksportshd216.xyz,selcuksportshd217.xyz,selcuksportshd218.xyz,selcuksportshd219.xyz,selcuksportshd220.xyz,selcuksportshd221.xyz,selcuksportshd222.xyz,selcuksportshd223.xyz,selcuksportshd224.xyz,selcuksportshd225.xyz,selcuksportshd226.xyz,selcuksportshd227.xyz,selcuksportshd228.xyz,selcuksportshd229.xyz,selcuksportshd230.xyz,selcuksportshd231.xyz,selcuksportshd232.xyz,selcuksportshd233.xyz,selcuksportshd234.xyz,selcuksportshd235.xyz,selcuksportshd236.xyz,selcuksportshd237.xyz,selcuksportshd238.xyz,selcuksportshd239.xyz,selcuksportshd240.xyz,selcuksportshd241.xyz,selcuksportshd242.xyz,selcuksportshd243.xyz,selcuksportshd244.xyz,selcuksportshd245.xyz,selcuksportshd246.xyz,selcuksportshd247.xyz,selcuksportshd248.xyz,selcuksportshd249.xyz,selcuksportshd250.xyz,selcuksportshd251.xyz,selcuksportshd252.xyz,selcuksportshd253.xyz,selcuksportshd254.xyz,selcuksportshd255.xyz,selcuksportshd256.xyz,selcuksportshd257.xyz,selcuksportshd258.xyz,selcuksportshd259.xyz,selcuksportshd260.xyz,selcuksportshd261.xyz,selcuksportshd262.xyz,selcuksportshd263.xyz,selcuksportshd264.xyz,selcuksportshd265.xyz,selcuksportshd266.xyz,selcuksportshd267.xyz,selcuksportshd268.xyz,selcuksportshd269.xyz,selcuksportshd270.xyz,selcuksportshd271.xyz,selcuksportshd272.xyz,selcuksportshd273.xyz,selcuksportshd274.xyz,selcuksportshd275.xyz,selcuksportshd276.xyz,selcuksportshd277.xyz,selcuksportshd278.xyz,selcuksportshd279.xyz,selcuksportshd280.xyz,selcuksportshd281.xyz,selcuksportshd282.xyz,selcuksportshd283.xyz,selcuksportshd284.xyz,selcuksportshd285.xyz,selcuksportshd286.xyz,selcuksportshd287.xyz,selcuksportshd288.xyz,selcuksportshd289.xyz,selcuksportshd290.xyz,selcuksportshd291.xyz,selcuksportshd292.xyz,selcuksportshd293.xyz,selcuksportshd294.xyz,selcuksportshd295.xyz,selcuksportshd296.xyz,selcuksportshd297.xyz,selcuksportshd298.xyz,selcuksportshd299.xyz,selcuksportshd300.xyz##.socials > ul > li > a[href]:not([href^="mailto:"], .twitter, .android, .iptv)
-selcuksportshd200.xyz,selcuksportshd201.xyz,selcuksportshd202.xyz,selcuksportshd203.xyz,selcuksportshd204.xyz,selcuksportshd205.xyz,selcuksportshd206.xyz,selcuksportshd207.xyz,selcuksportshd208.xyz,selcuksportshd209.xyz,selcuksportshd210.xyz,selcuksportshd211.xyz,selcuksportshd212.xyz,selcuksportshd213.xyz,selcuksportshd214.xyz,selcuksportshd215.xyz,selcuksportshd216.xyz,selcuksportshd217.xyz,selcuksportshd218.xyz,selcuksportshd219.xyz,selcuksportshd220.xyz,selcuksportshd221.xyz,selcuksportshd222.xyz,selcuksportshd223.xyz,selcuksportshd224.xyz,selcuksportshd225.xyz,selcuksportshd226.xyz,selcuksportshd227.xyz,selcuksportshd228.xyz,selcuksportshd229.xyz,selcuksportshd230.xyz,selcuksportshd231.xyz,selcuksportshd232.xyz,selcuksportshd233.xyz,selcuksportshd234.xyz,selcuksportshd235.xyz,selcuksportshd236.xyz,selcuksportshd237.xyz,selcuksportshd238.xyz,selcuksportshd239.xyz,selcuksportshd240.xyz,selcuksportshd241.xyz,selcuksportshd242.xyz,selcuksportshd243.xyz,selcuksportshd244.xyz,selcuksportshd245.xyz,selcuksportshd246.xyz,selcuksportshd247.xyz,selcuksportshd248.xyz,selcuksportshd249.xyz,selcuksportshd250.xyz,selcuksportshd251.xyz,selcuksportshd252.xyz,selcuksportshd253.xyz,selcuksportshd254.xyz,selcuksportshd255.xyz,selcuksportshd256.xyz,selcuksportshd257.xyz,selcuksportshd258.xyz,selcuksportshd259.xyz,selcuksportshd260.xyz,selcuksportshd261.xyz,selcuksportshd262.xyz,selcuksportshd263.xyz,selcuksportshd264.xyz,selcuksportshd265.xyz,selcuksportshd266.xyz,selcuksportshd267.xyz,selcuksportshd268.xyz,selcuksportshd269.xyz,selcuksportshd270.xyz,selcuksportshd271.xyz,selcuksportshd272.xyz,selcuksportshd273.xyz,selcuksportshd274.xyz,selcuksportshd275.xyz,selcuksportshd276.xyz,selcuksportshd277.xyz,selcuksportshd278.xyz,selcuksportshd279.xyz,selcuksportshd280.xyz,selcuksportshd281.xyz,selcuksportshd282.xyz,selcuksportshd283.xyz,selcuksportshd284.xyz,selcuksportshd285.xyz,selcuksportshd286.xyz,selcuksportshd287.xyz,selcuksportshd288.xyz,selcuksportshd289.xyz,selcuksportshd290.xyz,selcuksportshd291.xyz,selcuksportshd292.xyz,selcuksportshd293.xyz,selcuksportshd294.xyz,selcuksportshd295.xyz,selcuksportshd296.xyz,selcuksportshd297.xyz,selcuksportshd298.xyz,selcuksportshd299.xyz,selcuksportshd300.xyz##.banners + .footer
+selcuksportshd78.com,selcuksportshd200.xyz,selcuksportshd201.xyz,selcuksportshd202.xyz,selcuksportshd203.xyz,selcuksportshd204.xyz,selcuksportshd205.xyz,selcuksportshd206.xyz,selcuksportshd207.xyz,selcuksportshd208.xyz,selcuksportshd209.xyz,selcuksportshd210.xyz,selcuksportshd211.xyz,selcuksportshd212.xyz,selcuksportshd213.xyz,selcuksportshd214.xyz,selcuksportshd215.xyz,selcuksportshd216.xyz,selcuksportshd217.xyz,selcuksportshd218.xyz,selcuksportshd219.xyz,selcuksportshd220.xyz,selcuksportshd221.xyz,selcuksportshd222.xyz,selcuksportshd223.xyz,selcuksportshd224.xyz,selcuksportshd225.xyz,selcuksportshd226.xyz,selcuksportshd227.xyz,selcuksportshd228.xyz,selcuksportshd229.xyz,selcuksportshd230.xyz,selcuksportshd231.xyz,selcuksportshd232.xyz,selcuksportshd233.xyz,selcuksportshd234.xyz,selcuksportshd235.xyz,selcuksportshd236.xyz,selcuksportshd237.xyz,selcuksportshd238.xyz,selcuksportshd239.xyz,selcuksportshd240.xyz,selcuksportshd241.xyz,selcuksportshd242.xyz,selcuksportshd243.xyz,selcuksportshd244.xyz,selcuksportshd245.xyz,selcuksportshd246.xyz,selcuksportshd247.xyz,selcuksportshd248.xyz,selcuksportshd249.xyz,selcuksportshd250.xyz,selcuksportshd251.xyz,selcuksportshd252.xyz,selcuksportshd253.xyz,selcuksportshd254.xyz,selcuksportshd255.xyz,selcuksportshd256.xyz,selcuksportshd257.xyz,selcuksportshd258.xyz,selcuksportshd259.xyz,selcuksportshd260.xyz,selcuksportshd261.xyz,selcuksportshd262.xyz,selcuksportshd263.xyz,selcuksportshd264.xyz,selcuksportshd265.xyz,selcuksportshd266.xyz,selcuksportshd267.xyz,selcuksportshd268.xyz,selcuksportshd269.xyz,selcuksportshd270.xyz,selcuksportshd271.xyz,selcuksportshd272.xyz,selcuksportshd273.xyz,selcuksportshd274.xyz,selcuksportshd275.xyz,selcuksportshd276.xyz,selcuksportshd277.xyz,selcuksportshd278.xyz,selcuksportshd279.xyz,selcuksportshd280.xyz,selcuksportshd281.xyz,selcuksportshd282.xyz,selcuksportshd283.xyz,selcuksportshd284.xyz,selcuksportshd285.xyz,selcuksportshd286.xyz,selcuksportshd287.xyz,selcuksportshd288.xyz,selcuksportshd289.xyz,selcuksportshd290.xyz,selcuksportshd291.xyz,selcuksportshd292.xyz,selcuksportshd293.xyz,selcuksportshd294.xyz,selcuksportshd295.xyz,selcuksportshd296.xyz,selcuksportshd297.xyz,selcuksportshd298.xyz,selcuksportshd299.xyz,selcuksportshd300.xyz##.socials > ul > li > a[href]:not([href^="mailto:"], .twitter, .android, .iptv)
+selcuksportshd78.com,selcuksportshd200.xyz,selcuksportshd201.xyz,selcuksportshd202.xyz,selcuksportshd203.xyz,selcuksportshd204.xyz,selcuksportshd205.xyz,selcuksportshd206.xyz,selcuksportshd207.xyz,selcuksportshd208.xyz,selcuksportshd209.xyz,selcuksportshd210.xyz,selcuksportshd211.xyz,selcuksportshd212.xyz,selcuksportshd213.xyz,selcuksportshd214.xyz,selcuksportshd215.xyz,selcuksportshd216.xyz,selcuksportshd217.xyz,selcuksportshd218.xyz,selcuksportshd219.xyz,selcuksportshd220.xyz,selcuksportshd221.xyz,selcuksportshd222.xyz,selcuksportshd223.xyz,selcuksportshd224.xyz,selcuksportshd225.xyz,selcuksportshd226.xyz,selcuksportshd227.xyz,selcuksportshd228.xyz,selcuksportshd229.xyz,selcuksportshd230.xyz,selcuksportshd231.xyz,selcuksportshd232.xyz,selcuksportshd233.xyz,selcuksportshd234.xyz,selcuksportshd235.xyz,selcuksportshd236.xyz,selcuksportshd237.xyz,selcuksportshd238.xyz,selcuksportshd239.xyz,selcuksportshd240.xyz,selcuksportshd241.xyz,selcuksportshd242.xyz,selcuksportshd243.xyz,selcuksportshd244.xyz,selcuksportshd245.xyz,selcuksportshd246.xyz,selcuksportshd247.xyz,selcuksportshd248.xyz,selcuksportshd249.xyz,selcuksportshd250.xyz,selcuksportshd251.xyz,selcuksportshd252.xyz,selcuksportshd253.xyz,selcuksportshd254.xyz,selcuksportshd255.xyz,selcuksportshd256.xyz,selcuksportshd257.xyz,selcuksportshd258.xyz,selcuksportshd259.xyz,selcuksportshd260.xyz,selcuksportshd261.xyz,selcuksportshd262.xyz,selcuksportshd263.xyz,selcuksportshd264.xyz,selcuksportshd265.xyz,selcuksportshd266.xyz,selcuksportshd267.xyz,selcuksportshd268.xyz,selcuksportshd269.xyz,selcuksportshd270.xyz,selcuksportshd271.xyz,selcuksportshd272.xyz,selcuksportshd273.xyz,selcuksportshd274.xyz,selcuksportshd275.xyz,selcuksportshd276.xyz,selcuksportshd277.xyz,selcuksportshd278.xyz,selcuksportshd279.xyz,selcuksportshd280.xyz,selcuksportshd281.xyz,selcuksportshd282.xyz,selcuksportshd283.xyz,selcuksportshd284.xyz,selcuksportshd285.xyz,selcuksportshd286.xyz,selcuksportshd287.xyz,selcuksportshd288.xyz,selcuksportshd289.xyz,selcuksportshd290.xyz,selcuksportshd291.xyz,selcuksportshd292.xyz,selcuksportshd293.xyz,selcuksportshd294.xyz,selcuksportshd295.xyz,selcuksportshd296.xyz,selcuksportshd297.xyz,selcuksportshd298.xyz,selcuksportshd299.xyz,selcuksportshd300.xyz##.banners + .footer
 !
 !
 ! START: Yandex
@@ -6199,6 +6381,9 @@ driverdestek.com##.adsbygoogle
 ! Bad:  @@||example.org^$stealth (should be in AdGuard Base - allowlist_stealth.txt)
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/135914
+fullhdfilm.pro#@##reklamCodeiframe
+@@||fullhdfilm.pro/_video_onu_yeni.php$domain=fullhdfilm.pro
 ! https://github.com/AdguardTeam/AdguardFilters/issues/134519
 ! https://github.com/AdguardTeam/AdguardFilters/issues/128742
 @@||hdfilmifullizle.com/_video_onu_yeni.php$domain=hdfilmifullizle.com
