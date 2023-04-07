@@ -1,8 +1,8 @@
-! Checksum: g7PDlRIIyKUSRIrbH3XVsg
+! Checksum: 76SlbDLzrmiO+ndmmBuj1Q
 ! Title: AdGuard Dutch filter
 ! Description: EasyList Dutch + AdGuard Dutch filter. Filter list that specifically removes ads on websites in Dutch language.
-! Version: 2.0.4.46
-! TimeUpdated: 2023-03-01T11:32:05+00:00
+! Version: 2.0.4.58
+! TimeUpdated: 2023-04-03T21:32:09+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -737,7 +737,7 @@ buzzbie.nl##.TS_Banner_Spot
 telegraaf.nl##.TextArticlePage__bannerWrapper
 telegraaf.nl##.VideoArticlePage__banner
 telegraaf.nl##.VideoPage__banner
-dartfreakz.nl,thehike.nl##.a-single
+dartfreakz.nl,thehike.nl,zozwanger.nl##.a-single
 rtveen.nl##.aas_zone
 autozine.nl,beleggersbelangen.nl,besteproduct.nl,hetnieuwsvandaag.be,indebuurt.nl,koopplein.nl,letsgodigital.org,limburger.nl,persinfo.org,sport.be,tellows.nl,tradeidee.nl,tripadvisor.nl,voetbalnieuws.nl,voetbalprimeur.nl,wijlimburg.nl,xgn.nl##.ad
 filmtotaal.nl##.ad-centering
@@ -893,6 +893,7 @@ kanaalxxx.nl##.fpbnr
 motorrijdenexpert.nl##.full-row.relative-row.no-padding-bottom.title-txt-btn.flat-theme.flat-theme-content
 unitednews.sr##.fullwidthbanner-container
 binnenvaartkrant.nl,christmaholic.nl,curacao.nu,dartfreakz.nl,dbsuriname.com,despirituelewereld.be,dewereldmorgen.be,regioinbedrijf.nl,shespot.nl,sleutelstad.nl,westerwoldeactueel.nl##.g
+zozwanger.nl##.g-single
 zeelandnet.nl##.g_banner
 radiovisie.eu##.gmollik
 srherald.com##.gsrhera
@@ -973,6 +974,7 @@ qmusic.nl##.partner
 sc-heerenveen.nl##.partner-grid
 sc-heerenveen.nl##.partnerlink
 clubbrugge.be,feyenoord.nl,ftm.nl,royalantwerpfc.be,voetbalindebollenstreek.nl##.partners
+agraaf.nl##.partners-carousel
 golf.be##.partners-holder
 weespernieuws.nl##.pbph
 denachtvlinders.nl##.plek-boven-artikel
@@ -1202,7 +1204,7 @@ decibel.nl##img[width="640"][height="180"]
 nieuwsopbeeld.nl##img[width="640"][height="640"]
 volleyvlaanderen.be##img[width="670"][height="80"]
 wildfm.nl##img[width="699"][height="90"]
-ucl-voetbal.nl##img[width="728"][height="90"]
+pokeren.nl,ucl-voetbal.nl##img[width="728"][height="90"]
 basketballbelgium.be##img[width="970"][height="250"]
 landenweb.nl##table[style="margin-left: auto; margin-right: auto; border: 1px solid; width: 100%; margin-bottom: 10px;"]
 radiocaramba.nl##table[width="120"][height="600"]
@@ -1228,9 +1230,11 @@ tijd.be#?#.o-hpgrid__row-tijdconnect:-abp-has(h2:-abp-contains(Gesponsorde inhou
 tvgids.nl#?#.square-item:-abp-has( > .banner)
 vi.nl#?#.c-articles-list__item.c-articles-list__item--highlight:-abp-has(.c-tag.c-articles-list__label:-abp-contains(Advertorial))
 voetbalcentraal.nl#?#.blok:-abp-has(h3:-abp-contains(Partners))
+weer.nl#?#.shadow-lvl-2:-abp-has(a[href^="https://www.voordeeluitjes.nl/"])
 welingelichtekringen.nl#?#.post:-abp-has(a[href*="/partnerposting/"])
 wielerflits.nl#?#.list-group-item:-abp-has(span:-abp-contains(Ad))
 wielerflits.nl#?#.w-100.p-3:-abp-has(span:-abp-contains(Ad))
+wielerflits.nl#?#.widget:-abp-has(.wf_headline:-abp-contains(Wielerdeals))
 wkdarts.nl#?#.wpb_wrapper:-abp-has(div:-abp-contains(#advertentie))
 bokt.nl#@#.ad-body
 gratisaftehalen.nl#@#.ads-image
@@ -1292,14 +1296,20 @@ vakantieplaats.nl#@#.topAds
 @@||content.hwigroup.net/images^$domain=hardware.info
 hardware.info,tweakers.net#@#.AdBar
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/144629
+webcams-texel.nl#%#//scriptlet('abort-current-inline-script', 'document.createElement', 'adsbygoogle')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/142982
-tweakers.net#%#(function(){const a=Function.prototype.toString;window.EventTarget.prototype.addEventListener=new Proxy(window.EventTarget.prototype.addEventListener,{apply:(b,c,d)=>{const e=d[1];return e&&"function"==typeof e&&/handleAdblockDetect|Flags.autoRecov/.test(a.call(e))&&(d[1]=function(){}),Reflect.apply(b,c,d)}})})();
+! https://github.com/AdguardTeam/AdguardFilters/issues/120455
+tweakers.net#%#(function(){const a=Function.prototype.toString;window.EventTarget.prototype.addEventListener=new Proxy(window.EventTarget.prototype.addEventListener,{apply:(b,c,d)=>{const e=d[1],f=/detail.adblockDetected|handleAdblockDetect|Flags.autoRecov/;return e&&"function"==typeof e&&(f.test(a.call(e))||f.test(e.toString()))&&(d[1]=function(){}),Reflect.apply(b,c,d)}});Function.prototype.bind=new Proxy(Function.prototype.bind,{apply:(b,c,d)=>{const e=a.call(c),f=Reflect.apply(b,c,d);return f.toString=function(){return e},f}})})();
+tweakers.net#%#//scriptlet('prevent-fetch', 'ab.tweakers.nl')
+tweakers.net#%#//scriptlet('set-constant', 'BannerManager.bannersBlocked', 'false')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/99141
 @@/prebid/ad.gif?user=*&adId=$domain=kijk.nl
 @@||ads-talpa.adhese.com/json/$domain=kijk.nl
 kijk.nl#$#body .pub_300x250.pub_300x250m.pub_728x90.text-ad.textAd.text_ad.text_ads.text-ads.text-ad-links { display: initial !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/118874
 goplay.be#%#//scriptlet('prevent-fetch', 'pubads.g.doubleclick.net/gampad/ads')
+@@||imasdk.googleapis.com/js/sdkloader/ima3_dai.js$script,domain=goplay.be
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=noopjs,domain=goplay.be
 ! https://github.com/AdguardTeam/AdguardFilters/issues/74633
 ||goplay.be/js/sourcepoint/msg?v=
@@ -1399,9 +1409,6 @@ gfcnieuws.com#?#.entry-content div[class]:-abp-has(> ins.adsbygoogle)
 !
 ! https://github.com/AdguardTeam/AdguardFilters/issues/131530
 hardware.info#%#//scriptlet("set-constant", "BannerManager", "undefined")
-! https://github.com/AdguardTeam/AdguardFilters/issues/120455
-!+ PLATFORM(windows, mac, android, ext_chromium)
-tweakers.net#%#//scriptlet("set-constant", "BannerManager", "undefined")
 ! NOTE: JS end ⬆️
 ! !SECTION: Dutch - JS
 !
