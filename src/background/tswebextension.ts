@@ -22,6 +22,15 @@ const {
     MAX_NUMBER_OF_ENABLED_STATIC_RULESETS,
 } = chrome.declarativeNetRequest;
 
+// For tests
+declare global {
+    interface Window {
+        adguard: {
+            configure: (config: Configuration) => Promise<ConfigurationResult>;
+        }
+    }
+}
+
 class TsWebExtensionWrapper {
     private tsWebExtension: TsWebExtension;
 
@@ -31,6 +40,11 @@ class TsWebExtensionWrapper {
 
     constructor() {
         this.tsWebExtension = new TsWebExtension(WEB_ACCESSIBLE_RESOURCES_PATH);
+        // adguard.configure() is needed for integration tests
+        // eslint-disable-next-line no-restricted-globals
+        self.adguard = {
+            configure: this.tsWebExtension.configure.bind(this.tsWebExtension),
+        };
     }
 
     public get ruleSetsCounters(): RuleSetCounters[] {

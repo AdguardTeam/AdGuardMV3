@@ -146,3 +146,5 @@ export const REGEX_DOMAIN = /^(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.
 export const REGEX_DOMAIN_IN_RULE = /(?<=\|\|)(.*?)(?=\^|\/|:|\$)/g;
 
 export const WEB_ACCESSIBLE_RESOURCES_PATH = '/web-accessible-resources/redirects';
+
+export const EXTENSION_INITIALIZED_EVENT = 'initialized';

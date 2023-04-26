@@ -37,6 +37,9 @@ module.exports = {
         'import/resolver': {
             typescript: {
                 alwaysTryTypes: true
+            },
+            node: {
+                extensions: ['.ts']
             }
         },
         'import/parsers': {

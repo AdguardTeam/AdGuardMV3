@@ -54,6 +54,14 @@ to learn about all the limitations.
   Note, that this command will not run filters conversion, you'll need to do it
   manually.
 
+### Test
+
+- `yarn test` - run local unit tests using Jest.
+- To run the supported [testcases](https://testcases.agrd.dev/) using Playwright:
+  - `yarn integration-test dev` for dev build test;
+  - `yarn integration-test release` for release build test.
+
+
 ### For Filters Maintainers
 
 Some of the extension capabilities are only available when you install it as an

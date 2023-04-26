@@ -11,8 +11,12 @@ import _ from 'lodash';
 import fse from 'fs-extra';
 
 import { FILTER_RULESET, RulesetType } from '../../src/common/constants/filters';
-import type { Browser, BuildEnv } from '../build-constants';
-import { BROWSERS, BUILD_ENVS } from '../build-constants';
+import {
+    Browser,
+    BuildEnv,
+    BROWSERS,
+    BUILD_ENVS,
+} from '../build-constants';
 
 const packageJson = require('../../package.json');
 const tsconfig = require('../../tsconfig.json');

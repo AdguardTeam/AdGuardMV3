@@ -5,7 +5,7 @@ plan:
   key: V3BETESTSPECS
   name: browser extension mv3 - tests
 variables:
-  dockerNode: adguard/node-ssh:16.17--1
+  dockerPlaywright: adguard/playwright-runner:1.27.1--1
 
 stages:
   - Test:
@@ -19,7 +19,7 @@ Test:
   other:
     clean-working-dir: true
   docker:
-    image: ${bamboo.dockerNode}
+    image: ${bamboo.dockerPlaywright}
     volumes:
       ${system.YARN_DIR}: "${bamboo.cacheYarn}"
   tasks:
@@ -39,6 +39,8 @@ Test:
             yarn lint
             yarn test
             yarn dev
+            yarn integration-test dev
+
             rm -rf node_modules
   artifacts:
     - name: build.txt
