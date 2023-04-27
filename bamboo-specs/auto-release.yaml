@@ -37,9 +37,6 @@ AutoBuild:
             exec 2>&1
             ls -la
 
-            # check if deploy starts after the fail
-            exit 1
-
             yarn install ${bamboo.varsYarn}
 
             # update filters before build
@@ -92,10 +89,10 @@ AutoBuild:
   requirements:
     - adg-docker: true
 
+# run release build at 11:00 every day
 triggers:
   - cron:
-      # for testing purposes run every 10 minutes
-      expression: 0 0/10 * * * ?
+      expression: 0 0 11 * * ?
 
 branches:
   create: manually
