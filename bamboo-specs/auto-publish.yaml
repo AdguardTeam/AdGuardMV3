@@ -1,0 +1,48 @@
+---
+version: 2
+deployment:
+  name: browser extension mv3 - auto-publish
+  source-plan: ADGEXT-MV3AUTOBUILD
+release-naming: ${bamboo.inject.version}
+
+environments:
+  - AutoDeployAndPublish
+
+AutoDeployAndPublish:
+  # run auto-deploy only after successful build
+  triggers:
+    - build-success
+  tasks:
+    - clean
+    - checkout:
+        repository: bamboo-deploy-publisher
+        path: bamboo-deploy-publisher
+        force-clean-build: true
+    - artifact-download:
+        artifacts:
+          - name: chrome.zip
+    - script:
+        interpreter: SHELL
+        scripts:
+          - |-
+            set -x
+            set -e
+
+            # Fix mixed logs
+            exec 2>&1
+            ls -la
+
+            echo "Deploying and publishing in Chrome Web Store"
+
+            # ./bamboo-deploy-publisher/deploy.sh browser-extension-v3-webstore-publish
+  final-tasks: []
+  variables: {}
+  requirements:
+    - adg-docker: true
+  notifications:
+    - events:
+        - deployment-started-and-finished
+      recipients:
+        - webhook:
+            name: Deploy webhook
+            url: http://prod.jirahub.service.eu.consul/v1/webhook/bamboo?channel=adguard-qa

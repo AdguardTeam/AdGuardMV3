@@ -1,26 +1,31 @@
 ---
 version: 2
-deployment:
+plan:
+  project-key: ADGEXT
+  key: MV3AUTOBUILD
   name: browser extension mv3 - auto-release
-  source-plan: ADGEXT-MV3AUTOBUILD
-release-naming: ${bamboo.inject.version}
+variables:
+  # playwright is needed for integration tests after build
+  dockerPlaywright: adguard/playwright-runner:1.27.1--1
 
-environments:
-  - AutoDeployAndPublish
+stages:
+  - AutoBuild:
+      manual: false
+      final: false
+      jobs:
+        - AutoBuild
 
-AutoDeployAndPublish:
-  # run auto-deploy only after successful build
-  triggers:
-    - build-success
+AutoBuild:
+  key: AUTOBUILD
+  other:
+    clean-working-dir: true
+  docker:
+    image: ${bamboo.dockerPlaywright}
+    volumes:
+      ${system.YARN_DIR}: "${bamboo.cacheYarn}"
   tasks:
-    - clean
     - checkout:
-        repository: bamboo-deploy-publisher
-        path: bamboo-deploy-publisher
         force-clean-build: true
-    - artifact-download:
-        artifacts:
-          - name: chrome.zip
     - script:
         interpreter: SHELL
         scripts:
@@ -32,17 +37,75 @@ AutoDeployAndPublish:
             exec 2>&1
             ls -la
 
-            echo "Deploying and publishing in Chrome Web Store"
+            yarn install ${bamboo.varsYarn}
 
-            # ./bamboo-deploy-publisher/deploy.sh browser-extension-v3-webstore-publish
-  final-tasks: []
-  variables: {}
+            # update filters before build
+            yarn filters
+
+            # build release version of the extension
+            yarn release
+
+            # ensure that extension is ok
+            yarn integration-test release
+
+            # clean up
+            rm -rf node_modules
+    - any-task:
+        plugin-key: com.atlassian.bamboo.plugins.vcs:task.vcs.commit
+        configuration:
+          commitMessage: 'skipci: Filters update'
+          selectedRepository: defaultRepository
+    - script:
+        interpreter: SHELL
+        scripts:
+          - |-
+            # increment version for release
+            yarn increment
+    - any-task:
+        plugin-key: com.atlassian.bamboo.plugins.vcs:task.vcs.commit
+        configuration:
+          commitMessage: 'skipci: Automatic increment build number'
+          selectedRepository: defaultRepository
+    - inject-variables:
+        file: build/release/build.txt
+        scope: RESULT
+        namespace: inject
+    - any-task:
+        plugin-key: com.atlassian.bamboo.plugins.vcs:task.vcs.tagging
+        configuration:
+          selectedRepository: defaultRepository
+          tagName: v${bamboo.inject.version}
+  artifacts:
+    - name: build.txt
+      location: build/release
+      pattern: build.txt
+      shared: true
+      required: true
+    - name: chrome.zip
+      location: build/release
+      pattern: chrome.zip
+      shared: true
+      required: true
   requirements:
     - adg-docker: true
-  notifications:
-    - events:
-        - deployment-started-and-finished
-      recipients:
-        - webhook:
-            name: Deploy webhook
-            url: http://prod.jirahub.service.eu.consul/v1/webhook/bamboo?channel=adguard-qa
+
+triggers:
+  - cron:
+      # for testing purposes run every 10 minutes
+      expression: 0 0/10 * * * ?
+
+branches:
+  create: manually
+  delete: never
+  link-to-jira: true
+
+notifications:
+  - events:
+      - plan-status-changed
+    recipients:
+      - webhook:
+          name: Build webhook
+          url: http://prod.jirahub.service.eu.consul/v1/webhook/bamboo
+labels: []
+other:
+  concurrent-build-plugin: system-default
