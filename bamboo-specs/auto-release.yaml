@@ -37,6 +37,9 @@ AutoBuild:
             exec 2>&1
             ls -la
 
+            # check if deploy starts after the fail
+            exit 1
+
             yarn install ${bamboo.varsYarn}
 
             # update filters before build
