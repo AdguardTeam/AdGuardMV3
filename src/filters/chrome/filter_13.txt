@@ -1,8 +1,8 @@
-! Checksum: dSGDufT2exG2PWr8VuGr5g
+! Checksum: bCgGtE2uOjMdBhGuwH4STw
 ! Title: AdGuard Turkish filter
 ! Description: Filter list that specifically removes ads on websites in Turkish language.
-! Version: 2.0.44.8
-! TimeUpdated: 2023-04-27T13:30:37+00:00
+! Version: 2.0.44.10
+! TimeUpdated: 2023-04-28T07:30:23+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1446,9 +1446,6 @@ birasyadizi.com#%#//scriptlet('abort-on-property-write', 'onPopUnderLoaded')
 cizgiromanarsivi.com#%#//scriptlet('prevent-addEventListener', 'click', 'check_target')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/146967
 seyredeger.com#%#//scriptlet('abort-on-property-write', 'onPopUnderLoaded')
-! https://github.com/AdguardTeam/AdguardFilters/issues/146675
-fullhdfilmcibaba1.com#$#.swal2-container { display: none !important; }
-fullhdfilmcibaba1.com#$#body.swal2-shown { overflow: auto !important; padding-right: 0 !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/146680
 goodfilmizle.com#%#//scriptlet("abort-on-property-read", "sagAltReklamListesi")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/145188
@@ -1732,6 +1729,14 @@ r10.net#%#document.cookie = 'r10LeftHide=1';
 !------- CSS fixes --------------------!
 !--------------------------------------!
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/149576
+neskici.com#$##ikinci { display: block !important; }
+neskici.com#$##reklam { display: none !important; }
+! https://github.com/AdguardTeam/AdguardFilters/issues/149573
+dizifilmbox.pw#$#header.container { margin-top: 20px !important; }
+! https://github.com/AdguardTeam/AdguardFilters/issues/146675
+fullhdfilmcibaba1.com#$#.swal2-container { display: none !important; }
+fullhdfilmcibaba1.com#$#body.swal2-shown { overflow: auto !important; padding-right: 0 !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/148495
 paratic.com#$?#.splide__list > li.splide__slide:-abp-has(> div.s-gcm-br) { remove: true; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/148438
@@ -3008,7 +3013,8 @@ dafflix.*##.rek-wrap > *:not(b)
 dafflix.*##.rek-0
 cumhuriyet.com.tr##div[class^="page-"][class*="fixed-ad"]
 kariyer.net##.inline-ad-height
-fullhdizle.*###footer-fixed
+||dizifilmbox.pw/wp-content/uploads/*/cop90.gif
+dizifilmbox.pw,fullhdizle.*###footer-fixed
 ||ceviz.pw/pop.php
 ||filese.me/pop.php
 filmzal.co###singlePlay > div[class*="__"][style]
@@ -6649,6 +6655,8 @@ adguard.com,adguard.app##.hello_from_adguard_turkish
 ! Bad:  @@||example.org^$stealth (should be in AdGuard Base - allowlist_stealth.txt)
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/149576
+neskici.com#@##reklam
 ! https://github.com/AdguardTeam/AdguardFilters/issues/148249
 @@||sportframe1co.cfd^$subdocument,domain=viagna.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/148018

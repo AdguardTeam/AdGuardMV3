@@ -1,8 +1,8 @@
-! Checksum: pDC/y/LRbJnXThI/giwrrg
+! Checksum: pjkxIBATxa6ZPsM03cDKOQ
 ! Title: AdGuard Annoyances filter
 ! Description: Blocks irritating elements on web pages including cookie notices, third-party widgets and in-page pop-ups. Contains the following AdGuard filters: Cookie Notices, Popups, Mobile App Banners, Other Annoyances and Widgets.
-! Version: 2.1.58.43
-! TimeUpdated: 2023-04-27T16:30:37+00:00
+! Version: 2.1.58.45
+! TimeUpdated: 2023-04-28T07:30:36+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -2243,6 +2243,8 @@ freundin.de,utopia.de,mein-schoener-garten.de,eveningnews24.co.uk,rollingstone.d
 !
 ! NOTE: Regular rules
 !
+internetaptieka.lv#$#.cookie-notify__wrap { display: none !important; }
+internetaptieka.lv#$#body.cookie-notify-active { position: static !important; }
 orange.pl#?#section[role="region"] div[class]:-abp-has(> div > a[href="/view/cookies"])
 latestdeals.co.uk#?#header + div[class]:-abp-has(> div[class] > div[class] + p[class] > a[href^="/cookies"])
 my.everlastgyms.com##.fsi-alert-cookie
@@ -2997,7 +2999,7 @@ fidelity.de#$#.ensModalBackdrop { display: none !important; position: absolute !
 yenisafak.com##.ys-cookie-modal
 thecompleteuniversityguide.co.uk##.cookie_lbox
 socofe.pzu.pl##pfs-cookie-info
-doladowania.wrodzinie.com.pl,orange.pl##.bm-privacy
+doladuj.plus.pl,doladuj.heyah.pl,doladowania.wrodzinie.com.pl,orange.pl##.bm-privacy
 mysellix.io,sellix.io##.sellix-cookie-container
 toptanicgiyimistanbul.com###CerezPopupBox
 1pmobile.com#$#body { overflow: auto !important; padding-right: 0 !important; }
@@ -13530,6 +13532,8 @@ adguard.com,adguard.app##.hello_from_adguard_annoyances_cookies
 ! It's loaded by cdn.cookielaw.org/scripttemplates/otSDKStub.js, so it should be only unblocked on websites for which this script is unblocked
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/149561
+internetaptieka.lv#@#.cookie-notify
 ! https://github.com/AdguardTeam/AdguardFilters/issues/149488
 maximarkt.at#@##cookie-note
 ! https://github.com/AdguardTeam/AdguardFilters/issues/149401
@@ -44736,7 +44740,7 @@ web.ultra-soccer.jp###kindle-side-banner
 ! https://github.com/AdguardTeam/AdguardFilters/issues/145337
 hltv.org##.featured-matches-top
 ! truestory widget
-||thetruestory.news/widget-top.iife.js$domain=zona.media|thebell.io
+||thetruestory.news/widget-top.iife.js$domain=echofm.online|zona.media|thebell.io
 ! https://github.com/AdguardTeam/AdguardFilters/issues/140015
 telegram.hr##.offers-widget
 ! https://github.com/AdguardTeam/AdguardFilters/issues/139316
