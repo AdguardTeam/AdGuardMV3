@@ -105,7 +105,12 @@ notifications:
     recipients:
       - webhook:
           name: Build webhook
+          # default extension vcs channel
           url: http://prod.jirahub.service.eu.consul/v1/webhook/bamboo
+      - webhook:
+          name: Build webhook
+          # send notification also to the stand-up channel
+          url: http://prod.jirahub.service.eu.consul/v1/webhook/bamboo?channel=stand-up-extensions
 labels: []
 other:
   concurrent-build-plugin: system-default
