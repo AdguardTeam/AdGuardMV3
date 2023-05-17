@@ -100,17 +100,18 @@ branches:
   link-to-jira: true
 
 notifications:
-  - events:
-      - plan-status-changed
-    recipients:
+  - recipients:
       - webhook:
-          name: Notify vcs
+          name: Build webhook
           # default extension vcs channel
           url: http://prod.jirahub.service.eu.consul/v1/webhook/bamboo
       - webhook:
-          name: Notify standup
+          name: Build webhook
           # send notification also to the stand-up channel
           url: http://prod.jirahub.service.eu.consul/v1/webhook/bamboo?channel=stand-up-extensions
+    events:
+      - plan-status-changed
+
 labels: []
 other:
   concurrent-build-plugin: system-default
