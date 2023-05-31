@@ -9,24 +9,22 @@ interface ChangeHandler {
     (e: React.ChangeEvent<HTMLInputElement>): void;
 }
 
-export interface IProps {
+interface CheckboxProps {
     id: string;
     checked?: boolean;
     message?: string;
     onChange: ChangeHandler;
-    integrated?: boolean,
 }
 
-export const CheckboxOption = ({
+export const CheckboxOption: React.FunctionComponent<CheckboxProps> = ({
     id,
     checked,
     message,
     onChange,
-}: IProps) => {
+}) => {
     return (
         <label className={cn(theme.checkbox.container, styles.optionItem)} htmlFor={String(id)}>
             <input type="checkbox" id={String(id)} checked={checked} onChange={onChange} />
-            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
             <span className={cn(theme.checkbox.checkmark, theme.checkbox.option)} />
             <span>
                 {message}

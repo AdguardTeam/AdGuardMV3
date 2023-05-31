@@ -7,6 +7,7 @@ describe('notifier', () => {
             PROTECTION_UPDATED = 'event.protection.updated',
         }
 
+        // @ts-ignore
         const notifier = new Notifier(NOTIFIER_EVENTS);
 
         const settingsCallback = jest.fn();

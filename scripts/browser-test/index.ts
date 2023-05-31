@@ -41,7 +41,10 @@ const runTests = async (testMode: string) => {
         ],
     });
 
-    const backgroundPage = await browserContext.waitForEvent('serviceworker');
+    let [backgroundPage] = browserContext.serviceWorkers();
+    if (!backgroundPage) {
+        backgroundPage = await browserContext.waitForEvent('serviceworker');
+    }
 
     await backgroundPage.evaluate<void, string>(
         waitUntilExtensionInitialized,

@@ -105,6 +105,9 @@ export const getWebpackConfig = (
                     context: 'src',
                     from: 'assets',
                     to: 'assets',
+                    globOptions: {
+                        ignore: ['**/fonts/**/*'],
+                    },
                 },
                 {
                     context: 'src',
@@ -145,12 +148,15 @@ export const getWebpackConfig = (
             filename: 'debugging.html',
             chunks: ['debugging'],
         }),
+
+        // @ts-ignore
         new MiniCssExtractPlugin(),
     ];
 
     // If watch mode we don't need to generate zip
     if (!isWatchMode) {
         plugins.push(
+            // @ts-ignore
             new ZipWebpackPlugin({
                 path: '../',
                 filename: `${browser}.zip`,
@@ -191,6 +197,7 @@ export const getWebpackConfig = (
             path: OUTPUT_DIR,
             filename: '[name].js',
             publicPath: '',
+            assetModuleFilename: 'assets/[name][ext][query]',
         },
         resolve: {
             extensions: ['.tsx', '.ts', '.js'],
@@ -250,10 +257,6 @@ export const getWebpackConfig = (
                         },
                         'postcss-loader',
                     ],
-                },
-                {
-                    test: /\.css$/,
-                    use: [MiniCssExtractPlugin.loader, 'css-loader'],
                 },
             ],
         },

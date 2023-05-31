@@ -1,14 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 import { log } from 'Common/logger';
 
 import { DebuggingInfo } from './DebuggingInfo';
 
 try {
-    ReactDOM.render(
+    const rootNode = document.getElementById('root')!;
+    const root = createRoot(rootNode);
+    root.render(
         <DebuggingInfo />,
-        document.getElementById('root'),
     );
 } catch (error) {
     log.error(error);

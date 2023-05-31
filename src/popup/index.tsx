@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'mobx-react';
 
 import { log } from 'Common/logger';
@@ -9,11 +9,12 @@ import { PopupApp } from './components/PopupApp';
 import 'Common/styles/main.pcss';
 
 try {
-    ReactDOM.render(
+    const node = document.getElementById('root')!;
+    const root = createRoot(node);
+    root.render(
         <Provider>
             <PopupApp />
         </Provider>,
-        document.getElementById('root'),
     );
 } catch (error) {
     log.error(error);

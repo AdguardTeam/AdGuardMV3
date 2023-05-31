@@ -1,13 +1,5 @@
 import { lazyGet } from 'Common/utils/lazy';
 
-declare global {
-    namespace NodeJS {
-        interface Global {
-            browser: any;
-        }
-    }
-}
-
 /**
  * Extension global preferences.
  */
@@ -54,6 +46,7 @@ export const prefs = (() => {
         },
 
         get platform() {
+            // @ts-ignore
             return lazyGet(Prefs, 'platform', () => (global.browser ? 'firefox' : 'chromium'));
         },
     };

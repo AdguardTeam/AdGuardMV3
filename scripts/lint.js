@@ -57,6 +57,7 @@ module.exports = {
         'react/jsx-indent': ['error', 4],
         'react/jsx-indent-props': ['error', 4],
         'import/prefer-default-export': 'off',
+        'react/require-default-props': 'off',
         '@typescript-eslint/naming-convention': [
             'error',
             {

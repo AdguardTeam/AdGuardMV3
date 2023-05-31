@@ -3,7 +3,7 @@ import webpack, { Stats, Configuration } from 'webpack';
 import { cliLog } from '../cli-log';
 
 declare interface CallbackFunction<T> {
-    (err?: Error, result?: T): any;
+    (err: Error | null | undefined, result?: T): any;
 }
 
 export const bundleRunner = (webpackConfig: Configuration, watch = false) => {

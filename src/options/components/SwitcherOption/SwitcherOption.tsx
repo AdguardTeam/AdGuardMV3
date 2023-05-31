@@ -13,11 +13,10 @@ interface ChangeHandler {
     (e: React.ChangeEvent<HTMLInputElement>): void;
 }
 
-export interface IProps {
+interface IProps {
     id: string;
     iconId?: IconId;
     checked?: boolean;
-    messageKey?: string;
     messageDesc?: string;
     message?: string;
     onClick?: () => void;

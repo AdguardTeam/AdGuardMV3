@@ -9,7 +9,7 @@ type Listener = {
 /**
  * Class implementing simple observer pattern
  */
-export class Notifier<T, U> {
+export class Notifier<T, U extends { [key: string]: NOTIFIER_EVENTS }> {
     private listeners: { [key: string]: Listener } = {};
 
     private listenersEvents: { [key: string]: T[] } = {};
