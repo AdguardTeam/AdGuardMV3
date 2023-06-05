@@ -1,8 +1,8 @@
-! Checksum: GeHmppjeE/aJEtsfOh/pLQ
+! Checksum: 0UCiWbC1AqtVQWBx2T3d4w
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish, Portuguese, and Brazilian Portuguese languages.
-! Version: 2.0.19.38
-! TimeUpdated: 2023-05-17T11:32:15+00:00
+! Version: 2.0.19.64
+! TimeUpdated: 2023-06-05T07:32:12+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -304,6 +304,9 @@
 ! Bad: ||ad.doubleclick.net^ (should be in adservers.txt)
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/152019
+zona-leros.com#$#.iframeDiv > center > a[target="_blank"] { position: absolute !important; left: -3000px !important; }
+zona-leros.com#%#//scriptlet('prevent-setTimeout', 'checkAdblockUser')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/150604
 raulprietofernandez.net#%#//scriptlet("abort-on-property-write", "ADS_URL")
 ! https://www.reddit.com/r/uBlockOrigin/comments/13c9rw1/
@@ -520,7 +523,6 @@ vivercomsaude.online#$#.ads.ad.adsbox.ad-placement.carbon-ads { display: block !
 ! https://github.com/AdguardTeam/AdguardFilters/issues/113777
 texto.kom.gt#%#//scriptlet("set-constant", "adsbygoogle.loaded", "true")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/111805
-@@||www3.doubleclick.net/|$xmlhttprequest,domain=tivify.tv
 tivify.tv#%#//scriptlet('prevent-fetch', 'www3.doubleclick.net')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/111554
 @@||paky3.me/wp-content/plugins/wordpress-popup/assets/js/adb.min.js
@@ -783,9 +785,6 @@ anicchan.net#@#afs_ads
 @@||anicchan.net/popad/popads.js
 ! https://github.com/AdguardTeam/AdguardFilters/issues/54366
 @@||tunovelaligera.com/wp-content/plugins/*/js/ads*.min.js
-! https://github.com/AdguardTeam/AdguardFilters/issues/54450
-mangahost.site#%#//scriptlet("set-constant", "kkwoiNI", "noopFunc")
-mangahost.site#%#//scriptlet("set-constant", "yUIlOsT", "noopFunc")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/53660
 animesonehd.xyz##.rteam_antiadb
 ||animesonehd.xyz/wp-content/themes/animesonehd/js/rteam_detect.js
@@ -1089,7 +1088,6 @@ superanimes.site#$#.adstopo { position: absolute!important; left: -3000px!import
 animeflv.net#%#window.loadingAds = true;
 ! https://github.com/AdguardTeam/AdguardFilters/issues/15963
 ! https://github.com/AdguardTeam/AdguardFilters/issues/15386
-! https://github.com/AdguardTeam/AdguardFilters/issues/15842
 ! https://github.com/AdguardTeam/AdguardFilters/issues/15404
 @@||fantasy.li^$generichide
 ! https://github.com/AdguardTeam/AdguardFilters/issues/15630
@@ -1347,6 +1345,9 @@ peru21.pe#@#.adstop
 ! https://github.com/AdguardTeam/AdguardFilters/issues/24801
 yahoo.com#?#ul[class^="Mb(0)"] > li.js-stream-content:has(> div > a[rel="nofollow noopener noreferrer"]+div:contains(Patrocinado))
 !
+motor.es#?#.secundaria .divisor:has(~ .hueco-publicidad)
+motor.es#?#.secundaria .divisor:has(.robapaginas-portada)
+climadobrasil.com.br#?#.wrapper > .block_full:has(> div.cls-publi-height)
 eltiempo.pe#?#div:not([class]) > div[style]:has(> small + div ins.adsbygoogle)
 ole.com.ar#?#div[class^="sc-"]:has(> div > div[id^="div-gpt-"])
 elperiodico.cat#?#.col-md-4 > .hidden-xs:has(> .minHeightLong > .following-ad-container)
@@ -1625,6 +1626,16 @@ seriesgato.com#?#.TPlayerNv > li.Button:has(> span:contains(Publicidad))
 !------- JS rules ---------------------!
 !--------------------------------------!
 !
+! https://www.reddit.com/r/uBlockOrigin/comments/13zza6x/opening_popup_when_click_on_the_player/
+animesgratis.org#%#//scriptlet('remove-attr', 'href', 'a[href]#clickfakeplayer')
+! https://github.com/uBlockOrigin/uAssets/issues/18329
+g37.com.br#%#//scriptlet('prevent-addEventListener', 'DOMContentLoaded', 'document.write')
+! https://github.com/AdguardTeam/AdguardFilters/issues/152382
+piratefilmeshd.net#%#//scriptlet("abort-current-inline-script", "decodeURIComponent", "0x")
+! https://github.com/AdguardTeam/AdguardFilters/issues/151483
+gnula.club#%#//scriptlet('remove-attr', 'href', 'li[onclick^="go_to_player"] > a[target="_blank"][href]')
+! https://github.com/AdguardTeam/AdguardFilters/issues/151449
+elmundo.es#%#//scriptlet('set-constant', 'Object.prototype.adSlot', '')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/149757
 pelisflix2.*#%#//scriptlet('set-cookie-reload', 'adtura', '1')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/146455
@@ -1652,11 +1663,16 @@ ttlinks.live#%#(function(){if(-1<window.location.href.indexOf("/#")){var a=locat
 ! https://github.com/AdguardTeam/AdguardFilters/issues/138773
 ddtorrent.live#%#AG_onLoad(function(){try{var a;"function"==typeof decode_link&&"string"==typeof link_out&&(a=decode_link(atob(link_out)),location.assign(a)),"string"==typeof api_key&&(document.cookie=`${api_key}=Wn275; path=/`);var b=document.querySelector("* > .button#contador");b&&a&&setTimeout(()=>{var c=b.cloneNode(!0);b.parentNode.replaceChild(c,b),c.addEventListener("click",function(){location.assign(a)},!1)},500)}catch(a){}});
 ddtorrent.live#%#(function(){if(-1<window.location.href.indexOf("/#")){var a=location.href.split("/#");if(a&&a[1]){a=a[1];for(var c=0;10>c;c++)try{a=atob(a)}catch(f){var d=a.replace(/[a-zA-Z]/g,function(b){return String.fromCharCode(("Z">=b?90:122)>=(b=b.charCodeAt(0)+13)?b:b-26)});try{new URL(d);var e=!0}catch(b){e=!1}if(e){window.location=d;break}}}}})();
+! https://github.com/AdguardTeam/AdguardFilters/issues/152316
 ! https://github.com/AdguardTeam/AdguardFilters/issues/136572
+adskeeper.net#%#(()=>{const a=window.fetch,b={apply:async(b,c,d)=>{const e=d[0]instanceof Request?d[0].url:d[0];if("string"!=typeof e||0===e.length)return Reflect.apply(b,c,d);if(-1<e.indexOf("/ajax.php")){const b=await a(...d);let c=await b.text();const e=JSON.parse(c);e?.url&&location.assign(e?.url)}return Reflect.apply(b,c,d)}};try{window.fetch=new Proxy(window.fetch,b)}catch(a){console.debug(a)}})();
 acortalo.net#%#(()=>{const a=window.fetch,b={apply:async(b,c,d)=>{const e=d[0]instanceof Request?d[0].url:d[0];if("string"!=typeof e||0===e.length)return Reflect.apply(b,c,d);if(-1<e.indexOf("/ajax.php")){const b=await a(...d);let c=await b.text();const e=JSON.parse(c);e?.l&&location.assign(e?.l)}return Reflect.apply(b,c,d)}};try{window.fetch=new Proxy(window.fetch,b)}catch(a){console.debug(a)}})();
 mwpaste.com#%#(()=>{const a=window.fetch,b={apply:async(a,b,c)=>{const d=c[0]instanceof Request?c[0].url:c[0];if("string"!=typeof d||0===d.length)return Reflect.apply(a,b,c);if(-1<d.indexOf("&url=")){const a=new URL(d),b=a.searchParams,c=b.get("url");c&&location.assign(c)}return Reflect.apply(a,b,c)}};try{window.fetch=new Proxy(window.fetch,b)}catch(a){console.debug(a)}})();
 ! https://github.com/uBlockOrigin/uAssets/issues/13159#issuecomment-1320248188
 geeknetic.es#%#//scriptlet("prevent-window-open")
+! https://github.com/AdguardTeam/AdguardFilters/issues/151620
+solopc.net#%#//scriptlet('set-constant', 'global.noobMaxTry', '0')
+solopc.net#%#(function(){try{var a=location.href.split("out#!");if(a[1]){a=a[1];for(var b=0;10>b;b++){a=atob(a);try{new URL(decodeURIComponent(a));var c=!0}catch(d){c=!1}if(c)try{location.assign(decodeURIComponent(a));break}catch(d){}}}}catch(d){}})();
 ! https://github.com/AdguardTeam/AdguardFilters/issues/146895
 ! https://github.com/AdguardTeam/AdguardFilters/issues/144257
 ! https://github.com/AdguardTeam/AdguardFilters/issues/140034
@@ -1890,8 +1906,6 @@ redirdx.in#%#document.cookie = "tronador=aproved; path=/";
 redirdx.in#%#//scriptlet("prevent-window-open", "redirdx.in/go/")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/43603#issuecomment-553749336
 hentaihd.xyz#%#AG_onLoad(function() { setTimeout(function() { var el = document.querySelector('div.fluid_initial_play'); if(el) el.click(); }, 300); });
-! https://github.com/AdguardTeam/AdguardFilters/issues/42704
-baixarfilmetorrent.com#%#document.cookie = "ck1=true; path=/"; document.cookie = "ck1_cnt=1; path=/"; document.cookie = "ck2=true; path=/"; document.cookie = "ck2_cnt=1; path=/"; document.cookie = "ck3=true; path=/"; document.cookie = "ck3_cnt=1; path=/";
 ! https://github.com/AdguardTeam/AdguardFilters/issues/41643
 hentai-id.tv#%#AG_onLoad(function(){var a=document.querySelectorAll('a[href*="://ouo.io/"][href*="=http"],a[href*="://ouo.io/"][href*="= http"]');for(var b,c=0;c<a.length;c++)b=a[c].getAttribute("href"),(b=b.split(/^https?:\/\/ouo\.io\/[\S]*?\?.=/))&&a[c].setAttribute("href",b[1])});
 ! https://github.com/AdguardTeam/AdguardFilters/issues/42381
@@ -2078,8 +2092,6 @@ profesionalreview.com#$#body { background-image:none!important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/20163
 lavanguardia.com#$#.lv-publi-box { position: absolute!important; left: -3000px!important; }
 lavanguardia.com#$#.megabanner-adv { position: absolute!important; left: -3000px!important; }
-! https://github.com/AdguardTeam/AdguardFilters/issues/15842
-alojamiento.biz#$#body { overflow: visible!important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/12753
 depor.com#$#.ads-300x300 {position: absolute!important; left: -3000px!important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/9654
@@ -2231,12 +2243,27 @@ http://adw.
 $script,third-party,denyallow=bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|cdn.staticfile.org|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yastatic.net|ytimg.com|zencdn.net|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com|fastcomments.com,domain=anroll.net
 !
 ! ##.ad
-xatakamovil.com,espinof.com,mundoxiaomi.com,vidaextra.com,mediotiempo.com,elpais.com,olhardigital.com.br,atribuna.com.br,jovemnerd.com.br,laopiniondemurcia.es,larazon.es,dicio.com.br,band.uol.com.br,xataka.com,onyxplay.com,genbeta.com,vagalume.com.br,xatakandroid.com,abril.com.br##.ad
+applesfera.com,xatakamovil.com,espinof.com,mundoxiaomi.com,vidaextra.com,mediotiempo.com,elpais.com,olhardigital.com.br,atribuna.com.br,jovemnerd.com.br,laopiniondemurcia.es,larazon.es,dicio.com.br,band.uol.com.br,xataka.com,onyxplay.com,genbeta.com,vagalume.com.br,xatakandroid.com,abril.com.br##.ad
 ! ##.ads
 tvhistoria.com.br,bebe.abril.com.br,tribunapr.uol.com.br,diariodonordeste.verdesmares.com.br,sbt.com.br,link.estadao.com.br,atomixhq.*,jc.ne10.uol.com.br,internetpasoapaso.com,acidadeon.com,leouve.com.br,larazon.es,infoescola.com,quatrorodas.abril.com.br,cbn.globoradio.globo.com,maxitorrent.com,veja.abril.com.br,odia.ig.com.br,especiais.g1.globo.com,tribunapr.com.br,novelasd.com,anime-tube.tv##.ads
 ! ##.banner
-rpp.pe,ambito.com,economipedia.com,informador.mx,elinformador.com.co,cronista.com,rionegro.com.ar,diariodecuyo.com.ar,voydeviaje.com.ar,guarda14.com,viapais.com.ar,agazeta.com.br,eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.*,mundotecnologias.com,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##.banner
+manhwas.net,rpp.pe,ambito.com,economipedia.com,informador.mx,elinformador.com.co,cronista.com,rionegro.com.ar,diariodecuyo.com.ar,voydeviaje.com.ar,guarda14.com,viapais.com.ar,agazeta.com.br,eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.*,mundotecnologias.com,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##.banner
 !
+forum.adrenaline.com.br##div[id^="forum-ad-fixo-"]
+pelando.com.br##div[data-testid*="/site/feed_"]
+metropoles.com##div[class^="Publicidade"]
+dicionariocriativo.com.br##.clarice-banner-container
+airedesantafe.com.ar##.banner-libre
+airedesantafe.com.ar##.banner-custom
+canaln.pe##div[class^="AdsSlot_"]
+zona-leros.com##.content_store
+estadao.com.br##div[style="width: 100%; overflow: hidden;"]
+motor.es##.secundaria .hueco-publicidad
+motor.es##section[data-provider="taboola"]
+motor.es##div[class^="megabanner"]
+motor.es##div[class$=" "].hueco-publicidad
+europafm.com##.addContainer
+mhscans.com##.c-top-sidebar
 mxcity.mx##.ads_citi
 mxcity.mx###banner-top
 autobild.es##div[class^="wrapper_mega_"]
@@ -2290,7 +2317,7 @@ vanitatis.elconfidencial.com##.revUnit
 niusdiario.es###MEGASUPERIOR
 niusdiario.es##div[class^="ads__ad_container-"]
 olhardigital.com.br##.diagonal-strip
-xatakamovil.com,genbeta.com,espinof.com###stories_container:empty
+applesfera.com,xatakamovil.com,genbeta.com,espinof.com###stories_container:empty
 computerhoy.com,businessinsider.es##div[class^="ad-slot_"]
 businessinsider.es##div[class^="ad-catfish_"]
 ||apiv2-prd.anroll.net/service/p.js
@@ -2306,8 +2333,8 @@ spdiario.com.br###interna_banner_side
 spdiario.com.br##div[id$="_banner_quadrado"]
 jbox.com.br##.jbox-publi-fullwidth
 independentespanol.com###top-banner-wrapper
-metroecuador.com.ec,fayerwayer.com##.arcad-container
-metroecuador.com.ec,fayerwayer.com##div[id^="arcad-feature-"][class^="default__StyledAdUnit-"]
+metroworldnews.com,metroecuador.com.ec,fayerwayer.com##.arcad-container
+metroworldnews.com,metroecuador.com.ec,fayerwayer.com##div[id^="arcad-feature-"][class^="default__StyledAdUnit-"]
 gasteizhoy.com##.banclick
 gasteizhoy.com##.macrobanblock
 universohq.com##.barAds
@@ -2482,7 +2509,7 @@ poder360.com.br##div[class^="box-banner-footer"]
 sogatinhas.net##.catfish
 acordacidade.com.br##.publi-base
 lasestrellas.tv##.Ads
-elcomercio.com##.banner-wrapper
+consultaremedios.com.br,elcomercio.com##.banner-wrapper
 elcomercio.com##ned-ad
 ||streamtheworld.com/ondemand/ars?type=preroll$domain=cadenaser.com
 ||geeknetic.es/ajax/renderads.asp
@@ -2534,10 +2561,10 @@ elpais.com##div[id^="ad-"]
 ||static.elpais.com/dist/resources/js/*/ENP-outbrain.js
 elmundo.es##.ue-c-subscription-ad
 expansion.com,marca.com##.ue-c-ad
-listas.pro###orquidea-slideup
+mhscans.com,listas.pro###orquidea-slideup
 ouniversodatv.com,animerikosuper.blogspot.com###HTML1
 animerikosuper.blogspot.com###HTML260
-mhscans.com,animerikosuper.blogspot.com##div[class^="fixed-"][class$="Sd"]
+tecnoscann.com,mhscans.com,animerikosuper.blogspot.com##div[class^="fixed-"][class$="Sd"]
 sabornamesa.com.br###mcontent-ads
 sabornamesa.com.br##.mh-ads
 noticiasmoviles.com##.theiaStickySidebar > #block-6
@@ -2791,7 +2818,7 @@ oplanetatv.clickgratis.com.br##.block-ads-wrapper
 oplanetatv.clickgratis.com.br##.ads:not(.prebid)
 oplanetatv.clickgratis.com.br##.ads-block:not(.prebid)
 comoacaba.com##.aawp
-senpaiediciones.com,yugenmangas.com###teaser3
+atlantisscan.com,senpaiediciones.com,yugenmangas.com###teaser3
 yugenmangas.com##.site-header + .c-top-second-sidebar
 mangapt.com,yugenmangas.com##.body-wrap > .c-bottom-sidebar
 mangapt.com##.body-wrap > .c-top-second-sidebar
@@ -2898,7 +2925,7 @@ pobre.tv##a[href^="https://btt-pt.toldmeroc.com/"]
 ||pobre.tv/images/bettilt-*.png
 ||landings.toldmeroc.com^$domain=pobre.tv
 ||pobre.tv/videos/BT.mp4$media,redirect=noopmp3-0.1s
-mhscans.com,aiyumangascanlation.com,mangacrab.com,ahstudios.net,animerikosuper.blogspot.com,emperorscan.com,taurusfansub.com,miauscan.com,knightnoscanlation.com,pelisplaygratis.info###fixedban
+tecnoscann.com,mhscans.com,aiyumangascanlation.com,mangacrab.com,ahstudios.net,animerikosuper.blogspot.com,emperorscan.com,taurusfansub.com,miauscan.com,knightnoscanlation.com,pelisplaygratis.info###fixedban
 pelisplaygratis.info##.mvic-btn > a.btn-successful
 observatoriodatv.uol.com.br##.obx-ad
 observatoriodatv.uol.com.br##.BannerUOLPlay__Container
@@ -2913,7 +2940,6 @@ stardeos.com##.at-addcontent
 stardeos.com##.at-addthumbnail
 stardeos.com##div[class^="left-menu_layout_adsense-"]
 animeactua.com##.jeg_midbar
-olympusscanlation.com###teaser1
 /apu.php?zoneid=$domain=pelisplus.so
 pelisplus.so##body ~ iframe[style*="width:"][style*="opacity:"][style*="z-index:"][style*="position:"]:not([src])
 futemax.gratis##.alertWS
@@ -2975,7 +3001,7 @@ ahount.com##.inside-right-sidebar > aside[id^="custom_html-"]
 elpais.com###paywallOfferSmall
 elpais.com###cta-button-container
 remender.pe,noticiasautomotivas.com.br,idinheiro.com.br,diariodocomercio.com.br##body .code-block
-anitube.biz,otvfoco.com.br##div[class^="code-block code-block-"][style^="margin: 8px"]
+g37.com.br,anitube.biz,otvfoco.com.br##div[class^="code-block code-block-"][style^="margin: 8px"]
 bracontece.com.br##.testad
 noticiast.com##div[style="margin: 8px 0; clear: both;"]
 comidinhasdochef.com##.wrap-banner
