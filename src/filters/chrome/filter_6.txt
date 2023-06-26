@@ -1,8 +1,8 @@
-! Checksum: qJPYmwzcQPa+LMVMq14bTQ
+! Checksum: GdV2PG63PWd8oUvgiTreTQ
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.35.94
-! TimeUpdated: 2023-06-18T14:32:35+00:00
+! Version: 2.0.36.9
+! TimeUpdated: 2023-06-26T07:32:04+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -159,6 +159,8 @@ n-tv.de#%#//scriptlet("set-constant", "embedAddefend", "noopFunc")
 @@/bilder$~third-party,domain=giessener-allgemeine.de|da-imnetz.de|werra-rundschau.de|fnp.de|merkur.de|fr.de|extratipp.com|wetterauer-zeitung.de|hallo-muenchen.de|wlz-online.de|tz.de
 !+ NOT_OPTIMIZED
 @@||scr.wfcdn.de/$image,domain=winfuture.de
+!+ NOT_OPTIMIZED
+@@||image.capital.de^
 !+ NOT_OPTIMIZED
 @@||tvtv.de/tippbild/
 !+ NOT_OPTIMIZED
@@ -516,6 +518,7 @@ essen-und-trinken.de,urbia.de#%#!function(){function b(){}function a(a){return{g
 schnittmuster-datenbank.de#%#//scriptlet("abort-on-property-read", "adsBlocked")
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/154040
 ! Fix #149953 allround-pc.com
 allround-pc.com#@#div[id^="div-gpt-"]
 allround-pc.com#@#[id^="div-gpt-ad"]
@@ -584,8 +587,7 @@ proplanta.de#%#//scriptlet("prevent-setTimeout", "adBlockFlag.offsetHeight")
 hdfilme.*#$##fads { display: block !important; }
 hdfilme.*#%#//scriptlet("set-constant", "adBlocked", "falseFunc")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/109367
-||doubleclick.net^$xmlhttprequest,redirect=nooptext,domain=stol.it,important
-@@||doubleclick.net^$xmlhttprequest,domain=stol.it
+stol.it#%#//scriptlet('prevent-fetch', 'www3.doubleclick.net')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/107178
 kicker.de#%#//scriptlet('prevent-setTimeout', '.call(null)', '10')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/101535
@@ -1063,6 +1065,8 @@ teleboy.ch#@#.adWrapper
 ! Bad: example.org##main > div.ad (should be in specific.txt)
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/153929
+szbz.de#?#main > div.mb-11.bg-white:has(span:contains(Anzeige))
 ! https://github.com/AdguardTeam/AdguardFilters/issues/154008
 ga-online.de#?#.adw:only-child:upward(1)
 ga-online.de#?#.relative:has(> .absolute:contains(Anzeige))
@@ -1773,6 +1777,7 @@ pcgames.de#?#.column > .module:has(> div[class] > div[class] > .item > span > a[
 ! https://github.com/AdguardTeam/AdguardFilters/issues/8048
 wallstreet-online.de#?#.extract > strong:contains(Anzeige)
 !
+flz.de#?#.swiper-wrapper > div.swiper-slide:has(> div.preview-slider__preview-holder > div[app-media-preview])
 deutschlandkurier.de#?#.vc_column > div.wpb_wrapper > div.td_block_wrap:has(> a[href^="https://www.afd.de/"])
 deutschlandkurier.de#?#.vc_column > div.wpb_wrapper > div.td_block_wrap:has(> div.td-fix-index:contains(Anzeige))
 wetter.de#?#.article-teaser-list__articles > div > div.v-spacing-md:has(> div.showheroes-ad-slot)
@@ -1811,6 +1816,8 @@ amateurbusters.com#?#.sb_area > .sb_area_headline:contains(Urlaub)
 ! VAST video ads - e. g. https://github.com/AdguardTeam/AdguardFilters/issues/135687
 stern.de,desired.de,pcgames.de,t-online.de,vox.de,spieletipps.de,wetter.de,golem.de,autobild.de,buffed.de,gamesaktuell.de,kino.de,pcgameshardware.de,videogameszone.de,familie.de,tvnow.de,welt.de#%#//scriptlet('prevent-xhr', '.damoh.')
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/154072
+prosieben.de#%#//scriptlet('set-constant', 'Object.prototype.checkAdProxyAvailability', 'noopFunc')
 ! 20min.ch - fixes video player
 20min.ch#%#(()=>{window.TATM=window.TATM||{},TATM.init=()=>{},TATM.initAdUnits=()=>{},TATM.pageReady=()=>{},TATM.getVast=function(n){return new Promise((n=>{n()}))},TATM.push=function(n){if("function"==typeof n)try{n()}catch(n){console.debug(n)}};})();
 ! https://github.com/AdguardTeam/AdguardFilters/issues/148783
@@ -2249,6 +2256,18 @@ winfuture.de,netzwelt.de,quoka.de,farmeramania.de,bravofly.de,computerbild.de,di
 ! ##.billboard
 formel1.de,krautundrueben.de,motorsport-total.com,traktorpool.de,fnweb.de,laborjournal.de,tarnkappe.info,deraktionaer.tv,food-tiger.de,morgenweb.de##.billboard
 !
+||publicfiles.studysmarter.de/campaigns/*-stusta-
+app.studysmarter.de##app-feed-ads
+app.studysmarter.de##.job-offer-wrapper
+flz.de##app-full-width-media-sub-type
+flz.de##div[app-button-media-container]
+reviersport.de##.rs-superbanner
+heftig.de##div[class^="code-block code-block-"][style^="margin: 8px auto;"]
+om-online.de##.molecule-adcontainer
+lz.de##div[style*="min-height:310px;"]
+||atv.somquery.sqrt-*.de/v4/ad-wrapper/
+prosieben.de##div[data-oasis-id="midroll-marker"]
+allgaeuer-zeitung.de###dm_conative_container_artikel
 ga-online.de##.adw
 nordsee-zeitung.de##div[class*="-bannerMitte"]
 rollingstone.de##div[id^="mrec"]
@@ -4560,7 +4579,7 @@ teilzeithelden.de##.four-ads-blocks
 teilzeithelden.de##.ads300-thumb
 openthesaurus.de###content > div[style="margin-top:60px; text-align: center"]
 openthesaurus.de##.resultColumn > div[style="margin-top:20px; text-align: center"]
-geo.de,northdata.de,losungencodycross.com,game-dna.de,spieletipps.de,heise.de,netdoktor.de,aachener-zeitung.de,wissen.de##.ad-container
+sueddeutsche.de,geo.de,northdata.de,losungencodycross.com,game-dna.de,spieletipps.de,heise.de,netdoktor.de,aachener-zeitung.de,wissen.de##.ad-container
 geo.de##div[data-adtype]
 wissen.de##.blockbox.ad
 wissen.de##.ad_contentad
@@ -5347,6 +5366,7 @@ tagesspiegel.de###urban-teaser1
 !
 ! Bad:  ||example.org/video-links (should be in specific.txt)
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/154072
 ! t-online.de ad video
 ! https://github.com/AdguardTeam/CoreLibs/issues/1671
 ! Glomex video ads - kabeleins.de,prosieben.de,prosiebenmaxx.de,ran.de,sat1.de,sixx.de,the-voice-of-germany.de,wetter.com
@@ -5544,9 +5564,7 @@ druckerchannel.de#@##DCGA_CONTAINER
 ! https://github.com/AdguardTeam/AdguardFilters/issues/63806
 cash.ch#@#.ad-enabled
 ! https://github.com/AdguardTeam/AdguardFilters/issues/63830
-golem.de#@%#(function(b,d,e){function a(){}b={get:function(){return a},set:a},d={};Object.defineProperties(d,{spid_control_callback:b,content_control_callback:b,vid_control_callback:b});e=new Proxy({},{get:function(a,c){switch(c){case "config":return d;case "_setSpKey":throw Error();default:return a[c]}},set:function(a,c,b){switch(c){case "config":return!0;case "bootstrap":case "mms":return a[c]=b,!0;default:throw Error();}}});Object.defineProperty(window,"_sp_",{get:function(){return e},set:a})})();
 ! https://github.com/AdguardTeam/AdguardFilters/issues/61906
-chip.de#@%#(function(o){function a(a){return{get:function(){return a},set:b}}function b(){}function c(){throw"Adguard: stopped a script execution.";}var d={},e=a(function(a){a(!1)}),f={},g=EventTarget.prototype.addEventListener;o(d,{spid_control_callback:a(b),content_control_callback:a(b),vid_control_callback:a(b)});o(f,{config:a(d),_setSpKey:{get:c,set:c},checkState:e,isAdBlocking:e,getSafeUri:a(function(a){return a}),pageChange:a(b),setupSmartBeacons:a(b)});Object.defineProperty(window,"_sp_",a(f));EventTarget.prototype.addEventListener=function(a){"sp.blocking"!=a&&"sp.not_blocking"!=a&&g.apply(this,arguments)}})(Object.defineProperties);
 ! saechsische.de - article hidden - https://www.saechsische.de/staatsanwalt-gegenueber-rechten-befangen-5247375.html
 saechsische.de#@?#article,div:-abp-has( > .article-fill__section > span:-abp-contains(Anzeige))
 ! https://github.com/AdguardTeam/AdguardFilters/issues/70817
@@ -7695,6 +7713,7 @@ $stylesheet,subdocument,third-party,xmlhttprequest,domain=canna-power.to|canna.t
 ||pcgamesdatabase.de/images/amazon_small.jpg
 ||pcgamesdatabase.de/images/bt_orderamazon.jpg
 ||pcgameshardware.de/tsimg/topbanner/
+||pear.focus.de^
 ||pesterlloyd.net/assets/images/autogen/Betway-Casino-300x400.jpg
 ||pfaffenhofen-today.de/images/banners/
 ||pfalz-echo.de/wp-content/uploads/*-Banner-
@@ -8215,6 +8234,8 @@ connextra.com##iframe[src^="https://ssl.connextra.com"]
 ||ad.yieldlab.net^$domain=gofeminin.de
 ||ad4mat.de^$domain=googlesyndication.com
 ||adcell.com^$domain=autobild.de
+||adform.net/banners/$domain=gofeminin.de
+||adform.net/serving/$domain=gofeminin.de
 ||adform.net^$domain=autobild.de|googlesyndication.com
 ||adition.com^$domain=autobild.de|g.doubleclick.net
 ||adnxs-simple.com/creative/$domain=autobild.de
@@ -8273,6 +8294,7 @@ connextra.com##iframe[src^="https://ssl.connextra.com"]
 ||amazon.de^*^tag=$popup,domain=rheinlandpfalz-news.de
 ||bitporno.to/api/direct/$popup
 ||count.shopping.t-online.de/RE?ID=$popup,domain=t-online.de
+||data-load.in/partner/$popup
 ||delamar.de/out/$popup
 ||sexei.net/go.html$popup
 ||sptopf.de/tshp/RE?ID=$popup,domain=t-online.de
@@ -9382,7 +9404,7 @@ saechsische.de##.footer__partner
 rhein-neckar-loewen.de##.footer__slider
 oefb.at##.footer_partner
 scdhfk-handball.de##.footer_sponsor_row
-schwaebische.de##.fp-ad-placeholder
+nordkurier.de,schwaebische.de##.fp-ad-placeholder
 fruchtportal.de##.fp-banner
 arboe.at##.frame-type-mask_toolboxcontentad1
 freenet.de##.frn_contAmazon
@@ -10411,6 +10433,8 @@ warez-ddl.net##img[height="90"]
 ak-kurier.de,nr-kurier.de,ww-kurier.de##img[name="banner"]
 areadvd.de##img[referrerpolicy="unsafe-url"]
 aerotelegraph.com,clever-tanken.de,supremacy1914.de##img[referrerpolicy]
+data-load.in##img[style="width:270px;height:80px;"]
+data-load.in##img[style="width:700px;height:90px;"]
 vfl.de##img[width="110"]
 fruchthandel.de,nh24.de##img[width="140"][height="140"]
 wirsiegen.de##img[width="140"][height="180"]
@@ -10641,7 +10665,7 @@ marbacher-zeitung.de#?#.appetizer:-abp-contains(Anzeige)
 mediamarkt.de,saturn.de#?#div[data-test="mms-search-srp-productlist-item"]:-abp-has([class^="StyledSponsoringInnerWrapper"])
 meinbezirk.at#?#.article-list-item.article-card.article-card-default:-abp-has(.commercial-tag)
 meissen-fernsehen.de#?#.text-center:-abp-contains(- Werbung -)
-metager.de#?#.result:-abp-has(.advertisement-mark)
+metager.de#?#.result:-abp-has(.mark:-abp-contains(Anzeige))
 metager.de#?#.result:-abp-has(span:-abp-contains(Partnershop))
 mmnews.de#?#.sp-module:-abp-has(span:-abp-contains(Kleinanzeigen))
 mopo.de#?#.main-preview:-abp-has(.anzeige-label)
