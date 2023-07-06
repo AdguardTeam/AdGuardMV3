@@ -1,8 +1,8 @@
-! Checksum: luI67wn/aeFbuvHJb4zAlQ
+! Checksum: LIHxsscFt6o5KnoyN5SHaw
 ! Title: AdGuard Turkish filter
 ! Description: Filter list that specifically removes ads on websites in Turkish language.
-! Version: 2.0.45.61
-! TimeUpdated: 2023-07-03T07:30:24+00:00
+! Version: 2.0.45.67
+! TimeUpdated: 2023-07-05T19:30:23+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -85,6 +85,7 @@
 ! Bad: ||adssubdomain.legitwebsite.com^ (should be in adservers_firstparty.txt)
 !
 !
+||medyanative.com^$third-party
 ||61ads.net^
 ||ardykffwpfx.xyz^
 ||eskiya.tk^
@@ -861,6 +862,8 @@ dizipal580.com,dizipal581.com,dizipal582.com,dizipal583.com,dizipal584.com,dizip
 ! Bad: example.org##main > div.ad (should be in specific.txt)
 !
 !
+haber3.com#?#.row > div.col-12:has(> div.box > div.adpro)
+breakingbadizle.com#?##wrap > p:has(> iframe[src*="/rklm/"])
 popsci.com.tr#?#.td-main-content-wrap .tdc_zone > .tdc-row:has(> .vc_row.tdc-element-style:only-child > style:first-child + .td-element-style + .vc_column:last-child > .wpb_wrapper > .wpb_wrapper > .td-fix-index > .empower-ad)
 sokgazetesi.com.tr,fotospor.com#?#div[class^="col-"] > div.center:has(> div[style^="margin-bottom:20px;"] > div[id^="div-gpt-ad"])
 apara.com.tr#?#.contentFrame > .container > .row > .col-md-4:has(> .advert)
@@ -1439,6 +1442,8 @@ technopat.net#%#(function() { var w_open = window.open, regex = /goo.gl/; window
 ! END: Clickunders
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/155439
+breakingbadizle.com#%#//scriptlet("prevent-window-open")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/153726
 [$path=/^\/$/]itemci.com#%#//scriptlet('trusted-click-element', 'div[style^="background"][style*="https://cdn.itemci.com/assets/images/site_login_image.jpg"] > button.close', '', '3000')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/153242
@@ -2421,7 +2426,7 @@ begonya.com,egehaber.com,voleybolmagazin.com,kadinvekadin.net,savunmasanayist.co
 !
 ! For URL shorteners or simple sites with frequently changed ad servers.
 ! Incorrectly blocked domains can be excluded using regex(synchronize this regexp in all filters)
-/^(?!.*(bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|cdn.staticfile.org|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yandex.|yastatic.net|ytimg.com|zencdn.net|player|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com)).*$/$third-party,script,_____,domain=erotik-film.org|pollos.cyou|dizigom.tv|fullindirsene.net|ehliyetsinavsorulari.org
+/^(?!.*(bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|cdn.staticfile.org|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yandex.|yastatic.net|ytimg.com|zencdn.net|player|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com|imgsmail.ru)).*$/$third-party,script,_____,domain=erotik-film.org|pollos.cyou|dizigom.tv|fullindirsene.net|ehliyetsinavsorulari.org
 !
 ! canlitribun*.com - frequently changed domains
 canlitribun40.com,canlitribun41.com,canlitribun42.com,canlitribun43.com,canlitribun44.com,canlitribun45.com,canlitribun46.com,canlitribun47.com,canlitribun48.com,canlitribun49.com,canlitribun50.com,canlitribun51.com,canlitribun52.com,canlitribun53.com,canlitribun54.com,canlitribun55.com,canlitribun56.com,canlitribun57.com,canlitribun58.com,canlitribun59.com,canlitribun60.com,canlitribun61.com,canlitribun62.com,canlitribun63.com,canlitribun64.com,canlitribun65.com,canlitribun66.com,canlitribun67.com,canlitribun68.com,canlitribun69.com,canlitribun70.com##.chat_over_reklam
@@ -2434,6 +2439,10 @@ canlitribun40.com,canlitribun41.com,canlitribun42.com,canlitribun43.com,canlitri
 /service/advertchannels?$xmlhttprequest,redirect=nooptext,domain=mardinhaber.com.tr|gidahatti.com|bolugundem.com
 dirilispostasi.com,turkuazgazetesi.net,yenialanya.com,bugunkocaeli.com.tr,cagdaskocaeli.com.tr,mansetaydin.com,seskocaeli.com,kocaelibarisgazetesi.com,kocaelikoz.com,enkocaeli.com##.block-pano > div.us
 !
+||ototeknikveri.com/Advert/
+medyahaber.com##body > #kapat
+finans.mynet.com##.adv-item-box
+||breakingbadizle.com/son.js
 popsci.com.tr##.empower-ad
 sokgazetesi.com.tr##div[style="height:262px;"]
 sokgazetesi.com.tr,fotospor.com##div[style="height:330px;"][class^="flex"]
@@ -2520,7 +2529,7 @@ nedir.org##.empower
 nedir.org##.mobil[style^="min-width:300px;min-height:"]
 ||birgun.net/api/OfficialAds/
 oyunmodlari.com##.reklam-title
-veteknoloji.net,yozgatcamlik.com##.banner
+bursahayat.com.tr,veteknoloji.net,yozgatcamlik.com##.banner
 turkiyegazetesi.com.tr###dfp-detail-kare-container
 turkiyegazetesi.com.tr##div[class^="dfp-"]
 ||hdfilmcehennemi.life/red3.jpg$image,redirect=1x1-transparent.gif
@@ -2723,7 +2732,6 @@ ensonhaber.com###top-adbar
 ensonhaber.com##.esx-home-mansetalt
 ||dizilost.com/show-promote.js
 ||dizilost.com/popunderxx.js
-||breakingbadizle.com/diziyon.js
 turkiyegazetesi.com.tr###random-ads
 fullhdfilmizle5.*##.mbl_psc
 fullhdfilmizle5.*##div[class^="r_header_"]
@@ -2917,7 +2925,6 @@ fullhdfilmizle5.*##.player ~ div[style="margin:3px 0px;height:90px"]
 fullhdfilmizle5.*##a[href^="https://redirect.bkaff.net/"]
 /bons.js$domain=fullhdfilmizle5.*
 sozcu.com.tr##.has-ad div[class*="bitay"]
-||breakingbadizle.com/diziyotvm.js
 ogznet.com###main > .header[style^="height:"]
 fotomac.com.tr##.icrypex-wrap
 ||fotomac.com.tr/Content/v2/i/300x80ICRYPEX.gif
@@ -3082,7 +3089,6 @@ gazetemanifesto.com##.reklam-ortala
 milliyet.com.tr,hurriyet.com.tr##.medyanet-inline-adv
 ||vanfem.com/asset/jquery/slim-3.2.min.js?c=
 incehesap.com##.kampanya
-bursahayat.com.tr##.ads-box-news
 finans7.com##.finans_place_holder
 ||filmsezonu.com/reklam*.jpeg
 ||cdn.doccloud.me/rkl/
@@ -3389,7 +3395,7 @@ mail.com.tr###mail_ad
 mail.com.tr##.banner_text_bottom
 mail.com.tr##div[id^="main-billboard"]
 yenierzurumhaber.com##.reklamside
-/ad-zones.js$domain=yenidonem.com.tr|bursahakimiyet.com.tr|bursahayat.com.tr|gundembursa.com
+/ad-zones.js$domain=yenidonem.com.tr|bursahakimiyet.com.tr|gundembursa.com
 kriptoteknikhaber.com,istikbalgazetesi.com##div[align="center"] > a[target="_blank"] > img
 istikbalgazetesi.com##.side-banner
 altinpiyasa.com###lyr_ads_top2
@@ -3398,7 +3404,7 @@ fotomac.com.tr##.head-banner
 kocaelidebugun.com###sagAds
 ||turkiyegazetesi.com.tr/images/pageskin/interstitial/libs/ads-mg*.js
 almanilan.com##div.ai-viewports[data-insertion]
-bursahakimiyet.com.tr,yenidonem.com.tr##div[id^="adContainer"]
+bursahayat.com.tr,bursahakimiyet.com.tr,yenidonem.com.tr##div[id^="adContainer"]
 yemekev.com##.gallery_onu
 ||molystream.net/turnaa.png
 lorentlabs.com##.partner
@@ -5368,7 +5374,6 @@ doeda.com##center > p[style="background-color: #e7e7e7; color: #F00; font-weight
 /img/rek^$domain=kocaelihaberdunyasi.com|cagdaskocaeli.com.tr
 birhayalinpesinde.com##.thecontent > div.code-block > a[data-wpel-link="external"] > img
 ||birhayalinpesinde.com/wp-content/uploads/2019/03/tatildukkani.gif
-bursahayat.com.tr###ilangovtr
 ||imgyukle.com/*/kNGVnp.gif
 forumandroid.com##.p-body-inner > .samCodeUnit
 demokratkocaeli.com###fadeinbox

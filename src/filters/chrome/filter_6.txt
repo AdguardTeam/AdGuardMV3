@@ -1,8 +1,8 @@
-! Checksum: D5FP06FtlTe/ny1VMZnRhA
+! Checksum: MeMOOB/2KZmxOlI9KO74+Q
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.36.20
-! TimeUpdated: 2023-07-02T13:03:49+00:00
+! Version: 2.0.36.25
+! TimeUpdated: 2023-07-05T15:32:09+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1063,6 +1063,8 @@ teleboy.ch#@#.adWrapper
 ! Bad: example.org##main > div.ad (should be in specific.txt)
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/155255
+chip.de#?#div[style*="min-height:"]:has(> a[href*="contentpartnerId"]:only-child > img)
 ! ratgeber.bunte.de - left-over in article
 ratgeber.bunte.de#?#.Article > div[class]:has(>hr:first-child + aside[role="complementary"] + hr:last-child)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/153929
@@ -2256,6 +2258,9 @@ winfuture.de,netzwelt.de,quoka.de,farmeramania.de,bravofly.de,computerbild.de,di
 ! ##.billboard
 formel1.de,krautundrueben.de,motorsport-total.com,traktorpool.de,fnweb.de,laborjournal.de,tarnkappe.info,deraktionaer.tv,food-tiger.de,morgenweb.de##.billboard
 !
+||images.finanzen.net/images/b_fonds/Vanguard_Banner
+chip.de##.is-hidden-sm > a[href*="contentpartnerId"] > img
+chip.de##div[style] > a[href*="contentpartnerId"] > img
 heise.de##div[id^="HEI_"][class]
 4fansites.de##div[style="text-align: center; min-height: 320px;"]
 4fansites.de##.spalten_33_twitch
@@ -8335,7 +8340,6 @@ mtb-news.de###MTB_M_ROS_Sticky
 skiinfo.de###Mid
 bauexpertenforum.de,elektrikforen.de,megane-board.de,windows-7-forum.net###MidRectangle
 chip.de###R1C1
-chip.de###R1C2
 chip.de###R1C3
 onvista.de###SMART_BILLBOARD
 wiesbaden.de###SP-commercials
@@ -9484,7 +9488,7 @@ homeandsmart.de##.hs_anbieter_box_block
 boerse-online.de##.hsbc_homepage_topflop
 news.de##.ialayerContainer
 gmx.net,web.de##.iba-variant-test
-az-online.de,bgland24.de,buzzfeed.at,buzzfeed.de,bw24.de,chiemgau24.de,come-on.de,fnp.de,fr.de,hallo-muenchen.de,ingame.de,innsalzach24.de,kreiszeitung.de,mangfall24.de,merkur.de,rosenheim24.de,sauerlandkurier.de,soester-anzeiger.de,tz.de,wa.de,wasserburg24.de##.id-TBeepSlot
+24rhein.de,az-online.de,bgland24.de,buzzfeed.at,buzzfeed.de,bw24.de,chiemgau24.de,come-on.de,fnp.de,fr.de,hallo-muenchen.de,ingame.de,innsalzach24.de,kreiszeitung.de,mangfall24.de,merkur.de,rosenheim24.de,sauerlandkurier.de,soester-anzeiger.de,tz.de,wa.de,wasserburg24.de##.id-TBeepSlot
 pcwelt.de##.idgAmazonTextV2
 computerwoche.de,tecchannel.de##.idgLeaderBoard
 channelpartner.de##.idgWebcastsCarousel
@@ -9547,6 +9551,7 @@ mainz05.de##.logo-footer-module
 wohnidee.wunderweib.de##.logo-slider
 zfans.de##.logo_rechts_mitte
 thsv-eisenach.de##.logos
+tv.herthabsc.com##.logos-partner-holder
 stuttgarter-nachrichten.de##.m-weekli
 juedische-allgemeine.de##.magazinteaser
 filmstarts.de##.main-banner
@@ -9863,6 +9868,7 @@ hornoxe.com##.sponsorleft
 bayer04.de,bvb.de,dhb.de,fc-union-berlin.de,hallescherfc.de,hcpustertal.com,ofc.de,rundumkoeln.de,uniliga.gg##.sponsors
 sg-flensburg-handewitt.de##.sponsors-col
 uniliga.gg##.sponsors-desktop
+tv.herthabsc.com##.sponsors-holder
 tsg-hoffenheim.de##.sponsors-slider
 freiburgesports.de##.sponsors-wrapper
 sportclub-meran.it##.sponsorslider
@@ -9942,6 +9948,7 @@ fcbinside.de##.top-footer-inner
 oberberg-aktuell.de##.top-leaderboard
 angelshow.de##.top-panel
 macwelt.de##.top-products
+herthabsc.com##.top-sponsor-nav
 gload.to##.top2019main
 radio.at,radio.de##.topASp
 az.com.na,photovoltaikforum.com##.topBanner

@@ -1,8 +1,8 @@
-! Checksum: oDXqwT8qpmcxm2pEQnrXHA
+! Checksum: jric52KP59GK07HJdCuTdw
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish, Portuguese, and Brazilian Portuguese languages.
-! Version: 2.0.19.98
-! TimeUpdated: 2023-06-30T07:32:19+00:00
+! Version: 2.0.20.6
+! TimeUpdated: 2023-07-05T14:32:17+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -89,6 +89,8 @@
 ! https://forum.adguard.com/index.php?threads/ivoox-com-podcasts-issues.29530/
 ! ||addevweb.com^$third-party
 !
+||cirsoiddanize.com^
+||bowedcounty.com^
 ||fuegodevida.com^$third-party
 ||admasters.media^$third-party
 ||spacelala.com^
@@ -398,8 +400,7 @@ investnewsbrazil.com,ricettafitness.com#%#//scriptlet('prevent-element-src-loadi
 pobre.wtf#%#//scriptlet('set-constant', 'adBlockerActive', 'false')
 pobre.wtf#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/139850
-||suaads.com/peel1-ad-300x250.js
-suaurl.com#%#//scriptlet('set-constant', 'cdo', '1')
+suaurl.com#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
 suaurl.com#%#//scriptlet('prevent-setTimeout', 'Por favor, desative')
 suaurl.com#%#//scriptlet('prevent-setInterval', '/adblock|Por favor, desative|adsbygoogle\.js/')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/138774
@@ -1637,6 +1638,9 @@ seriesgato.com#?#.TPlayerNv > li.Button:has(> span:contains(Publicidad))
 !------- JS rules ---------------------!
 !--------------------------------------!
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/155430
+playpaste.com#%#//scriptlet('abort-current-inline-script', '$', 'window.open')
+playpaste.com#%#//scriptlet('abort-current-inline-script', 'enlace', 'document.write')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/153969
 directvxx.com#%#//scriptlet('abort-current-inline-script', 'document.oncontextmenu', 'location.replace')
 ! https://www.reddit.com/r/uBlockOrigin/comments/13zza6x/opening_popup_when_click_on_the_player/
@@ -2251,7 +2255,7 @@ http://adw.
 !
 ! For URL shorteners or simple sites with frequently changed ad servers.
 ! Incorrectly blocked domains can be excluded using regex(synchronize this regexp in all filters)
-/^(?!.*(bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|cdn.staticfile.org|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yandex.|yastatic.net|ytimg.com|zencdn.net|player|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com)).*$/$third-party,script,_____,domain=thepiratefilmestorrent.biz|serieslatinoamerica.tv|pelispoptv.com|superflix.net|mangatigre.net
+/^(?!.*(bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|cdn.staticfile.org|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yandex.|yastatic.net|ytimg.com|zencdn.net|player|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com|imgsmail.ru)).*$/$third-party,script,_____,domain=thepiratefilmestorrent.biz|serieslatinoamerica.tv|pelispoptv.com|superflix.net|mangatigre.net
 ! Similar to regexp above, but using the denyallow modifier
 $script,third-party,denyallow=bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|cdn.staticfile.org|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yastatic.net|ytimg.com|zencdn.net|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com|fastcomments.com,domain=anroll.net
 !
@@ -2262,6 +2266,14 @@ tvhistoria.com.br,tribunapr.uol.com.br,diariodonordeste.verdesmares.com.br,sbt.c
 ! ##.banner
 manhwas.net,rpp.pe,ambito.com,economipedia.com,informador.mx,elinformador.com.co,cronista.com,rionegro.com.ar,diariodecuyo.com.ar,voydeviaje.com.ar,guarda14.com,viapais.com.ar,agazeta.com.br,eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.*,mundotecnologias.com,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##.banner
 !
+playpaste.com##.flex-center > a[target="_blank"] > img
+eltiempo.com##.cont_pauta_vivamos
+estadao.com.br##.container-pub-selo
+principal.cat##.ppa
+revistacromos.com.co##.Ads_megaBannerTopContainer
+eldebate.com##.content-add
+eldebate.com##.module-free-html-ads
+semana.com##.publish-box
 jn.pt##.pub-container
 ps3hengames.site##div > .separator > a[target="_blank"]:not([href*="://stfly.me/"]) > img
 noticiasaominuto.com##.ultima-hora > a[href^="https://www.flytap.com"]
@@ -2549,7 +2561,7 @@ poder360.com.br##div[class^="box-banner-footer"]
 ||sogatinhas.net/out/$image
 sogatinhas.net##.catfish
 acordacidade.com.br##.publi-base
-lasestrellas.tv##.Ads
+revistacromos.com.co,lasestrellas.tv##.Ads
 consultaremedios.com.br,elcomercio.com##.banner-wrapper
 elcomercio.com##ned-ad
 ||streamtheworld.com/ondemand/ars?type=preroll$domain=cadenaser.com
@@ -2756,7 +2768,7 @@ webarcondicionado.com.br###enveloping
 buscape.com.br##div[class^="Hits_SponsoredWrapper__"]
 brasilescola.uol.com.br##.publi-dir
 brasilescola.uol.com.br##.corpoPubli
-brasilescola.uol.com.br##.area-publi-topo
+brasilescola.uol.com.br##.area-publi
 economia.ig.com.br##div[class^="maislidas"]
 verfutebol.net,verfutebol.tv###superderbi
 opopular.com.br###bannerMateriaAbertaMeiaPagina
