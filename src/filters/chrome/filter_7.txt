@@ -1,8 +1,8 @@
-! Checksum: LiJXe4BKObBKxcvB7l2YyA
+! Checksum: 5p+/l6wMLD0kM/K6aHgF5Q
 ! Title: AdGuard Japanese filter
 ! Description: Filter that enables ad blocking on websites in Japanese language.
-! Version: 2.0.40.80
-! TimeUpdated: 2023-07-08T18:32:05+00:00
+! Version: 2.0.40.95
+! TimeUpdated: 2023-07-10T23:32:06+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -517,9 +517,6 @@ egotter.com#@#ins.adsbygoogle
 @@||gamemod.blog.fc2.com^$generichide
 gamemod.blog.fc2.com#@#.AdContainer
 gamemod.blog.fc2.com##ins.adsbygoogle
-||fc2.com/g/a/m/gamemod/1x-ie8.js
-||fc2.com/g/a/m/gamemod/2x-ie9.js
-||fc2.com/g/a/m/gamemod/3x-user-comment.js
 gamemod.blog.fc2.com#%#//scriptlet('abort-current-inline-script', 'setTimeout', 'AdContainer')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/152033
 puzzle-ch.com#@##adframe:not(frameset)
@@ -622,9 +619,6 @@ blog-and-destroy.com#%#//scriptlet("abort-current-inline-script", "onload", "ads
 !+ PLATFORM(windows, mac, android, ext_chromium, ext_ublock)
 musenboya.com#%#//scriptlet("abort-current-inline-script", "navigator.brave")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/131648
-||fc2.com/h/e/l/helpsupport/z-ie8.js
-||fc2.com/h/e/l/helpsupport/z-ie9.js
-||fc2.com/h/e/l/helpsupport/z-user-comment.js
 helpsupport.blog.fc2.com#%#//scriptlet('prevent-setTimeout', '/adsbygoogle|getComputedStyle/')
 helpsupport.blog.fc2.com#@#.AdContainer
 ||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,redirect=googlesyndication-adsbygoogle,domain=helpsupport.blog.fc2.com,important
@@ -905,6 +899,9 @@ otonasalone.jp,sumaiweb.jp#?#._popIn_infinite_page > a._popIn_recommend_article_
 !
 !
 !
+ddnavi.com#?##serial-index > .box:has(> div[id^="div-gpt-"]:only-child)
+nikkei.com#?#div[class^="bottomContainer_"] > div[class^="container_"]:has(> h2 + ul[class*="adForLarge_"])
+ameblo.jp#?##entryLi > li[class^="_"]:has(> div.skinBorderBottomColor > div)
 chijofile.com#?#div.side-widget-area:has(a[href^="https://www.e-nls.com/access.php"])
 chijofile.com,chijolog.com,tekokeyland.com#?#.video-content-widget-area > h4:has(+ div.custom-html-widget)
 maniacture.com#?##side-right > div.side-widget-area:has(a[href^="https://rcv.ixd.dmm.com/api/surl"])
@@ -2563,11 +2560,13 @@ hostlove.com#$##index_nav > h1 { padding-top: 30px!important; }
 /wp-content/plugins/amazonjs/*
 !
 ! Malware/Phishing
+.com/ibg/client/*.php|$document
+://accout.smba.jp.*.com/$document
 ://aeonpayadmin-jp.$document
 /index.php?signin=openid.pape.max_auth_age0&openid.return_to=https%3A%2F%2Fwww.offfffff.co.jp%2F$document
 .online/03-enamaisaambadimastana-hoshsambahloaapna-mainrangshanrbatonka/$document
 .online/13-exxxxjunemegarmibadhi-drancewalasaaamsathakamatlab-kaisehonelagayesmjhmenah/$document
-.xyz/amaterasu/2_ja/?$document
+/amaterasu/2_ja/?acc=$document
 ://www.eki.*.*.com/$document
 ://mlit-kankocho.$document
 ://www.jac*-co-jp.*.com.cn/$document
@@ -2598,7 +2597,6 @@ hostlove.com#$##index_nav > h1 { padding-top: 30px!important; }
 .co.jp.*.top/ai/sign.php?authenticated=true&openid%2Fgp%2Fsignin%2F$document
 ://rekutan.co.jp.*.com^$document
 ://www.ube*/ai/login.php|$document
-.cam/all/loginm.php?$document
 .top/sbid_auth/type1/2.0/authorization.phpresponse_type=code&client_id=$document
 /bin/loginCamp.php?$document
 .com/reg_new?$document
@@ -2639,7 +2637,6 @@ hostlove.com#$##index_nav > h1 { padding-top: 30px!important; }
 ://amazon-*.com/mobile/signin.php|$document
 .com/ae/login.php?openid.pape.max_auth_age=0&openid.return_to=%$document
 /DOCOMO.apk^$document
-/pc/login/?Rfunccode=$document,domain=com|cn
 /KDDI.apk^$document
 /?AC=*&IC=$document,domain=fun|online|site
 .asp?AC=*&IC=$document,domain=fun|online|site
@@ -2714,12 +2711,20 @@ retty.me,hentai-covers.site,109cinemas.net,4545.to,bunshun.jp,eikaiwa.dmm.com,gi
 ! ##.main-container-ads - can cause FP, use FQDN
 akege.blog.jp,badminton.doorblog.jp,buybuykorea.doorblog.jp,chihosoku.com,dondonwork.com,egm.doorblog.jp,idolgekijyo.doorblog.jp,ikuji-news.com,j02r.blog.jp,kagekidan.net,kijobibouroku.com,kimagure-kijyo.com,kusainews.com,love-history.jp,mankai-zakura.doorblog.jp,maromeru.com,momoclomatomex.com,mon-st.blog.jp,nandemomatomedan.com,nijimoemoe.com,pachinkolist.com,porolympic.tokyo,raburaibu.com,rare-channel.com,mashlife.doorblog.jp,ringofred53.com,shingekikyojin.doorblog.jp,shuraba.net,shurabanote.com,taorun.xyz,toralucky.fun,uwasakijo.net,wiiups.com,yappaero.com,zootennis.fun,genshin.blog.jp,takegon.jp,moemoeanime.blog.jp##.main-container-ads
 ! Don't generalize to lg.jp (false positive on city.awaji.lg.jp)
-city.toda.saitama.jp,city.ageo.lg.jp,pref.fukushima.lg.jp,pref.okayama.jp,city.oyama.tochigi.jp,city.kimitsu.lg.jp,city.ishikari.hokkaido.jp,city.minamiawaji.hyogo.jp,city.yamaguchi.lg.jp###banner_footer1
+city.miki.lg.jp,city.ozu.ehime.jp,city.toda.saitama.jp,city.ageo.lg.jp,pref.fukushima.lg.jp,pref.okayama.jp,city.oyama.tochigi.jp,city.kimitsu.lg.jp,city.ishikari.hokkaido.jp,city.minamiawaji.hyogo.jp,city.yamaguchi.lg.jp###banner_footer1
 ! check carefully if you are to block richlink.blogsys.jp, it's likely to be blockable only on some pages
 gundamlog.com###more > iframe[src^="https://richlink.blogsys.jp"]
 !
 !
 !
+rookie.shonenjump.com##.media-middle-banner
+bellcurve.jp##.pattern-box
+xn--cck0eqb0ebb.net##.l-main > aside.widget-page
+xn--cck0eqb0ebb.net##.l-sidebar > aside.widget:first-child
+xn--cck0eqb0ebb.net##.widgetPost
+tabicoffret.com###Advertisement
+tabicoffret.com##div[class^="adarea_"]
+wear.jp###gbl_ad
 chijofile.com,chijolog.com,tekokeyland.com##.video-content-widget-area > div.custom-html-widget
 chijofile.com,maniacture.com##.native-widget-area:first-child
 chijolog.com,tekokeyland.com##.side-widget-area a[href^="https://al.dmm.co.jp"]
@@ -3992,7 +3997,7 @@ uwakich.com##div[style^="height:350px;"][style*="width:735px;"]
 trilltrill.jp##.sideBar-AffiliateBanner
 pokemonbbs.com##.ads_oya
 pokemonbbs.com##div[style="height:100px"]
-city.maebashi.gunma.jp##.kokoku-area
+city.hekinan.lg.jp,city.maebashi.gunma.jp##.kokoku-area
 download.co.jp##div[id^="SAKURA"]
 seleck.cc##div[class$="sticky-sidebar__widgets"]
 city.tochigi.lg.jp###top_banner_footer
@@ -4561,7 +4566,7 @@ mens-modern.jp,ranking-best.net##div[style="min-height: 320px;"]:not(.u-mt-15)
 er-animal.jp###pc_article_right_1
 ecodb.net##.hd2
 city.funabashi.lg.jp##.boxSideBnrArea
-city.sagamihara.kanagawa.jp,city.suita.osaka.jp,city.zama.kanagawa.jp,city.obihiro.hokkaido.jp,city.kokubunji.tokyo.jp,city.takarazuka.hyogo.jp,city.utsunomiya.tochigi.jp,lg.jp###sadbg
+city.kawanishi.hyogo.jp,city.sagamihara.kanagawa.jp,city.suita.osaka.jp,city.zama.kanagawa.jp,city.obihiro.hokkaido.jp,city.kokubunji.tokyo.jp,city.takarazuka.hyogo.jp,city.utsunomiya.tochigi.jp,lg.jp###sadbg
 city.fujimi.saitama.jp##.container_09
 pref.kumamoto.jp,city.azumino.nagano.jp###top_kokoku
 city.chita.lg.jp###fixedAdv
@@ -4605,7 +4610,7 @@ pref.gifu.lg.jp###top_kokoku_bg
 pref.osaka.lg.jp###banner_frame
 rokkasho.jp##.home_bnr_box
 city.kasugai.lg.jp,city.nishio.aichi.jp,city.higashikurume.lg.jp,city.urayasu.lg.jp,city.chigasaki.kanagawa.jp,city.itabashi.tokyo.jp,city.ebina.kanagawa.jp,city.tsukuba.lg.jp,city.iruma.saitama.jp,city.fussa.tokyo.jp,city.akita.lg.jp,city.amagasaki.hyogo.jp,city.wakayama.wakayama.jp,city.ise.mie.jp,city.inazawa.aichi.jp,city.toyota.aichi.jp,city.kariya.lg.jp,city.gifu.lg.jp,city.obu.aichi.jp,city.morioka.iwate.jp,pref.iwate.jp###sad
-city.kawasaki.jp,city.tama.lg.jp,city.inzai.lg.jp,city.kyotanabe.lg.jp,city.himeji.lg.jp,city.hirakata.osaka.jp,city.osaka.lg.jp,city.kyoto.lg.jp,city.maizuru.kyoto.jp,city.nagoya.jp,city.iga.lg.jp##.bana
+city.ogaki.lg.jp,city.kawasaki.jp,city.tama.lg.jp,city.inzai.lg.jp,city.kyotanabe.lg.jp,city.himeji.lg.jp,city.hirakata.osaka.jp,city.osaka.lg.jp,city.kyoto.lg.jp,city.maizuru.kyoto.jp,city.nagoya.jp,city.iga.lg.jp##.bana
 rallys.online##.widget > a[href][target="_blank"] > img
 rugby-rp.com##div[class*="-adarea-"]
 rugby-rp.com##.pickup-wrap
@@ -7602,6 +7607,7 @@ wikiwiki.jp###inbound-ad-container
 wikiwiki.jp###pc-bottom-parent-ad-container
 shanbara.jp##td[width="200"]
 globaledu.jp##.one_banner
+||vip-chps-api.2nt.com/apis/footer/
 ||chps-api.fc2.com/apis/footer/
 ||plus.xcity.jp/data.php?
 ||st-hatena.com/valve/$domain=future-nova.com|hateblo.jp|hatelabo.jp|hatena.ne.jp|hatenablog.com|hatenablog.jp|hatenadiary.com|hatenadiary.jp|hatenadiary.org|seuzo.net
