@@ -1,8 +1,8 @@
-! Checksum: H5TMJgWpjwL1laAAygBHBQ
+! Checksum: ZDfPStA1VW2eeqbROFuU/Q
 ! Title: AdGuard Turkish filter
 ! Description: Filter list that specifically removes ads on websites in Turkish language.
-! Version: 2.0.45.75
-! TimeUpdated: 2023-07-11T07:30:26+00:00
+! Version: 2.0.45.77
+! TimeUpdated: 2023-07-12T13:02:10+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -863,6 +863,7 @@ dizipal580.com,dizipal581.com,dizipal582.com,dizipal583.com,dizipal584.com,dizip
 ! Bad: example.org##main > div.ad (should be in specific.txt)
 !
 !
+ruyashoujo.com#?#footer ~ p[style]:has(> span > a[href="https://takipgo.com/"])
 ugurfilm3.com#$?#body > header { margin-bottom: 0 !important; }
 haberturk.com#?#.sidebar-content-infinite > div.wrapper:has(> div > div.ads-zone)
 konhaber.com#$?#.swiper-wrapper > .swiper-slide:has(*:is(img[src^="/sahifeler/rkl/"], .adsbygoogle)) { remove: true; }
@@ -1487,7 +1488,7 @@ netsportv158.com#%#//scriptlet('set-constant', 'config.adv', 'emptyObj')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/77520
 [$domain=/^i\[a-z\]*\.strmrdr\[a-z\]+\..*/]#%#//scriptlet('set-constant', 'adscfg.enabled', 'false')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/146814
-aspor.com.tr,atv.com.tr,beyaztv.com.tr,kanal7.com,kanald.com.tr,showtv.com.tr,startv.com.tr,teve2.com.tr,tv8.com.tr#%#//scriptlet('m3u-prune', '/daioncdn\.net\/.*\/ad\//', '/daioncdn\.net\/.*\.m3u8/')
+ntv.com.tr,tlctv.com.tr,dmax.com.tr,haberturk.com,bloomberght.com,aspor.com.tr,atv.com.tr,beyaztv.com.tr,kanal7.com,kanald.com.tr,showtv.com.tr,startv.com.tr,teve2.com.tr,tv8.com.tr#%#//scriptlet('m3u-prune', '/daioncdn\.net\/.*\/ad\//', '/daioncdn\.net\/.*\.m3u8/')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/148895
 birasyadizi.com#%#//scriptlet('abort-on-property-write', 'onPopUnderLoaded')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/148131
@@ -2432,6 +2433,8 @@ fullhddizifilmizle2.net,fullhddizifilmizle3.net,fullhddizifilmizle4.net,fullhddi
 halk54.com,habereguven.com,pusulagazetesi.com.tr,iscihaber.net,gulsehir.com,aydinpost.com,jethaber.com.tr,yenisakarya.com,megabayt.com,haberlobi.com,yenimalatya.com.tr,gelirkapisi.com##div[id^="ad_"]
 ! ##.stream-item
 begonya.com,egehaber.com,voleybolmagazin.com,kadinvekadin.net,savunmasanayist.com,aof.tc,m5dergi.com,sosyola.com,havadiskibris.com,unirehberi.com##.stream-item
+! ##.code-block
+ruyashoujo.com,pchocasi.com.tr,dusuncekatalogu.com,fullhdfilmcibaba1.com,tatil.net.tr,fullfilmcidayi1.com##.code-block
 !
 !
 ! For URL shorteners or simple sites with frequently changed ad servers.
@@ -2449,6 +2452,7 @@ canlitribun40.com,canlitribun41.com,canlitribun42.com,canlitribun43.com,canlitri
 /service/advertchannels?$xmlhttprequest,redirect=nooptext,domain=mardinhaber.com.tr|gidahatti.com|bolugundem.com
 dirilispostasi.com,turkuazgazetesi.net,yenialanya.com,bugunkocaeli.com.tr,cagdaskocaeli.com.tr,mansetaydin.com,seskocaeli.com,kocaelibarisgazetesi.com,kocaelikoz.com,enkocaeli.com##.block-pano > div.us
 !
+tarotscans.com##footer > p > span[style]
 ||i.hizliresim.com/pftjokl.gif
 ||luvibetgiris.xyz/suv.js
 ugurfilm3.com##a[href="https://ucuncusinema.com/"]
@@ -2961,7 +2965,6 @@ turkiyegazetesi.com.tr###dfp-kare-1
 turkiyegazetesi.com.tr##.masthead-container
 yasemin.com##div[id^="dfp-anasayfa-masthead-"]
 /popmyshake*.js$domain=erenamcigi.cfd|trunge.tk|musluman.cfd
-pchocasi.com.tr,dusuncekatalogu.com,fullhdfilmcibaba1.com,tatil.net.tr,fullfilmcidayi1.com##.code-block
 ||r.resimlink.com/ZyRYl.jpg
 ||sexfilmleriizle.com/mostvid.mp4
 hdmixfilim.com,sinemol.vip,siyahfilmizle.info,erotikizlefilm.com,erotikfilmtube.com##.money--video

@@ -1,8 +1,8 @@
-! Checksum: 26WNrgQFCDyaFOTAaRV4Ow
+! Checksum: 5ADyTpGcndJ+IGrkNj+u8g
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.36.33
-! TimeUpdated: 2023-07-10T18:32:07+00:00
+! Version: 2.0.36.36
+! TimeUpdated: 2023-07-12T17:03:44+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1063,6 +1063,11 @@ teleboy.ch#@#.adWrapper
 ! Bad: example.org##main > div.ad (should be in specific.txt)
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/156242
+zockify.de#?#div:has(> small.text-muted)
+zockify.de#?#.container:has(> div[data-displaytype="hybrid-banner"])
+! https://github.com/AdguardTeam/AdguardFilters/issues/156152
+win-10-forum.de#?#div.p-body-pageContent > article.message--post:has(article.message-body > a.amazonadlink)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/155255
 chip.de#?#div[style*="min-height:"]:has(> a[href*="contentpartnerId"]:only-child > img)
 ! ratgeber.bunte.de - left-over in article
@@ -2261,6 +2266,7 @@ winfuture.de,netzwelt.de,quoka.de,farmeramania.de,bravofly.de,computerbild.de,di
 ! ##.billboard
 formel1.de,krautundrueben.de,motorsport-total.com,traktorpool.de,fnweb.de,laborjournal.de,tarnkappe.info,deraktionaer.tv,food-tiger.de,morgenweb.de##.billboard
 !
+unser-stadtplan.de##div[id^="np_ads_roller_"]
 stern.de##.article__body > .ad-element
 travelbook.de,fitbook.de##.af-wrapper
 augsburger-allgemeine.de##.p-swatch_topdown-nice--ad
@@ -2552,9 +2558,9 @@ haus.de##.chakra-skeleton
 jungefreiheit.de##.elementor-element-76f3556
 ||pedelecforum.de/forum/styles/pedelec/direkt^
 pedelecforum.de###fh-div
-winboard.org,pedelecforum.de##.fh-sidebar
-winboard.org,pedelecforum.de###fh-inside-bottom
-winboard.org,pedelecforum.de##.fh-inside-post
+win-10-forum.de,winboard.org,pedelecforum.de##.fh-sidebar
+win-10-forum.de,winboard.org,pedelecforum.de###fh-inside-bottom
+win-10-forum.de,winboard.org,pedelecforum.de##.fh-inside-post
 schottenland.de##div[id^="Skyscraper"]
 schottenland.de##div[style="width:728px;height:90px;"]
 echo-online.de##.vrm-ads__wrapper
