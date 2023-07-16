@@ -1,8 +1,8 @@
-! Checksum: ZDfPStA1VW2eeqbROFuU/Q
+! Checksum: k/CFvx9KTToOcM+CD7pVtA
 ! Title: AdGuard Turkish filter
 ! Description: Filter list that specifically removes ads on websites in Turkish language.
-! Version: 2.0.45.77
-! TimeUpdated: 2023-07-12T13:02:10+00:00
+! Version: 2.0.45.81
+! TimeUpdated: 2023-07-15T19:30:22+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -863,6 +863,7 @@ dizipal580.com,dizipal581.com,dizipal582.com,dizipal583.com,dizipal584.com,dizip
 ! Bad: example.org##main > div.ad (should be in specific.txt)
 !
 !
+serieturkisch.com,serietvturche.com,tvseriadosturcos.com,seriesturco.com,seriesturkish.com,televizyongazetesi.com#?#section.penci-disSticky.elementor-section-items-middle:has(> .elementor-container:only-child > .penci-sticky-ct:only-child > .elementor-widget-wrap > .elementor-element > .elementor-widget-container > .adsbygoogle)
 ruyashoujo.com#?#footer ~ p[style]:has(> span > a[href="https://takipgo.com/"])
 ugurfilm3.com#$?#body > header { margin-bottom: 0 !important; }
 haberturk.com#?#.sidebar-content-infinite > div.wrapper:has(> div > div.ads-zone)
@@ -1778,6 +1779,8 @@ r10.net#%#document.cookie = 'r10LeftHide=1';
 !------- CSS fixes --------------------!
 !--------------------------------------!
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/156329
+sinemalar.com#$##roadblock { position: absolute !important; left: -3000px !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/155322
 popsci.com.tr#$#.td-pb-row > .tdc-column > .wpb_wrapper { min-height: 0 !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/154797
@@ -2452,11 +2455,16 @@ canlitribun40.com,canlitribun41.com,canlitribun42.com,canlitribun43.com,canlitri
 /service/advertchannels?$xmlhttprequest,redirect=nooptext,domain=mardinhaber.com.tr|gidahatti.com|bolugundem.com
 dirilispostasi.com,turkuazgazetesi.net,yenialanya.com,bugunkocaeli.com.tr,cagdaskocaeli.com.tr,mansetaydin.com,seskocaeli.com,kocaelibarisgazetesi.com,kocaelikoz.com,enkocaeli.com##.block-pano > div.us
 !
+milliyet.com.tr##.main-card-ads
+bizevdeyokuz.com###custom_html-7
+sinematurk.com##a.coverup
+sinematurk.com##.padder[style]:empty
+sinemalar.com##.left-column > div > a[target="_blank"] > img
+||imgsinemalar.com/img/cerezza_film_sayfasi_banner.png
 tarotscans.com##footer > p > span[style]
 ||i.hizliresim.com/pftjokl.gif
 ||luvibetgiris.xyz/suv.js
 ugurfilm3.com##a[href="https://ucuncusinema.com/"]
-||realfilmizle5.com/s-mi5.js
 ||storj-cloud.cdn.ampproject.org/*/bahsegel
 ||storj-cloud.cdn.ampproject.org/*/bettilt
 ||hdfilmhit.org/wp-content/uploads/*/input.jpg
@@ -3212,7 +3220,7 @@ myburc.com##div[style="height:280px;"]
 canlitv.center###sidebar_reklam
 ||erotik123.com/top.js
 filmifullizle.club##a[href="/filmifullizle.php"]
-/s-mi*.js$domain=720pfilmizleme1.com|fullhdfilmcibaba1.com|720pizlemek1.com|fullhdfilmizlett1.com
+/s-mi*.js$domain=realfilmizle5.com|720pfilmizleme1.com|fullhdfilmcibaba1.com|720pizlemek1.com|fullhdfilmizlett1.com
 /main_tabs*.js$domain=fullfilmcidayi1.com|720pizlemek1.com
 /video_ob*.js$domain=fullfilmcidayi1.com|fullhdfilmcibaba1.com|fullhdfilmizlett1.com|720pizlemek1.com
 /ft*.js$domain=fullfilmcidayi1.com|fullhdfilmizlett1.com|fullhdfilmcibaba1.com|720pizlemek1.com
@@ -6815,6 +6823,8 @@ adguard.com,adguard.app##.hello_from_adguard_turkish
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/156511
+@@||dogus-ads-cdn.dygdigital.com/daion/daion-videojs-hlsjs-*.min.js
 ! https://github.com/AdguardTeam/AdguardFilters/issues/154110
 @@||img.segmentify.com^$domain=mediamarkt.com.tr
 @@||cdn.segmentify.com^$domain=mediamarkt.com.tr
