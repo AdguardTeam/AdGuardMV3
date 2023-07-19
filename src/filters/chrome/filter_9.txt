@@ -1,8 +1,8 @@
-! Checksum: 6Jjv4RURYCSjJLMc4LyCKg
+! Checksum: UmBc/eAERCOyB/Z5IOsPgw
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish, Portuguese, and Brazilian Portuguese languages.
-! Version: 2.0.20.23
-! TimeUpdated: 2023-07-18T06:32:15+00:00
+! Version: 2.0.20.26
+! TimeUpdated: 2023-07-18T16:32:13+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -306,6 +306,8 @@
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/156826
+teleculinaria.pt#%#//scriptlet('prevent-fetch', 'adsbygoogle')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/156578
 meocloud.pt##.adblock_warning
 meocloud.pt#$#body .adblock_warning:not(#style_important) { position: absolute !important; left: -3000px !important; }
@@ -407,7 +409,8 @@ investnewsbrazil.com,ricettafitness.com#%#//scriptlet('prevent-element-src-loadi
 pobre.wtf#%#//scriptlet('set-constant', 'adBlockerActive', 'false')
 pobre.wtf#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/139850
-suaurl.com#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
+suaurl.com#%#//scriptlet('prevent-fetch', '/pagead2\.googlesyndication\.com|optad360\.io')
+||get.optad360.io^$xmlhttprequest,redirect=nooptext,domain=suaurl.com
 suaurl.com#%#//scriptlet('prevent-setTimeout', 'Por favor, desative')
 suaurl.com#%#//scriptlet('prevent-setInterval', '/adblock|Por favor, desative|adsbygoogle\.js/')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/138774
@@ -1646,6 +1649,8 @@ seriesgato.com#?#.TPlayerNv > li.Button:has(> span:contains(Publicidad))
 !------- JS rules ---------------------!
 !--------------------------------------!
 !
+! https://github.com/uBlockOrigin/uAssets/issues/18828#issuecomment-1639561464
+suaurl.com#%#//scriptlet("prevent-window-open")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/156217
 megafire.net#%#//scriptlet('set-constant', 'contadorClics', '1')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/155430
@@ -2276,6 +2281,11 @@ tvhistoria.com.br,tribunapr.uol.com.br,diariodonordeste.verdesmares.com.br,sbt.c
 ! ##.banner
 manhwas.net,rpp.pe,ambito.com,economipedia.com,informador.mx,elinformador.com.co,cronista.com,rionegro.com.ar,diariodecuyo.com.ar,voydeviaje.com.ar,guarda14.com,viapais.com.ar,agazeta.com.br,eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.*,mundotecnologias.com,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##.banner
 !
+suaurl.com##.mt-2.mb-5.text-center
+suaurl.com##.mt-5.text-center
+teleculinaria.pt##.up_comments
+teleculinaria.pt##.teleculinaria_meio_conteudo_receitas
+teleculinaria.pt##.akcelo-wrapper
 razoesparaacreditar.com##.ads-inline-content
 observatoriodosfamosos.uol.com.br##.obx-spots
 observatoriodosfamosos.uol.com.br##.BannerDisneyPlay__Container
@@ -3354,7 +3364,6 @@ nightlifeporn.com##.close-text
 morritastube.xxx##.mt_ad
 cabezanews.com##.tw-ads
 irmaosdotados.net##body > iframe[class][style^="border:"][style*="z-index:"]:not([src])
-||lun.com/vod/mp4:*_720p.mp4/playlist.m3u8
 lun.com##div[style="top:-1px;width:33%;float:left; vertical-align:top;"]
 hentaiporno.xxx###text-19
 ||hentaiporno.xxx/wp-content/uploads/*/*_video.mp4.mp4$media,redirect=noopmp4-1s

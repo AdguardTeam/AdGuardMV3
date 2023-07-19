@@ -1,8 +1,8 @@
-! Checksum: NPr9xcRxpdMrEmRY4AQh4Q
+! Checksum: mEYAi3CGQ9WQN9060+20Cg
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.83.10
-! TimeUpdated: 2023-07-17T12:31:07+00:00
+! Version: 2.0.83.15
+! TimeUpdated: 2023-07-18T13:31:11+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -6790,6 +6790,7 @@ dzen.ru,auto.ru,avito.ru,baby.ru,businessman.ru,dni.ru,e1.ru,echo.msk.ru,fb.ru,f
 ! TODO: add domains auto.ru and kinopoisk.ru to the rule below after the next release of AG for macos (current 2.3.2)
 $cookie=/blcrm|bltsr|zmFQeXtI|JPIqApiY|computer/,domain=dzen.ru|baby.ru|businessman.ru|dni.ru|e1.ru|echo.msk.ru|fb.ru|forexpf.ru|gismeteo.by|gismeteo.kz|gismeteo.md|gismeteo.ru|gorodrabot.ru|infoniac.ru|it-tehnik.ru|kakprosto.ru|liveinternet.ru|mk.ru|nkj.ru|ohotniki.ru|oko-planet.su|otzovik.com|rambler.ru|razlozhi.ru|sdamgia.ru|syl.ru|vz.ru
 ! zen.yandex.ru - broken resources
+dzen.ru#%#//scriptlet('json-prune', 'seatbid rtb direct')
 dzen.ru#%#//scriptlet('abort-on-property-read', 'yaContextCb')
 dzen.ru#%#//scriptlet('remove-cookie', '/blcrm|bltsr|zmFQeXtI|JPIqApiY|computer/')
 !
@@ -7335,6 +7336,7 @@ liveinternet.ru#%#Element.prototype.attachShadow = function(){};
 ! echo.msk.ru
 ! other sites(+ 24smi.org)
 !
+! /*! v:808163 b:adblock c:loaders/context_adb */
 !
 ! END: Yandex
 !
@@ -7821,6 +7823,8 @@ disk.yandex.*#%#//scriptlet('remove-class', 'has-fullscreen-banner','.public__ro
 !------- CSS -----------
 !-----------------------
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/156605
+simhost.org#$#.top_container { margin-top: 70px !important; }
 ! championat.com - enable synchronous scrolling of the sidebar
 championat.com#$#.page-sidebar > div.sticky-vertical { position: unset !important; }
 ! https://github.com/AdguardTeam/AdguardForAndroid/issues/4828
@@ -9321,6 +9325,10 @@ kadrovik01.com.ua,kom-dir.ru,gd.ru,buhsoft.ru,dirklinik.ru,fd.ru,business.ru,pro
 !
 !
 !
+simhost.org##.dle_b_brand
+kino-teatr.ru##.block_okko
+kamchatkamedia.ru##.to_nolimit.deflt-blk
+||interface31.ru/tech_it/images/mikrotik-sensei-
 kovalut.ru##.top-rekl
 minsknews.by##.wpadcenter-ad-container
 e1.ru#?#div[data-test="header-sticky"] > div[class] > section + div:has(> div > svg[width="64"][height="12"] > use)
@@ -9334,7 +9342,7 @@ torrent5.net###torent_val > h2
 kubnews.ru##.simular-smi2
 vladday.ru#?#aside > .border-b:has(> h5:contains(Реклама))
 iguides.ru##.huawei-link
-fantworld.org##div[id^="adfox_"]
+iz.ru,fantworld.org##div[id^="adfox_"]
 ||aflt.travel.ya.ru/widgets/api.js$third-party
 football.by###fonbet
 football.by##a[href="https://betonmobile.by/betera-android-app"]

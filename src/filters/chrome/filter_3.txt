@@ -1,8 +1,8 @@
-! Checksum: aLWQPo2xJDmj1V992n3btg
+! Checksum: S/sZBfcSQ7X9uVCfEY2Gfg
 ! Title: AdGuard Tracking Protection filter
 ! Description: The most comprehensive list of various online counters and web analytics tools. Use this filter if you do not want your actions on the Internet to be tracked.
-! Version: 2.0.58.46
-! TimeUpdated: 2023-07-17T21:03:29+00:00
+! Version: 2.0.58.54
+! TimeUpdated: 2023-07-19T08:31:45+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -83,6 +83,9 @@
 ! Bad: example.org###rek (should be in specific.txt)
 !
 !
+! https://github.com/uBlockOrigin/uAssets/issues/16512#issuecomment-1639236636
+! Fixes video player, it's part of the analytics script
+lun.com#%#//scriptlet('set-constant', 'CallAjax', 'noopFunc')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/156723
 security.oneplus.com#%#//scriptlet('set-constant', '_dx', 'emptyObj')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/156401
@@ -393,6 +396,7 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ! Bad: example.org##main > div.ad (should be in specific.txt)
 !
 ! placeholder by Taboola
+full-count.jp#?#.s-entry > section > div.c-heading:has(> div#taboola-below-article-thumbnails-desktop)
 kobe-np.co.jp#?#section.sec:has(> #piano_recs_inline_title)
 crank-in.net#?#.wrap_general:has(> #taboola-below-article-thumbnails-mg)
 crank-in.net#?#article > section.block-area:has(> div#taboola-below-article-thumbnails-mg)
@@ -513,6 +517,7 @@ prjaga.ru#?##right > div#right_nav > h3:contains(Онлайн статистик
 !||i.snssdk.com/log/*
 !||i.snssdk.com/slardar/sdk.js
 !
+||meowlytics.bignutty.xyz^
 ||loggw.alipay.com^
 ||loggw-ex.alipay.com^
 ||loggw.alipay.com.cn^
@@ -5563,6 +5568,9 @@ nethunt.com/api/v1/track/email/$image
 ! Blocking piwik analytics subdomain(for DNS filtering)
 |piwik.
 !
+||analytics.ripped.guide^
+||ats.auction.co.kr^
+||stats.stylight.de^
 ||tmserverside.mango.com^
 ||analytics.tedium.co^
 ||tracking.gnavi.co.jp^
@@ -55827,8 +55835,6 @@ charlestownwyllie.oaklawnnonantum.com^
 /get/*/inventory|
 /metrika/*.png?x=
 /in/track?data=
-/api/senddata?site=
-/api/ipv4check?site=
 /xstat/?id=$script,~third-party
 /perfmatters/js/analytics-minimal.js
 /omniture_tracking.
@@ -56278,6 +56284,14 @@ _tracking.php?b=
 /analytics.js$domain=tokyometro.jp|resumes.breakdownexpress.com|techcult.com|inbox.lv|kopeda.com|freexcafe.com|rusvideos.tv|nakubani.ru|lun.com|songsara.net|newsmax.com|bolgehastanesi.com|ewtc.de|newsdig.tbs.co.jp|imore.com|city.kushiro.lg.jp|emeraldbridal.com.au|emarat-news.ae|imobie.jp|tikla.com.tr|rusvideos.porn|jrkyushu.co.jp|amiunique.org
 ||assets.adobedtm.com^$domain=mcclatchydc.com|elnuevoherald.com|bellinghamherald.com|sacbee.com|charlotteobserver.com|newsobserver.com|miamiherald.com|ef.ru|algida.com.tr|bmw-motorrad.co.uk|cif.com.tr|clearhaircare.com|domestos.com|dove.com|elidor.com.tr|f1sport.autorevue.cz|geico.com|hellmanns.com.tr|herkessofraya.com|johnsonsbaby.com.tr|lipton.com|lnk.to|lux.com|magnumicecream.com|neutrogena.com.tr|omo.com|rexona.com|samsung.com|sap.com|schwarzkopf.com.tr|signalturkiye.com|msnbc.com|nbcnews.com|kbb.com|eurosport.ru|timgate.it|intermiles.com|oxfordmail.co.uk|spiegel.de|hp.com|deutschepost.de|thebay.com|s.shufoo.net|tsn.ca|tabelog.com|euronews.com|newshub.co.nz|fredmeyer.com|viabcp.com|carsales.com.au|falabella.com|aarp.org
 !
+||termsfeed.com/track/
+||data.pendo.statista.com/data/ptm.gif
+||jpnews-video.com/js/googleanalytics.js
+||otsuka-shokai.co.jp/_rtbcn/rt_track.js
+||ag.unistyleinc.com/pd.js
+||ag.unistyleinc.com/analytics
+||auction.co.kr/*/GetHashedCguid|$xmlhttprequest
+||mobile.auction.co.kr/CLog.aspx
 ||sumaity.com/script/analytics/s_code.js
 ||sumaity.com/js/press/analytics_scroll.js
 ||st.mngbcn.com/scripts/tagmanager.js
@@ -61760,6 +61774,7 @@ inapps.appsflyersdk.com^
 ! For platforms which do not support $redirect rules
 !
 !
+! https://github.com/uBlockOrigin/uAssets/issues/16512#issuecomment-1639236636
 ! https://github.com/AdguardTeam/AdguardFilters/issues/156301
 @@||googletagmanager.com/gtag/js$domain=bihann.com|nehannn.com
 @@||googletagservices.com/tag/js/gpt.js$domain=bihann.com|nehannn.com
