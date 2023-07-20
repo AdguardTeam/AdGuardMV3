@@ -1,8 +1,8 @@
-! Checksum: IYsXl7ah83AgRLkYTFPM6Q
+! Checksum: D9Ak2cxKZ8MRWcYjrUu2vQ
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.83.16
-! TimeUpdated: 2023-07-19T10:31:06+00:00
+! Version: 2.0.83.19
+! TimeUpdated: 2023-07-19T19:31:06+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -5975,6 +5975,8 @@ electric-house.ru#%#//scriptlet("abort-on-property-read", "onload")
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/156353
+zazloo.ru#%#//scriptlet('set-constant', 'fpm_adbDetect', 'noopFunc')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/155050
 ||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,redirect=noopjs,domain=test-dmv.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/152780
@@ -6075,7 +6077,9 @@ notdrink.ru#%#//scriptlet("abort-current-inline-script", "$", "initDetection")
 @@||staticmv.mediavitrina.ru/vitrina_assets/*/banner.gif?r=*&ads=adv$domain=player.mediavitrina.ru
 ! https://forum.adguard.com/index.php?threads/%D0%A0%D0%B5%D1%88%D0%B5%D0%BD%D0%BE-all-episodes-net.16180/page-2#post-214098
 all-episodes.fun,all-episodes.club#$#div[id^="adv"] { display: none !important; }
-all-episodes.fun,all-episodes.club#%#//scriptlet("abort-on-property-read", "perROS")
+all-episodes.fun,all-episodes.club##.advtss
+! breaks video at https://all-episodes.fun/mayans/season5/series9
+! all-episodes.fun,all-episodes.club#%#//scriptlet("abort-on-property-read", "perROS")
 ! sdamgia.ru - adb detection
 sdamgia.ru#$#.googlead.pub_300x250.pub_300x250m.pub_728x90.text-ad.textAd.text_ad.text_ads.text-ads.text-ad-links { display: block !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/88638
@@ -7823,6 +7827,8 @@ disk.yandex.*#%#//scriptlet('remove-class', 'has-fullscreen-banner','.public__ro
 !------- CSS -----------
 !-----------------------
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/156461
+torrent-soft.net#$#.wwide.pagebg { background: unset !important; padding-top: 0px !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/156605
 simhost.org#$#.top_container { margin-top: 70px !important; }
 ! championat.com - enable synchronous scrolling of the sidebar
@@ -14474,10 +14480,10 @@ experttur.com###text-19.sidebar-widget
 foto-toto.ru###text-2.widget
 windowsprofi.ru###text-20
 kaspyinfo.ru###text-27 > div > img
-androidayuda.com,androidsis.com,sdelairukami.ru###text-3
+multforum.ru,androidayuda.com,androidsis.com,sdelairukami.ru###text-3
 hsp.kz###text-31
 isroe.co.il###text-39
-pcgramota.ru###text-4
+multforum.ru,pcgramota.ru###text-4
 virtmachine.ru,kermo.info###text-5
 voyagist.ru###text-8
 itechua.com,poddavleniem.ru###text-9

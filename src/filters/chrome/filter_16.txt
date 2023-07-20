@@ -1,8 +1,8 @@
-! Checksum: 6whOlgvvjIMAZJjwY23uGg
+! Checksum: JFwo9AZ/gcOMVJYx6Ga2hA
 ! Title: AdGuard French filter
 ! Description: Liste FR + AdGuard French filter. Filter list that specifically removes ads on websites in French language.
-! Version: 2.0.40.94
-! TimeUpdated: 2023-07-17T12:30:50+00:00
+! Version: 2.0.40.96
+! TimeUpdated: 2023-07-20T06:30:55+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -800,7 +800,7 @@ canalplus.com#%#//scriptlet('set-constant', '__data.application.settings.featPla
 ! https://github.com/AdguardTeam/AdguardFilters/issues/123526
 canalplus.com#%#//scriptlet('json-prune', 'ads.*.default ads.*.url ads.enableMidrolls', 'ads')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/143831
-6play.fr#%#(function(){let callCounter=0;const nativeJSONParse=JSON.parse;const handler={apply(){callCounter++;const obj=Reflect.apply(...arguments);if(callCounter<=10){if(obj.hasOwnProperty('appName')){obj.applaunch.data.player.features.ad.enabled=false;obj.applaunch.data.player.features.ad.dai.enabled=false;}}else{JSON.parse=nativeJSONParse;}return obj;}};JSON.parse=new Proxy(JSON.parse,handler);})();
+6play.fr#%#(function(){let callCounter=0;const nativeJSONParse=JSON.parse;const handler={apply(){callCounter++;const obj=Reflect.apply(...arguments);if(callCounter<=10){if(obj.hasOwnProperty("appName")){if(obj.applaunch?.data?.player?.features?.ad?.enabled){obj.applaunch.data.player.features.ad.enabled=false}if(obj.applaunch?.data?.player?.features?.ad?.dai?.enabled){obj.applaunch.data.player.features.ad.dai.enabled=false}}}else{JSON.parse=nativeJSONParse}return obj}};JSON.parse=new Proxy(JSON.parse,handler)})();
 ! https://github.com/AdguardTeam/AdguardFilters/issues/103930
 rtlplay.be#%#//scriptlet('json-prune', 'applaunch.data.player.features.ad.enabled applaunch.data.player.features.ad.dai.enabled', 'appName')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/143831
@@ -7407,6 +7407,7 @@ _siteunder/$popup
 ||agedradiant.com^
 ||ageistlutists.com^
 ||agenuuiriyrr.com^
+||agilespatter.com^
 ||agmnamucqoe.com^
 ||aguehalved.com^
 ||ahdtgsdmc.com^
@@ -7466,6 +7467,7 @@ _siteunder/$popup
 ||allownotification.com^
 ||allownotifications.com^
 ||allowpush.com^
+||allrightpaint.com^
 ||alnuinkwintra.com^
 ||aloftlarge.com^
 ||alonged.com^
@@ -7551,6 +7553,7 @@ _siteunder/$popup
 ||aratiremanie.com^
 ||arcbrecy.com^
 ||arcticclairvoyant.com^
+||areamindless.com^
 ||arenitezill.com^
 ||arfycvxb.com^
 ||argalsunclay.space^
@@ -7612,6 +7615,7 @@ _siteunder/$popup
 ||atmasroofy.com^
 ||atnqeafqlert.com^
 ||atomheal.live^
+||atonementwisely.com^
 ||atopitegoutish.com^
 ||atrepsywristy.com^
 ||atrhffxiulfgfks.com^
@@ -7672,6 +7676,7 @@ _siteunder/$popup
 ||azureungild.com^
 ||b0ae83d7ec.com^
 ||b0bf3dc8c2.com^
+||b0omr3wn6u4b.com^
 ||b109bc2bfc.com^
 ||b1cee97d27.com^
 ||b2e2b89cc1.com^
