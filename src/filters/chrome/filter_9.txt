@@ -1,8 +1,8 @@
-! Checksum: UmBc/eAERCOyB/Z5IOsPgw
+! Checksum: r+o8InihzNy4j9uqeGfsVA
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish, Portuguese, and Brazilian Portuguese languages.
-! Version: 2.0.20.26
-! TimeUpdated: 2023-07-18T16:32:13+00:00
+! Version: 2.0.20.33
+! TimeUpdated: 2023-07-21T22:32:14+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -306,6 +306,8 @@
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/156973
+enlacito.com#%#//scriptlet('prevent-fetch', 'method:HEAD')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/156826
 teleculinaria.pt#%#//scriptlet('prevent-fetch', 'adsbygoogle')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/156578
@@ -1359,6 +1361,9 @@ peru21.pe#@#.adstop
 ! https://github.com/AdguardTeam/AdguardFilters/issues/24801
 yahoo.com#?#ul[class^="Mb(0)"] > li.js-stream-content:has(> div > a[rel="nofollow noopener noreferrer"]+div:contains(Patrocinado))
 !
+epe.es#?#.col-md-4 > div.visible-md:has(> div.minHeightLong > div.following-ad-container)
+contaspoupanca.pt#?#.et_pb_column:has(> div.et_pb_with_border > div.et_pb_module_inner > h4 > span[class]:contains(Publicidade))
+contaspoupanca.pt#?#p:has(> iframe[src^="https://afiliados.wook.pt/"])
 plog.com.br#?#.text-center > .panel:has(> .panel-body > ins[data-revive-zoneid])
 app.kultivi.com#?#.react-multi-carousel-track > li.react-multi-carousel-item:has(> div.MuiBox-root img[src="https://cdn-kultivi.s3.amazonaws.com/campaigns/1685391938255_desk_CKYcgEWzNV.webp"])
 app.kultivi.com#?#main > div.MuiBox-root > div.MuiBox-root:has(> div[align="center"] > div.MuiBox-root:contains(Publicidade))
@@ -1689,6 +1694,8 @@ suaurl.com#%#//scriptlet('abort-current-inline-script', '$', 'notficationAd')
 suaurl.com#%#//scriptlet('abort-current-inline-script', 'open', 'document.getElementById')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/139603
 estacio.br#%#//scriptlet('set-cookie', 'modal_promo', '1')
+! https://github.com/AdguardTeam/AdguardFilters/issues/156973
+enlacito.com#%#AG_onLoad(function(){try{var a;"function"==typeof decode_link&&"string"==typeof link_out&&(a=decode_link(atob(link_out)),location.assign(a)),"string"==typeof api_key&&(document.cookie=`${api_key}=Wn275; path=/`);var b=document.querySelector("* > .button#contador");b&&a&&setTimeout(()=>{var c=b.cloneNode(!0);b.parentNode.replaceChild(c,b),c.addEventListener("click",function(){location.assign(a)},!1)},500)}catch(a){}});
 ! https://github.com/AdguardTeam/AdguardFilters/issues/138774
 ttlinks.live#%#AG_onLoad(function(){try{var a;"function"==typeof decode_link&&"string"==typeof link_out&&(a=decode_link(atob(link_out)),location.assign(a)),"string"==typeof api_key&&(document.cookie=`${api_key}=Wn275; path=/`);var b=document.querySelector("* > .button#contador");b&&a&&setTimeout(()=>{var c=b.cloneNode(!0);b.parentNode.replaceChild(c,b),c.addEventListener("click",function(){location.assign(a)},!1)},500)}catch(a){}});
 ttlinks.live#%#(function(){if(-1<window.location.href.indexOf("/#")){var a=location.href.split("/#");if(a&&a[1]){a=a[1];for(var c=0;10>c;c++)try{a=atob(a)}catch(f){var d=a.replace(/[a-zA-Z]/g,function(b){return String.fromCharCode(("Z">=b?90:122)>=(b=b.charCodeAt(0)+13)?b:b-26)});try{new URL(d);var e=!0}catch(b){e=!1}if(e){window.location=d;break}}}}})();
@@ -2281,6 +2288,17 @@ tvhistoria.com.br,tribunapr.uol.com.br,diariodonordeste.verdesmares.com.br,sbt.c
 ! ##.banner
 manhwas.net,rpp.pe,ambito.com,economipedia.com,informador.mx,elinformador.com.co,cronista.com,rionegro.com.ar,diariodecuyo.com.ar,voydeviaje.com.ar,guarda14.com,viapais.com.ar,agazeta.com.br,eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.*,mundotecnologias.com,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##.banner
 !
+esdiario.com##div[class*="publi-"]
+neo2.com##.postDosRow
+milenio.com##aside[id^="taboola"]
+elcomercio.es##.voc-area-container--head-adv
+elpais.com##.outbrain
+neomotor.epe.es##div[style="min-height: 700px"]
+epe.es##div[data-recs]
+udgtv.com##a[href="https://velpay.com.mx/"] > img
+superluchas.com###custom_html-22
+||rondoniaovivo.com/imagensPublicidades/
+||wook.pt^$domain=contaspoupanca.pt
 suaurl.com##.mt-2.mb-5.text-center
 suaurl.com##.mt-5.text-center
 teleculinaria.pt##.up_comments
@@ -2382,7 +2400,7 @@ lanacion.com.ar##.lay-container > aside.ln-aside
 ||abola.pt/Scripts/videojs.ads.min.js
 sapo.pt##.fugly-ads
 sapo.pt##.spnsr
-diariosur.es,elcorreo.com,hoy.es##.v-adv
+elcomercio.es,diariosur.es,elcorreo.com,hoy.es##.v-adv
 brothersdoaz.com.br##.chw-widget
 elperiodico.cat##.following-ad-parent
 elperiodico.cat##body .following-ad-container
@@ -2673,7 +2691,7 @@ especiaisg1.globo##.banner-publicidade
 g1.globo.com##.apuracao-outros-locais-ads
 hola.com##body[data-pub] div[data-js-ad-manager-slot]
 elperiodico.com##._mo_recs_cti
-elperiodico.cat,cope.es,sport.es,elperiodico.com##.add
+epe.es,elperiodico.cat,cope.es,sport.es,elperiodico.com##.add
 otakustv.com###result_server > .playing:empty
 bloomberglinea.com,bloomberglinea.com.br##.arcad-feature-custom
 meteorologiaenred.com###text-8
@@ -3135,7 +3153,7 @@ elpais.com.uy##.editorial-ads
 odia.ig.com.br###taboola
 hentaienesp.com###banner_float
 hentaienesp.com###new_ads
-oantagonista.com##.leaderboard
+softzone.es,movilzona.es,adslzone.net,oantagonista.com##.leaderboard
 oantagonista.com##.banners_content_home
 olx.com.br###top-main-content
 eusaudavel.net##.banner + div.box

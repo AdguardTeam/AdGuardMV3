@@ -1,8 +1,8 @@
-! Checksum: 2AwCFDJe7ZW/ElKq5u7WkQ
+! Checksum: ttlvYeAHBG9QWceinDfZ6Q
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.36.47
-! TimeUpdated: 2023-07-19T18:32:02+00:00
+! Version: 2.0.36.51
+! TimeUpdated: 2023-07-22T18:32:00+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1067,6 +1067,13 @@ teleboy.ch#@#.adWrapper
 ! Bad: example.org##main > div.ad (should be in specific.txt)
 !
 !
+! menshealth.de - ads in articles and main page
+menshealth.de#?#a[is-digitarista-widget]:has( > .flex > .va-teaser-rating-item__text > div > .va-adhint)
+menshealth.de#?#.va-sidecol > div[class] > div[class]:has(> div > div[id^="div-gpt-ad"])
+menshealth.de#?#.va-teaser-list > div[class] > div:has(> div[id^="div-gpt-ad"])
+menshealth.de#?#.va-teaser-list > div[class] > div:has(> .va-list-item > .va-list-item-text .va-teaser-badges > .bg-skin-grey-medium)
+menshealth.de#?#.va-teaser-list > div > div[class] > div:has(> a > div[class] .va-teaser-badges > .bg-skin-grey-medium)
+menshealth.de#?#div.swiper-slide:has(> div > a > div[class] .va-teaser-badges > .bg-skin-grey-medium)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/156802
 stylight.de#?#.magazine-post-sidebar > .magazine-post-sidebar__row:has(> div[id^="ad_stylight_sidebar_"])
 ! https://github.com/AdguardTeam/AdguardFilters/issues/156741
@@ -2274,12 +2281,15 @@ winfuture.de,netzwelt.de,quoka.de,farmeramania.de,bravofly.de,computerbild.de,di
 ! ##.billboard
 formel1.de,krautundrueben.de,motorsport-total.com,traktorpool.de,fnweb.de,laborjournal.de,tarnkappe.info,deraktionaer.tv,food-tiger.de,morgenweb.de##.billboard
 !
+menshealth.de##.va-adhint
+menshealth.de##.va-sponsored
+menshealth.de###shopify-overlay-container:empty + div[class]
 stylight.de##.ad-banner-atf-mobile
 mux.de##div[style^="width:100%; height"][style*="text-align:center;"]
 winfuture.de###news_content > .ws_contentAd660 + br
 unser-stadtplan.de##div[id^="np_ads_roller_"]
 stern.de##.article__body > .ad-element
-myhomebook.de,travelbook.de,fitbook.de##div[class^="af-wrapper"]
+stylebook.de,myhomebook.de,travelbook.de,fitbook.de##div[class^="af-wrapper"]
 augsburger-allgemeine.de##.p-swatch_topdown-nice--ad
 augsburger-allgemeine.de##.p-block > .p-float_right.p-marg_t-xl
 n-tv.de##.lotto
@@ -7813,6 +7823,7 @@ $stylesheet,subdocument,third-party,xmlhttprequest,domain=canna-power.to|canna.t
 ||quadjournal.eu/wp-content/uploads/*-Banner-
 ||queer.de/gfx/air-france-presented-by-
 ||queer.de/gfx/mein-kondom-
+||quoka.de/mages/public/
 ||radio-oberland.de/images/banners/
 ||radio-oldtimer.de/fileadmin/Bilder/Banner/
 ||radio2000.it^*/banner_
@@ -7977,6 +7988,8 @@ $stylesheet,subdocument,third-party,xmlhttprequest,domain=canna-power.to|canna.t
 ||studium-ratgeber.de^*/auslandszeit-starterkit.png
 ||studium-ratgeber.de^*/Studententarife-300x250.png
 ||suche.1und1.de/amazon?
+||suche.gmx.at/amazon?
+||suche.gmx.ch/amazon?
 ||suche.gmx.net/amazon?
 ||suche.t-online.de/web/amazon?
 ||suche.t-online.de/web/billiger?
@@ -8925,7 +8938,6 @@ my-ladies.ch###topBannerContainer
 lust24.ch###topCustomers
 tarnkappe.info###top_0
 raidrush.net###top_ga
-hcgherdeina.com###top_sponsor_inner
 wintotal.de###topads
 selbstaendig-im-netz.de###topb
 bitsundso.de###topbanner
@@ -8978,7 +8990,7 @@ chip.de##.AD
 au-ja.de##.ADVBOX
 preissuchmaschine.de##.AFS_ADD
 onvista.de##.ANZEIGE
-chip.de,finanzfrage.net,gutefrage.net,praxistipps.focus.de##.Ad
+finanzfrage.net,gutefrage.net,praxistipps.focus.de##.Ad
 chip.de##.Ad-hor-height
 finanznachrichten.de##.Ad_FinativeHome
 finanznachrichten.de##.Ad_ImageTeaser
@@ -9231,6 +9243,7 @@ bunte.de##.bfa-ad-slot
 seekxl.de##.bg
 boersennews.de##.bg-smartbroker-dark
 boersennews.de##.bg-smartbroker-light
+hcgherdeina.com##.big-sponsor-box
 finanzen.ch##.big_size
 iplayapps.de##.bigbanner
 bildercache.de##.bilde-widget
@@ -9548,7 +9561,7 @@ nur-positive-nachrichten.de##.jrCardBanner
 eurocampings.de##.js-mock-banner
 eurogirlsescort.de##.js-stt-click
 lustmap.ch##.js_bns
-chip.de##.kasperskyclick
+chip.de##.kasperskyshown
 kochbar.de##.kb-home-medrec-halfpage
 kauperts.de##.kca-wrapper
 kicker.de##.kick__ad-pos_wrapper
@@ -9634,6 +9647,8 @@ mopo.de##.mopo-ads-editor
 jetztspielen.de##.mpu
 finanzen.net##.mrec-height-prefix
 clever-tanken.de##.mrec-news
+chip.de##.mt-md > div[style="min-height: 11.875rem;"]
+chip.de##.mt-md > div[style="min-height: 190px;"]
 mtb-news.de##.mtbn-fotos-incontent__container--mobile
 mtb-news.de##.mtbnews-forum__in-thread
 mtb-news.de##.mtbnews-forum__mobile-top
@@ -9690,7 +9705,7 @@ mytastedeu.com##.panorama
 paradiso.de##.paradiso-hp-ads-horizontal
 spielregeln.de##.parallax_link
 duesseldorfer-anzeiger.de##.park-portal
-1000ps.at,1000ps.ch,1000ps.de,broncos.it,electrive.net,eulen-ludwigshafen.de,fc-suedtirol.com,fck.de,hc-erlangen-ev.de,hcinnsbruck.at,hsc-bad-neustadt.de,ibash.de,plattentests.de,veu-feldkirch.at##.partner
+1000ps.at,1000ps.ch,1000ps.de,broncos.it,electrive.net,eulen-ludwigshafen.de,fc-suedtirol.com,fck.de,hc-erlangen-ev.de,hcinnsbruck.at,hcpustertal.com,hsc-bad-neustadt.de,ibash.de,plattentests.de,veu-feldkirch.at##.partner
 gmx.net,web.de##.partner-links
 esports.ch##.partner-logos
 herthabsc.com##.partner-main-footer
@@ -9859,6 +9874,7 @@ aedt.de##.slide-box
 tippspiel.wa.de##.sliderContainer
 suche6.ch##.slideshow
 wallis24.it##.slideshowck
+hcgherdeina.com##.small-sponsor-box
 finanznachrichten.de##.smartbroker--text
 finanznachrichten.de##.smartbroker-logo
 finanznachrichten.de##.smartbroker1
@@ -9894,7 +9910,7 @@ fcenergie.de##.sponsoren_wrapper
 tsv1860.de##.sponsorftr
 hc-erlangen.de##.sponsoring-footer
 hornoxe.com##.sponsorleft
-bayer04.de,bvb.de,dhb.de,fc-union-berlin.de,hallescherfc.de,hcpustertal.com,ofc.de,rundumkoeln.de,uniliga.gg##.sponsors
+bayer04.de,bvb.de,dhb.de,fc-union-berlin.de,hallescherfc.de,ofc.de,rundumkoeln.de,uniliga.gg##.sponsors
 sg-flensburg-handewitt.de##.sponsors-col
 uniliga.gg##.sponsors-desktop
 tv.herthabsc.com##.sponsors-holder
@@ -9934,6 +9950,7 @@ broncos.it##.supporter
 ntz.de,scdhfk-handball.de##.swiper-container
 swp.de##.swp-adbox
 frauporno.com##.sz_300_250
+quoka.de##.t-ctr
 t-online.de##.tMRM_billiger
 duden.de##.tabloid__side-column-top
 selbstaendig-im-netz.de##.tad1
@@ -10430,7 +10447,9 @@ winfuture.de##div[style="margin: 3px 0px; text-align: center; min-width: 300px; 
 fussballeuropa.com##div[style="margin:10px 0 5px 0;min-height:250px;"]
 rsa-radio.de##div[style="margin:40px 0 0 0; text-align:center;"]
 rsa-radio.de##div[style="margin:60px 0 0 0; text-align:center;"]
+chip.de##div[style="min-height: 16.5625rem;"]
 heise.de##div[style="min-height: 250px"]
+chip.de##div[style="min-height: 265px;"]
 teneriffa-news.com##div[style="min-height: 280px; margin-top: -20px;"]
 popkultur.de##div[style="min-height: 280px;"]
 heise.de##div[style="min-height: 400px;"]
@@ -10531,6 +10550,7 @@ petra.de##kas
 vital.de##kas[type="placement"]
 restegourmet.de##li[data-content-type="ad"]
 gmx.ch,gmx.net,web.de##list-inbox-ad-item
+chip.de##section.Subchapter > div.fb-trim > div.fb-col-12 > div.ButtonAuswahl + div
 ariva.de##span[onpointerdown^="countClickOnGAorEs("]
 ariva.de##span[onpointerup*="prgAnalyticsEvent("]
 erogeschichten.com##table[align-center][cellpadding="13"][border="0"][bgcolor="lightgrey"]
@@ -10629,6 +10649,7 @@ avguide.ch#?#.gridteaser.gridteaser-m:-abp-has(h4:-abp-contains(Sponsored Post))
 az.com.na#?#aside:-abp-has(img[src*="/adverts/"])
 barfuss.it#?#.panels-flexible-region:-abp-has(span:-abp-contains(Gesponsert))
 barfuss.it#?#.views-row:-abp-has(.partner-label)
+baur.de#?#div[data-testid="reco-wrapper"]:-abp-has(div[class^="indexesm__HeadlineElement-fragment-product-master__"]:-abp-contains(Gesponserte Artikel))
 bergsteiger.de#?#.eight.columns.alpha.content:-abp-has(span:-abp-contains(Advertorial))
 berliner-kurier.de#?#.m-teaser:-abp-has(span:-abp-contains(Sponsored))
 berliner-zeitung.de#?#.m-article-teaser:-abp-has(div:-abp-contains(Anzeige))
@@ -10718,8 +10739,8 @@ mediamarkt.de#?#div[data-test="mms-product-card"]:-abp-has(div[class^="CardProdu
 mediamarkt.de,saturn.de#?#div[data-test="mms-search-srp-productlist-item"]:-abp-has([class^="StyledSponsoringInnerWrapper"])
 meinbezirk.at#?#.article-list-item.article-card.article-card-default:-abp-has(.commercial-tag)
 meissen-fernsehen.de#?#.text-center:-abp-contains(- Werbung -)
-metager.de#?#.result:-abp-has(.mark:-abp-contains(Anzeige))
-metager.de#?#.result:-abp-has(span:-abp-contains(Partnershop))
+metager.de#?#.result:-abp-has(img[src="/img/mark-de.svg"])
+metager.de#?#.result:-abp-has(span:-abp-contains(Partner))
 mmnews.de#?#.sp-module:-abp-has(span:-abp-contains(Kleinanzeigen))
 mopo.de#?#.main-preview:-abp-has(.anzeige-label)
 mopo.de#?#.slider-preview:-abp-has(.anzeige-label)
