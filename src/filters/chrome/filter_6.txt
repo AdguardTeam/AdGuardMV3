@@ -1,8 +1,8 @@
-! Checksum: ttlvYeAHBG9QWceinDfZ6Q
+! Checksum: eqXzhw5wG3fGFgtUKack+g
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.36.51
-! TimeUpdated: 2023-07-22T18:32:00+00:00
+! Version: 2.0.36.55
+! TimeUpdated: 2023-07-23T19:31:59+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1067,6 +1067,8 @@ teleboy.ch#@#.adWrapper
 ! Bad: example.org##main > div.ad (should be in specific.txt)
 !
 !
+! macwelt.de, pcwelt.de - ad on main site
+macwelt.de,pcwelt.de#?#article.item:has(> div > .item-text > .item-text-inner > .item-eyebrow-sponsored-by-text)
 ! menshealth.de - ads in articles and main page
 menshealth.de#?#a[is-digitarista-widget]:has( > .flex > .va-teaser-rating-item__text > div > .va-adhint)
 menshealth.de#?#.va-sidecol > div[class] > div[class]:has(> div > div[id^="div-gpt-ad"])
@@ -1640,6 +1642,8 @@ jetzt.de#?#.stream__list > li:has( > .teaser--spost)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/40273
 1000ps.at#?#.dfpboxright > span.bold:contains(Anzeige)
 1000ps.at#?##inhalt > .inhaltsmall:has(> .topzubehoeranzeige-berichte[onclick*="Werbung"])
+! freundin.de - left-overs in article
+freundin.de#?##__next .ab-ad_placement-article ~ div:not([id]):not([class]):has(> div > .ab-products-entityType_not_set)
 ! freundin.de - ads in teaser list and sponsored articles
 ! freundin.de#?#div[class]:has(> div[class] > div[class] > a[href*="e-commerce"])
 ! when style gets modified whole page is broken, therefore remove: true;
@@ -1841,6 +1845,8 @@ amateurbusters.com#?#.sb_area > .sb_area_headline:contains(Urlaub)
 ! VAST video ads - e. g. https://github.com/AdguardTeam/AdguardFilters/issues/135687
 stern.de,desired.de,pcgames.de,t-online.de,vox.de,spieletipps.de,wetter.de,golem.de,autobild.de,buffed.de,gamesaktuell.de,kino.de,pcgameshardware.de,videogameszone.de,familie.de,tvnow.de,welt.de#%#//scriptlet('prevent-xhr', '.damoh.')
 !
+! infranken.de - removing amazon link, so the incredients are visible in a recipe
+infranken.de#%#//scriptlet('remove-attr', 'href', 'a[rel*="sponsored"]')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/154072
 prosieben.de#%#//scriptlet('set-constant', 'Object.prototype.checkAdProxyAvailability', 'noopFunc')
 ! 20min.ch - fixes video player
@@ -2674,7 +2680,7 @@ playcentral.de##div[id^="sas_"]
 /bilder/*/*.jpg$script,domain=24garten.de|hna.de|buzzfeed.de|costanachrichten.com|24rhein.de|24vita.de|brokser-heiratsmarkt.de|echo24.de|in-muenchen.de|ludwigshafen24.de|sauerlandkurier.de
 vorname.com,gala.de,stern.de,brigitte.de,urbia.de##.group--adtag-with-fallbackcontent
 gamestar.de##a[data-category="homebanner"]
-infranken.de,computerbase.de,gamestar.de##a[rel*="sponsored"]
+computerbase.de,gamestar.de##a[rel*="sponsored"]
 bild.de##.article-ad-link
 sueddeutsche.de###article-app-container a[href*="advertorial.sueddeutsche.de"]
 bz-berlin.de##.w-mrec > div[style*="width: 300px;"][style*="height: 250px"]
@@ -9752,6 +9758,7 @@ prinz.de##.prinz-info--lb
 songtexte.com##.prmtnContentMin
 songtexte.com##.prmtnKeepHeight
 ariva.de##.prodo-shadow
+kaufland.de##.product--spa
 kaufland.de##.product--sponsored
 maclife.de##.productbox
 zentrum-der-gesundheit.de##.products-inarticle-slider--parent
@@ -10791,6 +10798,7 @@ wallstreet-online.de#?#.sliderItem.active:-abp-has(span.news-item:-abp-has(img[a
 wallstreet-online.de#?#.teaser.objectfit:-abp-has(div.angebot)
 wallstreet-online.de#?#.teaser.objectfit:-abp-has(div.anzeige)
 wallstreet-online.de#?#tr:-abp-has(td.right:-abp-has(img[alt="Anzeige"]))
+wayfair.de#?#div[data-hb-id="Grid.Item"]:-abp-has(a[href*="&sponsoredid="])
 welt.de#?#.c-inline-teaser__body.c-inline-teaser__body--is-standalone:-abp-has(a[href^="https://www.financeads.net/tc.php?"])
 welt.de#?#div[id][data-qa]:-abp-has(.c-buelent-linkbox__label:-abp-contains(Anzeige))
 winfuture-forum.de#?#div.ExtraPostBlock:-abp-has(div.post_block:-abp-contains(Anzeige)):not(.with_rep)

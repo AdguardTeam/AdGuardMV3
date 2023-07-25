@@ -1,8 +1,8 @@
-! Checksum: CItQqhrZqBuM4ZpJ6N4S4A
+! Checksum: lujn7uGvYWv2dRX47RVwxQ
 ! Title: AdGuard Turkish filter
 ! Description: Filter list that specifically removes ads on websites in Turkish language.
-! Version: 2.0.46.0
-! TimeUpdated: 2023-07-21T23:30:23+00:00
+! Version: 2.0.46.5
+! TimeUpdated: 2023-07-25T07:30:26+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -864,6 +864,7 @@ dizipal580.com,dizipal581.com,dizipal582.com,dizipal583.com,dizipal584.com,dizip
 ! Bad: example.org##main > div.ad (should be in specific.txt)
 !
 !
+ensonhaber.com#$?#.swiper-wrapper > div.swiper-slide:has(> a[data-url^="https://ensonhaber.me/"]) { remove: true; }
 haberturk.com#?#.master-slider > div.swiper-wrapper > div.swiper-slide:has(> div > a[href^="https://adsp.haberturk.com/"])
 serieturkisch.com,serietvturche.com,tvseriadosturcos.com,seriesturco.com,seriesturkish.com,televizyongazetesi.com#?#section.penci-disSticky.elementor-section-items-middle:has(> .elementor-container:only-child > .penci-sticky-ct:only-child > .elementor-widget-wrap > .elementor-element > .elementor-widget-container > .adsbygoogle)
 ruyashoujo.com#?#footer ~ p[style]:has(> span > a[href="https://takipgo.com/"])
@@ -1217,9 +1218,12 @@ sikayetvar.com#?#.gridlist > div.grid-item > div.complaint-card:has(> .media > d
 ! Good: ##.adv
 ! Bad: example.org##.adv (should be in specific.txt)
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/157188
 ! https://github.com/AdguardTeam/AdguardFilters/issues/156507
 ! ads in video player
+##pjsdiv[style*="top: 378px; opacity:"][style*="font-size: 14px; line-height: 1em;"]
 ##pjsdiv[style*="top: 17px; opacity:"][style*="font-size: 14px; line-height: 1em;"]
+##pjsdiv[style*="top: 17px; opacity:"][style*="font-size: 14px; line-height: 1em;"] + pjsdiv[style*="opacity:"][style*="font-size: 14px; line-height: 1em;"]
 ! betexpertv121.live / betexpertv113.live and clones
 ##.pfixedd
 ##div[data-splsh-dsktp-cntnr]
@@ -2464,13 +2468,15 @@ canlitribun40.com,canlitribun41.com,canlitribun42.com,canlitribun43.com,canlitri
 /service/advertchannels?$xmlhttprequest,redirect=nooptext,domain=mardinhaber.com.tr|gidahatti.com|bolugundem.com
 dirilispostasi.com,turkuazgazetesi.net,yenialanya.com,bugunkocaeli.com.tr,cagdaskocaeli.com.tr,mansetaydin.com,seskocaeli.com,kocaelibarisgazetesi.com,kocaelikoz.com,enkocaeli.com##.block-pano > div.us
 !
+||dizipal*.com/vast*.xml
 ||yvt2bm7hzgtt.cloud/res.xml
 fullhdfilmizlesene4.org##.main-container > #film-icerik ~ a
 goodfilmizle.com##.footerleft
 dizikorea.com##.top-wcs
 yenisafak.com##.ys-popup-video-ad
 ||selcuksportshd*.xyz/img/madrid-wp*.jpg
-fullhdfilm.pro##.filmcontent > div[style="margin:3px 0px;height:75px"]
+fullhdfilm.pro##.footerleft > a:not([href*="fullhdfilm.pro"])
+fullhdfilm.pro##.filmcontent > div[style^="margin:3px"]
 yabancidizici.net,dizimag.org###activeFrontVid
 ||dizimag.org/uploads/1350x50.gif
 ||dizimag.org/uploads/1000x50.gif
@@ -2618,7 +2624,7 @@ ahaber.com.tr,apara.com.tr,aspor.com.tr,takvim.com.tr##.sub-board-frame
 ||zitinger*.cfd/sport*/imgs/tablo/*.gif
 ogznet.com##.widget_media_image > a[target="_blank"]
 dizicaps.org##.footerleft > p ~ *:not(hr)
-fanatik.com.tr##.nd-article__content p a[href*="&utm_campaign="] > img
+gazetevatan.com,fanatik.com.tr##.nd-article__content p a[href*="&utm_campaign="] > img
 ensonhaber.com###main > div[style^="height: 285px; width: 100%;"][style*="display: flex; justify-content: center;"]
 ||ensonhaber.com/imsakiye/$subdocument
 trthaber.com##.cities-banner
@@ -6785,7 +6791,6 @@ dizipal580.com,dizipal581.com,dizipal582.com,dizipal583.com,dizipal584.com,dizip
 dizipal580.com,dizipal581.com,dizipal582.com,dizipal583.com,dizipal584.com,dizipal585.com,dizipal586.com,dizipal587.com,dizipal588.com,dizipal589.com,dizipal590.com,dizipal591.com,dizipal592.com,dizipal593.com,dizipal594.com,dizipal595.com,dizipal596.com,dizipal597.com,dizipal598.com,dizipal599.com,dizipal600.com,720pizle5.com,dizipal607.com,dizipal608.com,dizipal609.com,dizipal610.com,dizipal611.com,dizipal612.com,dizipal613.com,dizipal614.com,dizipal615.com,dizipal616.com,dizipal617.com,dizipal618.com,dizipal619.com,dizipal620.com,dizipal621.com,dizipal622.com,dizipal623.com,dizipal624.com,dizipal625.com,dizipal626.com,dizipal627.com,dizipal628.com,dizipal629.com,dizipal630.com,dizipal631.com,dizipal632.com,dizipal633.com,dizipal634.com,dizipal635.com,dizipal636.com,dizipal637.com,dizipal638.com,dizipal639.com,dizipal640.com,dizipal641.com,dizipal642.com,dizipal643.com,dizipal644.com,dizipal645.com,dizipal646.com,dizipal647.com,dizipal648.com,dizipal649.com,dizipal650.com,dizipal651.com,dizipal652.com,dizipal653.com,dizipal654.com,dizipal655.com,dizipal656.com,dizipal657.com,dizipal658.com,dizipal659.com,dizipal660.com,dizipal661.com,dizipal662.com,dizipal663.com,dizipal664.com,dizipal665.com,dizipal666.com,dizipal667.com,dizipal668.com,dizipal669.com,dizipal670.com,dizipal671.com,dizipal672.com,dizipal673.com,dizipal674.com,dizipal675.com,dizipal676.com,dizipal677.com,dizipal678.com,dizipal679.com,dizipal680.com,dizipal681.com,dizipal682.com,dizipal683.com,dizipal684.com,dizipal685.com,dizipal686.com,dizipal687.com,dizipal688.com,dizipal689.com,dizipal690.com,dizipal691.com,dizipal692.com,dizipal693.com,dizipal694.com,dizipal695.com,dizipal696.com,dizipal697.com,dizipal698.com,dizipal699.com,dizipal700.com##center > a[target="_blank"] > img
 ! video player
 tradest.store,resadcer.store##.alert
-zoam1.buzz,pd2n2.buzz,osm2nz.buzz##pjsdiv[style*="top: 17px; opacity:"][style*="font-size: 14px; line-height: 1em;"]
 dizipal200.com,t7uut9s.xyz##pjsdiv[style^="position: absolute; top: -12px; left: -277px; pointer-events: none; opacity: 1; transition: opacity 0.1s linear 0s, transform 0.1s linear 0s; color: "]
 dizipal200.com,t7uut9s.xyz##pjsdiv[style^="position: absolute; top: -17px; left: -282.5px; width: 565px; height: 34px; border-radius: 0px; background: rgb(255, 0, 0); opacity: 1;"]
 !
