@@ -1,8 +1,8 @@
-! Checksum: PSHTPbxcTkA8Ift1KIAzdA
+! Checksum: 70uS3IpzER4XlePLVaDHEA
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.83.34
-! TimeUpdated: 2023-07-24T15:31:11+00:00
+! Version: 2.0.83.44
+! TimeUpdated: 2023-07-26T17:02:56+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -6808,6 +6808,8 @@ dzen.ru##.news-app__content div[class*="__column_myTarget mg-grid__item"] div[cl
 [$path=/pogoda]dzen.ru##.adv_type_rtb
 !
 ! Ad in Dzen articles
+dzen.ru###article__bottom-embed
+dzen.ru##div[class^="article-right-placeholder_"]
 [$path=/a/]dzen.ru#$#div[class*="_position_bottom "] > div > div:not([class]):not([id]) { transform: translate(-3000px) !important; position: fixed; }
 [$path=/a/]dzen.ru##div[class*="_position_inner "] > div > div[style^="width:"]
 [$path=/a/]dzen.ru##div[class*="_position_right "][style*="max-height:"]
@@ -6821,9 +6823,8 @@ dzen.ru##.card-rtb-one-column-stub
 [$path=/media]dzen.ru##div[class$="__ad-content"]
 !
 ! Dzen Video
-dzen.ru##div[class^="video-card-ad"]
-dzen.ru##._is-header-after-player > div > div > link + iframe[width="100%"]
-dzen.ru##.video-card-stub-view
+dzen.ru##div[class*="videoCardAd-"]
+dzen.ru##._is-header-after-player > div[class$="-content__description"] ~ div[class*="__videoCard"]
 ! ad in the zen videos
 ||strm.yandex.*/get/$xmlhttprequest,redirect=noopvast-3.0,domain=dzen.ru
 [$path=/video]dzen.ru##div[class$="sidebar__item"] div[class*="-sidebar__ad"]
@@ -6878,13 +6879,13 @@ games-pc.top,rustorka.com,rustorka.top,rustorka.net,rustorkacom.lib,naylo.top,za
 games-pc.top,rustorka.com,rustorka.top,rustorka.net,rustorkacom.lib,naylo.top,zannn.top,innal.top#%#//scriptlet('abort-on-property-write', 'dimisastop')
 !
 ! rustorka.com
-@@/printad.js$domain=games-pc.top|rustorka.com|rustorka.top|rustorka.net|rustorkacom.lib|naylo.top|zannn.top|innal.top
-@@/prerollad.js$domain=games-pc.top|rustorka.com|rustorka.top|rustorka.net|rustorkacom.lib|naylo.top|zannn.top|innal.top
-@@/pop_ads.js$domain=games-pc.top|rustorka.com|rustorka.top|rustorka.net|rustorkacom.lib|naylo.top|zannn.top|innal.top
-@@/pop_ad.js$domain=games-pc.top|rustorka.com|rustorka.top|rustorka.net|rustorkacom.lib|naylo.top|zannn.top|innal.top
-@@/clickunder.js$domain=games-pc.top|rustorka.com|rustorka.top|rustorka.net|rustorkacom.lib|naylo.top|zannn.top|innal.top
-@@/pop-under.js$domain=games-pc.top|rustorka.com|rustorka.top|rustorka.net|rustorkacom.lib|naylo.top|zannn.top|innal.top
-@@/popunder.js$domain=games-pc.top|rustorka.com|rustorka.top|rustorka.net|rustorkacom.lib|naylo.top|zannn.top|innal.top
+@@/printad.js$domain=games-pc.top|rustorka.com|rustorka.top|rustorka.net|rustorkacom.lib|naylo.top|monna2.top|zannn.top|innal.top
+@@/prerollad.js$domain=games-pc.top|rustorka.com|rustorka.top|rustorka.net|rustorkacom.lib|naylo.top|monna2.top|zannn.top|innal.top
+@@/pop_ads.js$domain=games-pc.top|rustorka.com|rustorka.top|rustorka.net|rustorkacom.lib|naylo.top|monna2.top|zannn.top|innal.top
+@@/pop_ad.js$domain=games-pc.top|rustorka.com|rustorka.top|rustorka.net|rustorkacom.lib|naylo.top|monna2.top|zannn.top|innal.top
+@@/clickunder.js$domain=games-pc.top|rustorka.com|rustorka.top|rustorka.net|rustorkacom.lib|naylo.top|monna2.top|zannn.top|innal.top
+@@/pop-under.js$domain=games-pc.top|rustorka.com|rustorka.top|rustorka.net|rustorkacom.lib|naylo.top|monna2.top|zannn.top|innal.top
+@@/popunder.js$domain=games-pc.top|rustorka.com|rustorka.top|rustorka.net|rustorkacom.lib|naylo.top|monna2.top|zannn.top|innal.top
 /rustorka.\w+\/forum\/(?!login.php)/$removeheader=location
 /naylo.top\/forum\/(?!login.php)/$removeheader=location
 /games-pc.top\/forum\/(?!login.php)/$removeheader=location
@@ -8274,10 +8275,10 @@ lostfilm.pro,lostfilmtv.site,lostfilm.uno,lostfilm.run,lostfilm.today,lostfilm.t
 ! https://github.com/AdguardTeam/AdguardFilters/issues/43591
 animevost-org.com#$#body > div#wrap { margin: 0!important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/43330
-vost.pw,animevost.am,smotret-anime-365.ru,animevost.site,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org#$#.menu { top: 0!important; }
-vost.pw,animevost.am,smotret-anime-365.ru,animevost.site,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org#$##wrap > div[class^="headbgnew"] { height: 53px!important; }
-vost.pw,animevost.am,smotret-anime-365.ru,animevost.site,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org#$#.menu > ul > li > div.sar { z-index: 9999!important; bottom: -200px!important; }
-vost.pw,animevost.am,smotret-anime-365.ru,animevost.site,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org#$#.menu > ul > li > span.sar { z-index: 9999!important; bottom: -150px!important; }
+vost.pw,animevost.am,smotret-anime-365.ru,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org#$#.menu { top: 0!important; }
+vost.pw,animevost.am,smotret-anime-365.ru,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org#$##wrap > div[class^="headbgnew"] { height: 53px!important; }
+vost.pw,animevost.am,smotret-anime-365.ru,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org#$#.menu > ul > li > div.sar { z-index: 9999!important; bottom: -200px!important; }
+vost.pw,animevost.am,smotret-anime-365.ru,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org#$#.menu > ul > li > span.sar { z-index: 9999!important; bottom: -150px!important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/42271
 33porno.com#$#body { padding-top: 0 !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/42905
@@ -8362,7 +8363,7 @@ pcpro100.info#$#.top-line { margin-bottom: 0px !important; }
 magcity74.ru#$#.bmobile { display: none !important; }
 magcity74.ru#$#body { overflow: visible!important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/30304
-vost.pw,animevost.am,smotret-anime-365.ru,animevost.site,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org#$#div[class^="headbg"] { background: transparent!important; }
+vost.pw,animevost.am,smotret-anime-365.ru,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org#$#div[class^="headbg"] { background: transparent!important; }
 ! mma-today.net - удаление отступа сверху
 mma-today.net#$#body { margin-top: 0 !important; }
 ! mediananny.com - удаление брендированного фона, отступа сверху
@@ -8764,7 +8765,7 @@ gopokemongo.ru,arendator.ru#$#body { overflow: visible!important; }
 ! kirovnet.ru - удаление отступа сверху
 kirovnet.ru#$#.bg_container { padding-top: 10px!important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/1863
-vost.pw,animevost.am,smotret-anime-365.ru,animevost.site,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org#$#.banerTop { position: absolute!important; left: -3000px!important; }
+vost.pw,animevost.am,smotret-anime-365.ru,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org#$#.banerTop { position: absolute!important; left: -3000px!important; }
 ! kino-go.co - удаление брендированного фона, отступа сверху
 kino-go.co#$#body  { background: #2e2e2e!important; padding-top: 0!important; }
 ! bigcinema.club - удаление брендированного фона
@@ -9188,6 +9189,7 @@ eg.ru,newsmaker.md,delo-vcusa.ru,tolknews.ru,gorodche.ru,smartpress.by,raenza.ru
 !
 !
 !
+24tv.ua#$?#.lg-thumb-item:has(> img[src="/assets/img/adv-thumb.png"]) { remove: true; }
 pravda.com.ua##.advtext_mob
 meta.ua##.bookmaker
 ukranews.com##.adversiting
@@ -9335,6 +9337,19 @@ kadrovik01.com.ua,kom-dir.ru,gd.ru,buhsoft.ru,dirklinik.ru,fd.ru,business.ru,pro
 !
 !
 !
+||afftimes.com/wp-content/themes/*/brand_banners$image
+afftimes.com##div[data-banner_id]
+afftimes.com##.float-popup
+afftimes.com##.post_banners_slider
+afftimes.com##.site-header__flex > a[data-wpel-link]:not([href^="https://afftimes.com"])
+tgstat.ru##.slider-editors-choice
+kinonews.ru##div[style="text-align: center;height:280px;"]
+vgr.by##.dmi-header-ads
+||banco.az/ru/simpleads/
+banco.az#?#.main-news > div.col-4:has(> div[class^="banner-"])
+arhangel.ru###topr
+arhangel.ru###yar
+arhangel.ru###botr
 northern-newspaper.ru##.status-publish
 2ip.ru##.ip-icon-x-eye
 device4game.ru###pages-2 > h3
@@ -9663,7 +9678,7 @@ celebxxx.top##.box-before-closing
 malfurik.online##.carou
 super.ru#?##root div[class] > div[class]:has(> div[class^="_"] > div[id^="adfox_"])
 syzran-small.ru##.bancode
-in-scale.ru,moscowtimes.ru,ukraina.ru,mipped.com,diapazon.kz,bloknot.ru##.banner
+netex.co.il,in-scale.ru,moscowtimes.ru,ukraina.ru,mipped.com,diapazon.kz,bloknot.ru##.banner
 vkusno.plus##.region-banner
 vkusno.plus##.region-sidebar-second
 vkusno.plus##.region-featured-bottom
@@ -13428,7 +13443,7 @@ infokuzov.ru##article > div[itemprop] > index > h2 + a[href]
 tele.ru##.adloc-leftskyscraper
 otxataba.net###dle-content > section.entry > div[id="msg"] + div[align="center"]
 narutoplanet.ru##.twelve-banner
-||aflt.market.yandex.ru/widget$domain=rutab.net|losst.ru|versus.com|3dnews.ru|winnote.ru|modxvm.com|iguides.ru|rozetked.me|yablyk.com|makeupkey.ru|expertcen.ru|festima.ru|damion.club|o-tendencii.com|beguza.ru|vsthemes.org|edimdoma.ru|klublady.ru|sportishka.com
+||aflt.market.yandex.ru/widget$domain=rutab.net|losst.ru|versus.com|3dnews.ru|winnote.ru|modxvm.com|iguides.ru|rozetked.me|yablyk.com|makeupkey.ru|expertcen.ru|festima.ru|damion.club|o-tendencii.com|beguza.ru|vsthemes.org|edimdoma.ru|klublady.ru|sportishka.com|overclockers.ru
 iguides.ru##.article-detail > div.t-2 + div.b560648742c6c7c0fe0c2cdeb95d4cef
 ||xn--80aikhbrhr.xn--j1amh/banner.jpg
 sochinyashka.ru##.content > li + br + noindex
@@ -19427,7 +19442,7 @@ foto-toto.ru##noindex > a
 gdetraffic.com,playua.net##.bg-link
 newsyou.info##div[id^="adpartner-"]
 bragazeta.ru,go64.ru,news29.ru,fc-amkar.org,sxem.org##div[id^="banner"]
-pravda.ru##div[class^="branding_"]
+afftimes.com,pravda.ru##div[class^="branding_"]
 gramota.ru,media-znak.ru##.c4e745-block
 tochka.net,hdkinoteatr.com,all-ebooks.com,allfight.ru,apn-spb.ru,bilahata.net,fedpress.ru,fost.ws,freshkino.com,hronika.info,k1news.ru,korrespondent.net,lookszone.ru,media.club4x4.ru,mosmonitor.ru,nakanune.ru,newc.info,news.novgorod.ru,newsua.one,nikopolnews.net,petrogazeta.ru,politeka.net,prizyv.ru,prozak.info,pure-t.ru,real-vin.com,rusdozor.ru,spbdnevnik.ru,therussiantimes.com,tvcom-tv.ru,voffka.com##div[id^="n4p_"]
 hi-fi.ru##div[class^="ad-"]
@@ -19691,19 +19706,19 @@ overclockers.ru##.material-inline-an
 ! рус-порно.com
 xn----ztbcbceder.com##.container-teaser_block
 !
--html5-*/index*.html$domain=smotret-anime-365.ru|animevost.site|animevost.online|animevost.net|animevost.org|animerost.org|animevost.am|agorov.org|vost.pw
-vost.pw,animevost.am,smotret-anime-365.ru,animevost.site,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org###centerBlock > div[align="center"][class^="b"]
-vost.pw,animevost.am,smotret-anime-365.ru,animevost.site,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org##.banerTop
-vost.pw,animevost.am,smotret-anime-365.ru,animevost.site,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org##center\" > a[target="_blank"] > img
-vost.pw,animevost.am,smotret-anime-365.ru,animevost.site,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org##iframe[width="260"][height="400"]
-vost.pw,animevost.am,smotret-anime-365.ru,animevost.site,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org##.shortstoryContent > div#shortstoryContentTegi + center[style]
-vost.pw,animevost.am,smotret-anime-365.ru,animevost.site,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org##div[style^="width:240px;height:400px;"]
-vost.pw,animevost.am,smotret-anime-365.ru,animevost.site,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org##div[class^="banerTop"]
-vost.pw,animevost.am,smotret-anime-365.ru,animevost.site,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org###wrap > div.headbgnew > a[target="_blank"][style*="display: block;"]
-vost.pw,animevost.am,smotret-anime-365.ru,animevost.site,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org##div[style="width:240px;height:400px;margin:auto;"]
-vost.pw,animevost.am,smotret-anime-365.ru,animevost.site,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org##div[class^="headbg"] > a[target="_blank"]
-vost.pw,animevost.am,smotret-anime-365.ru,animevost.site,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org#?##centerBlock > div:has(> center > a[target="_blank"])
-vost.pw,animevost.am,smotret-anime-365.ru,animevost.site,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org#?#div[id^="moduleLeft"]:has(> div[class] center)
+-html5-*/index*.html$domain=smotret-anime-365.ru|animevost.online|animevost.net|animevost.org|animerost.org|animevost.am|agorov.org|vost.pw
+vost.pw,animevost.am,smotret-anime-365.ru,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org###centerBlock > div[align="center"][class^="b"]
+vost.pw,animevost.am,smotret-anime-365.ru,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org##.banerTop
+vost.pw,animevost.am,smotret-anime-365.ru,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org##center\" > a[target="_blank"] > img
+vost.pw,animevost.am,smotret-anime-365.ru,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org##iframe[width="260"][height="400"]
+vost.pw,animevost.am,smotret-anime-365.ru,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org##.shortstoryContent > div#shortstoryContentTegi + center[style]
+vost.pw,animevost.am,smotret-anime-365.ru,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org##div[style^="width:240px;height:400px;"]
+vost.pw,animevost.am,smotret-anime-365.ru,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org##div[class^="banerTop"]
+vost.pw,animevost.am,smotret-anime-365.ru,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org###wrap > div.headbgnew > a[target="_blank"][style*="display: block;"]
+vost.pw,animevost.am,smotret-anime-365.ru,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org##div[style="width:240px;height:400px;margin:auto;"]
+vost.pw,animevost.am,smotret-anime-365.ru,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org##div[class^="headbg"] > a[target="_blank"]
+vost.pw,animevost.am,smotret-anime-365.ru,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org#?##centerBlock > div:has(> center > a[target="_blank"])
+vost.pw,animevost.am,smotret-anime-365.ru,animevost.online,animevost.net,animevost.org,animerost.org,animevost.am,agorov.org#?#div[id^="moduleLeft"]:has(> div[class] center)
 !
 ! anidub
 anime.anidub.life#?#.wrap > div[style]:has(> center > div[id^="adfox_"])

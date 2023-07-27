@@ -1,8 +1,8 @@
-! Checksum: dccfTtHvUtdgDo8jggZ3/A
+! Checksum: O+z2pacCdfLZfkPNWBvJcA
 ! Title: AdGuard Tracking Protection filter
 ! Description: The most comprehensive list of various online counters and web analytics tools. Use this filter if you do not want your actions on the Internet to be tracked.
-! Version: 2.0.58.85
-! TimeUpdated: 2023-07-25T07:31:46+00:00
+! Version: 2.0.58.95
+! TimeUpdated: 2023-07-27T06:31:45+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -83,6 +83,9 @@
 ! Bad: example.org###rek (should be in specific.txt)
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/157342
+futura-sciences.com#%#//scriptlet('set-constant', 'pa', 'emptyObj')
+futura-sciences.com#%#//scriptlet('set-constant', 'pa.privacy', 'emptyObj')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/157140
 perlego.com#%#(()=>{const t={getExperimentStates:function(){return[]}};window.optimizely={get:function(){return t}}})();
 ! https://github.com/AdguardTeam/AdguardFilters/issues/157248
@@ -526,6 +529,7 @@ prjaga.ru#?##right > div#right_nav > h3:contains(Онлайн статистик
 !||i.snssdk.com/log/*
 !||i.snssdk.com/slardar/sdk.js
 !
+||tgtag.io^$third-party
 ||track.gaconnector.com^
 ||trafico.prensaiberica.es^
 ||collector-*.px-cloud.net^
@@ -534,6 +538,8 @@ prjaga.ru#?##right > div#right_nav > h3:contains(Онлайн статистик
 ||meowlytics.bignutty.xyz^
 ||loggw.alipay.com^
 ||loggw-ex.alipay.com^
+||loggw-exsdk.alipay.com^
+||loggw.alipaydns.com^
 ||loggw.alipay.com.cn^
 ||analytics.gooogol.com^
 ||nol.hubty.network^
@@ -6061,11 +6067,8 @@ nethunt.com/api/v1/track/email/$image
 ||ampltd.top.gg^
 ||an.reflektion.com^
 ||analysis.afreecatv.com^
-||analysis.focalprice.com^
 ||analytic.imlive.com^
-||analytic.piri.net^
 ||analytic20.detik.com^
-||analyticapi.piri.net^
 ||analytics-api.smzdm.com^
 ||analytics-ingress-global.bitmovin.com^
 ||analytics-ingress.bitmovin.com^
@@ -6074,14 +6077,11 @@ nethunt.com/api/v1/track/email/$image
 ||analytics-sdk.yle.fi^
 ||analytics-sg.tiktok.com^
 ||analytics-static.ugc.bazaarvoice.com^
-||analytics-udg.netdna-ssl.com^
 ||analytics.74.ru^
-||analytics.247sports.com^
 ||analytics.adfreetime.com^
 ||analytics.adoffice.11st.co.kr^
 ||analytics.appservice.tech^
 ||analytics.archive.org^
-||analytics.artirix.com^
 ||analytics.atlassian.com^
 ||analytics.aweber.com^
 ||analytics.bi.encuentra24.com^
@@ -6092,7 +6092,6 @@ nethunt.com/api/v1/track/email/$image
 ||analytics.callbell.eu^
 ||analytics.carambo.la^
 ||analytics.ceneo.pl^
-||analytics.cervellio.com^
 ||analytics.cinematoday.jp^
 ||analytics.clic2buy.com^
 ||analytics.cn.ru^
@@ -6104,9 +6103,7 @@ nethunt.com/api/v1/track/email/$image
 ||analytics.edgesuite.net^
 ||analytics.electro-com.ru^
 ||analytics.faceitanalytics.com^
-||analytics.fairfax.com.au^
 ||analytics.fontanka.ru^
-||analytics.go.com^
 ||analytics.gorillanation.com^
 ||analytics.hashnode.com^
 ||analytics.histmag.org^
@@ -6124,7 +6121,6 @@ nethunt.com/api/v1/track/email/$image
 ||analytics.move.ru^
 ||analytics.msnbc.msn.com^
 ||analytics.nextopia.net^
-||analytics.omgpop.com/log
 ||analytics.ooyala.com^
 ||analytics.ovh.com^
 ||analytics.plaid.com^
@@ -6139,7 +6135,6 @@ nethunt.com/api/v1/track/email/$image
 ||analytics.sanoma.fi^
 ||analytics.schoolwires.com^
 ||analytics.send.cm^
-||analytics.services.distractify.com^
 ||analytics.sgnapps.com^
 ||analytics.shareaholic.com^
 ||analytics.shop.hisense.com^
@@ -6154,7 +6149,6 @@ nethunt.com/api/v1/track/email/$image
 ||analytics.teespring.com^
 ||analytics.thenest.com^
 ||analytics.thenewslens.com^
-||analytics.thetab.com^
 ||analytics.tio.ch^
 ||analytics.tmonews.com^
 ||analytics.tout.com^
@@ -6164,15 +6158,9 @@ nethunt.com/api/v1/track/email/$image
 ||analytics.us.archive.org^
 ||analytics.vadio.com^
 ||analytics.vedantu.com^
-||analytics.volvocars.com^
-||analytics.vooxe.com^
 ||analytics.webgains.io^
-||analytics.wetpaint.me^
-||analytics.whatculture.com^
 ||analytics.wondershare.cc^
-||analytics.xyscdn.com^
 ||analytics.yahoo.com^
-||analytics.zeekit.co^
 ||analytics*.carambo.la^
 ||analytics2.tvreport.co.kr^
 ||analyticsnew.overwolf.com^
@@ -6183,11 +6171,9 @@ nethunt.com/api/v1/track/email/$image
 ||api-adservices.apple.com^
 ||api-analytics.rozetka.com.ua^
 ||api.amplitude.com^
-||api.calq.io^
 ||api.exc.mob.com^
 ||api.flocktory.com^
 ||api.iterative.ly^
-||api.logmatic.io^
 ||apm.crittercism.com^
 ||apollo.plein.nl^
 ||app-analytics-*.snapchat.com^
@@ -6253,18 +6239,13 @@ nethunt.com/api/v1/track/email/$image
 ||behave.noen.at^
 ||beta.simpel.nl^
 ||bi-eventtracker-*.amazonaws.com^
-||bi-pipeline-collector.stylight.net^
 ||bia.brightinfo.com^
-||bl.impresa.pt^
 ||blue.fox8.com^
 ||blue.thehill.com^
 ||bonfire.spklw.com^
 ||boomerang.dell.com^
-||bournemouthecho-gb.bournemouthecho.co.uk^
-||br.phorm.com^
 ||broker.datazoom.io^
 ||bt.mediaimpact.de^
-||bt.phorm.com^
 ||buf.lemonde.fr^
 ||button.blogs.yandex.
 ||bwb101.goo.ne.jp^
@@ -6280,7 +6261,6 @@ nethunt.com/api/v1/track/email/$image
 ||c.opinion.com.ua^
 ||c.pravo.ru^
 ||c.sibnet.ru^
-||c.t-online.de^
 ||c.tbex.ru^
 ||c.wort-suche.com^
 ||c.x.oanda.com^
@@ -6361,8 +6341,6 @@ nethunt.com/api/v1/track/email/$image
 ||collector-cdn.github.com^
 ||collector-dev.cdp-dev.cnn.com^
 ||collector-hpn.ghostery.net^
-||collector-medium.lightstep.com^
-||collector.apester.com^
 ||collector.bunchbox.co^
 ||collector.cdp.cnn.com^
 ||collector.githubapp.com^
@@ -56056,6 +56034,7 @@ charlestownwyllie.oaklawnnonantum.com^
 ! ZhugeIO
 /zhugeio.js
 !
+/sayacff.html
 /share/js/gAnalytics.js
 /solid.gif?z=*&abvar=$third-party
 /wp-content/plugins/pageviews-counter/*
@@ -56558,12 +56537,18 @@ _tracking.php?b=
 /analytics.js$domain=tokyometro.jp|resumes.breakdownexpress.com|techcult.com|inbox.lv|kopeda.com|freexcafe.com|rusvideos.tv|nakubani.ru|lun.com|songsara.net|newsmax.com|bolgehastanesi.com|ewtc.de|newsdig.tbs.co.jp|imore.com|city.kushiro.lg.jp|emeraldbridal.com.au|emarat-news.ae|imobie.jp|tikla.com.tr|rusvideos.porn|jrkyushu.co.jp|amiunique.org
 ||assets.adobedtm.com^$domain=mcclatchydc.com|elnuevoherald.com|bellinghamherald.com|sacbee.com|charlotteobserver.com|newsobserver.com|miamiherald.com|ef.ru|algida.com.tr|bmw-motorrad.co.uk|cif.com.tr|clearhaircare.com|domestos.com|dove.com|elidor.com.tr|f1sport.autorevue.cz|geico.com|hellmanns.com.tr|herkessofraya.com|johnsonsbaby.com.tr|lipton.com|lnk.to|lux.com|magnumicecream.com|neutrogena.com.tr|omo.com|rexona.com|samsung.com|sap.com|schwarzkopf.com.tr|signalturkiye.com|msnbc.com|nbcnews.com|kbb.com|eurosport.ru|timgate.it|intermiles.com|oxfordmail.co.uk|spiegel.de|hp.com|deutschepost.de|thebay.com|s.shufoo.net|tsn.ca|tabelog.com|euronews.com|newshub.co.nz|fredmeyer.com|viabcp.com|carsales.com.au|falabella.com|aarp.org
 !
+||hub.fromdoppler.com/public/dhtrack.js
+||kick.com/*&loaderVersion=
 ||connatix.com/scripts/hotjar.js
 ||connatix.com/scripts/gaconnector.js
+||connatix.com/scripts/mkt-cke-script.js
 ||connatix.com/scripts/munchkin-script.js
+||connatix.com/scripts/linkedin-script.js
+||connatix.com/scripts/websights-script.js
 ||connatix.com/scripts/microsoft-ad-script.js
 ||connatix.com/scripts/facebook-pixel-script.js
 ||unibet.com/orval/tracking/lastclick.min.js
+||hotmediahub.com/api/analytics
 ||terabox.fun/api/analytics
 ||us.web3-lab.com*/*/stats
 ||data.infranken.de/g/collect
@@ -60604,6 +60589,8 @@ $cookie=_hjTLDTest
 ! Sets a unique user id for tracking how the user uses the site.
 ! It breaks possibility to save Bing preferences/settings
 !$cookie=MUID
+! Used to track how users behave and interact with the Microsoft application
+$cookie=MicrosoftApplicationsTelemetryDeviceId
 ! Microsoft an unique user ID. The cookie enables user tracking by synchronising the ID across many Microsoft domains.
 $cookie=muidn
 ! Sets a unique user id for tracking how the user uses the site.
@@ -62059,6 +62046,9 @@ inapps.appsflyersdk.com^
 ! For platforms which do not support $redirect rules
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/157420
+@@||hikmall.com/js/sensorsdata.min.js
+! https://github.com/AdguardTeam/AdguardFilters/issues/157342
 ! all function broken
 @@||analytics.digitalpfizer.com/js/prod/pcc/pf_appmeasurement.js$domain=pfizer-covid19-vaccine.jp
 ! https://github.com/AdguardTeam/AdguardFilters/issues/157140

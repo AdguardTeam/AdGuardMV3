@@ -1,8 +1,8 @@
-! Checksum: 8SF4RAY49NrZT3++ZZGwqg
+! Checksum: Ro7CgbDdKx6hAFAvmdZKoA
 ! Title: AdGuard French filter
 ! Description: Liste FR + AdGuard French filter. Filter list that specifically removes ads on websites in French language.
-! Version: 2.0.40.98
-! TimeUpdated: 2023-07-24T07:30:45+00:00
+! Version: 2.0.41.3
+! TimeUpdated: 2023-07-26T18:30:48+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -136,6 +136,8 @@ capital.fr#@#.plainAd
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/157388
+cinefil.com#%#//scriptlet('set-constant', 'adBlocked', 'false')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/155686
 @@||rustica.fr/*.iads.js
 ! https://github.com/AdguardTeam/AdguardFilters/issues/154887
@@ -620,6 +622,10 @@ tf1.fr,tf1info.fr#%#//scriptlet('prevent-fetch', '/^https:\/\/ads\.stickyadstv\.
 ! Good: example.org#?#main > div.row:has(> div.ad)
 ! Bad: example.org##main > div.ad (should be in specific.txt)
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/157067
+courrier-picard.fr#?#.qiota_reserve > r-article--section:not(:has(> p)):not(:has(> h3)):not(:has(> div)) > r-pub
+! https://github.com/AdguardTeam/AdguardFilters/issues/157342
+futura-sciences.com#?#.futura-genecy > div[class^="box__"]:has(> .optidigital-slot)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/155527
 letelegramme.fr#?#.tlg-no-padding > .tlg-block-small-padding:has(> .tlg-ad-container:only-child)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/151203
@@ -701,6 +707,7 @@ myfree-tivi.com#?#.content-col-list > .col-sm-2:has(> div[style="padding-top: 10
 ! https://forum.adguard.com/index.php?threads/www-tennisactu-net.28870/
 tennisactu.net#?#.main-right > h2:contains(Partenaires)
 !
+mariefrance.fr#?#.post > aside.sidebar-before-comments:has(> [class="default-title"] > span:contains(/Ailleurs sur le web|A lire sur le même sujet/))
 leboncoin.fr#?#a[data-test-id]:has([class]:contains(Sponsorisé))
 aniamey.com#?#div[align="center"]:has(> a > img[src$="/pub_icon.gif"])
 ici.tou.tv#?#section > div[class]:has(> p:contains(/^Publicité$/))
@@ -917,6 +924,8 @@ all-stadium.net#$##layer2 {top:50px!important; left:950px!important;}
 $script,third-party,denyallow=bunnycdn.ru|bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|cdn.staticfile.org|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yastatic.net|ytimg.com|zencdn.net|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com|fastcomments.com|plyr.io,_____,domain=extreme-down.moe|dl-protect.link
 !
 !
+mariefrance.fr##body .placeholder-pub_dfp
+futura-sciences.com##.article-sidebar > div[style="min-height: 600px;"]
 ||cvt1.sibnet.ru/j79fbdxg.js
 dl-protect.link##.col-sm-12 > center > span > a > img
 extreme-down.moe##.blockcontent > center > a[rel] > img
@@ -1197,8 +1206,8 @@ pornforrelax.com##.vda-item
 moneyvox.fr##.ban-modern
 moneyvox.fr##body .habpage
 cpasmieux.club##.report-pub-episode
-cpasmieux.club##.report-pub
-papadustream.uno,cinez.net,cpasmieux.club###playerOver
+cpasfini.me,cpasmieux.club##.report-pub
+cpasfini.me,papadustream.uno,cinez.net,cpasmieux.club###playerOver
 yggtorrent.si##.ad-alert-wrapper
 monpetitforfait.com###ad-display
 monpetitforfait.com###banner-offer
@@ -1454,6 +1463,8 @@ adguard.info,adguard.com,adguard.app##.hello_from_adguard_french
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/157284
+sai-zen-sen.jp#@#.with-ad
 ! https://github.com/AdguardTeam/AdguardFilters/issues/156594
 ||dailymotion.com/cdn/$media,script,badfilter
 ! https://github.com/AdguardTeam/AdguardFilters/issues/156362
