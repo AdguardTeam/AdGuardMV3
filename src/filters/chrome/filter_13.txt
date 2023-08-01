@@ -1,8 +1,8 @@
-! Checksum: XGRlWUKAepnH+K9gy6gD1Q
+! Checksum: SM1bclhXLmOIzDylr1k8fg
 ! Title: AdGuard Turkish filter
 ! Description: Filter list that specifically removes ads on websites in Turkish language.
-! Version: 2.0.46.16
-! TimeUpdated: 2023-07-28T10:30:27+00:00
+! Version: 2.0.46.18
+! TimeUpdated: 2023-07-31T13:02:22+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -483,6 +483,8 @@ zamaninvarken.com,kredi.biz.tr,kriptoradar.com,morlevha.com,bakimlikadin.net,kor
 iyibeslenme.net,teknop.net,kirtkirtla.com,buneymis.net,ozgunbilgi.com#%#//scriptlet("set-constant", "adblock.check", "noopFunc")
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/30209
+intekno.net#%#//scriptlet('prevent-setTimeout', 'ad_block_detected')
 ! https://github.com/uBlockOrigin/uAssets/issues/18722
 eksisozluk1923.com#$?#.ad-banner { remove: true; }
 ! https://github.com/uBlockOrigin/uAssets/issues/18716
@@ -2561,7 +2563,7 @@ erengotu.cc##body > a[href^="https://bit.ly/"]
 islamveihsan.com##.ad-banner
 gibanje.org##.ads_single_font
 tafdi3.com,tafdi4.com,tafdi5.com##footer .lastright > p ~ a
-tafdi3.com,tafdi4.com,tafdi5.com##.vidust-ads
+tafdi3.com,tafdi4.com,tafdi5.com##div[class^="vid"][class*="-ads"]
 ||tafdi*.com/ad*.js
 nedir.org##.empower
 nedir.org##.mobil[style^="min-width:300px;min-height:"]
