@@ -1,8 +1,8 @@
-! Checksum: b7lni/B635dl+gwWwncuFw
+! Checksum: 0bp2MX/Cdd9Bu4NYYXV9hQ
 ! Title: AdGuard Dutch filter
 ! Description: EasyList Dutch + AdGuard Dutch filter. Filter list that specifically removes ads on websites in Dutch language.
-! Version: 2.0.5.88
-! TimeUpdated: 2023-07-31T14:32:23+00:00
+! Version: 2.0.5.89
+! TimeUpdated: 2023-08-01T11:32:18+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1447,6 +1447,8 @@ hardware.info#%#//scriptlet("set-constant", "BannerManager", "undefined")
 !--------------------------------------!
 ! SECTION: Dutch - CSS
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/157818
+gpblog.com#$#aside[class^="Ad_"] { position: absolute !important; left: -3000px !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/3226
 omroepbrabant.nl#$#.ad-banner-container { position: absolute!important; left: -3000px!important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/26718
@@ -1491,7 +1493,6 @@ omroepwest.nl#$#.adcontainer-Rectangle { position: absolute!important; left: -40
 ! Good: example.org###rek; ||example.com/ads/
 ! Bad: example.org#$##rek { display: none !important; } (for instance, should be in general_extensions.txt)
 !
-gpblog.com##aside[class^="Ad_"]
 looopings.nl###contentBillboard
 looopings.nl##div[style="min-height:250px;"]
 gpblog.com##.betting-insert
