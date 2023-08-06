@@ -1,8 +1,8 @@
-! Checksum: ZsTiZ8CBPcg5RX5loa7/kw
+! Checksum: UIVHfERLoXQVCIye+CpfTA
 ! Title: AdGuard Tracking Protection filter
 ! Description: The most comprehensive list of various online counters and web analytics tools. Use this filter if you do not want your actions on the Internet to be tracked.
-! Version: 2.0.59.33
-! TimeUpdated: 2023-08-03T07:31:50+00:00
+! Version: 2.0.59.42
+! TimeUpdated: 2023-08-04T14:31:53+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -529,6 +529,9 @@ prjaga.ru#?##right > div#right_nav > h3:contains(Онлайн статистик
 !||i.snssdk.com/log/*
 !||i.snssdk.com/slardar/sdk.js
 !
+||grabifyicu.com^
+||etracker.p3p.repl.co^
+||canarytokens.com^$third-party
 ||track.lemmatechnologies.com^
 ||wiseref.com^$third-party
 ||swetrix.org^$third-party
@@ -5458,6 +5461,8 @@ prjaga.ru#?##right > div#right_nav > h3:contains(Онлайн статистик
 ! it's problematic that due to how Gmail proxy work, these domains aren't even exposed on the network level
 ! fortunately, extensions can see them (Gmail puts the real URL in the location.hash part of the src)
 !
+! AWeber
+openrate.aweber.com$image
 ! Sendpulse
 .pulse-stat.com$image
 ! change.org
@@ -5590,6 +5595,10 @@ nethunt.com/api/v1/track/email/$image
 ! Blocking piwik analytics subdomain(for DNS filtering)
 |piwik.
 !
+||openrate.aweber.com^
+||tracker.iplocation.net^
+||e20d8e38992b.o3n.io^
+||adservice.google.
 ||weblog.kma.go.kr^
 ||track.exame.com^
 ||t.syosetu.org^
@@ -5873,7 +5882,6 @@ nethunt.com/api/v1/track/email/$image
 ||analytics.mall.tv^
 ||log.etoday.co.kr^
 ||u.zhugeapi.net^
-||ubak.zhugeapi.net^
 ||zgsdk.zhugeio.com^
 ||track1.avplayer.com^
 ||sgtm.simoahava.com^
@@ -5969,7 +5977,6 @@ nethunt.com/api/v1/track/email/$image
 ||ipcc.vnpt.com.vn^
 ||stats.ucheba.ru^
 ||inspector-collector.m.naver.com^
-||stat.novinky.cz^
 ||cdn.stat-track.com^
 ||t.zhipin.com^
 ||logapi.zhipin.com^
@@ -6511,7 +6518,6 @@ nethunt.com/api/v1/track/email/$image
 ||dp1fzft1fdb84.cloudfront.net^
 ||ds-aksb-a.akamaihd.net^
 ||dsb.yahoo.co.jp^
-||dt.nrjmobile.fr^
 ||dtch.brunel.nl^
 ||dtxtngytz5im1.cloudfront.net^
 ||dw.com.com^,domain=~cnet.com
@@ -6569,9 +6575,7 @@ nethunt.com/api/v1/track/email/$image
 ||events.apester.com^
 ||events.artirix.com^
 ||events.cardsmobile.ru^
-||events.emogi.com^
 ||events.jora.com^
-||events.kaloo.ga^
 ||events.newsroom.bi^
 ||events.niit-mts.com^
 ||events.ocdn.eu^
@@ -6586,7 +6590,6 @@ nethunt.com/api/v1/track/email/$image
 ||events.whisk.com^
 ||events*.cre.ma^
 ||eventstream.dodopizza.com^
-||eventtracker.elitedaily.com^
 ||evs.data.ciceksepeti.com^
 ||evt.houzz.com^
 ||exacttarget.api.mashery.com^
@@ -6596,11 +6599,8 @@ nethunt.com/api/v1/track/email/$image
 ||external-promo-metrics.yandex.net^
 ||f7ds.liberation.fr^
 ||fairfaxmedia.sharedcount.com^
-||farmer.wego.com^
 ||fc.webmasterpro.de^
 ||fclog.baidu.com^
-||fly.gentside.com^
-||fly.ohmymag.com^
 ||fp.kakaku.com^
 ||frog.yuanfudao.com^
 ||front.optimonk.com^
@@ -6643,7 +6643,6 @@ nethunt.com/api/v1/track/email/$image
 ||geoloc*.geo20120530.com^
 ||geoloc*.geostats.ovh^
 ||geoloc*.geovisite.ovh^
-||geolocation.performgroup.com^
 ||geoservice.curse.com^
 ||geosvc.globalmailer.com^
 ||gfn1.ugap.fr^
@@ -6658,9 +6657,6 @@ nethunt.com/api/v1/track/email/$image
 ||gtm.vanmoof.com^
 ||gtmdev.jabra.
 ||guq9.vente-unique.it^
-||happyunicorns.gutefrage.net^
-||harvester.eu.square-enix.com^
-||harvester.ext.square-enix-europe.com^
 ||harvester.hbpl.co.uk^
 ||harvester.hnonline.sk^
 ||hc-analytics.idp.clogin.att.com^
@@ -6669,12 +6665,8 @@ nethunt.com/api/v1/track/email/$image
 ||heartbeats.prd.data.s.joyn.de^
 ||hi.hellobar.com^
 ||hindsight.significanceapps.com^
-||hit-pool.upscore.io^
-||hit.copesa.cl^
 ||hit.darmoweliczniki.pl^
 ||hit.demirorenteknoloji.com^
-||hit.dogannet.tv^
-||hit.duhnet.tv^
 ||hit.mynet.com^
 ||hits.dealer.com^
 ||hits.theguardian.com^
@@ -6690,20 +6682,17 @@ nethunt.com/api/v1/track/email/$image
 ||host*.polaroid.com^
 ||host*.rvshare.com^
 ||host*.rigbyandpeller.com^
-||howmanyview.com^
 ||hrumpoc.hotels.com^
 ||hstats*.hepsiburada.com^
 ||huffingtonpost.fr/px.gif^
 ||hummingbird.mavencoalition.io^
 ||hwa.his.huawei.com^
-||hydrahydra.ir^
 ||i.bigin.io^
 ||ia.51.la^
 ||iabusprivacy.pmc.com^
 ||ibeat.indiatimes.com^
 ||ichnaea-web.netflix.com^
 ||ichnaea.netflix.com^
-||ig.fp.oix.net^
 ||img.opentracker.net
 ||imp.go.sohu.com^
 ||improving.wuzhuiso.com^
@@ -7338,20 +7327,14 @@ nethunt.com/api/v1/track/email/$image
 ||stats.aws.rubiconproject.com^
 ||stats.bbc.co.uk^
 ||stats.behance.net^
-||stats.binki.es^
 ||stats.blogg.se^
 ||stats.bluebillywig.com^
 ||stats.break.com^
 ||stats.cardschat.com^
 ||stats.christianpost.com^
 ||stats.clear-media.com^
-||stats.cnevids.com^
 ||stats.dnaindia.com^
 ||stats.ebay.com^
-||stats.europe.newsweek.com^
-||stats.eyeviewdigital.com^
-||stats.farfetch.com^
-||stats.ficbook.net^
 ||stats.firedrive.com^
 ||stats.ft.com^
 ||stats.g.doubleclick.net^
@@ -7503,10 +7486,8 @@ nethunt.com/api/v1/track/email/$image
 ||telemetry.tradingview.com^
 ||temptation.ad.nl^
 ||teralog.techhub.co.kr^
-||terra.fp.oix.net^
 ||thj.astrakhan.ru^
 ||tim.nextinpact.com^
-||timeslog.indiatimes.com^
 ||tivan.naver.com^
 ||tj3rql9siwef.www.freecodecamp.org^
 ||tk.kaufda.de^
@@ -7518,7 +7499,6 @@ nethunt.com/api/v1/track/email/$image
 ||tools.ranker.com^
 ||top-fwz1.mail.ru^
 ||top.eomy.net^
-||top.gamesby.net^
 ||top.gigmir.net^
 ||top.hsdn.org^
 ||top.myfilms.su^
@@ -7554,9 +7534,7 @@ nethunt.com/api/v1/track/email/$image
 ||trac.oferting.net^
 ||trac.oferting.org^
 ||tracelog.www.alibaba.com^
-||tracer.perezhilton.com^
 ||track.analitycs.net^
-||track.atom-data.io^
 ||track.audtd.com^
 ||track.berliner-kurier.de^
 ||track.bizjournals.com^
@@ -7565,7 +7543,6 @@ nethunt.com/api/v1/track/email/$image
 ||track.catalogs.com^
 ||track.cbs.com^
 ||track.clkfly.com^$all
-||track.codepen.io^
 ||track.custora.com^
 ||track.datescan.info
 ||track.dictionary.com^
@@ -55550,6 +55527,9 @@ _tracking.php?b=
 /analytics.js$domain=tokyometro.jp|resumes.breakdownexpress.com|techcult.com|inbox.lv|kopeda.com|freexcafe.com|rusvideos.tv|nakubani.ru|lun.com|songsara.net|newsmax.com|bolgehastanesi.com|ewtc.de|newsdig.tbs.co.jp|imore.com|city.kushiro.lg.jp|emeraldbridal.com.au|emarat-news.ae|imobie.jp|tikla.com.tr|rusvideos.porn|jrkyushu.co.jp|amiunique.org
 ||assets.adobedtm.com^$domain=mcclatchydc.com|elnuevoherald.com|bellinghamherald.com|sacbee.com|charlotteobserver.com|newsobserver.com|miamiherald.com|ef.ru|algida.com.tr|bmw-motorrad.co.uk|cif.com.tr|clearhaircare.com|domestos.com|dove.com|elidor.com.tr|f1sport.autorevue.cz|geico.com|hellmanns.com.tr|herkessofraya.com|johnsonsbaby.com.tr|lipton.com|lnk.to|lux.com|magnumicecream.com|neutrogena.com.tr|omo.com|rexona.com|samsung.com|sap.com|schwarzkopf.com.tr|signalturkiye.com|msnbc.com|nbcnews.com|kbb.com|eurosport.ru|timgate.it|intermiles.com|oxfordmail.co.uk|spiegel.de|hp.com|deutschepost.de|thebay.com|s.shufoo.net|tsn.ca|tabelog.com|euronews.com|newshub.co.nz|fredmeyer.com|viabcp.com|carsales.com.au|falabella.com|aarp.org
 !
+||cdn.shopify.com/shopify-email/$image
+||sendfox.com/trk/open/$image
+||cdn.iol.pt/js/utils/Modules/IOLAnalytics/dist/iol.analytics.js
 ||wowow.co.jp/API/new_prg/get_tracking_url.php
 /exp-metrika.js$domain=russia-tv.online
 /yandex-metrika.js$domain=russia-tv.online
@@ -59768,6 +59748,9 @@ $cookie=bf_visit
 ! Bad:  ||monerominer.rocks^$third-party (should be in adservers.txt)
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/158141
+||galottery.com^$cookie=NID
+||galottery.com^$cookie=1P_JAR
 ! https://github.com/AdguardTeam/AdguardFilters/issues/156457
 ||nv.ua^$cookie=browser_id
 ! https://github.com/AdguardTeam/AdguardFilters/issues/156892
@@ -61067,6 +61050,8 @@ inapps.appsflyersdk.com^
 ! For platforms which do not support $redirect rules
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/158146
+@@||log.mmstat.com/eg.js$domain=youku.tv
 ! https://github.com/AdguardTeam/AdguardFilters/issues/157666
 ! https://github.com/AdguardTeam/AdguardFilters/issues/157996
 @@||data-*.faz.net^$domain=m.faz.net
@@ -61474,6 +61459,7 @@ goodwillfinds.com#%#//scriptlet("set-constant", "_etmc", "emptyArr")
 @@||cdn.cxense.com/cx.js$domain=journaldemontreal.com
 @@||api.cxense.com/public/widget/data?json=$domain=journaldemontreal.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/133210
+! https://github.com/AdguardTeam/AdguardFilters/issues/158128
 ! https://github.com/AdguardTeam/AdguardFilters/issues/133076
 ||googletagmanager.com/gtm.js$script,redirect=googletagmanager-gtm,domain=sport.tvp.pl
 ! https://github.com/AdguardTeam/AdguardFilters/issues/132771
@@ -63661,7 +63647,6 @@ kizi.com#%#window.google_trackConversion = function() {};
 @@||som.aeroplan.com/b/ss/
 ! https://forum.adguard.com/index.php?threads/https-russian-rt-com-inotv.13757/#post-101596
 @@||spot.im/api/tracker/spot/$domain=russian.rt.com
-@@||track.atom-data.io/report$domain=russian.rt.com
 ! https://forum.adguard.com/index.php?threads/13697/
 @@||googletagmanager.com/gtm.js$domain=tehnosila.ru
 ! https://github.com/AdguardTeam/AdguardFilters/issues/2874
