@@ -1,8 +1,8 @@
-! Checksum: +p66Rnz21+X2dS0YrjYf4g
+! Checksum: iFMu8wqbNA2EIognRJtydQ
 ! Title: AdGuard Chinese filter
 ! Description: EasyList China + AdGuard Chinese filter. Filter list that specifically removes ads on websites in Chinese language.
-! Version: 2.0.95.36
-! TimeUpdated: 2023-08-06T00:31:10+00:00
+! Version: 2.0.95.52
+! TimeUpdated: 2023-08-08T06:31:22+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -862,6 +862,8 @@ nfmovies.com#$#a[onclick*="openurl"][target="_blank"] img[src^="/static/"] { pos
 ! Good: example.org#?#main > div.row:has(> div.ad)
 ! Bad: example.org##main > div.ad (should be in specific.txt)
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/158575
+forum.hkgolden.com#?#body > div[class^="jss"]:has(> div[class][style^="transform"]:only-child > div[class] > div[data-role="ad"])
 ! https://github.com/AdguardTeam/AdguardFilters/issues/155467
 lihkg.com#?#div[id][class][data-post-id] + div[class]:not([id]):not([data-post-id]):has( > div[class]:only-child > div > div[id^="gam-"]:only-child)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/155154
@@ -885,6 +887,7 @@ hdmoli.com#?#.row > div.myui-panel:has(div[style^="text-align:"] > a[href][targe
 ! https://github.com/AdguardTeam/AdguardFilters/issues/134240
 ! Do not hide .bili-video-card container to not mess up content, related - https://github.com/AdguardTeam/AdguardFilters/issues/147194#issuecomment-1500803042
 ! bilibili.com#?#.bili-video-card.is-rcmd > div > a[href*="cm.bilibili.com"][data-target-url]:not([data-target-url*=".bili"]) + .bili-video-card__info:upward(2)
+bilibili.com#?#.container > div[class*="-card"]:has(div[style="display: none !important;"])
 bilibili.com#?#.bili-video-card:has(.bili-video-card__info--ad) > .bili-video-card__wrap
 bilibili.com#?#.bili-video-card:has(.bili-video-card__info--creative-ad) > .bili-video-card__wrap
 bilibili.com#$?#.bili-video-card:has(.bili-video-card__info--ad) > .bili-video-card__skeleton { visibility: visible !important; }
@@ -1372,6 +1375,13 @@ $script,third-party,denyallow=sharecast.ws|bunnycdn.ru|bootstrapcdn.com|cdn.ampp
 !
 !
 !
+||res.vps234.com/resources/images/hosting-promotion/
+imnks.com##.adTags
+||imnks.com/ad2023/$image
+porn5f.com##.alb_320x250
+porn5f.com##.mobframe
+porn5f.com##.preroll-adv-two
+porn5f.com###dprecommend
 iyf.tv##.video-player + div[class*=" "] > div.block
 jin10.com##.top-ad
 promodj.com##.banner_carousel
@@ -3351,6 +3361,7 @@ nfmovies.com#@?#div[id]:-abp-has(>img[onclick="openurl()"])
 /javhd-jp-970x170.jpg
 /jdzjgg/*
 /jfjs/ad.js
+/jianpian.obs.cn-
 /jianshen8/images/plan_banner_
 /js/aa.htm$script
 /js/aahome.htm
@@ -4405,7 +4416,7 @@ newduba.cn###jq_youxi
 ##a[href*=".com/?Extend="]
 ##a[href*=".com/Register.aspx?aid="]
 ##a[href*=".com/Register/?a="]
-##a[href*=".com?aff="]
+~allthingsopen.org##a[href*=".com?aff="]
 ##a[href*=".com?intr="]
 ~shenguangai.com##a[href*=".shenguangai.com/"]
 ##a[href*=".taobao.com"] > .top1
@@ -4540,6 +4551,7 @@ newduba.cn###jq_youxi
 ##a[href*="/9966699.vip"]
 ##a[href*="/mug749.vip"]
 ||1267a.xyz^
+||1378a.xyz^
 ||1379a.xyz^
 ||1u5gy.xyz^
 ||3400.org^
@@ -4549,6 +4561,7 @@ newduba.cn###jq_youxi
 ||52kuwang.cn^
 ||777aa999aa.com^
 ||8861198.com^
+||89mtdab.xyz^
 ||a8age.com^
 ||a9able.com^
 ||abdluv.xyz^
@@ -4585,14 +4598,17 @@ newduba.cn###jq_youxi
 ||c9r05q.com^
 ||caider.fun^
 ||canser1.top^
+||canser5.top^
 ||ccnim.xyz^
 ||cdmjur.xyz^
+||cfdns.vip^
 ||chiese.site^
 ||ciadre.fun^
 ||cix0wk.com^
 ||connectreadoasis.com^
 ||csedasdme.xyz^
 ||cslbahf.top^
+||ctquh0q.xyz^
 ||cuioxbqi.com^
 ||cxsh.cn.com^
 ||cyq3noz.icu^
@@ -4607,9 +4623,11 @@ newduba.cn###jq_youxi
 ||dehaer.site^
 ||destc8.icu^
 ||dffrahax.com^
+||dfgpifa.com^
 ||dfgymtx.icu^
 ||dgayibf.icu^
 ||dghhot.com^
+||dghkpp.xyz^
 ||dhjrvj.xyz^
 ||dhkipdsc.xyz^
 ||dojyiu8.com^
@@ -4624,6 +4642,7 @@ newduba.cn###jq_youxi
 ||eamqbaqzaewwq.top^
 ||eers0cy.com^
 ||eghyahl.cn^
+||eheb8.cn^
 ||ejolul.xyz^
 ||ekdky.cn^
 ||enhad.xyz^
@@ -4647,12 +4666,14 @@ newduba.cn###jq_youxi
 ||fhglcpf.icu^
 ||fjsytjs.cn^
 ||fjtroip.cn^
+||foirkrt.icu^
 ||fszpzd.xyz^
 ||fuliwang.cc^
 ||fvxlhn.xyz^
 ||fwepd.xyz^
 ||fwzvlp.xyz^
 ||ggdrfh5.com^
+||gghmef7.com^
 ||ghland.site^
 ||gjipd.xyz^
 ||gkjmev3.com^
@@ -4663,6 +4684,7 @@ newduba.cn###jq_youxi
 ||gw1jvhs.com^
 ||gyq3bew.icu^
 ||gyutmrp.com^
+||hacde3.icu^
 ||hanwdsii.com^
 ||hasgde.site^
 ||hbqabbg.cn^
@@ -4676,6 +4698,7 @@ newduba.cn###jq_youxi
 ||hghjks2.com^
 ||hikykhz.icu^
 ||hiqua.xyz^
+||hjgkr0g.xyz^
 ||hjkiguy.com^
 ||hkkeafj.cn^
 ||hlnr9q.icu^
@@ -4744,6 +4767,7 @@ newduba.cn###jq_youxi
 ||kqubxdb.cn^
 ||kslbahd.top^
 ||kv8899.com^
+||kwcmrfb.cn^
 ||kxm1b0u.com^
 ||kyplpw.com^
 ||kyq3hky.icu^
@@ -4763,6 +4787,7 @@ newduba.cn###jq_youxi
 ||lkmhn.com^
 ||llpuhx.xyz^
 ||lmnpd.xyz^
+||lqjinx.xyz^
 ||lrlsrz.xyz^
 ||lrqpyhn.icu^
 ||lskmipb.icu^
@@ -4772,13 +4797,16 @@ newduba.cn###jq_youxi
 ||metaversemolecule.com^
 ||mifyeldx.top^
 ||misapopait.com^
+||mkjnha.com^
 ||mlstx.cn^
 ||mmead.xyz^
+||mnhknds.com^
 ||moobtcnse.xyz^
 ||mrqbuf.xyz^
 ||mt4v4.com^
 ||mvamnng.cn^
 ||mvgucp.com^
+||naqiwjj.icu^
 ||ncgqmzm.cn^
 ||nektonsrutate.com^
 ||ngbthf.xyz^
@@ -4786,6 +4814,7 @@ newduba.cn###jq_youxi
 ||nieae.xyz^
 ||nifyeldc.top^
 ||njogejt.icu^
+||nmdotj.xyz^
 ||nmkghh.com^
 ||nnfyxd.xyz^
 ||nnqwe.xyz^
@@ -4898,10 +4927,12 @@ newduba.cn###jq_youxi
 ||vrr.name^
 ||vvdzucs.cn^
 ||vvwuqxp.icu^
+||vwfppr.xyz^
 ||vxhtxt.xyz^
 ||wddsva0.com^
 ||wnzle.com^
 ||wsdfame.com^
+||wslbahe.top^
 ||wubizigeng.com^
 ||wuye3d.com^
 ||wyq3rum.icu^
@@ -4924,6 +4955,7 @@ newduba.cn###jq_youxi
 ||xtbzff.xyz^
 ||xukang09.cn^
 ||xukou.net^
+||yegziyf.cn^
 ||yh18h8s.com^
 ||yhhnjg.com^
 ||yjnhndt.com^
@@ -4944,14 +4976,15 @@ newduba.cn###jq_youxi
 ||zifyeldq.top^
 ||ziravd.xyz^
 ||znyjmbh.icu^
-||nmdotj.xyz^
-||dfgpifa.com^
-||canser5.top^
-||yegziyf.cn^
-||foirkrt.icu^
-||mnhknds.com^
-||dghkpp.xyz^
 ||zonyff.xyz^
+||xmawwbz.icu^
+||thesac7.top^
+||hgjjk45.com^
+||vghnnh.xyz^
+||uwgnpkd.cn^
+||mkjnbg.com^
+||laljjn.xyz^
+||yjnhkd.com^
 ||zxrcfw.com^
 ||zypzzv.xyz^
 ##a[href$="/1c626.com"]
@@ -12542,6 +12575,7 @@ hxsame.hexun.com$domain=~quote.hexun.com
 ||inszu.com/js/qian/
 ||inte.sogou.com^
 ||iocoder.cn/alert/js/alert.js
+||ip.sb/assets/images/*_ads.
 ||ip138.com/banner/
 ||ip138.com/idc/
 ||ipeen.com.tw/js/frame/ad-actions.js
@@ -13122,6 +13156,7 @@ hxsame.hexun.com$domain=~quote.hexun.com
 ||mitbbs.ca/ad_
 ||mitbbs.com/ad_
 ||miwifi.com^*ads/
+||mixer.sina.cn^
 ||mixer.video.iqiyi.com/jp/mixin/resources/
 ||mkd88.cc/16.32.jpg
 ||mm.nwell.net^
@@ -13757,6 +13792,7 @@ hxsame.hexun.com$domain=~quote.hexun.com
 ||shulihua.net/js/yegonggao.js
 ||shuowan.com/Public/shuo/20160119/569dafddd13be.jpg
 ||sihbb.com/yang/
+||sina.cn/check?
 ||sina.cn/cm/sinaads_
 ||sina.cn/interface/*_game_wap_home_mid_list_in.
 ||sina.cn^*/impress?
@@ -14522,9 +14558,9 @@ hxsame.hexun.com$domain=~quote.hexun.com
 ||zztongyun.com/static/js/sh.
 ||zzz4.com/JS_AD/
 ||zzzyk.com/js/
-||ip.sb/assets/images/*_ads.
+||vps234.com/resources/images/hosting-promotion/
 szxx.com.cn###A0
-ip.sb##.rivencloud_ads
+imnks.com##.adTags
 szxx.com.cn###A1
 szxx.com.cn###A2
 gpcxw.com###AA2
@@ -16693,6 +16729,7 @@ cnblogs.com##.c_ad_block
 121xz.com##.c_money
 kdnet.net##.c_spread
 lenniu.com##.caClass
+sina.cn##.callApp_fl_btn
 hao.360.cn##.cangbao_redbags
 duba.com##.car_ads
 pixabay.com##.carbon-ad
@@ -18171,6 +18208,7 @@ portablesoft.org##.rightside > :nth-child(n+2)
 5588.tv##.ringhttu
 biz.ifeng.com##.riodel
 xxxxx520.com##.ripro_gg_wrap
+ip.sb##.rivencloud_ads
 iqiyi.com##.rm-header-ad
 iqiyi.com##.rm-logo-ad
 ithome.com##.rm-modal-bg
@@ -20770,7 +20808,6 @@ jmcomic1.city,jmcomic1.win##a[href^="http"]:not([href*="jmcom"]) > img
 ||18comic.*/media/albums/*?$media
 ||18comic.*/media/logo/
 ||18comic.*/static/resources/files/*0x
-||18comic.*/static/resources/images/*.gif
 ||18comic.*/static/resources/images/168/
 ||18comic.*/static/resources/images/300
 ||18comic.*/static/resources/images/JGG/
@@ -22527,6 +22564,7 @@ fqsousou.com,kengso.com#@#.user-share
 @@||geo.query.yahoo.com^$xmlhttprequest,domain=tw.autos.yahoo.com|tw.buy.yahoo.com
 @@||gias.jd.com/js/td.js
 @@||gifshow.com/rest/wd/common/log/collect/acfun
+@@||gk.sina.cn/v1/gkmatch?
 @@||google-analytics.com/analytics.js$domain=citytalk.tw|ebb.io|komica.org|lenovo.com.cn|linetv.tw|maminews.com.tw|support.amd.com
 @@||google-analytics.com/plugins/ua/ec.js$domain=lenovo.com.cn
 @@||google-analytics.com/plugins/ua/linkid.js$domain=support.amd.com

@@ -1,8 +1,8 @@
-! Checksum: MgeGUTB1K4O0y+Z12eWdWg
+! Checksum: J7rSrqpo77xPMHGCRvOR0g
 ! Title: AdGuard French filter
 ! Description: Liste FR + AdGuard French filter. Filter list that specifically removes ads on websites in French language.
-! Version: 2.0.41.15
-! TimeUpdated: 2023-08-03T12:30:47+00:00
+! Version: 2.0.41.18
+! TimeUpdated: 2023-08-08T07:30:49+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -137,6 +137,8 @@ capital.fr#@#.plainAd
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/158428
+meteo-grenoble.com#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/157388
 cinefil.com#%#//scriptlet('set-constant', 'adBlocked', 'false')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/155686
@@ -623,6 +625,9 @@ tf1.fr,tf1info.fr#%#//scriptlet('prevent-fetch', '/^https:\/\/ads\.stickyadstv\.
 ! Good: example.org#?#main > div.row:has(> div.ad)
 ! Bad: example.org##main > div.ad (should be in specific.txt)
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/158541
+frandroid.com#?#.is-hidden-mobile:has(> div[id^="optidigital-adslot-"]:only-child)
+frandroid.com#?#.is-hidden-desktop:has(> div[id^="optidigital-adslot-"]:only-child)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/157067
 courrier-picard.fr#?#.qiota_reserve > r-article--section:not(:has(> p)):not(:has(> h3)):not(:has(> div)) > r-pub
 ! https://github.com/AdguardTeam/AdguardFilters/issues/157342
@@ -928,7 +933,12 @@ all-stadium.net#$##layer2 {top:50px!important; left:950px!important;}
 $script,third-party,denyallow=sharecast.ws|bunnycdn.ru|bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|cdn.staticfile.org|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yastatic.net|ytimg.com|zencdn.net|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com|fastcomments.com|plyr.io,_____,domain=extreme-down.moe|dl-protect.link
 !
 !
-frandroid.com##.is-big-rook
+megastream.cam##.pmovie__big-btns
+megastream.cam##.pmovie__player > .ajax-iframe
+cpasmieux.homes##.movie-xyz
+cpasmieux.homes###js-fake_player
+cpasmieux.homes,megastream.cam##.adsvp-movie_collage_blue-wrapper
+cpasmieux.homes,megastream.cam##li.nopls[data-plink="/streamvip.html"]
 mariefrance.fr##body .placeholder-pub_dfp
 futura-sciences.com##.article-sidebar > div[style="min-height: 600px;"]
 ||cvt1.sibnet.ru/j79fbdxg.js
@@ -948,7 +958,6 @@ lhebdoduvendredi.com##.b-lazy-ads
 systemed.fr##div[style="min-height: 250px;"]
 challenges.fr##div[class^="pub-container"]
 malekal.com##.topad
-frandroid.com##.is-great-urial
 1001ebooks.net##.stream-item > div.box.download
 lesechos.fr##main > div[class^="sc-"]:not(.adBanner):empty
 lesechos.fr##article .post-paywall > div[class^="sc-"]:not(.adBanner):empty
@@ -983,7 +992,7 @@ blog-rct.com##body .code-block
 neko-sama.fr##a[href^="https://buqkrzbrucz.com/"]
 capital.fr##img[width="300"][height="250"]
 macg.co##body > div:not([class],[id]) > div[style^="position:fixed;"][style*="backdrop-filter: blur"]
-frandroid.com##.is-accused-chickadee
+frandroid.com##.is-tricky-cheetah
 frandroid.com###products-archive-content .is-narrow > .sidebar
 huffingtonpost.fr##.before-text
 ||vod.6cloud.fr/pub/*.mp4$media,redirect=noopmp3-0.1s,domain=6play.fr
@@ -1233,7 +1242,7 @@ eurosport.fr##.bet-btn
 eurosport.fr##.Winamax
 ||developpez.com/ws/offres?
 it-connect.fr##img[src$="Infrastructure_300x250_FR.gif"]
-hdss.uno,voirseries.co###pub
+cpasmieux.homes,megastream.cam,hdss.uno,voirseries.co###pub
 voirseries.co##center[style="padding: 20px;"]
 voirseries.co##.custom-fake-media-info
 ecranlarge.com#%#//scriptlet("abort-on-property-write", "__yget_ad_list")
@@ -1472,6 +1481,8 @@ adguard.info,adguard.com,adguard.app##.hello_from_adguard_french
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/158561
+||ggcorp.me^$badfilter
 ! https://github.com/AdguardTeam/AdguardFilters/issues/158090
 exeo.app#@#.ad-container
 ! https://github.com/AdguardTeam/AdguardFilters/issues/157930
