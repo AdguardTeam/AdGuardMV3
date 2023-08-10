@@ -1,8 +1,8 @@
-! Checksum: iEqZFDMg+YYJQgP9RZk4xQ
+! Checksum: UWhofTsxFwa3rKCQcn/IQw
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish, Portuguese, and Brazilian Portuguese languages.
-! Version: 2.0.20.59
-! TimeUpdated: 2023-08-07T20:32:28+00:00
+! Version: 2.0.20.66
+! TimeUpdated: 2023-08-10T06:32:24+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -305,6 +305,15 @@
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/158732
+redbolivision.tv.bo#%#//scriptlet('set-constant', 'googletag._loaded_', 'true')
+redbolivision.tv.bo#%#//scriptlet('prevent-fetch', 'securepubads.g.doubleclick.net/pagead/ppub_config')
+redbolivision.tv.bo#%#//scriptlet('prevent-element-src-loading', 'script', 'securepubads.g.doubleclick.net/tag/js/gpt.js')
+||securepubads.g.doubleclick.net/tag/js/gpt.js$script,redirect-rule=noopjs,domain=redbolivision.tv.bo
+||securepubads.g.doubleclick.net/pagead/ppub_config$xmlhttprequest,redirect-rule=nooptext,domain=redbolivision.tv.bo
+! animesonline.nz - antiadblock
+animesonline.nz##.detectadb
+animesonline.nz#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
 ! image not shown
 @@||olimposcans.com^*_prebid-ads.$script,~third-party
 ! https://github.com/AdguardTeam/AdguardFilters/issues/157526
@@ -417,11 +426,14 @@ investnewsbrazil.com,ricettafitness.com#%#//scriptlet('prevent-element-src-loadi
 ! https://github.com/AdguardTeam/AdguardFilters/issues/140890
 pobre.wtf#%#//scriptlet('set-constant', 'adBlockerActive', 'false')
 pobre.wtf#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
+! https://github.com/AdguardTeam/AdguardFilters/issues/158243
 ! https://github.com/AdguardTeam/AdguardFilters/issues/139850
-suaurl.com#%#//scriptlet('prevent-fetch', 'method:HEAD')
-$xmlhttprequest,redirect-rule=nooptext,domain=suaurl.com
-suaurl.com#%#//scriptlet('prevent-setTimeout', 'Por favor, desative')
-suaurl.com#%#//scriptlet('prevent-setInterval', '/adblock|Por favor, desative|adsbygoogle\.js/')
+@@||suaurl.com^$generichide
+@@||reidoplacar.com^$generichide
+$xmlhttprequest,redirect-rule=nooptext,domain=suaurl.com|reidoplacar.com
+reidoplacar.com,suaurl.com#%#//scriptlet('prevent-fetch', 'method:HEAD')
+reidoplacar.com,suaurl.com#%#//scriptlet('prevent-setTimeout', 'Por favor, desative')
+reidoplacar.com,suaurl.com#%#//scriptlet('prevent-setInterval', '/adblock|Por favor, desative|adsbygoogle\.js/')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/138774
 ttlinks.live#@#.adsbygoogle
 ! https://github.com/AdguardTeam/AdguardFilters/issues/138441
@@ -1187,8 +1199,12 @@ clubedohardware.com.br##.caixa_topo
 universoformulas.com#%#window.UFads = true;
 ! https://github.com/AdguardTeam/AdguardFilters/issues/11545
 ! https://github.com/AdguardTeam/AdguardFilters/issues/11384
+! https://github.com/AdguardTeam/AdguardFilters/issues/158672
 ! https://github.com/AdguardTeam/AdguardFilters/issues/33396
 ! https://github.com/AdguardTeam/AdguardFilters/issues/11279
+playview.io#%#//scriptlet('set-constant', 'runningAdsAllowed', 'true')
+@@||playview.io//ab/ads-prebid-wp-banners.js
+@@/fuckadblock.js$domain=playview.io
 ! https://github.com/AdguardTeam/AdguardFilters/issues/11255
 @@||nmn900.com/js/adsbygoogle.js
 ! https://github.com/AdguardTeam/AdguardFilters/issues/11045
@@ -2289,10 +2305,15 @@ placar.com.br,futebolinterior.com.br,tvhistoria.com.br,tribunapr.uol.com.br,diar
 ! ##.banner
 sub100.com.br,theenemy.com.br,manhwas.net,rpp.pe,ambito.com,economipedia.com,informador.mx,elinformador.com.co,cronista.com,rionegro.com.ar,diariodecuyo.com.ar,voydeviaje.com.ar,guarda14.com,viapais.com.ar,agazeta.com.br,eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.*,mundotecnologias.com,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##.banner
 !
+redbolivision.tv.bo##html ned-ad
+redbolivision.tv.bo##body .layout-rev
+metsul.com##.ad-wide-antes
+metsul.com##.metsu-adlabel
+metsul.com###header2_alright
 larazon.es###floorad__portada
 jotdown.es##div[align="center"] > a.gofollow > img
 aeiou.pt##div[class^="code-block code-block-"][style*="margin: 8px auto; text-align: center;"]
-aeiou.pt##div[style^="min-height: 250px;"]
+aeiou.pt##div[data-insertion-no-dbg]
 dinheirovivo.pt##aside[class^="t-pubbox-"]
 tvi.iol.pt,selfie.iol.pt##.patrocinado_section
 tvi.iol.pt##.adwrap-pub
