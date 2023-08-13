@@ -1,8 +1,8 @@
-! Checksum: hV58WLv+q0PhGxPoLZQVDA
+! Checksum: b4m/Vam84vj/1ST17NnkWw
 ! Title: AdGuard French filter
 ! Description: Liste FR + AdGuard French filter. Filter list that specifically removes ads on websites in French language.
-! Version: 2.0.41.19
-! TimeUpdated: 2023-08-09T04:30:56+00:00
+! Version: 2.0.41.23
+! TimeUpdated: 2023-08-12T15:30:46+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -137,6 +137,9 @@ capital.fr#@#.plainAd
 !
 !
 !
+! https://github.com/uBlockOrigin/uAssets/issues/19339
+empire-streaming.*,empire-stream.net#%#//scriptlet('set-constant', 'navigator.brave', 'undefined')
+@@||e-player-stream.app/player/assets/js/ads.js?$~third-party
 ! https://github.com/AdguardTeam/AdguardFilters/issues/158428
 meteo-grenoble.com#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/157388
@@ -743,6 +746,9 @@ forum.hardware.fr#?#.main ~ table.messagetable > tbody > tr.message div[id^="div
 ! https://github.com/AdguardTeam/AdguardFilters/issues/157906
 ! 20min.ch - fixes video player
 20min.ch#%#(()=>{window.TATM=window.TATM||{},TATM.init=()=>{},TATM.initAdUnits=()=>{},TATM.pageReady=()=>{},TATM.getVast=function(n){return new Promise((n=>{n()}))},TATM.push=function(n){if("function"==typeof n)try{n()}catch(n){console.debug(n)}};})();
+! https://github.com/uBlockOrigin/uAssets/issues/19339
+e-player-stream.*#%#//scriptlet('set-constant', 'adsConfig', 'emptyArr')
+empire-streaming.*,empire-stream.net#%#//scriptlet('prevent-window-open')
 ! https://github.com/uBlockOrigin/uAssets/issues/18840#issuecomment-1623546469
 e-player-stream.app#%#//scriptlet('set-constant', 'isSetupAccess', 'true')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/153795
@@ -952,7 +958,7 @@ rustica.fr###stickMe
 youwatch-serie.com##.buttonO
 youwatch-serie.com##.buttonrm
 youwatch-serie.com##body > #card
-empire-streaming.*##.hide-ads
+empire-stream.net,empire-streaming.*##.hide-ads
 cosmopolitan.fr##.Gallery-top-external
 lhebdoduvendredi.com##.b-lazy-ads
 systemed.fr##div[style="min-height: 250px;"]
@@ -1481,6 +1487,12 @@ adguard.info,adguard.com,adguard.app##.hello_from_adguard_french
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/158757
+||ojrq.net^$popup,third-party,badfilter
+! beautifulwomen2.bdsmlr.com - broken fonts
+@@||beautifulwomen2.bdsmlr.com/va/ads/fawesome/
+! https://github.com/AdguardTeam/AdguardFilters/issues/158749
+||jdoqocy.com^$popup,third-party,badfilter
 ! https://github.com/AdguardTeam/AdguardFilters/issues/158561
 ||ggcorp.me^$badfilter
 ! https://github.com/AdguardTeam/AdguardFilters/issues/158090
@@ -2297,12 +2309,9 @@ speed4up.com#@#.AdsTop
 @@||s.marktplaats.com/static-web/*/MyAds.
 ! https://github.com/AdguardTeam/AdguardFilters/issues/24765
 @@||7eer.net^$popup,domain=cashrewards.com.au
-@@||ojrq.net^$popup,domain=cashrewards.com.au
 ! https://github.com/AdguardTeam/AdguardFilters/issues/24643
 youzik.com#@#a[style]
 @@||vnadigital.com^$domain=youzik.com
-! https://github.com/AdguardTeam/AdguardFilters/issues/24242
-@@||ojrq.net^$popup,domain=pricehipster.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/24280
 @@||autopromo.allocine.fr/*-async/*/*&autoload=*&seg=$domain=allocine.fr
 @@||autopromo.wbdds.com/*-async/*/player_external_embed/*&autoload=*&seg=$domain=allocine.fr
