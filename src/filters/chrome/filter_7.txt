@@ -1,8 +1,8 @@
-! Checksum: 9jDfiw4z/koMjXFJFTcNSA
+! Checksum: zv1jUaUlyBWberRl+NCgjg
 ! Title: AdGuard Japanese filter
 ! Description: Filter that enables ad blocking on websites in Japanese language.
-! Version: 2.0.42.62
-! TimeUpdated: 2023-08-12T18:32:13+00:00
+! Version: 2.0.42.72
+! TimeUpdated: 2023-08-14T16:32:43+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -909,6 +909,10 @@ otonasalone.jp,sumaiweb.jp#?#._popIn_infinite_page > a._popIn_recommend_article_
 !
 !
 !
+app-ranking.net#?#.ranklist table:not([class]) > tbody > tr > td[colspan="3"]:upward(1)
+travel.mdpr.jp#?#aside.container ~ .container:has(.rellink > .ad)
+xn--r8jwklh769h2mc880dk1o431a.com#?#.kizi > p:last-of-type:has(> a[href][target="_blank"] > img.timtam)
+go2senkyo.com#$?#.p_top_top_article > span > div.p_top_top_article_banner:upward(2) { remove: true; }
 lifehack2ch.livedoor.biz#?##right_a:has(> div#rightbody > div#rakuafi)
 blogspot.com#?#.HTML > div.widget-content > ins.adsbygoogle:upward(2)
 cybersocean.net#?#.textwidget > p:has(> a[href^="https://amzn.to/"])
@@ -922,7 +926,7 @@ blog.fc2.com#?#.sidemenu_content > div.plg_body > div.plugin-freearea > script[s
 blog.fc2.com#?#.sidemenu_content > div.plg_body > div.plugin-freearea > div#scroll script[src^="https://adm.shinobi.jp/"]:upward(4)
 blog.fc2.com#?#.plugin_third > div.plg_body > div.plugin-freearea > a[href^="https://cnt.affiliate.fc2.com"]:upward(3)
 blog.livedoor.jp#?#.plugin-memo:has(> div.side > a[href^="http://www.e-nls.com/access.php"][target="_blank"] > img)
-javmix.tv#?#.home-h:first-child:contains(ライブ配信中)
+javmix.tv#?#.home-h:contains(ライブ配信中)
 japandesign.ne.jp#$?#.c-box.ad { remove: true; }
 uma-log.net#?##content >  div.widget_text:has(a[href="https://neetrio.jp/umalogdb/"][target="_blank"])
 gfoodd.com#?##related-entries ~ .singleh4:contains(amazon)
@@ -2697,6 +2701,8 @@ hostlove.com#$##index_nav > h1 { padding-top: 30px!important; }
 /wp-content/plugins/amazonjs/*
 !
 ! Malware/Phishing
+://smbc-*.shop/$document
+://*.*.xyz/jp.html^$document
 .com/funccode.php|$document
 .co.jp.*.com/login|$document
 .co.jp.*.top/ai/index.php$document
@@ -2849,6 +2855,12 @@ gundamlog.com###more > iframe[src^="https://richlink.blogsys.jp"]
 !
 !
 !
+app-ranking.net##.haj
+||tv-tokyo.co.jp/plus/tbcms/js/ad.1plusX.js
+tv-tokyo.co.jp##.tbcms_ad-block-overlay
+||animephilia.net/wp-content/plugins/my-adcontrol/
+city.ebetsu.hokkaido.jp###sidebar2 a[href^="/adv/ba.php"]
+taisy0.com###custom_html-20
 maonline.jp##.articlegroups > div.mgnT60.mgnB60
 meitou.info###aside
 meitou.info###content > a[href^="https://amzn.to"]
@@ -3347,6 +3359,7 @@ ge-soku.com##.single-related-area
 nanasepn.com###sidebar > div.widget_custom_html
 pr-park.com,xn--zcka7aza6gyb9jd.net###notfix > div.widget_custom_html
 twtimez.net##.adWideDown
+twiman.net##div[class*="my-"][class*="px\]"]
 twiman.net##div[style="margin:auto;max-width:1400px;"]
 gamemod.blog.fc2.com##div[id^="sp-area-"]
 ||uub.jp/opm/pnlbanner_
@@ -4192,6 +4205,9 @@ epark.jp##div[class^="p-advertisement"]
 ure.pia.co.jp###wrapper #button_id
 ure.pia.co.jp###wrapper #anchor_id
 kateich.net###headline_banner
+zch-vip.com##.article-body-inner dl > dd > a[href^="https://al.dmm.co.jp"][rel="nofollow"][target="_blank"]
+zch-vip.com##.article-body-inner dl > dd > b[style="color: rgb(255, 0, 0);"]
+zch-vip.com##.article-body-inner dl > dd > span[style$="color: rgb(255, 0, 0);"]
 zch-vip.com###article_bottom_ad
 zch-vip.com###article_center_ad
 ||billboard-japan.com/common/google_banner.html
@@ -4972,7 +4988,7 @@ newsmomonga.com##.post div[align="center"] + br + hr
 nc-net.or.jp##.box-pr-image-01
 mori.nc-net.or.jp###ok_ad_side
 jm1xtk.com##.web_adber-1
-city.soka.saitama.jp,jm1xtk.com##div[class$="_ad"]
+allabout.co.jp,city.soka.saitama.jp,jm1xtk.com##div[class$="_ad"]
 my-best.com##.l-footer__fixed
 print-kids.net##div[id^="ad-"]
 print-kids.net##div[id$="-rectangle"]
@@ -4990,7 +5006,7 @@ japan.cnet.com###ad_rect ~ div.iframeWrapper
 fc1adult.com##.line-ad
 world-fusigi.net##.top_rss_side_ad
 world-fusigi.net##.monthly_popular_wrap
-pref.kyoto.jp,city.anjo.aichi.jp,city.omura.nagasaki.jp,pref.yamanashi.jp,city.kita.tokyo.jp,citykita.j-server.com,city.arakawa.tokyo.jp,city.fujisawa.kanagawa.jp,city.yokosuka.kanagawa.jp,city.oita.oita.jp,pref.ibaraki.jp,pref.yamagata.jp,city.toride.ibaraki.jp,city.sendai.jp,city.izunokuni.shizuoka.jp,city.fuefuki.yamanashi.jp,city.aomori.aomori.jp,hellonavi.jp,lg.jp,tokunoshima-town.org###tmp_publicity
+pref.kagoshima.jp,pref.kyoto.jp,city.anjo.aichi.jp,city.omura.nagasaki.jp,pref.yamanashi.jp,city.kita.tokyo.jp,citykita.j-server.com,city.arakawa.tokyo.jp,city.fujisawa.kanagawa.jp,city.yokosuka.kanagawa.jp,city.oita.oita.jp,pref.ibaraki.jp,pref.yamagata.jp,city.toride.ibaraki.jp,city.sendai.jp,city.izunokuni.shizuoka.jp,city.fuefuki.yamanashi.jp,city.aomori.aomori.jp,hellonavi.jp,lg.jp,tokunoshima-town.org###tmp_publicity
 city.chiba.jp,city.edogawa.tokyo.jp,city.kofu.yamanashi.jp,pref.shizuoka.jp,pref.ehime.jp,city.fukushima.fukushima.jp,city.hamamatsu.shizuoka.jp,city.sapporo.jp,city-kirishima.jp,lg.jp###tmp_wrap_publicity
 ula.5ch.net,ula.cc##.nanohana7
 ||anitubu.com/amazon_category/
@@ -7716,7 +7732,7 @@ rebosoku.com##.sidebody-r
 rebosoku.com##div[style="height:445px;"]
 gameleaks.org,kinggonzalez.net,toolmania.info,moez-m.com,deai-help.com,curo.jp,gadget2ch.com,blog.syumikatu.info###sidebar-scroll
 blog.skeg.jp###gad-relatedentry
-itmedia.co.jp,pasoble.jp,figsoku.net,mysqlweb.net,nlab.itmedia.co.jp,securl.nu,blog.skeg.jp##.gad
+plus-a.net,itmedia.co.jp,pasoble.jp,figsoku.net,mysqlweb.net,nlab.itmedia.co.jp,securl.nu,blog.skeg.jp##.gad
 blog.skeg.jp##.gad-articletop
 blog.skeg.jp##.gad-sidetop
 fx-koryaku.com##.ad-single
@@ -8216,6 +8232,7 @@ kanaloco.jp##.top-head-bnr
 tktube.com##.fp-player > div[style*="z-index:"]
 tktube.com##.footer-margin
 tktube.com##.table
+friday.kodansha.co.jp##section[class^="detail_recommended_"]
 friday.kodansha.co.jp##div[class^="detail_adArea"]
 friday.kodansha.co.jp##div[class^="styles_ad"]
 ictmakes.com##.tcd_ad_widget

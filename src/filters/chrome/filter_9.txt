@@ -1,8 +1,8 @@
-! Checksum: e6zBIFmQzHIf3bfi37rPqw
+! Checksum: mMNJtU9eoBnI8YO3oXBT6Q
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish, Portuguese, and Brazilian Portuguese languages.
-! Version: 2.0.20.73
-! TimeUpdated: 2023-08-11T17:04:13+00:00
+! Version: 2.0.20.83
+! TimeUpdated: 2023-08-14T23:32:15+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -305,6 +305,8 @@
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/159034
+mega-enlace.com#%#//scriptlet('prevent-fetch', 'method:HEAD')
 ! https://github.com/uBlockOrigin/uAssets/issues/19312
 softwareany.net#%#//scriptlet('prevent-addEventListener', 'load', 'detect-modal')
 softwareany.net#@#ins.adsbygoogle
@@ -1378,6 +1380,8 @@ peru21.pe#@#.adstop
 ! https://github.com/AdguardTeam/AdguardFilters/issues/24801
 yahoo.com#?#ul[class^="Mb(0)"] > li.js-stream-content:has(> div > a[rel="nofollow noopener noreferrer"]+div:contains(Patrocinado))
 !
+autobild.es#?#article > aside:has(> div[class^="outbrain_"])
+autobild.es#?#div[class^="columns"] > aside[class^="columns_columnAside"]:has(> div[class^="columns_sticky"] > div[class^="ad-slot"])
 henaojara.com#?#.widget-area > div[id^="custom_html"]:not(:has(> div.textwidget > iframe[src^="https://discord.com/"]))
 jotdown.es#?##sidebar > .widget:has(div[align="center"] > a.gofollow > img)
 cofense.com#?#div[data-elementor-type="single-post"] section.elementor-section:has(.elementor-widget-share-buttons)
@@ -1719,6 +1723,9 @@ suaurl.com#%#//scriptlet('abort-current-inline-script', '$', 'notficationAd')
 suaurl.com#%#//scriptlet('abort-current-inline-script', 'open', 'document.getElementById')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/139603
 estacio.br#%#//scriptlet('set-cookie', 'modal_promo', '1')
+! https://github.com/AdguardTeam/AdguardFilters/issues/159034
+mega-enlace.com#%#AG_onLoad(function(){try{var a;"function"==typeof decode_link&&"string"==typeof link_out&&(a=decode_link(atob(link_out)),location.assign(a)),"string"==typeof api_key&&(document.cookie=`${api_key}=Wn275; path=/`);var b=document.querySelector("* > .button#contador");b&&a&&setTimeout(()=>{var c=b.cloneNode(!0);b.parentNode.replaceChild(c,b),c.addEventListener("click",function(){location.assign(a)},!1)},500)}catch(a){}});
+mega-enlace.com#%#(function(){if(-1<window.location.href.indexOf("?i=")){var b=location.href.split("?i=");if(b&&b[1]){b=b[1];for(var f=0;10>f;f++)try{b=atob(b)}catch(a){var g=b.replace(/[a-zA-Z]/g,function(a){return String.fromCharCode(("Z">=a?90:122)>=(a=a.charCodeAt(0)+13)?a:a-26)});try{new URL(g);var d=!0}catch(a){d=!1}if(d){const a=g.endsWith("|pehd")?g.split("|pehd")[0]:g;window.location=a;break}}}}})();
 ! https://github.com/AdguardTeam/AdguardFilters/issues/156973
 enlacito.com#%#AG_onLoad(function(){try{var a;"function"==typeof decode_link&&"string"==typeof link_out&&(a=decode_link(atob(link_out)),location.assign(a)),"string"==typeof api_key&&(document.cookie=`${api_key}=Wn275; path=/`);var b=document.querySelector("* > .button#contador");b&&a&&setTimeout(()=>{var c=b.cloneNode(!0);b.parentNode.replaceChild(c,b),c.addEventListener("click",function(){location.assign(a)},!1)},500)}catch(a){}});
 ! https://github.com/AdguardTeam/AdguardFilters/issues/138774
@@ -2313,8 +2320,22 @@ applesfera.com,xatakamovil.com,espinof.com,mundoxiaomi.com,vidaextra.com,medioti
 ! ##.ads
 placar.com.br,futebolinterior.com.br,tvhistoria.com.br,tribunapr.uol.com.br,diariodonordeste.verdesmares.com.br,sbt.com.br,link.estadao.com.br,atomixhq.*,jc.ne10.uol.com.br,internetpasoapaso.com,acidadeon.com,leouve.com.br,larazon.es,infoescola.com,cbn.globoradio.globo.com,maxitorrent.com,abril.com.br,odia.ig.com.br,especiais.g1.globo.com,tribunapr.com.br,novelasd.com,anime-tube.tv##.ads
 ! ##.banner
-sub100.com.br,theenemy.com.br,manhwas.net,rpp.pe,ambito.com,economipedia.com,informador.mx,elinformador.com.co,cronista.com,rionegro.com.ar,diariodecuyo.com.ar,voydeviaje.com.ar,guarda14.com,viapais.com.ar,agazeta.com.br,eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.*,mundotecnologias.com,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##.banner
+motociclismo.es,sub100.com.br,theenemy.com.br,manhwas.net,rpp.pe,ambito.com,economipedia.com,informador.mx,elinformador.com.co,cronista.com,rionegro.com.ar,diariodecuyo.com.ar,voydeviaje.com.ar,guarda14.com,viapais.com.ar,agazeta.com.br,eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.*,mundotecnologias.com,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##.banner
 !
+laopiniondemalaga.es##._mo_recs_vi
+autobild.es##div[class*="ad-slot_"]
+autobild.es##.hueco-publicidad
+autobild.es##.megabanner
+autobild.es##div[class^="river_gridPosition__"]
+laopiniondemalaga.es##[data-ad-position-baldomero]
+descargaseriestv.com###block-13
+descargaseriestv.com###block-38
+descargaseriestv.com###block-48
+descargaseriestv.com##.widget_recent_comments ~ aside.widget
+descargaseriestv.com##body .code-block
+globo.com##div[data-type="advertise"]
+neoxscans.net###custom_html-13
+hdpastes.com##center > a[target="_blank"] > video
 futecell.com###HTML28
 futecell.com###HTML27
 felizemforma.com##.ad970x250
@@ -2354,7 +2375,7 @@ futebolinterior.com.br##.ads--ordered + div[id^="borg-elm-"]:empty
 esdiario.com##div[class*="publi-"]
 neo2.com##.postDosRow
 milenio.com##aside[id^="taboola"]
-elcomercio.es##.voc-area-container--head-adv
+diariosur.es,elcomercio.es##.voc-area-container--head-adv
 elpais.com##.outbrain
 neomotor.epe.es##div[style="min-height: 700px"]
 epe.es##div[data-recs]
@@ -2402,7 +2423,7 @@ editalconcursosbrasil.com.br##.conteudo_ads
 estadao.com.br##.publi--spacing_news_htopo
 los40.com##.c-pub
 animeflv.net##div[class^="div"][style]:empty
-elplural.com##cs-ads
+65ymas.com,elplural.com##cs-ads
 elplural.com##iframe[class^="smarty-"]
 abril.com.br##.ads-bilboards
 otempo.com.br###pub-sidebar
@@ -2752,7 +2773,7 @@ tribunapr.uol.com.br##body > #__next > footer ~ .fixed.bottom-0
 especiaisg1.globo##.banner-publicidade
 g1.globo.com##.apuracao-outros-locais-ads
 hola.com##body[data-pub] div[data-js-ad-manager-slot]
-elperiodico.com##._mo_recs_cti
+laopiniondemalaga.es,elperiodico.com##._mo_recs_cti
 epe.es,elperiodico.cat,cope.es,sport.es,elperiodico.com##.add
 otakustv.com###result_server > .playing:empty
 bloomberglinea.com,bloomberglinea.com.br##.arcad-feature-custom
@@ -3204,7 +3225,7 @@ megacurioso.com.br##.ad-halfpage-placeholder
 megacurioso.com.br##.ad-leaderboard-placeholder
 ciudad.com.ar,oficinadanet.com.br##div[class^="banner-"]
 concursosnobrasil.com.br##.label-publicidade
-elnacional.cat##.c-banner
+65ymas.com,motociclismo.es,elnacional.cat##.c-banner
 galeriadaarquitetura.com.br###bannerheader
 galeriadaarquitetura.com.br###publicidade-banner
 definicionabc.com##.analisis > div[class^="abc-"]
@@ -3283,7 +3304,7 @@ lapoliticaonline.*###header-banner-wrapper
 onepieceex.net##.banner-resposivo
 tecmundo.com.br##p > a[href^="https://bit.ly/"][target="_blank"] > span > img
 ||img.ibxk.com.br/*/banner-*.png$domain=tecmundo.com.br
-eltiempo.com,gauchazh.clicrbs.com.br,hobbyconsolas.com,larepublica.pe,vozpopuli.com##.ad-container
+globo.com,eltiempo.com,gauchazh.clicrbs.com.br,hobbyconsolas.com,larepublica.pe,vozpopuli.com##.ad-container
 vozpopuli.com##.home_1_ad
 infobae.com##.d23-navbar-ad-container
 infobae.com##.navbar-ad-container
@@ -3357,7 +3378,7 @@ todopolicia.com##.samBannerUnit
 ||hentaistube.com/hentaistubepop.js
 primedeportes.es###yuio
 ||primedeportes.es/lado.php
-eldiario.es##.edi-advertising
+eldiario.es##body div.edi-advertising
 eldiario.es##.news-sponsored-content
 eldiario.es##.bbnx-module
 forum.lfspro.net##iframe[id^="aswift_"]

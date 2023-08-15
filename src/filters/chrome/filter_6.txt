@@ -1,8 +1,8 @@
-! Checksum: 7I9WWqFSUyOf650bSQYqgA
+! Checksum: HQCrwdjW6wqeDj017WqN2A
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.36.97
-! TimeUpdated: 2023-08-12T14:32:02+00:00
+! Version: 2.0.37.2
+! TimeUpdated: 2023-08-14T16:32:37+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1093,8 +1093,9 @@ zockify.de#?#div:has(> small.text-muted)
 zockify.de#?#.container:has(> div[data-displaytype="hybrid-banner"])
 ! https://github.com/AdguardTeam/AdguardFilters/issues/156152
 win-10-forum.de#?#div.p-body-pageContent > article.message--post:has(article.message-body > a.amazonadlink)
+! https://github.com/AdguardTeam/AdguardFilters/issues/158944
 ! https://github.com/AdguardTeam/AdguardFilters/issues/155255
-chip.de#?#div[style*="min-height:"]:has(> a[href*="contentpartnerId"]:only-child > img)
+chip.de#?#div[class]:has(> a[href*="contentpartnerId"]:only-child img)
 ! ratgeber.bunte.de - left-over in article
 ratgeber.bunte.de#?#.Article > div[class]:has(>hr:first-child + aside[role="complementary"] + hr:last-child)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/153929
@@ -2009,8 +2010,9 @@ menshealth.de#%#function google_ad_request_done() {};
 !--------------------------------------!
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/158944
+chip.de#$#section.Chapter.wrapper-safe[style^="min-height:"] { min-height: auto !important; }
 ! xnxx-sexfilme.com preroll ad
-||twincdn.com/video/susilive/$media,redirect=noopmp4-1s,domain=xnxx-sexfilme.com
 xnxx-sexfilme.com#$#.preroll-blocker { display: none !important; }
 xnxx-sexfilme.com#$#.preroll-skip-button { display: none !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/146985
@@ -2300,6 +2302,9 @@ winfuture.de,netzwelt.de,quoka.de,farmeramania.de,bravofly.de,computerbild.de,di
 ! ##.billboard
 formel1.de,krautundrueben.de,motorsport-total.com,traktorpool.de,fnweb.de,laborjournal.de,tarnkappe.info,deraktionaer.tv,food-tiger.de,morgenweb.de##.billboard
 !
+kino.de##.zdfmediathek
+chip.de###aabhor
+||twincdn.com/video/susilive/$media,redirect=noopmp4-1s,domain=xnxx-sexfilme.com
 giga.de###content-block-01F5ZNBF79MJY7K1CK9ZMCS0QV
 routeyou.com##.avsgWrapper-largeRectangleDesktop.avsgLoading
 ||media.routeyou.com/marketing/
@@ -5622,10 +5627,8 @@ tarnkappe.info#@#.category-advertorial
 hochzeitsportal24.de#@##bannerwerbung
 ! https://github.com/AdguardTeam/AdguardFilters/issues/73868
 druckerchannel.de#@##DCGA_CONTAINER
+! https://github.com/AdguardTeam/AdguardFilters/issues/159079
 ! https://github.com/AdguardTeam/AdguardFilters/issues/71692
-@@||googletagservices.com/tag/js/gpt.js$domain=cinemaxx.de
-@@||securepubads.g.doubleclick.net/gpt/pubads_impl_*.js$domain=cinemaxx.de
-@@||securepubads.g.doubleclick.net/gampad/ads$domain=cinemaxx.de
 ! https://github.com/AdguardTeam/AdguardFilters/issues/70473
 @@||ad.71i.de/somtag/loader/loader.js$domain=atv.at
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=atv.at
@@ -9028,6 +9031,7 @@ au-ja.de##.ADVBOX
 preissuchmaschine.de##.AFS_ADD
 onvista.de##.ANZEIGE
 finanzfrage.net,gutefrage.net,praxistipps.focus.de##.Ad
+chip.de##.Ad-hor-height:not([id^="advertisment-"])
 finanznachrichten.de##.Ad_FinativeHome
 finanznachrichten.de##.Ad_ImageTeaser
 finanznachrichten.de##.Ad_SmartAd
@@ -10346,6 +10350,7 @@ winfuture.de##div[align="center"][style="min-height: 320px;"]
 3dchip.de##div[align="center"][width="468px"] > table[height="60"][cellspacing="0"][cellpadding="0"][border="0"][align="center"]
 bitreporter.de##div[class$="-adlabel"]
 onvista.de##div[class*="InteractionTypeReference_ov-interaction-slot--fallback"]
+rewe.de##div[class*="Product_productSponsoredTile"]
 onlinehaendler-news.de##div[class*="adplacement_"]
 chartsurfer.de##div[class*="adszone-"]
 homegate.ch##div[class^="AdSlotContainer_"]
@@ -10714,8 +10719,6 @@ automotiveit.eu,instandhaltung.de,produktion.de,technik-einkauf.de#?#.ce_postlis
 avguide.ch#?#.avgrid_1_of_1.viewlet-bottom:-abp-has(h2:-abp-contains(Advertorials))
 avguide.ch#?#.gridteaser.gridteaser-m:-abp-has(h4:-abp-contains(Sponsored Post))
 az.com.na#?#aside:-abp-has(img[src*="/adverts/"])
-barfuss.it#?#.panels-flexible-region:-abp-has(span:-abp-contains(Gesponsert))
-barfuss.it#?#.views-row:-abp-has(.partner-label)
 baur.de#?#div[data-testid="card"]:-abp-has(span.MuiCardHeader-title:-abp-contains(Gesponserte Artikel))
 baur.de#?#div[data-testid="reco-wrapper"]:-abp-has(div[class^="indexesm__HeadlineElement-fragment-product-master__"]:-abp-contains(Gesponserte Artikel))
 bergsteiger.de#?#.eight.columns.alpha.content:-abp-has(span:-abp-contains(Advertorial))
