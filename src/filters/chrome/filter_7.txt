@@ -1,8 +1,8 @@
-! Checksum: zv1jUaUlyBWberRl+NCgjg
+! Checksum: 4FhltTfiyEY2MIosRRekoA
 ! Title: AdGuard Japanese filter
 ! Description: Filter that enables ad blocking on websites in Japanese language.
-! Version: 2.0.42.72
-! TimeUpdated: 2023-08-14T16:32:43+00:00
+! Version: 2.0.42.76
+! TimeUpdated: 2023-08-16T13:32:27+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -909,6 +909,11 @@ otonasalone.jp,sumaiweb.jp#?#._popIn_infinite_page > a._popIn_recommend_article_
 !
 !
 !
+jp-weathernews.com#?#section.block[style="overflow: hidden;"]:has(> div.adsense_center)
+fc2ppv.mhx.jp#?#.swell-block-button:has(> a[href^="https://live.fc2.com/adult/?afid"])
+fc2ppv.mhx.jp#?#h4.wp-block-heading:has(+ div.pcolle-parts)
+fc2ppv.mhx.jp#?#h4.wp-block-heading:has(+ p + center)
+scienceplus2ch.com#?#.sidetitlebody:contains(スポンサーリンク)
 app-ranking.net#?#.ranklist table:not([class]) > tbody > tr > td[colspan="3"]:upward(1)
 travel.mdpr.jp#?#aside.container ~ .container:has(.rellink > .ad)
 xn--r8jwklh769h2mc880dk1o431a.com#?#.kizi > p:last-of-type:has(> a[href][target="_blank"] > img.timtam)
@@ -1372,6 +1377,7 @@ technologyreview.jp##.register:has(> div#adPCLarge)
 newsee-media.com#?#.mb0 > div.s-side-title-header > [class^="s-side-"]:contains(スポンサードリンク)
 blog.livedoor.jp,ldblog.jp#?#.plugin-memo > div.side > div[class^="alistcloud-container"]:upward(2)
 economical.co.jp#?#.side-topad > div.widget_st_custom_html_widget:has(> div > p > a[href^="//ck.jp.ap.valuecommerce.com/servlet/referral"])
+weathernews.jp#?##sub > section[class*="block"]:has(> div[style^="width:100%; margin:0 auto"] > div[id^="div-gpt-"])
 weathernews.jp#?##main > .block:has(> div[style*="width:"]:first-child > div[id^="div-gpt-"])
 4years.asahi.com#$?#ul[class^="panel-article__list"] > li > div[id^="div-gpt-"]:upward(1) { remove: true; }
 picb2.com#?#.forum-information > font:contains(楽天)
@@ -1994,7 +2000,6 @@ blog.shinobi.jp#?#div.EntryBlock:has(#ninja-blog-inactive)
 blog.shinobi.jp#?#div.EntryTitle:has(a[href=""]:contains([PR]))
 fightingirl.com#?#article > section:has(img[src^="http://koukoku."])
 moeimg.net#?##main-2 > .post:has(> .pc_ad:only-child)
-weathernews.jp#?##sub > section.block > div[style^="width:100%; margin:0 auto"]:upward(1)
 ejje.weblio.jp#?#.sideBlock:has(> div[style="min-width: 300px; min-height: 100px;"])
 ejje.weblio.jp#?##side > .sideblock:not(:has(>*))
 ejje.weblio.jp#?##side > .sideblock:has(> .ads-loader)
@@ -2855,6 +2860,16 @@ gundamlog.com###more > iframe[src^="https://richlink.blogsys.jp"]
 !
 !
 !
+jp-weathernews.com##.adsense_center
+jp-weathernews.com##section[class*="admid"]
+beauty.biglobe.ne.jp###s_salon > div[style^="width:calc("]
+tenki.jp###pr-tokubetsu-banner
+hs-exp.jp##.amz-outline
+hs-exp.jp##.koruri.brown-link
+fc2ppv.mhx.jp##.post_content > div.swell-block-button + h4.wp-block-heading + p
+fc2ppv.mhx.jp##.w-frontBottom
+fc2ppv.mhx.jp##.wp-block-latest-posts + div.wp-block-image.u-mb-ctrl
+fc2ppv.mhx.jp##.wp-block-latest-posts + div.wp-block-image.u-mb-ctrl + p.has-text-align-center
 app-ranking.net##.haj
 ||tv-tokyo.co.jp/plus/tbcms/js/ad.1plusX.js
 tv-tokyo.co.jp##.tbcms_ad-block-overlay
@@ -3019,7 +3034,7 @@ chisou-media.jp##.p-articleAd--rec--2col
 gadget2ch.com###sidebar-widget > div.pc_text:first-child
 blogterest.net##.blockSide > div.blockWrapper > div.blockBody > center > a[href^="https://al.dmm.co.jp/"] > img
 blogterest.net##.blockAreaMainUpper > div.blockWrapper > div.blockBody > center > a[href^="https://al.dmm.co.jp/"] > img
-ero-meganezaru.com###sidebar
+fc2ppv.mhx.jp,ero-meganezaru.com###sidebar
 ej.alc.co.jp##div[class*="-only"][class$="-overlay"]
 keisan-mondai.com###content > div.nosma
 .jp/cmsfiles/banner/$domain=city.higashiosaka.lg.jp|city.higashiomi.shiga.jp|city.ikoma.lg.jp
@@ -3972,6 +3987,7 @@ live.kufu.co.jp##.banner_similar_adsense
 blog.jp##.advArea
 exawarosu.net##.l-parts-a > div.side
 elephant.2chblog.jp##div[class^="yms-2ad-"]
+scienceplus2ch.com###pc-side-nav.module--free
 scienceplus2ch.com##div[id^="ads_"]
 booksprivilege.com###adsub
 eiga.com###m-osorezone
@@ -5106,7 +5122,7 @@ hobbytimes.jp##.alignce > p
 resemom.jp##.sidebox[style*="1000px; margin-top"]
 manetatsu.com###browsi-wrec1ad
 mhmatome.com###text-23 > div.textwidget > div.wd_title_rss + p
-mhmatome.com##.post-title-upper
+glamoroustube.com,mhmatome.com##.post-title-upper
 vtubernews.jp##.g-ad250
 joqr.co.jp##.ad_full
 joqr.co.jp##.panel_kv > li[style="display:flex; justify-content: center; flex-wrap: wrap;"]:not([class])
@@ -5240,7 +5256,7 @@ cecile.co.jp##[id$="rec_bnr_header"]
 cecile.co.jp##.show-ads
 karzusp.net##.amazon-gift
 karzusp.net##.popular-book
-||doujin-assets.dmm.co.jp^$domain=skebetter.com|kimootoko.net
+||doujin-assets.dmm.co.jp^$domain=skebetter.com|kimootoko.net|urasma.com
 skebetter.com##.h-16.md\:h-24.p-1
 skebetter.com##.h-24.md\:h-48.p-1
 skebetter.com##.max-w-2xl.sm\:py-12.sm\:px-6.lg\:max-w-7xl
@@ -7744,6 +7760,7 @@ fx-koryaku.com##.textwidget > center > a[target="_blank"]
 ||mainichikirei.jp/assets/kirei/css/*_ad.css
 ||exploader.net/images/nls/
 ||dmm.co.jp^$domain=exploader.net
+exploader.net##div[style="width: 1120px;margin-left: -63px;margin-bottom: 5px;"]
 exploader.net###nls
 exploader.net##.dl_items
 exploader.net##.items
@@ -8691,7 +8708,7 @@ gizmodo.jp##.s-body-ad
 goo.ne.jp##.NR-ad
 news.goo.ne.jp##div[class^="gooad_"]
 news.goo.ne.jp##.gn-partition.sp-padding15
-map.goo.ne.jp,autos.goo.ne.jp,weather.goo.ne.jp##.NR-pr
+goo.ne.jp##.NR-pr
 heartlife-matome.com##.arttop
 gamejksokuhou.com##.side_amazon
 getnews.jp##.custom-html-widget > center > a[target="_blank"] > img
@@ -9710,10 +9727,10 @@ komachi.yomiuri.co.jp#@#._popIn_recommend_article_ad_reserved
 ! https://github.com/AdguardTeam/AdguardFilters/issues/62583
 @@||proto2ad.durasite.net/A-affiliate2/mobile$script,domain=ok.goo-net.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/55775
+hs-exp.jp##ins.adsbygoogle
+@@||hs-exp.jp^$generichide
 @@||hearthstone.exp.jp/ads/$image,domain=hs-exp.jp
 @@||hs-exp.jp/ads/$image,font,~third-party
-hs-exp.jp#@#.hcf-ad
-hs-exp.jp#@##search-ad
 ! https://github.com/AdguardTeam/AdguardFilters/issues/53900
 ! https://github.com/AdguardTeam/AdguardFilters/issues/47520
 @@||static.rebates.jp/img/*_300x250.

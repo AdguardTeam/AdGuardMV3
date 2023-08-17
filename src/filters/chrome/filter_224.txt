@@ -1,8 +1,8 @@
-! Checksum: WDRsbP/b1Ria1rWzUvCheA
+! Checksum: XnHYlZrP/b7X2PAtpDs+IQ
 ! Title: AdGuard Chinese filter
 ! Description: EasyList China + AdGuard Chinese filter. Filter list that specifically removes ads on websites in Chinese language.
-! Version: 2.0.96.9
-! TimeUpdated: 2023-08-15T02:31:12+00:00
+! Version: 2.0.96.20
+! TimeUpdated: 2023-08-17T06:31:18+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -896,7 +896,8 @@ hdmoli.com#?#.row > div.myui-panel:has(div[style^="text-align:"] > a[href][targe
 ! https://github.com/AdguardTeam/AdguardFilters/issues/134240
 ! Do not hide .bili-video-card container to not mess up content, related - https://github.com/AdguardTeam/AdguardFilters/issues/147194#issuecomment-1500803042
 ! bilibili.com#?#.bili-video-card.is-rcmd > div > a[href*="cm.bilibili.com"][data-target-url]:not([data-target-url*=".bili"]) + .bili-video-card__info:upward(2)
-bilibili.com#?#.container > div[class*="-card"]:has(div[style="display: none !important;"])
+bilibili.com#$?#.container > div.floor-single-card:has(> div.skeleton) { remove: true; }
+bilibili.com#$?#.container > div[class*="-card"]:has(div[style="display: none !important;"]) { remove: true; }
 bilibili.com#?#.bili-video-card:has(.bili-video-card__info--ad) > .bili-video-card__wrap
 bilibili.com#?#.bili-video-card:has(.bili-video-card__info--creative-ad) > .bili-video-card__wrap
 bilibili.com#$?#.bili-video-card:has(.bili-video-card__info--ad) > .bili-video-card__skeleton { visibility: visible !important; }
@@ -1389,7 +1390,7 @@ ipv6.baidu.com,www.baidu.com,www1.baidu.com,xueshu.baidu.com###content_left > .r
 ! Incorrectly blocked domains can be excluded using regex(synchronize this regexp in all filters)
 /^(?!.*(sharecast.ws|bunnycdn.ru|bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|cdn.staticfile.org|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yandex.|yastatic.net|ytimg.com|zencdn.net|player|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com|imgsmail.ru)).*$/$third-party,script,_____,domain=manshuxs.com|yemancomic.com|qimiaoxiaoshuo.com|gaofuwu.org|nxpaaq.com|dengbi2.com|92hm.top
 ! Similar to regexp above, but using the denyallow modifier
-$script,third-party,denyallow=sharecast.ws|bunnycdn.ru|bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|cdn.staticfile.org|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yastatic.net|ytimg.com|zencdn.net|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com|fastcomments.com|plyr.io,_____,domain=h.fkxs.net|wap.ishuquge.la|m.91zww.com|592mh.top|dubuxiaoshuo.com|clm410.buzz|bookbl.com|shuku99.com
+$script,third-party,denyallow=sharecast.ws|bunnycdn.ru|bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|cdn.staticfile.org|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yastatic.net|ytimg.com|zencdn.net|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com|fastcomments.com|plyr.io,_____,domain=h.fkxs.net|wap.ishuquge.la|m.91zww.com|592mh.top|dubuxiaoshuo.com|clm410.buzz|bookbl.com|shuku99.com|qiyoudy2.com
 !
 !
 !
@@ -1424,8 +1425,10 @@ miaoshangmanhua.com##.cy_menuright
 ettoday.net##.adHint
 duangks.com###a_d_sidebar
 yzzk.com##.promo
-netfly.tv##div[class*="tt-"] > a[target="_blank"] > img
-netfly.tv##div[class*="tt-"] > a[target="_blank"] + span.tt-icon-close
+netfly.fun,netfly.tv##.player-box > div.player-tt-rmm
+netfly.fun,netfly.tv##.module-tg-box
+netfly.fun,netfly.tv##div[class*="tt-"] > a[target="_blank"] > img
+netfly.fun,netfly.tv##div[class*="tt-"] > a[target="_blank"] + span.tt-icon-close
 today.line.me##div[id^="ad-module-"]
 gameapps.hk##.adClick
 gameapps.hk##a[class^="top-ad-"]
@@ -1541,7 +1544,6 @@ yaociyuan.bid##.board a[target="_blank"] > img
 yaociyuan.bid##.content a[target="_blank"] > img
 ||996000996.xyz/ga/$image,domain=yaociyuan.bid
 ||520xingyun.com/images/*.gif$domain=mcpcourse.com
-netfly.tv##.tg-container
 zhongce.sina.com.cn##div[class^="side-btns-jifen"]
 sojson.com##._left_ad
 sojson.com##._right_ad
@@ -4626,9 +4628,11 @@ newduba.cn###jq_youxi
 ||bifyeldv.top^
 ||bkhblj.xyz^
 ||bkjlf58.com^
+||bmptbyb.com^
 ||bnds3.site^
 ||bnds4.site^
 ||bnds6.site^
+||bnds7.site^
 ||bnds8.site^
 ||bnfyzszm.icu^
 ||boewgph.icu^
@@ -4641,6 +4645,7 @@ newduba.cn###jq_youxi
 ||bttazsyk.icu^
 ||bupidt.xyz^
 ||bxackzj.icu^
+||byvlph.xyz^
 ||bzxvtj.xyz^
 ||c4d4.cn^
 ||c9r05q.com^
@@ -4651,6 +4656,7 @@ newduba.cn###jq_youxi
 ||cdmjur.xyz^
 ||cfdns.vip^
 ||chiese.site^
+||chozarpeases.com^
 ||ciadre.fun^
 ||cix0wk.com^
 ||connectreadoasis.com^
@@ -4693,6 +4699,7 @@ newduba.cn###jq_youxi
 ||duyvtanrheje.xyz^
 ||dwfjtz.xyz^
 ||dyeperd.icu^
+||dygtulfe.icu^
 ||dzkwj0y.xyz^
 ||eamqbaqzaewwq.top^
 ||ebscb0l.xyz^
@@ -4704,6 +4711,7 @@ newduba.cn###jq_youxi
 ||ekdky.cn^
 ||enhad.xyz^
 ||epoid.xyz^
+||eraaoec.cn^
 ||erfskhnpter.xyz^
 ||ertgbme.com^
 ||erty0yx.com^
@@ -4723,13 +4731,13 @@ newduba.cn###jq_youxi
 ||fhglcpf.icu^
 ||fjsytjs.cn^
 ||fjtroip.cn^
-||flymc.cc^$third-party
 ||foirkrt.icu^
 ||fszpzd.xyz^
 ||fuliwang.cc^
 ||fvxlhn.xyz^
 ||fwepd.xyz^
 ||fwzvlp.xyz^
+||gdjme27.com^
 ||ggdrfh5.com^
 ||gghmef7.com^
 ||ghland.site^
@@ -4756,6 +4764,8 @@ newduba.cn###jq_youxi
 ||hgf8hck.com^
 ||hghjks2.com^
 ||hgjjk45.com^
+||hh6820123.com^
+||higefa.site^
 ||hikykhz.icu^
 ||hiqua.xyz^
 ||hjgkr0g.xyz^
@@ -4774,6 +4784,7 @@ newduba.cn###jq_youxi
 ||hsadeg.site^
 ||hslbahu.top^
 ||hstbrt.xyz^
+||huaxia.name^
 ||hubiazhi.com^
 ||hujunhao.name^
 ||huoju.asia^
@@ -4788,6 +4799,7 @@ newduba.cn###jq_youxi
 ||ipadf.xyz^
 ||iplm.cc^
 ||iqede.xyz^
+||iqgoukn.cn^
 ||islbaho.top^
 ||jakid.xyz^
 ||janwzsqi.icu^
@@ -4796,6 +4808,7 @@ newduba.cn###jq_youxi
 ||jhkggrr.icu^
 ||jhlazsot.icu^
 ||jhzfwl.cn^
+||jixmlx.xyz^
 ||jjade.xyz^
 ||jjklrcw.com^
 ||jjztrz.xyz^
@@ -4809,6 +4822,7 @@ newduba.cn###jq_youxi
 ||jpqed.xyz^
 ||jpush0b.xyz^
 ||jpvrbt.xyz^
+||jqkcett.icu^
 ||jrmrijv.icu^
 ||jslbaha.top^
 ||jszavs1.com^
@@ -4829,6 +4843,7 @@ newduba.cn###jq_youxi
 ||kl91ccp.com^
 ||kljslku.com^
 ||klufjdo.com^
+||kmnhgna.com^
 ||knjmhmk.com^
 ||kodfn.xyz^
 ||koljnda.com^
@@ -4848,6 +4863,7 @@ newduba.cn###jq_youxi
 ||lbnqnp.xyz^
 ||legdeh.fun^
 ||legopq.site^
+||lfjtiuy.cn^
 ||lgohse.fun^
 ||lgoseh.fun^
 ||lhiefl.com^
@@ -4868,6 +4884,7 @@ newduba.cn###jq_youxi
 ||lrlsrz.xyz^
 ||lrqpyhn.icu^
 ||lskmipb.icu^
+||lslbahl.top^
 ||lvrvdn.xyz^
 ||lwide.xyz^
 ||lycjsix.cn^
@@ -4881,6 +4898,7 @@ newduba.cn###jq_youxi
 ||mlstx.cn^
 ||mmead.xyz^
 ||mnhknds.com^
+||mnpbxjq.cn^
 ||moobtcnse.xyz^
 ||mrqbuf.xyz^
 ||mt4v4.com^
@@ -4888,6 +4906,7 @@ newduba.cn###jq_youxi
 ||mvgucp.com^
 ||naqiwjj.icu^
 ||ncgqmzm.cn^
+||ndqcz0e.xyz^
 ||nektonsrutate.com^
 ||ngbthf.xyz^
 ||nhjkm.com^
@@ -4932,6 +4951,7 @@ newduba.cn###jq_youxi
 ||pstvvb.xyz^
 ||ptmabek.cn^
 ||puy2.cn^
+||pypwxvo.cn^
 ||pzjizsyf.icu^
 ||qezpjlp.cn^
 ||qhjm600.com^
@@ -4968,8 +4988,10 @@ newduba.cn###jq_youxi
 ||sbeaje.com^
 ||sdchb2.com^
 ||sdfgbuy.com^
+||sensifyfugged.com^
 ||sfg11rr.com^
 ||shulsbs.cn^
+||simblotusitate.com^
 ||soushubah.com^$third-party
 ||sq59.cn^
 ||ssdfgq7.com^
@@ -4982,11 +5004,13 @@ newduba.cn###jq_youxi
 ||svarub.xyz^
 ||svvev3.com^
 ||tarqk5.com^
+||tcuqqhj.icu^
 ||termvb.xyz^
 ||tfdmzsgy.icu^
 ||tftran.shop^
 ||tfttbd.xyz^
 ||tgbevv.xyz^
+||tggsd07.com^
 ||thesac2.top^
 ||thesac3.top^
 ||thesac7.top^
@@ -5023,6 +5047,8 @@ newduba.cn###jq_youxi
 ||vcydyzd.icu^
 ||vghnnh.xyz^
 ||vhjxrj.xyz^
+||vhsutpgui.xyz^
+||vhutitpu.icu^
 ||vihppjk.cn^
 ||vlgkotr.cn^
 ||vmdlxj.xyz^
@@ -5079,6 +5105,7 @@ newduba.cn###jq_youxi
 ||yyuivw6.com^
 ||yzllux.xyz^
 ||zbx01.com^
+||zcbfjd.xyz^
 ||zcvyzsyd.icu^
 ||zddpnf.xyz^
 ||zerolcp.cn^
@@ -5091,15 +5118,18 @@ newduba.cn###jq_youxi
 ||zifyeldq.top^
 ||ziravd.xyz^
 ||znyjmbh.icu^
-||higefa.site^
-||huaxia.name^
-||tggsd07.com^
-||byvlph.xyz^
-||jqkcett.icu^
-||zszhln.xyz^
-||sensifyfugged.com^
-||simblotusitate.com^
 ||zonyff.xyz^
+||bfjk360.com^
+||zzisnvb.cn^
+||thesac4.top^
+||kmjndas.com^
+||dnceqzz.icu^
+||rszkhn.xyz^
+||hfjk3wa.com^
+||fmre1.com^
+||fiktvlnc.icu^
+||qucncfo.cn^
+||zszhln.xyz^
 ||zvasuzb.icu^
 ||zxrcfw.com^
 ||zypzzv.xyz^
@@ -10389,6 +10419,7 @@ hxsame.hexun.com$domain=~quote.hexun.com
 ||17173.com/x/
 ||17173cdn.com/20*.mp4$redirect=noopmp3-0.1s,domain=17173.com
 ||17173cdn.com/a/lib/vda/seed.js
+||17173cdn.com/a/oms/oms-data.
 ||17173cdn.com/a/www/index/2016v2/js/seed.js
 ||17173cdn.com/js/play/page/pThridPlayerAd.js
 ||1722t.com/js/jquery.js
@@ -15241,6 +15272,7 @@ hao.360.cn###festival_fly
 hao.360.cn###festival_fly + .couten
 6665.com###fgdiy01
 6665.com###fgdiy09
+17173.com###finalTuijian
 ysw191.com###fix
 elecfans.com###fix-tdkad
 ofweek.com###fixedADWrap
@@ -19343,6 +19375,7 @@ boke112.com##a[href^="https://dwz.cn/"]
 ditu.so.com##a[href^="https://e.so.com/"]
 18avinin.com##a[href^="https://forms.gle/"]
 nownews.com##a[href^="https://goo.gl/"]
+17173.com##a[href^="https://gtv."]
 netbian.com##a[href^="https://ibaotu.com/guanggao/"]
 right.com.cn##a[href^="https://jd.dangbei.com/"]
 ruanyifeng.com##a[href^="https://ke.qq.com/"]

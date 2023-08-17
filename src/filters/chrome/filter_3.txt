@@ -1,8 +1,8 @@
-! Checksum: EmpnJcEEtG7AFAW5Ki8xGQ
+! Checksum: 2hXe9Q0v8/a2RZgfdbkmYQ
 ! Title: AdGuard Tracking Protection filter
 ! Description: The most comprehensive list of various online counters and web analytics tools. Use this filter if you do not want your actions on the Internet to be tracked.
-! Version: 2.0.60.2
-! TimeUpdated: 2023-08-14T17:03:34+00:00
+! Version: 2.0.60.15
+! TimeUpdated: 2023-08-17T07:31:50+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -532,6 +532,7 @@ prjaga.ru#?##right > div#right_nav > h3:contains(Онлайн статистик
 !||i.snssdk.com/log/*
 !||i.snssdk.com/slardar/sdk.js
 !
+||sdk.fra-*.braze.eu^
 ||ct2.kutinawa.com^
 ||tg1.premiumimpression.com^
 ||ythingy.com^
@@ -4175,7 +4176,9 @@ prjaga.ru#?##right > div#right_nav > h3:contains(Онлайн статистик
 ||webcompteur.com^$third-party
 ||webcounter.co.za^$third-party
 ||webcounter.ws^$third-party
-||webengage.com^$third-party
+||ssl.widgets.webengage.com^
+||c.webengage.com^
+||z.webengage.com^
 ||webest.info^$third-party
 ||webflowmetrics.com^$third-party
 ||webforensics.co.uk^$third-party
@@ -4324,6 +4327,8 @@ prjaga.ru#?##right > div#right_nav > h3:contains(Онлайн статистик
 ! More info: https://getadmiral.com/products/measure
 ! Add same rules to the Admiral section of Annoyances filter
 !
+||ruralrobin.com^$third-party
+||scaredsnakes.com^$third-party
 ||bleachscarecrow.com^$third-party
 ||parentpicture.com^$third-party
 ||suspectmark.com^$third-party
@@ -5499,6 +5504,7 @@ prjaga.ru#?##right > div#right_nav > h3:contains(Онлайн статистик
 ! Blocking piwik analytics subdomain(for DNS filtering)
 |piwik.
 !
+||sanalytics.disneyplus.com^
 ||trcksp.cordial.io^
 ||track.msg.fortune.com^
 ||track.sp.crdl.io^
@@ -6918,11 +6924,9 @@ prjaga.ru#?##right > div#right_nav > h3:contains(Онлайн статистик
 ||pixel.honestjohn.co.uk^
 ||pixel.inforsea.com^
 ||pixel.klout.com^
-||pixel.naij.com^
 ||pixel.newscgp.com^
 ||pixel.newsdiscover.com.au^
 ||pixel.nur.kz^
-||pixel.parsely.com^
 ||pixel.pcworld.com^
 ||pixel.playbuzz.com^
 ||pixel.propublica.org^
@@ -6939,7 +6943,6 @@ prjaga.ru#?##right > div#right_nav > h3:contains(Онлайн статистик
 ||pixel.yabidos.com^
 ||pixelappcollector.thesun.co.uk^
 ||pixel*.adswizz.com
-||pixel.randi.adswizz.com
 ||pixelhere.com^
 ||pixels.ingbank.com.tr^
 ||pixels.livingsocial.com^
@@ -6949,7 +6952,6 @@ prjaga.ru#?##right > div#right_nav > h3:contains(Онлайн статистик
 ||plausible.simplelogin.io^
 ||player-feedback-v1.glomex.com^
 ||player-telemetry.vimeo.com^
-||ploz.mangadex.org^
 ||po.ponant.com^
 ||pos.baidu.com^
 ||prd-collector-anon-video.playbuzz.com^
@@ -48262,6 +48264,10 @@ _tracking.php?b=
 /analytics.js$domain=tokyometro.jp|resumes.breakdownexpress.com|techcult.com|inbox.lv|kopeda.com|freexcafe.com|rusvideos.tv|nakubani.ru|lun.com|songsara.net|newsmax.com|bolgehastanesi.com|ewtc.de|newsdig.tbs.co.jp|imore.com|city.kushiro.lg.jp|emeraldbridal.com.au|emarat-news.ae|imobie.jp|tikla.com.tr|rusvideos.porn|jrkyushu.co.jp|amiunique.org
 ||assets.adobedtm.com^$domain=mcclatchydc.com|elnuevoherald.com|bellinghamherald.com|sacbee.com|charlotteobserver.com|newsobserver.com|miamiherald.com|ef.ru|algida.com.tr|bmw-motorrad.co.uk|cif.com.tr|clearhaircare.com|domestos.com|dove.com|elidor.com.tr|f1sport.autorevue.cz|geico.com|hellmanns.com.tr|herkessofraya.com|johnsonsbaby.com.tr|lipton.com|lnk.to|lux.com|magnumicecream.com|neutrogena.com.tr|omo.com|rexona.com|samsung.com|sap.com|schwarzkopf.com.tr|signalturkiye.com|msnbc.com|nbcnews.com|kbb.com|eurosport.ru|timgate.it|intermiles.com|oxfordmail.co.uk|spiegel.de|hp.com|deutschepost.de|thebay.com|s.shufoo.net|tsn.ca|tabelog.com|euronews.com|newshub.co.nz|fredmeyer.com|viabcp.com|carsales.com.au|falabella.com|aarp.org
 !
+||api.testbook.com/api/*/popup
+||rocketcdn.me/*/tracking.js
+||gamerant.com/strpixel.png
+crea.bunshun.jp##.module-recommend
 ||plus.fifa.com/api/v*/analytics-collector
 ||mangaseek.jp/static/js/riveted.min.js
 ||2ip.*/member_photo/$domain=~2ip.com|~2ip.ru
@@ -51728,6 +51734,20 @@ link.gmapp*.net$image
 ! it's problematic that due to how Gmail proxy work, these domains aren't even exposed on the network level
 ! fortunately, extensions can see them (Gmail puts the real URL in the location.hash part of the src)
 !
+! mlsend.com
+lmqmpm.clicks.mlsend.com$image
+! Samsung News
+news.samsung.com/us/?noti=$image
+news.samsung.com%2Fus%2F%3Fnoti%3D$image
+! Amazon
+amazon.com/gp/r.html?C=*&ref_=pe_*_open$image
+amazon.com%2Fgp%2Fr.html%3FC%3D*%26ref_%3Dpe_*_open$image
+! Esputnik
+esputnik.com/repository/applications/commons/hidden.png
+! Athleticsirelandmerchandise
+athleticsirelandmerchandise.com/_t/open/$image
+! SmartrMail
+email.mail2.smartrmail.co$image
 ! Klaviyo
 ct.klclick.com$image
 ! Privatbank
@@ -54008,6 +54028,9 @@ inapps.appsflyersdk.com^
 ! For platforms which do not support $redirect rules
 !
 !
+! https://bousai.yahoo.co.jp/exam/intensive/ broken
+@@||s.yjtag.jp/tag.js$domain=bousai.yahoo.co.jp
+@@||yjtag.yahoo.co.jp/tag$script,domain=bousai.yahoo.co.jp
 ! https://github.com/AdguardTeam/AdguardFilters/issues/158351
 @@||googletagmanager.com/gtm.js$domain=villeroy-boch.fr
 ! https://github.com/AdguardTeam/AdguardFilters/issues/158323

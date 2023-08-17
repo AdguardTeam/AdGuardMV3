@@ -1,8 +1,8 @@
-! Checksum: ee1xJKulG9xVVYvlBYysAA
+! Checksum: lv3qmoa97hJzJd3eRDPbBg
 ! Title: AdGuard French filter
 ! Description: Liste FR + AdGuard French filter. Filter list that specifically removes ads on websites in French language.
-! Version: 2.0.41.24
-! TimeUpdated: 2023-08-14T08:30:46+00:00
+! Version: 2.0.41.27
+! TimeUpdated: 2023-08-16T07:30:47+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -137,6 +137,8 @@ capital.fr#@#.plainAd
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/159263
+lameteoagricole.net#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
 ! https://github.com/uBlockOrigin/uAssets/issues/19339
 empire-streaming.*,empire-stream.net#%#//scriptlet('set-constant', 'navigator.brave', 'undefined')
 @@||e-player-stream.app/player/assets/js/ads.js?$~third-party
@@ -628,6 +630,10 @@ tf1.fr,tf1info.fr#%#//scriptlet('prevent-fetch', '/^https:\/\/ads\.stickyadstv\.
 ! Good: example.org#?#main > div.row:has(> div.ad)
 ! Bad: example.org##main > div.ad (should be in specific.txt)
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/159033
+orange.fr#?#.container-fluid > .mt-1 > h3:contains(/^Liens commerciaux$/)
+! https://github.com/AdguardTeam/AdguardFilters/issues/159214
+minutesports.fr#?#div[align="center"]:contains(PUBLICITÉ)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/158541
 frandroid.com#?#.is-hidden-mobile:has(> div[id^="optidigital-adslot-"]:only-child)
 frandroid.com#?#.is-hidden-desktop:has(> div[id^="optidigital-adslot-"]:only-child)
@@ -939,6 +945,8 @@ all-stadium.net#$##layer2 {top:50px!important; left:950px!important;}
 $script,third-party,denyallow=sharecast.ws|bunnycdn.ru|bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|cdn.staticfile.org|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yastatic.net|ytimg.com|zencdn.net|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com|fastcomments.com|plyr.io,_____,domain=extreme-down.moe|dl-protect.link
 !
 !
+orange.fr##.media-advert-rm-center
+minutesports.fr###slide
 orange.fr##div[id="oan_ora_1_300x250_hp.prospects"]
 megastream.cam##.pmovie__big-btns
 megastream.cam##.pmovie__player > .ajax-iframe
