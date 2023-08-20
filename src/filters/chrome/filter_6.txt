@@ -1,8 +1,8 @@
-! Checksum: AgBxkHreglJYRkaeM235IQ
+! Checksum: TY81TEVgFrVSSPWBBMtk2g
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.37.7
-! TimeUpdated: 2023-08-17T05:04:01+00:00
+! Version: 2.0.37.17
+! TimeUpdated: 2023-08-19T19:32:03+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1076,12 +1076,15 @@ teleboy.ch#@#.adWrapper
 ! Bad: example.org##main > div.ad (should be in specific.txt)
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/159553
+finanzen.net#?#.page-content__item:has(> div[class^="fin-ob-"])
 ! https://github.com/AdguardTeam/AdguardFilters/issues/158876
 90min.de#?#main > div.viewablity-block > figure:has(> div > div#mm-player-placeholder-large-screen)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/158739
 giga.de#?#article:has(.alice-teaser-intro > .deal)
 ! macwelt.de, pcwelt.de - ad on main site
 macwelt.de,pcwelt.de#?#article.item:has(> div > .item-text > .item-text-inner > .item-eyebrow-sponsored-by-text)
+macwelt.de,pcwelt.de#?#article.item:has(> .item-inner > .item-text > .item-text-inner > .item-eyebrow)
 ! menshealth.de - ads in articles and main page
 menshealth.de#?#a[is-digitarista-widget]:has( > .flex > .va-teaser-rating-item__text > div > .va-adhint)
 menshealth.de#?#.va-sidecol > div[class] > div[class]:has(> div > div[id^="div-gpt-ad"])
@@ -2307,6 +2310,10 @@ winfuture.de,netzwelt.de,quoka.de,farmeramania.de,bravofly.de,computerbild.de,di
 ! ##.billboard
 formel1.de,krautundrueben.de,motorsport-total.com,traktorpool.de,fnweb.de,laborjournal.de,tarnkappe.info,deraktionaer.tv,food-tiger.de,morgenweb.de##.billboard
 !
+finanzen.net##.page-layout__ad-header-top
+email.t-online.de##.adSuperBannerContainer
+||asadcdn.com/adlib/*.js
+dasgelbeblatt.de##.wv_story_el_insertedAd
 kino.de##.zdfmediathek
 chip.de###aabhor
 ||twincdn.com/video/susilive/$media,redirect=noopmp4-1s,domain=xnxx-sexfilme.com
@@ -2420,7 +2427,7 @@ gmx.net,gmx.at,web.de##.list-inbox-ad-item--multi-line
 gmx.net,gmx.at,web.de##.list-programmatic-ad-item--multi-line
 btc-echo.de##div[data-btcee-trackbid]
 gesundheitsstadt-berlin.de##div[class="uk-visible@m"]
-wa.de##.id-TBeepSlot
+dasgelbeblatt.de,wa.de##.id-TBeepSlot
 ||syndication.target-video.com^$domain=forum.frag-mutti.de
 ||notebooksbilliger.de/api/cherry-handler/
 notebooksbilliger.de###dy-hero-banners-slider
@@ -4142,7 +4149,6 @@ motorsport-total.com###bs-container > .b-top
 ||derstandard.at/mkt/*adserver
 derstandard.at###promotion-banner
 fm1today.ch##iframe[src^="https://adquality.ch"]
-tvdigital.de,hoerzu.de##a[href^="https://www.werstreamt.es"]
 ||d163w5bauk02b4.cloudfront.net/partner^$third-party
 chip.de##.WidgetVetalio
 ||hardwareluxx.de/images/stories/werbung^
@@ -5520,6 +5526,9 @@ tagesspiegel.de###urban-teaser1
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/158314
+@@||storage.googleapis.com/adtags/kicker/QMAX_kicker.de.js$domain=kicker.de
+@@||storage.googleapis.com/prebid/qm_prebid.js$domain=kicker.de
 ! https://github.com/AdguardTeam/AdguardFilters/issues/158203
 @@||ad13.adfarm1.adition.com^$domain=1und1.de
 ! https://github.com/AdguardTeam/AdguardFilters/issues/142489
@@ -5891,7 +5900,6 @@ rtl.de#@#.rtlde-medium-rectangle
 /werbetrenner_
 /werbezonen/*
 /werbung.$third-party
-/werbung.$~image,~stylesheet,domain=~berlin-airport.de|~qs-optiker.de|~werbung.oebb.at
 /werbung.gif
 /werbung/*$third-party
 /Werbung/*_banner_
@@ -6357,6 +6365,7 @@ di.fm,kellertheater.at#@#.firstload
 hochzeitswahn.de#@#.internal-ad
 mietmobil-fuchs.ch#@#.jquery-script-ads
 11freunde.de#@#.js_deferred-ad
+spox.com#@#.ob-feed-layout
 wetter.de#@#.outbrain-ad-slot
 phytodoc.de#@#.plain-ad
 quoka.de#@#.related-ads
@@ -7013,6 +7022,7 @@ wetter.com#@#div[id^="div-gpt-"]
 ||bigpoint.com^*?aid=*&aig=*&aip=$popup,third-party
 ||boerse.today^$popup,third-party
 ||china-gadgets.de^*&utm_medium=popdown&$popup,third-party
+||ddownload.com^$popup,domain=ddl-warez.cc
 ||dealdoktor.de^*&utm_medium=popdown&$popup,third-party
 ||deutscherflirtbook.com/landing*&aff_$popup,third-party
 ||escaria.com/public/static/teaser/?$popup
@@ -7022,6 +7032,7 @@ wetter.com#@#div[id^="div-gpt-"]
 ||ggbetcasino.de^$popup
 ||ilove.de^*/landing_pages/$popup
 ||ishelminger.de/ad/$popup
+||katfile.com^$popup,domain=ddl-warez.cc
 ||landing.sexkiste.com^$popup
 ||lp.amateurcommunity.com/index.php?cp=$popup,third-party
 ||lustagenten.de/?w=$popup,third-party
@@ -7864,7 +7875,7 @@ $stylesheet,subdocument,third-party,xmlhttprequest,domain=canna-power.to|canna.t
 ||quadjournal.eu/wp-content/uploads/*-Banner-
 ||queer.de/gfx/air-france-presented-by-
 ||queer.de/gfx/mein-kondom-
-||quoka.de/mages/public/
+||quoka.de/images/public/
 ||radio-oberland.de/images/banners/
 ||radio-oldtimer.de/fileadmin/Bilder/Banner/
 ||radio2000.it^*/banner_

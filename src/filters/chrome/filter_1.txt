@@ -1,8 +1,8 @@
-! Checksum: VdDoVFWjuDFsTcwDXyQXHA
+! Checksum: HswDBYa4Q8SAvOwMNEAqXg
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.83.84
-! TimeUpdated: 2023-08-16T17:03:05+00:00
+! Version: 2.0.83.91
+! TimeUpdated: 2023-08-19T16:31:12+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1223,7 +1223,7 @@ ucoz.ru/informer/
 ##.advert__banner
 ~browsershots.org##.advert_list
 ~change.org,~tonprenom.com##.advertise
-~gazeteyenigun.com.tr,~andkon.com,~masseurporn.com,~wired.com##.advertisement:not(body)
+~inboxdollars.com,~gazeteyenigun.com.tr,~andkon.com,~masseurporn.com,~wired.com##.advertisement:not(body)
 ##.advertiser
 ~macwelt.de,~redmondpie.com##.advertisment
 ##.advertka
@@ -5714,6 +5714,7 @@ http://wq3.ru^$third-party
 ! Bad: /banner.jpg (should be in general_url.txt)
 ! Bad: ||legitwebsite.com^$third-party (should be in adservers.txt)
 !
+||market-backend.api.2gis.ru^
 !
 ! This section contains the list of advertising networks domains, which are hosted on non advertising sites as subdomains.
 ! Note, that we only put rules that block full subdomains here and not URL parts (there's `general_url.txt` for that).
@@ -7340,6 +7341,7 @@ www.kinopoisk.ru,yandex.*#%#//scriptlet('abort-on-property-write', 'Object.proto
 !
 liveinternet.ru#%#Element.prototype.attachShadow = function(){};
 !
+! kufar.by
 ! rg.ru
 !
 ! relax-fm.ru
@@ -9207,6 +9209,7 @@ eg.ru,newsmaker.md,delo-vcusa.ru,tolknews.ru,gorodche.ru,smartpress.by,raenza.ru
 !
 !
 !
+doradvokat.com.ua###sidebar-right > div#media_image-40 ~ div.mg-widget
 web.telegram.org#$?#.message-date-group > div.Message:has(.text-content:contains(/#реклама/)) { remove: true; }
 nur.kz##.js-commercial-menu
 nur.kz##.widget-1xbet
@@ -9363,6 +9366,7 @@ kadrovik01.com.ua,kom-dir.ru,gd.ru,buhsoft.ru,dirklinik.ru,fd.ru,business.ru,pro
 !
 !
 !
+freesoft.ru##.listing-new__item
 tvmag.ru##a[href*=".tricolor.tv"] > img
 ||vb17123filippaaniketos.pw/overroll/
 atorus.ru###block-headerads
@@ -20720,6 +20724,8 @@ store.ifixit.co.uk#@#.banner-body
 ! Good: example.org#@#.ad
 ! Bad:  @@||example.org^$stealth (should be in AdGuard Base - allowlist_stealth.txt)
 !
+! moboi.narod.ru - blocked images
+moboi.narod.ru#@#img[width="240"][height="400"]
 ! https://github.com/AdguardTeam/AdguardFilters/issues/154274
 siteripz.cc#@##teasers
 ! https://github.com/AdguardTeam/AdguardFilters/issues/153554
