@@ -1,8 +1,8 @@
-! Checksum: lv3qmoa97hJzJd3eRDPbBg
+! Checksum: /RA2fRzvR1Vgy1C9iE5eqQ
 ! Title: AdGuard French filter
 ! Description: Liste FR + AdGuard French filter. Filter list that specifically removes ads on websites in French language.
-! Version: 2.0.41.27
-! TimeUpdated: 2023-08-16T07:30:47+00:00
+! Version: 2.0.41.29
+! TimeUpdated: 2023-08-21T09:30:51+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -774,7 +774,9 @@ dl-protect.net,annuaire-telechargement.tel#%#//scriptlet('abort-on-stack-trace',
 ! https://github.com/AdguardTeam/AdguardFilters/issues/125733
 japscan.me#%#//scriptlet("abort-current-inline-script", "JSON.parse", "document.createElement('script')")
 japscan.me#%#//scriptlet("abort-current-inline-script", "document.createElement", "document.documentElement).appendChild")
+! https://github.com/AdguardTeam/AdguardFilters/issues/159695
 ! https://github.com/AdguardTeam/AdguardFilters/issues/119411
+femmeactuelle.fr,geo.fr,voici.fr,programme-tv.net,gala.fr,capital.fr#%#//scriptlet('set-constant', 'Object.prototype.withAds', 'false')
 femmeactuelle.fr,geo.fr,voici.fr,programme-tv.net,gala.fr,capital.fr#%#AG_onLoad(function(){if(window.pmsCoreAds&&Array.isArray(pmsCoreAds)){window.pmsCoreAds=new Proxy(pmsCoreAds,{set:(a,b,c,d)=>{if("function"==typeof c)try{let a=!1;const b=b=>{var c=document.querySelector(".ads-core-video");c&&a?clearInterval(d):(b(),a=!0)},d=setInterval(b,1e3,c)}catch(a){}return Reflect.set(a,b,c,d)}})}});
 ! allocine.fr - fixing delay in the video player
 allocine.fr#%#//scriptlet("set-constant", "AC.config.ads", "emptyObj")
@@ -945,6 +947,7 @@ all-stadium.net#$##layer2 {top:50px!important; left:950px!important;}
 $script,third-party,denyallow=sharecast.ws|bunnycdn.ru|bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|cdn.staticfile.org|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yastatic.net|ytimg.com|zencdn.net|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com|fastcomments.com|plyr.io,_____,domain=extreme-down.moe|dl-protect.link
 !
 !
+lequipe.fr##body div[id^="AmPlaceholder-"]
 orange.fr##.media-advert-rm-center
 minutesports.fr###slide
 orange.fr##div[id="oan_ora_1_300x250_hp.prospects"]
