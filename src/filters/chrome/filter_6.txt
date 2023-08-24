@@ -1,8 +1,8 @@
-! Checksum: O3d/1Nqjdtq87bs1BOLK1Q
+! Checksum: ILwTm1g3bVhEqsoQDRH8jw
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.37.19
-! TimeUpdated: 2023-08-21T09:32:11+00:00
+! Version: 2.0.37.26
+! TimeUpdated: 2023-08-23T17:04:03+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -606,8 +606,6 @@ onvista.de#@##SMART_BILLBOARD
 ||api.onvista.de*interactions
 @@||smartadserver.com/ac?mwid=$domain=onvista.de
 onvista.de#%#//scriptlet("set-constant", "window.ovHasAdBlocker", "false")
-! https://github.com/AdguardTeam/AdguardFilters/issues/93705
-einrichtungsbeispiele.de#@#.adsbygoogle
 ! https://github.com/AdguardTeam/AdguardFilters/issues/149085
 ! https://github.com/AdguardTeam/AdguardFilters/issues/93879
 sportdeutschland.tv#%#//scriptlet('set-constant', 'IOMm', 'noopFunc')
@@ -2244,6 +2242,13 @@ spiegel.de###Inhalt .relative > .relative > div[class] > section[class="clear-bo
 ! https://github.com/AdguardTeam/AdguardFilters/issues/94882
 ||getjad.io/prebid/$script,important,domain=gamepro.de|gamestar.de|moviepilot.de
 ||getjad.io/library/$script,important,domain=gamepro.de|gamestar.de|moviepilot.de
+! https://github.com/AdguardTeam/AdguardFilters/issues/159802
+!+ NOT_OPTIMIZED
+lkz.de##.nfy-element-ad
+!+ NOT_OPTIMIZED
+lkz.de##.nfy-ar-ad
+!+ NOT_OPTIMIZED
+lkz.de##.nfy-row-ad
 ! https://github.com/AdguardTeam/AdguardFilters/issues/157906
 ! 20min.ch - video player is fixed by JS rule, so advertisement script can be blocked
 !+ PLATFORM(windows, mac, android, ext_chromium)
@@ -2312,6 +2317,13 @@ winfuture.de,netzwelt.de,quoka.de,farmeramania.de,bravofly.de,computerbild.de,di
 ! ##.billboard
 formel1.de,krautundrueben.de,motorsport-total.com,traktorpool.de,fnweb.de,laborjournal.de,tarnkappe.info,deraktionaer.tv,food-tiger.de,morgenweb.de##.billboard
 !
+!
+!
+vox.de##.voxde-billboard-format
+vox.de##.rtli-master-morecontent__teaser--gujteaser
+news.de##.header-ad
+wetteronline.de##common-www-ad-container
+pcgames.de##.ecTool
 finanzen.net##.page-layout__ad-header-top
 email.t-online.de##.adSuperBannerContainer
 ||asadcdn.com/adlib/*.js
@@ -2329,7 +2341,7 @@ teslawissen.ch##div[id^="content-adsense"] + p
 saarbruecker-zeitung.de##.portal-slot
 gartenfreunde.de##body .ezoic-ad:not(#style_important)
 menshealth.de##.va-adhint
-menshealth.de##.va-sponsored
+auto-motor-und-sport.de,menshealth.de##.va-sponsored
 menshealth.de###shopify-overlay-container:empty + div[class]
 stylight.de##.ad-banner-atf-mobile
 mux.de##div[style^="width:100%; height"][style*="text-align:center;"]
@@ -2429,7 +2441,7 @@ gmx.net,gmx.at,web.de##.list-inbox-ad-item--multi-line
 gmx.net,gmx.at,web.de##.list-programmatic-ad-item--multi-line
 btc-echo.de##div[data-btcee-trackbid]
 gesundheitsstadt-berlin.de##div[class="uk-visible@m"]
-dasgelbeblatt.de,wa.de##.id-TBeepSlot
+echo24.de,dasgelbeblatt.de,wa.de##.id-TBeepSlot
 ||syndication.target-video.com^$domain=forum.frag-mutti.de
 ||notebooksbilliger.de/api/cherry-handler/
 notebooksbilliger.de###dy-hero-banners-slider
@@ -2593,7 +2605,7 @@ hallo-eltern.de##.flexible-content-ads
 jumk.de##div[style="font-size:10px;margin-top:3px;color:#000"]
 hallo-eltern.de##.ad-slot-placement
 goettinger-tageblatt.de##div[class^="Adstyled__"]
-vip.de##.ada-preservespace
+vox.de,vip.de##.ada-preservespace
 petbook.de##.article__content > .size-full > a[href*="utm_source"]
 t-online.de##div[class^="style_sdiPlaceholder"]
 t-online.de###Taboola-container
@@ -2737,8 +2749,6 @@ twitterperlen.de##body .code-block
 welt-der-bwl.de##div[class^="adunit-"]
 welt-der-bwl.de###block-block-24
 welt-der-bwl.de###block-block-25
-lkz.de##.nfy-ar-ad
-lkz.de##.nfy-row-ad
 abasix.com##.abx-ads-box
 ||hdfilme.top/vod/online1.html
 hdfilme.top##a[data-link="/vod/online1.html"]
@@ -3545,7 +3555,6 @@ amazon.de##.widgetId\=loom-desktop-brand-footer-slot_hsa-id
 amazon.de##span[class*="_adPlacements:"]
 ejz.de##.page_layout >.row .subtitle
 ejz.de##.page .box_header.font_lato
-lkz.de##.nfy-element-ad
 faz.net##.ctn-PlaceholderBox-is-in-article-text-right
 bz-berlin.de##.bcode-publisher-asmi
 heise.de##.teaser_deal_des_tages
@@ -5678,8 +5687,6 @@ yello.de#@#.advertorial
 @@||component-vvs.glomex.com/embed^$popup
 ! https://github.com/AdguardTeam/AdguardFilters/issues/42551
 @@||cdnstatic.secure.spiegel.de/SP/*/grafik^
-! dr-gumpert.de - broken article layout
-dr-gumpert.de#@#.adsbygoogle
 ! freundin.de - broken infinite scrolling
 @@||freundin.de/*_wrapper_format=drupal_ajax
 ! https://github.com/AdguardTeam/AdguardFilters/issues/38173
@@ -9627,7 +9634,7 @@ eurocampings.de##.js-mock-banner
 eurogirlsescort.de##.js-stt-click
 wetter.com##.jsDaa-D
 lustmap.ch##.js_bns
-chip.de##.kasperskyshown
+chip.de##.kasperskyclick[href]
 kochbar.de##.kb-home-medrec-halfpage
 kauperts.de##.kca-wrapper
 kicker.de##.kick__ad-pos_wrapper
@@ -9744,6 +9751,8 @@ noz.de##.nozmhn_ad
 nextpit.de##.np-product-offers
 nextpit.de##.np-top-deals
 netzwoche.ch##.np8-type-advertorial
+shop-apotheke.com##.o-ProductSliderItem[data-ssr-as*="\"clickUrl\":\"https://retail-api.sa-tech.de/api/"]
+shop-apotheke.com##.o-SearchProductListItem[data-ssr-as*="\"clickUrl\":\"https://retail-api.sa-tech.de/api/"]
 promiflash.de##.ob-p
 winfuture.de##.ob_what
 gs-forum.eu##.oc24-sidebar
@@ -10207,6 +10216,7 @@ gawina.de##a[data-track]
 t-online.de,www-t--online-de.cdn.ampproject.org##a[data-url^="https://count.shopping.t-online.de/RE?ID="]
 bildschirmarbeiter.com##a[href$="xref=nosim/wwwbildschirm-21"]
 onvista.de##a[href*="&adname="]
+chip.de##a[href*="(randomString)"]
 tarnkappe.info##a[href*=".rokkr.net/promo/"]
 dkamera.de,donau3fm.de,isaswomo.de,ofdb.de,picdumps.com,polizei.news,rechtsdepesche.de,spox.com,via-ferrata.de##a[href*="//bit.ly/"]
 hd-source.to##a[href*="/af.php"]
@@ -10573,6 +10583,7 @@ italienisch-lernen-online.net##div[style^="width:300px;height:250px;"]
 werkenntdenbesten.de##div[x-data="modules.ad()"]
 werkenntdenbesten.de##div[x-data="modules.ad()"] + span
 werkenntdenbesten.de##div[x-data^="modules.adMedia"]
+chip.de##h2[style*="background-image:url('https://im.chip.de/ii/"] + a
 reimmaschine.de##iframe[src="/more"]
 190.115.18.20,aniworld.to,s.to##iframe[style*="z-index: 2147483647"]
 windowspro.de##iframe[style="height:250px;overflow: hidden;"]

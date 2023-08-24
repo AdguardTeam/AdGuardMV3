@@ -1,8 +1,8 @@
-! Checksum: ncM58Z5W2JgVoPpt9L+aFA
+! Checksum: JcA8ET77LAUXkRVx5u+bqA
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.83.92
-! TimeUpdated: 2023-08-21T13:03:07+00:00
+! Version: 2.0.84.3
+! TimeUpdated: 2023-08-24T07:31:05+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -6813,12 +6813,15 @@ $cookie=/blcrm|bltsr|zmFQeXtI|JPIqApiY|computer/,domain=dzen.ru|baby.ru|business
 dzen.ru#%#//scriptlet('remove-cookie', '/blcrm|bltsr|zmFQeXtI|JPIqApiY|computer/')
 !
 ! Dzen main page
+dzen.ru##div[class^="currency-rates_"] + div[class^="geo-and-currency-widget_"]
+dzen.ru#?#div[class*="_yandexSearchContainer-"] ~ div[class][id] > div[id] > div:has(> div > a[href^="https://yandex.ru/an/"])
 [$path=/^\/$|\/\?/]dzen.ru###ya-dist
 dzen.ru##div[class^="dzen-desktop__link_bro-"]
 dzen.ru##div[class^="dzen-desktop__teaser-"]
 [$path=/a/]dzen.ru##div[class*="_position_"][class$="_direct"]
 !
 ! Dzen News
+dzen.ru#?#div[aria-label="Лента Дзена"] article.card-wrapper:has(div[class^="feed-single-desktop-floors-v2__title-eI"]:empty)
 dzen.ru##.news-app__content div[class*="__column_myTarget mg-grid__item"] div[class*="__loader "]
 [$path=/pogoda]dzen.ru##.adv_type_rtb
 !
@@ -6839,8 +6842,9 @@ dzen.ru##.card-rtb-one-column-stub
 [$path=/media]dzen.ru##div[class$="__ad-content"]
 !
 ! Dzen Video
-dzen.ru##div[class*="videoCardAd-"]
-dzen.ru##._is-header-after-player > div[class$="-content__description"] ~ div[class*="__videoCard"]
+dzen.ru##._is-header-after-player > div[class$="-content__description"] ~ div > div[id^="D-A-"]
+dzen.ru##div[class$="-recommended"] div[id^="R-I-"]
+dzen.ru##.viewer-layout__sidebar div[id^="D-A-"]
 ! ad in the zen videos
 ||strm.yandex.*/get/$xmlhttprequest,redirect=noopvast-3.0,domain=dzen.ru
 [$path=/video]dzen.ru##div[class$="sidebar__item"] div[class*="-sidebar__ad"]
@@ -7239,6 +7243,7 @@ yandex.*##.card-header-media-view__list > div.card-header-media-view__advert-wra
 yandex.*#?#.business-card-title-view__actions > div.business-card-title-view__advert
 yandex.*#?#.business-card-title-view__actions > div.business-card-title-view__advert + div.business-card-title-view__call-to-action
 [$path=/maps]yandex.*#?#.business-card-view__overview > div.business-card-view__section > div.business-card-view__offers:upward(1)
+[$path=/maps]yandex.*##.promo-button
 !
 ! Yandex.Pogoda
 !
@@ -9211,6 +9216,8 @@ eg.ru,newsmaker.md,delo-vcusa.ru,tolknews.ru,gorodche.ru,smartpress.by,raenza.ru
 !
 !
 !
+food.obozrevatel.com##.idealmedia
+food.obozrevatel.com##.googleBanner
 doradvokat.com.ua###sidebar-right > div#media_image-40 ~ div.mg-widget
 web.telegram.org#$?#.message-date-group > div.Message:has(.text-content:contains(/#реклама/)) { remove: true; }
 nur.kz##.js-commercial-menu
@@ -9368,6 +9375,11 @@ kadrovik01.com.ua,kom-dir.ru,gd.ru,buhsoft.ru,dirklinik.ru,fd.ru,business.ru,pro
 !
 !
 !
+||genshin.ru/wp-content/uploads/2023/05/bg_genshin2-min.png
+genshin.ru##.td-banner-wrap-full
+forbes.kz#?#.nav__elements > li.nav__element:has(> a[href^="/redirect?"])
+mixnews.lv##div[id^="advads-"]
+synthira.ru##.ahuelguardd
 pogoda.onliner.by##div[class$="_fixed-height"]
 freesoft.ru##.listing-new__item
 tvmag.ru##a[href*=".tricolor.tv"] > img
@@ -17736,7 +17748,7 @@ naruto-brand.ru##tr[style^="background:url(/img/fsd.jpg)"]
 bugaga.ru##ul.lx_adslist
 ria-m.tv##ul[class="slider_top"]
 zerocoolpro.biz##ul[data-pos^="ad_"]
-||relap.io^$domain=zr.ru|ngs.ru|msk1.ru|russian.rt.com|rg.ru|animedub.ru|risk.ru|kaluga-poisk.ru|echo.msk.ru|ilenta.com|life.ru|lifenews78.ru|mk.ru|narod-novosti.com|nv.ua|yablyk.com|kulturologia.ru|fb2-epub.ru|gilc.ru|prophotos.ru|avtovzglyad.ru|knijky.ru|zadereyko.info|ranobe.me|5ka-sale.ru|egesdamlegko.ru
+||relap.io^$domain=74.ru|zr.ru|ngs.ru|msk1.ru|russian.rt.com|rg.ru|animedub.ru|risk.ru|kaluga-poisk.ru|echo.msk.ru|ilenta.com|life.ru|lifenews78.ru|mk.ru|narod-novosti.com|nv.ua|yablyk.com|kulturologia.ru|fb2-epub.ru|gilc.ru|prophotos.ru|avtovzglyad.ru|knijky.ru|zadereyko.info|ranobe.me|5ka-sale.ru|egesdamlegko.ru
 webware.ru/*/clients/
 |ws*://*.trialeset.org:8041
 ||012345.ru/upload/
@@ -20091,6 +20103,7 @@ gamer-info.com###games-db-main-listblock > a[class="gmv2-it"] + div[class]
 !
 !
 ! START: mail.ru
+e.mail.ru##.letter-list-item-adv
 lady.mail.ru##.ph-whiteline ~ div#portal-menu ~ span > div
 otvet.mail.ru##div[class*="adv-slot-"]
 mail.ru##div[data-testid="grid-header"] > div.toolbar
