@@ -1,8 +1,8 @@
-! Checksum: ILwTm1g3bVhEqsoQDRH8jw
+! Checksum: 3dvSYMxyDagM48MEAdoNfQ
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.37.26
-! TimeUpdated: 2023-08-23T17:04:03+00:00
+! Version: 2.0.37.36
+! TimeUpdated: 2023-08-26T14:32:01+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1074,6 +1074,8 @@ teleboy.ch#@#.adWrapper
 ! Bad: example.org##main > div.ad (should be in specific.txt)
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/159998
+android-hilfe.de#?#.js-replyNewMessageContainer > .message--post:not([data-author]):has(> .message-inner > .message-cell--user .message-name > a.username:contains(/^Anzeige$/))
 ! https://github.com/AdguardTeam/AdguardFilters/issues/159553
 finanzen.net#?#.page-content__item:has(> div[class^="fin-ob-"])
 ! https://github.com/AdguardTeam/AdguardFilters/issues/158876
@@ -2016,6 +2018,9 @@ menshealth.de#%#function google_ad_request_done() {};
 !--------------------------------------!
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/159998
+! https://github.com/AdguardTeam/CoreLibs/issues/1800
+! TODO: remove when/if it will be fixed in CoreLibs
 ! https://github.com/AdguardTeam/AdguardFilters/issues/158944
 chip.de#$#section.Chapter.wrapper-safe[style^="min-height:"] { min-height: auto !important; }
 ! xnxx-sexfilme.com preroll ad
@@ -2319,6 +2324,10 @@ formel1.de,krautundrueben.de,motorsport-total.com,traktorpool.de,fnweb.de,laborj
 !
 !
 !
+android-hilfe.de##.billboard-ad-top
+android-hilfe.de##div[style="float: left;padding-right:0px;padding-top:0px;min-height:255px;min-width:300px;"]
+||email.t-online.de/res/*/frame/anzeige_hor.gif
+dazn.com##div[class^="AdBanner_adBannerWrapper_"]
 vox.de##.voxde-billboard-format
 vox.de##.rtli-master-morecontent__teaser--gujteaser
 news.de##.header-ad
@@ -5463,6 +5472,9 @@ tagesspiegel.de###urban-teaser1
 !
 ! Bad:  ||example.org/video-links (should be in specific.txt)
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/159998
+! https://github.com/AdguardTeam/CoreLibs/issues/1800
+! TODO: remove when/if it will be fixed in CoreLibs
 ! https://github.com/AdguardTeam/AdguardFilters/issues/158739
 ! https://github.com/AdguardTeam/AdguardFilters/issues/154072
 ! t-online.de ad video
@@ -7064,6 +7076,8 @@ wetter.com#@#div[id^="div-gpt-"]
 ||vulkanbet.pro^$popup
 ||vulkanbetting.biz^$popup
 $stylesheet,subdocument,third-party,xmlhttprequest,domain=canna-power.to|canna.to
+/as1.php$domain=boerse.ai|boerse.am|boerse.im|boerse.kz|boerse.sx|boerse.tw
+/b.php$domain=boerse.ai|boerse.am|boerse.im|boerse.kz|boerse.sx|boerse.tw
 ^what=zone^$domain=ww3.cad.de|ww4.cad.de
 |http://$subdocument,third-party,domain=bonimail.de
 ||112-magazin.de/images/banners/
@@ -7116,6 +7130,8 @@ $stylesheet,subdocument,third-party,xmlhttprequest,domain=canna-power.to|canna.t
 ||aktuell-kl.de/images/banners/
 ||akustik-gitarre.com/uploads/tx_ricrotation/
 ||algarve-entdecker.com/wp-content/uploads/*/xbanner-
+||alles-mahlsdorf.de/wp-content/uploads/*-Banner-
+||alles-mahlsdorf.de/wp-content/uploads/*-werbung-
 ||allround-pc.com/com$image
 ||altesrad.net/phpBB3/images/banner/
 ||amazonaws.com/bnp_657x209_$domain=finanzen.net
@@ -7591,6 +7607,7 @@ $stylesheet,subdocument,third-party,xmlhttprequest,domain=canna-power.to|canna.t
 ||ibooks.to/wp-content/uploads/*/ffree.png
 ||ibooks.to/wp-content/uploads/*/goforblock.png
 ||ibooks.to/wp-content/uploads/*/offdd728.png
+||ibooks.to^*.php|$script
 ||idealo.de/banner/
 ||images-amazon.com/images/*/marquee/
 ||images-amazon.com/images/*/marqueestatic/
@@ -7816,6 +7833,7 @@ $stylesheet,subdocument,third-party,xmlhttprequest,domain=canna-power.to|canna.t
 ||osthessen-zeitung.de/uploads/tx_macinabanners/
 ||osttirol-online.at/images/banners/
 ||ottfried.de/wp-content/uploads/*/traueranzeige_
+||otto.de/wato-onsite/assets/*.wato.onsite.module.
 ||outdoortest.info/wp-content/kooperation/
 ||ox.gassi-tv.de^
 ||oxmoxhh.de/wp-content/uploads/*/hotspring-
@@ -8416,6 +8434,7 @@ connextra.com##iframe[src^="https://ssl.connextra.com"]
 ||delamar.de/out/$popup
 ||sexei.net/go.html$popup
 ||sptopf.de/tshp/RE?ID=$popup,domain=t-online.de
+||warez.cx^$popup,domain=ibooks.to
 dtb.de###AD
 nd-aktuell.de###Ads
 mazda-forum.info###BelowRectangle
@@ -8439,6 +8458,8 @@ kinderspiele-welt.de###MR
 mtb-news.de###MTB_M_ROS_Sticky
 skiinfo.de###Mid
 bauexpertenforum.de,elektrikforen.de,megane-board.de,windows-7-forum.net###MidRectangle
+seo-suedwest.de###Mod373
+seo-suedwest.de###Mod416
 chip.de###R1C3
 onvista.de###SMART_BILLBOARD
 wiesbaden.de###SP-commercials
@@ -8821,6 +8842,7 @@ bundesliga-streams.net###nwmlay
 nydus.org###ny_banner
 nydus.org###nyba
 nydus.org###nybanner
+nydus.org###nydus_org_970x300_billboard_responsive
 autoexperience.de,flugzeugforum.de,gs-forum.eu,uhrforum.de,xbox-passion.de###oc24-div
 elektrikforen.de###oc24_container_top
 yasni.de###offer
@@ -8938,6 +8960,7 @@ queer.de###startrechts
 11889.com###sticky-aside
 11880.com###sticky-aside-placeholder
 finanzen.net###sticky-superbanner
+nydus.org###stickyaside
 studis-online.de###ston-billboard
 studis-online.de###ston-footer-ad
 eu-vertretung.de###stream-item-widget-2
@@ -9165,6 +9188,7 @@ kauf6.com##.advertisments
 speedweek.com##.advheader
 smartdroid.de##.advorp1
 erf.de,greenbyte.ch,rtl.de##.adwrapper
+rtl.de##.adwrapper--mobile
 guteporno.com##.aff-inhalt-geil-spalte
 fitbook.de,myhomebook.de,stylebook.de,techbook.de,travelbook.de##.affiliate-amex
 einsteiger-keyboard.de##.affiliate-button
@@ -9377,6 +9401,7 @@ fairaudio.de##.candy-top
 filmlaune.de##.card-streaming-btns
 neuwagen.de##.cardealers
 anzeigervomrottal.ch##.carousel
+alles-mahlsdorf.de##.category-werbung-kopfzeile
 all-electronics.de,automobil-produktion.de,automotiveit.eu,chemietechnik.de,fertigung.de,fluid.de,instandhaltung.de,ke-next.de,kgk-rubberpoint.de,ki-portal.de,neue-verpackung.de,pharma-food.de,plastverarbeiter.de,produktion.de,technik-einkauf.de,werkzeug-formenbau.de##.ce_banneradbox
 e-formel.de##.ce_plista
 technik-einkauf.de##.ce_promotionbox
@@ -9406,6 +9431,7 @@ raptastisch.net##.code-block-14
 borncity.com##.code-block-16
 borncity.com,buenasideas.de##.code-block-2
 borncity.com##.code-block-3
+ibooks.to##.code-block-3[style]
 borncity.com,deinhandy.de##.code-block-4
 borncity.com##.code-block-5
 borncity.com##.code-block-6
@@ -9520,6 +9546,7 @@ uepo.de##.flexslider
 floatmagazin.de##.float-widget
 tvinfo.de##.floatLeft[style="padding:10px;"]
 freiburger-nachrichten.ch##.fn-edp-section__slider
+seo-suedwest.de##.fnet-banner
 amazona.de##.fnetbr-pbb-container
 gwd-minden.de##.footer
 katzeausdemsack.de##.footer-banner
@@ -9561,6 +9588,7 @@ nextpit.de##.gptSlot
 modernhifi.de##.grey-banner
 modernhifi.de##.grey-banner-bottom
 epd-film.de##.group-externe-links
+seo-suedwest.de##.gruenebox2
 my-homo.net##.gstsk
 fussballtransfers.com##.gtag
 wetter.de##.guj-ad-slot
@@ -10371,12 +10399,13 @@ blick.ch##aside[id^="appnexus-placement"]
 weristdeinfreund.de##aside[id^="banner"]
 ww3.cad.de##body > table[width="100%"][border="0"]:first-child
 ddl-warez.cc##button[onclick*="/af.php"]
+ibooks.to##button[type="submit"]
 abload.de##center > table > tbody > tr > td[valign="bottom"][align="center"][style="width: 100%;"]
 winfuture.de##div[align="center"][style="min-height: 320px;"]
 3dchip.de##div[align="center"][width="468px"] > table[height="60"][cellspacing="0"][cellpadding="0"][border="0"][align="center"]
 bitreporter.de##div[class$="-adlabel"]
 onvista.de##div[class*="InteractionTypeReference_ov-interaction-slot--fallback"]
-rewe.de##div[class*="Product_productSponsoredTile"]
+shop.rewe.de##div[class*="Product_productSpecialTile"]
 onlinehaendler-news.de##div[class*="adplacement_"]
 chartsurfer.de##div[class*="adszone-"]
 homegate.ch##div[class^="AdSlotContainer_"]
@@ -10738,6 +10767,7 @@ t-online.de##section[data-stage-layout^="custom_nativendo_"]
 stol.it#?##ContainerFull:-abp-has(a:-abp-contains(Anzeige))
 abendzeitung-muenchen.de#?#article[class^="teaser nummer-"]:-abp-has(span.specialfeature)
 all-electronics.de,automotiveit.eu,produktion.de#?#.ce_topicbox:-abp-has(.label-ad-highlight)
+alles-mahlsdorf.de#?#.elementor-section:-abp-has(h2.elementor-heading-title:-abp-contains(Werbung))
 android-hilfe.de#?#article.message--post:-abp-has(span.username:-abp-contains(Anzeige))
 apfeltalk.de#?#div.wpb_text_column:-abp-has(h5:-abp-contains(Werbung))
 apfeltalk.de#?#div.wpb_text_column:-abp-has(h6:-abp-contains(Werbung))
@@ -10856,6 +10886,8 @@ motorradonline.de#?#.v-A_-topteaser__rotationbox__item:-abp-has(.v-A_-teaser__ta
 motorsport-total.com#?#.teaser_container.teaser-htmlcode.relative.row:-abp-has(.f1de-container-title:-abp-contains(Die besten Leasing-Deals))
 mountainbike-magazin.de#?#.v-A_-white__tile:-abp-has(.v-A_-teaser__tag--ad)
 nur-positive-nachrichten.de#?#.moduletable.text-center:-abp-has(.bildunterschrift:-abp-contains(Anzeige))
+nydus.org#?#div.ui-tabs:-abp-has(#nydus_org_300x600_desktop_1)
+nydus.org#?#div:-abp-has(> #nydus_org_970x300_billboard_responsive)
 o-sport.de#?#.card-body:-abp-contains(Sponsoren)
 onvista.de#?#.flex-layout:-abp-has(div[class^="ArticleTeaser_ov-article-teaser__onvistaCustomer_"])
 onvista.de#?#.outer-spacing--xxlarge-top:-abp-contains(Werbung von)
@@ -10881,6 +10913,7 @@ saechsische.de#?#.article-box:-abp-has(> .article-box__text > .article-box__info
 saechsische.de#?#.article-fill:-abp-has(.article-badge.article-badge--ad)
 satvision.de#?#.fc_bloglist_item:-abp-has(a:-abp-contains(Advertorial))
 satvision.de#?#.mod_flexicontent_standard_wrapper:-abp-has(span:-abp-contains(Advertorial))
+seo-suedwest.de#?#.moduletable:-abp-has(span:-abp-contains(Anzeige))
 skodacommunity.de#?#article.message--post:-abp-has(a:-abp-contains(Anzeige))
 smartphonemag.de#?#.td_module_wrap:-abp-has(.td-post-author-name:-abp-contains(Werbung))
 sportdeutschland.tv#?#.text-right.text-white.col-6:-abp-contains(präsentiert von)
