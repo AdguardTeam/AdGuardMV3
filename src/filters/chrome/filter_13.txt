@@ -1,8 +1,8 @@
-! Checksum: BHIhd7WYSoGPb+SjpMb0AQ
+! Checksum: okM7DiajebAEYdozGtILNg
 ! Title: AdGuard Turkish filter
 ! Description: Filter list that specifically removes ads on websites in Turkish language.
-! Version: 2.0.46.99
-! TimeUpdated: 2023-08-25T16:30:59+00:00
+! Version: 2.0.47.2
+! TimeUpdated: 2023-08-28T14:30:36+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -85,6 +85,8 @@
 ! Bad: ||adssubdomain.legitwebsite.com^ (should be in adservers_firstparty.txt)
 !
 !
+||peppaping.xyz^
+||trkwinaff13.com^
 ||adsby.io^
 ||ads724.com^
 ||policycounsel.org^$popup
@@ -692,8 +694,10 @@ unisinav.com#%#//scriptlet("set-constant", "$tieE3", "true")
 osxinfo.net#%#//scriptlet("abort-current-inline-script", "$", "!document.getElementById(btoa")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/49271
 turkdenizcileri.com,bilgalem.blogspot.com,okulsoru.com#%#//scriptlet("set-constant", "koddostu_com_adblock_yok", "null")
+! https://github.com/AdguardTeam/AdguardFilters/issues/160080
 ! https://github.com/AdguardTeam/AdguardFilters/issues/48825
-tekniknot.com#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
+tekniknot.com#%#//scriptlet('prevent-fetch', '/pagead2\.googlesyndication\.com|static\.ads-twitter\.com/')
+tekniknot.com#%#//scriptlet('prevent-addEventListener', 'load', '/BlockContent|\.onerror|\.catch/')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/48473
 ||yoneticihane.com/*/blossomfeaturebox.$script,stylesheet
 ! https://github.com/AdguardTeam/AdguardFilters/issues/47184
