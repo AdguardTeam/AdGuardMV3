@@ -1,8 +1,8 @@
-! Checksum: dn7+Lz7mfnkkbr6pVw0Fqw
+! Checksum: E7Uz2fkLYqx/KKQiXFpvMg
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.37.40
-! TimeUpdated: 2023-08-28T13:05:05+00:00
+! Version: 2.0.37.43
+! TimeUpdated: 2023-08-31T07:32:05+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -85,6 +85,7 @@
 ! Bad: ||adssubdomain.legitwebsite.com^ (should be in adservers_firstparty.txt)
 !
 !
+||quartermedia-ad-service.net^
 ||ad.dl.mainpost.de^
 ||plx.eispop.com^
 ||oddsserve.com^$third-party
@@ -1073,7 +1074,8 @@ teleboy.ch#@#.adWrapper
 ! Good: example.org#?#main > div.row:has(> div.ad)
 ! Bad: example.org##main > div.ad (should be in specific.txt)
 !
-!
+! infranken.de - left-over in article
+infranken.de##img[data-cmp-src^="https://ir-de.amazon-adsystem.com"]
 ! https://github.com/AdguardTeam/AdguardFilters/issues/159998
 android-hilfe.de#?#.js-replyNewMessageContainer > .message--post:not([data-author]):has(> .message-inner > .message-cell--user .message-name > a.username:contains(/^Anzeige$/))
 ! https://github.com/AdguardTeam/AdguardFilters/issues/159553
@@ -1084,7 +1086,7 @@ finanzen.net#?#.page-content__item:has(> div[class^="fin-ob-"])
 giga.de#?#article:has(.alice-teaser-intro > .deal)
 ! macwelt.de, pcwelt.de - ad on main site
 macwelt.de,pcwelt.de#?#article.item:has(> div > .item-text > .item-text-inner > .item-eyebrow-sponsored-by-text)
-macwelt.de,pcwelt.de#?#article.item:has(> .item-inner > .item-text > .item-text-inner > .item-eyebrow)
+macwelt.de,pcwelt.de#?#article.item:has(> .item-inner > .item-text > .item-text-inner > .item-eyebrow:contains(Anzeige))
 ! menshealth.de - ads in articles and main page
 menshealth.de#?#a[is-digitarista-widget]:has( > .flex > .va-teaser-rating-item__text > div > .va-adhint)
 menshealth.de#?#.va-sidecol > div[class] > div[class]:has(> div > div[id^="div-gpt-ad"])
@@ -1861,7 +1863,7 @@ amateurbusters.com#?#.sb_area > .sb_area_headline:contains(Urlaub)
 !
 ! VAST video ads - e. g. https://github.com/AdguardTeam/AdguardFilters/issues/135687
 !+ NOT_PLATFORM(ios, ext_android_cb)
-stern.de,desired.de,pcgames.de,t-online.de,vox.de,spieletipps.de,wetter.de,golem.de,autobild.de,buffed.de,gamesaktuell.de,kino.de,pcgameshardware.de,videogameszone.de,familie.de,plus.rtl.de,welt.de#%#//scriptlet('prevent-xhr', '.damoh.')
+kicker.de,stern.de,desired.de,pcgames.de,t-online.de,vox.de,spieletipps.de,wetter.de,golem.de,autobild.de,buffed.de,gamesaktuell.de,kino.de,pcgameshardware.de,videogameszone.de,familie.de,plus.rtl.de,welt.de#%#//scriptlet('prevent-xhr', '.damoh.')
 !
 ! infranken.de - removing amazon link, so the incredients are visible in a recipe
 infranken.de#%#//scriptlet('remove-attr', 'href', 'a[rel*="sponsored"]')
@@ -2324,6 +2326,7 @@ formel1.de,krautundrueben.de,motorsport-total.com,traktorpool.de,fnweb.de,laborj
 !
 !
 !
+winfuture.de###news_content > a[href*="redirect"]
 webfail.com##div[style="min-height:250px;"]
 android-hilfe.de##.billboard-ad-footer
 android-hilfe.de##.billboard-ad-top
@@ -2835,8 +2838,6 @@ geo.de,stern.de##.page__ad-element
 netmoms.de##.news-teaser--sponsored
 helles-koepfchen.de##.topAdCol
 helles-koepfchen.de##div[style^="margin-bottom:30px;"][style*="width: 100%;"]
-noz.de##.search-results > .open
-noz.de##.search-results > .open + .article__teaser__separator
 focus.de##div[class^="cls_hor_prnt_"]
 t-online.de##.oEmbed_container div[data-testid="commercial-indication"]
 t-online.de##.oEmbed_container div[data-testid="commercial-indication"] ~ div[data-testid="produktbox-wrapper"]
