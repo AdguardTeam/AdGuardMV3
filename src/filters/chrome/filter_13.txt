@@ -1,8 +1,8 @@
-! Checksum: whiikd02rU3cJ5ooZRlYwQ
+! Checksum: bGKP/FkgWdHEca3PjFRYmw
 ! Title: AdGuard Turkish filter
 ! Description: Filter list that specifically removes ads on websites in Turkish language.
-! Version: 2.0.47.10
-! TimeUpdated: 2023-09-01T14:30:28+00:00
+! Version: 2.0.47.15
+! TimeUpdated: 2023-09-04T18:30:44+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -872,6 +872,8 @@ dizipal580.com,dizipal581.com,dizipal582.com,dizipal583.com,dizipal584.com,dizip
 ! Bad: example.org##main > div.ad (should be in specific.txt)
 !
 !
+forum.turkmmo.com#?#.samOverlay_30:has(> div.overlay > div.overlay-title:contains(Reklam))
+forum.turkmmo.com#$?#body { overflow: visible !important; }
 1000kitap.com#?#div.min-h-100vh div.dr:has(> .dr.bg-gri:empty)
 forum.turkmmo.com#?#.p-body-sidebar > div.block:has(> div[data-widget-key*="reklam"])
 star.com.tr#?#div[style^="height:"]:has(> div[id^="div-gpt-ad"])
@@ -1226,6 +1228,12 @@ sikayetvar.com#?#.gridlist > div.grid-item > div.complaint-card:has(> .media > d
 ! Good: ##.adv
 ! Bad: example.org##.adv (should be in specific.txt)
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/160823
+##amp-img[width="728"][height="90"]
+##body > div[class^="item"] > a[target="_blank"][style^="padding: 4px 1px;text-align: center;"]
+##.link-group > div.features
+###uyarikutu
+##.link-group > div.table-container
 ! https://github.com/AdguardTeam/AdguardFilters/issues/159052
 ##.sayfa-arka
 ##.noxstream-gorsel
@@ -1268,11 +1276,6 @@ sikayetvar.com#?#.gridlist > div.grid-item > div.complaint-card:has(> .media > d
 ##.fuck-ivr
 ##.fuck-ivr ~ p[style^="background-color:"]
 !
-##amp-img[width="728"][height="90"]
-##body > div[class^="item"] > a[target="_blank"][style^="padding: 4px 1px;text-align: center;"]
-##.link-group > div.features
-###uyarikutu
-##.link-group > div.table-container
 ###adStarter
 ##.textrek
 ##.playerinads
@@ -2463,6 +2466,7 @@ ruyashoujo.com,pchocasi.com.tr,dusuncekatalogu.com,tatil.net.tr##.code-block
 /service/advertchannels?$xmlhttprequest,redirect=nooptext,domain=mardinhaber.com.tr|gidahatti.com|bolugundem.com
 dirilispostasi.com,turkuazgazetesi.net,yenialanya.com,bugunkocaeli.com.tr,cagdaskocaeli.com.tr,mansetaydin.com,seskocaeli.com,kocaelibarisgazetesi.com,kocaelikoz.com,enkocaeli.com##.block-pano > div.us
 !
+kuponigo.com##div[data-block-structure="custom"] a[href^="https://kuponigo.com/go/"][target="_blank"] > picture
 hurriyet.com.tr##.specialdayBand
 itemci.com##.banner-effect
 kraloyun.com##div[class*="header-ads"]
@@ -2489,10 +2493,10 @@ yenimesaj.com.tr##body > div[style="margin: auto; width: 100%; height: 250px; te
 fulltimehdfilmizle.*##a[href^="https://azureiptv1.site/"]
 fullfilmizle.net##a[href^="https://t2m.io/"]
 ||storj-cloud.cdn.ampproject.org/i/s/storj.cloud/f/fv/*.gif$domain=sinefy2.com
-720pizle.mov##.top-bnr
-roketdizi.pw,sinefy2.com,dizilla.plus,yabanci-dizi.me,diziroll.co,720pizle.mov###mPlayerFd
+720pizle.*##.top-bnr
+roketdizi.pw,sinefy2.com,dizilla.plus,yabanci-dizi.me,diziroll.co,720pizle.*###mPlayerFd
 diziroll.co##.series-watch-player a[target="_blank"] > img
-||storj-cloud.cdn.ampproject.org^$domain=roketdizi.pw|diziroll.co|720pizle.mov|yabanci-dizi.me|dizilla.plus
+||storj-cloud.cdn.ampproject.org^$domain=roketdizi.pw|diziroll.co|720pizle.*|yabanci-dizi.me|dizilla.plus
 ||storj-cloud.cdn.ampproject.org/i/s/storj.cloud/f/fv/hovardahatfoot.gif
 ||storj-cloud.cdn.ampproject.org/i/s/storj.cloud/f/fv/300_250-king-b.gif
 ||pembetv18.net/pop.js
@@ -2793,7 +2797,7 @@ ensonhaber.com##.hd-280[style="text-align: center;"]
 ||hibya.com/bannera*.js
 ||hibya.com/bannerhibya.js
 fullfilmizle.net,altyazilifilmizle3.com##.footer-description
-evrenselfilm1.com,fullhdfilmcibaba2.com##.footer-info
+yabancidizici.net,evrenselfilm1.com,fullhdfilmcibaba2.com##.footer-info
 indirmedenfilmizle.vip##.copyright span.footer-description
 ||siyahfilmizle.info/wp-content/themes/filmzone/js/smscrnpop.js
 siyahfilmizle.pro,siyahfilmizle.info###footer_q
@@ -2872,7 +2876,7 @@ ehliyettestleri.com,testlericoz.com##.yazialtireklam
 ||yeniufukgazetesi.com.tr/wp-content/uploads/2021/04/800.gif
 sabah.com.tr##div[data-wbzone-loaded="728x90"]
 ||isbh.tmgrup.com.tr/sbh/site/v3/apara/*/bitay-
-dizilla.plus,720pizle.mov,diziroll.co,roketdizi.pw,yabanci-dizi.me###footerFixedDivWrapper
+dizilla.plus,720pizle.*,diziroll.co,roketdizi.pw,yabanci-dizi.me###footerFixedDivWrapper
 ye-mek.net##.addForMainPage
 donanimhaber.com##.giydirme-container
 4kfilmizlesene.xyz##div[class^="vpre"]
@@ -3315,7 +3319,7 @@ mangagecesi.com##.mangagecesi_reklam
 altyazilifilmizle3.com,evrenselfilm1.com,seyredeger.com,indirmedenfilmizle.vip##.zfc-ads
 jetfilmizle.*###movie-sidebar > a[target="_blank"]
 bolgegundem.com,yenihaberden.com##.fixed-pub
-720pizle.mov,sinema.cc,erotikfilmleri.org,erotikfilmsitesi.online,erotikfilmler.live,tekfullfilmizle.org,yetiskinfilmizle.xyz,yabancidizici.net,burasiduzce.com,gazetem.ru,coin-turk.com,turkerotikfilm.com##center > a[target="_blank"] > img
+720pizle.*,sinema.cc,erotikfilmleri.org,erotikfilmsitesi.online,erotikfilmler.live,tekfullfilmizle.org,yetiskinfilmizle.xyz,yabancidizici.net,burasiduzce.com,gazetem.ru,coin-turk.com,turkerotikfilm.com##center > a[target="_blank"] > img
 yeniakit.com.tr##.sticky-ads
 ||telgraf.net/uploads/data/Advertisement/
 worldinmotionvr.com,yvt2bm7hzgtt.cloud,movietube32.xyz,sinema.cc##.pppx
@@ -6617,6 +6621,8 @@ selcuksportshd78.com#$?#body { background-image: none !important; }
 [$domain=/(^\|.+\.)selcuksportshd\d+\.xyz/]##.footer
 [$domain=/(^\|.+\.)selcuksportshd\d+\.xyz/]##.socials a:is(.meritroyal, .iptv, .streamradar)
 !
+! Frequently changed domain
+||cdn.discordapp.com^$domain=kralking.com
 ! tipobettv*.com - frequently changed domains
 ||tipobettv*.com/Uploads/*_pgskn.jpg
 ||tipobettv*.com/Uploads/*.gif
@@ -6733,6 +6739,7 @@ saglamindir.net##.text-center.visible-lg > a[class="download"][rel="nofollow"]
 driverdestek.com##.adsbygoogle
 ! https://github.com/AdguardTeam/AdguardFilters/issues/77520
 ! TODO: We take a look at this rule later in the linter, until then keep the linter disabled here
+! https://github.com/AdguardTeam/tsurlfilter/issues/105
 ! aglint-disable-next-line invalid-modifiers
 ||video.twimg.com/ext_tw_video/*/*.m3u8$domain=/^i[a-z]*\.strmrdr[a-z]+\..*/
 !

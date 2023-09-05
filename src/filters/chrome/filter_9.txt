@@ -1,8 +1,8 @@
-! Checksum: j8YG8nRPKExPm7HA1gzU2w
+! Checksum: PGAaI5qSbnvfkvl/iTVW5w
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish, Portuguese, and Brazilian Portuguese languages.
-! Version: 2.0.21.20
-! TimeUpdated: 2023-08-31T13:04:38+00:00
+! Version: 2.0.21.31
+! TimeUpdated: 2023-09-04T17:06:58+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -305,6 +305,9 @@
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/160806
+||imasdk.googleapis.com/pal/sdkloader/pal.js$script,redirect=noopjs,domain=southparkstudios.com.br|southpark.lat
+||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima3,domain=southparkstudios.com.br|southpark.lat
 ! https://github.com/AdguardTeam/AdguardFilters/issues/160498
 animeszone.net##.bodyc
 animeszone.net#%#//scriptlet('set-constant', 'detectAdBlock', 'noopFunc')
@@ -320,12 +323,13 @@ qwanturankpro.com,desbloquea.me,mega-enlace.com#%#//scriptlet('prevent-fetch', '
 softwareany.net#%#//scriptlet('prevent-addEventListener', 'load', 'detect-modal')
 softwareany.net#@#ins.adsbygoogle
 softwareany.net##ins.adsbygoogle:not(.ad-slot)
+! https://github.com/AdguardTeam/AdguardFilters/issues/160783
 ! https://github.com/AdguardTeam/AdguardFilters/issues/158732
-redbolivision.tv.bo#%#//scriptlet('set-constant', 'googletag._loaded_', 'true')
-redbolivision.tv.bo#%#//scriptlet('prevent-fetch', 'securepubads.g.doubleclick.net/pagead/ppub_config')
-redbolivision.tv.bo#%#//scriptlet('prevent-element-src-loading', 'script', 'securepubads.g.doubleclick.net/tag/js/gpt.js')
-||securepubads.g.doubleclick.net/tag/js/gpt.js$script,redirect-rule=noopjs,domain=redbolivision.tv.bo
-||securepubads.g.doubleclick.net/pagead/ppub_config$xmlhttprequest,redirect-rule=nooptext,domain=redbolivision.tv.bo
+repretel.com,redbolivision.tv.bo#%#//scriptlet('set-constant', 'googletag._loaded_', 'true')
+repretel.com,redbolivision.tv.bo#%#//scriptlet('prevent-fetch', 'securepubads.g.doubleclick.net/pagead/ppub_config')
+repretel.com,redbolivision.tv.bo#%#//scriptlet('prevent-element-src-loading', 'script', 'securepubads.g.doubleclick.net/tag/js/gpt.js')
+||securepubads.g.doubleclick.net/tag/js/gpt.js$script,redirect-rule=noopjs,domain=redbolivision.tv.bo|repretel.com
+||securepubads.g.doubleclick.net/pagead/ppub_config$xmlhttprequest,redirect-rule=nooptext,domain=redbolivision.tv.bo|repretel.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/159624
 animesonline.nz##.detectadb
 animesonline.nz##.cleitao
@@ -1370,6 +1374,9 @@ peru21.pe#@#.adstop
 ! https://github.com/AdguardTeam/AdguardFilters/issues/24801
 yahoo.com#?#ul[class^="Mb(0)"] > li.js-stream-content:has(> div > a[rel="nofollow noopener noreferrer"]+div:contains(Patrocinado))
 !
+nsctotal.com.br#?##home > div.container:has(> .row h2:contains(Conteúdo Publicitário))
+opopular.com.br#?#div[class^="PJLV"][class$="SlotContainer"] div.MainContent > div:has(img[alt="Logo Classi.com.br"])
+neoxscan.net#?#.page-break  > center:contains(/^Publicidade$/)
 lermangaonline.com,goldenmanga.top#?#h2.cg_color:contains(/^Publicidade$/)
 lermangaonline.com,goldenmanga.top#?#.col-sm-4 > a[href^="https://amzn.to/"] ~ .cg_color:contains(/^Publicidade$/)
 ahnegao.com.br#?#div[class^="astra-advanced-hook"]:has(> div[id^="M"])
@@ -2320,12 +2327,26 @@ http://adw.
 $script,third-party,denyallow=statically.io|sharecast.ws|bunnycdn.ru|bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|cdn.staticfile.org|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yastatic.net|ytimg.com|zencdn.net|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com|fastcomments.com|plyr.io,_____,domain=anroll.net|monoschinos2.com|animeyt.es
 !
 ! ##.ad
-noticiasdenavarra.com,informacion.es,applesfera.com,xatakamovil.com,espinof.com,mundoxiaomi.com,vidaextra.com,mediotiempo.com,elpais.com,olhardigital.com.br,atribuna.com.br,jovemnerd.com.br,laopiniondemurcia.es,larazon.es,dicio.com.br,band.uol.com.br,xataka.com,onyxplay.com,genbeta.com,vagalume.com.br,xatakandroid.com,abril.com.br##.ad
+nsctotal.com.br,noticiasdenavarra.com,informacion.es,applesfera.com,xatakamovil.com,espinof.com,mundoxiaomi.com,vidaextra.com,mediotiempo.com,elpais.com,olhardigital.com.br,atribuna.com.br,jovemnerd.com.br,laopiniondemurcia.es,larazon.es,dicio.com.br,band.uol.com.br,xataka.com,onyxplay.com,genbeta.com,vagalume.com.br,xatakandroid.com,abril.com.br##.ad
 ! ##.ads
-placar.com.br,futebolinterior.com.br,tvhistoria.com.br,tribunapr.uol.com.br,diariodonordeste.verdesmares.com.br,sbt.com.br,link.estadao.com.br,atomixhq.*,jc.ne10.uol.com.br,internetpasoapaso.com,acidadeon.com,leouve.com.br,larazon.es,infoescola.com,cbn.globoradio.globo.com,maxitorrent.com,abril.com.br,odia.ig.com.br,especiais.g1.globo.com,tribunapr.com.br,novelasd.com,anime-tube.tv##.ads
+gaz.com.br,placar.com.br,futebolinterior.com.br,tvhistoria.com.br,tribunapr.uol.com.br,diariodonordeste.verdesmares.com.br,sbt.com.br,link.estadao.com.br,atomixhq.*,jc.ne10.uol.com.br,internetpasoapaso.com,acidadeon.com,leouve.com.br,larazon.es,infoescola.com,cbn.globoradio.globo.com,maxitorrent.com,abril.com.br,odia.ig.com.br,especiais.g1.globo.com,tribunapr.com.br,novelasd.com,anime-tube.tv##.ads
 ! ##.banner
-cnnespanol.cnn.com,motociclismo.es,sub100.com.br,theenemy.com.br,manhwas.net,rpp.pe,ambito.com,economipedia.com,informador.mx,elinformador.com.co,cronista.com,rionegro.com.ar,diariodecuyo.com.ar,voydeviaje.com.ar,guarda14.com,viapais.com.ar,agazeta.com.br,eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.*,mundotecnologias.com,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##.banner
+correio24horas.com.br,cnnespanol.cnn.com,motociclismo.es,sub100.com.br,theenemy.com.br,manhwas.net,rpp.pe,ambito.com,economipedia.com,informador.mx,elinformador.com.co,cronista.com,rionegro.com.ar,diariodecuyo.com.ar,voydeviaje.com.ar,guarda14.com,viapais.com.ar,agazeta.com.br,eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.*,mundotecnologias.com,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##.banner
 !
+||dj91.hostingnuclear.com/8014/stream$domain=animegafirex.com
+||images.lun.com/luncontents/Banners/
+lun.com###uctNoticesBanner_divbanner
+gazetadopovo.com.br##div[data-ads]
+nsctotal.com.br##.ad-single
+nsctotal.com.br###floater_2
+opopular.com.br##.classi-search-widget
+opopular.com.br##.classi
+opopular.com.br##div[id^="POP_HOME_SMT_"]
+uol.com.br##.uolpd-video-inarticle
+correio24horas.com.br##div[id^="single_"][id$="_piano"]
+umdoisesportes.com.br##.banner-principal
+neoxscan.net##a[href^="https://www.amazon.com"] > img
+||cdn.discordapp.com/attachments/*/mo-logitc-amz-nx.jpg$domain=neoxscan.net
 abc.es##[class^="voc-header"] > a[data-voc-vtm-id="comienzoSuscripcionON"]
 abc.es##.voc-ob-wrapper
 ||static.vocstatic.com/vam/*/vam.js
@@ -2374,8 +2395,8 @@ futecell.com###HTML27
 felizemforma.com##.ad970x250
 genbeta.com###editorialRecommendedPosts
 ||recantodasletras.com.br/vitrine/vitrine.php
-redbolivision.tv.bo##html ned-ad
-redbolivision.tv.bo##body .layout-rev
+repretel.com,redbolivision.tv.bo##html ned-ad
+repretel.com,redbolivision.tv.bo##body .layout-rev
 metsul.com##.ad-wide-antes
 metsul.com##.metsu-adlabel
 metsul.com###header2_alright
@@ -2754,7 +2775,7 @@ canalnet.tv##.the-banner
 web-ole.lilax.io,ole.com.ar##div[class^="sc-ade"]
 aristeguinoticias.com###topleader
 caras.uol.com.br##div[id^="banner-"][id$="-area"]
-agazeta.com.br##.ads-paragrafo
+correio24horas.com.br,agazeta.com.br##.ads-paragrafo
 elcomercio.es##.voc-animated-modal-bottom
 habitaclia.com##.publig
 cope.es##.toolbar-directo__advertisment
@@ -3428,7 +3449,7 @@ uol.com.br##.moduloBanner
 globaltvapp.net##.dmPhotoGalleryResp a[href="https://calentadores.shoptena.com/"]
 television-envivo.com###publicidad-video
 ||frml.tv/rbw/?v=f$domain=formulatv.com
-oglobo.globo.com,cifraclub.com##div[id^="pub-"]
+jornalvs.com.br,oglobo.globo.com,cifraclub.com##div[id^="pub-"]
 ||vermangasporno.com/wp-content/cache/min/*/static/adManager-*.js
 ||vermangasporno.com/wp-content/cache/min/*/sdk/v*/p-*.js
 repelis.io###ads
@@ -3537,7 +3558,7 @@ wikicharlie.cl###mw-panel > .advertisements
 forodecostarica.com##div[class^="contenedorPublicidad"]
 tn.com.ar##div[id^="parent-arcAds-"]
 letras.com,letras.mus.br##.cnt-space-top
-letras.com,letras.mus.br##div[id^="pub_"]
+jornalvs.com.br,cifraclub.com.br,letras.com,letras.mus.br##div[id^="pub_"]
 mangatigre.com##.chapter-content > div.bottom-bloc
 hipertextual.com##.wrapperBanner
 ||cdn.romanews.com.br/upload/dn_banner/
@@ -3687,7 +3708,6 @@ online-dvdrip.com##.mvic-btn > a.btn-successful[target="_blank"]
 repelisplus.vip###adxx
 ||descargaranimehentai.com/unrmnewzpt.php
 ||goyabu.uk/random.js
-cifraclub.com.br##div[id^="pub_"]
 cifraclub.com.br##.floatingBottomAd
 elnuevodia.com##div[class^="advertising"]
 elnuevodia.com##.highlight-box-header-partner
@@ -4573,7 +4593,7 @@ cinetube.es##.adsb
 inkanime.com,todoanimeshd.com,anime-latino.net,animeflv.net##.adspl
 cinetube.es##.adst
 intereconomia.com##.adv-top
-lance.com.br,larazon.es,folha.uol.com.br,tribunaavila.com,terra.com.ni,totaldescargas.com##.advertising
+atribuna.com.br,lance.com.br,larazon.es,folha.uol.com.br,tribunaavila.com,terra.com.ni,totaldescargas.com##.advertising
 lanacion.cl##.advs1
 lanacion.cl##.advs2
 lanacion.cl##.advs3
