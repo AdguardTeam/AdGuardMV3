@@ -1,8 +1,8 @@
-! Checksum: zxlfz6kgT4eIZFAFgYaWnQ
+! Checksum: NSMa/PJhHY9pBCEZgSVzeQ
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.37.49
-! TimeUpdated: 2023-09-04T17:06:40+00:00
+! Version: 2.0.37.56
+! TimeUpdated: 2023-09-06T17:03:51+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -909,8 +909,6 @@ china-gadgets.de##.TMX_Werbeplatz_adblocker
 @@||ec-ns.sascdn.com/diff/251/pages/motorsporttotal.js$domain=motorsport-total.com
 ! https://forum.adguard.com/index.php?threads/20694/
 @@andads.com/*/ad-*.bmp
-! https://forum.adguard.com/index.php?threads/20363/
-@@||games.softgames.de/assets/advertisement.js
 ! https://forum.adguard.com/index.php?threads/mahjongspielen-de.20371/
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js^$domain=mahjongspielen.de
 ! https://forum.adguard.com/index.php?threads/kostenlosspielen-net.20364/
@@ -1074,6 +1072,9 @@ teleboy.ch#@#.adWrapper
 ! Good: example.org#?#main > div.row:has(> div.ad)
 ! Bad: example.org##main > div.ad (should be in specific.txt)
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/160976
+woxikon.de#?#.synonyms-list-inner > div.synonyms-full-width:has(> div.ads-wrapper)
+woxikon.de###content > div.row:has(> div[class^="col"] > div.ads-sticky-container)
 ! infranken.de - left-over in article
 infranken.de##img[data-cmp-src^="https://ir-de.amazon-adsystem.com"]
 ! https://github.com/AdguardTeam/AdguardFilters/issues/159998
@@ -1105,7 +1106,8 @@ zockify.de#?#.container:has(> div[data-displaytype="hybrid-banner"])
 win-10-forum.de#?#div.p-body-pageContent > article.message--post:has(article.message-body > a.amazonadlink)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/158944
 ! https://github.com/AdguardTeam/AdguardFilters/issues/155255
-chip.de#?#div[class]:has(> a[href*="contentpartnerId"]:only-child img)
+chip.de#?#div[class]:has(> a[href*="chip.de/downloads/"]:only-child img[src*="hash"]:not([class], [data-src]))
+chip.de#?##dlcharts-list + .mt-md > div[class]:has(> div[class]:only-child > a[href*="chip.de/downloads/"] img[src*="hash"]:not([class], [data-src]))
 ! ratgeber.bunte.de - left-over in article
 ratgeber.bunte.de#?#.Article > div[class]:has(>hr:first-child + aside[role="complementary"] + hr:last-child)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/153929
@@ -2327,6 +2329,7 @@ formel1.de,krautundrueben.de,motorsport-total.com,traktorpool.de,fnweb.de,laborj
 !
 !
 !
+woxikon.de##.ads-sticky-container
 kino.de##a[data-smb-track*="werblich"]
 kabeleins.de,sat1.de,sixx.de,prosieben.de##div[data-testid="display-ad"]
 ||yastatic.net/pcode/adfox/loader.js$domain=rtde.site
@@ -2372,8 +2375,7 @@ augsburger-allgemeine.de##.p-swatch_topdown-nice--ad
 augsburger-allgemeine.de##.p-block > .p-float_right.p-marg_t-xl
 n-tv.de##.lotto
 ||images.finanzen.net/images/b_fonds/Vanguard_Banner
-chip.de##.is-hidden-sm > a[href*="contentpartnerId"] > img
-chip.de##div[style] > a[href*="contentpartnerId"] > img
+chip.de##a[href*="chip.de/downloads/"] img[src*="hash"]:not([class], [data-src])
 heise.de##div[id^="HEI_"][class]
 4fansites.de##div[style="text-align: center; min-height: 320px;"]
 4fansites.de##.spalten_33_twitch
@@ -4854,7 +4856,6 @@ regionalwolfsburg.de##.logocontainer > div.mobcenter
 regionalwolfsburg.de###platzierung
 motorsport-total.com##.anzeige_teas_rect
 spiele123.com##li.ad
-games.softgames.de###voyager-ad-popup
 derwesten.de##.promotion
 ||ich-tanke.de/bilder/partner/
 ||vod-ac-mds.glomex.com/vod/2.0/progressive/$media
@@ -9235,7 +9236,6 @@ aerzteblatt.de##.anzeigenbox
 reiseblog7.com##.ap
 willhaben.at##.apn-leaderboard-wrapper
 oefb.at##.app-foesvAdSpace
-chip.de##.app_nexus_banners_common
 blick.ch##.appnexus-container
 heise.de##.article-layout__header-wrbng
 computerbase.de##.article-view__rectangle
@@ -9773,7 +9773,7 @@ lavendel.net##.netpoint
 fruchthandel.de##.news-item-wbg
 fussballdaten.de##.news-spiel-quoten
 kitzanzeiger.at##.news_sponsoren_banner
-pz-news.de,rheinpfalz.de##.nfy-banner
+pz-news.de,rheinpfalz.de,zvw.de##.nfy-banner
 dtb-tennis.de##.ng-banner
 mallorcazeitung.es##.no-baldomero
 frustfrei-lernen.de##.noContentBannerArea
@@ -10337,7 +10337,6 @@ pornkinox.to##a[href^="https://lp.mydirtyhobby.com/"]
 ero-world.info##a[href^="https://media.campartner.com/"]
 metager.de##a[href^="https://metager.de/partner/r?"]
 pcwelt.de##a[href^="https://ndirect.ppro.de/"]
-chip.de##a[href^="https://network.screen13.com/"]
 bbszene.de##a[href^="https://neu.turbo-d.de/"]
 goal.com##a[href^="https://prf.hn/"]
 pcwelt.de##a[href^="https://pvn.mediamarkt.de/"]
@@ -10736,7 +10735,7 @@ t-online.de##.css-2k2lok
 n-tv.de##.ems-slot
 focus.de##.fol_mew-flying-carpet-wrapper
 chip.de,focus.de##.ob-ad-carousel-layout
-chip.de##.ob-p
+chip.de##.ob-widget .ob-p
 jetzt.de,prosieben.de,transfermarkt.de,tvspielfilm.de##.plistaList > .itemLinkPET
 plista.com##.plistaList > .plista_widget_belowArticle_item[data-type="pet"]
 notebookchat.com,prosieben.de,tvspielfilm.de##.plistaList > .plista_widget_underArticle_item[data-type="pet"]
@@ -10797,6 +10796,7 @@ carpediem.life#?#.post-overview:-abp-has(div:-abp-contains(Anzeige))
 chip.de#?#.AD:-abp-has(img)
 chip.de#?#.Subchapter div[id][class][style="display: flex;"]:-abp-contains(ANZEIGE)
 chip.de#?#.mt-md > div:-abp-contains(Gesponserte Empfehlung)
+chip.de#?#.mt-md:-abp-has(path[d$="92.456,64.241 z"])
 chip.de#?#a.secondary:-abp-has(.Badge__Content:-abp-contains(/anzeige|gesponsert/))
 chip.de#?#a[href^="https://x.chip.de/"]:-abp-has(path[d$="92.456,64.241 z"])
 chip.de#?#a[onclick]:-abp-has(path[d^="M92.456,64.241L66.18"])

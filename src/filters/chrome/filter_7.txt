@@ -1,8 +1,8 @@
-! Checksum: KcRvFWWFK689D2MbqRAW6Q
+! Checksum: ObpYc/5KqyC3q9LL9FaukA
 ! Title: AdGuard Japanese filter
 ! Description: Filter that enables ad blocking on websites in Japanese language.
-! Version: 2.0.43.68
-! TimeUpdated: 2023-09-04T19:34:06+00:00
+! Version: 2.0.43.78
+! TimeUpdated: 2023-09-06T19:32:04+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -907,6 +907,10 @@ otonasalone.jp,sumaiweb.jp#?#._popIn_infinite_page > a._popIn_recommend_article_
 !
 !
 !
+momon-ga.com#?##main > div[style^="max-width: 1200px;"]:has(> iframe[src^="https://creative.xlirdr.com"])
+shiroutoav.net#?#.side-menu:has(> div > div.plugin-freearea > center > ins.widget-banner)
+kids-zoo.com#?#.entry-content > div.center:has(> p a[target="_blank"][rel="nofollow noopener"])
+car-me.jp#$?#.csw-content-container > .ise-ad { remove: true; }
 s.kabutan.jp#?#.justify-center.pt-6.pb-22:has(> div[id^="div-gpt-ad-"])
 ear-phone-review.com#?#.entry-content > div:has(> a[rel="noopener sponsored"])
 chatpad.jp#?##body > .plainBox:has(.adv)
@@ -2264,6 +2268,8 @@ nijinchu.com#?#article > div.entry_content > h3:contains(おすすめ商品)
 !-------JS----------
 !-------------------
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/160835
+dvdrev.com#%#AG_onLoad(function() { var el = document.querySelector('.inner-contents'); if(el) { el.innerHTML = el.innerHTML.replace(/関連動画/g,''); } });
 ! https://github.com/AdguardTeam/AdguardFilters/issues/160020
 japaneseasmr.top#%#//scriptlet('prevent-window-open')
 ! skip ad
@@ -2911,6 +2917,22 @@ gundamlog.com###more > iframe[src^="https://richlink.blogsys.jp"]
 !
 !
 !
+city.yatsushiro.lg.jp##.ban
+city.konan.lg.jp###sadwrap
+erogazou-pinkline.com##.appc_text
+uta-net.com##body div#pc-gpt-overlay-wrap
+twiigle.com##iframe[id^="adpost_"]
+twiigle.com##.__isboostSideSlideShow
+||blog.livedoor.jp/itsoku/scroll2.js
+erota2.com##.overflow-hidden[style]
+shittokuadult.net###item_ranking-2
+||souko.pipii.tv/player?$third-party
+dvdrev.com##.inner-contents a[href*="dmm.co.jp"][target="_blank"][rel$="nofollow"]
+dvdrev.com##.inner-contents hr
+dvdrev.com##.side_menu:last-child
+kids-zoo.com##.responbox50
+twihub.me##.c-min-height-300x100-banner + div.c-min-height
+twihub.me##.c-min-height-300x100-banner
 m.kuku.lu##div[style$="min-height:90px;"]
 m.kuku.lu##div[style="height:100px;max-height:100px;overflow:hidden;"]
 kagoshima-gourmet.jp##.w-beforeRelated
@@ -3355,7 +3377,7 @@ axessmrs.com##.custom-html-widget > p > strong
 backsi.com##.custom-html-widget a[href^="https://www.e-nls.com/access.php"]
 backsi.com,berotuber.com##.custom-html-widget > p > small
 berotuber.com##.custom-html-widget a[href^="https://www.sokmil.com"]
-h-sextaiken.org##.widget-above-single-content-title
+omeko-spice.tokyo,h-sextaiken.org##.widget-above-single-content-title
 shicony.com,h-sextaiken.org###sidebar > aside.widget_text
 osiri-suki-club.com##.content > div[style="margin:0;padding:5px;font-size:14px;word-break: break-all;"] > a[href^="https://al.dmm.co.jp/"]
 ||adultangel.com/image/pickup.gif
@@ -3470,7 +3492,7 @@ wife-board.net##iframe[src^="http://www.wife-room.net/pickup/"]
 wife-board.net##table[border="0"][width="100%"] td[height="220"][bgcolor="#F0F0F0"]
 wife-board.net###slide
 ||cnects.net/ot/talk.php$domain=minna.cc
-search.minna.cc###overlay_area
+hozonv.com,search.minna.cc###overlay_area
 dosports.yahoo-net.jp##.advertising
 anichoice.com,toychan.blog.jp##.cstmreba
 konest.com##div[style="clear:both; width:300px; height:250px; margin:10px auto; text-align:center; line-height: 0px;"]
@@ -4601,7 +4623,7 @@ download.co.jp##div[id^="SAKURA"]
 seleck.cc##div[class$="sticky-sidebar__widgets"]
 city.tochigi.lg.jp###top_banner_footer
 agora-web.jp##iframe[style="width:300px;height:250px;border:none;vertical-align:bottom;"]
-twidou.link##.c-max-width-320
+twicoco.com,twidou.link##.c-max-width-320
 twidou.link##.row.text-center > div.mb-3.mt-4.c-min-height
 twidou.link,twihub.me##.c-max-width-height-350
 2-carat.net##.inven_spot
@@ -5945,7 +5967,7 @@ huffingtonpost.jp##.right-rail-sticky__native-ad-container
 ||cheerup.jp/ads_gets?
 billboard-rock.com,mobile.inest-inc.co.jp,sotokabe.net###footer_cta
 plus1world.com,panty-kiwami.com,xn--u9j3iub5080abs7bxbc.com##.external
-loliotome.com,etude000.com,seihukujyosi.com,xn--u9j3iub5080abs7bxbc.com##.posts-under-1
+tousatu.xyz,loliotome.com,etude000.com,seihukujyosi.com,xn--u9j3iub5080abs7bxbc.com##.posts-under-1
 ||shimanenichinichi.co.jp/media/image_kiwami0303.js
 travel.spot-app.jp##.banner-rectangl
 eromon.net##a[href^="https://a-affiliate.net/login/link.php"]
@@ -6441,7 +6463,7 @@ uma-log.net,tech-biz-eng.com,55paradise.com,blogging-life.com,dietmiler.com,sana
 sanabo.com,masaralog.com,tech-biz-eng.com,moqlog.jp,column.ifis.co.jp,erogamemod.com###custom_html-14
 tousatu-club.com,blue-protocol-ch.com,volx.jp,nuki-dokoro.com,4thsight.xyz,kisslog2.com,matome.eternalcollegest.com,smartparty.jp,erogamemod.com###custom_html-15
 talking-english.net,4thsight.xyz,baraero.com,blogging-life.com###custom_html-16
-tvanimemuryoudouga.com,asobou.co.jp,tech-biz-eng.com,namatamago.net,i-think-it.net,kurashinofusen.com,nijiero-ch.com,nknews.jp,4thsight.xyz###custom_html-17
+kids-zoo.com,tvanimemuryoudouga.com,asobou.co.jp,tech-biz-eng.com,namatamago.net,i-think-it.net,kurashinofusen.com,nijiero-ch.com,nknews.jp,4thsight.xyz###custom_html-17
 eternalcollegest.com###custom_html-18
 a-da-co-da.com,sanabo.com###custom_html-19
 taisy0.com###custom_html-20
@@ -7597,7 +7619,7 @@ hangul-note.info##div.aside_box[style="height: 600px;"]
 e-kuchikomi.info###rsd > .sp20:first-child
 oisiso.com###ads_w
 petwell.jp##.adsFooterTopWrap
-e-nenpi.com,rubiconbrewing.com##.bfb_textTextBtn
+hinakira.com,e-nenpi.com,rubiconbrewing.com##.bfb_textTextBtn
 laurier.excite.co.jp##.ad-header-banner
 ||fresheye.com/parts/koma/parts_ad2_
 fresheye.com##.amazon-book
