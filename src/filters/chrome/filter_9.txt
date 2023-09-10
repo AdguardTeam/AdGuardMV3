@@ -1,8 +1,8 @@
-! Checksum: tsU4o/GmBsZDgGfkzgqu9w
+! Checksum: vgh+ThmP/AxIbEKvswr+0g
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish, Portuguese, and Brazilian Portuguese languages.
-! Version: 2.0.21.33
-! TimeUpdated: 2023-09-06T16:32:15+00:00
+! Version: 2.0.21.35
+! TimeUpdated: 2023-09-08T11:33:32+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1681,6 +1681,8 @@ seriesgato.com#?#.TPlayerNv > li.Button:has(> span:contains(Publicidad))
 !------- JS rules ---------------------!
 !--------------------------------------!
 !
+! animesbr.cc - popup in player
+animesbr.cc#%#//scriptlet('abort-on-property-write', 'redirectpage')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/158831
 assistirfilmeshdgratis.com#%#//scriptlet('remove-attr', 'href', 'a[href]#clickfakeplayer')
 assistirfilmeshdgratis.com#%#//scriptlet('trusted-click-element', 'a#clickfakeplayer:not([href])', '', '1500')
@@ -2212,7 +2214,7 @@ windowsblogitalia.com#$#.sidebar > div.tile-top.tile { height: auto!important; }
 -publicidade.
 .br/ads/
 .br/adx.js
-.br/afiliados/
+.br/afiliados/$domain=~mercadolivre.com.br
 .br/banner.aspx?
 .br/banners/$domain=~colombo.com.br
 .br/imagensdb/banners/
