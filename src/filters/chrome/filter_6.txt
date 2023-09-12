@@ -1,8 +1,8 @@
-! Checksum: 6l3djMljBaj3IfvSzEf0Kw
+! Checksum: F0hLjl14g48sddtPdbpetA
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.37.58
-! TimeUpdated: 2023-09-09T15:31:59+00:00
+! Version: 2.0.37.61
+! TimeUpdated: 2023-09-11T11:32:06+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -519,6 +519,9 @@ essen-und-trinken.de,urbia.de#%#!function(){function b(){}function a(a){return{g
 schnittmuster-datenbank.de#%#//scriptlet("abort-on-property-read", "adsBlocked")
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/161312
+gamezoom.net#%#//scriptlet('prevent-fetch', 'ads.gamezoom.net')
+gamezoom.net#%#//scriptlet('set-constant', 'loadAntiWerber', 'noopFunc')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/159343
 deutschekanale.com,riuria.beauty#%#//scriptlet('prevent-fetch', '/doubleclick\.net|imasdk\.googleapis\.com/')
 ||imasdk.googleapis.com^$xmlhttprequest,redirect=nooptext,domain=deutschekanale.com|riuria.beauty
@@ -1072,6 +1075,8 @@ teleboy.ch#@#.adWrapper
 ! Good: example.org#?#main > div.row:has(> div.ad)
 ! Bad: example.org##main > div.ad (should be in specific.txt)
 !
+! mein-mmo.de - ads main page
+mein-mmo.de#?#.article:has(> section > .content > .mmo-custom-label-wrapper > span[data-type="sponsored"])
 ! https://github.com/AdguardTeam/AdguardFilters/issues/160976
 woxikon.de#?#.synonyms-list-inner > div.synonyms-full-width:has(> div.ads-wrapper)
 woxikon.de###content > div.row:has(> div[class^="col"] > div.ads-sticky-container)
@@ -2329,6 +2334,7 @@ formel1.de,krautundrueben.de,motorsport-total.com,traktorpool.de,fnweb.de,laborj
 !
 !
 !
+livestreamde.com##div[style="height:300px; margin-bottom: 20px !important;"]
 woxikon.de##.ads-sticky-container
 kino.de##a[data-smb-track*="werblich"]
 kabeleins.de,sat1.de,sixx.de,prosieben.de##div[data-testid="display-ad"]

@@ -1,8 +1,8 @@
-! Checksum: vgh+ThmP/AxIbEKvswr+0g
+! Checksum: uHj+AFwuWeKFdqY7AdmTQw
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish, Portuguese, and Brazilian Portuguese languages.
-! Version: 2.0.21.35
-! TimeUpdated: 2023-09-08T11:33:32+00:00
+! Version: 2.0.21.37
+! TimeUpdated: 2023-09-11T09:04:37+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -305,6 +305,18 @@
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/161248
+sabornutritivo.com#%#//scriptlet('set-cookie', 'visited', '1')
+sabornutritivo.com#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
+sabornutritivo.com#%#//scriptlet('adjust-setTimeout', '.html(', '*', '0.001')
+! https://github.com/AdguardTeam/AdguardFilters/issues/161247
+||financasdeouro.com/*/js/adblock.js
+financasdeouro.com#%#//scriptlet('set-cookie', 'visited', '1')
+financasdeouro.com#%#//scriptlet('set-constant', 'antiAdBlockerHandler', 'noopFunc')
+! https://github.com/AdguardTeam/AdguardFilters/issues/161243
+guiacripto.online#%#//scriptlet('set-cookie', 'visited', '1')
+guiacripto.online#%#//scriptlet('prevent-setTimeout', '/adBlock|\.height\(\)/')
+guiacripto.online#%#//scriptlet('adjust-setTimeout', 'playFunction', '*', '0.001')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/160806
 ||imasdk.googleapis.com/pal/sdkloader/pal.js$script,redirect=noopjs,domain=southparkstudios.com.br|southpark.lat
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima3,domain=southparkstudios.com.br|southpark.lat
@@ -1681,6 +1693,11 @@ seriesgato.com#?#.TPlayerNv > li.Button:has(> span:contains(Publicidad))
 !------- JS rules ---------------------!
 !--------------------------------------!
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/161249
+fazercurriculo.online,usandoapp.com#%#//scriptlet('adjust-setTimeout', '.delay', '*', '0.001')
+! https://github.com/AdguardTeam/AdguardFilters/issues/161246
+1i1.in#%#//scriptlet('set-cookie', 'clicked_ads', '2')
+playerflix.com#%#//scriptlet('adjust-setInterval', 'myInterval', '*', '0.001')
 ! animesbr.cc - popup in player
 animesbr.cc#%#//scriptlet('abort-on-property-write', 'redirectpage')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/158831
@@ -2993,7 +3010,7 @@ leitor.net,mangalivre.net##.manga-top-ad
 leitor.net,mangalivre.net##div[amazon-offers-list]
 /desktop/top.php$domain=mangalivre.net|leitor.net
 /mangazord_lib/*/amazon_ads.min.$domain=mangalivre.net|leitor.net
-arnolds.com.br,guialocaliza.club##div[id^="adx"]
+fazercurriculo.online,usandoapp.com,arnolds.com.br,guialocaliza.club##div[id^="adx"]
 empregonews.online##div[id^="bloco"]
 akumanimes.com##.Sright > .widgets > .akuma-widget
 akumanimes.com##img[src^="/wp-content/uploads/ads/"]
@@ -5340,6 +5357,8 @@ adguard.info,adguard.com,adguard.app##.hello_from_adguard_spanish
 ! Bad:  @@||example.org^$stealth (should be in AdGuard Base - allowlist_stealth.txt)
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/161245
+cozinhandofitness.com#@##ads2
 ! https://github.com/AdguardTeam/AdguardFilters/issues/160254
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$domain=descargaseriestv.com
 ||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,redirect=googlesyndication-adsbygoogle,important,domain=descargaseriestv.com
