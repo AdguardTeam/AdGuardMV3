@@ -1,8 +1,8 @@
-! Checksum: L9jaAo0y9SGDgddpU92KfQ
+! Checksum: /r6WNhvbgTtfCxGNhioytQ
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.37.67
-! TimeUpdated: 2023-09-13T13:03:45+00:00
+! Version: 2.0.37.73
+! TimeUpdated: 2023-09-16T17:03:45+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -519,6 +519,8 @@ essen-und-trinken.de,urbia.de#%#!function(){function b(){}function a(a){return{g
 schnittmuster-datenbank.de#%#//scriptlet("abort-on-property-read", "adsBlocked")
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/161767
+@@||cdns.symplr.de/filext.com/filext.js$domain=filext.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/161312
 gamezoom.net#%#//scriptlet('prevent-fetch', 'ads.gamezoom.net')
 gamezoom.net#%#//scriptlet('set-constant', 'loadAntiWerber', 'noopFunc')
@@ -636,6 +638,7 @@ raidrush.net#%#//scriptlet("prevent-setTimeout", "window.getComputedStyle(el)")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/142943
 ! https://github.com/AdguardTeam/AdguardFilters/issues/73994
 cryptstream.de,2ix2com.de,2ix2-alternative.de,2ix2tv.de,tv24livestream2.de,tv24livestream1.de,tv24livestream.de,mysqlcryptnow.de,mysql2dumpcrypt.de,nydus.org###abmm
+cryptstream.de,2ix2com.de,2ix2-alternative.de,2ix2tv.de,tv24livestream2.de,tv24livestream1.de,tv24livestream.de,mysqlcryptnow.de,mysql2dumpcrypt.de,nydus.org#?##abmm
 nydus.org###ab
 nydus.org#$##wrapfabtest { height: 1px !important; }
 cryptstream.de,2ix2com.de,2ix2-alternative.de,2ix2tv.de,tv24livestream2.de,tv24livestream1.de,tv24livestream.de,mysqlcryptnow.de,mysql2dumpcrypt.de,nydus.org#%#//scriptlet('prevent-setTimeout', '/ab==|window\.getComputedStyle\(el\)/')
@@ -1075,6 +1078,11 @@ teleboy.ch#@#.adWrapper
 ! Good: example.org#?#main > div.row:has(> div.ad)
 ! Bad: example.org##main > div.ad (should be in specific.txt)
 !
+! lieferando.de - sponsored entries
+lieferando.de#?#div[data-dd-action-name="restaurant-card"]:has(a div[data-qa="sponsored-indicator-content"])
+! https://github.com/AdguardTeam/AdguardFilters/issues/161299
+nydus.org#?##r600sky
+nydus.org#?##fplayer > div[id^="nbn"]
 ! mein-mmo.de - ads main page
 mein-mmo.de#?#.article:has(> section > .content > .mmo-custom-label-wrapper > span[data-type="sponsored"])
 ! https://github.com/AdguardTeam/AdguardFilters/issues/160976
@@ -3433,12 +3441,9 @@ golem.de##.list-articles > li[class*="li-hb-"]
 hausbau-forum.de##.samItem
 mopo.de##img[referrerpolicy="unsafe-url"][src^="/image/"]
 mopo.de##body > div[style*="margin: 0 0 0 160px;"]
-nydus.org###ny_bill
-nydus.org###ny_banner
-nydus.org###right160x600
-nydus.org##div[style="text-align:center;margin:0 auto;clear:both;"]
-nydus.org##div[style="height:90px;overflow:hidden;text-align:center;"]
-||raidrush.net/ticker/rr_ticker_rand.php?
+nydus.org###r600sky
+nydus.org###fplayer > div[id^="nbn"]
+||raidrush.net/ticker/rr_ticker*.php?
 wetter.com##.advert-notice
 n-tv.de##.ob_embed
 schalke04.de##body .module-advertising
@@ -8151,6 +8156,7 @@ $stylesheet,subdocument,third-party,xmlhttprequest,domain=canna-power.to|canna.t
 ||teilzeithelden.de/wp-content/uploads/*/Teilzeit-Truant-
 ||telefonsexmitcam.com/images/
 ||telefonsexwebcam.com/images/livestrip-
+||teltarif.de/img/smartphone/apple/iphone.jpg$script
 ||teltarif.de/scripts/ads/
 ||teltarif.de/scripts/foo/
 ||teneriffa-aktuell.com/wp-content/uploads/*/banner-
@@ -8761,6 +8767,7 @@ wiener-online.at###hab-top
 tarnkappe.info###halfpage
 immo4trans.de###halfpage-banner
 perfektdamen.co###hat_message
+onlinehaendler-news.de###hbpartner-logo-container
 belgieninfo.net###head_banner
 mtb-news.de###header
 archiexpo.de,directindustry.de,medicalexpo.de,nauticexpo.de,rotelaterne.de###header-banner

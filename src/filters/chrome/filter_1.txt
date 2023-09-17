@@ -1,8 +1,8 @@
-! Checksum: HZPKHTkINyZhQ6BKZNsa9A
+! Checksum: ANKOF2omVFyjN7E/bAIDOw
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.84.54
-! TimeUpdated: 2023-09-13T20:31:00+00:00
+! Version: 2.0.84.59
+! TimeUpdated: 2023-09-15T19:31:01+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -3209,7 +3209,6 @@ http://wq3.ru^$third-party
 ||barbys.ru^$third-party
 ||barpe.ru^$third-party
 ||basetts.com^$third-party
-||bashirian.biz^$third-party
 ||bb.tidopro.biz^$third-party
 ||bbeeejafhacbigaeih.ru^$third-party
 ||bbeljxm2dvwnfib.ru^$third-party
@@ -7181,6 +7180,7 @@ yandex.*##.search-advert-badge
 yandex.*##.card-header-media-view__list > div.card-header-media-view__advert-wrap
 yandex.*#?#.business-card-title-view__actions > div.business-card-title-view__advert
 yandex.*#?#.business-card-title-view__actions > div.business-card-title-view__advert + div.business-card-title-view__call-to-action
+[$path=/maps]yandex.*#?#.toponym-card-view__overview > div.toponym-card-view__section:has(> div.banner-placeholder-view)
 [$path=/maps]yandex.*#?#.business-card-view__overview > div.business-card-view__section > div.business-card-view__offers:upward(1)
 [$path=/maps]yandex.*##.promo-button
 !
@@ -7396,7 +7396,9 @@ e.mail.ru,octavius.mail.ru#%#//scriptlet('trusted-replace-xhr-response', '/\[{"j
 ! https://github.com/AdguardTeam/AdguardFilters/issues/147394
 ! https://github.com/AdguardTeam/AdguardFilters/issues/146771
 !+ NOT_PLATFORM(windows, mac, android)
-pikabu.ru#%#//scriptlet('json-prune', 'data', 'meta')
+pikabu.ru#%#//scriptlet('remove-node-text', 'script', '/[evalxhrtspnoT()+"\'\[\]]{16,};/')
+!+ NOT_PLATFORM(windows, mac, android)
+pikabu.ru#%#//scriptlet('json-prune', 'data', 'errors')
 ! https://forum.adguard.com/index.php?threads/51458/
 ip.tivix.co#%#//scriptlet('prevent-window-open')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/140602
@@ -9322,6 +9324,9 @@ kadrovik01.com.ua,kom-dir.ru,gd.ru,buhsoft.ru,dirklinik.ru,fd.ru,business.ru,pro
 !
 !
 !
+kino-teatr.ru#?#.all_content > div[align="center"]:has(> div[align="center"] > advertronic-slot)
+kino-teatr.ru###top_line
+vk.com##div[id^="postadsite_"]
 sundukporno.video###fluid-player-e2e-case_fluid_html_on_pause
 pornoxata.net##.video-holder > a[href^="/images/obmen/pu01.php"]
 pornomobi.xyz##.rbox
@@ -10703,7 +10708,7 @@ tvmag.ru##a[href^="https://cli.co/"] > img
 tvmag.ru##._reklama
 pdalife.to##.feed__item_type_ban
 kvnews.ru##.banner-center-wr > a[data-id]
-kino-teatr.ru##div[class*="_bablo"]
+kino-teatr.ru##div[class*="_dobro"]
 ||pimpletv.ru/wp-content/uploads/img/melbet-sidebar.png
 alexbruni.ru,incrypted.com##a[href^="https://bit.ly/"]
 regnum.ru##.article-footer-partner-wrapper
