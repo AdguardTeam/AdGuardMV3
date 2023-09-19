@@ -1,8 +1,8 @@
-! Checksum: ANKOF2omVFyjN7E/bAIDOw
+! Checksum: ZA5z94bkPqU2KY4M8LvQlA
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.84.59
-! TimeUpdated: 2023-09-15T19:31:01+00:00
+! Version: 2.0.84.61
+! TimeUpdated: 2023-09-18T10:31:08+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -7395,9 +7395,8 @@ e.mail.ru,octavius.mail.ru#%#//scriptlet('trusted-replace-xhr-response', '/\[{"j
 ! https://github.com/AdguardTeam/AdguardFilters/issues/148093
 ! https://github.com/AdguardTeam/AdguardFilters/issues/147394
 ! https://github.com/AdguardTeam/AdguardFilters/issues/146771
-!+ NOT_PLATFORM(windows, mac, android)
+pikabu.ru#%#//scriptlet('abort-current-inline-script', 'XMLHttpRequest', 'llasa')
 pikabu.ru#%#//scriptlet('remove-node-text', 'script', '/[evalxhrtspnoT()+"\'\[\]]{16,};/')
-!+ NOT_PLATFORM(windows, mac, android)
 pikabu.ru#%#//scriptlet('json-prune', 'data', 'errors')
 ! https://forum.adguard.com/index.php?threads/51458/
 ip.tivix.co#%#//scriptlet('prevent-window-open')
@@ -9324,6 +9323,11 @@ kadrovik01.com.ua,kom-dir.ru,gd.ru,buhsoft.ru,dirklinik.ru,fd.ru,business.ru,pro
 !
 !
 !
+4pda.to#?#[id][class*=" "][style*="height:"] > div[style]:has(a[target="_blank"] > img[title])
+4pda.to#?#[id][class*=" "][style*="height:"] > div[style]:has(> ul.slider-list + div > script)
+4pda.to#?#[id][class*=" "][style*="height:"] > div[style]:has(> h2[data-revive-zoneid][data-revive-id]) + div[class][style]
+4pda.to#?#[class] > div[class][id][style] + [id][class]:has(a[target="_blank"] > img[title])
+4pda.to#?#[class] > [id][class][style^="min-height:"]:has(a[target="_blank"] > img[title])
 kino-teatr.ru#?#.all_content > div[align="center"]:has(> div[align="center"] > advertronic-slot)
 kino-teatr.ru###top_line
 vk.com##div[id^="postadsite_"]
