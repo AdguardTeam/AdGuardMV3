@@ -1,8 +1,8 @@
-! Checksum: 7P9iOCoqIvselMEBvZEvZA
+! Checksum: 1CeHonHn4vaKU7TL57Y3PA
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.84.65
-! TimeUpdated: 2023-09-20T14:31:10+00:00
+! Version: 2.0.84.69
+! TimeUpdated: 2023-09-22T20:31:00+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1478,6 +1478,7 @@ ucoz.ru/informer/
 ! Bad: /banner.jpg (should be in general_url.txt)
 ! Bad: ||adssubdomain.legitwebsite.com^ (should be in adservers_firstparty.txt)
 !
+||trackclicksplz.site^$third-party
 ||b.we-are-anon.com^$all
 ||fsm-files.ru^$document
 ||sofq.site^$document
@@ -5981,6 +5982,8 @@ electric-house.ru#%#//scriptlet("abort-on-property-read", "onload")
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/162184
+||xcom-shop.ru/*/check-block-apps.min.js
 ! https://github.com/AdguardTeam/AdguardFilters/issues/162030
 cdnmovies-stream.online#%#//scriptlet("prevent-fetch", "covivado.club/vast3/")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/157688
@@ -9324,6 +9327,11 @@ kadrovik01.com.ua,kom-dir.ru,gd.ru,buhsoft.ru,dirklinik.ru,fd.ru,business.ru,pro
 !
 !
 !
+apteka.ru##.EshopBannersGrid
+apteka.ru##div[class^="banners"]
+kino-teatr.ru#?#.content_block:has(> div.block_kion)
+wikigrowth.com##.wgr
+f1news.ru###b2-container
 apteka.ru##.OrderCreatedPopup__banner
 ||rutor.org.ru/download*.png
 4pda.to#?#[id][class*=" "][style*="height:"] > div[style]:has(a[target="_blank"] > img[title])
