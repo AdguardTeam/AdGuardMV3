@@ -1,8 +1,8 @@
-! Checksum: 1CeHonHn4vaKU7TL57Y3PA
+! Checksum: 57ZFx83AHuWdA1pI0fpucA
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.84.69
-! TimeUpdated: 2023-09-22T20:31:00+00:00
+! Version: 2.0.84.75
+! TimeUpdated: 2023-09-26T07:30:59+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -7165,6 +7165,7 @@ echo.msk.ru,kakprosto.ru#%#//scriptlet('abort-on-property-read', 'Object.prototy
 ya.ru##.banner
 !
 ! Yandex.Search
+[$path=/search]ya.ru,yandex.*##.AdvMedia
 ya.ru,yandex.*##li.mini-suggest__item > a[href^="http://yabs."][href*="/count/"]
 ya.ru,yandex.*##li.mini-suggest__item > a[href^="https://yabs."][href*="/count/"]
 ya.ru,yandex.*##li.mini-suggest__item > a[href^="http://yandex"][href*="/clck/"]
@@ -7377,6 +7378,8 @@ sinoptik.com.ru#$#iframe[bb] { visibility: hidden!important; }
 !------- JS ------------
 !-----------------------
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/162448
+botanichka.ru#%#//scriptlet('set-constant', 'tdBlock', 'undefined')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/161497
 trafficcardinal.com#%#//scriptlet('remove-class', 'desktop-branding-bg', 'body')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/159689
@@ -7800,6 +7803,8 @@ disk.yandex.*#%#//scriptlet('remove-class', 'has-fullscreen-banner','.public__ro
 !------- CSS -----------
 !-----------------------
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/162448
+botanichka.ru#$#body.td-background-link { cursor: auto !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/158165
 notepadonline.ru#$#.editor { right: 0 !important; }
 notepadonline.ru#$#.mob-mask { height: 100% !important; }
@@ -9327,6 +9332,10 @@ kadrovik01.com.ua,kom-dir.ru,gd.ru,buhsoft.ru,dirklinik.ru,fd.ru,business.ru,pro
 !
 !
 !
+cursorinfo.co.il##div[data-dest="placeholder"]
+||cdn.botanichka.ru/pics/brand/
+/jquery.js|$domain=cc-fan.tv|cn-fan.tv|fox-fan.tv|nf-fan.tv
+/jquery.li.js$domain=cc-fan.tv|cn-fan.tv|fox-fan.tv|nf-fan.tv
 apteka.ru##.EshopBannersGrid
 apteka.ru##div[class^="banners"]
 kino-teatr.ru#?#.content_block:has(> div.block_kion)
@@ -9379,7 +9388,6 @@ ktv-ray.ru##img[alt="AdPicture"]
 food.ru##div[class^="videoBanner"]
 findanime.net##.video-ba-placeholder
 ||genshin.ru/wp-content/uploads/2023/05/bg_genshin2-min.png
-genshin.ru##.td-banner-wrap-full
 forbes.kz#?#.nav__elements > li.nav__element:has(> a[href^="/redirect?"])
 mixnews.lv##div[id^="advads-"]
 synthira.ru##.ahuelguardd
@@ -10430,7 +10438,6 @@ avito.ru#?#div[class^="styles-list-"] > div[class^="styles-root-"]:not([data-mar
 politros.com#?##not_for_mob > div.news-block-header:has(span:contains(Новости партнёров))
 chita.ru#?##right_column > div.content-container:has(> div.chitaru__wonder)
 nastup.net#?#.l-content > section.color_custom:has(> div > div.offset_small > div.full-width > div.ult-adjust-bottom-margin > div[id^="Info-banner-"]:not([style="top: 0px;"]))
-softportal.com#?#.relap-default-wrapper div[data-relap-max-column-quantity] > div.js-relap__item:has(> div.js-relap__item-inner > a > div.relap-default__item__label:contains(Реклама))
 the-satori.net#?#.code-block-label:contains(Реклама)
 vplate.ru#?#.article > div[style]:has(> ins.adsbygoogle)
 htaccess.net.ru#?#noindex > div:has(> div[align="Right"]:contains(Реклам))
@@ -11994,8 +12001,7 @@ pesni.life##div[style="background-color:#2288BB; padding:5px;margin:8px;text-ali
 ||my.mp3ha.org/images/hvImg/
 muzofond.fm,music.radio.lol,my.mp3ha.org##.hvContainer
 player.tele-sport.ru##.video-container__banner
-softportal.com##.cardPageDescMain > div[style^="float:"][style*="min-"]
-||softportal.com/advert/
+softportal.com##.cardPageDescMain > div[style^="float:"][style*="position:"]
 lenta.ru##.b-board__coef-item
 go64.ru##.wow_type_longer
 ||go64.ru/upload/adv_banner/
@@ -16138,7 +16144,7 @@ pornohi.net##.tag_banners
 itweek.ru##.tbl-interesno
 forum.ozpp.ru##.tborder1 td[class="alt1"][width="39%"]
 forum.ozpp.ru##.tborder1 td[class="alt2"][width="24%"]
-allmmorpg.ru,hs-manacost.ru##.td-banner-wrap-full
+botanichka.ru,genshin.ru,allmmorpg.ru,hs-manacost.ru##.td-banner-wrap-full
 electronics-review.ru##.td-header-header > div.td-header-sp-recs
 attuale.ru##.td-ss-main-sidebar > #yuzo_widget-2
 kulemet.com##.td-ss-main-sidebar img[src*=".gif"]
@@ -18384,7 +18390,6 @@ webware.ru/*/clients/
 ||ip2geolocation.com/scripts/$image
 ||iplayer.fm/public/api.iframe.php
 ||ipleer.fm/public/api.iframe.php?n=
-||iqoption.com^$domain=softportal.com
 ||ironfriends.ru/SocialMartWidgetProxy/
 ||isif-life.ru/img/400x240.gif
 ||islam-today.ru/files/stat_ban/
@@ -20717,6 +20722,8 @@ store.ifixit.co.uk#@#.banner-body
 ! Good: example.org#@#.ad
 ! Bad:  @@||example.org^$stealth (should be in AdGuard Base - allowlist_stealth.txt)
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/162363
+flasharch.com#@#.advertisement:not(body)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/160226
 fanex.pro#@#.banners1
 fanex.pro#@#.banners2
