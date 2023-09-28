@@ -1,8 +1,8 @@
-! Checksum: OtkdwIL8eIymUFKzg7Mqog
+! Checksum: JcgandmGrdGLD5Bkp90OsQ
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish, Portuguese, and Brazilian Portuguese languages.
-! Version: 2.0.21.49
-! TimeUpdated: 2023-09-25T16:32:12+00:00
+! Version: 2.0.21.53
+! TimeUpdated: 2023-09-27T06:32:13+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1708,6 +1708,8 @@ seriesgato.com#?#.TPlayerNv > li.Button:has(> span:contains(Publicidad))
 !------- JS rules ---------------------!
 !--------------------------------------!
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/162520
+beautyskincarebrasil.com#%#//scriptlet('prevent-window-open')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/161356
 receitasdafazenda.com#%#//scriptlet('set-local-storage-item', 'last_ads', 'yes')
 modsimuladores.com,assistirfilmesdaluna.com,vejaideias.com.br,jogoscompleto.xyz#%#//scriptlet('adjust-setTimeout', 'atualizar', '*', '0.02')
@@ -2059,6 +2061,8 @@ newpct1.com#%#window.atob = function() { };
 !------- CSS fixes --------------------!
 !--------------------------------------!
 !
+! https://github.com/uBlockOrigin/uAssets/issues/19849
+3djuegos.com#$#.ad-lat2 { height: 0 !important; min-height: 0 !important; margin: 0 !important; padding: 0 !important; visibility: collapse !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/161428
 anroll.net#$#.modal-backdrop { display: none !important; }
 anroll.net#$#.modal[style^="backdrop-filter"] { display: none !important; }
@@ -2374,6 +2378,9 @@ gaz.com.br,placar.com.br,futebolinterior.com.br,tvhistoria.com.br,tribunapr.uol.
 ! ##.banner
 correio24horas.com.br,cnnespanol.cnn.com,motociclismo.es,sub100.com.br,theenemy.com.br,manhwas.net,rpp.pe,ambito.com,economipedia.com,informador.mx,elinformador.com.co,cronista.com,rionegro.com.ar,diariodecuyo.com.ar,voydeviaje.com.ar,guarda14.com,viapais.com.ar,agazeta.com.br,eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.*,mundotecnologias.com,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##.banner
 !
+agroclima.climatempo.com.br##div[data-type="ad_space"]
+/sdkpop.js$script,domain=beautyskincarebrasil.com
+cnnbrasil.com.br##.ad__area
 maisesports.com.br##a[href*="&offer="][target="_blank"] img
 ||maisesports.com.br/_next/image/?url=*elasticbeanstalk-*.amazonaws.com*strapi-uploads*300x600_stake_*.gif
 poder360.com.br##.box-skeleton--banner-rectangle-2
@@ -3011,7 +3018,7 @@ radiopanamericana.com##.module-publicidad
 cuevana3.*##p[align="center"] > a[target="_blank"] > img
 ||animesonlineup.com/codigo_de_pop.js
 canaistv.top###sticky-banner1
-player.repelis24.rs,sinalpublico.com##body > a[target="_blank"]
+player.repelis24.rs##body > a[target="_blank"]
 exame.com##div[class^="AdContainer-"]
 exame.com##div[class^="Footer__FooterAnchorAd-"]
 animesgratisbr.biz##.anuncios a:not([href^="https://discord.gg/"]) > img
@@ -5386,6 +5393,15 @@ adguard.info,adguard.com,adguard.app##.hello_from_adguard_spanish
 ! Bad:  @@||example.org^$stealth (should be in AdGuard Base - allowlist_stealth.txt)
 !
 !
+! https://github.com/uBlockOrigin/uAssets/issues/19849
+@@||securepubads.g.doubleclick.net/tag/js/gpt.js$domain=3djuegos.com
+@@||securepubads.g.doubleclick.net/pagead/managed/js/gpt/*/pubads_impl.js$domain=3djuegos.com
+@@||securepubads.g.doubleclick.net/gampad/ads$xmlhttprequest,domain=3djuegos.com
+@@||cdn.lib.getjad.io/library/$script,domain=3djuegos.com
+@@||cdn.lib.getjad.io/prebid/$script,domain=3djuegos.com
+3djuegos.com#@#div[id^="div-gpt-"]
+3djuegos.com#@#.ad-box:not(#ad-banner)
+3djuegos.com#@#.ad-lat2
 ! https://github.com/AdguardTeam/AdguardFilters/issues/161245
 cozinhandofitness.com#@##ads2
 ! https://github.com/AdguardTeam/AdguardFilters/issues/160254

@@ -1,8 +1,8 @@
-! Checksum: 57ZFx83AHuWdA1pI0fpucA
+! Checksum: v5dgacuBBOjwhBjzyR4uiA
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.84.75
-! TimeUpdated: 2023-09-26T07:30:59+00:00
+! Version: 2.0.84.85
+! TimeUpdated: 2023-09-28T07:31:00+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -5942,6 +5942,8 @@ wss://s.zmctrack.net/
 ! for `zmctrack` if iframe isn't in ShadowRoot
 forumodua.com#$?#head > iframe[name] { remove: true; }
 strana.ua#$?#body > iframe[style="display:none"] { remove: true; }
+www.ukr.net#%#//scriptlet('remove-node-text', 'script', '!function(r,n,t,e)')
+www.ukr.net#$?#body > iframe { remove: true; }
 !
 meteofor.com.ua,gismeteo.ua,dengi.ua,epravda.com.ua,eurointegration.com.ua,i.factor.ua,isport.ua,kolobok.ua,love.i.ua,tv.ua,radio.i.ua,nv.ua,pravda.com.ua,finance.i.ua,smak.ua,buhgalter911.com,gazeta.ua,panno4ka.net,meteo.ua,censor.net,kurs.com.ua,zv.zp.ua,ivona.ua,i.ua,buhgalter.com.ua,nbnews.com.ua,viva.ua,zn.ua,bigmir.net,glavcom.ua,hvylya.net,inforesist.org,nnovosti.info,obyava.ua,strana.ua,tochka.net,u-news.com.ua,ukr.net,vesti.ua#$?#body > iframe:not([class]):not([id]):not([src]) { remove: true; }
 i.factor.ua,kriminal.tv,i.ua,lifedon.com.ua,football24.ua,vsetv.com,112.ua,gorod.dp.ua,autoua.net,beauty.ua,besplatka.ua,enovosty.com,facenews.ua,forumodua.com,hvylya.net,kolobok.ua,kp.ua,liga.net,orakul.com,real-vin.com,tv.ua,ubr.ua,vesti.ua,vgorode.ua#$?#body iframe[name]:not([class]):not([id]):not([src]) { remove: true; }
@@ -5982,6 +5984,8 @@ electric-house.ru#%#//scriptlet("abort-on-property-read", "onload")
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/162627
+forum.ruboard.ru#@#div[id^="yandex_rtb"]
 ! https://github.com/AdguardTeam/AdguardFilters/issues/162184
 ||xcom-shop.ru/*/check-block-apps.min.js
 ! https://github.com/AdguardTeam/AdguardFilters/issues/162030
@@ -9332,6 +9336,12 @@ kadrovik01.com.ua,kom-dir.ru,gd.ru,buhsoft.ru,dirklinik.ru,fd.ru,business.ru,pro
 !
 !
 !
+kino-teatr.ru#?#.content_block:has(> div.block_okkko)
+forbes.ru#?#div[data-article] > div[class] > div[class]:has(> div[class] > aside > div[id^="adfox_"])
+aptekirls.ru###top-b
+aptekirls.ru###top-banner-info
+||aptekirls.ru/images/banners/$image
+pb.wtf###page_contents > div.active > a[href^="https://gamesell.icu/"][target="_blank"]
 cursorinfo.co.il##div[data-dest="placeholder"]
 ||cdn.botanichka.ru/pics/brand/
 /jquery.js|$domain=cc-fan.tv|cn-fan.tv|fox-fan.tv|nf-fan.tv
@@ -9539,7 +9549,7 @@ gp.by##img[width="305"][height="213"]
 gp.by##div[id^="banner_bottom_"]
 /images/tyan.jpg$domain=pornreactor.cc|joyreactor.cc|reactor.cc
 ||hcdinamo.by/img/winline
-pikabu.ru#?#.page-story__story:not(:has(div[data-story-id]))
+pikabu.ru##.popup_animation
 pikabu.ru##.stories-feed__container > article:not([data-context-actions="duplicate_report"]):not([data-page]):not([data-author-name])
 oborot.ru##[class^="banner"]
 oborot.ru##.brand_block_epmty
@@ -20100,7 +20110,6 @@ gamer-info.com###games-db-main-listblock > a[class="gmv2-it"] + div[class]
 !
 !
 ! START: mail.ru
-e.mail.ru##.letter-list-item-adv
 lady.mail.ru##.ph-whiteline ~ div#portal-menu ~ span > div
 otvet.mail.ru##div[class*="adv-slot-"]
 mail.ru##div[data-testid="grid-header"] > div.toolbar
@@ -20132,6 +20141,7 @@ cloud.mail.ru#$?#.w-public__content  > div.b-layout > div.b-layout__col_1_2 { ma
 dom.mail.ru###Rubric-root > div[data-qa="ArticlesList"] > div:not([data-qa])
 !
 ! e.mail.ru / octavius.mail.ru
+e.mail.ru,octavius.mail.ru##.letter-list-item-adv
 e.mail.ru,octavius.mail.ru##.promo-block-letter + div[class]
 e.mail.ru,octavius.mail.ru##.js-banner-wrapper-container > div.trg-b-img-wrap
 e.mail.ru,octavius.mail.ru##.js-banner-wrapper-container > div.trg-b-container
@@ -20248,7 +20258,8 @@ tv.mail.ru##div[data-module="SlotModel"][data-adq-id]
 ok.ru##.anonym_login_w+div.prl_txt
 ||st.mycdn.me/res/css/prod/login/login_megafon.*.css
 !
-ok.ru#$?#.feed-list > div.feed-w:has(> div.feed div.feed_ava ~ div > div[class]:matches-property(innerText=/^Реклама$/)) { remove: true; }
+ok.ru#?#.feed-list > div.feed-w:has(> div.feed div.feed-info-label:contains(Реклама))
+! ok.ru#$?#.feed-list > div.feed-w:has(> div.feed div.feed_ava ~ div > div[class]:matches-property(innerText=/^Реклама$/)) { remove: true; }
 ok.ru###hook_Block_AnonymMainRightColumnAd
 ok.ru##.browser-banner
 ok.ru##.exit-popup > *
@@ -20702,6 +20713,8 @@ adguard.info,adguard.com,adguard.app##.hello_from_adguard_russian
 ! Good: example.org#@#.ad
 ! Bad:  @@||example.org^$stealth (should be in AdGuard Base - allowlist_stealth.txt)
 !
+! thestreet.com - player not showing
+thestreet.com#@##ad-container
 ! https://github.com/AdguardTeam/AdguardFilters/issues/161446
 si.com#@##ad-container
 ! https://github.com/AdguardTeam/AdguardFilters/issues/151923
