@@ -1,10 +1,12 @@
 # AdGuard MV3 Extension
-
-<br/>
-<div align="center">
-    <img alt="AdGuard DNS" src="https://cdn.adtidy.org/website/images/adguard_main_logo.png" width="300px"/>
-</div>
-<br/>
+&nbsp;
+<br>
+<p align="center">
+    <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://cdn.adguard.com/public/Adguard/Common/Logos/ext_dark.svg" width="300px" alt="AdGuard Browser Extension" />
+        <img src="https://cdn.adguard.com/public/Adguard/Common/Logos/ext.svg" width="300px" alt="AdGuard Browser Extension"/>
+    </picture>
+</p>
 <div align="center">
     <a href="https://adguard.com/">AdGuard Website</a> |
     <a href="https://reddit.com/r/Adguard">Reddit</a> |
