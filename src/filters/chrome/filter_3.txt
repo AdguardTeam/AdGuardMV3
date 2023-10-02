@@ -1,8 +1,8 @@
-! Checksum: L0honJsDveA9rKvCkSBiLw
+! Checksum: 18yD3pjkv78VV9moPQL8Qw
 ! Title: AdGuard Tracking Protection filter
 ! Description: The most comprehensive list of various online counters and web analytics tools. Use this filter if you do not want your actions on the Internet to be tracked.
-! Version: 2.0.61.84
-! TimeUpdated: 2023-09-28T07:31:39+00:00
+! Version: 2.0.61.97
+! TimeUpdated: 2023-10-01T21:31:39+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -410,76 +410,6 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ##a[href^="https://top.mail.ru/jump"]
 ##img[src*="counter.yadro.ru"]
 ##img[src^="http://c.bigmir.net/"]
-!---------------------------------------------------------------------------!
-!-------------- Extended CSS rules -----------------------------------------!
-!---------------------------------------------------------------------------!
-!
-! This section contains the list of extended CSS rules against leftovers.
-! Note, that rules should be domain-specific and you have to use special syntax `#?#` instead of `##`.
-!
-! Good: example.org#?#main > div.row:has(> div.ad)
-! Bad: example.org##main > div.ad (should be in specific.txt)
-!
-! https://github.com/AdguardTeam/AdguardFilters/issues/160835
-dvdrev.com#?#.side_menu:has(> div > div.plugin-freearea > div.ninja-recommend-block)
-! placeholder by Cxense
-vivi.tv#?#.section__inner:has(> #recommended-posts-result)
-! placeholder by Taboola
-full-count.jp#?#.s-entry > section > div.c-heading:has(> div#taboola-below-article-thumbnails-desktop)
-kobe-np.co.jp#?#section.sec:has(> #piano_recs_inline_title)
-crank-in.net#?#.wrap_general:has(> #taboola-below-article-thumbnails-mg)
-crank-in.net#?#article > section.block-area:has(> div#taboola-below-article-thumbnails-mg)
-jbpress.ismedia.jp#?#div.--wid:has(> div#taboola-below-article-thumbnails-bottom)
-mdpr.jp#?#.p-articleList__heading:has(+ div#taboola-below-article-thumbnails-desktop)
-! https://github.com/AdguardTeam/AdguardFilters/issues/152371
-gmx.com#?#.content-wrapper > div[data-mod-name="container"]:has(> div.taboola-teasers)
-! https://github.com/AdguardTeam/AdguardFilters/issues/147644
-gendai.media#?#.elementSectionHeadingsWithSuffix:has(+ div[id^="taboola-below-article-thumbnails-gendai_biz-desktop"])
-! https://github.com/AdguardTeam/AdguardFilters/issues/146864
-blog.jp#?#.plugin-memo > div.side > div > div[id^="blz_rss"]:upward(3)
-! https://github.com/AdguardTeam/AdguardFilters/issues/79878
-jin115.com#?#.plugin-memo > div.side > script[src*="ziyu.net/"]:upward(2)
-! https://github.com/AdguardTeam/AdguardFilters/issues/140288#issuecomment-1385509403
-ero-anime.net#?##side_col #index_side_widget:has(.ninja-recommend-block)
-minnyuu.jp#?#div[class$="BlockBase"] > div > div > div.plugin-freearea > div.ninja-recommend-block:upward(4)
-mesyuu.com#?#div[class$="_outline"] > div > div.plugin-freearea > div.ninja-recommend-block:upward(3)
-doorblog.jp,pachinkopachisro.com,blog.livedoor.jp,blog.jp,vipstyle.tokyo#?#.plugin-memo > div.side > div.ninja-recommend-block:upward(2)
-blogterest.net#?#.blockSide > div.blockWrapper > div > div.ninja-recommend-block:upward(2)
-nukeruerodouga.com#?##main-right > div.right_area > div.ninja-recommend-block:upward(2)
-! https://github.com/AdguardTeam/AdguardFilters/issues/110304#issuecomment-1057807201
-kuow.org#?#.story-content-wrapper > div.embed_block:has(> div[ub-in-page])
-kuow.org#?#.story-content-wrapper > div.embed_block:has(> script:contains(window.usabilla))
-!
-hinatasoku.blog.jp#?#.right-container > div.sidewrapper:has(> div.side > a[href="http://www.ziyu.net/"])
-aatyu.livedoor.blog#?#.article > div.plugin-memo:has(> div.side > div.ninja-recommend-block)
-cartune.me#?#.contents-inner > div > div#taboola-alternating-thumbnails-a:upward(1)
-livedoor.biz,ldblog.jp#?#.plugin-memo > div.side > a[href$="ziyu.net/"]:upward(2)
-blog.fc2.com#?#div[class$="_outline"] > div > div.plugin-counter:upward(2)
-jisin.jp#?##main-articles > section.post-group > div[data-gmoad]:upward(1)
-screenov.eu#?#.container > div.box:has(> a[href^="https://www.liveinternet.ru/click"])
-infokam.su#?#aside > section.bot-post:has(> center > a[href^="https://www.liveinternet.ru/"])
-valetudo.ru#?#.v_left > div.moduletable:has(script[src^="https://www.googletagmanager.com/"])
-blog.fc2.com#?#.side-menu > div.sidebar-style > script[src^="//counter1.fc2.com/"]:upward(2)
-qiita.com#?#div[class^="css"] > div > div[id^="logly-"]:upward(2)
-m.crank-in.net#?#div[id^="_popIn_trend_ranking"]:upward(1)
-business.nikkei.com#?#.l-content_footer.recommendesInfomation:contains(あなたにオススメ)
-unews.pro#?##banner > div.RightColumn:has(> a[href^="//www.liveinternet.ru/"])
-fatcatslim.ru#?#.sidebar > div.widget:has(> div > a[href$="liveinternet.ru/click"])
-automesseweb.jp#?##_popIn_ranking:upward(.code_php_in_widget)
-myfirstcomp.ru#?#.tm-sidebar-b > div.uk-panel:has(script[src^="https://adcounter"])
-hitkino.org#?#td[valign="top"] > table.white_text > tbody > tr:has(> td[background] > b:contains(Статистика))
-hitkino.org#?#td[valign="top"] > table.white_text > tbody > tr:has(> td[background] > b:contains(Статистика)) + tr
-thg.ru#?#td[valign="top"] > table > tbody > tr:has(> td > table[cellpadding="0"] a[href^="http://top100.rambler.ru/"])
-musicrock24.ru#?#.art-layout-cell > div.art-box:has(> div.art-box-body > div.art-blockheader > h3:contains(Счётчики))
-pryamoj-efir.ru#?#.layout-post-right > h1.playmaker-list:contains(Статистика)
-elmundo.es#?#body > main[role="main"] > div.ue-l-article:has(> div.ue-l-article__inner > div.ue-l-article__main-column > aside > div[id^="taboola"])
-uniongang.org#?#td[align="center"][height="27"]:contains(Счётчики)
-novate.ru#?##right > div.bordered:has(> script:contains(relap))
-novate.ru#?##right > h2:contains(Рекомендуем)
-luxhard.com#?##sidebar-primary > .widget-container:has(a[href^="https://metrika.yandex.ru/stat/"])
-specialcom.net#?##sidebar > div.widget:has(span#openstat1)
-kinoman.me#?##extra_block > div.extra_mod > div.extra_mod:has(> div.extra_mod_title:contains(Счетчики))
-prjaga.ru#?##right > div#right_nav > h3:contains(Онлайн статистика)
 !-------------------------------------------------------------------------------!
 !-------------- Tracking servers list  -----------------------------------------!
 !-------------------------------------------------------------------------------!
@@ -547,6 +477,7 @@ prjaga.ru#?##right > div#right_nav > h3:contains(Онлайн статистик
 !||i.snssdk.com/log/*
 !||i.snssdk.com/slardar/sdk.js
 !
+||mobadme.jp^$third-party
 ||analytics.jslib.win^
 ||spadsync.com^
 ||easter-analytics.com^
@@ -5532,6 +5463,8 @@ prjaga.ru#?##right > div#right_nav > h3:contains(Онлайн статистик
 ! Blocking piwik analytics subdomain(for DNS filtering)
 |piwik.
 !
+||groovy-manul.pikapod.net^
+||tracking.shinycolors.enza.fun^
 ||log.bunjang.co.kr^
 ||log.ahamo.com^
 ||eu.pftk.temu.com^
@@ -53030,6 +52963,8 @@ charlestownwyllie.oaklawnnonantum.com^
 !
 ! NOTE: Fixing the issues
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/162672
+||explore.agilent.com^
 ! https://github.com/AdguardTeam/AdguardFilters/issues/160473
 ||go.oracle.com^$badfilter
 ! https://github.com/hagezi/dns-blocklists/issues/1453
@@ -56523,6 +56458,56 @@ znak.com##.relap
 ||doublepimp.com/Scripts/Analytics/
 ||hmma.baidu.com/app.gif
 ||common.duapps.com/appLock/getConf?tk*&vendor=
+dvdrev.com#?#.side_menu:has(> div > div.plugin-freearea > div.ninja-recommend-block)
+vivi.tv#?#.section__inner:has(> #recommended-posts-result)
+full-count.jp#?#.s-entry > section > div.c-heading:has(> div#taboola-below-article-thumbnails-desktop)
+kobe-np.co.jp#?#section.sec:has(> #piano_recs_inline_title)
+crank-in.net#?#.wrap_general:has(> #taboola-below-article-thumbnails-mg)
+crank-in.net#?#article > section.block-area:has(> div#taboola-below-article-thumbnails-mg)
+jbpress.ismedia.jp#?#div.--wid:has(> div#taboola-below-article-thumbnails-bottom)
+mdpr.jp#?#.p-articleList__heading:has(+ div#taboola-below-article-thumbnails-desktop)
+gmx.com#?#.content-wrapper > div[data-mod-name="container"]:has(> div.taboola-teasers)
+gendai.media#?#.elementSectionHeadingsWithSuffix:has(+ div[id^="taboola-below-article-thumbnails-gendai_biz-desktop"])
+blog.jp#?#.plugin-memo > div.side > div > div[id^="blz_rss"]:upward(3)
+jin115.com#?#.plugin-memo > div.side > script[src*="ziyu.net/"]:upward(2)
+ero-anime.net#?##side_col #index_side_widget:has(.ninja-recommend-block)
+minnyuu.jp#?#div[class$="BlockBase"] > div > div > div.plugin-freearea > div.ninja-recommend-block:upward(4)
+mesyuu.com#?#div[class$="_outline"] > div > div.plugin-freearea > div.ninja-recommend-block:upward(3)
+doorblog.jp,pachinkopachisro.com,blog.livedoor.jp,blog.jp,vipstyle.tokyo#?#.plugin-memo > div.side > div.ninja-recommend-block:upward(2)
+blogterest.net#?#.blockSide > div.blockWrapper > div > div.ninja-recommend-block:upward(2)
+nukeruerodouga.com#?##main-right > div.right_area > div.ninja-recommend-block:upward(2)
+kuow.org#?#.story-content-wrapper > div.embed_block:has(> div[ub-in-page])
+kuow.org#?#.story-content-wrapper > div.embed_block:has(> script:contains(window.usabilla))
+hinatasoku.blog.jp#?#.right-container > div.sidewrapper:has(> div.side > a[href="http://www.ziyu.net/"])
+aatyu.livedoor.blog#?#.article > div.plugin-memo:has(> div.side > div.ninja-recommend-block)
+cartune.me#?#.contents-inner > div > div#taboola-alternating-thumbnails-a:upward(1)
+livedoor.biz,ldblog.jp#?#.plugin-memo > div.side > a[href$="ziyu.net/"]:upward(2)
+blog.fc2.com#?#div[class$="_outline"] > div > div.plugin-counter:upward(2)
+jisin.jp#?##main-articles > section.post-group > div[data-gmoad]:upward(1)
+screenov.eu#?#.container > div.box:has(> a[href^="https://www.liveinternet.ru/click"])
+infokam.su#?#aside > section.bot-post:has(> center > a[href^="https://www.liveinternet.ru/"])
+valetudo.ru#?#.v_left > div.moduletable:has(script[src^="https://www.googletagmanager.com/"])
+blog.fc2.com#?#.side-menu > div.sidebar-style > script[src^="//counter1.fc2.com/"]:upward(2)
+qiita.com#?#div[class^="css"] > div > div[id^="logly-"]:upward(2)
+m.crank-in.net#?#div[id^="_popIn_trend_ranking"]:upward(1)
+business.nikkei.com#?#.l-content_footer.recommendesInfomation:contains(あなたにオススメ)
+unews.pro#?##banner > div.RightColumn:has(> a[href^="//www.liveinternet.ru/"])
+fatcatslim.ru#?#.sidebar > div.widget:has(> div > a[href$="liveinternet.ru/click"])
+automesseweb.jp#?##_popIn_ranking:upward(.code_php_in_widget)
+myfirstcomp.ru#?#.tm-sidebar-b > div.uk-panel:has(script[src^="https://adcounter"])
+hitkino.org#?#td[valign="top"] > table.white_text > tbody > tr:has(> td[background] > b:contains(Статистика))
+hitkino.org#?#td[valign="top"] > table.white_text > tbody > tr:has(> td[background] > b:contains(Статистика)) + tr
+thg.ru#?#td[valign="top"] > table > tbody > tr:has(> td > table[cellpadding="0"] a[href^="http://top100.rambler.ru/"])
+musicrock24.ru#?#.art-layout-cell > div.art-box:has(> div.art-box-body > div.art-blockheader > h3:contains(Счётчики))
+pryamoj-efir.ru#?#.layout-post-right > h1.playmaker-list:contains(Статистика)
+elmundo.es#?#body > main[role="main"] > div.ue-l-article:has(> div.ue-l-article__inner > div.ue-l-article__main-column > aside > div[id^="taboola"])
+uniongang.org#?#td[align="center"][height="27"]:contains(Счётчики)
+novate.ru#?##right > div.bordered:has(> script:contains(relap))
+novate.ru#?##right > h2:contains(Рекомендуем)
+luxhard.com#?##sidebar-primary > .widget-container:has(a[href^="https://metrika.yandex.ru/stat/"])
+specialcom.net#?##sidebar > div.widget:has(span#openstat1)
+kinoman.me#?##extra_block > div.extra_mod > div.extra_mod:has(> div.extra_mod_title:contains(Счетчики))
+prjaga.ru#?##right > div#right_nav > h3:contains(Онлайн статистика)
 sinoptik.ua###bigmirTop
 lurkmore.to###p-counters
 football-ukraine.com###reachMedia
@@ -57074,6 +57059,10 @@ link.gmapp*.net$image
 ! it's problematic that due to how Gmail proxy work, these domains aren't even exposed on the network level
 ! fortunately, extensions can see them (Gmail puts the real URL in the location.hash part of the src)
 !
+! meetup.com
+clicks.meetup.com$image
+! Stripо.email
+tlr.stripocdn.email$image
 ! mjt.lu
 mjt.lu$image
 ! frontapp.com
@@ -57386,6 +57375,7 @@ email.mixmax.com/e/o$image
 ! SendGrid, Robinhood
 ct.sendgrid.net$image
 /wf/open?upn=$image
+%2Fwf%2Fopen%3Fupn%3D$image
 ! ExactTarget
 exct.net/open.aspx$image
 ! Litmus
@@ -59475,6 +59465,14 @@ inapps.appsflyersdk.com^
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/162943
+@@||cdn.optimizely.com/datafiles/*.json$domain=shop.mango.com
+! https://github.com/AdguardTeam/AdguardFilters/issues/162154
+@@||proquest.com/modules.gz/snowplow/snowplow-
+! https://github.com/AdguardTeam/AdguardFilters/issues/162730
+! https://github.com/AdguardTeam/AdguardFilters/issues/162663
+! https://github.com/AdguardTeam/AdguardFilters/issues/162705
+||googleoptimize.com/optimize.js$script,redirect=google-analytics,domain=winnicalidla.pl
 ! thestreet.com - cookie dialogue not shown
 @@||uid.mavencoalition.io^$domain=thestreet.com|reelrundown.com|owlcation.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/162223
