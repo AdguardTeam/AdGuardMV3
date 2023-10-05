@@ -1,8 +1,8 @@
-! Checksum: yIqOjZALMlDfGqBzysIkag
+! Checksum: hxI4hGmXj2F4mZDjMKSUjg
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.84.92
-! TimeUpdated: 2023-10-02T06:31:02+00:00
+! Version: 2.0.85.2
+! TimeUpdated: 2023-10-04T14:31:19+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -6854,6 +6854,7 @@ games-pc.top,rustorka.com,rustorka.top,rustorka.net,rustorkacom.lib,naylo.top,za
 games-pc.top,rustorka.com,rustorka.top,rustorka.net,rustorkacom.lib,naylo.top,zannn.top,innal.top#%#//scriptlet('abort-on-property-write', 'dimisastop')
 !
 ! rustorka.com
+@@/jspopunder.js$domain=games-pc.top|rustorka.com|rustorka.top|rustorka.net|rustorkacom.lib|naylo.top|monna2.top|zannn.top|innal.top
 @@/printad.js$domain=games-pc.top|rustorka.com|rustorka.top|rustorka.net|rustorkacom.lib|naylo.top|monna2.top|zannn.top|innal.top
 @@/prerollad.js$domain=games-pc.top|rustorka.com|rustorka.top|rustorka.net|rustorkacom.lib|naylo.top|monna2.top|zannn.top|innal.top
 @@/pop_ads.js$domain=games-pc.top|rustorka.com|rustorka.top|rustorka.net|rustorkacom.lib|naylo.top|monna2.top|zannn.top|innal.top
@@ -7290,6 +7291,7 @@ www.kinopoisk.ru,yandex.*#%#//scriptlet('abort-on-property-write', 'Object.proto
 !
 liveinternet.ru#%#Element.prototype.attachShadow = function(){};
 !
+! comedy-radio.ru
 ! kufar.by
 ! rg.ru
 !
@@ -7803,6 +7805,8 @@ disk.yandex.*#%#//scriptlet('remove-class', 'has-fullscreen-banner','.public__ro
 !------- CSS -----------
 !-----------------------
 !
+! Kinogo
+kinogo.biz#$#body { margin-top: 0 !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/162448
 botanichka.ru#$#body.td-background-link { cursor: auto !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/158165
@@ -9332,9 +9336,12 @@ kadrovik01.com.ua,kom-dir.ru,gd.ru,buhsoft.ru,dirklinik.ru,fd.ru,business.ru,pro
 !
 !
 !
+imya.com##a[href="https://ral.ru/classic_russian"]
+||officelife.media/upload/iblock/fec/$image
+monna2.top#?#center > center:has(> div > a[rel="nofollow"][href] > img)
+forbes.ru#?#main div[class] > div[class]:has(> div[class] > aside > div[id^="adfox_"])
 ||yastatic.net/vas-bundles/
 kino-teatr.ru#?#.content_block:has(> div.block_okkko)
-forbes.ru#?#div[data-article] > div[class] > div[class]:has(> div[class] > aside > div[id^="adfox_"])
 aptekirls.ru###top-b
 aptekirls.ru###top-banner-info
 ||aptekirls.ru/images/banners/$image
@@ -9405,7 +9412,6 @@ tvmag.ru##a[href*=".tricolor.tv"] > img
 atorus.ru###block-headerads
 korsars.pro##a[href^="https://bit.ly/"] > img
 fontanka.ru##div[style*="--creative-height:"]
-forbes.ru#?#div[data-article="0"] > div[class] > div[class]:has(> div[class] > aside > [id^="adfox_"])
 kniga-online.com##.adv
 serialfan.net##.dle_b_help
 notepadonline.ru##.adbox
@@ -9461,7 +9467,6 @@ football.by###fonbet
 football.by##a[href="https://betonmobile.by/betera-android-app"]
 mlyn.by##body .adv-blocks__block
 citydog.by,citydog.io#$?#.contentCol > div.article.desktop:has(> div.banner240x400 > div[id^="div-gpt-ad"]) { remove: true; }
-forbes.ru#?#div[style^="grid-"] > div[style^="grid-"]:has(> div[style] > aside > div[id^="adfox_"])
 forbes.ru##div[data-type="ad"]
 forbes.ru##div[style="min-height: 224px;"]
 forbes.ru#?#ul > li:has(div[class] > aside > div[id^="adfox_"])
@@ -11154,7 +11159,7 @@ nsp.ru##app-article-banner
 lennytab.com##label[style^="color:white;position:fixed;"]
 popcornnews.ru##div[style="padding: 20px 0; background-color: #f4f4f4;"]
 ||the-hole.tv/ads?
-flicksbar.top##.topAdPad
+flicksbar.lol,flicksbar.top##.topAdPad
 ||torrent-mass.ru/dow.png
 torontovka.com##.header-partnership
 torontovka.com##tor-banner-block
@@ -16928,7 +16933,7 @@ talkers.ru##center > a[href="http://talkers.ru/forumdisplay.php?f=142"] > img
 newrutor.org##center > a[href^="//newrutor.org/goaway.php"] > img
 games-portal.ws##center > a[href^="/engine/go.php?url="] > img
 gig-torrent.com##center > a[href^="/go"] > img
-tvtorrent.me##center > a[href^="/go.php?url="] > img
+monna2.top,tvtorrent.me##center > a[href^="/go.php?url="] > img
 megatrack.info##center > a[href^="http://goo.gl"] > img
 rutor.co##center > a[href^="http://rutor.co"][rel="nofollow"] > img
 zhmak.info##center > a[href^="https://goo.gl"] > img
@@ -20079,8 +20084,11 @@ mail.ru##.skeleton + a[href^="https://r.mail.ru/redir/"]
 mail.ru##.skeleton
 mail.ru##.skeleton-tgb
 kino.mail.ru,health.mail.ru,dom.mail.ru,deti.mail.ru,auto.mail.ru,pogoda.mail.ru,news.mail.ru#?#.cols__inner div.box:has(> div[class] div.js-module:empty)
+! main page
+mail.ru##.micro-widgets + div:empty
+mail.ru#%#//scriptlet('json-prune', '*.json.result.body.direct')
 ! for all domains
-mail.ru#%#//scriptlet('set-constant', 'Object.prototype.componentSlotParams', 'undefined')
+mail.ru#%#//scriptlet('json-prune', 'result.status')
 !
 ||ad.mail.ru^$domain=~e.mail.ru|~octavius.mail.ru
 ! Domains: mail.ru,auto.mail.ru,cloud.mail.ru,e.mail.ru,octavius.mail.ru,esports.mail.ru,games.mail.ru,go.mail.ru,health.mail.ru,hi-tech.mail.ru,horo.mail.ru,kino.mail.ru,lady.mail.ru,love.mail.ru,mailblog.mail.ru,minigames.mail.ru,my.mail.ru,news.mail.ru,otvet.mail.ru,pogoda.mail.ru,realty.mail.ru,touch.mail.ru,tv.mail.ru,ok.ru
