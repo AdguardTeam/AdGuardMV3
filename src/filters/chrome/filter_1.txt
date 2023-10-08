@@ -1,8 +1,8 @@
-! Checksum: hxI4hGmXj2F4mZDjMKSUjg
+! Checksum: CybSFs4Ug60NbKXFgyFYWQ
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.85.2
-! TimeUpdated: 2023-10-04T14:31:19+00:00
+! Version: 2.0.85.6
+! TimeUpdated: 2023-10-06T10:31:05+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -5722,6 +5722,7 @@ http://wq3.ru^$third-party
 ! Bad: ||legitwebsite.com^$third-party (should be in adservers.txt)
 !
 !
+||sharemefiles.ru^$popup
 ||userdata.ati.su^
 ||r.z3.fm^
 ||adv.topvideo.tj^
@@ -9336,6 +9337,13 @@ kadrovik01.com.ua,kom-dir.ru,gd.ru,buhsoft.ru,dirklinik.ru,fd.ru,business.ru,pro
 !
 !
 !
+softportal.com#?#.cardPage > div.cardPageDescMain:has(> a[href^="https://1softs.com/smart/"])
+softportal.com#?#.contentWrap > div[style][id]:has(> span > a[href^="https://affiliate.freevpnplanet.com/"])
+wday.ru#?#section > div[class^="article"]:has(div.product-set-block)
+wday.ru#?#section > div[class^="article"]:has(div[data-block-after="productSet"])
+wday.ru#?#section > div[class^="article"]:has(div.block-text > h2:contains(Вам понравится:))
+myshows.me##.CommentBanner
+iguides.ru##.i-box-ads
 imya.com##a[href="https://ral.ru/classic_russian"]
 ||officelife.media/upload/iblock/fec/$image
 monna2.top#?#center > center:has(> div > a[rel="nofollow"][href] > img)
@@ -20519,7 +20527,7 @@ forum.ixbt.com##.mainpage_table > tbody > tr > td[align="center"]
 !
 ! sdamgia.ru
 sdamgia.ru#$?#div > aside > div:has(script:contains(window.yaContextCb)) { position: absolute !important; top: -9999px !important; }
-sdamgia.ru#$?#div > main > div:has(script:contains(window.rotator)) { height: 1px !important; }
+sdamgia.ru#$?#div > main > div:has(script:contains(window.rotator)) { remove: true; }
 sdamgia.ru#$?#div > aside > div:has(script:contains(window.rotator)) { position: absolute !important; top: -9999px !important; }
 sdamgia.ru#$?#.menu > div[style]:has(script:contains(window.rotator)) { position: absolute !important; top: -9999px !important; }
 sdamgia.ru##.con_warper > div[class$="t_block"]
