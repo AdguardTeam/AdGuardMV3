@@ -1,8 +1,8 @@
-! Checksum: yddOs72oPpJiY24h318C5g
+! Checksum: 6dgdkeYRY64AC+JA3PfeSw
 ! Title: AdGuard French filter
 ! Description: Liste FR + AdGuard French filter. Filter list that specifically removes ads on websites in French language.
-! Version: 2.0.41.82
-! TimeUpdated: 2023-10-07T16:30:45+00:00
+! Version: 2.0.41.85
+! TimeUpdated: 2023-10-09T22:30:43+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -137,6 +137,8 @@ capital.fr#@#.plainAd
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/163478
+benjaminellisbernard.fr#%#//scriptlet('abort-on-property-read', 'adsBlocked')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/162516
 darkino.pro,darkino.biz#%#//scriptlet('prevent-fetch', 'tag.min.js')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/161892
@@ -346,8 +348,6 @@ bleachmx.fr#%#//scriptlet("abort-on-property-read", "mdpDeBlocker")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/53875
 @@||leakgaming.fr/js/*/Adsplex-shu.js
 leakgaming.fr#%#//scriptlet("abort-current-inline-script", "$", "!document.getElementById(btoa")
-! https://github.com/AdguardTeam/AdguardFilters/issues/52169
-salutbonjour.ca#%#//scriptlet("set-constant", "initDetectAdBlock", "noopFunc")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/67028
 ! https://github.com/AdguardTeam/AdguardFilters/issues/52166
 ! https://github.com/AdguardTeam/AdguardFilters/issues/52021
@@ -1108,7 +1108,7 @@ factandfurious.com###custom_html-2
 numerama.com##.is-original-antlion
 aeroports-voyages.fr##.adsenseContentBottom
 lalibre.be##.ap-AdContainer
-closermag.fr###avantis_container
+mariefrance.fr,closermag.fr###avantis_container
 closermag.fr,mariefrance.fr##html > body .placeholder-pub_dfp:not(#style_important)
 lavie.fr##.bloc-payant
 lavie.fr##.if-abo
@@ -1456,6 +1456,8 @@ adguard.info,adguard.com,adguard.app##.hello_from_adguard_french
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/163456
+cloud.189.cn#@#.ad-container
 ! https://forum.adguard.com/index.php?threads/futura-sciences-com-videos-broken.54970/
 @@||sonar.viously.com/*/js?*vastPassbackCustomMacro$domain=futura-sciences.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/161897

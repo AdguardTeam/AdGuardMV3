@@ -1,8 +1,8 @@
-! Checksum: OfK6OWrNTtUzdypI0c8OpA
+! Checksum: 5CmZaglnzkNCqjj1tKjkYQ
 ! Title: AdGuard Japanese filter
 ! Description: Filter that enables ad blocking on websites in Japanese language.
-! Version: 2.0.44.57
-! TimeUpdated: 2023-10-06T15:32:05+00:00
+! Version: 2.0.44.60
+! TimeUpdated: 2023-10-09T15:32:13+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -503,7 +503,7 @@
 !
 ! https://github.com/AdguardTeam/AdguardFilters/issues/161822
 !#safari_cb_affinity(privacy)
-@@||clarity.ms/c.gif$domain=ganohr.net
+@@||clarity.ms^$domain=ganohr.net
 !#safari_cb_affinity
 ! https://github.com/AdguardTeam/AdguardFilters/issues/160241
 ! https://github.com/AdguardTeam/AdguardFilters/issues/159769
@@ -1622,12 +1622,14 @@ gundamlog.com###more > iframe[src^="https://richlink.blogsys.jp"]
 !
 !
 !
+dailyshincho.jp##.c-box-ad-movie--space
 ||sw.onedragon.win/logo.svg
 ||ymobile.jp/store/images/top/kv/kv_$third-party
 yuki-portal.com###reblock_widget-4
 yuki-portal.com##.ct-code-block > a[rel$="sponsored"]
 news-postseven.com##div[style="min-height: 395px; margin-bottom:10px;"]
 docomo.ne.jp##div[id*="Advertisement"]
+dazn.com##div[class^="AdBanner_container__"]
 gamingdeputy.com##.header-banner-desktop
 gamingdeputy.com###block-5
 spread-sports.jp##.ad_box_sp
@@ -2086,6 +2088,8 @@ erommdtube.com,oreno3d.com##figure > div[style^="display: block; position: absol
 myhome.nifty.com###footerRect
 ||kan-geki.com/img/home/picmo_banner.png
 cu.ntv.co.jp##.hulu-link
+onnela.asahi.co.jp##.insert-ad
+onnela.asahi.co.jp##.insert-ad-area
 douga.tv-asahi.co.jp##.common-box-ad
 douga.tv-asahi.co.jp##.common-box-ad-landscape
 ||city.yatsushiro.lg.jp/dynamic/common/UploadFileOutput.ashx
@@ -8584,7 +8588,7 @@ lifehack2ch.livedoor.biz#?##right_a:has(> div#rightbody > div#rakuafi)
 blogspot.com#?#.HTML > div.widget-content > ins.adsbygoogle:upward(2)
 cybersocean.net#?#.textwidget > p:has(> a[href^="https://amzn.to/"])
 w.atwiki.jp#$?##atwiki-ads-overlay { remove: true; }
-taisy0.com#?#.c_linkto:has(> .adsbygoogle)
+reikawatanabe.com,taisy0.com#?#.c_linkto:has(> .adsbygoogle)
 gensin.blog.jp#?#.plugin-memo.sidewrapper:has(.amazon)
 thetv.jp#?#.sidebarcontents:has(> ul.affiliatelist)
 moqlog.jp#?#.widget-sidebar-standard:has(> div > div.squareb)
