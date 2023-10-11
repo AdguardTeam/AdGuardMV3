@@ -1,7 +1,8 @@
 import path from 'path';
 
-import { validator } from '@adguard/translate';
+import { validator, Locale } from '@adguard/translate';
 
+import { getErrorMessage } from '../../src/common/error';
 import { cliLog } from '../cli-log';
 import { areArraysEqual, getLocaleTranslations } from '../helpers';
 
@@ -12,24 +13,20 @@ import {
     LOCALES_RELATIVE_PATH,
     REQUIRED_LOCALES,
     THRESHOLD_PERCENTAGE,
-    translationResultType,
+    type TranslationResultType,
+    type MessageValidationResult,
 } from './locales-constants';
 
 const LOCALES = Object.keys(LANGUAGES);
 const LOCALES_DIR = path.resolve(__dirname, LOCALES_RELATIVE_PATH);
 
 /**
- * @typedef Result
- * @property locale
- * @property level - % of translated
- * @property untranslatedStrings
- */
-
-/**
  * Logs translations readiness
- * @param {Result[]} results
+ *
+ * @param results List of translations readiness results.
+ * @param isMinimum Flag for minimum locales to check, limited to the required locales.
  */
-const printTranslationsResults = (results: translationResultType[], isMinimum = false) => {
+const printTranslationsResults = (results: TranslationResultType[], isMinimum = false): void => {
     cliLog.info('Translations readiness:');
     results.forEach((r) => {
         const record = `${r.locale} -- ${r.level}%`;
@@ -55,18 +52,40 @@ const printTranslationsResults = (results: translationResultType[], isMinimum = 
     });
 };
 
-// eslint-disable-next-line consistent-return
-const validateMessage = (baseKey: string, baseLocaleTranslations: any, localeTranslations: any) => {
+/**
+ * Validates that localized string correspond by structure to base locale string.
+ *
+ * @param baseKey Key of the base locale string.
+ * @param baseLocaleTranslations Translations of the base locale.
+ * @param rawLocale Locale to validate.
+ * @param localeTranslations Translations of the locale to validate.
+ *
+ * @returns Validation result if error occurred, otherwise undefined.
+ */
+const validateMessage = (
+    baseKey: string,
+    baseLocaleTranslations: any,
+    rawLocale: string,
+    localeTranslations: any,
+): MessageValidationResult | undefined => {
     const baseMessageValue = baseLocaleTranslations[baseKey].message;
     const localeMessageValue = localeTranslations[baseKey].message;
+    // locale should be lowercase, e.g. 'pt_br', not 'pt_BR'
+    const locale: Locale = rawLocale.toLowerCase() as Locale;
+
+    let validation: MessageValidationResult | undefined;
     try {
-        const isTranslationValid = validator.isTranslationValid(baseMessageValue, localeMessageValue);
-        if (!isTranslationValid) {
-            throw new Error('Invalid translated string');
+        if (!validator.isTranslationValid(
+            baseMessageValue,
+            localeMessageValue,
+            locale,
+        )) {
+            throw new Error('Invalid translation');
         }
-    } catch (error) {
-        return { key: baseKey, error };
+    } catch (e: unknown) {
+        validation = { key: baseKey, error: getErrorMessage(e) };
     }
+    return validation;
 };
 
 /**
@@ -76,7 +95,7 @@ const validateMessage = (baseKey: string, baseLocaleTranslations: any, localeTra
  */
 export const checkTranslations = async (
     locales: string[], isInfo: boolean = false,
-): Promise<translationResultType[]> => {
+): Promise<TranslationResultType[]> => {
     const baseLocaleTranslations = await getLocaleTranslations(
         LOCALES_DIR, BASE_LOCALE, LOCALE_DATA_FILENAME,
     );
@@ -97,7 +116,7 @@ export const checkTranslations = async (
             if (!localeMessages.includes(baseStr)) {
                 untranslatedStrings.push(baseStr);
             } else {
-                const validationError = validateMessage(baseStr, baseLocaleTranslations, localeTranslations);
+                const validationError = validateMessage(baseStr, baseLocaleTranslations, locale, localeTranslations);
                 if (validationError) {
                     invalidTranslations.push(validationError);
                 }

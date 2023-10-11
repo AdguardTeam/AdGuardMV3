@@ -7,11 +7,39 @@ import inputConfig from './config.json';
 export type localeUrlType = { locale: string, url: string };
 export type localeDataType = { locale: string, data: Buffer };
 export type localeMessageType = { [key: string]: { message: string } };
-export type translationResultType = {
+
+export type MessageValidationResult = {
+    /**
+     * Key of the base locale string.
+     */
+    key: string,
+
+    /**
+     * Error message.
+     */
+    error: string,
+};
+
+export type TranslationResultType = {
+    /**
+     * Locale code.
+     */
     locale: string,
+
+    /**
+     * Percentage of translated strings.
+     */
     level: number,
+
+    /**
+     * List of untranslated strings.
+     */
     untranslatedStrings: string[],
-    invalidTranslations: { key: string, error: any }[],
+
+    /**
+     * List of invalid translations.
+     */
+    invalidTranslations: MessageValidationResult[],
 };
 
 const {
