@@ -1,8 +1,8 @@
-! Checksum: 5CmZaglnzkNCqjj1tKjkYQ
+! Checksum: GEraQ1uS8aOzErMtMfPsyQ
 ! Title: AdGuard Japanese filter
 ! Description: Filter that enables ad blocking on websites in Japanese language.
-! Version: 2.0.44.60
-! TimeUpdated: 2023-10-09T15:32:13+00:00
+! Version: 2.0.44.67
+! TimeUpdated: 2023-10-12T07:32:02+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1011,17 +1011,10 @@ shico.xyz#%#//scriptlet('abort-on-property-read', 'fanza_link')
 trendynailwraps.com#%#//scriptlet('prevent-window-open')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/133903
 kijomatomelog.com,gundamlog.com,doorblog.jp,digital-thread.com,livedoor.blog,blog.jp,blog.livedoor.jp#%#//scriptlet('abort-current-inline-script', 'jQuery', 'floatingAd')
-! https://github.com/AdguardTeam/AdguardFilters/issues/133312
-7mmtv.sx#%#//scriptlet('abort-on-property-read', 'StripchatSpot')
-7mmtv.sx#%#AG_onLoad(function(){var a=new MutationObserver(function(){document.querySelectorAll('div[id^="mvspan_"][id*="_s_k_i_p_b"]').forEach(function(b){b.click()})});a.observe(document,{childList:!0,subtree:!0});setTimeout(function(){a.disconnect()},1E4)});
-mm9845.com#%#//scriptlet('prevent-window-open')
-filemoon.sx#%#//scriptlet('prevent-window-open')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/133218
 ch-review.net#%#AG_onLoad(function() { document.body.innerHTML = document.body.innerHTML.replace(/スポンサーリンク/g, ""); });
 ! https://github.com/AdguardTeam/AdguardFilters/issues/132631
 giocox.jp#%#//scriptlet('remove-attr', 'href', '.game_amazon > a[href*=".amazon."]')
-! https://github.com/AdguardTeam/AdguardFilters/issues/131568
-7mmtv.sx#%#//scriptlet('prevent-window-open')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/128599
 uraaka-joshi.com#%#//scriptlet('prevent-addEventListener', 'playing', 'VAST_TARGET')
 ! skip ad
@@ -1457,6 +1450,7 @@ hostlove.com#$##index_nav > h1 { padding-top: 30px!important; }
 /wp-content/themes/CashLINESystem/js/modal.$script
 !
 ! Malware/Phishing
+n.lat/login|$document
 .cn/auth/login.php?/realms/msweb/protocol/openid-connect/auth?client_id=moneySiteWeb&redirect_uri=https://www.aeon.co.jp/$document
 ://account.smba.$document
 /Wi708n0b00saOEr08d67/index.html$document
@@ -1622,6 +1616,18 @@ gundamlog.com###more > iframe[src^="https://richlink.blogsys.jp"]
 !
 !
 !
+||city.nishitokyo.lg.jp/js/banner.js
+city.nishitokyo.lg.jp#?#.top_sec03_r_box:has(> div > script[src="/js/banner.js"])
+n-seikei.jp##.google3
+n-seikei.jp###submenubar
+||ssp.socoms.net/newsletterbannerorurl?$third-party
+epochtimes.jp##.single_right_banner
+netkeiba.com###pc_nk_top_main0
+netkeiba.com##.SideJackBnr
+netkeiba.com##div[class^="nk_AdvBox"]
+nar.netkeiba.com##div[id$="_banner"][style] > .modal_open
+nar.netkeiba.com##.nar_top_message_box
+danna-shine.com#?#.page-content > div[style^="margin-top:"]:has(> div.a-single + br)
 dailyshincho.jp##.c-box-ad-movie--space
 ||sw.onedragon.win/logo.svg
 ||ymobile.jp/store/images/top/kv/kv_$third-party
@@ -3822,10 +3828,6 @@ tumadouga.jp##div[id^="index_banner_space"]:not(#index_banner_space_01) > div[cl
 tumadouga.jp##.index_banner_space > div[class*="index_banner_space_"]:not([id]) > .text-center:not(:only-child)
 tumadouga.jp##.container > .footer-links ~ div[class*="index_banner_space_"]:not([id]) > .text-center:not(:only-child)
 city.iwaki.lg.jp##div.slide_link + div.wrap > div.aside
-7mmtv.sx###player-container
-7mmtv.sx##div[id][style^="position: absolute;  z-index: 12345;width: 100%; height: 100%; left: 0;  top: 0;background: gold;"]
-7mmtv.sx##.a-d-block
-7mmtv.sx##body .set_height_250
 ear-phone-review.com###entry-footer-primary-modules
 netshop.impress.co.jp##.ad-wrapper-in-content
 netshop.impress.co.jp##.node-body-content > div[style="background-color:#FFFBD6; margin:3em 2em; padding:10px 5px"]
@@ -3953,7 +3955,7 @@ hoshujapan.jp###st_custom_html_widget-149
 sportingnews.com##.header-advertising
 sportingnews.com##strong > [href^="https://bit.ly"]
 thedigestweb.com##.c-ad-banner--col2
-traveltoku.com##.a-single
+danna-shine.com,traveltoku.com##.a-single
 traveltoku.com##.g-single
 aumo.jp##.pure-ad-banner
 ||gpc-check.com/img/pr/
@@ -5682,7 +5684,7 @@ dekiru.net##div[class$="-ads"]
 makuring.com##.small.center
 makuring.com##.center > p.nospace
 kisetsumimiyori.com,rapidtables.org,blog.thetheorier.com##p[style^="text-align: center;"]
-oshinpoke.com,under-taker.com,momiage.work,blog.thetheorier.com###my-footer > p[style]
+nekopictures.net,oshinpoke.com,under-taker.com,momiage.work,blog.thetheorier.com###my-footer > p[style]
 have-fun.blog,re-doing.com###st_custom_html_widget-8
 radiolife.com###a-banner
 radiolife.com###side-banner
@@ -5828,7 +5830,7 @@ ipentec.com##.FlexContainerAdsenseTop
 ||my-best.com/advertisements/
 my-best.com###ad-product
 tenmusume.com##.home_block > div.pc.clearfix
-color-hiyoko.com,wanabe.net,wackwack.net,paiza.hatenablog.com,namakeru.com##.hatena-module-html:first-child
+nekopictures.net,color-hiyoko.com,wanabe.net,wackwack.net,paiza.hatenablog.com,namakeru.com##.hatena-module-html:first-child
 ear-phone-review.com###box2-inner > div.hatena-module-html:nth-last-child(-n+2)
 musume4610.com###statusbar
 ||joyu.info/pp/
@@ -7631,7 +7633,7 @@ excite.co.jp##div[id^="gpt_"]
 www.exblog.jp##[class*="list" i] > .ss
 exblog.jp##.generalListAd
 dlsoft.dmm.co.jp##.dmm-c-banner-tags
-dmm.co.jp###footer-ad-container
+dmm.com,dmm.co.jp###footer-ad-container
 hamusoku.com###sub div.plugin-recent_articles + div.plugin-memo
 hamusoku.com##span[style="font-size: 125%;"] > b > a[href^="https://amzn.to/"]
 kichimamasenki.com,jiji-kue.com,en.user-info.net,girlsvip-matome.com,asianoneta.blog.jp,hamusoku.com##.plugin-memo:first-child
@@ -7936,7 +7938,7 @@ yomiuri.co.jp##[class^="home-2020-ad"]
 yomiuri.co.jp##[id^="ad_dfp"]
 nikkansports.com###adUnit32
 nikkansports.com###headerAdBnr2022
-blogmura.com##div[class^="ad"]
+n-seikei.jp,blogmura.com##div[class^="ad"]
 ||gameranbu.jp/js/scrole_ad_
 gameranbu.jp##.taboola-recommend-span
 gameranbu.jp##.side_recomend_trac
