@@ -1,8 +1,8 @@
-! Checksum: nRuiUPjaiYPif9nAgzusJg
+! Checksum: lx0VFDbJ9nmsb9lFDBV6bw
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.85.18
-! TimeUpdated: 2023-10-11T18:31:05+00:00
+! Version: 2.0.85.24
+! TimeUpdated: 2023-10-13T17:31:00+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -5962,6 +5962,9 @@ newsyou.info,4mama.ua,autoua.net,censor.net,eurointegration.com.ua,gagadget.com,
 ! NOTE: Ads replacement (piguiqproxy.com etc.) end ⬆️
 ! !SECTION: Ads replacement (piguiqproxy.com etc.)
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/163312
+cosme-world.net#@#.advertise
+!
 ! First of all, this section has common rules that prevent most known ad block detections. In that case domain should be added to the common rules.
 ! The section contains the list of the rules are against all kinds of ads reinjection or ad-blocking circumvention scripts. If such a script does not cripple the website, we add rules to the Annoyances filter.
 ! Rules should generally be domain-specific. In some exceptional cases, it's allowed to add generic ones, but this should be approved by most of the maintainers.
@@ -5985,6 +5988,8 @@ electric-house.ru#%#//scriptlet("abort-on-property-read", "onload")
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/163682
+testserver.pro#%#//scriptlet('prevent-setTimeout', '.ayayay')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/162627
 forum.ruboard.ru#@#div[id^="yandex_rtb"]
 ! https://github.com/AdguardTeam/AdguardFilters/issues/162184
@@ -7196,6 +7201,7 @@ yandex.*#?#.business-card-title-view__actions > div.business-card-title-view__ad
 ! Yandex.Market
 !
 ! Yandex.Video
+! Video ad
 !
 ! Yandex.Afisha
 afisha.yandex.*##div[style="width:100%;height:250px;display:block"]
@@ -7805,8 +7811,6 @@ disk.yandex.*#%#//scriptlet('remove-class', 'has-fullscreen-banner','.public__ro
 !------- CSS -----------
 !-----------------------
 !
-! Kinogo
-kinogo.biz#$#body { margin-top: 0 !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/162448
 botanichka.ru#$#body.td-background-link { cursor: auto !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/158165
@@ -9062,6 +9066,7 @@ go.mail.ru#$#.response___wrapper > #js-bottomBar > div > div[class*="b"][class*=
 ! https://github.com/AdguardTeam/CoreLibs/issues/1442
 ! rutracker.org - addition for apps only
 ! Yandex.Video
+yandex-video.naydex.net#%#//scriptlet('trusted-replace-xhr-response', '/(<VAST[\s\S]*?>)[\s\S]*<\/VAST>/', '\$1<\/VAST>', 'strm.yandex.ru')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/58647
 ! https://github.com/AdguardTeam/AdguardFilters/issues/58617
 ! https://github.com/AdguardTeam/AdguardFilters/issues/50723
@@ -20534,7 +20539,6 @@ forum.ixbt.com##.mainpage_table > tbody > tr > td[align="center"]
 !
 ! sdamgia.ru
 sdamgia.ru#$?#div > aside > div:has(script:contains(window.yaContextCb)) { position: absolute !important; top: -9999px !important; }
-sdamgia.ru#$?#div > main > div:has(script:contains(window.rotator)) { remove: true; }
 sdamgia.ru#$?#div > aside > div:has(script:contains(window.rotator)) { position: absolute !important; top: -9999px !important; }
 sdamgia.ru#$?#.menu > div[style]:has(script:contains(window.rotator)) { position: absolute !important; top: -9999px !important; }
 sdamgia.ru##.con_warper > div[class$="t_block"]
