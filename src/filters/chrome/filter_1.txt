@@ -1,8 +1,8 @@
-! Checksum: lx0VFDbJ9nmsb9lFDBV6bw
+! Checksum: jAXd8K8LijexkgTBXVM4Yg
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.85.24
-! TimeUpdated: 2023-10-13T17:31:00+00:00
+! Version: 2.0.85.26
+! TimeUpdated: 2023-10-16T12:31:13+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1477,6 +1477,7 @@ ucoz.ru/informer/
 ! Bad: /banner.jpg (should be in general_url.txt)
 ! Bad: ||adssubdomain.legitwebsite.com^ (should be in adservers_firstparty.txt)
 !
+||rbfive.bid^
 ||nwhoxwpuj6.com^
 ||trackclicksplz.site^$third-party
 ||b.we-are-anon.com^$all
@@ -6788,9 +6789,10 @@ dzen.ru##.news-app__content div[class*="__column_myTarget mg-grid__item"] div[cl
 dzen.ru###article__bottom-embed
 dzen.ru##div[class^="article-right-placeholder_"]
 dzen.ru##.card-wrapper > div[class^="article-bottom-single-desktop-placeholder__"]
-[$path=/a/]dzen.ru#$#div[class*="_position_bottom "] > div > div:not([class]):not([id]) { transform: translate(-3000px) !important; position: fixed; }
-[$path=/a/]dzen.ru##div[class*="_position_inner "] > div > div[style^="width:"]
-[$path=/a/]dzen.ru##div[class*="_position_right "][style*="max-height:"]
+[$path=/a/]dzen.rudzen.ru##.article__content_limited div[class^="article-bottom-single-desktop-placeholder__"]
+![$path=/a/]dzen.ru#$#div[class*="_position_bottom "] > div > div:not([class]):not([id]) { transform: translate(-3000px) !important; position: fixed; }
+![$path=/a/]dzen.ru##div[class*="_position_inner "] > div > div[style^="width:"]
+![$path=/a/]dzen.ru##div[class*="_position_right "][style*="max-height:"]
 dzen.ru##.ad-split-embed
 !
 ! Yandex browser popup
