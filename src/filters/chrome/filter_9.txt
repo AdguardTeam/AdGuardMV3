@@ -1,8 +1,8 @@
-! Checksum: poYhnbLkO8xi+HKp6LBxIA
+! Checksum: NaxE6S6KQITj9u2kEjtFgw
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish, Portuguese, and Brazilian Portuguese languages.
-! Version: 2.0.21.69
-! TimeUpdated: 2023-10-16T13:05:00+00:00
+! Version: 2.0.21.75
+! TimeUpdated: 2023-10-19T07:32:08+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -229,7 +229,6 @@
 ||idealista.com^$third-party,domain=~idealista.com
 ||ieurop.net^$third-party
 ||img.netaffiliation.com^$third-party
-||informtext.blogspot.com^$third-party
 ||intrastats.com^$third-party
 ||italianos.it/2008/Tim/$third-party
 ||kontextua.com^$third-party
@@ -306,6 +305,13 @@
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/164082
+sempreupdate.com.br#@#[id^="google_ads_iframe"]
+sempreupdate.com.br#%#//scriptlet('prevent-setTimeout', 'placebo.height()')
+! https://github.com/AdguardTeam/AdguardFilters/issues/164047
+||peliculas8k.com/TV/encriptador/cierrapues.js
+peliculas8k.com#%#//scriptlet('prevent-setTimeout', 'Promise[\'all\'](urls')
+peliculas8k.com#%#//scriptlet('prevent-fetch', '/googlesyndication\.com|iubenda\.com|unblockia\.com|bannersnack\.com|mopinion\.com/')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/163384
 alarmadefraude.com#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/162478
@@ -1116,8 +1122,6 @@ superanimes.site#$#.adstopo { position: absolute!important; left: -3000px!import
 ! https://github.com/AdguardTeam/AdguardFilters/issues/17844
 ! https://github.com/AdguardTeam/AdguardFilters/issues/17611
 @@||animeyt.tv/js/adsbygoogle.js
-! https://github.com/AdguardTeam/AdguardFilters/issues/17327
-@@||murodoclassicrock4.blogspot.com^$generichide
 ! https://github.com/AdguardTeam/AdguardFilters/issues/17298
 ! https://github.com/AdguardTeam/AdguardFilters/issues/17290
 ! https://github.com/AdguardTeam/AdguardFilters/issues/17291
@@ -2163,6 +2167,8 @@ gaz.com.br,placar.com.br,futebolinterior.com.br,tvhistoria.com.br,tribunapr.uol.
 ! ##.banner
 correio24horas.com.br,cnnespanol.cnn.com,motociclismo.es,sub100.com.br,theenemy.com.br,manhwas.net,rpp.pe,ambito.com,economipedia.com,informador.mx,elinformador.com.co,cronista.com,rionegro.com.ar,diariodecuyo.com.ar,voydeviaje.com.ar,guarda14.com,viapais.com.ar,agazeta.com.br,eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.*,mundotecnologias.com,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##.banner
 !
+elsalvador.com##body > #top-bar
+obemdito.com.br##.adsDesktop1
 olympusv2.gg##div[class="min-h-120 !rounded-none"]
 forocoches.com##div[style^="min-height:250px;"]
 forocoches.com##section[style^="min-width: 300px;"]
@@ -5479,8 +5485,10 @@ oantagonista.uol.com.br#@#div[id^="div-gpt-"]
 @@||securepubads.g.doubleclick.net/tag/js/gpt.js$domain=videos.memedeportes.com|videos.cuantarazon.com|videos.vistoenlasredes.com|videos.vrutal.com|videos.humorenserie.com
 !#safari_cb_affinity
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/163936
 ! https://github.com/AdguardTeam/AdguardFilters/issues/89176
-@@||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=suamusica.com.br
+||securepubads.g.doubleclick.net/tag/js/gpt.js$script,redirect=googletagservices-gpt,domain=suamusica.com.br
+||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima3,domain=suamusica.com.br
 ! https://github.com/AdguardTeam/AdguardFilters/issues/87302
 gczs.gldjc.com#@#.bannerBox
 ! https://github.com/uBlockOrigin/uAssets/issues/9405

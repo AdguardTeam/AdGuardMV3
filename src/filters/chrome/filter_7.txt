@@ -1,8 +1,8 @@
-! Checksum: XL+NCOolM/r8Q8zRfB+NPQ
+! Checksum: l1lqUyjGBuG9Za/eFGDp7w
 ! Title: AdGuard Japanese filter
 ! Description: Filter that enables ad blocking on websites in Japanese language.
-! Version: 2.0.44.77
-! TimeUpdated: 2023-10-17T07:32:51+00:00
+! Version: 2.0.44.84
+! TimeUpdated: 2023-10-18T17:03:58+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -965,6 +965,8 @@ nasubiblog.com,kyukyoku-matome.com##.widget_pc_ad
 !-------JS----------
 !-------------------
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/164064
+javple.com#%#//scriptlet('abort-current-inline-script', 'onload', 'puHref')
 ! leftover
 betweenjpandkr.blog#%#AG_onLoad(function() { var el = document.querySelector('.clearfix'); if(el) { el.innerHTML = el.innerHTML.replace(/PR:/g,''); } });
 ! https://github.com/AdguardTeam/AdguardFilters/issues/161236
@@ -1619,9 +1621,11 @@ gundamlog.com###more > iframe[src^="https://richlink.blogsys.jp"]
 !
 !
 !
-klmanga.org#?##movie-last-movie > li:has(> center > ins[id])
+javple.com##.widget > a[target="_blank"] > img
+javple.com###tracking-url
+tv-aichi.co.jp##.p-news_snsarea
+klmanga.vip,klmanga.org#?##movie-last-movie > li:has(> center > ins[id])
 books.rakuten.co.jp##.flexContents__box--adBox1
-koiroomnotice.net#?#main > section.first:has(> div.tate)
 ||ufret.jp/img/sococo640200.jpg
 ufret.jp##div[data-as-slot-id]
 betweenjpandkr.blog#?##mainEntity > div.clearfix > p > ins.adsbygoogle:upward(1)
@@ -7138,7 +7142,7 @@ kurashi-no.jp##.u-bg-dgray.c-section
 ||i-section.net/rakuten_ranklet/$third-party
 ||i-section.net/ranklet/$third-party
 saitama-np.co.jp##.prlist
-live.kufu.co.jp,newsee-media.com,reader.futabanet.jp,maidonanews.jp,oricon.co.jp,htb.co.jp,saitama-np.co.jp##.ad_response
+lisani.jp,news.tv-aichi.co.jp,live.kufu.co.jp,newsee-media.com,reader.futabanet.jp,maidonanews.jp,oricon.co.jp,htb.co.jp,saitama-np.co.jp##.ad_response
 recordchina.co.jp##.right-people[style^="min-width: 300px; min-height: 250px"]
 recordchina.co.jp##.ad-outer
 recordchina.co.jp##.right-ranking
@@ -8925,7 +8929,9 @@ withonline.jp#?##ranking-part > ul.tab_content > li[class]:has(> a[data-google-i
 zyuken.net#?#.adsbygoogle:upward(1)
 refind2ch.org#?#.list-group > tr:has(> td[style="text-align:center"] > div[style^="padding-top:30px;"])
 yahoo.co.jp#?#div[class^="Sports_StreamSports"] > aside[class^="ArticleBox_ArticleBox"]:has(> a[href^="https://app.adjust.com/"])
-meiwasuisan.com#?#body > div.toTheEdge:has(> a[href^="http://live.fc2.com/"])
+meiwasuisan.com#?#tr > td[colspan="4"][align="center"]:has(> script[src^="https://xml.affiliate.rakuten.co.jp"])
+meiwasuisan.com##.toTheEdge[style="text-align:center;font-size:24px;padding:10px;"]
+meiwasuisan.com##.toTheEdge[style="text-align:center;font-size:24px;padding:10px;"] + div.line
 gammaplus.takeshobo.co.jp#?#.bnr__section:has(script[src^="https://js.ad-stir.com"])
 nme-jp.com#?#.post-content ~ div.row:has(> div[class^="col-xs"] > div.post-banner)
 privatter.net#?#.hidden-sm > p > a[data-target="#adModal"]:upward(2)
@@ -9873,9 +9879,9 @@ manpukunews.blog.jp#@#.ads01
 ! https://github.com/AdguardTeam/AdguardFilters/issues/131295
 ! https://github.com/AdguardTeam/AdguardFilters/issues/131221
 ! https://jbbs.shitaraba.net/bbs/read.cgi/internet/25463/1598352715/160
-@@||click.speee-ad.jp/v1/recwid?$script,domain=saitama-np.co.jp|htb.co.jp|oricon.co.jp|maidonanews.jp|reader.futabanet.jp|newsee-media.com|live.kufu.co.jp
-@@||speee-ad.akamaized.net/tag/$script,domain=saitama-np.co.jp|htb.co.jp|oricon.co.jp|maidonanews.jp|reader.futabanet.jp|newsee-media.com|live.kufu.co.jp
-@@||speee-ad.akamaized.net^$image,domain=saitama-np.co.jp|htb.co.jp|oricon.co.jp|reader.futabanet.jp|newsee-media.com|live.kufu.co.jp
+@@||click.speee-ad.jp/v1/recwid?$script,domain=saitama-np.co.jp|htb.co.jp|oricon.co.jp|maidonanews.jp|reader.futabanet.jp|newsee-media.com|live.kufu.co.jp|news.tv-aichi.co.jp|lisani.jp
+@@||speee-ad.akamaized.net/tag/$script,domain=saitama-np.co.jp|htb.co.jp|oricon.co.jp|maidonanews.jp|reader.futabanet.jp|newsee-media.com|live.kufu.co.jp|news.tv-aichi.co.jp|lisani.jp
+@@||speee-ad.akamaized.net^$image,domain=saitama-np.co.jp|htb.co.jp|oricon.co.jp|reader.futabanet.jp|newsee-media.com|live.kufu.co.jp|news.tv-aichi.co.jp|lisani.jp
 ! https://hinative.com/ja part of app banner hidden
 hinative.com#@#.banner_header
 ! https://github.com/AdguardTeam/AdguardFilters/issues/130121
