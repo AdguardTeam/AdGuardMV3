@@ -1,8 +1,8 @@
-! Checksum: FNeYL7qOxaajknLttLTFxw
+! Checksum: 3bLSQpbtA7BmMgOEyPAOuw
 ! Title: AdGuard Tracking Protection filter
 ! Description: The most comprehensive list of various online counters and web analytics tools. Use this filter if you do not want your actions on the Internet to be tracked.
-! Version: 2.0.62.47
-! TimeUpdated: 2023-10-18T14:31:47+00:00
+! Version: 2.0.62.55
+! TimeUpdated: 2023-10-20T16:31:40+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -83,6 +83,8 @@
 ! Bad: example.org###rek (should be in specific.txt)
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/164104
+reuters.com#%#(()=>{window.analytics=[],analytics.user=function(){return this},analytics.track=function(){},analytics.anonymousId=function(){},analytics.push=function(){[...arguments].forEach((n=>{if("function"==typeof n)try{n()}catch(n){console.debug(n)}Array.isArray(n)&&[...n].forEach((n=>{if("function"==typeof n)try{n()}catch(n){console.debug(n)}}))}))};})();
 ! https://github.com/AdguardTeam/AdguardFilters/issues/163978
 [$path=/edmredir.php]mobile01.com#%#//scriptlet('trusted-replace-node-text', 'script', '/sendOfflineEvent[\s\S]*?window\.location\.href/', '/(window\.dataLayer[\s\S]*?sendOfflineEvent[\s\S]*?(window.location.href = [\s\S]*?;))/', '$2$1')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/161237
@@ -4286,6 +4288,8 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ! More info: https://getadmiral.com/products/measure
 ! Add same rules to the Admiral section of Annoyances filter
 !
+||fewkittens.com^$third-party
+||inquisitiveice.com^$third-party
 ||delicatecascade.com^$third-party
 ||dreamycanyon.com^$third-party
 ||whimsicalgrove.com^$third-party
@@ -5476,6 +5480,7 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ! Blocking piwik analytics subdomain(for DNS filtering)
 |piwik.
 !
+||ca-api.cafe24data.com^
 ||tracking.tving.com^
 ||c.statcounter.com^
 ||a.mts.ru^
@@ -54396,6 +54401,9 @@ charlestownwyllie.oaklawnnonantum.com^
 ||wiz.empowerhearing.com^
 ||wiz.sncf-connect.com^
 ||wz.allianz.fr^
+!
+! TODO : remove when a cname tracker data for this domain will be collected (20.10.2023)
+|mailgun.org^
 !-------------------------------------------------------------------------------!
 !-------------- CNAME trackers exceptions --------------------------------------!
 !-------------------------------------------------------------------------------!
@@ -54447,6 +54455,7 @@ charlestownwyllie.oaklawnnonantum.com^
 !+ NOT_OPTIMIZED
 /.well-known/private-click-measurement
 !
+/track/impressions?
 /smi/fp.min.js
 /wp-content/plugins/google-analytics-for-wordpress/*
 /px.gif?
@@ -55044,6 +55053,7 @@ _tracking.php?b=
 /analytics.js$domain=tokyometro.jp|resumes.breakdownexpress.com|techcult.com|inbox.lv|kopeda.com|freexcafe.com|rusvideos.tv|nakubani.ru|lun.com|songsara.net|newsmax.com|bolgehastanesi.com|ewtc.de|newsdig.tbs.co.jp|imore.com|city.kushiro.lg.jp|emeraldbridal.com.au|emarat-news.ae|imobie.jp|tikla.com.tr|rusvideos.porn|jrkyushu.co.jp|amiunique.org
 ||assets.adobedtm.com^$domain=mcclatchydc.com|elnuevoherald.com|bellinghamherald.com|sacbee.com|charlotteobserver.com|newsobserver.com|miamiherald.com|ef.ru|algida.com.tr|bmw-motorrad.co.uk|cif.com.tr|clearhaircare.com|domestos.com|dove.com|elidor.com.tr|f1sport.autorevue.cz|geico.com|hellmanns.com.tr|herkessofraya.com|johnsonsbaby.com.tr|lipton.com|lnk.to|lux.com|magnumicecream.com|neutrogena.com.tr|omo.com|rexona.com|samsung.com|sap.com|schwarzkopf.com.tr|signalturkiye.com|msnbc.com|nbcnews.com|kbb.com|eurosport.ru|timgate.it|intermiles.com|oxfordmail.co.uk|spiegel.de|hp.com|deutschepost.de|thebay.com|s.shufoo.net|tsn.ca|tabelog.com|euronews.com|newshub.co.nz|fredmeyer.com|viabcp.com|carsales.com.au|falabella.com|aarp.org
 !
+/www\.eldorado\.gg\/[a-zA-Z]{10}\.js/$script,~third-party,domain=eldorado.gg
 ||eye.targetads.io/web/pixel
 ||4sysops.com/js/uni.js
 ||4sysops.com/global/appear.js
@@ -57646,7 +57656,6 @@ dizibey.com##.sidebar > #text-19
 ||boy18tube.com/analytics.js
 ||klops.ru/ahoy/
 ||a.europaplus.ru/*/event?p2=
-||morhipo.com/Shared/AnalyticsJS^
 /css/stat.js$domain=assia.*|assia4.com
 /css/analytics.js$domain=assia.*|assia4.com
 ||svcs.ebay.com/delstats/imp/rtm
@@ -58517,6 +58526,8 @@ link.gmapp*.net$image
 ! it's problematic that due to how Gmail proxy work, these domains aren't even exposed on the network level
 ! fortunately, extensions can see them (Gmail puts the real URL in the location.hash part of the src)
 !
+! Washington Post
+s2.washingtonpost.com/beacon/$image
 ! WizRocket
 wizrocketmail.net$image
 ! meetup.com
@@ -58933,7 +58944,8 @@ nethunt.com/api/v1/track/email/$image
 ! https://github.com/easylist/easylist/pull/11359
 @@||cmoa.jp^$cookie=_ga
 ! https://github.com/AdguardTeam/AdguardFilters/issues/108624
-@@||store-jp.nintendo.com^$cookie
+! https://github.com/AdguardTeam/AdguardFilters/issues/164150
+!@@||store-jp.nintendo.com^$cookie
 ! https://github.com/AdguardTeam/AdguardFilters/issues/101014
 @@||gigabyte.*^$cookie=/^_ga_/
 ! https://github.com/AdguardTeam/AdguardFilters/issues/101455
@@ -59125,8 +59137,9 @@ $cookie=flocktory-uuid
 $cookie=/^wisepops/
 ! Demandware Analytics
 $cookie=/dwanonymous_/
-$cookie=/dwac_/
 $cookie=cqcid
+! BUG: https://github.com/AdguardTeam/AdguardFilters/issues/164150
+$cookie=/dwac_/,domain=~nintendo.com
 ! retentionscience.com tracking
 $cookie=rsci_vid
 ! qualaroo.com tracking
@@ -59307,7 +59320,8 @@ $cookie=AMP_TOKEN
 ! Contains campaign related information for the user.
 $cookie=/^_gac_/
 ! Used to persist session state.
-$cookie=/^_ga_/
+! BUG: https://github.com/AdguardTeam/AdguardFilters/issues/164150
+$cookie=/^_ga_/,domain=~nintendo.com
 ! Used to throttle request rate.
 $cookie=/^_dc_gtm_UA-/
 ! ---
@@ -60928,6 +60942,8 @@ inapps.appsflyersdk.com^
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/164104
+||cdn.segment.com^$script,redirect=noopjs,important,domain=reuters.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/163978
 ! https://github.com/AdguardTeam/AdguardFilters/issues/163934
 @@||securepubads.g.doubleclick.net/tag/js/gpt.js$script,redirect=googletagservices-gpt,domain=tf1info.fr
@@ -63186,9 +63202,6 @@ kizi.com#%#window.google_trackConversion = function() {};
 @@||google-analytics.com/analytics.js$domain=kompas.com
 ! spiegel.de - article shows only after a while
 @@||googletagmanager.com/gtm.js?id=GTM$domain=spiegel.de
-! https://github.com/AdguardTeam/AdguardFilters/issues/19305
-@@||google-analytics.com/analytics.js$domain=morhipo.com
-@@||google-analytics.com/gtm/js?id=GTM^$domain=morhipo.com
 ! https://github.com/AdguardTeam/AdguardDNS/issues/300
 @@||tag.aticdn.net/*/smarttag.js$domain=compteczam.fr
 ! https://github.com/AdguardTeam/AdguardFilters/issues/19024

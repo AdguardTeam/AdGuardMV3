@@ -1,8 +1,8 @@
-! Checksum: RagFIDx6Wpz2NtenCVapXg
+! Checksum: ks3HU3V0PQf344Z8HyaLWA
 ! Title: AdGuard Dutch filter
 ! Description: EasyList Dutch + AdGuard Dutch filter. Filter list that specifically removes ads on websites in Dutch language.
-! Version: 2.0.6.4
-! TimeUpdated: 2023-10-18T14:32:14+00:00
+! Version: 2.0.6.6
+! TimeUpdated: 2023-10-20T14:32:09+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -545,6 +545,7 @@ immo.vlan.be###TopCompareBox
 hoekschnieuws.nl###\36 050c52fcf1d8-2
 gaynews.nl###abri
 gaynews.nl###abri1
+menselijklichaam.nl###ad1
 filmtotaal.nl###adf-autonative
 filmtotaal.nl###adf-autonative-2
 filmtotaal.nl,lonelyplanet.nl###adf-billboard
@@ -1483,7 +1484,9 @@ omroepwest.nl#$#.adcontainer-Rectangle { position: absolute!important; left: -40
 ! Good: example.org###rek; ||example.com/ads/
 ! Bad: example.org#$##rek { display: none !important; } (for instance, should be in general_extensions.txt)
 !
-serietotaal.nl##.banner-billboard
+serietotaal.nl##div[class*="banner"]
+serietotaal.nl##div[id^="ad"]
+serietotaal.nl##.rect-in-headlines
 marktplaats.nl#?#.mp-Page-element > .mp-Listings + div:not([class]):not([id]):has(> .mp-Listings__admarktTitle)
 marktplaats.nl#?#ul.mp-Listings > li.mp-Listing:has(> .mp-Listing-coverLink > .mp-Listing-group > .mp-Listing-group--price-date-feature > span.mp-Listing-priority > span:contains(/^Topadvertentie$/))
 turksemedia.nl#$?#div[class="sidebar_item"][style="padding-bottom: 16px;"]:has(> a > img[width="276"]) { remove: true; }
