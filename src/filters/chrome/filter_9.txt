@@ -1,8 +1,8 @@
-! Checksum: VW5Bsz08GBvVVWEIEYsFEA
+! Checksum: WDQdONZanXeP3LhkkEAAvQ
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish, Portuguese, and Brazilian Portuguese languages.
-! Version: 2.0.21.78
-! TimeUpdated: 2023-10-23T06:32:09+00:00
+! Version: 2.0.21.82
+! TimeUpdated: 2023-10-25T11:32:22+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -305,6 +305,8 @@
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/164545
+expertplay.net#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/164377
 manga-crab.com##div[uncopy-anti-adblocker]
 manga-crab.com#%#//scriptlet('abort-on-property-read', 'antiAdBlockerStyle')
@@ -336,7 +338,9 @@ financasdeouro.com#%#//scriptlet('set-constant', 'antiAdBlockerHandler', 'noopFu
 guiacripto.online#%#//scriptlet('set-cookie', 'visited', '1')
 guiacripto.online#%#//scriptlet('prevent-setTimeout', '/adBlock|\.height\(\)/')
 guiacripto.online#%#//scriptlet('adjust-setTimeout', 'playFunction', '*', '0.001')
+! https://github.com/AdguardTeam/AdguardFilters/issues/164466
 ! https://github.com/AdguardTeam/AdguardFilters/issues/160806
+southparkstudios.com.br,southpark.lat#%#//scriptlet('prevent-fetch', 'imasdk.googleapis.com')
 ||imasdk.googleapis.com/pal/sdkloader/pal.js$script,redirect=noopjs,domain=southparkstudios.com.br|southpark.lat
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima3,domain=southparkstudios.com.br|southpark.lat
 ! https://github.com/AdguardTeam/AdguardFilters/issues/160498
@@ -2170,6 +2174,8 @@ gaz.com.br,placar.com.br,futebolinterior.com.br,tvhistoria.com.br,tribunapr.uol.
 ! ##.banner
 correio24horas.com.br,cnnespanol.cnn.com,motociclismo.es,sub100.com.br,theenemy.com.br,manhwas.net,rpp.pe,ambito.com,economipedia.com,informador.mx,elinformador.com.co,cronista.com,rionegro.com.ar,diariodecuyo.com.ar,voydeviaje.com.ar,guarda14.com,viapais.com.ar,agazeta.com.br,eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.*,mundotecnologias.com,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##.banner
 !
+midianews.com.br###ban_header
+midianews.com.br##.col-sm-3 div[style="height: 280px;"]
 manga-crab.com##.anunciopublicitario
 okdiario.com##aside.ad-slot-ph
 okdiario.com##.ad-slot-ph::before
@@ -3215,7 +3221,7 @@ lapoliticaonline.*###header-banner-wrapper
 onepieceex.net##.banner-resposivo
 tecmundo.com.br##p > a[href^="https://bit.ly/"][target="_blank"] > span > img
 ||img.ibxk.com.br/*/banner-*.png$domain=tecmundo.com.br
-yugenmangas.net.br,globo.com,eltiempo.com,gauchazh.clicrbs.com.br,hobbyconsolas.com,larepublica.pe,vozpopuli.com##.ad-container
+yugenmangas.org,yugenmangas.net.br,globo.com,eltiempo.com,gauchazh.clicrbs.com.br,hobbyconsolas.com,larepublica.pe,vozpopuli.com##.ad-container
 vozpopuli.com##.home_1_ad
 infobae.com##.d23-navbar-ad-container
 infobae.com##.navbar-ad-container

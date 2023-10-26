@@ -1,8 +1,8 @@
-! Checksum: LHuTa6KlFep92hxqtBaPqg
+! Checksum: NoxkmwN9m9nVVgKY/BFqkg
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.38.37
-! TimeUpdated: 2023-10-23T21:31:52+00:00
+! Version: 2.0.38.42
+! TimeUpdated: 2023-10-25T09:32:22+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -524,6 +524,8 @@ essen-und-trinken.de,urbia.de#%#!function(){function b(){}function a(a){return{g
 schnittmuster-datenbank.de#%#//scriptlet("abort-on-property-read", "adsBlocked")
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/164437
+hausbau-forum.de#%#//scriptlet('prevent-xhr', 'adsbygoogle')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/161767
 @@||cdns.symplr.de/filext.com/filext.js$domain=filext.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/161312
@@ -536,6 +538,7 @@ deutschekanale.com,riuria.beauty#%#//scriptlet('prevent-fetch', '/doubleclick\.n
 gartenfreunde.de###ez-content-blocker-container
 gartenfreunde.de#%#//scriptlet('set-constant', 'ezDetectAardvark', 'noopFunc')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/157392
+southpark.de#%#//scriptlet('prevent-fetch', 'imasdk.googleapis.com')
 ||imasdk.googleapis.com/pal/sdkloader/pal.js$script,redirect=noopjs,domain=southpark.de
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima3,domain=southpark.de
 ! https://github.com/AdguardTeam/AdguardFilters/issues/156446
@@ -670,9 +673,6 @@ wetteronline.at,wetteronline.de#%#//scriptlet("abort-on-property-write", "google
 t-online.de#%#//scriptlet("set-constant", "abp", "false")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/49340
 @@||teleboy.ch/assets/js/*werbung*.js
-! https://github.com/AdguardTeam/AdguardFilters/issues/48726
-@@||hausbau-forum.de/js/siropu/am/ads.min.js
-hausbau-forum.de#%#//scriptlet("set-constant", "adBlockDetected", "false")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/48008
 @@||cdn.zomap.de/*signature=$domain=player.glomex.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/46813
@@ -1261,6 +1261,8 @@ menshealth.de#%#function google_ad_request_done() {};
 !--------------------------------------!
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/164563
+ratgeber.bunte.de#$##G32 { --topbanner-height-min: 0 !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/159998
 ! https://github.com/AdguardTeam/CoreLibs/issues/1800
 ! TODO: remove when/if it will be fixed in CoreLibs
@@ -1568,6 +1570,11 @@ formel1.de,krautundrueben.de,motorsport-total.com,traktorpool.de,fnweb.de,laborj
 !
 !
 !
+ratgeber.bunte.de##main ~ aside[id^="R1C"][role="complementary"]
+xn--solitr-online-ffb.eu##div[id*="pane"][class*="pane"][style]
+minesweeper-online.de##.rek
+mahjong-spiel.eu##.bn[id][style]
+computerbase.de##.skin-ad
 bild.de##.mtl
 all-in.de###banner-container
 all-in.de###stroeer-container-pubperform
@@ -7027,6 +7034,7 @@ $stylesheet,subdocument,third-party,xmlhttprequest,domain=canna-power.to|canna.t
 ||codecheck.info/i/CTA-banner.png
 ||coincierge.de/wp-content/plugins/floating-banner/
 ||com-magazin.de/img/*/Commerce-Week_450x94.jpeg
+||computerbase.de/creatives/
 ||computerschach.de^*/shredder_130x80.gif
 ||condor.cl/wp-content/uploads/*/aviso_condor-07.png
 ||condor.cl/wp-content/uploads/*/BANNERWEB_
@@ -9749,6 +9757,7 @@ der-farang.com##.sideboard_conatainer
 automatentest.de##.sideinfo
 mytastedeu.com##.site-header__panorama
 beeg-pornos.com,deinesexfilme.com,einfachtitten.com,gutesexfilme.com,halloporno.net,hd-pornos.info,hd-sexfilme.com,hdpornos.net,herzporno.com,lesbenhd.com,meinyouporn.com,milffabrik.com,nursexfilme.com,pornhub-sexfilme.net,pornoaffe.net,pornodavid.com,pornoente.tv,pornofelix.com,pornofisch.com,pornohammer.com,pornohans.com,pornohelm.com,pornohirsch.net,pornojenny.com,pornoklinge.com,pornoleon.com,pornolisa.com,pornoritze.com,pornoschlange.com,pornosusi.com,pornotanja.com,pornotom.com,pornotommy.com,pornovideos-hd.com,pornozebra.com,sexente.com,sexfilme-gratis.com,sexvideos-gratis.com,sexvideos-hd.com,tube8-pornos.com,xnxx-porno.com,xnxx-pornos.xxx,xnxx-sexfilme.com##.size-300x250
+computerbase.de##.skin-ad
 gesundheit.de,onmeda.de##.sky-left
 gesundheit.de,onmeda.de##.sky-right
 hifi.de##.sky1-outer-container

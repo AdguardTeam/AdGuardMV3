@@ -1,8 +1,8 @@
-! Checksum: jl59i6CnnGykej80jxKO9g
+! Checksum: iE8kvMFK6OqkFD0sjJFP4A
 ! Title: AdGuard Japanese filter
 ! Description: Filter that enables ad blocking on websites in Japanese language.
-! Version: 2.0.44.95
-! TimeUpdated: 2023-10-23T17:31:59+00:00
+! Version: 2.0.45.1
+! TimeUpdated: 2023-10-26T04:32:12+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -831,7 +831,6 @@ nasubiblog.com,kyukyoku-matome.com##.widget_pc_ad
 ##._popIn_recommend_article_ad
 ##._popIn_recommend_article_ad_reserved
 ##.google-afc-image
-###BottomAd
 ###ad-60days-area
 ###ad-recommend
 ###float-bnr
@@ -921,7 +920,6 @@ nasubiblog.com,kyukyoku-matome.com##.widget_pc_ad
 ##.wipe-ad-div-class
 ##.ys-ad-content
 ##a[href^="http://abroadabc.com/index.php"]
-##a[href^="http://ad2.trafficgate.net/"]
 ##a[href^="https://preaf.jp/pa.do"] > img
 ##a[href^="https://www.tenshilover.jp/product/"] > img
 ##div[class][data-index][style^="float: none; margin"]
@@ -1107,6 +1105,8 @@ avgle.com#%#//scriptlet('abort-current-inline-script', '__htapop')
 !-------CSS---------
 !-------------------
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/164490
+ryukyushimpo.jp#$?#main > .homepage:not(:matches-css(max-width: 1150px)) { margin-top: 0px !important; }
 ! placeholder
 profile.ameba.jp#$#.big-footer-article__container { width: 656px !important; }
 umaroidblog.com#$##sidebar[style^="height:"] { height: auto !important; }
@@ -1621,6 +1621,12 @@ gundamlog.com###more > iframe[src^="https://richlink.blogsys.jp"]
 !
 !
 !
+itmedia.co.jp##div[style="min-width:600px;min-height:32px;"]
+itmedia.co.jp###BelowArtLink
+||subscription.ximera.com^$subdocument,domain=ryukyushimpo.jp
+ryukyushimpo.jp##.ryukyushimpo-fourteen-container
+ryukyushimpo.jp#?#article ~ .flex-col:has(div[id^="gpt-"][style^="min-width:"])
+ryukyushimpo.jp##div[id^="gpt-"][style^="min-width:"]
 comedydouga.com#?#.entry-letterbody > blockquote.gazou:has(> p > a[rel="noopener noreferrer"])
 patanouchi.com#?#td[valign="top"] > table[border="0"][cellspacing="0"] > tbody > tr > td > ins.adsbygoogle:upward(1)
 patanouchi.com##td > font[size="2"] > span[style="font-family:HGP創英角ﾎﾟｯﾌﾟ体; font-size:2em; color:darkgreen;"] ~ a
@@ -2451,6 +2457,7 @@ kensetsunews.com###sidebar > div > div > div.g
 fc2.com##iframe[src^="https://media5.fc2.com/"]
 ||fc2.com/a/pagead/
 ||fc2.com/pagead/
+rakuten-sec.co.jp##.list-banner-01
 rakuten-sec.co.jp##.footerBanner
 blog.kaerucloud.com,kojintekibikematomeblog.com##.side-topad
 city.sumida.lg.jp##.bnr_area
