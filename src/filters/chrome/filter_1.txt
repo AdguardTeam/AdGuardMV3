@@ -1,8 +1,8 @@
-! Checksum: +xe0g6lPXBvQx8ILcKozxQ
+! Checksum: 2+uK6qrGe3k4euRCCwlAOw
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.85.48
-! TimeUpdated: 2023-10-25T14:31:23+00:00
+! Version: 2.0.85.55
+! TimeUpdated: 2023-10-27T12:31:09+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1476,6 +1476,7 @@ ucoz.ru/informer/
 ! Bad: /banner.jpg (should be in general_url.txt)
 ! Bad: ||adssubdomain.legitwebsite.com^ (should be in adservers_firstparty.txt)
 !
+||all-audio.pro^$all
 ||rbfive.bid^
 ||nwhoxwpuj6.com^
 ||trackclicksplz.site^$third-party
@@ -7175,6 +7176,7 @@ echo.msk.ru,kakprosto.ru#%#//scriptlet('abort-on-property-read', 'Object.prototy
 ya.ru##.banner
 !
 ! Yandex.Search
+ya.ru##.Skeleton_type_ad_search
 [$path=/search]ya.ru,yandex.*##.AdvMedia
 ya.ru,yandex.*##li.mini-suggest__item > a[href^="http://yabs."][href*="/count/"]
 ya.ru,yandex.*##li.mini-suggest__item > a[href^="https://yabs."][href*="/count/"]
@@ -7360,6 +7362,9 @@ rivnepost.rv.ua,telegraf.in.ua,vlast.kz,mignews.com.ua,sibkray.ru,kursiv.kz,live
 !-------CSS---------
 !-------------------
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/147884#issuecomment-1782593924
+dev.ua#$#.partners { background-color: unset !important; }
+dev.ua#$#.partners > a:not([href^="https://dev.ua/"]) { visibility: hidden !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/59768
 hdrezkabmmshq.org,hdrezkafh28d9.org,hdrezkasmakyy.org,hdrezkafhs83u.org,hdrezkahs920s.org,hdrezka.in,hdrezkat5ee2w.org,hdrezkagdvv2b.net,hdrezka66yhfg.net,hdrezka77ftyy.net,hdrezka.rest,hdrezkaffsg67.net,hdrezkafjk2he.net,hdrezkahf22hh.net,hdrezkahdg24s.net,hdrezkabbdh4d.net,hdrezkajjfhr5.net,27p6qp79zyr1.net,hdrezka19139.org,hdrezkap3g.org,hdrezkapez.org,hdrezkapoi.org,hdrezkarty.org,hdrezkacvb.org,hdrezka.ag,upivi.com,hdrezka.me,ikinopoisk.com,kinopub.me,3ivi.com,rezkify.com,aghdrezka.com,hdrezka.re,bestofkinopoisk.com,rezkance.com,rezkery.com,rezkily.com,ezhdrezka.com,akinopoisk.com,hdrezkaonline.com,drhdrezka.com,mrhdrezka.com,hdrezka.sh,ehdrezka.com,nukinopoisk.com,livekinopoisk.com,betahdrezka.com,cokinopoisk.com,hdrezka-ag.com,hdrezka.club,hdrezka.cm,hdrezka.co,hdrezka.name,hdrezka.site,hdrezka.today,hdrezka.tv,hdrezka.website,hdrezkaag.net,hdrezkaweb.com,hdrezkayou.com,instahdrezka.com,myhdrezka.com,freehdrezka.com,rezka.ag,tryhdrezka.com#$#.b-post__rating_table { margin-left: -30px !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/147690
@@ -7814,6 +7819,8 @@ disk.yandex.*#%#//scriptlet('remove-class', 'has-fullscreen-banner','.public__ro
 !------- CSS -----------
 !-----------------------
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/164720
+russian-seriali.ru#$#.wrap > div[class="block center"] { padding-top: 0 !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/163803
 stavka.tv#$#.PromoPopup { display: none !important; }
 stavka.tv#$#body[class] { overflow: auto !important; }
@@ -7896,9 +7903,9 @@ cybersport.ru#$#.page-layout > main { padding-top: 0 !important; }
 culture.ru#$#div > div[style^="background: rgb"] > a[href][target="_blank"] { display: none !important; }
 culture.ru#$##header { top: 0 !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/130588
-study.ru#$#.top-banner { display: none!important; }
-study.ru#$##header { height: 94px!important; }
-study.ru#$#.header-inner { height: 94px!important; }
+study.ru#$#.top-banner { display: none !important; }
+study.ru#$##header { height: 94px !important; }
+study.ru#$#.header-inner { height: 94px !important; }
 ! dzen.ru
 dzen.ru#$#body { overflow: auto !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/129387
@@ -9162,7 +9169,7 @@ kp.ua,ukrrudprom.com,bezformata.com,progorodsamara.ru,agrotrend.com.ua,sputnikne
 ! ##div[class^="banner-"]
 progorod33.ru,inpodolsk.ru,dota2.ru,meteo.ua,klops.ru,crazymailing.com,lotzon.pro,novosti-n.org,prokazan.ru,20minut.ua,alnews.com.ua,gtavicecity.ru,haqqin.az,medicina.ua,obzor.press,polit.ru,tsn.ua,wday.ru,zhitomir.info,zvuki.ru##div[class^="banner-"]
 ! ##.banner
-uaportal.com,nebogach.ru,text.ru,tvrain.tv,kinogo.sh,stopcor.org,1plus1.ua,officelife.media,tass.ru,glavcom.ua,dni.ru,sakhaday.ru,vb.kg,01.kg,015.by,0154.by,0312.ua,032.ua,0332.ua,0342.ua,0352.ua,0362.ua,0372.ua,0382.ua,0412.ua,04141.com.ua,0432.ua,04563.com.ua,04597.com.ua,04598.com.ua,0462.ua,0472.ua,048.ua,04868.com.ua,0512.com.ua,05136.com.ua,05161.com.ua,0522.ua,0532.ua,05366.com.ua,0542.ua,05447.com.ua,0552.ua,056.ua,0564.ua,0566.com.ua,0569.com.ua,057.ua,061.ua,06153.com.ua,0619.com.ua,0623.com.ua,06236.com.ua,06237.com.ua,06239.com.ua,06242.ua,06252.com.ua,06267.com.ua,06272.com.ua,06274.com.ua,06277.com.ua,0629.com.ua,0642.ua,06452.com.ua,161.ru,1news.zp.ua,1prime.ru,1rnd.ru,2ip.me,2ip.ua,3652.ru,3654.ru,3849.com.ua,44.ua,4594.com.ua,5692.com.ua,62.ua,6262.com.ua,6264.com.ua,65.media,7152.kz,72.ru,7232.kz,8422city.ru,8692.ru,9tv.co.il,academic.ru,advis.ru,afisha.ngs.ru,afisha.ngs22.ru,afisha.vse42.ru,agronews.ru,agroperspectiva.com,allboxing.ru,anapa.life,angarsk38.ru,apostrophe.ua,apteka.ru,armeniasputnik.am,astrakhan-24.ru,avtodispetcher.ru,baikal-daily.ru,bazhopol.ru,be-in.ru,bel.biz,belretail.by,bigsale.com.ua,bilyayivka.city,blitz.if.ua,blizko.by,bloknot-rostov.ru,blstv.eu,budport.com.ua,championat.com,chepetsk.ru,choiz.me,chto-eto-takoe.ru,city04.kz,city41.ru,citydomodedovo.ru,cnews.ru,comments.ua,computerra.ru,cossa.ru,dengi.ua,dentalmagazine.ru,dfiles.ru,dialog.ua,dnl.dn.ua,dom.ngs.ru,dom.vse42.ru,doska.vse42.ru,doutdess.org,echosevera.ru,etver.ru,eva.ru,exler.ru,exploit.media,f1news.ru,fedpress.ru,football.ua,fraza.ua,gametech.ru,ganc-chas.by,gazeta.ru,go01.ru,go26.ru,go31.ru,go61.ru,go7812.ru,godublin.info,golondon.info,gooool.org,gorod3466.ru,gorod55.ru,gorodarmavir.ru,gorodkirov.ru,gorodnsk63.ru,gorodrabot.ru,gtavicecity.ru,hi.ru,hightech.fm,hornews.com,hornews.ru,iccup.com,ichip.ru,iguides.ru,iledebeaute.ru,inaktau.kz,inalmaty.kz,inastana.kz,inatyrau.kz,infolyubertsy.ru,inform69.ru,inkaragandy.kz,inosmi.ru,inshymkent.kz,it-world.ru,ivanovonews.ru,iz.ru,jkg-portal.com.ua,joxi.net,joxi.ru,kaktutzhit.by,karelia.news,kaskelenec.kz,kazanfirst.ru,kinda.media,kinorom.com,klex.ru,kod.ru,konkretno.ru,konkurent.in.ua,konkurent.ua,kramatorsk.info,l2op.ru,lenta.ru,lidanews.by,lider-press.by,life.ru,liga.net,livemaster.ru,lowadi.com,magcity74.ru,metrinfo.ru,mgorod.kz,mignews.com.ua,mmotop.ru,mmovote.ru,mob.org.ru,mojaakcija.com.ua,molnet.ru,msk.ru,music.i.ua,mv.org.ua,myvin.com.ua,mywatershop.ua,namba.kg,nashbryansk.ru,navi.gg,naviny.by,naviny.media,news.pn,news.vse42.ru,newsbuzz.ru,newslab.ru,newsomsk.ru,nn-files.nnov.org,novostivoronezha.ru,nv.ua,odessa.net,odessamedia.net,oneprog.ru,oper.ru,oshto.kg,penzadoctor.ru,pg21.ru,piginfo.ru,pornk.in,portal.lviv.ua,post-tracker.ru,ppt.ru,prado-club.su,prm.ru,pro.berdyansk.biz,prokazan.ru,prophotos.ru,psm7.com,punkt-a.info,qapshagai-city.kz,rabota.vse42.ru,ranak.me,rcmm.ru,realty.interfax.ru,ria.ru,ridus.ru,risu.org.ua,roem.ru,ruposters.ru,sakhalin.info,samara24.ru,sarnovosti.ru,savepic.net,savepic.ru,seodiz.ru,shliah.by,shoes-report.ru,sm-news.ru,snow-motion.ru,softkey.ru,softtorrent.ru,sonikelf.ru,sovsport.ru,sport.kazanfirst.ru,sporu.net,spravochnick.ru,squarefaction.ru,strana.ua,superomsk.ru,tatar-inform.ru,techlabs.by,tele.click,teleg.run,thequestion.ru,tochka.net,tomsk.ru,topwar.ru,tourism.interfax.ru,tsn.ua,turizm.ru,tvernews.ru,tvfru.org,ukrlife.tv,ukropnews.com,unian.net,ur8lv.com,uralskcity.kz,usionline.com,vancouverok.com,vashvkus.ru,vesty.co.il,vidal.ru,vidnoe24.ru,vm.ru,vprognoze.ru,vzsar.ru,wareznik2.ru,wd-x.ru,wday.ru,wildo.ru,winreview.ru,woman.ru,womenhealthnet.ru,yugopolis.ru,zhmak.info,zimamagazine.com##.banner
+unian.ua,uaportal.com,nebogach.ru,text.ru,tvrain.tv,kinogo.sh,stopcor.org,1plus1.ua,officelife.media,tass.ru,glavcom.ua,dni.ru,sakhaday.ru,vb.kg,01.kg,015.by,0154.by,0312.ua,032.ua,0332.ua,0342.ua,0352.ua,0362.ua,0372.ua,0382.ua,0412.ua,04141.com.ua,0432.ua,04563.com.ua,04597.com.ua,04598.com.ua,0462.ua,0472.ua,048.ua,04868.com.ua,0512.com.ua,05136.com.ua,05161.com.ua,0522.ua,0532.ua,05366.com.ua,0542.ua,05447.com.ua,0552.ua,056.ua,0564.ua,0566.com.ua,0569.com.ua,057.ua,061.ua,06153.com.ua,0619.com.ua,0623.com.ua,06236.com.ua,06237.com.ua,06239.com.ua,06242.ua,06252.com.ua,06267.com.ua,06272.com.ua,06274.com.ua,06277.com.ua,0629.com.ua,0642.ua,06452.com.ua,161.ru,1news.zp.ua,1prime.ru,1rnd.ru,2ip.me,2ip.ua,3652.ru,3654.ru,3849.com.ua,44.ua,4594.com.ua,5692.com.ua,62.ua,6262.com.ua,6264.com.ua,65.media,7152.kz,72.ru,7232.kz,8422city.ru,8692.ru,9tv.co.il,academic.ru,advis.ru,afisha.ngs.ru,afisha.ngs22.ru,afisha.vse42.ru,agronews.ru,agroperspectiva.com,allboxing.ru,anapa.life,angarsk38.ru,apostrophe.ua,apteka.ru,armeniasputnik.am,astrakhan-24.ru,avtodispetcher.ru,baikal-daily.ru,bazhopol.ru,be-in.ru,bel.biz,belretail.by,bigsale.com.ua,bilyayivka.city,blitz.if.ua,blizko.by,bloknot-rostov.ru,blstv.eu,budport.com.ua,championat.com,chepetsk.ru,choiz.me,chto-eto-takoe.ru,city04.kz,city41.ru,citydomodedovo.ru,cnews.ru,comments.ua,computerra.ru,cossa.ru,dengi.ua,dentalmagazine.ru,dfiles.ru,dialog.ua,dnl.dn.ua,dom.ngs.ru,dom.vse42.ru,doska.vse42.ru,doutdess.org,echosevera.ru,etver.ru,eva.ru,exler.ru,exploit.media,f1news.ru,fedpress.ru,football.ua,fraza.ua,gametech.ru,ganc-chas.by,gazeta.ru,go01.ru,go26.ru,go31.ru,go61.ru,go7812.ru,godublin.info,golondon.info,gooool.org,gorod3466.ru,gorod55.ru,gorodarmavir.ru,gorodkirov.ru,gorodnsk63.ru,gorodrabot.ru,gtavicecity.ru,hi.ru,hightech.fm,hornews.com,hornews.ru,iccup.com,ichip.ru,iguides.ru,iledebeaute.ru,inaktau.kz,inalmaty.kz,inastana.kz,inatyrau.kz,infolyubertsy.ru,inform69.ru,inkaragandy.kz,inosmi.ru,inshymkent.kz,it-world.ru,ivanovonews.ru,iz.ru,jkg-portal.com.ua,joxi.net,joxi.ru,kaktutzhit.by,karelia.news,kaskelenec.kz,kazanfirst.ru,kinda.media,kinorom.com,klex.ru,kod.ru,konkretno.ru,konkurent.in.ua,konkurent.ua,kramatorsk.info,l2op.ru,lenta.ru,lidanews.by,lider-press.by,life.ru,liga.net,livemaster.ru,lowadi.com,magcity74.ru,metrinfo.ru,mgorod.kz,mignews.com.ua,mmotop.ru,mmovote.ru,mob.org.ru,mojaakcija.com.ua,molnet.ru,msk.ru,music.i.ua,mv.org.ua,myvin.com.ua,mywatershop.ua,namba.kg,nashbryansk.ru,navi.gg,naviny.by,naviny.media,news.pn,news.vse42.ru,newsbuzz.ru,newslab.ru,newsomsk.ru,nn-files.nnov.org,novostivoronezha.ru,nv.ua,odessa.net,odessamedia.net,oneprog.ru,oper.ru,oshto.kg,penzadoctor.ru,pg21.ru,piginfo.ru,pornk.in,portal.lviv.ua,post-tracker.ru,ppt.ru,prado-club.su,prm.ru,pro.berdyansk.biz,prokazan.ru,prophotos.ru,psm7.com,punkt-a.info,qapshagai-city.kz,rabota.vse42.ru,ranak.me,rcmm.ru,realty.interfax.ru,ria.ru,ridus.ru,risu.org.ua,roem.ru,ruposters.ru,sakhalin.info,samara24.ru,sarnovosti.ru,savepic.net,savepic.ru,seodiz.ru,shliah.by,shoes-report.ru,sm-news.ru,snow-motion.ru,softkey.ru,softtorrent.ru,sonikelf.ru,sovsport.ru,sport.kazanfirst.ru,sporu.net,spravochnick.ru,squarefaction.ru,strana.ua,superomsk.ru,tatar-inform.ru,techlabs.by,tele.click,teleg.run,thequestion.ru,tochka.net,tomsk.ru,topwar.ru,tourism.interfax.ru,tsn.ua,turizm.ru,tvernews.ru,tvfru.org,ukrlife.tv,ukropnews.com,unian.net,ur8lv.com,uralskcity.kz,usionline.com,vancouverok.com,vashvkus.ru,vesty.co.il,vidal.ru,vidnoe24.ru,vm.ru,vprognoze.ru,vzsar.ru,wareznik2.ru,wd-x.ru,wday.ru,wildo.ru,winreview.ru,woman.ru,womenhealthnet.ru,yugopolis.ru,zhmak.info,zimamagazine.com##.banner
 ! ##.advert
 ufacitynews.ru,sevastopol.su,zn.ua,pravo.ru,lubertsyriamo.ru,kommersant.ru,dvnovosti.ru,kubnews.ru,turbopages.org,chernozem.info,flashgames.ru,footballreview.ru,inforesist.org,msgforum.ru,newsland.com,province.ru,tenews.org.ua,tltorrent.ru,zab.ru##.advert
 ! ##div[id^="unit_"]
@@ -9181,6 +9188,12 @@ eg.ru,newsmaker.md,delo-vcusa.ru,tolknews.ru,gorodche.ru,smartpress.by,raenza.ru
 !
 !
 !
+itc.ua##body > div[style="text-align:center;background: #000;"]
+dev.ua##.container > div.island.card
+dev.ua##.island.d-none_mobile
+new-rutor.org,xrutor.org,123rutor.su##iframe[height="265px"][width="732px"]
+new-rutor.org,xrutor.org,123rutor.su###bulbasaur-frame
+unian.ua#?#.publication > div.title-without-border:contains(Новини партнерів)
 buhplatforma.com.ua##a[href^="https://seminar.expertus.com.ua/"]
 vgorode.ua###news_scroll_bottom
 socportal.info##.sticky-wrapper
@@ -9261,6 +9274,14 @@ meta-ratings.com.ua,metaratings.ru##.main-top-bookmakers
 sinoptik.com.ru,sinoptik.ua###adsZone
 sinoptik.com.ru,sinoptik.ua###adsZone3
 ||sinst.fwdcdn.com/img/partners/$domain=sinoptik.com.ru|sinoptik.ua
+!
+! gamer-info.com
+gamer-info.com###all-page-content > div.mp-line > div.games-onl-set-m1 > a[data-gmimplid]
+gamer-info.com##.games-onl-set-v2
+gamer-info.com##.roarticlecol > div[class*=" "] > div[style="overflow:hidden;"]
+gamer-info.com##.mn-news-lst-ad-bl > div:not([class]):first-child
+gamer-info.com##.mn-video-lst-ad-bl > div[class]:first-child
+gamer-info.com###games-db-main-listblock > a[class="gmv2-it"] + div[class]
 ! citysites.ua
 048.ua,44.ua,056.ua,032.ua,04868.com.ua,karelia.news,0629.com.ua,5692.com.ua,01.kg,0154.by,0472.ua,048.ua,0512.com.ua,0522.ua,0532.ua,0552.ua,056.ua,0564.ua,061.ua,06153.com.ua,0642.ua,62.ua,7152.kz,7232.kz,city04.kz,inaktau.kz,inalmaty.kz,inastana.kz,inatyrau.kz,inkaragandy.kz,inshymkent.kz,kaskelenec.kz,oshto.kg,qapshagai-city.kz,uralskcity.kz#?#.card-wrapper:has(> amp-ad)
 karelia.news,015.by,032.ua,0332.ua,0342.ua,0352.ua,0362.ua,0372.ua,0412.ua,0432.ua,0462.ua,0472.ua,048.ua,04868.com.ua,0512.com.ua,0522.ua,0532.ua,05366.com.ua,0542.ua,0552.ua,056.ua,0564.ua,057.ua,061.ua,06153.com.ua,06239.com.ua,06252.com.ua,06274.com.ua,0629.com.ua,0642.ua,44.ua,5692.com.ua,62.ua,6264.com.ua,8422city.ru,86155city.ru,8634city.ru,go31.ru,goroddomodedovo.ru,labaved.ru##div[class*="banner_box"]
@@ -9351,6 +9372,11 @@ kadrovik01.com.ua,kom-dir.ru,gd.ru,buhsoft.ru,dirklinik.ru,fd.ru,business.ru,pro
 !
 !
 !
+hi-tech.mail.ru##div[data-qa="Box"]
+russian-seriali.ru##.mixmob
+russian-seriali.ru##.roll
+||goodgame.ru/html/embed-player/dist/index.html?partner=
+shazoo.ru#?#.aside > div > b:contains(Партнерский стрим)
 ||cdnvideo.v.ozone.ru/vod/*/asset_*.mp4
 ozon.ru##div[data-widget="advVideoBanner"]
 audit-it.ru##.opadv
@@ -20065,13 +20091,6 @@ pornolab-zerkalo.appspot.com,pornolab.biz,pornolab.cc,pornolab.lib,pornolab.net#
 pornolab-zerkalo.appspot.com,pornolab.biz,pornolab.cc,pornolab.lib,pornolab.net###vs_here
 pornolab-zerkalo.appspot.com,pornolab.biz,pornolab.cc,pornolab.lib,pornolab.net##td[width="50%"][class="vBottom"][style="text-align: right !important;"]
 ! END: pornolab
-!
-! gamer-info.com
-gamer-info.com##.games-onl-set-v2
-gamer-info.com##.roarticlecol > div[class*=" "] > div[style="overflow:hidden;"]
-gamer-info.com##.mn-news-lst-ad-bl > div:not([class]):first-child
-gamer-info.com##.mn-video-lst-ad-bl > div[class]:first-child
-gamer-info.com###games-db-main-listblock > a[class="gmv2-it"] + div[class]
 !
 ! Prevent of loading WS (onerror event)
 ||adl-hunter.com/bens/vinos$script,redirect=noopjs,important,~websocket

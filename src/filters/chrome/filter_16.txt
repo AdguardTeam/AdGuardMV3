@@ -1,8 +1,8 @@
-! Checksum: VvDZstKPyEvkCCXsqLGS7A
+! Checksum: 8l6rR+IVxYPtMND1uLWOWA
 ! Title: AdGuard French filter
 ! Description: Liste FR + AdGuard French filter. Filter list that specifically removes ads on websites in French language.
-! Version: 2.0.41.99
-! TimeUpdated: 2023-10-25T21:30:42+00:00
+! Version: 2.0.42.1
+! TimeUpdated: 2023-10-26T16:30:47+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -837,6 +837,7 @@ $script,third-party,denyallow=fastly.net|statically.io|sharecast.ws|bunnycdn.ru|
 !
 !
 !
+app.molotov.tv##div[id^="banner"]
 parismatch.be##.ap-SmartTarget
 presse-citron.net##.od-wrapper
 presse-citron.net##.vsly-player
@@ -1460,12 +1461,19 @@ adguard.info,adguard.com,adguard.app##.hello_from_adguard_french
 ! Good: example.org#@#.ad
 ! Bad:  @@||example.org^$stealth (should be in AdGuard Base - allowlist_stealth.txt)
 !
+! TEMPORARY
+! https://github.com/AdguardTeam/AdguardFilters/issues/164259
+! Reported to Easylist. Caused by EasyPrivacy
+! TODO: check 30.10.23 and remove. Or move to TPF
+app.molotov.tv#%#//scriptlet('prevent-xhr', '/ping?token=')
 !
 ! broken player
 @@||oasis-player*/web/monetization/*/monetization.js$domain=puls24.at|kabeleins.de|wetter.com|prosiebenmaxx.de|sixx.de|sat1.de|puls4.com|prosieben.de|kabeleinsdoku.de|kabeleinsdoku.at|zappn.tv|sat1.at
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/164610
+mrdeepfakes.com#@#div[data-ad]
 ! https://github.com/AdguardTeam/AdguardFilters/issues/164510
 @@||partners.travel.meetch.io^$domain=souscription.travel.upcover.fr
 ! https://github.com/AdguardTeam/AdguardFilters/issues/164483
