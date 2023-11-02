@@ -1,8 +1,8 @@
-! Checksum: HQW1lONAWFFQ2oo7wY4MzA
+! Checksum: vsYs8oLhBfgboisLpoZA7Q
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.85.63
-! TimeUpdated: 2023-10-31T07:30:59+00:00
+! Version: 2.0.85.70
+! TimeUpdated: 2023-11-01T15:31:01+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -5990,6 +5990,15 @@ electric-house.ru#%#//scriptlet("abort-on-property-read", "onload")
 !
 !
 !
+! pikabu.ru
+! https://github.com/AdguardTeam/AdguardFilters/issues/164131#issuecomment-1784848634
+! https://github.com/AdguardTeam/AdguardFilters/issues/148093
+! https://github.com/AdguardTeam/AdguardFilters/issues/147394
+! https://github.com/AdguardTeam/AdguardFilters/issues/146771
+||pikabu.ru^$cookie=/bs/
+pikabu.ru#%#//scriptlet('json-prune', 'data', 'errors')
+! https://github.com/AdguardTeam/AdguardBrowserExtension/issues/2505
+pikabu.ru#%#//scriptlet('remove-node-text', 'script', '/XMLHttpRequest\(\)[\s\S]+Ad[\s\S]+/')
 ! sports.ru
 sports.ru#%#//scriptlet('json-prune', 'direct rtbAuctionInfo')
 sports.ru#%#//scriptlet('set-constant', 'Ya.adfoxCode.create', 'noopFunc')
@@ -6820,24 +6829,23 @@ dzen.ru##.viewer-layout__sidebar div[id^="D-A-"]
 ! adblock detection in videos
 @@||ad.mail.ru/static/admanhtml/rbadman-html5.min.js$domain=dzen.ru
 !
-! Common rules
-!
+! mail.ru - ad on main page
+[$path=/^\/$|\/\?/]mail.ru#%#//scriptlet('remove-node-text', 'script', 'Honeypot')
 ! kino.mail.ru
 @@||ad.mail.ru/i*.gif$domain=kino.mail.ru
 @@||kino.mail.ru^$generichide
 ! horo.mail.ru
-!
 ||auto.mail.ru/sw-mobile.js
-!
+! minigames.mail.ru - ads replacement script
 !
 ! probably obsolete:
-!
-! minigames.mail.ru - ads replacement script
 !
 ! ok.ru
 ! https://github.com/AdguardTeam/AdguardFilters/issues/43985
 @@||ad.mail.ru/adq/?callback=mailruEnabled$domain=ok.ru
 ! https://github.com/AdguardTeam/AdguardFilters/issues/19112
+!
+! Common rules
 !
 ! END: VK Group
 !
@@ -7402,6 +7410,8 @@ sinoptik.com.ru#$#iframe[bb] { visibility: hidden!important; }
 !------- JS ------------
 !-----------------------
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/165140
+tochka.by#%#//scriptlet('remove-class', 'brand', '.l-section.brand')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/164032
 doramatv.live#%#//scriptlet('json-prune', 'direct rtbAuctionInfo')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/162448
@@ -7425,12 +7435,6 @@ viks.tv#%#//scriptlet('prevent-window-open')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/141785
 !+ NOT_PLATFORM(windows, mac, android)
 e.mail.ru,octavius.mail.ru#%#//scriptlet('trusted-replace-xhr-response', '/\[{"json":{"result":{"status":200\,"body":{"direct".+/', '/\[{"json":{"result":{"status":200\,"body":{"direct":{}}}}}\]/', '/api/v1')
-! https://github.com/AdguardTeam/AdguardFilters/issues/164131#issuecomment-1784848634
-! https://github.com/AdguardTeam/AdguardFilters/issues/148093
-! https://github.com/AdguardTeam/AdguardFilters/issues/147394
-! https://github.com/AdguardTeam/AdguardFilters/issues/146771
-pikabu.ru#%#//scriptlet('remove-node-text', 'script', 'AdCn')
-pikabu.ru#%#//scriptlet('json-prune', 'data', 'errors')
 ! https://forum.adguard.com/index.php?threads/51458/
 ip.tivix.co#%#//scriptlet('prevent-window-open')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/140602
@@ -9047,8 +9051,6 @@ gameinonline.com#$##header {padding:20px 0 3px!important;}
 kinozadrot.net#$#body.brending {padding-top:180px!important;}
 ! hdkinomax.com - удаление отступа сверху
 hdkinomax.com#$##subheader {padding: 0px 0 0 0!important;}
-! promodj.com - удаление отступа сверху
-promodj.com#$##topbrandingspot {padding-top:0!important;}
 ! kinonoch.com - удаление отступа сверху
 kinonoch.com#$#.wrapperrrr {top: 0!important; }
 ! 999.md - чиним вёрстку
@@ -9380,6 +9382,10 @@ kadrovik01.com.ua,kom-dir.ru,gd.ru,buhsoft.ru,dirklinik.ru,fd.ru,business.ru,pro
 !
 !
 !
+myfreesoft.ru#?##singlepost > div.post:has(> [id^="id-C-A-"])
+||tochka.by/*/banners/
+tochka.by##.l-section > a[href="/articles/sport/"]
+tochka.by#?#.brand-header
 zrelki.link##.content-block__left-col > div.video + div[style^="margin-bottom: 20px;"]
 ||frfetchme.com^$domain=flibusta.*
 chislennost.com###stickblock
@@ -12424,7 +12430,7 @@ online-stars.org##a[href^="https://litmarket.ru/"] > img
 coop-land.ru##body > header + div:not([class]):not([empty]):empty
 mmo13.ru###wallpaper_container
 ||mmo13.ru/images/c/*/full_d_$image
-trucoteca.com,deep-review.com##div[class^="code-block code-block-"][style*="margin: 8px auto; text-align: center;"]
+yablyk.com,trucoteca.com,deep-review.com##div[class^="code-block code-block-"][style*="margin: 8px auto; text-align: center;"]
 ||iviche.com/images/commertials/390x600.jpg
 rebenok.by##.brand-div > a[class^="brand-"]
 ||rebenok.by/pics/branding/
@@ -14829,7 +14835,6 @@ sob.ru##.adv-page-tgb
 kun.uz##.adv-wrapper
 aex.ru,tele.ru,consmed.ru##.adv-youdo
 vkino-tv.ru##.adv1
-promodj.com##.adv240x400
 vedom.ru##.adv__banner
 vestivrn.ru##.adv__horizontal
 oren.ru##.adv_block
@@ -18077,7 +18082,6 @@ webware.ru/*/clients/
 ||cdn.muzofon.com/banner/
 ||cdn.muzofon.com/bg/
 ||cdn.ntvplus.ru/files/*Branding-site
-||cdn.promodj.com/brandings/
 ||cdn.videonow.ru/v*/*/vn_module.js$domain=goodhouse.ru
 ||cdn.topwar.ru/bg/
 ||cdn.warfiles.ru/bg/
@@ -19590,6 +19594,7 @@ devby.io,profile.ru,glavred.info,etextlib.ru,pushkino.tv,tglink.ru,mos.news,nvda
 filebase.ws,apachan.net,astromeridian.ru,forums.rusmedserv.com,gamemag.ru,hdkinomax.tv,igrigo.net,igru-xbox.net,itbukva.com,kino-go.co,kinokrad.co,miytvideo.ru,repackov.net,seeyoupage.ru,sitandwatch.org,torrentum.ru,tourister.ru,uzb-seks.ru,vsedoramy.ru,warfiles.ru##body > noindex
 !
 ! pikabu.ru
+pikabu.ru#?#.stories-feed__container > article.story:has(> div.story__main a[href^="/information/specials"])
 pikabu.ru#?#.stories-feed__container > article:has(> div.story__placeholder)
 pikabu.ru#?#aside > div.sidebar-block:has(> :not(div):not(a):not(script)[id])
 pikabu.ru#?#aside > div.sidebar-block:has(> div.button_add)
