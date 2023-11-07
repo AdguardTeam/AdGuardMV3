@@ -1,8 +1,8 @@
-! Checksum: qscqhiMvFNC1ytKwZkm1rw
+! Checksum: ngAlghUfpzasYx3rlfT5Vw
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish, Portuguese, and Brazilian Portuguese languages.
-! Version: 2.0.21.97
-! TimeUpdated: 2023-11-04T07:32:21+00:00
+! Version: 2.0.22.2
+! TimeUpdated: 2023-11-07T07:32:12+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -306,10 +306,14 @@
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/165412
+aquiyahorajuegos.net#@#.adsBanner
+aquiyahorajuegos.net#%#//scriptlet('abort-on-property-read', 'eazyAdUnBlockerHttp')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/165264
-receitasdochico.life#@#.ad-1
-receitasdochico.life#@#.ads-2
-receitasdochico.life#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
+receitasdochico.life,dicasdefinancas.net,dicasfinanceirasbr.com#@#.ad-1
+receitasdochico.life,dicasdefinancas.net,dicasfinanceirasbr.com#@#.ads-2
+dicasdevalor.net#%#//scriptlet('abort-current-inline-script', 'jQuery', 'AdblockDetector')
+receitasdochico.life,dicasdefinancas.net,dicasfinanceirasbr.com#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/165192
 ||tudosobrefinancas.com/avan/ads_anuncio.js
 tudosobrefinancas.com#$#body div[id].ads.adsbox.doubleclick { display: block !important; }
@@ -1516,6 +1520,8 @@ peru21.pe#@#.adstop
 !------- JS rules ---------------------!
 !--------------------------------------!
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/165638
+embedder.net#%#//scriptlet('abort-on-property-read', 'initPu')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/164868
 forodecostarica.com#%#//scriptlet('prevent-setTimeout', 'adJsView')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/162520
@@ -1872,8 +1878,11 @@ newpct1.com#%#window.atob = function() { };
 !------- CSS fixes --------------------!
 !--------------------------------------!
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/165640
+receitasdodia.fun#$#.hided { display: block !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/165264
-receitasdochico.life#$#.wrap > div.wrap-player > div#player { display: block !important; }
+receitasdochico.life,dicasdefinancas.net,dicasfinanceirasbr.com,dicasdevalor.net#$##player { display: block !important; }
+dicasvalores.com#$#.content-box { display: block !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/165265
 ldicas.com.br#$##colunas { display: block !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/165263
@@ -2201,9 +2210,13 @@ gaz.com.br,placar.com.br,futebolinterior.com.br,tvhistoria.com.br,tribunapr.uol.
 ! ##.banner
 correio24horas.com.br,cnnespanol.cnn.com,motociclismo.es,sub100.com.br,theenemy.com.br,manhwas.net,rpp.pe,ambito.com,economipedia.com,informador.mx,elinformador.com.co,cronista.com,rionegro.com.ar,diariodecuyo.com.ar,voydeviaje.com.ar,guarda14.com,viapais.com.ar,agazeta.com.br,eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.*,mundotecnologias.com,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##.banner
 !
+receitasdodia.fun##div[id^="el-02"]
+noticiasaominuto.com##.placeholder
+gamestorrents.fm##.landar center > a[target="_blank"] > img
+gamestorrents.fm#?#.tab-pane > div[class*="-movie-gride-agile"]:has(> a[href*="?offer_id="][target="_blank"] > img)
 juegosonlinegratis.com.mx,juegosonline.com.co,juegosonline.cl,jeuxgratuitjeux.com,culga.com,juegosonlinegratis.com.es,jogosnainternet.com.br##.horizontal-pub
 visortmo.com##.pbl_top
-visortmo.com##a[href*="?offer_id="][target="_blank"] > img
+gamestorrents.fm,visortmo.com##a[href*="?offer_id="][target="_blank"] > img
 ||forodecostarica.com/skokka/
 ||forodecostarica.com/data/siropu/aml/
 ||visortmo.com/images/ch-*.jpg
