@@ -1,8 +1,8 @@
-! Checksum: d0Tw1jBXxymfn+13Lst6ww
+! Checksum: QGG9mWuuEr/jqoYe/cm4wg
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.38.61
-! TimeUpdated: 2023-11-06T15:32:08+00:00
+! Version: 2.0.38.63
+! TimeUpdated: 2023-11-08T07:32:10+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -528,6 +528,8 @@ schnittmuster-datenbank.de#%#//scriptlet("abort-on-property-read", "adsBlocked")
 @@||st.wetteronline.de/*/js/showAds.js
 ! https://github.com/AdguardTeam/AdguardFilters/issues/164437
 hausbau-forum.de#%#//scriptlet('prevent-xhr', 'adsbygoogle')
+! In case of DNS filtering
+hausbau-forum.de###consent_info
 ! https://github.com/AdguardTeam/AdguardFilters/issues/161767
 @@||cdns.symplr.de/filext.com/filext.js$domain=filext.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/161312
@@ -648,11 +650,16 @@ raidrush.net#$##wrapfabtest { height: 1px !important; }
 raidrush.net#%#//scriptlet("prevent-setTimeout", "window.getComputedStyle(el)")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/142943
 ! https://github.com/AdguardTeam/AdguardFilters/issues/73994
-cryptstream.de,2ix2com.de,2ix2-alternative.de,2ix2tv.de,tv24livestream2.de,tv24livestream1.de,tv24livestream.de,mysqlcryptnow.de,mysql2dumpcrypt.de,nydus.org###abmm
-cryptstream.de,2ix2com.de,2ix2-alternative.de,2ix2tv.de,tv24livestream2.de,tv24livestream1.de,tv24livestream.de,mysqlcryptnow.de,mysql2dumpcrypt.de,nydus.org#?##abmm
+cryptstream.de,2ix2com.de,2ix2-alternative.de,2ix2tv.de,tv24livestream2.de,tv24livestream1.de,tv24livestream.de,mysqlcryptnow.de,mysql2dumpcrypt.de,nydus.org###xabzy
+cryptstream.de,2ix2com.de,2ix2-alternative.de,2ix2tv.de,tv24livestream2.de,tv24livestream1.de,tv24livestream.de,mysqlcryptnow.de,mysql2dumpcrypt.de,nydus.org#?##xabzy
+cryptstream.de,2ix2com.de,2ix2-alternative.de,2ix2tv.de,tv24livestream2.de,tv24livestream1.de,tv24livestream.de,mysqlcryptnow.de,mysql2dumpcrypt.de,nydus.org##div[id^="abmm"]
+cryptstream.de,2ix2com.de,2ix2-alternative.de,2ix2tv.de,tv24livestream2.de,tv24livestream1.de,tv24livestream.de,mysqlcryptnow.de,mysql2dumpcrypt.de,nydus.org#?#div[id^="abmm"]
 nydus.org###ab
 nydus.org#$##wrapfabtest { height: 1px !important; }
-cryptstream.de,2ix2com.de,2ix2-alternative.de,2ix2tv.de,tv24livestream2.de,tv24livestream1.de,tv24livestream.de,mysqlcryptnow.de,mysql2dumpcrypt.de,nydus.org#%#//scriptlet('prevent-setTimeout', '/ab==|window\.getComputedStyle\(el\)/')
+cryptstream.de,2ix2com.de,2ix2-alternative.de,2ix2tv.de,tv24livestream2.de,tv24livestream1.de,tv24livestream.de,mysqlcryptnow.de,mysql2dumpcrypt.de,nydus.org#%#//scriptlet('set-constant', 'gss', '0')
+cryptstream.de,2ix2com.de,2ix2-alternative.de,2ix2tv.de,tv24livestream2.de,tv24livestream1.de,tv24livestream.de,mysqlcryptnow.de,mysql2dumpcrypt.de,nydus.org#%#//scriptlet('set-constant', 'stpd', 'emptyObj')
+cryptstream.de,2ix2com.de,2ix2-alternative.de,2ix2tv.de,tv24livestream2.de,tv24livestream1.de,tv24livestream.de,mysqlcryptnow.de,mysql2dumpcrypt.de,nydus.org#%#//scriptlet('prevent-setTimeout', '/ab==|window\.getComputedStyle\(el\)|\.style\.display="none"|=="undefined"/')
+cryptstream.de,2ix2com.de,2ix2-alternative.de,2ix2tv.de,tv24livestream2.de,tv24livestream1.de,tv24livestream.de,mysqlcryptnow.de,mysql2dumpcrypt.de,nydus.org#%#//scriptlet('prevent-addEventListener', 'DOMContentLoaded', 'AdBlock')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/67991
 nibelungen-kurier.de#%#//scriptlet("set-constant", "window.nlf.custom.userCapabilities", "false")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/66407
@@ -2707,6 +2714,10 @@ hausbau-forum.de##.samItem
 mopo.de##img[referrerpolicy="unsafe-url"][src^="/image/"]
 mopo.de##body > div[style*="margin: 0 0 0 160px;"]
 nydus.org###r600sky
+nydus.org###lsky
+nydus.org#?##lsky
+nydus.org###fplayer + div[id^="nbn"]
+nydus.org#?##fplayer + div[id^="nbn"]
 nydus.org###fplayer > div[id^="nbn"]
 nydus.org###fplayer + div > div[id^="nbn"]
 ||raidrush.net/ticker/rr_ticker*.php?

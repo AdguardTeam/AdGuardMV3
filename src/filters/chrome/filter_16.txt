@@ -1,8 +1,8 @@
-! Checksum: Bm7K5s4qydrmANeiPmqALw
+! Checksum: FC7YFIRsDOuInWGD/SmJLQ
 ! Title: AdGuard French filter
 ! Description: Liste FR + AdGuard French filter. Filter list that specifically removes ads on websites in French language.
-! Version: 2.0.42.10
-! TimeUpdated: 2023-11-06T12:30:44+00:00
+! Version: 2.0.42.13
+! TimeUpdated: 2023-11-09T04:30:43+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -154,6 +154,7 @@ empire-streaming.*,empire-stream.net#%#//scriptlet('set-constant', 'navigator.br
 meteo-grenoble.com#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/157388
 cinefil.com#%#//scriptlet('set-constant', 'adBlocked', 'false')
+cinefil.com#%#AG_onLoad((function(){const e=document.body,t=document.createElement("div");t.setAttribute("class","adsbygoogle"),e&&e.appendChild(t)}));
 ! https://github.com/AdguardTeam/AdguardFilters/issues/155686
 @@||rustica.fr/*.iads.js
 ! https://github.com/AdguardTeam/AdguardFilters/issues/154887
@@ -840,6 +841,8 @@ $script,third-party,denyallow=fastly.net|statically.io|sharecast.ws|bunnycdn.ru|
 !
 !
 !
+2ememain.be###top-banner-root
+forums.macg.co##.samCodeUnit
 actu.orange.fr#?#.col-xl-4 > .align-items-center > .text-right > span:contains(/^PUBLICITÉ$/)
 mariefrance.fr##.sidebar-before-comments
 app.molotov.tv##div[id^="banner"]
@@ -23341,7 +23344,7 @@ eurosport.fr##.oas
 football.fr##.oas-middle
 nouvelobs.com##.obs-pub
 01net.com##.od-tlc
-01net.com##.od-wrapper
+01net.com,journaldugeek.com##.od-wrapper
 livescore.in##.oddsPlacement
 01net.com##.offers-selector
 rakuten.com##.offersKelkoo
@@ -23877,6 +23880,7 @@ it-swarm-fr.com##a[href^="https://m.do.co/"]
 paruvendu.fr##a[href^="https://res.paruvendu.fr/"]
 notre-siecle.com,perelafouine.com##a[href^="https://riskassur-boutique.com/"] > img
 appsystem.fr##a[href^="https://shop.appsystem.fr/"] > img
+journaldugeek.com##a[href^="https://shop.journaldugeek.com/go/"] > img
 toplien.fr##a[href^="https://track.effiliation.com/servlet/effi.click?"]
 zetorrents.fr##a[href^="https://uploadsnack.com/"]
 fdesouche.com,lacoccinelle.net,wikimonde.com##a[href^="https://www.amazon.fr/"]
@@ -23946,6 +23950,7 @@ gauleporno.xxx,pornburst.xxx##div[class*="banner"]
 lefigaro.fr##div[class*="mad__partenaire__"]
 lefigaro.fr##div[class*="mad__pub__"]
 rakuten.com##div[class*="rads_placement"]
+leboncoin.fr##div[class="vl"]
 booska-p.com##div[class][style^="background"]
 nrj.fr##div[class^="StyledAds"]
 une-recette.com##div[class^="banniere"]

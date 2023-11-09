@@ -1,8 +1,8 @@
-! Checksum: g1BMAS1ODgdlyCgqLu1A1w
+! Checksum: 0dOV8TseiN9s/oIzuANDiw
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.85.74
-! TimeUpdated: 2023-11-04T10:31:00+00:00
+! Version: 2.0.85.84
+! TimeUpdated: 2023-11-08T16:31:04+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1261,7 +1261,6 @@ ucoz.ru/informer/
 ##.baner_block
 ##.banex-banner
 ##.banfoot
-~polaroid.com,~caffeborbone.it,~aliexpress.com,~coursera.org,~techcrunch.com##.banner-body
 ##.banner-border-wrap
 ##.banner-head
 ##.banner-hold
@@ -1476,6 +1475,9 @@ ucoz.ru/informer/
 ! Bad: /banner.jpg (should be in general_url.txt)
 ! Bad: ||adssubdomain.legitwebsite.com^ (should be in adservers_firstparty.txt)
 !
+||ehqaobjhna.com^$third-party
+||istmvh.com^
+||talktomeplease.biz^
 ||bzgmcqqfxd.com^
 ||ejxosoryso.ru^
 ||all-audio.pro^$all
@@ -6830,7 +6832,7 @@ dzen.ru##.viewer-layout__sidebar div[id^="D-A-"]
 @@||ad.mail.ru/static/admanhtml/rbadman-html5.min.js$domain=dzen.ru
 !
 ! mail.ru - ad on main page
-[$path=/^\/$|\/\?/]mail.ru#%#//scriptlet('remove-node-text', 'script', 'Honeypot')
+[$path=/^\/$|\/\?/]mail.ru#%#//scriptlet('remove-node-text', 'script', '[adgin]')
 ! kino.mail.ru
 @@||ad.mail.ru/i*.gif$domain=kino.mail.ru
 @@||kino.mail.ru^$generichide
@@ -7591,7 +7593,7 @@ forallkino.ru,hdrabbit.ru,kinowinx.ru#%#//scriptlet("set-constant", "Object.prot
 ! https://github.com/AdguardTeam/AdguardFilters/issues/55487
 oxax.tv#%#//scriptlet('prevent-window-open')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/55271
-4kfilm.online#%#//scriptlet("remove-class", "have-brand", "div.have-brand")
+4kfilm.click,4kfilm.online#%#//scriptlet("remove-class", "have-brand", "div.have-brand")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/53045
 it-like.ru#%#//scriptlet('remove-attr', 'href', '.post-content > article > div > ul > li > a[href^="https://it-like.ru/link/"][data-wpel-link="external"]')
 ! assiatv.com - popups
@@ -9162,7 +9164,7 @@ yandex-video.naydex.net#%#//scriptlet('trusted-replace-xhr-response', '/(<VAST[\
 /^http(s?):\/\/([A-Za-z0-9-.]+\/){5,}[A-Za-z0-9_-]+$/$script,third-party,domain=crashplane.ru|ymkababy.ru|newsland.com|prozoro.net.ua|alau.kz|brjunetka.ru|tarifec.com|u-news.com.ua|zoobusiness.kiev.ua|b-online.ru|beejournal.ru|porosenka.net|dachnyuchastok.ru|gubka-bob.ru|film.ru|pg11.ru|pg12.ru|pg13.ru|pg21.ru|prochepetsk.ru|progorod33.ru|progorod43.ru|progorod58.ru|progorod59.ru|progorod62.ru|progorod76.ru|progorodnn.ru|progorodnsk.ru|progorodsamara.ru|progoroduhta.ru|fixmaster74.ru|samokat-dostavka.ru|coronavirus-control.ru|lifedon.com.ua|molitvy.online|fatelines.net|clubhunters.ru|made-box.ru|howto-news.info
 !
 ! ads.bid
-/script.js^$third-party,domain=rus-km.ru|progorodnn.ru|vestiprim.ru|4mlhn1ocg4.com|koolinar.ru|kyiv.media|pershij.com.ua|u-news.com.ua|crashplane.ru|cin-24.com|vikingi-online.info|hi-blog.ru|lifedon.com.ua|skuky.net|365news.biz|vklook.ru|tv-show.live|pt0zhwhc26.ru|mnogotolka.ru|gadget-apple.ru|kinovideo.cc|tarifec.com|amazingfacts.ru|womanvip.ru|evo-rus.com|kraj.by|shematok.ru|bargu.by|rivnepost.rv.ua|sobesednik.ru|comments.ua|pln-pskov.ru|lyricsonline.ru|amperof.ru|kapital-rus.ru|sport24tv.ru|militariorg.ucoz.ru|pravda-tv.ru|ianed.ru|progorod33.ru|015.by|map1.com.ua|solenka.info|inforuss.info|ufanotes.ru|togliatti24.ru|storinka.com.ua|moskva-obl.ru
+/script.js^$third-party,domain=rus-km.ru|progorodnn.ru|vestiprim.ru|4mlhn1ocg4.com|koolinar.ru|kyiv.media|pershij.com.ua|u-news.com.ua|crashplane.ru|cin-24.com|vikingi-online.info|hi-blog.ru|lifedon.com.ua|skuky.net|365news.biz|vklook.ru|tv-show.live|pt0zhwhc26.ru|mnogotolka.ru|gadget-apple.ru|kinovideo.cc|tarifec.com|amazingfacts.ru|womanvip.ru|evo-rus.com|kraj.by|shematok.ru|bargu.by|rivnepost.rv.ua|sobesednik.ru|comments.ua|pln-pskov.ru|lyricsonline.ru|amperof.ru|kapital-rus.ru|sport24tv.ru|militariorg.ucoz.ru|pravda-tv.ru|ianed.ru|progorod33.ru|015.by|map1.com.ua|solenka.info|inforuss.info|ufanotes.ru|togliatti24.ru|storinka.com.ua|moskva-obl.ru|reporter64.ru
 !
 ! ##.ad
 liga.net,appstorrent.ru,graniru.org,3dnews.ru,zaks.ru,ukranews.com,mr-7.ru,ferra.ru,cont.ws,riavrn.ru,maanimo.com,begaem.com,passion.ru,gq.ru,agravery.com,appsgames.ru,buhgalteria.ru,dumskaya.net,hackersoft.ru,hotcharts.xyz,klops.ru,mmovote.ru,molnet.ru,news.pn,newsru.co.il,shazoo.ru##.ad
@@ -9196,6 +9198,7 @@ eg.ru,newsmaker.md,delo-vcusa.ru,tolknews.ru,gorodche.ru,smartpress.by,raenza.ru
 !
 !
 !
+rbc.ua##.vidverto-wrapper
 itc.ua##body > div[style="text-align:center;background: #000;"]
 dev.ua##.container > div.island.card
 dev.ua##.island.d-none_mobile
@@ -9380,7 +9383,9 @@ kadrovik01.com.ua,kom-dir.ru,gd.ru,buhsoft.ru,dirklinik.ru,fd.ru,business.ru,pro
 !
 !
 !
-promodj.com###overlaybranding
+||realt.by/uploads/pics/bsb-bank_mechty_
+wionews.com##.ad_fixed
+ura.news##.publication-c4
 k-ps.ru##.banner_iframe
 myfreesoft.ru#?##singlepost > div.post:has(> [id^="id-C-A-"])
 ||tochka.by/*/banners/
@@ -13575,7 +13580,7 @@ infokuzov.ru##article > div[itemprop] > index > h2 + a[href]
 tele.ru##.adloc-leftskyscraper
 otxataba.net###dle-content > section.entry > div[id="msg"] + div[align="center"]
 narutoplanet.ru##.twelve-banner
-||aflt.market.yandex.ru/widget$domain=rutab.net|losst.ru|versus.com|3dnews.ru|winnote.ru|modxvm.com|iguides.ru|rozetked.me|yablyk.com|makeupkey.ru|expertcen.ru|festima.ru|damion.club|o-tendencii.com|beguza.ru|vsthemes.org|edimdoma.ru|klublady.ru|sportishka.com|overclockers.ru|kp.ru|kp.by|kp.kg|kp.kz|kp.md
+||aflt.market.yandex.ru/widget$domain=rutab.net|losst.ru|versus.com|3dnews.ru|winnote.ru|modxvm.com|iguides.ru|rozetked.me|yablyk.com|makeupkey.ru|expertcen.ru|festima.ru|damion.club|o-tendencii.com|beguza.ru|vsthemes.org|edimdoma.ru|klublady.ru|sportishka.com|overclockers.ru|kp.ru|kp.by|kp.kg|kp.kz|kp.md|windows-school.ru
 iguides.ru##.article-detail > div.t-2 + div.b560648742c6c7c0fe0c2cdeb95d4cef
 ||xn--80aikhbrhr.xn--j1amh/banner.jpg
 sochinyashka.ru##.content > li + br + noindex
@@ -20638,6 +20643,7 @@ adme.media##div[data-test-id="article-content"] > div[class*=" "]:not([tabindex]
 adme.media#?#div[data-test-id="article-bottom-recommended"] > div > div > div[style="position:relative"] > div > div:has(div:empty + div:empty + div:empty)
 !
 ! Start: vc.ru, dtf.ru, spark.ru
+dtf.ru#?#.feed-page__content-list > div.content-list > div.content + div[class][style]:has(> a[target="_blank"])
 new.dtf.ru##a[class^="post-branding-"]
 dtf.ru,vc.ru#?#.feed__chunk > div.l-island-b:has(> a[target="_blank"])
 dtf.ru,vc.ru#?#div.l-island-b:has(> div.l-island-d div:contains(Реклама))
@@ -20761,14 +20767,6 @@ si.com#@##ad-container
 lib.seu.edu.cn#@#.one-search
 ! https://github.com/AdguardTeam/AdguardFilters/issues/148164
 player.ex.co#@##ad-container
-! https://github.com/AdguardTeam/AdguardFilters/issues/147891
-hanfgefluester.de#@#.banner-body
-! https://github.com/AdguardTeam/AdguardFilters/issues/28946
-сервисдом.com#@#.banner-body
-! https://github.com/AdguardTeam/AdguardFilters/issues/68834
-taste.com.au#@#.banner-body
-! https://github.com/AdguardTeam/AdguardFilters/issues/127704
-store.ifixit.co.uk#@#.banner-body
 !
 ! This section contains the list of rules that fix incorrect blocking. Rules must be domain-specific.
 !
@@ -20784,8 +20782,6 @@ fanex.pro#@#.banners2
 moboi.narod.ru#@#img[width="240"][height="400"]
 ! https://github.com/AdguardTeam/AdguardFilters/issues/154274
 siteripz.cc#@##teasers
-! https://github.com/AdguardTeam/AdguardFilters/issues/153554
-nature-love.de#@#.banner-body
 ! https://github.com/AdguardTeam/AdguardFilters/issues/149668
 xcums.com#@#.advertisement:not(body)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/146899
