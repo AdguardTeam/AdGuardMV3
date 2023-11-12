@@ -1,8 +1,8 @@
-! Checksum: 4Bje66k3okoH+Ef0rKElQw
+! Checksum: 0JEIhZGKRBVf1+Dsaqydew
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish, Portuguese, and Brazilian Portuguese languages.
-! Version: 2.0.22.3
-! TimeUpdated: 2023-11-07T09:32:13+00:00
+! Version: 2.0.22.9
+! TimeUpdated: 2023-11-11T01:03:53+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -306,6 +306,11 @@
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/165465
+@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$domain=dicasvalores.com
+||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,redirect=googlesyndication-adsbygoogle,important,domain=dicasvalores.com
+! https://github.com/AdguardTeam/AdguardFilters/issues/165846
+tvguia.es#%#//scriptlet('prevent-element-src-loading', 'script', 'adsbygoogle')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/165412
 aquiyahorajuegos.net#@#.adsBanner
 aquiyahorajuegos.net#%#//scriptlet('abort-on-property-read', 'eazyAdUnBlockerHttp')
@@ -556,9 +561,6 @@ discografias.net#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
 pcworld.es#%#//scriptlet("abort-on-property-read", "Object.prototype.autoRecov")
 ! fix antiadblock
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=antena2.com
-! fix antiadblock
-||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,redirect=googlesyndication-adsbygoogle,important,domain=tvguia.es
-@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$domain=tvguia.es
 ! https://github.com/AdguardTeam/AdguardFilters/issues/132493
 ||listas.pro/go/detecta.js
 listas.pro#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
@@ -1037,8 +1039,6 @@ televall.website#$##ad { position: absolute!important; left: -3000px!important; 
 @@||cdnjs.cloudflare.com/ajax/libs/fuckadblock/3.2.1/fuckadblock.min.js$domain=doramasmp4.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/29574
 ||torrentbrazil.org/adbclk.js
-! https://github.com/AdguardTeam/AdguardFilters/issues/29429
-@@||tvguia.es/advertisement.js
 ! https://github.com/AdguardTeam/AdguardFilters/issues/29427
 animeshouse.net#%#//scriptlet("abort-current-inline-script", "document.addEventListener", "/;return \{clear:function\(\)\{/")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/28812
@@ -1520,6 +1520,8 @@ peru21.pe#@#.adstop
 !------- JS rules ---------------------!
 !--------------------------------------!
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/165934
+warezstream.net#%#//scriptlet("prevent-window-open")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/165638
 embedder.net#%#//scriptlet('abort-on-property-read', 'initPu')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/164868
@@ -2208,8 +2210,12 @@ $script,third-party,denyallow=fastly.net|statically.io|sharecast.ws|bunnycdn.ru|
 ! ##.ads
 gaz.com.br,placar.com.br,futebolinterior.com.br,tvhistoria.com.br,tribunapr.uol.com.br,diariodonordeste.verdesmares.com.br,sbt.com.br,link.estadao.com.br,atomixhq.*,jc.ne10.uol.com.br,internetpasoapaso.com,acidadeon.com,leouve.com.br,larazon.es,infoescola.com,cbn.globoradio.globo.com,maxitorrent.com,abril.com.br,odia.ig.com.br,especiais.g1.globo.com,tribunapr.com.br,novelasd.com,anime-tube.tv##.ads
 ! ##.banner
-correio24horas.com.br,cnnespanol.cnn.com,motociclismo.es,sub100.com.br,theenemy.com.br,manhwas.net,rpp.pe,ambito.com,economipedia.com,informador.mx,elinformador.com.co,cronista.com,rionegro.com.ar,diariodecuyo.com.ar,voydeviaje.com.ar,guarda14.com,viapais.com.ar,agazeta.com.br,eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.*,mundotecnologias.com,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##.banner
+ahoragranada.com,correio24horas.com.br,cnnespanol.cnn.com,motociclismo.es,sub100.com.br,theenemy.com.br,manhwas.net,rpp.pe,ambito.com,economipedia.com,informador.mx,elinformador.com.co,cronista.com,rionegro.com.ar,diariodecuyo.com.ar,voydeviaje.com.ar,guarda14.com,viapais.com.ar,agazeta.com.br,eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.*,mundotecnologias.com,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##.banner
 !
+biologianet.com##.pub-center
+biologianet.com##.area-publi-topo
+biologianet.com##div[class^="publi-"]
+biologianet.com##div[class^="pub_insert_content"]
 receitasdodia.fun##div[id^="el-02"]
 noticiasaominuto.com##.placeholder
 gamestorrents.fm##.landar center > a[target="_blank"] > img
@@ -2233,7 +2239,6 @@ forocoches.com##div[style^="min-height:250px;"]
 forocoches.com##section[style^="min-width: 300px;"]
 arkhamscan.com###floatcenter
 diariodocomercio.com.br##[id^="ad"]
-neoxscan.net##.text-left > br
 agroclima.climatempo.com.br##div[data-type="ad_space"]
 /sdkpop.js$script,domain=beautyskincarebrasil.com
 cnnbrasil.com.br##.ad__area
@@ -2256,14 +2261,11 @@ opopular.com.br##div[id^="POP_HOME_SMT_"]
 uol.com.br##.uolpd-video-inarticle
 correio24horas.com.br##div[id^="single_"][id$="_piano"]
 umdoisesportes.com.br##.banner-principal
-neoxscan.net##a[href^="https://www.amazon.com"] > img
-||cdn.discordapp.com/attachments/*/mo-logitc-amz-nx.jpg$domain=neoxscan.net
 abc.es##[class^="voc-header"] > a[data-voc-vtm-id="comienzoSuscripcionON"]
 abc.es##.voc-ob-wrapper
 ||static.vocstatic.com/vam/*/vam.js
 elmundo.es##div[class*="ue-c-main-header__subscription"]
 ||e00-elmundo.uecdn.es/js/pbmu.js
-neoxscan.net##.wp-manga.c-top-sidebar
 derechadiario.com.ar##a[href="https://www.zbl-legal.com/"] > img
 revistaoeste.com,diariodorio.com##.autozep-outer
 ahnegao.com.br###global_topo
@@ -2964,6 +2966,16 @@ oplanetatv.clickgratis.com.br##.block-ads-wrapper
 oplanetatv.clickgratis.com.br##.ads:not(.prebid)
 oplanetatv.clickgratis.com.br##.ads-block:not(.prebid)
 comoacaba.com##.aawp
+||cdn.discordapp.com/attachments/*/mo-logitc-amz-nx.jpg$domain=neoxscan.net
+neoxscan.net##.text-left > br
+neoxscan.net##.wp-manga.c-top-sidebar
+neoxscan.net##.page-break > a[target="_blank"]
+neoxscan.net##a[href^="https://www.amazon.com"] > img
+neoxscan.net##center > a[target="_blank"]:not([href*="discord.gg"]) > img
+neoxscan.net#?#.text-left > center:contains(/^Publicidade$/)
+neoxscan.net#?#.page-break > center:contains(/^Publicidade$/)
+neoxscan.net#?#.page-break > center:contains(/^Publicidade$/) + div[id^="bg-ssp-"]
+neoxscan.net#?#.c-top-sidebar  .row > .widget_custom_html:has(> .widget_text > .widget_text > .textwidget > *:is([id^="teaser"], .adsbygoogle, [id^="bg-ssp-"]))
 arkhamscan.com,reaperbr.online,randomscanlators.net,gloriousscan.online,neoxscan.net,diskusscan.com,gloriousscan.com,atlantisscan.com,senpaiediciones.com,yugenmangas.com###teaser3
 yugenmangas.com##.site-header + .c-top-second-sidebar
 mangapt.com,yugenmangas.com##.body-wrap > .c-bottom-sidebar
@@ -3107,7 +3119,7 @@ tvprime.ig.com.br##div[class^="tvpri"]
 uol.com.br##.cardAd
 uol.com.br##.advertisementArea--showLabel
 ||baixartorrents.org/subs/popup.js
-portugues.com.br##.pub-left
+biologianet.com,portugues.com.br##.pub-left
 preparaenem.com,portugues.com.br##.pub-300x250
 portugues.com.br##.pub_insert_content
 portugues.com.br##.publicidade-cima-container
@@ -5138,8 +5150,6 @@ donghualife.com#?#aside > div[id^="block"]:has(> .adsbygoogle)
 donghualife.com#?#aside > div[id^="block"]:has(> p > .adsbygoogle)
 nsctotal.com.br#?##home > div.container:has(> .row h2:contains(Conteúdo Publicitário))
 opopular.com.br#?#div[class^="PJLV"][class$="SlotContainer"] div.MainContent > div:has(img[alt="Logo Classi.com.br"])
-neoxscan.net#?#.text-left > center:contains(/^Publicidade$/)
-neoxscan.net#?#.page-break > center:contains(/^Publicidade$/)
 ahnegao.com.br#?#div[class^="astra-advanced-hook"]:has(> div[id^="M"])
 uol.com.br#?#.uolpd-video-inarticle:has(> #uolpd-banner-inarticle:only-child)
 orchidcommerce.com#?#.row > div[class]:has(> link#feedzy-rss-feeds-css)
