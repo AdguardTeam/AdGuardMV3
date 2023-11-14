@@ -1,8 +1,8 @@
-! Checksum: gmDnOOtiDvVjmIPe8exfWg
+! Checksum: MjtkkX6cP/43AE0mT+l3mw
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.85.90
-! TimeUpdated: 2023-11-10T11:31:11+00:00
+! Version: 2.0.85.95
+! TimeUpdated: 2023-11-13T19:31:16+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1475,6 +1475,8 @@ ucoz.ru/informer/
 ! Bad: /banner.jpg (should be in general_url.txt)
 ! Bad: ||adssubdomain.legitwebsite.com^ (should be in adservers_firstparty.txt)
 !
+||givemelink.cc^
+||mediabrama.com^$third-party
 ||ehqaobjhna.com^$third-party
 ||istmvh.com^
 ||talktomeplease.biz^
@@ -6832,7 +6834,8 @@ dzen.ru##.viewer-layout__sidebar div[id^="D-A-"]
 @@||ad.mail.ru/static/admanhtml/rbadman-html5.min.js$domain=dzen.ru
 !
 ! mail.ru - ad on main page
-[$path=/^\/$|\/\?/]mail.ru#%#//scriptlet('remove-node-text', 'script', '[adgin]')
+mail.ru#?#div[slot="main-column"] > div:has(> svg[width="100%"][height="90"])
+[$path=/^\/$|\/\?/]mail.ru#%#//scriptlet('remove-node-text', 'script', '/\[a?dgina?\]/')
 ! kino.mail.ru
 @@||ad.mail.ru/i*.gif$domain=kino.mail.ru
 @@||kino.mail.ru^$generichide
@@ -7833,6 +7836,8 @@ disk.yandex.*#%#//scriptlet('remove-class', 'has-fullscreen-banner','.public__ro
 !------- CSS -----------
 !-----------------------
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/165602
+1-hd.lorfil.net#$#.wrap { padding-top: 0 !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/164720
 russian-seriali.ru#$#.wrap > div[class="block center"] { padding-top: 0 !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/163803
@@ -8280,8 +8285,6 @@ gamemag.ru#$#.top-branding { height: 0 !important; }
 prostoprosport.ru#$#.main-container { margin-top: 1vw !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/45253
 fclmnews.ru#$#body > div.site { margin: 0 auto 0 auto!important; }
-! https://github.com/AdguardTeam/AdguardFilters/issues/44628
-gordonua.com#$#body { padding-top: 0 !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/44603
 sovetromantica.com#$#.sbrand--back { background-image: none !important; }
 sovetromantica.com#$#.mainContainer { padding-top: 0 !important; }
@@ -9198,6 +9201,8 @@ eg.ru,newsmaker.md,delo-vcusa.ru,tolknews.ru,gorodche.ru,smartpress.by,raenza.ru
 !
 !
 !
+gordonua.com##div[data-action="banners"]
+gordonua.com##a[class^="branding-link-"]
 rbc.ua##.vidverto-wrapper
 itc.ua##body > div[style="text-align:center;background: #000;"]
 dev.ua##.container > div.island.card
@@ -9234,7 +9239,7 @@ ukranews.com##.adversiting
 obyava.ua##div[class$="-banner"]
 kubnews.ru##.static-banner
 ilounge.ua##div[style^="height: 90px;max-height:90px;"]
-hochu.ua,24tv.ua,zaxid.net,unian.ua,glavred.net,footballua.tv,epravda.com.ua,zn.ua,focus.ua,rbc.ua,fakty.com.ua,glavred.info,unian.net,nv.ua##.nts-video-wrapper
+gordonua.com,hochu.ua,24tv.ua,zaxid.net,unian.ua,glavred.net,footballua.tv,epravda.com.ua,zn.ua,focus.ua,rbc.ua,fakty.com.ua,glavred.info,unian.net,nv.ua##.nts-video-wrapper
 rbc.ua,fakty.com.ua,pravda.com.ua,glavred.info#?#.nts-video-wrapper
 newsmaker.md##.theiaStickySidebar > aside.widget_media_image
 newsmaker.md##.theiaStickySidebar > aside.evo-slider-widget
@@ -9383,6 +9388,7 @@ kadrovik01.com.ua,kom-dir.ru,gd.ru,buhsoft.ru,dirklinik.ru,fd.ru,business.ru,pro
 !
 !
 !
+virtmachine.ru###content-holder article[id^="post-"] ~ br
 tlgrm.ru#?#.channel-feed > div.channel-feed__brick:has(> div.cfeed-card > div.cfeed-card-contents--banner)
 day.ru##.b-a-n-e-r
 gameguru.ru##a[target="_blank"][href*="referal"] > img[title="Играть"]
@@ -10419,7 +10425,6 @@ yampil.info#?#.theiaStickySidebar > aside.widget:has(> h2.widget-title > span:co
 losst.ru#?##sidebar > div.widget:has(> div.widget-title:contains(Реклама))
 stalker-mods.su#?#.rt-article-content ~ div[align="center"]:has(> ins.adsbygoogle)
 cosmo.ru#?#.cols > div:has(> div[banner-name])
-gordonua.com#?#.span-4 > div.block:has(> noindex)
 news.pn#?#.snap-block > div[class^="blockhead"] + div[class]:has(> div > div[class][style*="//news.pn/"])
 zr.ru#?##root > div > div[class^="relap-"] > div[class][style] > div > div[class^="relap-"][style] > div[class]:has(div[class^="relap-"] > a[target="_blank"][rel^="noopener"])
 habr.com#?#.sidebar_right > div.default-block:has(> div.sidebar-block > div.sidebar-block__banner)
@@ -12036,7 +12041,6 @@ calorizator.ru###site-branding-block
 calorizator.ru###block-block-44
 calorizator.ru###block-block-24
 ||rlocman.ru/ban/
-||gordonua.com/pub/banners/
 moyareklama.ru##.advertSingleAd
 moyareklama.ru##.main_advert_place
 versiya.info##div[data-block="Последние новости"]
@@ -12801,7 +12805,7 @@ topvideo.tj##.dfp_fullscreen_block
 ||topvideo.tj/static/js/videojs-preroll.js
 ||topvideo.tj/media/catfish/*/index.html
 ||topvideo.tj/media/branding/
-lovesun.by,sportarena.com,golf.ru,gordonua.com##body > a
+lovesun.by,sportarena.com,golf.ru##body > a
 fainaidea.com##body > div.backstretch
 diakov.net##td > a[target="_blank"] > img
 enovosty.com###redtram_news
@@ -13573,8 +13577,6 @@ pingvin.pro##.singlepartners
 statut.by##.bannergroupcenterbanner
 ||mmo13.ru/bgr|
 zoom.cnews.ru##.article_content > div.wrapper + div.sidebar
-gordonua.com##div[id^="corebanner_"]
-gordonua.com##.row > div > div[class^="sep"]
 hitvk.mobi##tr[id^="n-rek-"]
 soft.mydiv.net##div[class^="rightcon"] > div[id="Qans.lg_qs_usable"] + div[style]
 news24ua.com###block-system-main div.inside > div.panel-separator + section.panel-pane:last-child
@@ -13932,7 +13934,6 @@ nudecelebs.pro,sexicelebs.ru###adflow
 seanse.tv,sexicelebs.ru##a[href*="/track?c="] > img
 t-do.ru##a.btn + div > a:not([href^="tg://"])
 t-do.ru##body > footer
-gordonua.com##.side_banner
 ||mshelxxx.ru.com/block_script.php
 parnuxi.com##.tor-block + br + center a
 ||torrentorik.com/knopki/yasa.png
@@ -17305,7 +17306,7 @@ politonline.ru##div[id^="div_sf_"]
 hdserials.tv##div[id^="gkBanner"]
 anekdot.ru##div[id^="krt-"]
 mobiltelefon.ru##div[id^="lbanners"]
-tlt.ru,medialeaks.ru##div[id^="mtt-inread-"]
+nevskie-palaty.ru,tlt.ru,medialeaks.ru##div[id^="mtt-inread-"]
 ntv.ru##div[id^="nads_banner_"]
 nasotke.ru##div[id^="nasotke-fixed-"]
 agrimpasa.com,newformat.info,rusjev.net##div[id^="newPortal_informer_"]
@@ -20156,7 +20157,6 @@ pornolab-zerkalo.appspot.com,pornolab.biz,pornolab.cc,pornolab.lib,pornolab.net#
 lady.mail.ru##.ph-whiteline ~ div#portal-menu ~ span > div
 otvet.mail.ru##div[class*="adv-slot-"]
 mail.ru##div[data-testid="grid-header"] > div.toolbar
-mail.ru#?#div[slot="main-column"] > div:has(> svg[width="100%"][height="90"])
 mail.ru##.skeleton + a[href^="https://r.mail.ru/redir/"]
 mail.ru##.skeleton
 mail.ru##.skeleton-tgb
