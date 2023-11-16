@@ -1,8 +1,8 @@
-! Checksum: NDN5nqQLSK+exGfUwxoTTA
+! Checksum: pL1Juo9AHCZjWbAppLUX1g
 ! Title: AdGuard Dutch filter
 ! Description: EasyList Dutch + AdGuard Dutch filter. Filter list that specifically removes ads on websites in Dutch language.
-! Version: 2.0.6.19
-! TimeUpdated: 2023-11-09T19:32:13+00:00
+! Version: 2.0.6.23
+! TimeUpdated: 2023-11-15T13:32:17+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1165,6 +1165,7 @@ debestevpn.nl##.wpsm_promobox
 iphoned.nl##.wrap.hidden.lg\:flex.mt-8
 beurs.nl##.wrapper--topbanner
 voetbalprimeur.nl##[class^="Ad_"]
+bright.nl##[class^="Ad_ad_"]
 indeleiderstrui.nl##[data-ub-carousel]
 regionoordkop.nl##[id^="regio-"]
 geenstijl.nl##a[data-ga-event^="link-tip"]
@@ -1377,9 +1378,6 @@ tweakers.net#$##b_re { display: block !important; min-height: 2px !important; }
 tweakers.net#$?#.widebnr > * { remove: true; }
 tweakers.net#$#.widebnr { display: block !important; min-height: 2px !important; }
 tweakers.net#%#//scriptlet('prevent-fetch', '/a[ab]\.tweakers\.nl/')
-tweakers.net#%#//scriptlet('set-constant', 'BannerManager.enableTags', 'noopFunc')
-tweakers.net#%#//scriptlet('set-constant', 'BannerManager.bannersBlocked', 'false')
-tweakers.net#%#//scriptlet('set-constant', 'BannerManager.sendAdRequest', 'noopFunc')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/99141
 @@/prebid/ad.gif?user=*&adId=$domain=kijk.nl
 @@||ads-talpa.adhese.com/json/$domain=kijk.nl
@@ -1459,6 +1457,8 @@ telegraaf.nl#%#window.canRunAds = true;
 !--------------------------------------!
 ! SECTION: Dutch - JS
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/166205
+npo.nl#%#//scriptlet('json-prune', 'assets.preroll')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/131530
 hardware.info#%#//scriptlet("set-constant", "BannerManager", "undefined")
 ! NOTE: JS end ⬆️
@@ -1515,6 +1515,7 @@ omroepwest.nl#$#.adcontainer-Rectangle { position: absolute!important; left: -40
 ! Good: example.org###rek; ||example.com/ads/
 ! Bad: example.org#$##rek { display: none !important; } (for instance, should be in general_extensions.txt)
 !
+knack.be##.c-header__ad
 serietotaal.nl##div[class*="banner"]
 serietotaal.nl##div[id^="ad"]
 serietotaal.nl##.rect-in-headlines
