@@ -1,8 +1,8 @@
-! Checksum: /ljmKY7U6vj5LLV4Wov1cg
+! Checksum: OwuT5vJoqNZjkdSQe+xIxA
 ! Title: AdGuard Tracking Protection filter
 ! Description: The most comprehensive list of various online counters and web analytics tools. Use this filter if you do not want your actions on the Internet to be tracked.
-! Version: 2.0.63.43
-! TimeUpdated: 2023-11-15T17:31:53+00:00
+! Version: 2.0.63.51
+! TimeUpdated: 2023-11-17T17:32:12+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -491,6 +491,13 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 !||i.snssdk.com/log/*
 !||i.snssdk.com/slardar/sdk.js
 !
+||pixel.locker2.com^
+||analytics.trovit.com^
+||us.tags.newscgp.com^
+||smazaz.icu^
+||mpraven.org^
+||smatr.net^
+||meet-buddy.com^
 ||adsmeasurement.com^
 ||t.ghostboard.io^
 ||counter.packa2.cz^
@@ -4442,6 +4449,8 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ! Blocking piwik analytics subdomain(for DNS filtering)
 |piwik.
 !
+||d1tprjo2w7krrh.cloudfront.net^
+||tracking.prismpartner.smt.docomo.ne.jp^
 ||audience-mostread.r7.com^
 ||analytics.cocolog-nifty.com^
 ||stats.totalav.com^
@@ -62825,9 +62834,9 @@ _tracking.php?b=
 ||googleadservices.com/pagead/conversion_async.js$redirect=noopjs,domain=ffm.to,important
 !
 /analytics.js$domain=tokyometro.jp|resumes.breakdownexpress.com|techcult.com|inbox.lv|kopeda.com|freexcafe.com|rusvideos.tv|nakubani.ru|lun.com|songsara.net|newsmax.com|bolgehastanesi.com|ewtc.de|newsdig.tbs.co.jp|imore.com|city.kushiro.lg.jp|emeraldbridal.com.au|emarat-news.ae|imobie.jp|tikla.com.tr|rusvideos.porn|jrkyushu.co.jp|amiunique.org|edit.ing
-||assets.adobedtm.com^$domain=mcclatchydc.com|elnuevoherald.com|bellinghamherald.com|sacbee.com|charlotteobserver.com|newsobserver.com|miamiherald.com|ef.ru|algida.com.tr|bmw-motorrad.co.uk|cif.com.tr|clearhaircare.com|domestos.com|dove.com|elidor.com.tr|f1sport.autorevue.cz|geico.com|hellmanns.com.tr|herkessofraya.com|johnsonsbaby.com.tr|lipton.com|lnk.to|lux.com|magnumicecream.com|neutrogena.com.tr|omo.com|rexona.com|samsung.com|sap.com|schwarzkopf.com.tr|signalturkiye.com|msnbc.com|nbcnews.com|kbb.com|eurosport.ru|timgate.it|intermiles.com|oxfordmail.co.uk|spiegel.de|hp.com|deutschepost.de|thebay.com|s.shufoo.net|tsn.ca|tabelog.com|euronews.com|newshub.co.nz|fredmeyer.com|viabcp.com|carsales.com.au|falabella.com|aarp.org|thehill.com
+||assets.adobedtm.com^$domain=mcclatchydc.com|elnuevoherald.com|bellinghamherald.com|sacbee.com|charlotteobserver.com|newsobserver.com|miamiherald.com|ef.ru|algida.com.tr|bmw-motorrad.co.uk|cif.com.tr|clearhaircare.com|domestos.com|dove.com|elidor.com.tr|f1sport.autorevue.cz|geico.com|hellmanns.com.tr|herkessofraya.com|johnsonsbaby.com.tr|lipton.com|lnk.to|lux.com|magnumicecream.com|neutrogena.com.tr|omo.com|rexona.com|samsung.com|sap.com|schwarzkopf.com.tr|signalturkiye.com|msnbc.com|nbcnews.com|kbb.com|eurosport.ru|timgate.it|intermiles.com|oxfordmail.co.uk|spiegel.de|hp.com|deutschepost.de|thebay.com|s.shufoo.net|tsn.ca|tabelog.com|euronews.com|newshub.co.nz|fredmeyer.com|viabcp.com|carsales.com.au|falabella.com|aarp.org|thehill.com|realtor.com
 !
-||reddit.com/svc/shreddit/events|$redirect=nooptext
+||realtor.com/rdc_user_check/init.js
 ||rzd-partner.ru/events/
 ||nextech.sk/site/visitStore/
 ||bizhankook.com/log/
@@ -66266,6 +66275,8 @@ dreamprogs.net##td[width="88"][height="31"]
 ||google.com/log?$redirect=nooptext
 ||yandex.ru/clck/click|
 ||clck.dzen.ru/click|
+!+ NOT_PLATFORM(ext_ublock)
+||reddit.com/svc/shreddit/events|$xmlhttprequest,redirect=nooptext
 !+ NOT_PLATFORM(ios, ext_safari)
 ||yandex.*/clck/
 !
@@ -66777,6 +66788,8 @@ nethunt.com/api/v1/track/email/$image
 ! Bad:  ||example.com^$cookie=flat_r_mb (should be in cookies_specific.txt)
 !
 !
+! scoreapp.com
+$cookie=_vid_t
 ! Granify
 ! Used for personalization and offers
 $cookie=granify.uuid
@@ -68023,6 +68036,7 @@ inapps.appsflyersdk.com^
 !
 ! NOTE: Regular rules
 !
+||analytics-*-nfl.yinzcam.com^
 ||prod.report.nacustomerexperience.citi.com^
 ||mon.byteoversea.com^
 ||fraud.adjoe.zone^
@@ -68764,6 +68778,10 @@ inapps.appsflyersdk.com^
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/166386
+@@||rudaw.net/images/pixel.gif$~third-party
+! https://github.com/AdguardTeam/AdguardFilters/issues/166131
+@@||googletagmanager.com/gtm.js$domain=portal.game.aug.wkb.jp
 ! https://github.com/AdguardTeam/AdguardFilters/issues/166258
 ! www.ec-store.net recommendation on mobile
 @@||rtoaster.jp^$script,domain=ec-store.net

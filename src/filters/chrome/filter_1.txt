@@ -1,8 +1,8 @@
-! Checksum: G3oPrGzUNWkHUCPGle4AbA
+! Checksum: FBnA7TKYv9LZG1NuZfMKZg
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.86.9
-! TimeUpdated: 2023-11-16T07:31:05+00:00
+! Version: 2.0.86.25
+! TimeUpdated: 2023-11-17T19:31:14+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1477,6 +1477,8 @@ ucoz.ru/informer/
 ! Bad: /banner.jpg (should be in general_url.txt)
 ! Bad: ||adssubdomain.legitwebsite.com^ (should be in adservers_firstparty.txt)
 !
+||wensonk.com^
+||smatr.net^
 ||tailstories.biz^
 ||hhdjcabafaejaibaaaeg.world^
 ||givemelink.cc^
@@ -2664,7 +2666,6 @@ ucoz.ru/informer/
 ||vuwgt.com^$third-party
 ||jerredsite.pro^$third-party
 ||4736.in^$third-party
-||bannerboo.com^$third-party
 ||prelstar.ru^$third-party
 ||dytupr.com^$third-party
 ||r5jpkacq.ru^$third-party
@@ -6004,10 +6005,9 @@ electric-house.ru#%#//scriptlet("abort-on-property-read", "onload")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/148093
 ! https://github.com/AdguardTeam/AdguardFilters/issues/147394
 ! https://github.com/AdguardTeam/AdguardFilters/issues/146771
-||pikabu.ru^$cookie=vs
 pikabu.ru#%#//scriptlet('json-prune', 'data', 'errors')
 ! https://github.com/AdguardTeam/AdguardBrowserExtension/issues/2505
-pikabu.ru#%#//scriptlet('remove-node-text', 'script', '/XMLHt[\s\S]+tpRequest[\s\S]+\([\s\S]+Ad[\s\S]+/')
+pikabu.ru#%#//scriptlet('remove-node-text', 'script', '/new window\[[XMLHtpRequs\'\+]{20,25}\][\s\S]+Ad[\s\S]+/')
 ! sports.ru
 sports.ru#%#//scriptlet('json-prune', 'direct rtbAuctionInfo')
 sports.ru#%#//scriptlet('set-constant', 'Ya.adfoxCode.create', 'noopFunc')
@@ -6798,6 +6798,7 @@ $cookie=/blcrm|bltsr|zmFQeXtI|JPIqApiY|computer/,domain=dzen.ru|baby.ru|business
 dzen.ru#%#//scriptlet('remove-cookie', '/blcrm|bltsr|zmFQeXtI|JPIqApiY|computer/')
 !
 ! Dzen main page
+dzen.ru##div[class^="geo-and-currency"][class*="Wrapper"] + div
 dzen.ru##div[class*="bannerMain"]
 dzen.ru##div[class^="currency-rates_"] + div[class^="geo-and-currency-widget_"]
 dzen.ru#?#div[class*="_yandexSearchContainer-"] ~ div[class][id] > div[id] > div:has(> div > a[href^="https://yandex.ru/an/"])
@@ -7804,8 +7805,6 @@ tfilm.me#%#AG_onLoad(function() { document.getElementById("body").style.paddingT
 videokub.me#%#document.cookie = "mycp=1";
 ! http://forum.adguard.com/showthread.php?8703
 luxpic.ru#%#document.cookie = "clickunder=1";
-! rutor - override clickunder
-rutor.info,rutor.is,zerkalo-rutor.org#%#AG_onLoad(function() { window.openNewTab = function() {} });
 ! http://www.yaplakal.com/forum44/topic894652.html - clickunder на странице перехода по ссылке (после клика на любой ссылке)
 alpha.yaplakal.com#%#window.open = function() {};
 ! https://github.com/AdguardTeam/ExperimentalFilter/issues/126
@@ -9405,6 +9404,23 @@ kadrovik01.com.ua,kom-dir.ru,gd.ru,buhsoft.ru,dirklinik.ru,fd.ru,business.ru,pro
 !
 !
 !
+moiprogrammy.com##div[style^="width:728px;height:90px;"]
+moiprogrammy.com##div[style^="margin:"][style*="width:55%"]
+||football.kulichki.net/geo_r*/$script
+||football.kulichki.net/banner/$~image
+football.kulichki.net#?#td[align="left"] > p:has(> a[href="http://www.kulichki.com/advert"]) ~ p
+abw.by##a[href^="https://marik.by/"]
+abw.by##a[href^="https://autostrong-m.by/"]
+abw.by##div[class^="r-block"]
+abw.by##.r-header-wrapper
+abw.by##.article-content + .card-wrapper
+abw.by##.aside-promo
+/static\.abw\.by\/upload\/2023\/\d{2}\/\d{2}\/\d{2}[a-z0-9]{28,}(e|f)1\.webp$/$domain=abw.by
+hibiny.ru##div[class^="pek"]
+rutor-game.info###dle-content div[align="center"] > a[rel="nofollow"][target="_blank"] > img
+redtorrent.org##a[href="/yan.php"]
+||darktorrent.org/yabez*.png
+ont.by##.b-renommee__wrap
 kaliningrad.welltex.ru#$?##header-banners-carousel > div.carousel-inner > div.carousel-item:has(> a[href^="/banners/"]) { remove: true; }
 rzd-partner.ru##.banner200
 rzd-partner.ru##.banner240100
@@ -13422,7 +13438,7 @@ pravda.ru,hd.moviegrand.ru##.offers
 fanat1k.ru##a[href^="/click.php?"] > span.center-block
 ||newsrated-kino.info/templates/*/images/dds.png
 newsrated-kino.info##.dnmoduly-load-vk
-animedub.ru##div[data-dlebid]
+pcprogs.net,animedub.ru##div[data-dlebid]
 ||samokat-dostavka.ru/wp-content/uploads/2020/03/narodny-banner-300x177.png
 cdmail.ru##a[href*="/ya_browser.htm"]
 cdmail.ru##.block_recommendation
@@ -20801,6 +20817,8 @@ player.ex.co#@##ad-container
 ! Good: example.org#@#.ad
 ! Bad:  @@||example.org^$stealth (should be in AdGuard Base - allowlist_stealth.txt)
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/166369
+ddl-warez.cc#@#.affiliate
 ! https://github.com/AdguardTeam/AdguardFilters/issues/162363
 flasharch.com#@#.advertisement:not(body)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/160226

@@ -1,8 +1,8 @@
-! Checksum: WYzgMYxgo4CClGlgu55ljQ
+! Checksum: fvcvKPOLTSNI5X8RzT2Tvw
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.38.73
-! TimeUpdated: 2023-11-15T23:32:07+00:00
+! Version: 2.0.38.78
+! TimeUpdated: 2023-11-17T20:32:05+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1113,6 +1113,8 @@ kicker.de,stern.de,desired.de,pcgames.de,t-online.de,vox.de,spieletipps.de,wette
 plus.rtl.de#%#//scriptlet('trusted-replace-xhr-response', 'true', 'false', 'homadClientConfig-plusrtlde.json')
 plus.rtl.de#%#//scriptlet('abort-on-stack-trace', 'Object.prototype.adReinsertion', 'createSdk')
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/166369
+ddl-warez.cc#%#//scriptlet('prevent-window-open', 'af.php')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/164427
 3c-bap.gmx.ch,3c-bap.gmx.at,3c-bap.gmx.net,3c.web.de#%#//scriptlet('hide-in-shadow-dom', 'list-inbox-pga-ad-item')
 ! infranken.de - removing amazon link, so the incredients are visible in a recipe
@@ -1128,6 +1130,8 @@ data-load.in#%#//scriptlet('set-cookie', '_xflora', '1')
 ! TODO: use scriptlet "inject-css-in-shadow-dom" when it will be available in apps
 ! gmx.net,gmx.at,web.de#%#//scriptlet('inject-css-in-shadow-dom', '.list-programmatic-ad-item--multi-line, .list-inbox-ad-item--multi-line { display: none !important; }')
 gmx.net,gmx.at,web.de#%#(()=>{const a=(a,b,c)=>{const d=Reflect.apply(a,b,c),e=".list-programmatic-ad-item--multi-line, .list-inbox-ad-item--multi-line { display: none !important; }";if("adoptedStyleSheets"in document){const a=new CSSStyleSheet;a.replaceSync(e),d.adoptedStyleSheets=[a]}else{const a=document.createElement("style");a.innerText=e,d.appendChild(a)}return d};window.Element.prototype.attachShadow=new Proxy(window.Element.prototype.attachShadow,{apply:a})})();
+! https://github.com/AdguardTeam/AdguardFilters/issues/158944
+chip.de#%#AG_onLoad((function(){if(window.publisherAdsRp&&window.publisherAdsRp instanceof Object)try{Object.keys(publisherAdsRp).forEach((e=>document.querySelector(`.${e}`)?.remove()))}catch(e){}}));
 ! chip.de - ad popup when pressing download
 chip.de#%#//scriptlet('set-cookie', 'chipde-r2d2-view-state ', '1')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/135749
@@ -1676,6 +1680,9 @@ augsburger-allgemeine.de##.p-swatch_topdown-nice--ad
 augsburger-allgemeine.de##.p-block > .p-float_right.p-marg_t-xl
 n-tv.de##.lotto
 ||images.finanzen.net/images/b_fonds/Vanguard_Banner
+chip.de##.fb-col-sm-12 > ul > li > a[href*="chip.de/downloads/"] img[src*="hash"]
+chip.de##li > a[href*="chip.de/downloads/"][target="_blank"] img[src*="hash"]
+chip.de##li > a[href*="chip.de/downloads/"][target="_blank"]:has(img[src*="hash"])
 chip.de#?#a[href*="chip.de/downloads/"]:has(img[src*="hash"]:not([class], [data-src]))
 chip.de##a[href*="chip.de/downloads/"] img[src*="hash"]:not([class], [data-src])
 heise.de##div[id^="HEI_"][class]
@@ -6569,6 +6576,7 @@ wetter.com#@#div[id^="div-gpt-"]
 ||china-gadgets.de^$subdocument,third-party
 ||communicationads.net/tb.php
 ||crawler.pearl.de/pearl-crawler/banner?
+||cript.to/plopscript.php
 ||datingpartner.com/medien/$third-party
 ||dealdog.net/dealdog.php
 ||dealdoktor.de/m/$third-party
@@ -7388,6 +7396,7 @@ $stylesheet,subdocument,third-party,xmlhttprequest,domain=canna-power.to|canna.t
 ||ibooks.to/plpscript.php
 ||ibooks.to/plscript.php
 ||ibooks.to/wp-content/uploads/*/daddel.png
+||ibooks.to/wp-content/uploads/*/ddd.png
 ||ibooks.to/wp-content/uploads/*/ddnew2728.png
 ||ibooks.to/wp-content/uploads/*/dldl.png
 ||ibooks.to/wp-content/uploads/*/ffree.png
@@ -8229,6 +8238,7 @@ connextra.com##iframe[src^="https://ssl.connextra.com"]
 ||chip.de/downloads/*.html|$popup,domain=chip.de
 ||count.shopping.t-online.de/RE?ID=$popup,domain=t-online.de
 ||data-load.in/partner/$popup
+||ddownload.com/free$popup,domain=ibooks.to
 ||delamar.de/out/$popup
 ||eishockey-online.news^$popup,domain=eishockey-online.com
 ||sexei.net/go.html$popup
@@ -8968,6 +8978,7 @@ africa-positive.de,androidhow.eu,arbeitszeugnisgenerator.de,autoscout24.ch,badi-
 efahrer.chip.de##.ads-alignment
 glarus24.ch,radiocentral.ch,sunshine.ch##.ads-container
 6profis.de##.ads6p
+chefkoch.de##.ads__initialized
 meetingpoint-brandenburg.de##.ads_mobile
 eatsmarter.de##.adsense
 stereo.de##.adserver
@@ -10210,6 +10221,7 @@ ww3.cad.de##body > table[width="100%"][border="0"]:first-child
 ddl-warez.cc##button[onclick*="/af.php"]
 ibooks.to##button[type="submit"]
 abload.de##center > table > tbody > tr > td[valign="bottom"][align="center"][style="width: 100%;"]
+chefkoch.de##consent-for
 winfuture.de##div[align="center"][style="min-height: 320px;"]
 3dchip.de##div[align="center"][width="468px"] > table[height="60"][cellspacing="0"][cellpadding="0"][border="0"][align="center"]
 bitreporter.de##div[class$="-adlabel"]
