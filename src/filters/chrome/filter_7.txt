@@ -1,8 +1,8 @@
-! Checksum: fnStcjnv4I5DQcaId7eslA
+! Checksum: V70fSuF5ap9L+JTz6Q0v5g
 ! Title: AdGuard Japanese filter
 ! Description: Filter that enables ad blocking on websites in Japanese language.
-! Version: 2.0.46.8
-! TimeUpdated: 2023-11-19T06:31:59+00:00
+! Version: 2.0.46.19
+! TimeUpdated: 2023-11-21T07:32:07+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -91,6 +91,7 @@
 ! not for DNS
 ||ias.rakuten.co.jp^$third-party,domain=~rakuten-co.jp
 !
+||afi-thor.com^$third-party
 ||afbhub.net^$third-party
 ||advortex.cloud^
 ||dlp4luwpus5kr.cloudfront.net^
@@ -503,6 +504,8 @@
 ! Bad: ||ad.doubleclick.net^ (should be in adservers.txt)
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/166650
+jukenbbs.com#%#//scriptlet('prevent-addEventListener', 'load', 'delayCheckAdBlock')
 ! https://github.com/uBlockOrigin/uAssets/issues/20629
 @@||shindanmaker.com^$generichide
 shindanmaker.com#$#div[id^="div-gpt-"] { min-height: 1px !important; }
@@ -962,6 +965,9 @@ nasubiblog.com,kyukyoku-matome.com##.widget_pc_ad
 !-------JS----------
 !-------------------
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/166651
+! https://github.com/AdguardTeam/AdguardFilters/issues/166658
+pictab.art,onagazou.info#%#//scriptlet('set-constant', 'pum_vars', 'undefined')
 ! https://github.com/uBlockOrigin/uAssets/issues/20629
 shindanmaker.com#%#//scriptlet('adjust-setInterval', 'reward_countdown')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/165446
@@ -1103,6 +1109,11 @@ avgle.com#%#//scriptlet('abort-current-inline-script', '__htapop')
 !-------CSS---------
 !-------------------
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/166591
+wpb.shueisha.co.jp#$?#ul.mod-grid2 > li.block-list-a-a__list__item:has(> div.block-banner-b-a) { display: none !important; }
+wpb.shueisha.co.jp#$?#ul.mod-grid2 > li.block-list-a-a__list__item:has(> div[class$="_InRecommend"]) { display: none !important; }
+wpb.shueisha.co.jp#$?#ul.mod-grid2:has(> li.block-list-a-a__list__item > div.block-banner-b-a) { width: 50% !important; }
+wpb.shueisha.co.jp#$?#ul.mod-grid2:has(> li.block-list-a-a__list__item > div[class$="_InRecommend"]) { width: 50% !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/166349
 minkch.com#$#.lsidebar[style^="min-height"] { min-height: auto !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/165829
@@ -1461,6 +1472,8 @@ hostlove.com#$##index_nav > h1 { padding-top: 30px!important; }
 /wp-content/themes/CashLINESystem/js/modal.$script
 !
 ! Malware/Phishing
+/?type=lp001&afl=$document
+/?wt=*&adv=$document
 /^https:\/\/\d*juniorlak[0-9a-z]+\.[a-z]{2}\.com\//$document,domain=sa.com|ru.com|za.com
 ://amazon-co-jp.*.com/$document
 .com/nta/client/LOG0101001.php|$document
@@ -1618,6 +1631,12 @@ gundamlog.com###more > iframe[src^="https://richlink.blogsys.jp"]
 !
 !
 !
+nikkei.com#?#div[class^="default_"]:has(> div > div[class^="ad"])
+response.jp##div[style="min-height:250px;"]
+jukenbbs.com##.column--r > center:first-child
+jukenbbs.com##.container-fluid > center
+wpb.shueisha.co.jp#?#.block-widget-a-c__container:has(> div.mod-box > div.mod-box__container > div.js-ad-wpb_pc_house)
+majinai.art##.slide_b
 shimotsuke.co.jp##div[id^="jp_soon_"][style]
 todaishimbun.org#?#.dfad:not(:has(> a[href^="https://www.todaishimbun.org"])):not(:has(> a[href^="https://forms.gle"]))
 media.finasee.jp##div[style="width: 100%; min-height:100px; margin: 0 auto;"]
@@ -4602,7 +4621,6 @@ news.ameba.jp##div[class^="SpAd"]
 huffingtonpost.jp##.leaderboard-flex-placeholder
 macaro-ni.jp##.articleShow__nativeAd
 macaro-ni.jp##.yadsOverlay
-wpb.shueisha.co.jp###js-news-recommended-list-json ~ div.helper--min-height-225
 mitok.info,entamega.com,getnews.jp,webcartop.jp##div[style="min-height: 250px;"]
 getnews.jp,withonline.jp,jprime.jp##div[style="min-height:250px;"]
 otajo.jp##iframe[src^="https://rcm-jp.amazon.co.jp/e/cm?"]
@@ -4696,7 +4714,6 @@ tenshoku.srad.jp###top-hat
 osdn.co.jp###gpt-cojp_rec-footer
 osdn.co.jp###gpt-cojp_rec-header
 jump.x0.to###prs
-wpb.shueisha.co.jp##.helper--min-height-225:not(.js-cxense-widget-recommend)
 app-liv.jp##.adv-area
 app-liv.jp##.ad-bnr-words
 ||manga-yomeru.com/jp/template/sidebar-banner1.
@@ -8184,13 +8201,6 @@ audioreview.m1001.coreserver.jp###side-fixed a[href^="//af.moshimo.com/af/c/clic
 kashi-mo.com##.rectangle_bnr
 yahoo.co.jp###lrec
 ||vipsister23.com/vipsister.html
-nijinchu.com##.dmm-comic-bottom
-nijinchu.com##.dmm-douga-bottom
-nijinchu.com##.dmm-game-bottom
-nijinchu.com##.dmm-item
-nijinchu.com##.p_img_pickup
-nijinchu.com##div[class*="adv"]
-||cdn.exaf.jp/dmm/js^$domain=nijinchu.com
 vipsister23.com###share2
 85cc.net##a[href*="mm786.com/"]
 85cc.net##.menu > a.item[target="_blank"]
@@ -8198,6 +8208,8 @@ ibbs.info##.ad_data
 share-videos.se##.widget_sponsored_area
 embed.share-videos.se###new_ad_html
 embed.share-videos.se###ad_html
+blog.esuteru.com##.azrank_quote
+blog.esuteru.com##.siteAside > div.ad-aside:nth-child(-n+2)
 blog.esuteru.com,jin115.com###gStickyAd
 news-us.org##.adspc
 news-us.org##[class^="sponsor"]
@@ -8704,7 +8716,6 @@ masterwiki.net#?##content > center:has(> script[src="http://pagead2.googlesyndic
 nishinippon.co.jp#?#.l-section-side h2.c-heading-side-h2--otherStyle__text:upward(.l-section-side)
 ldblog.jp,blogo.jp#?#.plugin-memo:has(> div.side > a[href*="www.dlsite"])
 ascii2d.net#?#.col-lg-4 > .p-t-1:has(> h5:contains(広告))
-nijinchu.com#?#article > div.entry_content > h3:contains(おすすめ商品)
 urahame.com#?#h2.MuiStack-root > div.MuiStack-root:has(> div.MuiBox-root > script[src^="https://adtest.pages.dev"])
 news.tennis365.net#?##cntAreaR > div[style*="padding:"]:has(div[id^="div-gpt-"])
 shikaku-fan.net#?#div[align="center"]:has(> ins.adsbygoogle)

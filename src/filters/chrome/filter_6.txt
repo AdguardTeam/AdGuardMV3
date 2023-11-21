@@ -1,8 +1,8 @@
-! Checksum: fvcvKPOLTSNI5X8RzT2Tvw
+! Checksum: 1uSCV5EMd8Sk/T+jWfU4tw
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.38.78
-! TimeUpdated: 2023-11-17T20:32:05+00:00
+! Version: 2.0.38.82
+! TimeUpdated: 2023-11-20T17:03:49+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1522,6 +1522,11 @@ lkz.de##.nfy-row-ad
 ! https://github.com/AdguardTeam/AdguardFilters/issues/84273
 ! Blocked service worker to fix filtering in apps
 ||obi.de/wrapper-sw.js
+!https://github.com/AdguardTeam/AdguardFilters/issues/158944
+chip.de##.fb-col-sm-12 > ul > li > a[href*="chip.de/downloads/"] img[src*="hash"]
+chip.de##li > a[href*="chip.de/downloads/"][target="_blank"]:has(img[src*="hash"])
+chip.de#?#a[href*="chip.de/downloads/"]:has(img[src*="hash"]:not([class], [data-src]))
+chip.de##a[href*="chip.de/downloads/"] img[src*="hash"]:not([class], [data-src])
 ! https://github.com/AdguardTeam/AdguardFilters/issues/61907
 ||chip.de/*.php*&$~third-party,script
 chip.de##.js_download_button > a[href^="https://x.chip.de/intern/dl/?url="][href*="&pageLayout=withinstaller|"]
@@ -1583,6 +1588,7 @@ formel1.de,krautundrueben.de,motorsport-total.com,traktorpool.de,fnweb.de,laborj
 !
 !
 !
+lacrux.com##.lacruxtarget
 myhomebook.de#?#div[class]:has(> article a[href^="https://secure.adnxs.com"])
 myhomebook.de#?#section[data-type="sticky-bar"]:has(> a[rel*="sponsored"]:only-child)
 myhomebook.de#?#div[class][style*="min-width"][style*="min-height"]:has(> #mrec:only-child)
@@ -1680,11 +1686,6 @@ augsburger-allgemeine.de##.p-swatch_topdown-nice--ad
 augsburger-allgemeine.de##.p-block > .p-float_right.p-marg_t-xl
 n-tv.de##.lotto
 ||images.finanzen.net/images/b_fonds/Vanguard_Banner
-chip.de##.fb-col-sm-12 > ul > li > a[href*="chip.de/downloads/"] img[src*="hash"]
-chip.de##li > a[href*="chip.de/downloads/"][target="_blank"] img[src*="hash"]
-chip.de##li > a[href*="chip.de/downloads/"][target="_blank"]:has(img[src*="hash"])
-chip.de#?#a[href*="chip.de/downloads/"]:has(img[src*="hash"]:not([class], [data-src]))
-chip.de##a[href*="chip.de/downloads/"] img[src*="hash"]:not([class], [data-src])
 heise.de##div[id^="HEI_"][class]
 4fansites.de##div[style="text-align: center; min-height: 320px;"]
 4fansites.de##.spalten_33_twitch
@@ -9230,6 +9231,7 @@ autoscout24.at,autoscout24.de##.cl-billboad-wrapper
 wg-gesucht.de##.clicked_partner
 wolfsrevier.de##.client_wrapper
 pixelio.de##.clipad
+focus.de##.cls_hor_prnt_am
 focus.de##.cls_slot_xxoutstreamxx
 focus.de##.cls_ver_prnt
 focus.de##.cls_ver_prnt_xs
@@ -9899,7 +9901,7 @@ bauernzeitung.at##.tdi_59
 neumarkt-tv.de##.tdi_88
 bestattungen.de##.tdp
 bild.de##.tea-rectangle
-wort.lu##.teaser--sponsored
+nzz.ch,wort.lu##.teaser--sponsored
 ariva.de##.teaserPicturedNews
 watson.ch##.teaser_type_paid_content
 familie.de##.teaserheld-header-wrapper

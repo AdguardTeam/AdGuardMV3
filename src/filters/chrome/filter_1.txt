@@ -1,8 +1,8 @@
-! Checksum: FBnA7TKYv9LZG1NuZfMKZg
+! Checksum: 45N35i0cdVE+LgNXseIaMQ
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.86.25
-! TimeUpdated: 2023-11-17T19:31:14+00:00
+! Version: 2.0.86.30
+! TimeUpdated: 2023-11-20T17:02:50+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -6007,7 +6007,7 @@ electric-house.ru#%#//scriptlet("abort-on-property-read", "onload")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/146771
 pikabu.ru#%#//scriptlet('json-prune', 'data', 'errors')
 ! https://github.com/AdguardTeam/AdguardBrowserExtension/issues/2505
-pikabu.ru#%#//scriptlet('remove-node-text', 'script', '/new window\[[XMLHtpRequs\'\+]{20,25}\][\s\S]+Ad[\s\S]+/')
+pikabu.ru#%#//scriptlet('remove-node-text', 'script', '/new window\[atob\([a-zA-Z0-9\'\=]{15,30}\)\][\s\S]+Ad[\s\S]+/')
 ! sports.ru
 sports.ru#%#//scriptlet('json-prune', 'direct rtbAuctionInfo')
 sports.ru#%#//scriptlet('set-constant', 'Ya.adfoxCode.create', 'noopFunc')
@@ -6843,9 +6843,9 @@ dzen.ru##.viewer-layout__sidebar div[id^="D-A-"]
 ! mail.ru
 mail.ru##div[class*="js-module"][class*="rb-slot_plug"]
 mail.ru,sportmail.ru##div[class*="m-fixed-panel__box"]
-mail.ru,sportmail.ru,~touch.mail.ru#%#//scriptlet('set-constant', 'Object.prototype.mimic', 'null')
+mail.ru,sportmail.ru,~my.mail.ru,~touch.mail.ru#%#//scriptlet('set-constant', 'Object.prototype.mimic', 'null')
 ! ad on main page
-mail.ru#?#div[slot="main-column"] > div:has(> svg[width="100%"][height="100%"])
+mail.ru##.micro-widgets + div.tgb-wrapper
 [$path=/^\/$|mail\.ru\/\?/]mail.ru#%#//scriptlet('remove-node-text', 'script', '/\[a?d?gina?d?\]/')
 ! kino.mail.ru
 kino.mail.ru##.block_ad-text
@@ -7849,6 +7849,8 @@ disk.yandex.*#%#//scriptlet('remove-class', 'has-fullscreen-banner','.public__ro
 !------- CSS -----------
 !-----------------------
 !
+! abw.by
+abw.by#$#.news-main__grid { min-height: auto !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/165998
 soccer365.com.ua#$#.header_top { padding-top: 0 !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/165602
@@ -9203,7 +9205,7 @@ ufacitynews.ru,sevastopol.su,zn.ua,pravo.ru,lubertsyriamo.ru,kommersant.ru,dvnov
 ! ##div[id^="unit_"]
 sib.fm,tulapressa.ru,vladday.ru,teleport2001.ru,ivbg.ru,progorod76.ru,riamobalashiha.ru,sobesednik.com,vz.ru,autoparus.by,ctv.by,hightech.plus,vkpress.ru,newstula.ru,panoramapro.ru,zpravda.ru,mirtesen.ru,sports.ru,ko.ru,togliatti24.ru,punkt-a.info,psychologies.ru,1yar.tv,fontanka.ru,baltnews.*,sm.news,news.ru,interfax-russia.ru,kursk-izvestia.ru,dp.ru,lentv24.ru,runews24.ru,bfm.ru,starhit.ru,ctnews.ru,kp40.ru,politring.com,ura.news,osnmedia.ru,interfax.by,lifehacker.ru,miasskiy.ru,eadaily.com,golospravdy.eu,govoritmoskva.ru,tayga.info,neg.by,wi-fi.ru,kriminal.net.ua,vesti.ru,province.ru,nashe.ru,rusvesna.su,7info.ru,ntv.ru,365news.biz,life.ru,rb.ru,business.ru,rosbalt.ru,mir24.tv,utro.ru,progorodnn.ru,newsru.com,anekdot.ru,astrakhan-24.ru,bel.ru,belive.ru,chrdk.ru,dni.ru,finam.info,gazeta.ru,gmbox.ru,iz.ru,kaspyinfo.ru,m24.ru,marieclaire.ru,mhealth.ru,mixnews.lv,moika78.ru,nation-news.ru,penzavzglyad.ru,pravda.ru,radioromantika.ru,realty.interfax.ru,riamo.ru,rusplt.ru,russian.rt.com,severpost.ru,snob.ru,sovsport.ru,steaklovers.menu,teleprogramma.pro,topwar.ru,trendymen.ru,tvc.ru,tvzvezda.ru,ua-football.com,ukraina.ru,vesti.uz,vokrugsveta.ru,warhead.su,zakon.kz,zr.ru##div[id^="unit_"]
 ! ##div[id^="adfox_"]
-eg.ru,newsmaker.md,delo-vcusa.ru,tolknews.ru,gorodche.ru,smartpress.by,raenza.ru,eadaily.com,zakon.kz,svpressa.ru,udf.name,udf.by,baby.ru,pikabu.ru,thequestion.ru##div[id^="adfox_"]
+gastronom.ru,eg.ru,newsmaker.md,delo-vcusa.ru,tolknews.ru,gorodche.ru,smartpress.by,raenza.ru,eadaily.com,zakon.kz,svpressa.ru,udf.name,udf.by,baby.ru,pikabu.ru,thequestion.ru##div[id^="adfox_"]
 !
 ! For URL shorteners or simple sites with frequently changed ad servers.
 ! Incorrectly blocked domains can be excluded using regex(synchronize this regexp in all filters)
@@ -9216,6 +9218,8 @@ eg.ru,newsmaker.md,delo-vcusa.ru,tolknews.ru,gorodche.ru,smartpress.by,raenza.ru
 !
 !
 !
+news.meta.ua##.banner-img
+news.meta.ua##small[style^="display:block;"]
 gordonua.com##div[data-action="banners"]
 gordonua.com##a[class^="branding-link-"]
 rbc.ua##.vidverto-wrapper
@@ -9404,6 +9408,8 @@ kadrovik01.com.ua,kom-dir.ru,gd.ru,buhsoft.ru,dirklinik.ru,fd.ru,business.ru,pro
 !
 !
 !
+betnews.by#?#.col:has(> .ad-banner)
+||betnews.by/wp-content/uploads/2023/11/1080x240.png
 moiprogrammy.com##div[style^="width:728px;height:90px;"]
 moiprogrammy.com##div[style^="margin:"][style*="width:55%"]
 ||football.kulichki.net/geo_r*/$script
