@@ -1,8 +1,8 @@
-! Checksum: jXqXp93BkepjIqm+lN5tKQ
+! Checksum: +iZYMKPaP9ykXeM6H57MpA
 ! Title: AdGuard Chinese filter
 ! Description: EasyList China + AdGuard Chinese filter. Filter list that specifically removes ads on websites in Chinese language.
-! Version: 2.1.3.97
-! TimeUpdated: 2023-11-21T05:02:55+00:00
+! Version: 2.1.4.9
+! TimeUpdated: 2023-11-23T07:31:09+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -85,6 +85,7 @@
 ! Bad: ||adssubdomain.legitwebsite.com^ (should be in adservers_firstparty.txt)
 !
 !
+||ggsfq.xyz^$third-party
 ||lqxbkqdtvtdhw.xyz^
 ||noafoaji.xyz^
 ||bilec.xyz^
@@ -478,6 +479,8 @@
 ! Bad: ||ad.doubleclick.net^ (should be in adservers.txt)
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/166740
+04647.club#%#//scriptlet('prevent-fetch', 'doubleclick.net')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/166155
 vxetable.cn#%#//scriptlet('abort-current-inline-script', 'decodeURIComponent', 'pagead')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/165865
@@ -1250,6 +1253,10 @@ $script,third-party,denyallow=fastly.net|statically.io|sharecast.ws|bunnycdn.ru|
 !
 !
 !
+||1905.com/data/js/*.json?pwd=*.shtml&rand=$xmlhttprequest
+||1905.com/data/js/*.json?pwd=*?fr=videoplay_*&rand=$xmlhttprequest
+04647.club##div[class*="adsBox"]
+04647.club##div[class*="bannerBox"]
 hanime1.me##.video-show-width > .single-show-list > .hidden-xs[style*="text-align:"]
 bg3.co###div_top_ads
 bg3.co###interstitial_fade
@@ -2790,7 +2797,7 @@ onemanhua.com##div[id^="rn_ad_native"]
 ||hboav.com/guga/*.php$domain=5278.cc
 forum.hkgolden.com##div[id^="Super Banner"]
 sokoc2.com##.rHHc
-news.ltn.com.tw,commonhealth.com.tw,health.tvbs.com.tw,idreamx.com,xchina.co,99kubo.tv,manhuafen.com##.ad
+1905.com,news.ltn.com.tw,commonhealth.com.tw,health.tvbs.com.tw,idreamx.com,xchina.co,99kubo.tv,manhuafen.com##.ad
 pianku.me###playad
 javdove.com##.dn_fix_bottom
 javdove.com##.recommend-link
@@ -4723,8 +4730,10 @@ newduba.cn###jq_youxi
 ||2c0a5.xyz^
 ||2u3v4w5x6y.com^
 ||3562wsgkbcm.xyz^
+||38bw0.space^
 ||3dh9y.com^
 ||3uvz5.xyz^
+||415677.com^
 ||44jui.top^
 ||5jzu5t.com^
 ||6528fdyngk.xyz^
@@ -4745,6 +4754,7 @@ newduba.cn###jq_youxi
 ||agossuoeach.com^
 ||ahpphkc.xyz^
 ||aidmat.icu^
+||aiiaqw.xyz^
 ||aispyd.icu^
 ||aknkvallbfml.com^
 ||albsgdq.cn^
@@ -4752,6 +4762,7 @@ newduba.cn###jq_youxi
 ||aniede.xyz^
 ||anjneia.xyz^
 ||apis301.com^
+||apvnzvg.xyz^
 ||aqburrae.xyz^
 ||aqiemc.xyz^
 ||arbbj6.com^
@@ -4870,6 +4881,7 @@ newduba.cn###jq_youxi
 ||fenem.top^
 ||fepmpify.xyz^
 ||fgttbz.xyz^
+||fguhyg.cn^
 ||fkjsjwbs.xyz^
 ||fluhmmr.cn^
 ||fmvbyji.cn^
@@ -4880,6 +4892,7 @@ newduba.cn###jq_youxi
 ||fsgiosi.com^
 ||ftzzbx.xyz^
 ||fwhhcpj.xyz^
+||fytpft.xyz^
 ||fzgetdy.cn^
 ||g0fc3.com^
 ||g2ak5.com^
@@ -4954,9 +4967,11 @@ newduba.cn###jq_youxi
 ||hinm.online^
 ||hixutb.xyz^
 ||hjnjjcw.xyz^
+||hkljed.xyz^
 ||hkrytf.xyz^
 ||hnkhgw.com^
 ||holdntlc.com^
+||hooe.top^
 ||hrtinqj.cn^
 ||huhwllvk.xyz^
 ||hunklm.com^
@@ -4975,6 +4990,7 @@ newduba.cn###jq_youxi
 ||igkgag.xyz^
 ||ikmhndd.com^
 ||iknhgj.com^
+||ileled.xyz^
 ||imrvyop.cn^
 ||imxsvpxe.xyz^
 ||insfengdata.com^
@@ -4984,6 +5000,7 @@ newduba.cn###jq_youxi
 ||itwzlyq.com^
 ||iujlwn.icu^
 ||iuvssgh.cn^
+||jane1.top^
 ||jane2.top^
 ||jcbjcb9.cn^
 ||jeqxuvv.icu^
@@ -5012,6 +5029,7 @@ newduba.cn###jq_youxi
 ||kkmsa.top^
 ||klfbnklddfbkn.com^
 ||klwhuci.cn^
+||kmlpgjh.xyz^
 ||kncrya.xyz^
 ||knhmgn.com^
 ||knuaxfv.cn^
@@ -5028,13 +5046,16 @@ newduba.cn###jq_youxi
 ||l80ays.com^
 ||lblwhh.xyz^
 ||ldvnehc.xyz^
+||lewhrzv.xyz^
 ||lfhnzbj.xyz^
 ||lianglili2.cn^
 ||liuyi22.cn^
 ||liuyuhuaa.cn^
 ||lkdybkwi.xyz^
 ||lkoqtvvajktpjsk.xyz^
+||lkot.top^
 ||llblwzg.xyz^
+||llmxt.fun^
 ||llnxdx.xyz^
 ||lmfehr.xyz^
 ||ln0.com.cn^
@@ -5056,6 +5077,7 @@ newduba.cn###jq_youxi
 ||mfnfylx.xyz^
 ||mggzah.icu^
 ||mhnzhlase.xyz^
+||mhzftye.xyz^
 ||mlumlio.cn^
 ||mmvjuti.cn^
 ||mnhncf.cn^
@@ -5090,6 +5112,7 @@ newduba.cn###jq_youxi
 ||nrzzaep.xyz^
 ||nubcdaqa.xyz^
 ||nyfgpbsc.xyz^
+||nyhgjmlg.xyz^
 ||nyhgvn.xyz^
 ||nyvgbt.xyz^
 ||oapyrzde.xyz^
@@ -5105,6 +5128,7 @@ newduba.cn###jq_youxi
 ||oprece.xyz^
 ||orssengseen.com^
 ||ovfvkfc.xyz^
+||owkmmo.xyz^
 ||oxrvfsi.xyz^
 ||pajhvd.xyz^
 ||pdngnx.xyz^
@@ -5152,6 +5176,7 @@ newduba.cn###jq_youxi
 ||rkds5.icu^
 ||rntdqwc.xyz^
 ||roxewwq.cn^
+||rqrvfp.xyz^
 ||rrfccx.com^
 ||rslkhj.xyz^
 ||rvreuxi.cn^
@@ -5163,6 +5188,7 @@ newduba.cn###jq_youxi
 ||sglahyea.xyz^
 ||shipostrich.com^
 ||shx11.xyz^
+||slkdfg.com^
 ||sllo.top^
 ||smlpcz.icu^
 ||splfnok.cn^
@@ -5170,6 +5196,7 @@ newduba.cn###jq_youxi
 ||sregfle.cn^
 ||srldkqj.cn^
 ||srlhgo.cn^
+||stylishar.com^
 ||suzoqz.icu^
 ||syjkscy.cn^
 ||tae0t.site^
@@ -5184,8 +5211,10 @@ newduba.cn###jq_youxi
 ||thboxp.xyz^
 ||titv.top^
 ||tmlwvxae.xyz^
+||tmvebl.xyz^
 ||tongjiniao.com^
 ||toyhyhv.icu^
+||tozwrqnq.xyz^
 ||tqrznqs.cn^
 ||trdmtx.xyz^
 ||trrmkzesvyqrary.com^
@@ -5233,6 +5262,7 @@ newduba.cn###jq_youxi
 ||vozftn.xyz^
 ||vrivslffndepxqd.xyz^
 ||vrnrpzy.xyz^
+||vrosqolcg.com^
 ||vttqld.xyz^
 ||vxdpmxw.xyz^
 ||w3wci.site^
@@ -5261,6 +5291,7 @@ newduba.cn###jq_youxi
 ||xcqbbcqpl.xyz^
 ||xdfdqce.xyz^
 ||xfqrsjq.cn^
+||xfztgxt.com^
 ||xg6hb.xyz^
 ||xjxbdh.xyz^
 ||xkfigjh.cn^
@@ -5296,6 +5327,7 @@ newduba.cn###jq_youxi
 ||z0a1b2c3d4.com^
 ||z1wfe.top^
 ||z91f4.top^
+||zattdf.xyz^
 ||zbxtcwi.xyz^
 ||zchvyet.cn^
 ||zcpsc.top^
@@ -5316,18 +5348,19 @@ newduba.cn###jq_youxi
 ||zyzo.cn^
 ||zzyy17.top^
 ||zzyy18.top^
-||hooe.top^
-||rqrvfp.xyz^
-||owkmmo.xyz^
-||llmxt.fun^
-||xfztgxt.com^
-||nyhgjmlg.xyz^
-||apvnzvg.xyz^
-||vrosqolcg.com^
-||tmvebl.xyz^
-||hkljed.xyz^
-||lewhrzv.xyz^
-||fguhyg.cn^
+||corcztpc.xyz^
+||ran2.top^
+||7bspu.site^
+||quzpvtt.xyz^
+||rxrdjb.xyz^
+||hkvuzv.xyz^
+||dzdxnbc.xyz^
+||jackdd.xyz^
+||mhglue.xyz^
+||bfgtfxd.com^
+||fgcxdr.cn^
+||ronm.top^
+||wwwww.asia^
 ||zzyy19.top^
 ||zzyy20.top^
 ##[style*="sotv.me"]

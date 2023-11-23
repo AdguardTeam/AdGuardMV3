@@ -1,8 +1,8 @@
-! Checksum: V70fSuF5ap9L+JTz6Q0v5g
+! Checksum: DOeYLnjJPmkQn/K2Mr+qhw
 ! Title: AdGuard Japanese filter
 ! Description: Filter that enables ad blocking on websites in Japanese language.
-! Version: 2.0.46.19
-! TimeUpdated: 2023-11-21T07:32:07+00:00
+! Version: 2.0.46.25
+! TimeUpdated: 2023-11-22T12:32:12+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -91,6 +91,7 @@
 ! not for DNS
 ||ias.rakuten.co.jp^$third-party,domain=~rakuten-co.jp
 !
+||gs-ad.jp^
 ||afi-thor.com^$third-party
 ||afbhub.net^$third-party
 ||advortex.cloud^
@@ -1631,8 +1632,12 @@ gundamlog.com###more > iframe[src^="https://richlink.blogsys.jp"]
 !
 !
 !
+web-engineer-wiki.com##.w-fixSide
+web-engineer-wiki.com##.l-mainContent__inner > div.post_content > div.swell-block-capbox.is-style-shadow[data-colset]
+web-engineer-wiki.com##.l-mainContent__inner > div.post_content > div.swell-block-capbox.is-style-shadow[data-colset] + div.swell-block-capbox[data-colset]
+gentosha-go.com##.side-banner > a:not([href^="https://gentosha-go.com"])
+gentosha-go.com##.footer-banner > a:not([href^="https://gentosha-go.com"]):not([href^="https://ggo-ad.com"])
 nikkei.com#?#div[class^="default_"]:has(> div > div[class^="ad"])
-response.jp##div[style="min-height:250px;"]
 jukenbbs.com##.column--r > center:first-child
 jukenbbs.com##.container-fluid > center
 wpb.shueisha.co.jp#?#.block-widget-a-c__container:has(> div.mod-box > div.mod-box__container > div.js-ad-wpb_pc_house)
@@ -4622,7 +4627,7 @@ huffingtonpost.jp##.leaderboard-flex-placeholder
 macaro-ni.jp##.articleShow__nativeAd
 macaro-ni.jp##.yadsOverlay
 mitok.info,entamega.com,getnews.jp,webcartop.jp##div[style="min-height: 250px;"]
-getnews.jp,withonline.jp,jprime.jp##div[style="min-height:250px;"]
+response.jp,getnews.jp,withonline.jp,jprime.jp##div[style="min-height:250px;"]
 otajo.jp##iframe[src^="https://rcm-jp.amazon.co.jp/e/cm?"]
 2chmatome2.jp###gn_overlay_wrapper
 2ch.logpo.jp##.AdsWidth
@@ -6079,6 +6084,7 @@ nlab.itmedia.co.jp##.admsg
 nlab.itmedia.co.jp##.bannar
 nlab.itmedia.co.jp###globalHeader
 nlab.itmedia.co.jp##.headerbannar
+||gamewith.jp/*/ad/index.js
 gamewith.jp##.review_amazon_ranking_container
 gamewith.jp##.review_amazon_ranking_title
 gamewith.jp##.ad-pc-footer
