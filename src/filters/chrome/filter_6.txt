@@ -1,8 +1,8 @@
-! Checksum: djy41xGiP42QKAe9xNzRTA
+! Checksum: dk49uD4ruSAFzYr+vuDtkw
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.38.90
-! TimeUpdated: 2023-11-22T21:03:52+00:00
+! Version: 2.0.38.98
+! TimeUpdated: 2023-11-25T14:31:57+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -524,6 +524,8 @@ essen-und-trinken.de,urbia.de#%#!function(){function b(){}function a(a){return{g
 schnittmuster-datenbank.de#%#//scriptlet("abort-on-property-read", "adsBlocked")
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/166925
+golf-live.at#%#//scriptlet("abort-current-inline-script", "atob", "KX0pKCk7")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/164648
 @@||st.wetteronline.de/*/js/showAds.js
 ! https://github.com/AdguardTeam/AdguardFilters/issues/164437
@@ -1590,6 +1592,9 @@ formel1.de,krautundrueben.de,motorsport-total.com,traktorpool.de,fnweb.de,laborj
 !
 !
 !
+infranken.de#?#.listing-item:has(> article[class*="lp_partnerangebote"] .post-content > .post-location > span:contains(Anzeige))
+||07c225f3.online/fl1efsl/$script,subdocument,xmlhttprequest
+||07c225f3.online^$redirect=nooptext,important
 stol.it##div[class^="AdSuperBanner__SuperBannerContainer"]
 netdoktor.ch##.footer-ad-container
 lacrux.com##.lacruxtarget
@@ -8249,6 +8254,7 @@ connextra.com##iframe[src^="https://ssl.connextra.com"]
 ||ddownload.com/free$popup,domain=ibooks.to
 ||delamar.de/out/$popup
 ||eishockey-online.news^$popup,domain=eishockey-online.com
+||linux-magazin.de/wp-content/uploads/*#$popup,domain=linux-magazin.de
 ||sexei.net/go.html$popup
 ||sptopf.de/tshp/RE?ID=$popup,domain=t-online.de
 ||warez.cx^$popup,domain=ibooks.to
@@ -9159,7 +9165,7 @@ finanzen.ch##.big_size
 iplayapps.de##.bigbanner
 bildercache.de##.bilde-widget
 designtagebuch.de##.billbo
-baupool.com,bundesliga.com,fnweb.de,formel1.de,laborjournal.de,ligaportal.at,mannheimer-morgen.de,tarnkappe.info,traktorpool.de,winfuture.de##.billboard
+baupool.com,bundesliga.com,fnweb.de,formel1.de,laborjournal.de,ligaportal.at,linux-magazin.de,mannheimer-morgen.de,tarnkappe.info,traktorpool.de,winfuture.de##.billboard
 android-hilfe.de##.billboard-ad-footer
 android-hilfe.de##.billboard-ad-top
 infranken.de##.billboard-wrapper
@@ -9285,6 +9291,7 @@ finanzen.net##.cpg_incontent1-container
 finanzen.net##.cpg_incontent2-container
 daswetter.com##.creatividad
 u1-radio.at##.csc-partner
+haus.de##.css-1mdt86f
 filmstreaming-de.life##.custom-ban-wrap
 boerse-express.com##.custom-bexad
 derkleinegarten.de##.custom-inhoadd
@@ -10287,6 +10294,7 @@ sportbild.bild.de##div[data-tr-doc-type="dt=InlineAd|st=BTOAdTag"]
 giga.de##div[data-trigger="sourcepoint-ad"]
 prosiebengames.de##div[data-url-link^="https://track-adspree.com/"]
 gesundheit.de,onmeda.de##div[id$="SparkWrapper"]
+teltarif.de##div[id^="LxIdealo"]
 t-online.de,www-t--online-de.cdn.ampproject.org##div[id^="T-"].Tmm.Tltb.Tts.Tmc1.Tww1.Thh3[onfocus^="A('zid="] > .Ttsc.Ttsv169
 t-online.de,www-t--online-de.cdn.ampproject.org##div[id^="T-"][oncontextmenu="return false"]
 hardware-mag.de##div[id^="ad-"]
