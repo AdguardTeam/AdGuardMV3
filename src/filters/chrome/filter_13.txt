@@ -1,8 +1,8 @@
-! Checksum: 7TwrFh5WR7XviTfVTf3zsw
+! Checksum: HMZKvpKn8HvDW2/5dXpuvA
 ! Title: AdGuard Turkish filter
 ! Description: Filter list that specifically removes ads on websites in Turkish language.
-! Version: 2.0.48.43
-! TimeUpdated: 2023-11-25T17:02:15+00:00
+! Version: 2.0.48.49
+! TimeUpdated: 2023-11-28T07:30:33+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -705,9 +705,8 @@ oyungibi.com#%#//scriptlet("set-constant", "jQuery.adblock", "false")
 osxinfo.net#%#//scriptlet("abort-current-inline-script", "$", "!document.getElementById(btoa")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/49271
 turkdenizcileri.com,bilgalem.blogspot.com,okulsoru.com#%#//scriptlet("set-constant", "koddostu_com_adblock_yok", "null")
-! https://github.com/AdguardTeam/AdguardFilters/issues/166107
-tekniknot.com#%#//scriptlet('abort-on-property-write', 'onload')
-tekniknot.com#%#//scriptlet('abort-on-property-write', 'onscroll')
+! https://github.com/AdguardTeam/AdguardFilters/issues/167228
+||tekniknot.com/a|
 ! https://github.com/AdguardTeam/AdguardFilters/issues/48473
 ||yoneticihane.com/*/blossomfeaturebox.$script,stylesheet
 ! https://github.com/AdguardTeam/AdguardFilters/issues/47184
@@ -2060,6 +2059,7 @@ oyundunyasi.net,bilgenc.com,teknodiot.com,ruyashoujo.com,pchocasi.com.tr,dusunce
 /service/advertchannels?$xmlhttprequest,redirect=nooptext,domain=mardinhaber.com.tr|gidahatti.com|bolugundem.com
 dirilispostasi.com,turkuazgazetesi.net,yenialanya.com,bugunkocaeli.com.tr,cagdaskocaeli.com.tr,mansetaydin.com,seskocaeli.com,kocaelibarisgazetesi.com,kocaelikoz.com,enkocaeli.com##.block-pano > div.us
 !
+softonic.com.tr##.black-friday-ads
 sinefy3.com##.bg-cover-faker > div:not([class]):not([id]) > center
 ||storage.oyungezer.com.tr/ogz-public/ads/
 ||yabancidizi.io/main-functions.js?vs=
@@ -2160,7 +2160,6 @@ ensonhaber.com#$?#.swiper-wrapper > div.swiper-slide:has(> a[data-url^="https://
 haberturk.com#?#.master-slider > div.swiper-wrapper > div.swiper-slide:has(> div > a[href^="https://adsp.haberturk.com/"])
 serieturkisch.com,serietvturche.com,tvseriadosturcos.com,seriesturco.com,seriesturkish.com,televizyongazetesi.com#?#section.penci-disSticky.elementor-section-items-middle:has(> .elementor-container:only-child > .penci-sticky-ct:only-child > .elementor-widget-wrap > .elementor-element > .elementor-widget-container > .adsbygoogle)
 ruyashoujo.com#?#footer ~ p[style]:has(> span > a[href="https://takipgo.com/"])
-ugurfilm3.com#$?#body > header { margin-bottom: 0 !important; }
 haberturk.com#?#.sidebar-content-infinite > div.wrapper:has(> div > div.ads-zone)
 konhaber.com#$?#.swiper-wrapper > .swiper-slide:has(*:is(img[src^="/sahifeler/rkl/"], .adsbygoogle)) { remove: true; }
 haber3.com#?#.row > div.col-12:has(> div.box > div.adpro)
@@ -2211,10 +2210,11 @@ bikifi.com#?#.grid > .my-3[class*="min-h-"]:has(>.mb-2[class*="min-h-"] > .bikif
 fotomac.com.tr#?#.display-none:has(> div.advers-box)
 fotomac.com.tr#?#.view-sm-20:has(> div.advers-box)
 manga-tr.com#?#.col-sm-4 > .well3:has(> .panel > .panel-heading2 > center:contains(Reklam Alanı))
+[$domain=lifebursa.com,path=/^\/$/]#?#.container > div.row:has(> div[class^="col-"] > div.banner)
+eksisozluk1923.com#$?#.ui-autocomplete > li:has(> div[style^="color:"]) { remove: true; }
 eksisozluk1923.com#$?##interstitial-close-link-source { remove: true; }
 eksisozluk1923.com#$?#.ad-doubleclickwebinterstital { remove: true; }
-eksisozluk1923.com#$?#.ui-autocomplete > li:has(> div[style="color:rgb(0, 0, 0)"]) { remove: true; }
-eksisozluk1923.com#$?#.ui-autocomplete > li[style^="position: absolute;"][style*="z-index:"]:has(> .ui-menu-item-wrapper:contains(/^sponsorlu$/)) { remove: true; }
+eksisozluk1923.com###search-box-ad
 nefisyemektarifleri.com#?#.recipe-cards-area > div > div#arsiv-native:upward(1)
 vitoporno.com#?#.entry-content > div.film-content > div.film-share:upward(1)
 diziyo.*#?##contenedor > div[class*="onceki"]:has(> center > iframe[src*="/rklm/"])
@@ -2429,7 +2429,6 @@ sinemalar.com##.left-column > div > a[target="_blank"] > img
 tarotscans.com##footer > p > span[style]
 ||i.hizliresim.com/pftjokl.gif
 ||luvibetgiris.xyz/suv.js
-ugurfilm3.com##a[href="https://ucuncusinema.com/"]
 ||storj-cloud.cdn.ampproject.org/*/bahsegel
 ||storj-cloud.cdn.ampproject.org/*/bettilt
 ||hdfilmhit.org/wp-content/uploads/*/input.jpg
@@ -3030,7 +3029,6 @@ finans7.com##.finans_place_holder
 ||filmsezonu.com/reklam*.jpeg
 ||cdn.doccloud.me/rkl/
 ||r.filmizlesene.vip^
-||ugurfilm3.com/reklampopup*.js
 ||yabancidizi.pro/turna.png
 konyagazetesi.com.tr##img[src^="https://konyagazetesi.com.tr/writable/uploads/advcom/"]
 diziyou.co,sinemadelisi.com##.playerBottom
@@ -5460,7 +5458,7 @@ oggito.com##a[href^="http://notoskitap.com/"][target="_blank"] > img
 ilacrehberi.com###kt_2
 ||cdn.xix*.com/bnr^
 ||imagizer.imageshack.us/a/img922/8810/wHDdVD.gif
-teknobh.com,yoldaolmak.com,aof.tc,igrus.com,iskandinavya.com,sorumatik.co,andronova.net,koinfinans.com,hwp.com.tr,konupara.com,lafmacun.net,finanskocaeli.com##body .code-block
+armoniscans.com,teknobh.com,yoldaolmak.com,aof.tc,igrus.com,iskandinavya.com,sorumatik.co,andronova.net,koinfinans.com,hwp.com.tr,konupara.com,lafmacun.net,finanskocaeli.com##body .code-block
 dilbilgisi.net##div[class^="code-block code-block-"]
 milliyet.com.tr##.adv300B
 koinfinans.com###custom_html-26
@@ -6012,7 +6010,7 @@ haberturk.com##iframe[src*="/ads/"]
 cnnturk.com##iframe[src^="/action/ibanner"]
 afyonhaber.com##img[alt*="web-banner"]
 dizivex.com,dizimag.org,akcakocahavadis.com,webteizle.*,muglagazetesi.com.tr,basarisiralamalari.com,eniyiandroid.com,bigatribun.net,mavididim.com.tr##img[alt="reklam"]
-ugurfilm3.com,fatsayenihaber.com,geredeyenigun.com,balikesirhaberajansi.com,kurtulusgazetesi.com.tr##img[alt="Reklam"]
+fatsayenihaber.com,geredeyenigun.com,balikesirhaberajansi.com,kurtulusgazetesi.com.tr##img[alt="Reklam"]
 gidahatti.com##img[alt="ad"]
 kanalben.com##img[alt^="banner"]
 emlakdream.com##img[style="height:250px; width:300px"]
@@ -6096,6 +6094,11 @@ isguc.org##td[width="200"] a[target="_blank"] img[width="200"][alt]
 ||vidout.net/vidoutMedia/ads/
 ||bolununsesi.com/ilangorsel/
 !
+! ugurfilm*.com - frequently changed domains
+ugurfilm7.com,ugurfilm8.com,ugurfilm9.com,ugurfilm10.com,ugurfilm11.com,ugurfilm12.com,ugurfilm13.com,ugurfilm14.com,ugurfilm15.com,ugurfilm16.com#$?#body > header { margin-bottom: 0 !important; }
+ugurfilm7.com,ugurfilm8.com,ugurfilm9.com,ugurfilm10.com,ugurfilm11.com,ugurfilm12.com,ugurfilm13.com,ugurfilm14.com,ugurfilm15.com,ugurfilm16.com##a[href="https://ucuncusinema.com/"]
+/reklampopup*.js$domain=ugurfilm7.com|ugurfilm8.com|ugurfilm9.com|ugurfilm10.com|ugurfilm11.com|ugurfilm12.com|ugurfilm13.com|ugurfilm14.com|ugurfilm15.com|ugurfilm16.com
+ugurfilm7.com,ugurfilm8.com,ugurfilm9.com,ugurfilm10.com,ugurfilm11.com,ugurfilm12.com,ugurfilm13.com,ugurfilm14.com,ugurfilm15.com,ugurfilm16.com##img[alt="Reklam"]
 ! avrupabettv*.com - frequently changed domains
 ||avrupabettv*.com/wp-content/uploads/
 avrupabettv1.com,avrupabettv2.com,avrupabettv3.com,avrupabettv4.com,avrupabettv5.com,avrupabettv6.com,avrupabettv7.com,avrupabettv8.com,avrupabettv9.com,avrupabettv10.com,avrupabettv11.com,avrupabettv12.com,avrupabettv13.com,avrupabettv14.com,avrupabettv15.com,avrupabettv16.com,avrupabettv17.com,avrupabettv18.com,avrupabettv19.com,avrupabettv20.com,avrupabettv21.com,avrupabettv22.com##.pageskin

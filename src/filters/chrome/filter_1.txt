@@ -1,8 +1,8 @@
-! Checksum: pHG0rW1/iRfMywF8tPpPFw
+! Checksum: 1NpHPfELcgoCfibQKjZxRg
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.86.54
-! TimeUpdated: 2023-11-24T17:02:50+00:00
+! Version: 2.0.86.57
+! TimeUpdated: 2023-11-28T00:31:00+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -6849,7 +6849,7 @@ mail.ru,sportmail.ru##div[class*="m-fixed-panel__box"]
 mail.ru,sportmail.ru,~my.mail.ru,~touch.mail.ru#%#//scriptlet('set-constant', 'Object.prototype.mimic', 'null')
 ! ad on main page
 [$path=/^\/$|mail\.ru\/\?/]mail.ru#%#//scriptlet('set-constant', 'Object.prototype.MimicTgb', 'undefined')
-[$path=/^\/$|mail\.ru\/\?/]mail.ru##.micro-widgets + div[class*=" "]
+[$path=/^\/$|mail\.ru\/\?/]mail.ru#?#div:has(> a.traffic-widget) + div
 ! kino.mail.ru
 kino.mail.ru##.block_ad-text
 kino.mail.ru##button[class*="adv-marker"]
@@ -6900,6 +6900,7 @@ apad2.top,games-pc.top,rustorka.com,rustorka.top,rustorka.net,rustorkacom.lib,na
 apad2.top,games-pc.top,rustorka.com,rustorka.top,rustorka.net,rustorkacom.lib,naylo.top,zannn.top,innal.top#%#//scriptlet('abort-on-property-write', 'dimisastop')
 !
 ! rustorka.com
+@@/leftad.$domain=games-pc.top|rustorka.com|rustorka.top|rustorka.net|rustorkacom.lib|naylo.top|monna2.top|zannn.top|innal.top|apad2.top
 @@/lazyad.$domain=games-pc.top|rustorka.com|rustorka.top|rustorka.net|rustorkacom.lib|naylo.top|monna2.top|zannn.top|innal.top|apad2.top
 @@/layerad.$domain=games-pc.top|rustorka.com|rustorka.top|rustorka.net|rustorkacom.lib|naylo.top|monna2.top|zannn.top|innal.top|apad2.top
 @@/jspopunder.js$domain=games-pc.top|rustorka.com|rustorka.top|rustorka.net|rustorkacom.lib|naylo.top|monna2.top|zannn.top|innal.top|apad2.top
@@ -9416,6 +9417,7 @@ kadrovik01.com.ua,kom-dir.ru,gd.ru,buhsoft.ru,dirklinik.ru,fd.ru,business.ru,pro
 !
 !
 !
+kp.ru##div[class^="rec-slot"]
 fotostrana.ru##div[id*="-reklama"]
 uteka.ru#?#.home-page-simple-banners a.home-page-simple-banner:has(div.advertising-popover)
 litres.ru##div[class^="MainPromoBanner-module__wrapper_"]
