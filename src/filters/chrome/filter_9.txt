@@ -1,8 +1,8 @@
-! Checksum: c3G40Y5cj6U/fQUuBjSOkA
+! Checksum: p8/VAjqaipQNjPnipt+qUw
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish, Portuguese, and Brazilian Portuguese languages.
-! Version: 2.0.22.41
-! TimeUpdated: 2023-12-04T10:32:16+00:00
+! Version: 2.0.22.44
+! TimeUpdated: 2023-12-06T11:32:47+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -605,8 +605,10 @@ emperorscan.com#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/129242
 ||lavoz.com.ar/pf/resources/js/adsUtils.js
 ||lavoz.com.ar/pf/resources/js/a-block.js
+! https://github.com/AdguardTeam/AdguardFilters/issues/167863
 ! https://github.com/AdguardTeam/AdguardFilters/issues/128774
-||documaniatv.com/templates/echo/js/veras.js
+@@||documaniatv.com/templates/echo/js/*.js
+documaniatv.com#%#//scriptlet('set-constant', 'DeRunAds', 'true')
 ! AdRegain
 tunovelaligera.com#%#//scriptlet("abort-on-property-write", "adregain_wall")
 tunovelaligera.com#%#//scriptlet("abort-on-property-read", "ad_nodes")
@@ -2245,6 +2247,15 @@ gaz.com.br,placar.com.br,futebolinterior.com.br,tvhistoria.com.br,tribunapr.uol.
 ! ##.banner
 ahoragranada.com,correio24horas.com.br,cnnespanol.cnn.com,motociclismo.es,sub100.com.br,theenemy.com.br,manhwas.net,rpp.pe,ambito.com,economipedia.com,informador.mx,elinformador.com.co,cronista.com,rionegro.com.ar,diariodecuyo.com.ar,voydeviaje.com.ar,guarda14.com,viapais.com.ar,agazeta.com.br,eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.*,mundotecnologias.com,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##.banner
 !
+fulltv.com.mx,fulltv.com.ar##.toptext1
+fulltv.com.mx,fulltv.com.ar##.toptext2
+fulltv.com.mx,fulltv.com.ar##.toptext5
+fulltv.com.mx,fulltv.com.ar##.pie:empty
+fulltv.com.mx,fulltv.com.ar##.social > div[class^="top"]
+fulltv.com.mx,fulltv.com.ar##div[class^="pub336"]
+fulltv.com.mx,fulltv.com.ar##.publicidad-728-top
+||full.video^$domain=fulltv.com.ar|fulltv.com.mx
+||documaniatv.com/player/plugins/vast/v/*/vast.js
 tudogostoso.com.br##.ads-pholder
 tudogostoso.com.br##.sticky-column-slot
 ||lancebetting.com^$domain=lance.com.br

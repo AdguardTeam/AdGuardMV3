@@ -1,8 +1,8 @@
-! Checksum: 4WzQlRmtRPsYUqV1r4gO5g
+! Checksum: /KvJALYy57KU59dt0nQqbQ
 ! Title: AdGuard Chinese filter
 ! Description: EasyList China + AdGuard Chinese filter. Filter list that specifically removes ads on websites in Chinese language.
-! Version: 2.1.4.95
-! TimeUpdated: 2023-12-04T23:31:11+00:00
+! Version: 2.1.5.17
+! TimeUpdated: 2023-12-07T06:31:10+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -85,6 +85,7 @@
 ! Bad: ||adssubdomain.legitwebsite.com^ (should be in adservers_firstparty.txt)
 !
 !
+||aziekg.xyz^
 ||max211.top^
 ||st-fly.b-cdn.net^
 ||ggsfq.xyz^$third-party
@@ -483,6 +484,11 @@
 !
 ! https://github.com/AdguardTeam/AdguardFilters/issues/167332
 18comic.vip#%#//scriptlet('prevent-setTimeout', 'float_right > div')
+18comic.org,18comic.vip,18-comic.work#@?#:-abp-has(>ins+script)
+18comic.org,18comic.vip,18-comic.work#$?#.col-xs-6 > div[data-type][style]:has(> ins + script) { remove: true; }
+18comic.org,18comic.vip,18-comic.work#?#.col-xs-6 > div[data-show][style]:has(> p:only-child > a[target="_blank"] > img)
+18comic.org,18comic.vip,18-comic.work#%#//scriptlet('abort-current-inline-script', 'document.dispatchEvent', '/getexoloader/')
+||18comic.*/exads-adblock-*/backend_loader.php
 ! https://github.com/AdguardTeam/AdguardFilters/issues/166740
 04647.club#%#//scriptlet('prevent-fetch', 'doubleclick.net')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/166155
@@ -1256,6 +1262,9 @@ $script,third-party,denyallow=fastly.net|statically.io|sharecast.ws|bunnycdn.ru|
 !
 !
 !
+/bookhaitang\.com\/assets\/.+\.js(?<!\.min\.js|pageTran\.js)/$domain=bookhaitang.com
+qdmm.com###page-ops
+123pan.com##.baidu-banner-container
 daybuy.tw##body .code-block
 ||tw.buy.yahoo.com/smartbanner/$domain=tw.news.yahoo.com
 litv.tv##.ad_impression
@@ -4697,6 +4706,7 @@ newduba.cn###jq_youxi
 ##img[src*=".sinaimg."][style="width:150px;height:300px"]
 ##script + #coupletBox
 ##script + #rbbox
+##TD[id^="td_"] > A[href^="/htmm/"]
 ##script + a[href] > img[src*="lbsugc.cdn.bcebos.com"]
 ##script + a[target="_bank"] > img[src*=".c-ctrip.com"][style="width:100%;height:auto;"]
 ##script + div[id^="a-loading-"]
@@ -4728,6 +4738,7 @@ newduba.cn###jq_youxi
 ##a[href*=".sng.link/"]
 ##a[href*=".sudun.com/"]
 ||05826.online^
+||05pg9z.com^
 ||0a2b3c4d5e.com^
 ||0efghij.com^
 ||0ghijkl.com^
@@ -4811,6 +4822,7 @@ newduba.cn###jq_youxi
 ||aueajkn.cn^
 ||autyxdek.xyz^
 ||avplwte.xyz^
+||awareista.com^
 ||awaw.asia^
 ||ax7fv.space^
 ||azdiqsb.cn^
@@ -4915,6 +4927,7 @@ newduba.cn###jq_youxi
 ||dwerzv.xyz^
 ||dwq661.biz^
 ||dzdxnbc.xyz^
+||dzvy7.space^
 ||e3inu.space^
 ||eapect.icu^
 ||ebmlsvw.cn^
@@ -4927,6 +4940,7 @@ newduba.cn###jq_youxi
 ||elemea.xyz^
 ||elprput.xyz^
 ||emynwlz.xyz^
+||epebuk.xyz^
 ||eqcwpeo.cn^
 ||eraygc.xyz^
 ||erutxdk.cn^
@@ -5035,6 +5049,7 @@ newduba.cn###jq_youxi
 ||haise5.top^
 ||hanadrmc.xyz^
 ||hangzhouhdb.top^
+||haokanshipin.com^
 ||haree.cn^
 ||haxqxd.xyz^
 ||hcgbhq.com^
@@ -5043,6 +5058,7 @@ newduba.cn###jq_youxi
 ||hfjhr.cn^
 ||hfresgtyytjncvvh.com^
 ||hfwld.cn^
+||hgxwhpba.xyz^
 ||hibj.online^
 ||hihlj.online^
 ||hinm.online^
@@ -5084,6 +5100,7 @@ newduba.cn###jq_youxi
 ||insfengdata.com^
 ||iobvmtx.xyz^
 ||ionjkcj.cn^
+||ioswhi.com^
 ||iqs871.com^
 ||irtefs.xyz^
 ||isnd.top^
@@ -5104,14 +5121,17 @@ newduba.cn###jq_youxi
 ||jingxuanjingyan.com^
 ||jjvzqjh.xyz^
 ||jlhlnd.xyz^
+||jltolz.xyz^
 ||jmhngn.com^
 ||jmvvpb.xyz^
+||jmylj.cn^
 ||jndxsuy.xyz^
 ||jnkmhn.com^
 ||jofknbpe.xyz^
 ||jppxnhe.xyz^
 ||jqtkzuco.xyz^
 ||jqvajfvs.xyz^
+||jspqhh.xyz^
 ||juhooqv.cn^
 ||julefhgu.xyz^
 ||juljrd.xyz^
@@ -5158,6 +5178,7 @@ newduba.cn###jq_youxi
 ||lewhrzv.xyz^
 ||lfhnzbj.xyz^
 ||lianglili2.cn^
+||linj.top^
 ||liuyi22.cn^
 ||liuyuhuaa.cn^
 ||lkdybkwi.xyz^
@@ -5194,6 +5215,7 @@ newduba.cn###jq_youxi
 ||mhnzhlase.xyz^
 ||mhzftye.xyz^
 ||mlumlio.cn^
+||mlzjepc.xyz^
 ||mmiedf.xyz^
 ||mmtdfxh.xyz^
 ||mmvjuti.cn^
@@ -5211,6 +5233,7 @@ newduba.cn###jq_youxi
 ||myyxox.icu^
 ||mzthbna.xyz^
 ||n019q.com^
+||n0h56.site^
 ||nangongmall.com^
 ||naweslt.cn^
 ||nbxymdy.cn^
@@ -5257,6 +5280,7 @@ newduba.cn###jq_youxi
 ||ovfvkfc.xyz^
 ||owkmmo.xyz^
 ||oxrvfsi.xyz^
+||p5kzev.com^
 ||pajhvd.xyz^
 ||pdngnx.xyz^
 ||pdweoyw.cn^
@@ -5318,6 +5342,7 @@ newduba.cn###jq_youxi
 ||rfrhfh.xyz^
 ||rgpujh.xyz^
 ||rivdxb.xyz^
+||rjwljrf.xyz^
 ||rkds1.icu^
 ||rkds10.icu^
 ||rkds2.icu^
@@ -5334,10 +5359,14 @@ newduba.cn###jq_youxi
 ||rt004.top^
 ||rvreuxi.cn^
 ||rvvji.online^
+||rvvmhp.xyz^
 ||rxrdjb.xyz^
 ||rycff.online^
 ||rzflhxn.cn^
+||s5ue6.com^
+||sbhduht.xyz^
 ||scqaaf.cn^
+||sdkjnbjksbnkjs.com^
 ||sdklcnskvbks.com^
 ||serda10.icu^
 ||sgeth9.icu^
@@ -5348,8 +5377,10 @@ newduba.cn###jq_youxi
 ||slkdfg.com^
 ||sllo.top^
 ||smlpcz.icu^
+||sotunet.com^
 ||splfnok.cn^
 ||sqevnrb.com^
+||sqgnqc.xyz^
 ||sregfle.cn^
 ||srldkqj.cn^
 ||srlhgo.cn^
@@ -5392,6 +5423,7 @@ newduba.cn###jq_youxi
 ||ugwxwy.xyz^
 ||uhjxitn.xyz^
 ||uidwyx.icu^
+||uiszwh.icu^
 ||ukjwyv.icu^
 ||ulrvkee.xyz^
 ||uncs7.top^
@@ -5406,6 +5438,7 @@ newduba.cn###jq_youxi
 ||v34s6r.com^
 ||vainews.cn^
 ||valerieurania.com^
+||vbzrkme.xyz^
 ||vdggsd001.com^
 ||vdggsd002.com^
 ||vdggsd003.com^
@@ -5469,6 +5502,8 @@ newduba.cn###jq_youxi
 ||xfqrsjq.cn^
 ||xfztgxt.com^
 ||xg6hb.xyz^
+||xgrcfz.xyz^
+||xiaohuishu.top^
 ||xixil.cn^
 ||xjxbdh.xyz^
 ||xkfigjh.cn^
@@ -5496,6 +5531,7 @@ newduba.cn###jq_youxi
 ||ycgkol.icu^
 ||ycmgeb.icu^
 ||yepgdita.xyz^
+||ygfgzmzo.xyz^
 ||yhlzadr.xyz^
 ||yhtpsy8888.cc^
 ||yivkzvog.xyz^
@@ -5505,6 +5541,7 @@ newduba.cn###jq_youxi
 ||ymniqh.icu^
 ||ynulcpt.cn^
 ||yongzhen8.com^
+||yshlor.icu^
 ||ytezym.xyz^
 ||yuanxiaa.cn^
 ||yuanxiab.cn^
@@ -5521,6 +5558,8 @@ newduba.cn###jq_youxi
 ||zents2.top^
 ||zhangyuting04.cn^
 ||zhongfumzzew.com^
+||zigyspv.icu^
+||ziyzcu.buzz^
 ||zjdruhn.xyz^
 ||zlncvn.xyz^
 ||zmfcnlvu.xyz^
@@ -5535,14 +5574,24 @@ newduba.cn###jq_youxi
 ||zyzo.cn^
 ||zzyy17.top^
 ||zzyy18.top^
-||dzvy7.space^
-||sqgnqc.xyz^
-||sotunet.com^
-||xgrcfz.xyz^
-||sbhduht.xyz^
-||ygfgzmzo.xyz^
-||vbzrkme.xyz^
-||jltolz.xyz^
+||xrllybr.xyz^
+||qbcmws.xyz^
+||99zns.top^
+||96kso.online^
+||vrnblp.xyz^
+||yddbysa.xyz^
+||isna.top^
+||rfxnff.xyz^
+||iephrenhq.com^
+||nwpcptmm.xyz^
+||maxun066.top^
+||maxun118.top^
+##a[href*=".mhtimes.cn"]
+||lvzkfcm.cn^
+||cwrxgb.icu^
+||manymgsgn.com^
+||bmatgg18.xyz^
+||44180055.cn^
 ||zzyy19.top^
 ||zzyy20.top^
 ##[style*="sotv.me"]
@@ -8864,6 +8913,7 @@ newduba.cn###jq_youxi
 ||7xi9g1.com1.z0.glb.clouddn.com^
 ||876920.com^
 ||87uq.com^
+||8861202.com^
 ||94lm.com^
 ||a.youdao.com^
 ||aafuck.xyz^$third-party
@@ -9494,6 +9544,7 @@ hxsame.hexun.com$domain=~quote.hexun.com
 ||484r.com/images/flash/gallery_
 ||4btbtt.com/slade.js
 ||4gamers.com.tw/ads-
+||4gamers.com.tw/site/api/aols/media?
 ||4gamers.com.tw/site/iframe-aols/
 ||4gtv.tv/4gTV_OTT.json
 ||4hw.com.cn/js/common.js
@@ -10440,6 +10491,7 @@ hxsame.hexun.com$domain=~quote.hexun.com
 ||cao0001.com/vip/js/
 ||cao0002.com/vip/js/
 ||caoads.com/images/
+||caoav.net/img/*.js
 ||caohv.com/mm/
 ||car.pchome.com.tw/iframe/news_iframe.
 ||carexpert.com.tw/wp-content/uploads/*800x90.
@@ -16125,6 +16177,7 @@ hao123.com##.enter1
 423down.com##.entry > p[style$="111"]
 423down.com##.entry > p[style="font-size: 20px;"]
 423down.com##.entry > p[style^="color:red"]
+423down.com##.entry > p[style^="font-size"] > a[href*="/go."]
 hackhw.com##.entry-banner
 idanmu.ee##.entry-body > div[class]:first-child
 iplaysoft.com##.entry-content + div[style="margin:-10px 0 0 0;overflow:hidden"]
@@ -18962,6 +19015,7 @@ bbs.my0511.com##span.smalltxt
 gamebase.com.tw##span[id^="aid_"]
 52pk.com##span[style*="gaosu"]
 bilibili.com##span[style*="height:"][data-loc-id]
+tianhaohz.com##span[style="display: block; clear: both; overflow: hidden;"]
 typecho.wiki##span[style="height: 17px;margin-left: 10px;background: #000;border: 1px solid #000;"]
 tptoon.com##span[style^="position:fixed; bottom:30vh;"]
 xinmin.cn##span[style^="position:fixed;right"]
@@ -19373,6 +19427,7 @@ android-doc.com,apk.tw,chaojizhibo.net,chtoen.com,dizhishengcheng.com,doitwell.t
 @@||adoi.cn^$generichide
 @@||ads.alafish.cn^$~third-party
 @@||ads.cdn.tvb.com^*.key
+@@||ads.lingxing.com^$~third-party
 @@||ads.privacy.qq.com^$domain=privacy.qq.com
 @@||ads.reddit.com^$domain=myqqjd.com
 @@||ads.tiktok.com^$generichide
@@ -19914,9 +19969,9 @@ guailie.com#@#.google-ad
 18comic.org,18comic.vip,18-comic.work#?#:-abp-has(>ins+script)
 18comic.org,18comic.vip,18-comic.work#?#:-abp-has(>script+ins)
 18comic.org,18comic.vip,18-comic.work#?#:not(body):-abp-has(>script[src*=".realsrv.com"])
+18-comic.work,18comic.org,18comic.vip##a[href*="//"]:not([href*="comic."]) > [style*="back"]
 18-comic.work,18comic.org,18comic.vip##a[href*="//"]:not([href*="comic."]) > img
 18-comic.work,18comic.org,18comic.vip##a[href*="//"]:not([href*="comic."]) > img + [style]
-18-comic.work,18comic.org,18comic.vip##a[href*="//"]:not([href*="comic."]) > span[style*="back"]
 ||18-comic.work/media/albums/*?$media
 ||18comic.*/media/albums/*?$media
 !#2

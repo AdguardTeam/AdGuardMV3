@@ -1,8 +1,8 @@
-! Checksum: 9CxqzOo4PYje5HQtNpxHeA
+! Checksum: YQUcxIszGCwELhbXN/mK/w
 ! Title: AdGuard Japanese filter
 ! Description: Filter that enables ad blocking on websites in Japanese language.
-! Version: 2.0.46.51
-! TimeUpdated: 2023-12-04T15:32:29+00:00
+! Version: 2.0.46.57
+! TimeUpdated: 2023-12-06T15:32:39+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -502,6 +502,9 @@
 ! Bad: ||ad.doubleclick.net^ (should be in adservers.txt)
 !
 !
+!
+! https://github.com/AdguardTeam/AdguardFilters/issues/167887
+||nazology.net/wp-content/themes/nazology_sp/js/adb/$script
 ! https://github.com/AdguardTeam/AdguardFilters/issues/167723
 pvpoke-re.com#@#ins.adsbygoogle
 ||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$xmlhttprequest,redirect=googlesyndication-adsbygoogle,domain=pvpoke-re.com
@@ -1643,6 +1646,14 @@ gundamlog.com###more > iframe[src^="https://richlink.blogsys.jp"]
 !
 !
 !
+ekitan.com###div-transit_access_result_summary_bottom
+ekitan.com##.bnr-item
+kamikouryaku.com#?#h2.left:has(+ #left_ads)
+animephilia.net##.adcontrol-wrapper
+vague.style##.header-add.add-container
+finasee.jp#?#.m-articles__side-articles-ranking-lists > li:has(> div[style^="width: 100%; min-height:100px;"])
+finasee.jp##div[style^="width: 100%; min-height:90px;"]
+discoveryjapan.jp##.interstitial_ad
 freem.ne.jp##.game-ad-bottom
 nikkan-spa.jp##.tag-box > div.series-img
 game16.net##.g-txt
