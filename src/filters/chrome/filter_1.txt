@@ -1,8 +1,8 @@
-! Checksum: C8bnWKVZwKkgQ8hQFMRXaw
+! Checksum: +0f2N4zMb7xM2yQg46ddIg
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.86.94
-! TimeUpdated: 2023-12-06T16:31:15+00:00
+! Version: 2.0.87.4
+! TimeUpdated: 2023-12-08T19:31:03+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1397,7 +1397,6 @@ ucoz.ru/informer/
 ##.rightrecl
 ##.rkl
 ##.s_adv
-~oilprice.com,~vietgiaitri.com,~userbars.be##.show_ads
 ##.skyad
 ##.slidebar-banner-block
 ##.sp_one_search
@@ -5714,6 +5713,9 @@ http://wq3.ru^$third-party
 !
 ||bjiuck.com^
 !
+! This IP hosts advertising domains that promote yandex.
+!
+!
 ! Ads reinjection (For apps only)
 !
 !
@@ -6694,6 +6696,7 @@ aqa.ru#@#div[id^="div-gpt-ad"]
 !
 ! rambler with side-projects: afisha.ru, autorambler.ru, championat.com, eda.ru, gazeta.ru, lenta.ru, letidor.ru, moslenta.ru, motor.ru, passion.ru, quto.ru, rambler.ru, rns.online, wmj.ru
 ! rambler replacement script (scriptlet must be in Annoyances filter)
+!+ NOT_OPTIMIZED
 ||zoomdecorate.rambler.ru^$script,xmlhttprequest,redirect=noopjs,domain=afisha.ru|autorambler.ru|championat.com|eda.ru|gazeta.ru|lenta.ru|letidor.ru|moslenta.ru|motor.ru|passion.ru|quto.ru|rambler.ru|rns.online|wmj.ru
 !
 ! https://github.com/AdguardTeam/AdguardFilters/issues/16182
@@ -6910,6 +6913,7 @@ forums.overclockers.ru#@##yandex_ad_1
 ! https://github.com/AdguardTeam/AdguardFilters/issues/87125
 $cookie=/[0-9a-f]{32}/,domain=games-pc.top|rustorka.com|rustorka.top|rustorka.net|rustorkacom.lib|naylo.top|zannn.top|innal.top|apad2.top
 $removeheader=location,domain=zannn.top|innal.top
+apad2.top,games-pc.top,rustorka.com,rustorka.top,rustorka.net,rustorkacom.lib,naylo.top,zannn.top,innal.top#%#//scriptlet("abort-on-property-write", "chessday")
 apad2.top,games-pc.top,rustorka.com,rustorka.top,rustorka.net,rustorkacom.lib,naylo.top,zannn.top,innal.top#$##e7af0de8b4 { height: 16px !important; }
 apad2.top,games-pc.top,rustorka.com,rustorka.top,rustorka.net,rustorkacom.lib,naylo.top,zannn.top,innal.top#%#//scriptlet('abort-on-property-write', 'dimisastop')
 !
@@ -7231,6 +7235,7 @@ ya.ru##.banner
 ! Yandex.Search
 ya.ru##.Skeleton_type_ad_search
 [$path=/search]ya.ru,yandex.*##.AdvMedia
+ya.ru,yandex.*##.content__right .serp-item > *
 ya.ru,yandex.*##li.mini-suggest__item > a[href^="http://yabs."][href*="/count/"]
 ya.ru,yandex.*##li.mini-suggest__item > a[href^="https://yabs."][href*="/count/"]
 ya.ru,yandex.*##li.mini-suggest__item > a[href^="http://yandex"][href*="/clck/"]
@@ -7419,9 +7424,6 @@ rivnepost.rv.ua,telegraf.in.ua,vlast.kz,mignews.com.ua,sibkray.ru,kursiv.kz,live
 !-------CSS---------
 !-------------------
 !
-! https://github.com/AdguardTeam/AdguardFilters/issues/147884#issuecomment-1782593924
-dev.ua#$#.partners { background-color: unset !important; }
-dev.ua#$#.partners > a:not([href^="https://dev.ua/"]) { visibility: hidden !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/59768
 rezka-ua.tv,hdrezkabmmshq.org,hdrezkafh28d9.org,hdrezkasmakyy.org,hdrezkafhs83u.org,hdrezkahs920s.org,hdrezka.in,hdrezkat5ee2w.org,hdrezkagdvv2b.net,hdrezka66yhfg.net,hdrezka77ftyy.net,hdrezka.rest,hdrezkaffsg67.net,hdrezkafjk2he.net,hdrezkahf22hh.net,hdrezkahdg24s.net,hdrezkabbdh4d.net,hdrezkajjfhr5.net,27p6qp79zyr1.net,hdrezka19139.org,hdrezkap3g.org,hdrezkapez.org,hdrezkapoi.org,hdrezkarty.org,hdrezkacvb.org,hdrezka.ag,upivi.com,hdrezka.me,ikinopoisk.com,kinopub.me,3ivi.com,rezkify.com,aghdrezka.com,hdrezka.re,bestofkinopoisk.com,rezkance.com,rezkery.com,rezkily.com,ezhdrezka.com,akinopoisk.com,hdrezkaonline.com,drhdrezka.com,mrhdrezka.com,hdrezka.sh,ehdrezka.com,nukinopoisk.com,livekinopoisk.com,betahdrezka.com,cokinopoisk.com,hdrezka-ag.com,hdrezka.club,hdrezka.cm,hdrezka.co,hdrezka.name,hdrezka.site,hdrezka.today,hdrezka.tv,hdrezka.website,hdrezkaag.net,hdrezkaweb.com,hdrezkayou.com,instahdrezka.com,myhdrezka.com,freehdrezka.com,rezka.ag,tryhdrezka.com#$#.b-post__rating_table { margin-left: -30px !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/147690
@@ -7874,6 +7876,8 @@ disk.yandex.*#%#//scriptlet('remove-class', 'has-fullscreen-banner','.public__ro
 !------- CSS -----------
 !-----------------------
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/167617
+flicksbar.fun#$#body > .wrapper { height: 100% !important; }
 ! abw.by
 abw.by#$#.news-main__grid { min-height: auto !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/165998
@@ -9243,6 +9247,7 @@ gastronom.ru,eg.ru,newsmaker.md,delo-vcusa.ru,tolknews.ru,gorodche.ru,smartpress
 !
 !
 !
+dev.ua##.partners
 finance.ua##div[class^="AdvertisingBanner"]
 news.meta.ua##.banner-img
 news.meta.ua##small[style^="display:block;"]
@@ -9449,6 +9454,10 @@ bits.media,devyatka.ru,gazeta-n1.ru,gorod48.ru,hi-fi.ru,innov.ru,k1news.ru,ktost
 !
 !
 !
+downradar.ru##a[href="https://pikadil.ru"]
+downradar.ru#?#body > header:has(> div.row-original > span > a[href="https://pikadil.ru"])
+eda.ru#?#div[class^="emotion-"] > section[class^="emotion-"]:has(> div[class^="emotion-"] > div#billboard)
+kanobu.ru##div[class^="LinkingButtonsOfArticle_root"]
 kino-teatr.ru##.page_content_block div[class="film_block"][style="background: none;"]
 ||data.videonow.ru/?profile_id=*&container=preroll
 ||siterost.net/uploads/temp/*.gif
@@ -11355,7 +11364,7 @@ nsp.ru##app-article-banner
 lennytab.com##label[style^="color:white;position:fixed;"]
 popcornnews.ru##div[style="padding: 20px 0; background-color: #f4f4f4;"]
 ||the-hole.tv/ads?
-flicksbar.lol,flicksbar.top##.topAdPad
+flicksbar.fun,flicksbar.lol,flicksbar.top##.topAdPad
 ||torrent-mass.ru/dow.png
 torontovka.com##.header-partnership
 torontovka.com##tor-banner-block
@@ -20482,6 +20491,8 @@ prostitutka-ket.livejournal.com,sergeydolya.livejournal.com##dl[class="sidebar-b
 !
 !
 ! START: rambler.ru
+rambler.ru##div[style="min-height: 600px;"]
+rambler.ru##div[style="min-height: 300px;"]
 rambler.ru##div[class^="xm"][style="min-height:600px"]
 rambler.ru##div[id^="rnet_news_"]
 rambler.ru##a[href^="https://sber180.lenta.ru/"]
@@ -20499,6 +20510,11 @@ rambler.ru##.mixednews__bottom-ad
 rambler.ru##div[class$="b-guides__item_banner><div class="]
 rambler.ru##div[class$="mixednews-item_partner"]
 !
+horoscopes.rambler.ru##div[style="min-height: 400px;"]
+horoscopes.rambler.ru##div:has(> div > div > div[id^="hedux-"])
+!
+auto.rambler.ru,finance.rambler.ru,woman.rambler.ru##div:has(> div > div > div[id^="adfox-"])
+!
 woman.rambler.ru##.swiper-wrapper > div.j-gallery__banner
 woman.rambler.ru##.article__read-also
 woman.rambler.ru##div[class*="traffic-blocks"][class*="intresting"]
@@ -20507,6 +20523,7 @@ finance.rambler.ru##.finance__partners
 finance.rambler.ru,auto.rambler.ru,news.rambler.ru,sport.rambler.ru,weekend.rambler.ru##.article__read-also
 finance.rambler.ru,auto.rambler.ru,news.rambler.ru,sport.rambler.ru,weekend.rambler.ru##.traffic-blocks
 finance.rambler.ru,auto.rambler.ru,news.rambler.ru,sport.rambler.ru,weekend.rambler.ru,woman.rambler.ru##.article__partners
+!
 auto.rambler.ru,tsargrad.tv##.article__banner
 autorambler.ru##.banner-board
 autorambler.ru##.margin-top-30px[data-reactid="398"]
@@ -20875,6 +20892,8 @@ player.ex.co#@##ad-container
 ! Good: example.org#@#.ad
 ! Bad:  @@||example.org^$stealth (should be in AdGuard Base - allowlist_stealth.txt)
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/168012
+letemps.ch#@#.topad
 ! https://github.com/AdguardTeam/AdguardFilters/issues/166369
 ddl-warez.cc#@#.affiliate
 ! https://github.com/AdguardTeam/AdguardFilters/issues/162363
@@ -21092,8 +21111,6 @@ ogosex.org#@#.adv-list
 mamazone.pl#@#.adi
 ! wylecz.to - incorrect blocking with generic rule
 wylecz.to#@#.adi
-! https://github.com/AdguardTeam/AdguardFilters/issues/60692
-file.fm#@#.show_ads
 ! https://github.com/AdguardTeam/AdguardFilters/issues/60350
 porttest.net#@#.banner_center
 ! https://github.com/AdguardTeam/AdguardFilters/issues/59636
@@ -21416,8 +21433,6 @@ devid.info#@##top_banner
 ! https://forum.adguard.com/index.php?threads/14109/
 ! mdm.ru is broken by Adguard injections
 @@||mdm.ru^$elemhide,jsinject
-! https://forum.adguard.com/index.php?threads/14013/
-sz-trauer.de#@#.show_ads
 ! https://github.com/AdguardTeam/AdguardFilters/issues/3114
 weebly.com#@##banner-wrap
 ! liveam.tv - broken player

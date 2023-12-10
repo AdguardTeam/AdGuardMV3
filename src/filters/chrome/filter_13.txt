@@ -1,8 +1,8 @@
-! Checksum: X+m2qLQB+OV1BHQE2z3QwQ
+! Checksum: UYRvYM97ttcDTZEu/NtQ7g
 ! Title: AdGuard Turkish filter
 ! Description: Filter list that specifically removes ads on websites in Turkish language.
-! Version: 2.0.48.66
-! TimeUpdated: 2023-12-06T19:30:33+00:00
+! Version: 2.0.48.69
+! TimeUpdated: 2023-12-08T18:30:30+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -85,6 +85,7 @@
 ! Bad: ||adssubdomain.legitwebsite.com^ (should be in adservers_firstparty.txt)
 !
 !
+||intermediaworks.com^$third-party
 ||rtb.pixad.com.tr^
 ||finvest.care^$third-party
 ||winaffiliates1.com^$third-party
@@ -261,7 +262,6 @@
 ||glixaing.com^$all
 ||gmgreklam.com^$third-party
 ||gndrglsn.com^$third-party
-||go.spaceshipads.com/afu.php?zoneid
 ||gorselcdn.com^$third-party
 ||gorselpanel.com^$third-party
 ||hetaruvg.com^$all
@@ -696,9 +696,8 @@ osxinfo.net#%#//scriptlet("abort-current-inline-script", "$", "!document.getElem
 ! https://github.com/AdguardTeam/AdguardFilters/issues/49271
 turkdenizcileri.com,bilgalem.blogspot.com#%#//scriptlet("set-constant", "koddostu_com_adblock_yok", "null")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/167228
-tekniknot.com#%#//scriptlet('abort-current-inline-script', 'onload', 'adsbygoogle')
-tekniknot.com#%#//scriptlet('abort-on-property-write', 'window.onload')
-||tekniknot.com/you|
+tekniknot.com#%#//scriptlet('prevent-setTimeout', 't.open(\'\x')
+/:\/\/tekniknot\.com\/\w+$/$xmlhttprequest,domain=tekniknot.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/47184
 @@||veterinerhekimleri.com/wp-content/plugins/*/includes/adblock-detector/advertisement.js
 veterinerhekimleri.com#%#//scriptlet("set-constant", "jQuery.adblock", "false")
