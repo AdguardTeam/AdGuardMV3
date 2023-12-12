@@ -1,8 +1,8 @@
-! Checksum: +0f2N4zMb7xM2yQg46ddIg
+! Checksum: rerL8Rx51isO59o5BntDYg
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.87.4
-! TimeUpdated: 2023-12-08T19:31:03+00:00
+! Version: 2.0.87.5
+! TimeUpdated: 2023-12-11T13:36:06+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -6007,6 +6007,8 @@ electric-house.ru#%#//scriptlet("abort-on-property-read", "onload")
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/168249
+positiverecords.ru#%#//scriptlet("abort-current-inline-script", "$", "Adblock")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/167379
 tragtorr.in#@#div[id^="yandex_rtb"]
 ! https://github.com/AdguardTeam/AdguardFilters/issues/167304
@@ -9454,6 +9456,9 @@ bits.media,devyatka.ru,gazeta-n1.ru,gorod48.ru,hi-fi.ru,innov.ru,k1news.ru,ktost
 !
 !
 !
+kp.ru##.afisha-r__block
+||static.gazeta.ru/nm2021/js/others_scripts_v1.js
+gazeta.ru##.b_article + div[class^="w_col"] > div[class^="unit-"][data-check][id]
 downradar.ru##a[href="https://pikadil.ru"]
 downradar.ru#?#body > header:has(> div.row-original > span > a[href="https://pikadil.ru"])
 eda.ru#?#div[class^="emotion-"] > section[class^="emotion-"]:has(> div[class^="emotion-"] > div#billboard)
