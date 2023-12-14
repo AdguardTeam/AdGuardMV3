@@ -1,8 +1,8 @@
-! Checksum: rerL8Rx51isO59o5BntDYg
+! Checksum: A9ZBbORsHSJHTcSw8sg8Og
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.87.5
-! TimeUpdated: 2023-12-11T13:36:06+00:00
+! Version: 2.0.87.15
+! TimeUpdated: 2023-12-13T18:31:02+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1475,6 +1475,8 @@ ucoz.ru/informer/
 ! Bad: /banner.jpg (should be in general_url.txt)
 ! Bad: ||adssubdomain.legitwebsite.com^ (should be in adservers_firstparty.txt)
 !
+||appcodedark.com^
+||appcodepnik^
 ||flyroll.ru^
 ||adstreamer.ru^$third-party
 ||videohead.tech^
@@ -6827,8 +6829,10 @@ dzen.ru##div[class^="dzen-desktop__teaser-"]
 dzen.ru##div[class*="__isNewGridFloors"] > article._full-height[aria-label] + article:not(article._full-height):not([aria-label])
 !
 ! Dzen News
+dzen.ru##.mg-advert > div[class*="loader"]
 dzen.ru#?#div[aria-label="Лента Дзена"] article.card-wrapper:has(div[class^="feed-single-desktop-floors-"])
 dzen.ru##.news-app__content div[class*="__column_myTarget mg-grid__item"] div[class*="__loader "]
+!
 [$path=/pogoda]dzen.ru##.adv_type_rtb
 !
 ! Ad in Dzen articles
@@ -7237,12 +7241,14 @@ ya.ru##.banner
 ! Yandex.Search
 ya.ru##.Skeleton_type_ad_search
 [$path=/search]ya.ru,yandex.*##.AdvMedia
-ya.ru,yandex.*##.content__right .serp-item > *
 ya.ru,yandex.*##li.mini-suggest__item > a[href^="http://yabs."][href*="/count/"]
 ya.ru,yandex.*##li.mini-suggest__item > a[href^="https://yabs."][href*="/count/"]
 ya.ru,yandex.*##li.mini-suggest__item > a[href^="http://yandex"][href*="/clck/"]
 yandex.*##body:not([data-bem*="pogoda"]) .mini-suggest__popup-content > li[data-type="nav"]
 [$path=/search]yandex.*#?#.serp-list > li.serp-item:has(> div[data-bem*="organic"] > div.organic__title-wrapper > a[href][data-event-required])
+! Breaks useful content
+! https://github.com/AdguardTeam/AdguardFilters/issues/168382
+! ya.ru,yandex.*##.content__right .serp-item > *
 !
 ! Yandex.Images
 [$path=/images/]ya.ru,yandex.*##.SimpleSkeleton[width="100%"]
@@ -9249,6 +9255,9 @@ gastronom.ru,eg.ru,newsmaker.md,delo-vcusa.ru,tolknews.ru,gorodche.ru,smartpress
 !
 !
 !
+||appcode*.com/substr/gerunel.js
+finance.ua##div[class$="-commercial-section"]
+tutkino.tv##.rel-news-block
 dev.ua##.partners
 finance.ua##div[class^="AdvertisingBanner"]
 news.meta.ua##.banner-img
@@ -9456,6 +9465,14 @@ bits.media,devyatka.ru,gazeta-n1.ru,gorod48.ru,hi-fi.ru,innov.ru,k1news.ru,ktost
 !
 !
 !
+tproger.ru##.tp-layout-default__listok-top-container
+life.ru##a[class="wrapper"][target="_blank"]
+ngs.ru#?#.gridContainer > div[class]:not([id]):has(> [data-cms-place])
+kulturologia.ru#?##right > div.bordered:has(> center > div[id^="yandex_rtb"])s
+amic.ru#?#section > div[style^="max-height:"]:has(> div[class^="adfinity_"])
+logist.today##.horizontal-banner
+logist.today##div[class|="article-sidebar__ad"]
+smart-lab.ru#?#.sidebar_right > div.bbr__big:has(> div[id^="adfox_"])
 kp.ru##.afisha-r__block
 ||static.gazeta.ru/nm2021/js/others_scripts_v1.js
 gazeta.ru##.b_article + div[class^="w_col"] > div[class^="unit-"][data-check][id]
@@ -11228,7 +11245,7 @@ winzoro.net##.wzADS
 geekhacker.ru###rehub_sticky_on_scroll-2
 hosting.timeweb.ru##.timer-promotion-banner
 ||starlight.digital/get-playlist-ad/hls-vod/files/*.mp4/*_AdBlock^$xmlhttprequest,redirect=noopmp4-1s
-vnimanie.pro,teleprogramma.pro##.dna-adfox-block
+attention.plus,vnimanie.pro,teleprogramma.pro##.dna-adfox-block
 playground.ru##.page-aside > div.sticky
 playground.ru##.mezzanine > div.mezzanine-center > div:not([class])
 sportplus.live##.container__main > a[href][target="_blank"]
@@ -11369,7 +11386,7 @@ nsp.ru##app-article-banner
 lennytab.com##label[style^="color:white;position:fixed;"]
 popcornnews.ru##div[style="padding: 20px 0; background-color: #f4f4f4;"]
 ||the-hole.tv/ads?
-flicksbar.fun,flicksbar.lol,flicksbar.top##.topAdPad
+flicksbar.info,flicksbar.fun,flicksbar.lol,flicksbar.top##.topAdPad
 ||torrent-mass.ru/dow.png
 torontovka.com##.header-partnership
 torontovka.com##tor-banner-block
@@ -17265,7 +17282,7 @@ region15.ru##div[class^="bann"]
 proufu.ru##div[class^="banner-block"]
 nn.ru##div[class^="banner-cont"]
 biokrasota.ru,yugopolis.ru##div[class^="banner-container"]
-saint-petersburg.ru##div[class^="banner-place-"]
+rabota.by,saint-petersburg.ru##div[class^="banner-place-"]
 dni.ru##div[class^="banner980"]
 rusplt.ru##div[class^="bannerPlace"]
 ura.news##div[class^="bannerPosition"]
@@ -20707,12 +20724,16 @@ ixbt.com###yandex_recommend
 ixbt.com##a[data-menuitem="honor"]
 ixbt.com##.horb
 ixbt.com##.mobb
+ixbt.com##.bcontainer
+ixbt.com##.hcont
+ixbt.com##.vcont
 forum.ixbt.com##.mainpage_table > tbody > tr > td[align="center"]
 ||rose.ixbt.com/banner/
 ||ixbt.online/banners/$image
 ||ixbt.com/cgi-bin/banqs.cgi
 !
 ! sdamgia.ru
+sdamgia.ru##a[target="_blank"] > img[src^="data:image"]
 sdamgia.ru#$?#div > aside > div:has(script:contains(window.yaContextCb)) { position: absolute !important; top: -9999px !important; }
 sdamgia.ru#$?#div > aside > div:has(script:contains(window.rotator)) { position: absolute !important; top: -9999px !important; }
 sdamgia.ru#$?#.menu > div[style]:has(script:contains(window.rotator)) { position: absolute !important; top: -9999px !important; }
@@ -20764,6 +20785,7 @@ adme.media##div[data-test-id="article-content"] > div[class*=" "]:not([tabindex]
 adme.media#?#div[data-test-id="article-bottom-recommended"] > div > div > div[style="position:relative"] > div > div:has(div:empty + div:empty + div:empty)
 !
 ! Start: vc.ru, dtf.ru, spark.ru
+dtf.ru##.rotator
 dtf.ru##div.subsite-header > div.subsite-header__cover > a.subsite-branding
 dtf.ru##.post-branding-top
 dtf.ru##.post-branding-bottom

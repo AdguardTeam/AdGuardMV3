@@ -1,8 +1,8 @@
-! Checksum: 3F5YG8LyRt5I5F8UbwFuPQ
+! Checksum: VXNo3gAxwknjx4z89OU4Jw
 ! Title: AdGuard Japanese filter
 ! Description: Filter that enables ad blocking on websites in Japanese language.
-! Version: 2.0.46.67
-! TimeUpdated: 2023-12-11T15:32:10+00:00
+! Version: 2.0.46.71
+! TimeUpdated: 2023-12-13T21:32:10+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1120,6 +1120,8 @@ avgle.com#%#//scriptlet('abort-current-inline-script', '__htapop')
 !-------CSS---------
 !-------------------
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/168163
+hitoikigame.com#$#.plugin-freearea td[bgcolor] > div[style] { width: 100% !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/167699
 afsgames.com#$#.ad970x250 { visibility: hidden !important; height: 0 !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/166591
@@ -1646,6 +1648,11 @@ gundamlog.com###more > iframe[src^="https://richlink.blogsys.jp"]
 !
 !
 !
+phoebe.bbspink.com##.sidemenu_banner
+abroadch.com##.block-adsense-q-wrapper
+hitoikigame.com#?#.p1_outline > .p1_title:contains(スポンサードリンク)
+hitoikigame.com#?##first > .p1_outline:has(> .p1_title:contains(人気ゲームランキング))
+hitoikigame.com#?#.plugin-freearea td:has(ins.adsbygoogle)
 chanto.jp.net##.article-body > div[style^="margin:0 auto;width: auto; min-height:"]
 seikeidouga.blog.jp##.article-body-inner > center
 seikeidouga.blog.jp##.left-column-inner > div.plugin-categorize + div.plugin-memo
@@ -7913,6 +7920,8 @@ asahi.com###Outbrain_Osusume
 asahi.com##.p-ad--topNews
 asahi.com##.p-chumoku
 asahi.com##.p-rectangleAd
+dot.asahi.com##.--ad
+dot.asahi.com##.a-ad
 dot.asahi.com##.g-ad-side
 ascii.jp###artAds
 ascii.jp##.pickwrap

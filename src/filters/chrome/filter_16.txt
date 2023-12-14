@@ -1,8 +1,8 @@
-! Checksum: YV7zkpgnLwHqaka5Vtp+gQ
+! Checksum: xXII1HsVC6cdpXc5NmZoUA
 ! Title: AdGuard French filter
 ! Description: Liste FR + AdGuard French filter. Filter list that specifically removes ads on websites in French language.
-! Version: 2.0.42.49
-! TimeUpdated: 2023-12-11T05:02:30+00:00
+! Version: 2.0.42.53
+! TimeUpdated: 2023-12-13T20:30:47+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -137,6 +137,8 @@ capital.fr#@#.plainAd
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/168112
+super-ethanol.com#%#//scriptlet('abort-current-inline-script', 'chp_ads_blocker_detector')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/167991
 ||pmur.org/scripts/HuffP_abChoice.js$domain=huffingtonpost.fr
 ! https://github.com/AdguardTeam/AdguardFilters/issues/166960
@@ -851,6 +853,8 @@ $script,third-party,denyallow=fastly.net|statically.io|sharecast.ws|bunnycdn.ru|
 !
 !
 !
+lalsace.fr#$?##blockPubGalleryWrapper { remove: true; }
+leparisien.fr##.paywall-article-inread-ads
 ooparc.com##aside#cross-bar
 ooparc.com##div[id^="section-pub-"]
 ooparc.com##a[id^="advert-bg-"]:not(#advert-bg-top)
@@ -870,9 +874,9 @@ presse-citron.net##.vsly-player
 melty.fr#?#.placeholder-pub_dfp
 closermag.fr#?##left_wrapper > aside#text-22:has(> div.textwidget > div.akcelo-wrapper)
 leboncoin.fr###mainContent > div > div#lht-space-ad:upward(1)
-lepoint.fr##.slotadm
-lepoint.fr##div#CONT_WRAP_PAVE_ATF
-lepoint.fr###TABOOLA_D
+lpnt.fr,lepoint.fr##.slotadm
+lpnt.fr,lepoint.fr##div#CONT_WRAP_PAVE_ATF
+lpnt.fr,lepoint.fr###TABOOLA_D
 tuxboard.com##div[id^="slot_"][style^="min-height:"]
 radio-canada.ca##div[class^="StyledAdboxWrapperBase-"]
 orange.fr#?#.container-fluid > .mt-1 > h3:contains(/^Liens commerciaux$/)
@@ -1087,7 +1091,7 @@ sudouest.fr##.pub_with_light_background.sidebar-section
 voici.fr##.offsetCardGrid-cardsContainer > .offsetCardGrid-card.nativeCard
 paroles2chansons.lemonde.fr,paroles.net##div[id^="trg_"]
 paroles.net##div[style="width:300px;height:600px;"]
-lepoint.fr##body .slotpub:not(#style_important)
+lpnt.fr,lepoint.fr##body .slotpub:not(#style_important)
 cnews.fr##div[id^="block-dm-services-ads-"]
 lesoir.be##.rossel-ads
 analyticsinsight.net##.widget-5
@@ -1096,7 +1100,7 @@ ouest-france.fr##div[id*="taboola"]
 ouest-france.fr##div.pub[id^="pub_"]
 vf-film.top##.TPlayer.on::after
 /\/\/[a-z]{6,}\.com\/[a-zA-Z0-9]{5,}-?[a-zA-Z0-9.]{6,}[\s\S]*\/[a-zA-Z0-9]{10,}/$domain=zone-telechargement.click,script
-lepoint.fr###taboola-below-article
+lpnt.fr,lepoint.fr###taboola-below-article
 capital.fr##.outbrain-ads
 lunchboards.com###mv-info > a[target="_blank"] > img
 lunchboards.com##.mvic-desc > a[target="_blank"] > img
@@ -1109,8 +1113,8 @@ parismatch.com##.lmn-aside
 parismatch.com##.lmn-inread
 lejdd.fr,parismatch.com##.taboola-wrapper
 boursorama.com##.l-header__gigaban
-lepoint.fr##div[id^="WRAP_"][id*="_ATF"]
-lepoint.fr##div[id^="WRAP_NATIVE_"]
+lpnt.fr,lepoint.fr##div[id^="WRAP_"][id*="_ATF"]
+lpnt.fr,lepoint.fr##div[id^="WRAP_NATIVE_"]
 cnews.fr##.article-advertisement
 parlons-basket.com##.widget-ad-slot
 parlons-basket.com##a[href^="https://www.airbnb.fr/rooms/"] > img

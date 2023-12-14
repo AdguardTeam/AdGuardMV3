@@ -1,8 +1,8 @@
-! Checksum: XZUucMAi5SIzdBL+PliR5w
+! Checksum: 8xYLepmC49EVrREoAW4P+w
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.39.40
-! TimeUpdated: 2023-12-11T21:03:55+00:00
+! Version: 2.0.39.46
+! TimeUpdated: 2023-12-13T23:32:05+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1112,10 +1112,12 @@ teleboy.ch#@#.adWrapper
 !--------------------------------------!
 !
 ! VAST video ads - e. g. https://github.com/AdguardTeam/AdguardFilters/issues/135687
+! can cause pause on video when ad video should be shown
 !+ NOT_PLATFORM(ios, ext_android_cb)
 kicker.de,stern.de,desired.de,pcgames.de,t-online.de,vox.de,spieletipps.de,wetter.de,golem.de,autobild.de,buffed.de,gamesaktuell.de,kino.de,pcgameshardware.de,videogameszone.de,familie.de,welt.de#%#//scriptlet('prevent-xhr', '.damoh.')
 ! new version (both rules are working on their own)
 plus.rtl.de#%#//scriptlet('trusted-replace-xhr-response', 'true', 'false', 'homadClientConfig-plusrtlde.json')
+brigitte.de#%#//scriptlet('trusted-replace-xhr-response', 'true', 'false', 'global_config.json')
 plus.rtl.de#%#//scriptlet('abort-on-stack-trace', 'Object.prototype.adReinsertion', 'createSdk')
 !
 ! https://github.com/AdguardTeam/AdguardFilters/issues/166369
@@ -1595,6 +1597,8 @@ formel1.de,krautundrueben.de,motorsport-total.com,traktorpool.de,fnweb.de,laborj
 !
 !
 !
+oe24.at##a[href^="https://www.oe24.at/redirconsole/"]
+oe24.at##li[data-ad="1"]
 importantia.de##.rte_content
 michael-bickel.de##div[id^="micha-"]
 michael-bickel.de##.micha-adlabel + p
@@ -1608,9 +1612,12 @@ infranken.de#?#.listing-item:has(> article[class*="lp_partnerangebote"] .post-co
 stol.it##div[class^="AdSuperBanner__SuperBannerContainer"]
 netdoktor.ch##.footer-ad-container
 lacrux.com##.lacruxtarget
+petbook.de##section[data-type="sticky-bar"]
+petbook.de,computerbase.de,gamestar.de##a[rel*="sponsored"]
 myhomebook.de#?#div[class]:has(> article a[href^="https://secure.adnxs.com"])
 myhomebook.de#?#section[data-type="sticky-bar"]:has(> a[rel*="sponsored"]:only-child)
 myhomebook.de#?#div[class][style*="min-width"][style*="min-height"]:has(> #mrec:only-child)
+petbook.de#?#div[class]:has(> article:only-child h3 > a[rel*="sponsored"])
 bild.de#?#.layout:has(> .ad-wrapper:only-child)
 studysmarter.de##.ss-dynamic-banner
 zockify.de#?#article > aside:has(> div > div.vm-dynamic-container)
@@ -2081,7 +2088,6 @@ playcentral.de##div[id^="sas_"]
 /bilder/*/*.jpg$script,domain=24garten.de|hna.de|buzzfeed.de|costanachrichten.com|24rhein.de|24vita.de|brokser-heiratsmarkt.de|echo24.de|in-muenchen.de|ludwigshafen24.de|sauerlandkurier.de
 vorname.com,gala.de,stern.de,brigitte.de,urbia.de##.group--adtag-with-fallbackcontent
 gamestar.de##a[data-category="homebanner"]
-computerbase.de,gamestar.de##a[rel*="sponsored"]
 bild.de##.article-ad-link
 sueddeutsche.de###article-app-container a[href*="advertorial.sueddeutsche.de"]
 bz-berlin.de##.w-mrec > div[style*="width: 300px;"][style*="height: 250px"]
@@ -10667,6 +10673,7 @@ bitreporter.de#?#.code-block:-abp-has(span:-abp-contains(/ANZEIGE|Anzeige|Werbun
 boersennews.de#?##bnTickerContainer:-abp-has(#bnTickerAdNotice)
 caravaning.de#?#.v-A_-teaser__halfcol__listitem:-abp-has(.v-A_-teaser__tag--ad)
 carpediem.life#?#.post-overview:-abp-has(div:-abp-contains(Anzeige))
+celleheute.de#?#div.YzqVVZ:-abp-has(span.wixui-rich-text__text:-abp-contains(Anzeigen))
 chip.de#?#.Listing > div[class]:-abp-has(path[d$="92.456,64.241 z"])
 chip.de#?#.mt-md:-abp-has(path[d$="92.456,64.241 z"])
 chip.de#?#a.secondary:-abp-has(.Badge__Content:-abp-contains(/anzeige|gesponsert/))
@@ -10748,6 +10755,8 @@ kajak-magazin.com#?#.custom:-abp-has(span:-abp-contains(Anzeige))
 kaufland.de#?#.product:-abp-has(div.product__sponsored-ad-label)
 kaufland.de#?#.rd-recommender__tile:-abp-has(div.rd-product-tile__badge--ad)
 kaufland.de#?#.recommender-wrapper:-abp-contains(Gesponsert)
+la-palma24.info#?#article[class^="dvs-ad-tyblqtres-uno"]:-abp-has(div:-abp-contains(AD))
+la-palma24.info#?#div[class^="dvbloqbasic"]:-abp-has(div:-abp-contains(Ad))
 laola1.at#?#.block.medium:-abp-has(a[href^="https://dt.sportradar.com/"])
 lausitz-tv.de#?#.small-12.column:-abp-contains(Anzeige)
 linkedin.com#?#.core-rail > div > div[id^="ember"]:-abp-has(span:-abp-contains(Gesponsert))
@@ -10769,6 +10778,7 @@ motorradonline.de#?#.v-A_-teaser__halfcol__listitem:-abp-has(.v-A_-teaser__tag--
 motorradonline.de#?#.v-A_-topteaser__rotationbox__item:-abp-has(.v-A_-teaser__tag--ad)
 motorsport-total.com#?#.teaser_container.teaser-htmlcode.relative.row:-abp-has(.f1de-container-title:-abp-contains(Die besten Leasing-Deals))
 mountainbike-magazin.de#?#.v-A_-white__tile:-abp-has(.v-A_-teaser__tag--ad)
+notebookcheck.com#?#.introa_news:-abp-contains(Anzeige)
 nur-positive-nachrichten.de#?#.moduletable.text-center:-abp-has(.bildunterschrift:-abp-contains(Anzeige))
 nydus.org#?#div.ui-tabs:-abp-has(#nydus_org_300x600_desktop_1)
 nydus.org#?#div:-abp-has(> #nydus_org_970x300_billboard_responsive)

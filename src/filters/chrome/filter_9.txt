@@ -1,8 +1,8 @@
-! Checksum: xh3Ddr4cOUuHkbGfDV8+NA
+! Checksum: wFlRbJ24aFwPCn8S2GaDHA
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish, Portuguese, and Brazilian Portuguese languages.
-! Version: 2.0.22.46
-! TimeUpdated: 2023-12-08T08:32:16+00:00
+! Version: 2.0.22.51
+! TimeUpdated: 2023-12-13T17:04:08+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -306,7 +306,10 @@
 ! Bad: ||ad.doubleclick.net^ (should be in adservers.txt)
 !
 !
-!
+! https://github.com/AdguardTeam/AdguardFilters/issues/168376
+ggames.com.br#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
+! https://github.com/AdguardTeam/AdguardFilters/issues/168358
+elespanol.com#%#//scriptlet("abort-on-property-read", "setNptTechAdblockerCookie")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/167053
 gamesteelstudioplus.blogspot.com,gamesteelstudio.blogspot.com###antiAdBlock
 gamesteelstudioplus.blogspot.com,gamesteelstudio.blogspot.com#%#//scriptlet('abort-current-inline-script', 'EventTarget.prototype.addEventListener', 'adsbygoogle.js')
@@ -2247,6 +2250,10 @@ gaz.com.br,placar.com.br,futebolinterior.com.br,tvhistoria.com.br,tribunapr.uol.
 ! ##.banner
 ahoragranada.com,correio24horas.com.br,cnnespanol.cnn.com,motociclismo.es,sub100.com.br,theenemy.com.br,manhwas.net,rpp.pe,ambito.com,economipedia.com,informador.mx,elinformador.com.co,cronista.com,rionegro.com.ar,diariodecuyo.com.ar,voydeviaje.com.ar,guarda14.com,viapais.com.ar,agazeta.com.br,eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.*,mundotecnologias.com,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##.banner
 !
+forum.outerspace.com.br##.p-body-sidebar > div:not([data-widget-key])
+primicias.ec##.banner_large
+infopedia.pt##body .googleAdsWidget
+||infopedia.pt/assets/Ads/
 temporeal.lance.com.br##.tl-item[data-evento="publicidade"]
 fulltv.com.mx,fulltv.com.ar##.toptext1
 fulltv.com.mx,fulltv.com.ar##.toptext2
