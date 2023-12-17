@@ -1,8 +1,8 @@
-! Checksum: A9ZBbORsHSJHTcSw8sg8Og
+! Checksum: ZprqvfrgzgSs0lDkcDtZCQ
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.87.15
-! TimeUpdated: 2023-12-13T18:31:02+00:00
+! Version: 2.0.87.25
+! TimeUpdated: 2023-12-16T01:02:49+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -6009,6 +6009,8 @@ electric-house.ru#%#//scriptlet("abort-on-property-read", "onload")
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/168541
+torlook.in#%#//scriptlet("set-constant", "adBlockFunction", "noopFunc")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/168249
 positiverecords.ru#%#//scriptlet("abort-current-inline-script", "$", "Adblock")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/167379
@@ -9465,6 +9467,22 @@ bits.media,devyatka.ru,gazeta-n1.ru,gorod48.ru,hi-fi.ru,innov.ru,k1news.ru,ktost
 !
 !
 !
+uznayvse.ru##.promo_feed_side
+uznayvse.ru##div[id^="bfmtopad_"]
+topcor.ru##div[id^="id-C-A-"]
+kaluga-poisk.ru##.text > div[style^="min-height:"]
+partnerkin.com###ap_branding
+||partnerkin.com/uploads/sourcesb/
+partnerkin.com##.ab-box
+softportal.com##.cardPageDescMain a[rel="nofollow"][target="_blank"] img
+kinonews.ru#?#.block-main > div[style^="text-align:"]:has(> div[style^="display:"] > div[id^="adfox_"])
+kinonews.ru##.block-page-new + .clear + hr
+kinonews.ru#?#.block-main > div:has(> div[style^="text-align:"] > div[style^="display:"] > div[id^="adfox_"])
+kinonews.ru#?#.block-main > div:has(> div[style^="text-align:"] > div[style^="display:"] > div[id^="adfox_"]) + .clear + hr
+turkmenportal.com##.sub_header_middle_panel > div[class^="col-"]:has(> div.bannerB)
+turkmenportal.com#?##related-news-wrapper > div.row:has(div[style^="height:"] > div.banner_wrapper)
+tass.ru###top_page_box
+technical.city##.container > div[style^="margin-bottom:"]
 tproger.ru##.tp-layout-default__listok-top-container
 life.ru##a[class="wrapper"][target="_blank"]
 ngs.ru#?#.gridContainer > div[class]:not([id]):has(> [data-cms-place])
@@ -9572,8 +9590,6 @@ youandme.chat###play-banner
 sharlib.com##.abs_row
 rulaws.ru##.adfox
 kanobu.ru##aside[class^="AgGamesOnline_"]
-softportal.com#?#.cardPage > div.cardPageDescMain:has(> a[href^="https://1softs.com/smart/"])
-softportal.com#?#.contentWrap > div[style][id]:has(> span > a[href^="https://affiliate.freevpnplanet.com/"])
 wday.ru#?#section > div[class^="article"]:has(div.product-set-block)
 wday.ru#?#section > div[class^="article"]:has(div[data-block-after="productSet"])
 wday.ru#?#section > div[class^="article"]:has(div.block-text > h2:contains(Вам понравится:))
@@ -12236,7 +12252,6 @@ pesni.life##div[style="background-color:#2288BB; padding:5px;margin:8px;text-ali
 ||my.mp3ha.org/images/hvImg/
 muzofond.fm,music.radio.lol,my.mp3ha.org##.hvContainer
 player.tele-sport.ru##.video-container__banner
-softportal.com##.cardPageDescMain > div[style^="float:"][style*="position:"]
 lenta.ru##.b-board__coef-item
 go64.ru##.wow_type_longer
 ||go64.ru/upload/adv_banner/
@@ -20919,6 +20934,8 @@ player.ex.co#@##ad-container
 ! Good: example.org#@#.ad
 ! Bad:  @@||example.org^$stealth (should be in AdGuard Base - allowlist_stealth.txt)
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/168479
+@@||yandex.ru/ads/system/header-bidding.js$domain=irkutskmedia.ru
 ! https://github.com/AdguardTeam/AdguardFilters/issues/168012
 letemps.ch#@#.topad
 ! https://github.com/AdguardTeam/AdguardFilters/issues/166369
