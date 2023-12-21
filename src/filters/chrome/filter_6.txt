@@ -1,8 +1,8 @@
-! Checksum: V64HRr0NoVyEqXDKrbIITA
+! Checksum: ldl7yZNOCl21yHIBuV0O/g
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.39.54
-! TimeUpdated: 2023-12-18T14:32:05+00:00
+! Version: 2.0.39.56
+! TimeUpdated: 2023-12-20T08:32:01+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -553,7 +553,9 @@ southpark.de#%#//scriptlet('prevent-fetch', 'imasdk.googleapis.com')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/156446
 @@||imagenetz.de/werbebanner-ad.js
 ! https://github.com/AdguardTeam/AdguardFilters/issues/154040
-! Fix #149953 allround-pc.com
+! https://github.com/AdguardTeam/AdguardFilters/issues/168628
+! https://github.com/AdguardTeam/AdguardFilters/issues/149953
+allround-pc.com#%#//scriptlet('set-constant', 'Object.prototype.detectables', 'undefined')
 allround-pc.com#@#div[id^="div-gpt-"]
 allround-pc.com#@#[id^="div-gpt-ad"]
 allround-pc.com#@#[class^="div-gpt-ad"]:not([style^="width: 1px; height: 1px;"], .div-gpt-ad_adblock_test)
@@ -1597,6 +1599,7 @@ formel1.de,krautundrueben.de,motorsport-total.com,traktorpool.de,fnweb.de,laborj
 !
 !
 !
+allround-pc.com##.is-container[class*="r-s"]
 computerbase.de#?#.article:has(> div > .js-article-ad-hide-button)
 spiegel.de##div[data-area="affiliatebox"]
 oe24.at##a[href^="https://www.oe24.at/redirconsole/"]
