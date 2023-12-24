@@ -1,8 +1,8 @@
-! Checksum: m4gnKovoJPYKEVIz/SOrSw
+! Checksum: jW0RxZ19ZrPqCHt0N6Ng7w
 ! Title: AdGuard Turkish filter
 ! Description: Filter list that specifically removes ads on websites in Turkish language.
-! Version: 2.0.48.93
-! TimeUpdated: 2023-12-21T06:30:25+00:00
+! Version: 2.0.49.3
+! TimeUpdated: 2023-12-23T19:30:24+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -85,6 +85,7 @@
 ! Bad: ||adssubdomain.legitwebsite.com^ (should be in adservers_firstparty.txt)
 !
 !
+||cryptosmoke.care^$third-party
 ||intermediaworks.com^$third-party
 ||rtb.pixad.com.tr^
 ||finvest.care^$third-party
@@ -102,7 +103,6 @@
 ||medyanative.com^$third-party
 ||61ads.net^
 ||ardykffwpfx.xyz^
-||eskiya.tk^
 ||apptospace.com^
 ||kingadsvip.club^$third-party
 ://sportframe*.co^$third-party
@@ -127,7 +127,6 @@
 ||diken.xyz^
 ||realhumandeals.com^
 ||likevertising.com^
-||banlamaartikoce.ml^
 ||betstadyum.com^$third-party
 ||sportframe.org^$third-party
 ||cokemoke.cf^
@@ -255,7 +254,6 @@
 ||finema-net.cdn.ampproject.org^$third-party
 ||finema.net^$third-party
 ||franecki.net^$third-party
-||frknseo.info^$third-party
 ||fvbaffiliate.com^$third-party
 ||genelajans.com^$third-party
 ||git.emarketing724.com^$third-party
@@ -286,7 +284,6 @@
 ||kos.interseek.si^$third-party
 ||kralseo.info^$third-party
 ||kurulum.xyz^$third-party
-||kuzeyinyeri.site^$third-party
 ||launchingonsetwhirlwind.com^
 ||load.sumome.com^$third-party
 ||makroads.net^$third-party
@@ -350,7 +347,6 @@
 ||segmentify.com^$third-party
 ||seldos.com.tr^$third-party
 ||sinefilmizlesen.com^$third-party
-||slhgfdsir.com^
 ||smopy.com^$third-party
 ||smrtbnr.com^
 ||smrtbnr.info^
@@ -372,7 +368,6 @@
 ||tracking.ucreate.live^
 ||trackocean.com^$third-party
 ||turngrind.com^$third-party
-||ucretsiz-indirin.online^$third-party
 ||uzmanreklam.com^$third-party
 ||vegabet.net^$third-party
 ||videoustu.com^$third-party
@@ -391,11 +386,7 @@
 ||xyztanitim.com^$third-party
 ||yebadu.com^$third-party
 ||yedimedia.net^$third-party
-||yes999.cf^$third-party
-||yes999.ga^$third-party
 ||yes999.gq^$third-party
-||yes999.ml^$third-party
-||yes999.tk^$third-party
 ||yfzbn.com^$third-party
 ||youtubesave.org^
 ||youtubex.top^$third-party
@@ -491,7 +482,11 @@ zamaninvarken.com,kredi.biz.tr,kriptoradar.com,morlevha.com,bakimlikadin.net,kor
 iyibeslenme.net,teknop.net,kirtkirtla.com,buneymis.net,ozgunbilgi.com#%#//scriptlet("set-constant", "adblock.check", "noopFunc")
 !
 !
-!
+! https://github.com/AdguardTeam/AdguardFilters/issues/169122
+teknotaci.com#@#[id^="google_ads_iframe"]
+teknotaci.com#%#//scriptlet('prevent-setTimeout', 'placebo.height()')
+! https://github.com/AdguardTeam/AdguardFilters/issues/168937
+betistuta.club#%#//scriptlet('prevent-element-src-loading', 'script', 'pagead2.googlesyndication.com')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/168342
 beceriksizler.net#%#//scriptlet('set-constant', 'adblock.check', 'noopFunc')
 ||beceriksizler.net/clientscript/yilmazantiadblockv*.js
@@ -1431,6 +1426,9 @@ r10.net#%#document.cookie = 'r10LeftHide=1';
 !------- CSS fixes --------------------!
 !--------------------------------------!
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/168858
+coin-turk.com#$#body > div.site-outer { margin-top: 0 !important; }
+coin-turk.com#$#div[class^="clickout-native_table_box-"] { display: none !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/164551
 fullhdfilm.pro#$#.pageskin header { margin-top: 0 !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/158088
@@ -2029,8 +2027,15 @@ $xmlhttprequest,third-party,denyallow=linkvertise.com|fastly.net|statically.io|s
 /service/advertchannels?$xmlhttprequest,redirect=nooptext,domain=mardinhaber.com.tr|gidahatti.com|bolugundem.com
 dirilispostasi.com,turkuazgazetesi.net,yenialanya.com,bugunkocaeli.com.tr,cagdaskocaeli.com.tr,mansetaydin.com,seskocaeli.com,kocaelibarisgazetesi.com,kocaelikoz.com,enkocaeli.com##.block-pano > div.us
 !
-coin-turk.com#$?#div[class^="clickout-native_table_box-"] { display: none !important; }
-coin-turk.com#$?#.site-outer { margin-top: 0 !important; }
+fullhdfilm.pro##.hrklm_oblong
+||economynews24.com/show-promote.min.js
+yabancidizi.io#?#.poster > div:has(> div.bx-sidebar > div.flex > a[href^="https://kzn.pw/"])
+dizimom.de##.videoustuheader
+||ssl.p.jwpcdn.com/player/*/vast.js
+||dizimom.de/wp-content/themes/dizimom/js/vastt.js
+kocuce.com##body > center > a > img[style="max-width: 100%"]
+kocuce.com##.slickModal
+merlininkazani.com##.leader-board-row
 dizimini.com###tv-spoox2 > .frontBgItem
 ||sinema.cc/demo/prerollvid.php
 diziyou.co##.video > a
@@ -2079,7 +2084,7 @@ hurriyet.com.tr#?#.swiper-pagination-bullets > span.swiper-pagination-bullet:has
 dogruhaber.com.tr###adVideo
 dizivex.com##body > div[style^="position:"] ~ a[href][target="_blank"]
 kocuce.com#?#center:has(> a[href] > img[src^= "https://i.hizliresim.com"])
-kocuce.com##.pageskin-main
+kocuce.com##div[class^="pageskin-main"]
 kocuce.com##.notices
 kocuce.com##.samItem
 kocuce.com###popup-1
@@ -2581,7 +2586,6 @@ afroditscans.com###footer > p > span[style]
 jetfilmizle.*##body > div[id] > [style^="position:fixed;inset:"][style*="z-index:"][style*="height:100%;width:100%"]
 play.dizigom*.*/640x360.
 birasyadizi.com,goodfilmizle.com,zitinger11.cfd,zitinger5.cfd##a[href^="https://cutt.ly/"]
-||v*.zopim.com^$domain=ltbjeans.com
 ||indirmedenfilmizle.vip/show-promote.js
 anizm.net##div[style^="text-align: center;"] > a[target="_blank"]:not([href="https://anizm.net/"])
 tgrthaber.com.tr##div[id^="dfp-sidebar-"]
