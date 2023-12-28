@@ -1,9 +1,10 @@
-! Checksum: zsBgAQnZhs1kvztBrqpTqQ
+! Checksum: UU+yA0T6hrkkF/IRXzOnQw
+! Diff-Path: ../patches/9/9-s-1703694989-3600.patch
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish, Portuguese, and Brazilian Portuguese languages.
-! Version: 2.0.22.60
-! TimeUpdated: 2023-12-26T07:32:11+00:00
-! Expires: 4 days (update frequency)
+! Version: 2.0.22.63
+! TimeUpdated: 2023-12-27T12:33:02+00:00
+! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
 !
@@ -306,6 +307,11 @@
 ! Bad: ||ad.doubleclick.net^ (should be in adservers.txt)
 !
 !
+!
+! https://github.com/AdguardTeam/AdguardFilters/issues/169287
+techdiniz.com,trueliketop.org#%#//scriptlet('set-cookie', 'force_ad', '2')
+! https://github.com/AdguardTeam/AdguardFilters/issues/169277
+seriesemcena.com.br#%#//scriptlet('prevent-requestAnimationFrame', '.clientHeight')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/168718
 ||agregalink.net/js/adblock
 ! https://github.com/AdguardTeam/AdguardFilters/issues/168376
@@ -499,8 +505,7 @@ nptmedia.tv#%#//scriptlet('prevent-fetch', '/pagead2\.googlesyndication\.com|ads
 ! https://github.com/AdguardTeam/AdguardFilters/issues/168950
 ! https://github.com/AdguardTeam/AdguardFilters/issues/142951
 ! https://github.com/AdguardTeam/AdguardFilters/issues/142462
-netcine2.la#$#body { overflow: auto !important; padding-right: 0 !important; }
-netcine2.la#$#.swal2-container { display: none !important; }
+netcine2.la#%#//scriptlet('abort-on-stack-trace', 'alert', 'eval')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/142265
 antoniomote.com#$#[id].adsbox.doubleclick.ad-placement { display: block !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/142266
