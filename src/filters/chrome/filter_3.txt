@@ -1,9 +1,9 @@
-! Checksum: wgOOHnsWCCn1pYKhldxLdQ
-! Diff-Path: ../patches/3/3-s-1703720103-3600.patch
+! Checksum: gZMM8Ak60SkZazh4R9ALKw
+! Diff-Path: ../patches/3/3-s-1703946924-3600.patch
 ! Title: AdGuard Tracking Protection filter
 ! Description: The most comprehensive list of various online counters and web analytics tools. Use this filter if you do not want your actions on the Internet to be tracked.
-! Version: 2.0.65.2
-! TimeUpdated: 2023-12-27T23:32:16+00:00
+! Version: 2.0.65.15
+! TimeUpdated: 2023-12-30T14:32:36+00:00
 ! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -103,6 +103,8 @@ spletnik.ru#%#//scriptlet('set-local-storage-item', 'adrcid', '$remove$')
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/169415
+jrhokkaido.co.jp#%#//scriptlet('prevent-addEventListener', 'DOMContentLoaded', 'pt_enable')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/169400
 firmwaredrive.com#%#setTimeout(function() { var el = document.querySelector('input[name="dfp"]'); if(el){el.value = '1234567890123456';} }, 300);
 ! https://github.com/easylist/easylist/pull/17986
@@ -472,6 +474,8 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 !
 ! The list of bug-tracker services(Sentry, etc.)
 ! Add as commented rules. Will be used in additional list and/or strict DNS
+! ||js.cdn.applicationinsights.io^
+! ||eastus-*.applicationinsights.azure.com^
 ! ||admob-app-id-*.firebaseio.com^
 ! ||api.loganalytics.io^
 ! ||apptrace.com^
@@ -515,6 +519,8 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 !
 !
 !
+||metrics.plaid.com^
+||api.iterable.com^
 ||t.arcade.show^
 ||pxl.retaku.net^
 ||extrawatch.com^$third-party
@@ -577,7 +583,6 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ||agrvt.com^
 ||westats.dev^$third-party
 ||adsolutions.com^$third-party
-||sdk.fra-*.braze.eu^
 ||ct2.kutinawa.com^
 ||tg1.premiumimpression.com^
 ||ythingy.com^
@@ -4489,6 +4494,7 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ! Blocking piwik analytics subdomain(for DNS filtering)
 |piwik.
 !
+||metrics.geekwire.com^
 ||click-performance.assets.rndtech.de^
 ||track.linksynergy.com^
 ||tracking.epicgames.com^
@@ -74950,10 +74956,10 @@ _tracking.php?b=
 ! https://github.com/AdguardTeam/Scriptlets/issues/253#issuecomment-1308957501 - do not remove `~id.x5.ru`
 ! https://github.com/AdguardTeam/AdguardFilters/issues/137243
 ! https://github.com/AdguardTeam/AdguardFilters/issues/155158
-!+ NOT_PLATFORM(windows, mac, android)
 ||mc.yandex.ru/metrika/tag.js$script,redirect=metrika-yandex-tag,domain=~id.x5.ru|~aiondb.ru
 ||mc.yandex.ru/metrika/watch.js$script,redirect=metrika-yandex-watch
-! TODO: replace `~domain.com` by exclusions after ext4.0 release
+! https://github.com/AdguardTeam/AdguardFilters/issues/137243
+!
 ! https://github.com/AdguardTeam/AdguardForWindows/issues/3973
 ! Probably caused by overriding "dataLayer.push" function
 ||google-analytics.com/analytics.js$script,redirect=google-analytics,domain=~olx.*|~banki.ru|~bigc.co.th
@@ -74979,8 +74985,14 @@ _tracking.php?b=
 ||googleadservices.com/pagead/conversion_async.js$redirect=noopjs,domain=ffm.to,important
 !
 /analytics.js$domain=tokyometro.jp|resumes.breakdownexpress.com|techcult.com|inbox.lv|kopeda.com|freexcafe.com|rusvideos.tv|nakubani.ru|lun.com|songsara.net|newsmax.com|bolgehastanesi.com|ewtc.de|newsdig.tbs.co.jp|imore.com|city.kushiro.lg.jp|emeraldbridal.com.au|emarat-news.ae|imobie.jp|tikla.com.tr|rusvideos.porn|jrkyushu.co.jp|amiunique.org|edit.ing|konami.com
-||assets.adobedtm.com^$domain=mcclatchydc.com|elnuevoherald.com|bellinghamherald.com|sacbee.com|charlotteobserver.com|newsobserver.com|miamiherald.com|ef.ru|algida.com.tr|bmw-motorrad.co.uk|cif.com.tr|clearhaircare.com|domestos.com|dove.com|elidor.com.tr|f1sport.autorevue.cz|geico.com|hellmanns.com.tr|herkessofraya.com|johnsonsbaby.com.tr|lipton.com|lnk.to|lux.com|magnumicecream.com|neutrogena.com.tr|omo.com|rexona.com|samsung.com|sap.com|schwarzkopf.com.tr|signalturkiye.com|msnbc.com|nbcnews.com|kbb.com|eurosport.ru|timgate.it|intermiles.com|oxfordmail.co.uk|spiegel.de|hp.com|deutschepost.de|thebay.com|s.shufoo.net|tsn.ca|tabelog.com|euronews.com|newshub.co.nz|fredmeyer.com|viabcp.com|carsales.com.au|falabella.com|aarp.org|thehill.com|realtor.com|nzherald.co.nz|aia.com.ph
+||assets.adobedtm.com^$domain=mcclatchydc.com|elnuevoherald.com|bellinghamherald.com|sacbee.com|charlotteobserver.com|newsobserver.com|miamiherald.com|ef.ru|algida.com.tr|bmw-motorrad.co.uk|cif.com.tr|clearhaircare.com|domestos.com|dove.com|elidor.com.tr|f1sport.autorevue.cz|geico.com|hellmanns.com.tr|herkessofraya.com|johnsonsbaby.com.tr|lipton.com|lnk.to|lux.com|magnumicecream.com|neutrogena.com.tr|omo.com|rexona.com|samsung.com|sap.com|schwarzkopf.com.tr|signalturkiye.com|msnbc.com|nbcnews.com|kbb.com|eurosport.ru|timgate.it|intermiles.com|oxfordmail.co.uk|spiegel.de|hp.com|deutschepost.de|thebay.com|s.shufoo.net|tsn.ca|tabelog.com|euronews.com|newshub.co.nz|fredmeyer.com|viabcp.com|carsales.com.au|falabella.com|aarp.org|thehill.com|realtor.com|nzherald.co.nz|aia.com.ph|baynews9.com
 !
+||indeed.com/m/rpc/frontendlogging
+||androidpolice.com/an-strpixel.png
+||atlas.rambler.ru/metrics
+||braze.eu/api/v3/data/
+||infoq.com/metrics/
+||api.fool.com/*/events
 ||o.techmaniak.pl^$image
 ||toss.im/pages/ekdil/tragoudo|
 ||morinaga.co.jp/assets/js/ga.js
@@ -75221,7 +75233,6 @@ president.jp##.recommend
 ||corp.w-nexco.co.jp/*/googleAnalytics.js
 ||corp.w-nexco.co.jp/*/ga*.js
 ||sanyo-railway.co.jp/*/analytics.js
-||jrhokkaido.co.jp/*/ga.js
 ||regmedia.co.uk/*/tp.gif
 ||go.theregister.com/*/abt_bb|
 /\/-[A-z0-9]+\/[A-z0-9]+\/[A-z0-9]+\/[A-z0-9]+\/[A-z0-9]+\/[A-z0-9]+\/[A-z0-9]+\/[A-z0-9]+$/$domain=calvinklein.*,xmlhttprequest,script
@@ -79194,11 +79205,12 @@ $cookie=flocktory-uuid
 ! wisepops.com widget counter
 $cookie=/^wisepops/
 ! Demandware Analytics
-$cookie=/dwanonymous_/
+! https://github.com/AdguardTeam/AdguardFilters/issues/169558
+$cookie=/dwanonymous_/,domain=~ec.nintendo.com|~store-jp.nintendo.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/167333
-$cookie=cqcid,domain=~nintendo.com
+$cookie=cqcid,domain=~ec.nintendo.com|~store-jp.nintendo.com
 ! BUG: https://github.com/AdguardTeam/AdguardFilters/issues/164150
-$cookie=/dwac_/,domain=~nintendo.com
+$cookie=/dwac_/,domain=~ec.nintendo.com|~store-jp.nintendo.com
 ! retentionscience.com tracking
 $cookie=rsci_vid
 ! qualaroo.com tracking
@@ -79384,7 +79396,7 @@ $cookie=AMP_TOKEN
 $cookie=/^_gac_/
 ! Used to persist session state.
 ! BUG: https://github.com/AdguardTeam/AdguardFilters/issues/164150
-$cookie=/^_ga_/,domain=~nintendo.com
+$cookie=/^_ga_/,domain=~ec.nintendo.com|~store-jp.nintendo.com
 ! Used to throttle request rate.
 $cookie=/^_dc_gtm_UA-/
 ! ---
@@ -79422,7 +79434,8 @@ $cookie=_opt_expid
 ! Used to register what ads have been displayed to the user.
 $cookie=__gads
 ! This cookie enables experiments with advertisement efficiency across websites in the Google Ads network.
-$cookie=_gcl_au
+! https://github.com/AdguardTeam/AdguardFilters/issues/169558
+$cookie=_gcl_au,domain=~ec.nintendo.com|~store-jp.nintendo.com
 ! Used to track visitors on multiple websites, in order to present relevant advertisement based on the visitor's preferences.
 $cookie=_gcl_aw
 ! https://policies.google.com/technologies/cookies/embedded?hl=en-US
@@ -79618,8 +79631,8 @@ $cookie=SC_ANALYTICS_GLOBAL_COOKIE
 ! Random generated id for anonymous visitors. Used to count different users.
 $cookie=ajs_anonymous_id
 ! Stores a visitor's unique Optimizely identifier.
-$cookie=optimizelyEndUserId
-!
+! https://github.com/AdguardTeam/AdguardFilters/issues/169558
+$cookie=optimizelyEndUserId,domain=~ec.nintendo.com|~store-jp.nintendo.com
 ! Outbrain
 ! Collects data on the user’s navigation and behavior on the website.
 $cookie=outbrain_cid_fetch
@@ -80026,6 +80039,20 @@ $cookie=WPci,domain=wp.pl|money.pl|o2.pl|pudelek.pl|komorkomania.pl|gadzetomania
 $cookie=_pbjs_userid_consent_data,domain=wp.pl|money.pl|o2.pl|pudelek.pl|komorkomania.pl|gadzetomania.pl|fotoblogia.pl|autokult.pl|abczdrowie.pl|parenting.pl|videostar.pl|autocentrum.pl|benchmark.pl
 $cookie=ACac2,domain=wp.pl|money.pl|o2.pl|pudelek.pl|komorkomania.pl|gadzetomania.pl|fotoblogia.pl|autokult.pl|abczdrowie.pl|parenting.pl|videostar.pl|autocentrum.pl|benchmark.pl
 $cookie=STac,domain=wp.pl|money.pl|o2.pl|pudelek.pl|komorkomania.pl|gadzetomania.pl|fotoblogia.pl|autokult.pl|abczdrowie.pl|parenting.pl|videostar.pl|autocentrum.pl|benchmark.pl
+!
+$cookie=rubiconuid,domain=wp.pl
+$cookie=rtbhouseuid,domain=wp.pl
+$cookie=openxmiud,domain=wp.pl
+$cookie=onetaguid,domain=wp.pl
+$cookie=oftmediauid,domain=wp.pl
+$cookie=tpluid,domain=wp.pl
+$cookie=stroeercoreuid,domain=wp.pl
+$cookie=yoc_visxuid,domain=wp.pl
+$cookie=apnxuid,domain=wp.pl
+$cookie=adfmuid,domain=wp.pl
+$cookie=ixuid,domain=wp.pl
+$cookie=smartmiud,domain=wp.pl
+!
 ! https://github.com/AdguardTeam/AdguardFilters/issues/123962
 ||hankookilbo.com^$cookie=uv_user_id
 ||hankookilbo.com^$cookie=hk_ltuid
@@ -80946,7 +80973,6 @@ inapps.appsflyersdk.com^
 !
 ! Repeated requests, two or more in one second if blocked - https://old.reddit.com/r/Adguard/comments/ztbv96/how_do_i_stop_this_my_phone_is_overheating_and/
 !
-! https://twitter.com/m6827596773/status/1739281880804151319
 ! https://github.com/AdguardTeam/AdguardFilters/issues/163109
 ! https://github.com/AdguardTeam/AdguardFilters/issues/160004
 ! https://github.com/AdguardTeam/AdguardFilters/issues/121419
@@ -81029,6 +81055,8 @@ inapps.appsflyersdk.com^
 ! For platforms which do not support $redirect rules
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/169338
+@@||rmcpay.com/js/google-analytics.js|
 ! https://github.com/AdguardTeam/AdguardFilters/issues/169400
 ! https://github.com/AdguardTeam/AdguardFilters/issues/169080
 @@||d.line-scdn.net/*/torimochi.js/public/v1/release/stable/min/torimochi.js$domain=pointclub-portal.landpress.line.me
@@ -81128,7 +81156,6 @@ alternativeto.net#%#//scriptlet('prevent-element-src-loading', 'script', 'double
 @@||cdn.cxense.com/cx.cce.js$domain=lopinion.fr
 @@||cdn.cxense.com/cx.js$domain=lopinion.fr
 @@||api.cxense.com/public/widget/data?$domain=lopinion.fr
-! https://github.com/AdguardTeam/AdguardFilters/issues/163111
 ! https://github.com/AdguardTeam/AdguardFilters/issues/163143
 @@||googletagmanager.com/gtm.js$domain=store-jp.nintendo.com
 @@||cdn.optimizely.com/js/$script,domain=store-jp.nintendo.com
@@ -81342,8 +81369,11 @@ login.coupang.com#%#//scriptlet('prevent-element-src-loading', 'script', 'app-co
 ! https://make.dmm.com/mypage/upload/ broken upload
 ||googletagmanager.com/gtm.js$script,redirect=googletagmanager-gtm,domain=make.dmm.com,important
 @@||googletagmanager.com/gtm.js$domain=make.dmm.com
+! https://github.com/AdguardTeam/AdguardFilters/issues/168620
+! https://github.com/AdguardTeam/AdguardFilters/issues/168622
 ! https://github.com/AdguardTeam/AdguardFilters/issues/152345
-capital.it#%#//scriptlet('prevent-element-src-loading', 'script', 'static.chartbeat.com/js/chartbeat_brightcove_plugin.js')
+||googletagmanager.com/gtm.js$script,redirect=google-analytics,important,domain=m2o.it|deejay.it|capital.it
+||static.chartbeat.com/js/chartbeat_brightcove_plugin.js$script,redirect=noopjs,important,domain=m2o.it|deejay.it|capital.it
 ! https://github.com/AdguardTeam/AdguardFilters/issues/152136
 ||form.info-morimoto-real.jp^$badfilter
 ! https://github.com/AdguardTeam/AdguardFilters/issues/152259
@@ -82746,8 +82776,6 @@ demae-can.com#%#//scriptlet('remove-attr', 'data-trm-action|data-trm-category|da
 ! https://forum.adguard.com/index.php?threads/samsung-com.39002/
 @@||assets.adobedtm.com/*-source.min.js$domain=samsung.com
 @@||assets.adobedtm.com/*launch-*.min.js$domain=samsung.com
-! liga.net - fixing comments
-@@||googletagmanager.com/gtm.js$domain=liga.net
 ! https://github.com/AdguardTeam/AdguardFilters/issues/58292
 @@||s.imgur.com/min/px.js$domain=imgur.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/57944

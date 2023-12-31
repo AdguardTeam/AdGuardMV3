@@ -1,9 +1,9 @@
-! Checksum: eULIIdZFO1tQKOz3UNOytw
-! Diff-Path: ../patches/1/1-s-1703694982-3600.patch
+! Checksum: 9o+dEmLRkylHQS6O7vOofA
+! Diff-Path: ../patches/1/1-s-1703874915-3600.patch
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.87.49
-! TimeUpdated: 2023-12-27T09:31:36+00:00
+! Version: 2.0.87.53
+! TimeUpdated: 2023-12-29T18:31:39+00:00
 ! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -7257,9 +7257,8 @@ ya.ru,yandex.*###search-result-aside > div[class*="_right_yes"] > div[data-cid] 
 ! ya.ru,yandex.*##.content__right .serp-item > *
 !
 ! Yandex.Images
-[$path=/images/]ya.ru,yandex.*##.SimpleSkeleton[width="100%"]
-yandex.*#?#div[role="list"] div[class*="-Incut"]:has(div[id^="viewer_rim_direct"])
-yandex.*##.serp-list > div.incut
+ya.ru,yandex.*##div[style^="max-width:"] > svg.ContentLoader
+ya.ru,yandex.*##.serp-list > div.incut
 ya.ru,yandex.*##.DirectInline
 !
 ! Yandex.Maps
@@ -9472,6 +9471,8 @@ bits.media,devyatka.ru,gazeta-n1.ru,gorod48.ru,hi-fi.ru,innov.ru,k1news.ru,ktost
 !
 !
 !
+verstka.media##.verstka-telegram-link:has(> thetruestory-widget-top)
+portable-rus.ru##aside[id^="block-"]:has(> div[id^="yandex_rtb"])
 apteka.ru##.EshopShelf
 wordparts.ru##div[class^="ad"][style="width:100%;float:left;padding:10px;overflow-y:auto;height:400px;"]
 ||all-epiosodesfun.com/adpreroll/
@@ -11177,7 +11178,7 @@ calc.ru##.static_re
 neva.today##.populary
 neva.today##.article div.popular
 neva.today##.banner-idea
-nevnov.ru##.billboard
+sevastopolmedia.ru,nevnov.ru##.billboard
 video.matchtv.ru##.vjs-link_view-mpartner
 ||bomtv.ru/hlam/samokat.jpg
 emdigital.ru##.instalens > div.row > div[style^="height:290px;background-image:url"]
@@ -15215,7 +15216,7 @@ arendator.ru,rusbody.com,unipack.ru##.banner-box
 oblgazeta.ru##.banner-cell
 vgoru.org,tvmag.ru,internetua.com,news.ngs.ru,oren.ru##.banner-center
 furfur.me##.banner-centering-wrap
-footballua.tv,dp.ru,vctr.media,buro247.ru,afisha.ngs.ru,newsvl.ru##.banner-container
+sevastopolmedia.ru,footballua.tv,dp.ru,vctr.media,buro247.ru,afisha.ngs.ru,newsvl.ru##.banner-container
 click-or-die.ru,ykt.ru##.banner-desktop
 klops.ru##.banner-down
 penzavzglyad.ru##.banner-dummy

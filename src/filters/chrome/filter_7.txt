@@ -1,9 +1,9 @@
-! Checksum: tg7Q2tqq91Kvbu/xwhPoXQ
-! Diff-Path: ../patches/7/7-s-1703694989-3600.patch
+! Checksum: spncJyXeRgjjp1bgD+4jGQ
+! Diff-Path: ../patches/7/7-s-1703954124-3600.patch
 ! Title: AdGuard Japanese filter
 ! Description: Filter that enables ad blocking on websites in Japanese language.
-! Version: 2.0.47.6
-! TimeUpdated: 2023-12-26T19:01:53+00:00
+! Version: 2.0.47.11
+! TimeUpdated: 2023-12-30T16:32:58+00:00
 ! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -500,7 +500,7 @@
 !
 !
 ! https://github.com/AdguardTeam/AdguardFilters/issues/159931
-iwb.jp#%#//scriptlet('abort-on-stack-trace', 'onload', 'getComputedStyle')
+iwb.jp#%#//scriptlet('prevent-setTimeout', 'location.href')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/167887
 ||nazology.net/*/adb/adb.js
 ! https://github.com/AdguardTeam/AdguardFilters/issues/167723
@@ -1118,6 +1118,8 @@ avgle.com#%#//scriptlet('abort-current-inline-script', '__htapop')
 !-------CSS---------
 !-------------------
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/169518
+ge-soku.com#$##custom_html-48 { margin-top: 0px !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/168163
 hitoikigame.com#$#.plugin-freearea td[bgcolor] > div[style] { width: 100% !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/167699
@@ -1479,6 +1481,8 @@ hostlove.com#$##index_nav > h1 { padding-top: 30px!important; }
 /wp-content/themes/CashLINESystem/js/modal.$script
 !
 ! Malware/Phishing
+.cfd/*?_t=$document
+&p=*&_mi|$document,domain=top
 .com/ibg/client/*.php|$document
 ://smdc-*.fit/$document
 ://tokyodisney.*.com/*?lang=ja^$document
@@ -1488,7 +1492,7 @@ hostlove.com#$##index_nav > h1 { padding-top: 30px!important; }
 .xyz/win/^$document
 ://smbc-$document,domain=fit|shop
 .xyz/funccode.php|$document
-.cloud/_/*/WHkFeaR2U/*$document
+.cloud/*/WHkFeaR2U/$document
 /mos/?t=$document
 /wos/?t=$document
 /?type=lp001&afl=$document
@@ -1649,6 +1653,13 @@ gundamlog.com###more > iframe[src^="https://richlink.blogsys.jp"]
 !
 !
 !
+ge-soku.com###diver_widget_pcsp-5
+ge-soku.com###diver_widget_pcsp-16
+ge-soku.com###diver_widget_pcsp-14
+ge-soku.com###custom_html-108
+pks.raenonx.cc##.w-full.info-section-opaque.fixed.bottom-0.z-nav
+pks.raenonx.cc#?#.h-full:has(> div > div.absolute > ins.adsbygoogle)
+automaton-media.com##.td-ss-main-sidebar > aside.widget:has(> div.block-title > span)
 nbblog.jp##div[class^="napbiz_ad"]
 news.sukupara.jp#?#.adv2:has(div[id^="div-gpt-"])
 /^https:\/\/javplayer\.org\/[0-9a-zA-Z]{5,7}\.js$/$script,~third-party

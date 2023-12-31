@@ -1,9 +1,9 @@
-! Checksum: IdzDLtT4wed9DwAzVNYqjQ
-! Diff-Path: ../patches/13/13-s-1703702114-3600.patch
+! Checksum: UCvrowmccsBdFHmkXtMyDQ
+! Diff-Path: ../patches/13/13-s-1703943320-3600.patch
 ! Title: AdGuard Turkish filter
 ! Description: Filter list that specifically removes ads on websites in Turkish language.
-! Version: 2.0.49.11
-! TimeUpdated: 2023-12-27T18:30:57+00:00
+! Version: 2.0.49.18
+! TimeUpdated: 2023-12-30T13:31:16+00:00
 ! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -483,6 +483,8 @@ zamaninvarken.com,kredi.biz.tr,kriptoradar.com,morlevha.com,bakimlikadin.net,kor
 iyibeslenme.net,teknop.net,kirtkirtla.com,buneymis.net,ozgunbilgi.com#%#//scriptlet("set-constant", "adblock.check", "noopFunc")
 !
 !
+! https://github.com/uBlockOrigin/uAssets/issues/21665
+tranimaci.com#@#ins.adsbygoogle
 ! https://github.com/AdguardTeam/AdguardFilters/issues/169122
 teknotaci.com#@#[id^="google_ads_iframe"]
 teknotaci.com#%#//scriptlet('prevent-setTimeout', 'placebo.height()')
@@ -1210,6 +1212,7 @@ nefisyemektarifleri.com#%#//scriptlet('set-constant', 'loadPlayerAds', 'trueFunc
 ! https://github.com/AdguardTeam/AdguardFilters/issues/141903
 izlesene.com#%#//scriptlet('set-constant', 'loadPlayerAds', 'trueFunc')
 ! filmizletv*.com - frequently changed domains
+filmizletv2.com,filmizletv3.com,filmizletv4.com,filmizletv5.com,filmizletv6.com,filmizletv7.com,filmizletv8.com,filmizletv9.com,filmizletv10.com,filmizletv11.com,filmizletv12.com,filmizletv13.com,filmizletv14.com,filmizletv15.com,filmizletv16.com,filmizletv17.com,filmizletv18.com,filmizletv19.com,filmizletv20.com,filmizletv.*#%#//scriptlet('set-constant', 'reklam_1', '')
 filmizletv2.com,filmizletv3.com,filmizletv4.com,filmizletv5.com,filmizletv6.com,filmizletv7.com,filmizletv8.com,filmizletv9.com,filmizletv10.com,filmizletv11.com,filmizletv12.com,filmizletv13.com,filmizletv14.com,filmizletv15.com,filmizletv16.com,filmizletv17.com,filmizletv18.com,filmizletv19.com,filmizletv20.com,filmizletv.*#%#//scriptlet('adjust-setInterval', '#rekgecyen', '*', '0.02')
 filmizletv2.com,filmizletv3.com,filmizletv4.com,filmizletv5.com,filmizletv6.com,filmizletv7.com,filmizletv8.com,filmizletv9.com,filmizletv10.com,filmizletv11.com,filmizletv12.com,filmizletv13.com,filmizletv14.com,filmizletv15.com,filmizletv16.com,filmizletv17.com,filmizletv18.com,filmizletv19.com,filmizletv20.com,filmizletv.*#%#//scriptlet('prevent-setTimeout', '/filmizletv\..*\/uploads\/Psk\//')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/140880
@@ -2031,6 +2034,14 @@ $xmlhttprequest,third-party,denyallow=linkvertise.com|fastly.net|statically.io|s
 /service/advertchannels?$xmlhttprequest,redirect=nooptext,domain=mardinhaber.com.tr|gidahatti.com|bolugundem.com
 dirilispostasi.com,turkuazgazetesi.net,yenialanya.com,bugunkocaeli.com.tr,cagdaskocaeli.com.tr,mansetaydin.com,seskocaeli.com,kocaelibarisgazetesi.com,kocaelikoz.com,enkocaeli.com##.block-pano > div.us
 !
+||hdfilmtime.net/337.js
+||fullhdfilmizlebaba.com/ft14.js
+||fullhdfilmizlebaba.com/s-m6.js
+||tranimaci.com/pop.js
+fullhdabifilm.com##div[id^="filmciday"]
+fullhdabifilm.com###wrap > script[type] ~ a[href][title]
+turkanime.co#?#.row > div[class^="col-"]:has(> div.panel > div#sponsored)
+||play.dizigom*.com/jwplayer-*/plugins/vast/v/*/vast.js
 ||sinebaz.com/ads
 fullfilmizle.pro##a[href^="https://tinyurl.com/"]
 vkfilmizlet.com##a[target="_blank"]
@@ -2045,7 +2056,7 @@ dizimom.de##.videoustuheader
 kocuce.com##body > center > a > img[style="max-width: 100%"]
 kocuce.com##.slickModal
 merlininkazani.com##.leader-board-row
-dizimini.com###tv-spoox2 > .frontBgItem
+dizikorea.tv,dizimini.com###tv-spoox2 > .frontBgItem
 ||sinema.cc/demo/prerollvid.php
 diziyou.co##.video > a
 manga-tr.com##.col-lg-4 > div.well3:has(> div.panel > center > a[href="https://medyabayim.com"])
@@ -2661,7 +2672,7 @@ ensonhaber.com##.hd-280[style="text-align: center;"]
 ||hibya.com/bannera*.js
 ||hibya.com/bannerhibya.js
 fullfilmizle.*,altyazilifilmizle3.com##.footer-description
-dizivex.com,evrenselfilm1.com,fullhdfilmcibaba2.com##.footer-info
+fullhdfilmizlebaba.com,dizivex.com,evrenselfilm1.com,fullhdfilmcibaba2.com##.footer-info
 indirmedenfilmizle.vip##.copyright span.footer-description
 siyahfilmizle.pro###footer_q
 turkrus.com##div[class^="relative"]
