@@ -1,9 +1,9 @@
-! Checksum: UCvrowmccsBdFHmkXtMyDQ
-! Diff-Path: ../patches/13/13-s-1703943320-3600.patch
+! Checksum: RONgsAnTjayAU/olzyzacg
+! Diff-Path: ../patches/13/13-s-1704292547-3600.patch
 ! Title: AdGuard Turkish filter
 ! Description: Filter list that specifically removes ads on websites in Turkish language.
-! Version: 2.0.49.18
-! TimeUpdated: 2023-12-30T13:31:16+00:00
+! Version: 2.0.49.23
+! TimeUpdated: 2024-01-03T14:31:30+00:00
 ! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1108,6 +1108,8 @@ technopat.net#%#(function() { var w_open = window.open, regex = /goo.gl/; window
 ! END: Clickunders
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/169729
+yeppuu.com#%#//scriptlet('abort-on-property-write', 'openRandomUrl')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/168503
 ypsd.xyz#%#//scriptlet('set-constant', 'player.vroll', 'noopFunc')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/167825
@@ -1194,8 +1196,6 @@ netsportv158.com#%#//scriptlet('set-constant', 'config.adv', 'emptyObj')
 tabii.com,trtizle.com,ntv.com.tr,tlctv.com.tr,dmax.com.tr,haberturk.com,bloomberght.com,aspor.com.tr,atv.com.tr,beyaztv.com.tr,kanal7.com,kanald.com.tr,showtv.com.tr,startv.com.tr,teve2.com.tr,tv8.com.tr#%#//scriptlet('m3u-prune', '/daioncdn\.net\/.*\/ad\//', '/daioncdn\.net\/.*\.m3u8/')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/148895
 birasyadizi.com#%#//scriptlet('abort-on-property-write', 'onPopUnderLoaded')
-! https://github.com/AdguardTeam/AdguardFilters/issues/148131
-cizgiromanarsivi.com#%#//scriptlet('prevent-addEventListener', 'click', 'check_target')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/146967
 seyredeger.com#%#//scriptlet('abort-on-property-write', 'onPopUnderLoaded')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/146680
@@ -2034,6 +2034,10 @@ $xmlhttprequest,third-party,denyallow=linkvertise.com|fastly.net|statically.io|s
 /service/advertchannels?$xmlhttprequest,redirect=nooptext,domain=mardinhaber.com.tr|gidahatti.com|bolugundem.com
 dirilispostasi.com,turkuazgazetesi.net,yenialanya.com,bugunkocaeli.com.tr,cagdaskocaeli.com.tr,mansetaydin.com,seskocaeli.com,kocaelibarisgazetesi.com,kocaelikoz.com,enkocaeli.com##.block-pano > div.us
 !
+kulaklik.com##.left-right-banner
+mangaoku.info##.c-top-sidebar .separator > a[target="_blank"]
+cheatglobal.com##.notices
+yeppuu.com##footer > p
 ||hdfilmtime.net/337.js
 ||fullhdfilmizlebaba.com/ft14.js
 ||fullhdfilmizlebaba.com/s-m6.js
@@ -2134,7 +2138,7 @@ cumhuriyet.com.tr###sticky-player
 cumhuriyet.com.tr##.col-md-12.mb20[style^="width:100%; aspect-ratio:"]
 sikayetvar.com##.promo-banner
 ||webteizle.live/taxi.js
-cizgiromanarsivi.com,hentaizm.fun##.pa-container
+hentaizm.fun##.pa-container
 hentaizm.fun#?##leftC > .filmborder:has(> .filmcontent > .tam > a:contains(Sponsor Reklam))
 ||bilgenc.com/wp-content/uploads/*-banner.gif
 haberkibris.com#$?#.mansetSlider li:has(img[src*="//haberkibris.com/banner2/"]) { remove: true; }
@@ -2753,10 +2757,8 @@ netspor100.live,netspor1.live,netspor6.live,netspor16.live,netsportv166.com,nets
 tarotscans.com##body > div#footer + p[style="text-align: center;"]
 trwebtoon.com##.page-content > a.links[href]
 ruyamanga.com##.body-wrap > p[style="text-align: center;"]
-cizgiromanarsivi.com###custom_html-45
 fullhdfilmizlett1.com##body > div[id^="filmcidayi"]
 ||cdn.discordapp.com/attachments/*/turkanime_animemmorpg_2022_playforfree3.png
-cizgiromanarsivi.com##.c-top-sidebar
 ||mangacim.com/wp-content/uploads/*/20221207_193639_0000.png
 diziyou.co##.diziyouFooter
 ||diskstore.xyz/*.mp4$domain=diziyou.co
@@ -5087,7 +5089,7 @@ muzikmp3indir.com##div[style="margin:28px"] > center > b > a[href][target="_blan
 ||muzikmp3indir.com/mp3mzk.js
 turkedebiyati.org##.textbox#current[style^="float: left;"]
 sozcukitabevi.com##.banner_wrapper > a[target="_blank"] > img[alt="Sözcü Plus"]
-gazeterize.com,aydinses.com##.splash
+donailfoulardautore.com,gazeterize.com,aydinses.com##.splash
 tesisatmarket.com##.advrs
 tesisatmarket.com##.col-2x > .widget-slider
 08haber.com###reklam2

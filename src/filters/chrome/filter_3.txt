@@ -1,9 +1,9 @@
-! Checksum: k8t4nW4rpsIETKuLrAUWQw
-! Diff-Path: ../patches/3/3-s-1704105694-3600.patch
+! Checksum: HqvaKQhSqWyHIGfdSsIIGA
+! Diff-Path: ../patches/3/3-s-1704314142-3600.patch
 ! Title: AdGuard Tracking Protection filter
 ! Description: The most comprehensive list of various online counters and web analytics tools. Use this filter if you do not want your actions on the Internet to be tracked.
-! Version: 2.0.65.16
-! TimeUpdated: 2024-01-01T10:32:43+00:00
+! Version: 2.0.65.23
+! TimeUpdated: 2024-01-03T20:32:51+00:00
 ! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -103,6 +103,11 @@ spletnik.ru#%#//scriptlet('set-local-storage-item', 'adrcid', '$remove$')
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/169625
+muratorplus.pl#%#//scriptlet('set-constant', 'GemiusPlayer', 'noopFunc')
+muratorplus.pl#%#//scriptlet('set-constant', 'GemiusPlayer.prototype.newProgram', 'noopFunc')
+muratorplus.pl#%#//scriptlet('set-constant', 'GemiusPlayer.prototype.programEvent', 'noopFunc')
+muratorplus.pl#%#//scriptlet('set-constant', 'GemiusPlayer.prototype.setVideoObject', 'noopFunc')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/169415
 jrhokkaido.co.jp#%#//scriptlet('prevent-addEventListener', 'DOMContentLoaded', 'pt_enable')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/169400
@@ -4494,6 +4499,9 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ! Blocking piwik analytics subdomain(for DNS filtering)
 |piwik.
 !
+||rtnl.bxcl.de^
+||analytics.api.justeattakeaway.com^
+||analytics.eip.telegraph.co.uk^
 ||metrics.geekwire.com^
 ||click-performance.assets.rndtech.de^
 ||track.linksynergy.com^
@@ -77466,6 +77474,10 @@ _tracking.php?b=
 /analytics.js$domain=tokyometro.jp|resumes.breakdownexpress.com|techcult.com|inbox.lv|kopeda.com|freexcafe.com|rusvideos.tv|nakubani.ru|lun.com|songsara.net|newsmax.com|bolgehastanesi.com|ewtc.de|newsdig.tbs.co.jp|imore.com|city.kushiro.lg.jp|emeraldbridal.com.au|emarat-news.ae|imobie.jp|tikla.com.tr|rusvideos.porn|jrkyushu.co.jp|amiunique.org|edit.ing|konami.com
 ||assets.adobedtm.com^$domain=mcclatchydc.com|elnuevoherald.com|bellinghamherald.com|sacbee.com|charlotteobserver.com|newsobserver.com|miamiherald.com|ef.ru|algida.com.tr|bmw-motorrad.co.uk|cif.com.tr|clearhaircare.com|domestos.com|dove.com|elidor.com.tr|f1sport.autorevue.cz|geico.com|hellmanns.com.tr|herkessofraya.com|johnsonsbaby.com.tr|lipton.com|lnk.to|lux.com|magnumicecream.com|neutrogena.com.tr|omo.com|rexona.com|samsung.com|sap.com|schwarzkopf.com.tr|signalturkiye.com|msnbc.com|nbcnews.com|kbb.com|eurosport.ru|timgate.it|intermiles.com|oxfordmail.co.uk|spiegel.de|hp.com|deutschepost.de|thebay.com|s.shufoo.net|tsn.ca|tabelog.com|euronews.com|newshub.co.nz|fredmeyer.com|viabcp.com|carsales.com.au|falabella.com|aarp.org|thehill.com|realtor.com|nzherald.co.nz|aia.com.ph|baynews9.com
 !
+||cdn.gravitec.media/track.min.js
+||events.*/takeaway/takeaway.com/*/*.gif$domain=thuisbezorgd.nl|takeaway.com|just-eat.ch|lieferando.at|lieferando.de|just-eat.fr|pyszne.pl|just-eat.dk|just-eat.no
+||cf.eip.telegraph.co.uk/particle-embed/js/particle.js
+||tinhte.vn/appforo/index.php?tinhte-analytics/
 ||indeed.com/m/rpc/frontendlogging
 ||androidpolice.com/an-strpixel.png
 ||atlas.rambler.ru/metrics
@@ -83534,6 +83546,12 @@ inapps.appsflyersdk.com^
 ! For platforms which do not support $redirect rules
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/169319
+@@||easyupload.io/cdn-cgi/zaraz/s.js
+! https://github.com/AdguardTeam/AdguardFilters/issues/169590
+@@||dlswbr.baidu.com/heicha/mw/abclite-$domain=haoma.baidu.com,script
+! https://github.com/AdguardTeam/AdguardFilters/issues/169625
+||idm.hit.gemius.pl/gplayer.js$script,redirect=gemius,domain=muratorplus.pl
 ! https://github.com/AdguardTeam/AdguardFilters/issues/169338
 @@||rmcpay.com/js/google-analytics.js|
 ! https://github.com/AdguardTeam/AdguardFilters/issues/169400
