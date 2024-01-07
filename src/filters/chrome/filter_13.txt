@@ -1,9 +1,9 @@
-! Checksum: RONgsAnTjayAU/olzyzacg
-! Diff-Path: ../patches/13/13-s-1704292547-3600.patch
+! Checksum: KpPnRnB6Y9ZNgVUwf7QCWw
+! Diff-Path: ../patches/13/13-s-1704479756-3600.patch
 ! Title: AdGuard Turkish filter
 ! Description: Filter list that specifically removes ads on websites in Turkish language.
-! Version: 2.0.49.23
-! TimeUpdated: 2024-01-03T14:31:30+00:00
+! Version: 2.0.49.28
+! TimeUpdated: 2024-01-05T18:31:48+00:00
 ! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -86,6 +86,7 @@
 ! Bad: ||adssubdomain.legitwebsite.com^ (should be in adservers_firstparty.txt)
 !
 !
+||srvd2204.com^
 ||cryptosmoke.care^$third-party
 ||intermediaworks.com^$third-party
 ||rtb.pixad.com.tr^
@@ -483,6 +484,8 @@ zamaninvarken.com,kredi.biz.tr,kriptoradar.com,morlevha.com,bakimlikadin.net,kor
 iyibeslenme.net,teknop.net,kirtkirtla.com,buneymis.net,ozgunbilgi.com#%#//scriptlet("set-constant", "adblock.check", "noopFunc")
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/169961
+dentalilan.com#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
 ! https://github.com/uBlockOrigin/uAssets/issues/21665
 tranimaci.com#@#ins.adsbygoogle
 ! https://github.com/AdguardTeam/AdguardFilters/issues/169122
@@ -760,18 +763,9 @@ gezenbilir.com#%#window.samDetected = false;
 ! https://github.com/AdguardTeam/AdguardFilters/issues/22687
 @@||haberturk.com/scripts/ads.js
 ! https://github.com/AdguardTeam/AdguardFilters/issues/21867
-! https://github.com/AdguardTeam/AdguardFilters/issues/21485
-bursverenkurumlar.com#@#.an-sponsored
-bursverenkurumlar.com#@#.an-advert-banner
 ! https://github.com/AdguardTeam/AdguardFilters/issues/21016
-! https://github.com/AdguardTeam/AdguardFilters/issues/20401
-dijitalteknoloji.net#@#.an-advert-banner
-dijitalteknoloji.net#@#.an-sponsored
 ! https://github.com/AdguardTeam/AdguardFilters/issues/19960
 @@||bolgegundem.com/s/advertisement.js
-! https://github.com/AdguardTeam/AdguardFilters/issues/19872
-fmhikayeleri.com#@#.an-sponsored
-fmhikayeleri.com#@#.an-advert-banner
 ! https://github.com/AdguardTeam/AdguardFilters/issues/116484
 @@||forum.miuiturkiye.net/js/s7pqm/*.js
 ! https://github.com/AdguardTeam/AdguardFilters/issues/17095
@@ -2025,6 +2019,9 @@ oyundunyasi.net,bilgenc.com,teknodiot.com,ruyashoujo.com,pchocasi.com.tr,dusunce
 ! Incorrectly blocked domains can be excluded using regex(synchronize this regexp in all filters)
 /^(?!.*(statically.io|sharecast.ws|bunnycdn.ru|bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|cdn.staticfile.org|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yandex.|yastatic.net|ytimg.com|zencdn.net|player|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com|imgsmail.ru)).*$/$third-party,script,_____,domain=erotik-film.org|pollos.cyou|dizigom.tv|fullindirsene.net|ehliyetsinavsorulari.org
 !
+! Similar to regexp above, but using the denyallow modifier
+! Be careful, if a site uses third-party resources (players etc.) and the rule applied in AdGuard for Safari/iOS
+$script,third-party,denyallow=linkvertise.com|fastly.net|statically.io|sharecast.ws|bunnycdn.ru|bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|cdn.staticfile.org|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yastatic.net|ytimg.com|zencdn.net|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com|fastcomments.com|plyr.io,_____,domain=dizigom1.com
 ! Similar to regexp above, but using the denyallow modifier and for xmlhttprequest
 $xmlhttprequest,third-party,denyallow=linkvertise.com|fastly.net|statically.io|sharecast.ws|bunnycdn.ru|bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|cdn.staticfile.org|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yastatic.net|ytimg.com|zencdn.net|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com|fastcomments.com|plyr.io,_____,domain=ruyamanga.com
 !
@@ -2034,6 +2031,8 @@ $xmlhttprequest,third-party,denyallow=linkvertise.com|fastly.net|statically.io|s
 /service/advertchannels?$xmlhttprequest,redirect=nooptext,domain=mardinhaber.com.tr|gidahatti.com|bolugundem.com
 dirilispostasi.com,turkuazgazetesi.net,yenialanya.com,bugunkocaeli.com.tr,cagdaskocaeli.com.tr,mansetaydin.com,seskocaeli.com,kocaelibarisgazetesi.com,kocaelikoz.com,enkocaeli.com##.block-pano > div.us
 !
+dentalilan.com##p[style="text-align: center;"] > a[target="_blank"] > img
+dizigom1.com##ins[class][data-key]
 kulaklik.com##.left-right-banner
 mangaoku.info##.c-top-sidebar .separator > a[target="_blank"]
 cheatglobal.com##.notices
@@ -2396,7 +2395,6 @@ sinekolik.com##a[href^="https://bit.ly/"]
 ||image.fanatik.com.tr/i/fanatik/75/770x0/657c5980df15856dfa0626de.jpg
 teknoloji.org##.inside-right-sidebar > aside.widget_custom_html
 turkiyegazetesi.com.tr##div[id^="dfp-masthead-infinity-"]
-turkiyegazetesi.com.tr##.widget_General_Advert_GooglePublisherTags
 turkiyegazetesi.com.tr##div[style="display:flex; justify-content: space-around; min-height:280px; margin-top: 20px; margin-bottom: 20px;"]
 trwebtoon.com##a[href="https://medyapanel.net/"]
 plastikciyiz.biz##.smaller
@@ -2446,7 +2444,7 @@ sokgazetesi.com.tr##div[style="height:262px;"]
 sokgazetesi.com.tr,fotospor.com##div[style="height:330px;"][class^="flex"]
 sokgazetesi.com.tr,fotospor.com##div[style^="margin-bottom:20px;text-align:center;height:262px"]
 nedir.org##div[data-ad]
-iha.com.tr,tgrthaber.com.tr##div[id^="widget_General_Advert_"]
+turkiyegazetesi.com.tr,mavikadin.com,iha.com.tr,tgrthaber.com.tr##div[id^="widget_General_Advert_"]
 tvaktuel.com##.theiaStickySidebar > div.adsWidget ~ div.nativeWidget
 oyunmoduindir.com##.optional-url-cnt > img
 oyunmoduindir.com##.optional-url-cnt > a[onclick][rel="nofollow"][title]
@@ -2457,12 +2455,10 @@ itemci.com##.modal-backdrop
 itemci.com##div[class^="bg_rek_"]
 itemci.com##img[src^="https://cdn.itemci.com/storage/images/rek/"]
 yenibiris.com##.rightColumnForLarge > div.well.p0
-||fullhdizle.me/wp-content/uploads/*/melbet.gif
-||fullhdizle.me/wp-content/uploads/*/tophill.jpg
-/wp-content/uploads/*.mp4$domain=fullhdizle.me|dizifilmbox.*|fullhdizle.one
+/wp-content/uploads/*.mp4$domain=fullhdizle.*|dizifilmbox.*
 ||dizifilmbox.*/wp-content/uploads/*/bet*.gif
-fullhdizle.me,dizifilmbox.*##.bireklam
-fullhdfilmizlesenebox.net,fullhdizle.me##.player-ustu-metin
+fullhdizle.*,dizifilmbox.*##.bireklam
+fullhdfilmizlesenebox.net,fullhdizle.*##.player-ustu-metin
 dizifilmbox.*##a[target="_blank"] > img[width="100%"][height="100%"]
 dizifilmbox.*,fullhdizle.*###footer-fixed
 ||hdfilmhit.org/wp-content/uploads/*/videoonu.mp4
@@ -2532,7 +2528,6 @@ ekonomist.com.tr##.hide-mobile[style*="min-height: 250px;"]
 ekonomist.com.tr##.hide-mobile[style^="min-width:"][style*="min-height:"]
 ensonhaber.com###splashmodal
 ||ggcloud.cfd/betkanyon.js
-asyaanimeleri.com###overplay
 hdfilmseyircisi.org###header_sol
 hdfilmseyircisi.org###header_sag
 hdfilmseyircisi.org###spnsr5desktop
@@ -2911,7 +2906,6 @@ hepsiemlak.com##.listing-top-banner
 emlakjet.com##._3wHMMW
 emlakjet.com##.-JTEJb
 internethaber.com##a[href^="https://pubads.g.doubleclick.net/"]
-mavikadin.com##.widget_General_Advert_HomePageskin
 mavikadin.com###dfp-homepage-masthead-container
 tgrthaber.com.tr,mavikadin.com##div[id^="dfp-kare"]
 tgrthaber.com.tr,mavikadin.com##.advert-desktop
@@ -6066,6 +6060,8 @@ isguc.org##td[width="200"] a[target="_blank"] img[width="200"][alt]
 ||vidout.net/vidoutMedia/ads/
 ||bolununsesi.com/ilangorsel/
 !
+! asyaanimeleri*.com - frequently changed domains
+asyaanimeleri01.com,asyaanimeleri02.com,asyaanimeleri03.com,asyaanimeleri04.com,asyaanimeleri05.com,asyaanimeleri06.com###overplay
 ! ugurfilm*.com - frequently changed domains
 ugurfilm7.com,ugurfilm8.com,ugurfilm9.com,ugurfilm10.com,ugurfilm11.com,ugurfilm12.com,ugurfilm13.com,ugurfilm14.com,ugurfilm15.com,ugurfilm16.com#$?#body > header { margin-bottom: 0 !important; }
 ugurfilm7.com,ugurfilm8.com,ugurfilm9.com,ugurfilm10.com,ugurfilm11.com,ugurfilm12.com,ugurfilm13.com,ugurfilm14.com,ugurfilm15.com,ugurfilm16.com##a[href="https://ucuncusinema.com/"]

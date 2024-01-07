@@ -1,9 +1,9 @@
-! Checksum: HqvaKQhSqWyHIGfdSsIIGA
-! Diff-Path: ../patches/3/3-s-1704314142-3600.patch
+! Checksum: v0DsmdUuBLa03n5PMgMa0g
+! Diff-Path: ../patches/3/3-s-1704537351-3600.patch
 ! Title: AdGuard Tracking Protection filter
 ! Description: The most comprehensive list of various online counters and web analytics tools. Use this filter if you do not want your actions on the Internet to be tracked.
-! Version: 2.0.65.23
-! TimeUpdated: 2024-01-03T20:32:51+00:00
+! Version: 2.0.65.38
+! TimeUpdated: 2024-01-06T10:32:59+00:00
 ! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -103,6 +103,9 @@ spletnik.ru#%#//scriptlet('set-local-storage-item', 'adrcid', '$remove$')
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/169949
+! Fixes video player
+nbcsports.com#%#//scriptlet('prevent-element-src-loading', 'script', 'sb.scorecardresearch.com')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/169625
 muratorplus.pl#%#//scriptlet('set-constant', 'GemiusPlayer', 'noopFunc')
 muratorplus.pl#%#//scriptlet('set-constant', 'GemiusPlayer.prototype.newProgram', 'noopFunc')
@@ -254,12 +257,6 @@ cbssports.com#%#(()=>{window.admiral=function(d,a,b){if("function"==typeof b)try
 6play.fr#%#//scriptlet('set-local-storage-item', 'localDeviceId', '0')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/131034
 imdb.com#%#//scriptlet("set-constant", "doWithAds", "noopFunc")
-! This rule is for suppressing Google Topics.
-! Read more about it here:
-! https://developer.chrome.com/docs/privacy-sandbox/topics/
-! TODO: replace with the 'no-topics' scriptlet later: https://github.com/AdguardTeam/Scriptlets/issues/214
-! #%#//scriptlet('no-topics')
-#%#//scriptlet('set-constant', 'Document.prototype.browsingTopics', 'undefined')
 ! https://github.com/AdguardTeam/AdguardFilters/pull/133054
 fmkorea.com#%#//scriptlet("set-constant", "link_url", "")
 ! https://github.com/AdguardTeam/AdguardFilters/pull/130514
@@ -410,6 +407,27 @@ citypizza.ru#%#window.yaCounter9890803 = { reachGoal: function() {} };
 apteka.ru#%#window.yaCounter14913877={ reachGoal: function() {} };
 ! https://forum.adguard.com/index.php?threads/resolved-accountkiller-com.16162/
 accountkiller.com#%#window.ga = function(){var a = arguments[5];a&&a.hitCallback&&a.hitCallback();}
+!
+! Start: Rules for Google "Privacy" Sandbox
+!
+! Suppressing Google's Topics API:
+! https://developers.google.com/privacy-sandbox/relevance/topics
+#%#//scriptlet('no-topics')
+!
+! Suppressing Google's "Protected" Audience API:
+! https://wicg.github.io/turtledove/
+! TODO: Add a scriptlet: https://github.com/AdguardTeam/Scriptlets/issues/395
+!
+! Suppressing both Google's Topics API and Topics API using Permissions policy
+! Works in CoreLibs-based AdGuard versions, the browser extension waits for https://github.com/AdguardTeam/tsurlfilter/issues/66
+! Part with "://*.*" before "$permissions=" is required, otherwise it will be marked as too wide rule
+! AGLint temporarily disabled for this rule due to https://github.com/AdguardTeam/AGLint/issues/191
+! TODO: Enable it back when AGLint is fixed.
+! aglint-disable-next-line
+://*.*$permissions=join-ad-interest-group=()\, run-ad-auction=()\, browsing-topics=()
+!
+! End: Rules for Google "Privacy" Sandbox
+!
 !-------------------
 !-------CSS---------
 !
@@ -524,6 +542,7 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 !
 !
 !
+||trk.a-dsp.com^
 ||metrics.plaid.com^
 ||api.iterable.com^
 ||t.arcade.show^
@@ -4348,6 +4367,16 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ||zoossoft.net^$third-party
 ||zqtk.net^$third-party
 !
+! Bright Data
+||bright-sdk.com^
+||brightdata.com^$third-party
+||brightdata.de^$third-party
+||perr.l-agent.me^
+||perr.l-err.biz^
+||brdtest.com^
+||brdtnet.com^
+||luminati.io^
+!
 ! relateddigital.com domains
 ||visilabs.com^$third-party
 ||visilabs.net^$third-party
@@ -4499,6 +4528,10 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ! Blocking piwik analytics subdomain(for DNS filtering)
 |piwik.
 !
+||trk.tirto.id^
+||prdwebcollector.ruetracking.com^
+||analytics-api.invideo.io^
+||tr.staff-start.com^
 ||rtnl.bxcl.de^
 ||analytics.api.justeattakeaway.com^
 ||analytics.eip.telegraph.co.uk^
@@ -39082,7 +39115,7 @@ charlestownwyllie.oaklawnnonantum.com^
 ||favor1.fractal.jp^
 ||video.sp.gmossp-sp.jp^
 !
-! GoDaddy : ads.bid disguised trackers
+! GoDaddy : ads2.bid disguised trackers
 ! included to BaseFilter/sections/cname_adservers.txt
 !
 ! Ingenious Technologies : affex.org disguised trackers
@@ -76964,8 +76997,8 @@ zelda.paperlesspost.com$image
 /wp-statistics/assets/js/tracker.js
 /wp-content/plugins/s2f-referral-tracking/*
 /swlapi/stats|
-.com/stats?t=$xmlhttprequest
-.net/stats?t=$xmlhttprequest
+.com/api/stats?t=$xmlhttprequest,ping
+.net/api/stats?t=$xmlhttprequest,ping
 /wp-content/plugins/flying-analytics/*
 /sayacff.html
 /share/js/gAnalytics.js
@@ -77474,6 +77507,10 @@ _tracking.php?b=
 /analytics.js$domain=tokyometro.jp|resumes.breakdownexpress.com|techcult.com|inbox.lv|kopeda.com|freexcafe.com|rusvideos.tv|nakubani.ru|lun.com|songsara.net|newsmax.com|bolgehastanesi.com|ewtc.de|newsdig.tbs.co.jp|imore.com|city.kushiro.lg.jp|emeraldbridal.com.au|emarat-news.ae|imobie.jp|tikla.com.tr|rusvideos.porn|jrkyushu.co.jp|amiunique.org|edit.ing|konami.com
 ||assets.adobedtm.com^$domain=mcclatchydc.com|elnuevoherald.com|bellinghamherald.com|sacbee.com|charlotteobserver.com|newsobserver.com|miamiherald.com|ef.ru|algida.com.tr|bmw-motorrad.co.uk|cif.com.tr|clearhaircare.com|domestos.com|dove.com|elidor.com.tr|f1sport.autorevue.cz|geico.com|hellmanns.com.tr|herkessofraya.com|johnsonsbaby.com.tr|lipton.com|lnk.to|lux.com|magnumicecream.com|neutrogena.com.tr|omo.com|rexona.com|samsung.com|sap.com|schwarzkopf.com.tr|signalturkiye.com|msnbc.com|nbcnews.com|kbb.com|eurosport.ru|timgate.it|intermiles.com|oxfordmail.co.uk|spiegel.de|hp.com|deutschepost.de|thebay.com|s.shufoo.net|tsn.ca|tabelog.com|euronews.com|newshub.co.nz|fredmeyer.com|viabcp.com|carsales.com.au|falabella.com|aarp.org|thehill.com|realtor.com|nzherald.co.nz|aia.com.ph|baynews9.com
 !
+||jsdelivr.net/npm/navigator.sendbeacon
+||djuf7jb483wz1.cloudfront.net/p/l.jpg
+||gvm.com.tw/tracker/view
+||avivid.likr.tw/api/ring_only_tracking.min.js
 ||cdn.gravitec.media/track.min.js
 ||events.*/takeaway/takeaway.com/*/*.gif$domain=thuisbezorgd.nl|takeaway.com|just-eat.ch|lieferando.at|lieferando.de|just-eat.fr|pyszne.pl|just-eat.dk|just-eat.no
 ||cf.eip.telegraph.co.uk/particle-embed/js/particle.js
@@ -82233,6 +82270,8 @@ $cookie=bf_visit
 ! Bad:  ||monerominer.rocks^$third-party (should be in adservers.txt)
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/169629
+||tvnoviny.sk^$cookie=MS_PPID
 ! rnd.de - analytics
 ||rnd.de^$cookie=__vads
 ! https://github.com/AdguardTeam/AdguardFilters/issues/169286
@@ -83546,6 +83585,15 @@ inapps.appsflyersdk.com^
 ! For platforms which do not support $redirect rules
 !
 !
+! https://github.com/easylist/easylist/issues/18198
+abema.tv#%#//scriptlet('remove-node-text', 'script', 'NREUM')
+@@||bam.nr-data.net^$xmlhttprequest,domain=abema.tv
+@@||js-agent.newrelic.com^$script,domain=abema.tv
+! https://github.com/AdguardTeam/AdguardFilters/issues/169735
+@@||giraff.io^$domain=vs.lv
+! https://github.com/AdguardTeam/AdguardFilters/issues/169949
+! Fixes video player
+||sb.scorecardresearch.com/*/streamingtag_plugin_jwplayer.js$script,redirect=noopjs,domain=nbcsports.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/169319
 @@||easyupload.io/cdn-cgi/zaraz/s.js
 ! https://github.com/AdguardTeam/AdguardFilters/issues/169590
@@ -84618,8 +84666,6 @@ ntp.msn.com#@%#navigator.getBattery = undefined;
 @@||muumuu-domain.com/common/js/ga_social_tracking.js
 ! cw.com.tw - incorrect blocking - fixing video player (at the bottom)
 ! Example link - https://www.cw.com.tw/article/5119022
-! https://www.reddit.com/r/uBlockOrigin/comments/r4z0zj/how_to_unblock_elements_tweets_blocked_by_jsnofloc/
-@@||googletagmanager.com/gtm.js$script,domain=insideevs.com
 ! https://github.com/uBlockOrigin/uAssets/issues/10629
 ||cxense.com/cx.js$script,redirect=noopjs,domain=nlab.itmedia.co.jp,important
 @@||cxense.com/cx.js$domain=nlab.itmedia.co.jp
