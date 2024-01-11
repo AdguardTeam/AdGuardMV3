@@ -1,9 +1,9 @@
-! Checksum: 9OoD+Zy9OsCNA0hVuqI4Dw
-! Diff-Path: ../patches/16/16-s-1704710916-3600.patch
+! Checksum: 6YdIRwOhlESPHCMsb2l6lg
+! Diff-Path: ../patches/16/16-s-1704904570-3600.patch
 ! Title: AdGuard French filter
 ! Description: Liste FR + AdGuard French filter. Filter list that specifically removes ads on websites in French language.
-! Version: 2.0.42.78
-! TimeUpdated: 2024-01-08T10:32:05+00:00
+! Version: 2.0.42.80
+! TimeUpdated: 2024-01-10T16:32:14+00:00
 ! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -736,6 +736,8 @@ tf1info.fr#%#//scriptlet('set-constant', '__NEXT_DATA__.runtimeConfig.playerTF1.
 !------- CSS fixes --------------------!
 !--------------------------------------!
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/170093
+linternaute.com,journaldunet.com#$#@media (min-width: 1024px) { .layout--offcanvas { top: 100px !important; } }
 ! systemed.fr - blank space at the top
 systemed.fr#$#html >body.hasHabillage { padding-top: 0 !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/166761
@@ -840,6 +842,9 @@ $script,third-party,denyallow=fastly.net|statically.io|sharecast.ws|bunnycdn.ru|
 !
 !
 !
+commentcamarche.net##.sticky-zone
+commentcamarche.com,commentcamarche.net,journaldunet.com##div[id^="ctn_"]
+jeux-gratuits.com##div[class^="placeholder_"]
 la-croix.com##.banner-offer__wrapper
 science-et-vie.com###top_intro_article > .viously-player
 revolution-energetique.com#?#main > div[style]:has(> div.container div.row > div[id^="optidigital-adslot"])
@@ -2148,11 +2153,6 @@ forodecostarica.com#@##ad_global_below_navbar
 ||script.hentaicdn.com/cdn/*/core/js/arf-$badfilter
 ! https://github.com/AdguardTeam/AdguardFilters/issues/54910
 @@||static.stormwall.pro^$domain=zone-annuaire.com
-! https://github.com/AdguardTeam/AdguardFilters/issues/54195
-@@||astatic.ccmbg.com/fc/js/prebid?v=$domain=sante.journaldesfemmes.fr
-@@||dpm.zebestof.com/*/tag.js$domain=sante.journaldesfemmes.fr
-! https://github.com/AdguardTeam/AdguardFilters/issues/54195
-@@||c.amazon-adsystem.com/aax2/apstag.js$domain=sante.journaldesfemmes.fr
 ! https://github.com/AdguardTeam/AdguardFilters/issues/126517
 /redirect/cpa/*$popup,badfilter
 ! https://github.com/AdguardTeam/AdguardFilters/issues/53109
@@ -2498,11 +2498,6 @@ alfresco-holidays.com,alfresco-holidays.nl,alfresco-camping.de,eurocamp.co.uk#@#
 @@||template-help.com^$domain=templatemonster.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/38213
 ! Fixing WordPress auth
-! https://github.com/AdguardTeam/AdguardFilters/issues/6433
-@@||p.ccmbg.com/media/index.php$domain=linternaute.com
-@@||player.ooyala.com/*api/$domain=linternaute.com
-@@||player.ooyala.com/static/$domain=linternaute.com
-@@||damoh.linternaute.com^$domain=linternaute.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/6603
 @@||kweb.videostep.com^$domain=jeanmarcmorandini.com
 ! https://forum.adguard.com/index.php?threads/24295/

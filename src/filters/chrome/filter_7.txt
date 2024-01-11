@@ -1,9 +1,9 @@
-! Checksum: FGdHUvxCqWNUzPbROsd8sQ
-! Diff-Path: ../patches/7/7-s-1704720959-3600.patch
+! Checksum: UKdWj5WsItKNV7QgPfedWg
+! Diff-Path: ../patches/7/7-s-1704958587-3600.patch
 ! Title: AdGuard Japanese filter
 ! Description: Filter that enables ad blocking on websites in Japanese language.
-! Version: 2.0.47.37
-! TimeUpdated: 2024-01-08T13:33:25+00:00
+! Version: 2.0.47.46
+! TimeUpdated: 2024-01-11T07:33:46+00:00
 ! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -92,6 +92,7 @@
 ! not for DNS
 ||ias.rakuten.co.jp^$third-party,domain=~rakuten-co.jp
 !
+||seo.linel.top^
 ||compass-fit.jp^$third-party
 ||gs-ad.jp^
 ||afi-thor.com^$third-party
@@ -1478,11 +1479,14 @@ hostlove.com#$##index_nav > h1 { padding-top: 30px!important; }
 /wp-content/themes/CashLINESystem/js/modal.$script
 !
 ! Malware/Phishing
+://amzone.co.jp.$document
+/?*=+81(050)-$document
+://access-mericairi.$document,domain=cn
+://janlan-net.*.com/$document
 /?m=000&t=000&ip=$document
-://www.aeon-co-jp.$document,domain=asia|life|top|work
+://www.aeon-co-jp.$document
 ://jp-safebgt-$document,domain=s3.ap-southeast-1.amazonaws.com
 /ap/sign.php?authenticated=true&openid%2Fgp%2Fsignin%2Fx%26i%3Da%26oauth%3Dm%26i%3Fie%3DUTF8%26ref_%3Drhf_custrec_signin^$document,domain=best
-||s3.us-west-2.amazonaws.com/*/index%25%$document
 /g?visitorid=*&extra_data2=|$document
 ||amplifyapp.com/*=(0101)-$document
 .xyz/loginone.php?do?$document
@@ -1491,7 +1495,7 @@ hostlove.com#$##index_nav > h1 { padding-top: 30px!important; }
 .cfd/*?_t=$document
 &p=*&_mi|$document,domain=top
 .com/ibg/client/*.php|$document
-://smdc-*.fit/$document
+://smdc-$document,domain=cn|fit
 ://tokyodisney.*.com/*?lang=ja^$document
 .click/mac/^$document
 .click/win/^$document
@@ -1657,6 +1661,17 @@ gundamlog.com###more > iframe[src^="https://richlink.blogsys.jp"]
 !
 !
 !
+fighters-kingdom.blog.jp##.plugin-memo:has(> div.side > script[src^="https://js.ad-optima.com/"])
+r18blog.com##.plugin_right:has(> div > div.plugin-freearea > div > a[href*="al.dmm.co"])
+erocommu.jp##.sidebar:has(> div > div.plugin-freearea > a[href*="e-nls.com/access.php"])
+hametaro.net##.sidemenu_content:has(> div.plg_body > div.plugin-freearea > a[href="https://superfreesex.blog.2nt.com/"])
+||cross-way.net/market-value/wp-content/uploads/2023/12/banner.png$third-party
+doujin-master.fc2.xxx###l-sidecontents > aside.plugin_first:first-child
+motimoti3d.jp###sidemenu > span:first-child
+motimoti3d.jp##.fc2_footer + br + span
+teradas.net##.sticky-container
+teradas.net##.ads-statement
+suresuta.jp##div[class^="adsbox"]
 fujitv-view.jp###footer-overlay-ad
 hozonv.com##.responsibe-ad-wrap
 i-like-seen.com##.entry-content > div.box26
@@ -3221,7 +3236,7 @@ how-to-sexfriends.com##.no-icon[href^="http://www.sfc.bz/"] > img
 how-to-sexfriends.com##.no-icon[href^="http://www.ultiga.jp/"] > img
 sumahoinfo.net,ukemi-no-kiwami.work##.widget-below-sns-buttons
 ukemi-no-kiwami.work##a[href="https://chatreze.net/article/mamisc/"]
-hadakanonude.com,exploader.net,ukemi-no-kiwami.work##a[href^="https://al.dmm.co.jp/"]
+the-3rd.net,hadakanonude.com,exploader.net,ukemi-no-kiwami.work##a[href^="https://al.dmm.co.jp/"]
 kodate-ru.com,sumu-lab.com,sumu-log.com##.respnsvad
 520call.me,video.520cc.cc###inplayer
 sutekicookan.com##.e-wiki_middle_responsive_kk_conf
@@ -4735,7 +4750,7 @@ news.ameba.jp##div[class^="SpAd"]
 huffingtonpost.jp##.leaderboard-flex-placeholder
 macaro-ni.jp##.articleShow__nativeAd
 macaro-ni.jp##.yadsOverlay
-mitok.info,entamega.com,getnews.jp,webcartop.jp##div[style="min-height: 250px;"]
+ac-illust.com,photo-ac.com,mitok.info,entamega.com,getnews.jp,webcartop.jp##div[style="min-height: 250px;"]
 response.jp,getnews.jp,withonline.jp,jprime.jp##div[style="min-height:250px;"]
 otajo.jp##iframe[src^="https://rcm-jp.amazon.co.jp/e/cm?"]
 2chmatome2.jp###gn_overlay_wrapper
@@ -5613,7 +5628,7 @@ holosoku.com,erokune.com,sukesuke-mile-kojiki.net###custom_html-27
 sukesuke-mile-kojiki.net,daeudaeu.com,bodymate.jp###custom_html-28
 sumahodata.com,sanabo.com###custom_html-29
 dennosokuho.com,designoma.com,sanabo.com###custom_html-30
-dennosokuho.com,sasebo2.com###custom_html-31
+suresuta.jp,dennosokuho.com,sasebo2.com###custom_html-31
 dennosokuho.com,ff14.playguide2.net###custom_html-32
 uma-log.net,e-countries.com,momojirinouen.com###custom_html-33
 e-countries.com###custom_html-34

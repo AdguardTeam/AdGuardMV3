@@ -1,9 +1,9 @@
-! Checksum: EjbGvRVIq8oJJdE1zKxFmA
-! Diff-Path: ../patches/13/13-s-1704749744-3600.patch
+! Checksum: 9eZK99k2QdlivB40a+elbw
+! Diff-Path: ../patches/13/13-s-1704915371-3600.patch
 ! Title: AdGuard Turkish filter
 ! Description: Filter list that specifically removes ads on websites in Turkish language.
-! Version: 2.0.49.34
-! TimeUpdated: 2024-01-08T21:31:38+00:00
+! Version: 2.0.49.41
+! TimeUpdated: 2024-01-10T19:31:53+00:00
 ! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1102,6 +1102,11 @@ technopat.net#%#(function() { var w_open = window.open, regex = /goo.gl/; window
 ! END: Clickunders
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/170123
+mgviagrtoomuch.com#%#//scriptlet('set-constant', 'window.config.adv.enabled', '0')
+mgviagrtoomuch.com#%#//scriptlet('set-constant', 'window.config.match.watermark', '')
+! https://github.com/AdguardTeam/AdguardFilters/issues/170076
+mislink3.com#%#//scriptlet('trusted-replace-node-text', 'script', 'saniye--', 'var saniye = 10;', 'var saniye = 0;')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/169729
 yeppuu.com#%#//scriptlet('abort-on-property-write', 'openRandomUrl')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/168503
@@ -2006,7 +2011,7 @@ lidergazete.com,bilecik11.com,liderbursa.com,mebehliyetsinavsorulari.com,haberle
 ! ##.rkm
 kocaelikoz.com,elbistaninsesi.com,gunaydinduzce.com,medyabaskent.com,bolugundem.com,duzceparantez.com,turkuazgazetesi.net,gaziantepgunes.com,mardinhaber.com.tr,gidahatti.com,ajansurfa.com,sigortahaber.com,ozgunkocaeli.com.tr,karamandan.com,olaymedya.com,kocaelifikir.com,dirilispostasi.com,kocaelidenge.com,kocaelibarisgazetesi.com,nevsehirkenthaber.com,gazianteptime.com.tr,canlihaber.com,rhaajans.com,nazillipost.com,spor264.com.tr,geyvelim.com,hbrcaldiran.com,nnchaber.com,turkiyehaberi.com,habertakvimi.com,yesilgiresun.com.tr,ozgurkocaeli.com.tr,buyukkocaeli.com.tr,vanhavadis.com,kpsscafe.com.tr,forapost.com,okuhaber.com,akyazi.net,cagdaskocaeli.com.tr,haberlerankara.com,seskocaeli.com,kocaelizirve.com,yenialanya.com,t54.com.tr,haber266.com,safihaber.com,nazilliadalet.com,bizimyaka.com,akdeniztelgraf.com,ispartamhaber.com,haberhurriyeti.com,mercekhabergazetesi.com,gaziantepinhabercisi.com,gurbettekierzurum.com.tr,haberaydin.com,lidergazetesi.com,haberso.com,aydingazetesi.com,aydinyenihaber.com,haber28.com,netgaste.com,sakaryadanhaber.com,erzurumhaber.com.tr,yenidevir.com.tr,golcukgundem.com,elbistanolay.com,cthaber.com,mihraphaber.com,pamukovahalk.com,medyabar.com,bgazete.com.tr,kartepegazetesi.com.tr,istekocaeli.com,mansetaydin.com,sesgazetesi.com.tr,bugunkocaeli.com.tr,kocaeligazetesi.com.tr,milligazete.com.tr,tanisgazetesi.com.tr,elbistankaynarca.com,guncelkocaeli.com,enkocaeli.com##.rkm
 ! ##.ad
-korkusuz.com.tr,szctv.com.tr,bursa.com,sozcu.com.tr,megahaber27.com,yemektarifleri.org,lifebursa.com,mshowto.org,macizlee.ne,dunyaatlasi.com,ensonhaber.com,gayrimenkulhaber.com,internethaber.com,gercekgundem.com,cevapla.tv,cinemadran.com,ranini.tv,oggito.com,kocaeligazetesi.com.tr,rumma.org,kitaptansanattan.com,aydindenge.com.tr,gecmisgazete.com##.ad
+korkusuz.com.tr,szctv.com.tr,bursa.com,sozcu.com.tr,megahaber27.com,yemektarifleri.org,lifebursa.com,mshowto.org,dunyaatlasi.com,ensonhaber.com,gayrimenkulhaber.com,internethaber.com,gercekgundem.com,cevapla.tv,cinemadran.com,ranini.tv,oggito.com,kocaeligazetesi.com.tr,rumma.org,kitaptansanattan.com,aydindenge.com.tr,gecmisgazete.com##.ad
 ! ##div[id^="ad_"]
 halk54.com,habereguven.com,pusulagazetesi.com.tr,iscihaber.net,gulsehir.com,aydinpost.com,jethaber.com.tr,yenisakarya.com,megabayt.com,haberlobi.com,yenimalatya.com.tr,gelirkapisi.com##div[id^="ad_"]
 ! ##.stream-item
@@ -2031,6 +2036,12 @@ $xmlhttprequest,third-party,denyallow=linkvertise.com|fastly.net|statically.io|s
 /service/advertchannels?$xmlhttprequest,redirect=nooptext,domain=mardinhaber.com.tr|gidahatti.com|bolugundem.com
 dirilispostasi.com,turkuazgazetesi.net,yenialanya.com,bugunkocaeli.com.tr,cagdaskocaeli.com.tr,mansetaydin.com,seskocaeli.com,kocaelibarisgazetesi.com,kocaelikoz.com,enkocaeli.com##.block-pano > div.us
 !
+||donailfoulardautore.com/dosyalar/
+/videojs8/nuevo.min.js$domain=etlorotogo.com|brusti.one
+/videojs/plugins/vastpro.js$domain=etlorotogo.com|brusti.one
+||etlorotogo.com/mobil/sitem.js
+mislink3.com###reklamlar center
+mgviagrtoomuch.com##div[style^="bottom:0;height:50px;"]
 fanatik.com.tr##img[src="https://image.fanatik.com.tr/i/fanatik/75/770x0/6595061b6e3b9a5771e091b2.jpg"]
 ||sporligtv*/superderbi.php
 sporligtv482.live###superderbi
@@ -2394,6 +2405,7 @@ diziroll.*##.series-watch-player a[target="_blank"] > img
 sinekolik.com##a[href^="https://bit.ly/"]
 ||contentx-me.cdn.ampproject.org/i/s/contentx.me/obiletads.png
 ||canlidizi6.com/wp-content/uploads/*/Gunde1TL-Banner.webp
+||image.fanatik.com.tr/i/fanatik/75/770x0/6595061b6e3b9a5771e091b2.jpg
 ||image.fanatik.com.tr/i/fanatik/75/770x0/650e8aa980a0330f306cc17f.jpg
 ||image.fanatik.com.tr/i/fanatik/75/770x0/64c9319180a0323578c70c0e.jpg
 ||image.fanatik.com.tr/i/fanatik/75/770x0/657c5980df15856dfa0626de.jpg
@@ -6255,6 +6267,8 @@ adguard.info,adguard.com,adguard.app##.hello_from_adguard_turkish
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/170076
+mislink3.com#@##reklamlar
 ! https://github.com/AdguardTeam/AdguardFilters/issues/158098
 ralphlauren.co.uk#@##top-banner
 ! https://github.com/AdguardTeam/AdguardFilters/issues/156511
