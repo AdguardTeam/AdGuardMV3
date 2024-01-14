@@ -1,9 +1,9 @@
-! Checksum: yNPVbHyRDN3IUz7CKLggrA
-! Diff-Path: ../patches/1/1-s-1704911772-3600.patch
+! Checksum: vFsrtSggyLBpbowxNDCv3A
+! Diff-Path: ../patches/1/1-s-1705156564-3600.patch
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.87.70
-! TimeUpdated: 2024-01-10T18:32:25+00:00
+! Version: 2.0.87.80
+! TimeUpdated: 2024-01-13T14:32:35+00:00
 ! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1478,6 +1478,7 @@ ucoz.ru/informer/
 ! Bad: /banner.jpg (should be in general_url.txt)
 ! Bad: ||adssubdomain.legitwebsite.com^ (should be in adservers_firstparty.txt)
 !
+||infostuet.com^
 ||s.cummerata.link^
 ||cchbdata.net^
 ||s.ccsyncuuid.net^
@@ -6040,7 +6041,7 @@ tragtorr.in#@#div[id^="yandex_rtb"]
 pikabu.ru#%#//scriptlet('abort-on-stack-trace', 'XMLHttpRequest', 'createAd')
 pikabu.ru#%#//scriptlet('prevent-setTimeout', '_sendAnalytics')
 pikabu.ru#%#//scriptlet('json-prune', 'data', 'errors')
-pikabu.ru#%#//scriptlet('remove-node-text', 'script', '/new (this|document\.defaultView|window|top|XMLHttpRequest)(\[[\"\s\'\+a-zA-Z]+\])?[\s\S]+Ad/')
+pikabu.ru#%#//scriptlet('remove-node-text', 'script', '/new \(?(this|document\.defaultView|window|top|XMLHttpRequest|true)(\[[\"\s\'\+a-zA-Z]+\])?[\s\S]+Ad/')
 ! sports.ru
 sports.ru#%#//scriptlet('json-prune', 'direct rtbAuctionInfo')
 sports.ru#%#//scriptlet('set-constant', 'Ya.adfoxCode.create', 'noopFunc')
@@ -6855,7 +6856,7 @@ dzen.ru##.news-app__content div[class*="__column_myTarget mg-grid__item"] div[cl
 [$path=/pogoda]dzen.ru##.adv_type_rtb
 !
 ! Ad in Dzen articles
-dzen.ru##div[class^="article"][class*="holder"]
+dzen.ru##body:not(.page_article-editor) div[class^="article"][class*="holder"]
 dzen.ru#?#div[id^="zen-row"] div.feed__item article:not([aria-label^="Карточка"]):matches-css(user-select: none)
 dzen.ru###article__bottom-embed
 [$path=/a/]dzen.ru##.article__content_limited div[class^="article-bottom-single-desktop-placeholder__"]
@@ -6960,8 +6961,7 @@ apad2.top,games-pc.top,rustorka.com,rustorka.top,rustorka.net,rustorkacom.lib,na
 /naylo.top\/forum\/(?!login.php)/$removeheader=location
 /games-pc.top\/forum\/(?!login.php)/$removeheader=location
 $cookie=opt_js,domain=games-pc.top|rustorka.com|rustorka.top|rustorka.net|rustorkacom.lib|naylo.top
-apad2.top,games-pc.top,rustorka.com,rustorka.top,rustorka.net,rustorkacom.lib,naylo.top,zannn.top,innal.top#%#//scriptlet("abort-current-inline-script", "checkCookie", "var _0x")
-apad2.top,games-pc.top,rustorka.com,rustorka.top,rustorka.net,rustorkacom.lib,naylo.top,zannn.top,innal.top#%#//scriptlet('remove-cookie', '/^opt_js\d{1}$/')
+apad2.top,games-pc.top,rustorka.com,rustorka.top,rustorka.net,rustorkacom.lib,naylo.top,zannn.top,innal.top#%#//scriptlet('prevent-setTimeout', 'chessday')
 !
 tapochek.net#%#//scriptlet("set-constant", "antiadblock", "undefined")
 !$cookie=/^u_count|^st\d+|adblock|gophp/,domain=naylo.top|rustorka.com|rustorka.net|rustorkacom.lib|tapochek.net
@@ -7279,6 +7279,7 @@ ya.ru,yandex.*##.serp-list > div.incut
 ya.ru,yandex.*##.DirectInline
 !
 ! Yandex.Maps
+[$path=/maps]yandex.*##.media-gallery > div.media-gallery__frame-wrapper:has(> div.media-gallery__frame > div > div[data-chunk="promo"])
 yandex.*##.banner-placeholder-view
 yandex.*##._advert
 yandex.*##.search-advert-badge
@@ -8376,7 +8377,7 @@ sovetromantica.com#$#.sbrand--back { background-image: none !important; }
 sovetromantica.com#$#.mainContainer { padding-top: 0 !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/44207
 ! background is used for ads, so moved from Annoyances filter
-lostfilmtv5.site,lostfilm.pro,lostfilmtv.site,lostfilm.uno,lostfilm.run,lostfilm.today,lostfilm.tv#$#body { background: #000000!important; }
+lostfilm.download,lostfilmtv5.site,lostfilm.pro,lostfilmtv.site,lostfilm.uno,lostfilm.run,lostfilm.today,lostfilm.tv#$#body { background: #000000!important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/43591
 animevost-org.com#$#body > div#wrap { margin: 0!important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/43330
@@ -9496,6 +9497,8 @@ bits.media,devyatka.ru,gazeta-n1.ru,gorod48.ru,hi-fi.ru,innov.ru,k1news.ru,ktost
 !
 !
 !
+marieclaire.ru##.article__block_type-productSet
+pc.ru##div[class^="advert_"]
 hen-tay.com#?#td > table:has(> tbody > tr > td:contains(/Реклама|Порно игра|Партнёры/))
 hen-tay.com#?#tbody > tr:has(> td > noindex > div[align="center"] > a > img[src^="/go/"])
 hen-tay.com#?#.news > div[align="center"]:has(> a[href*=".php"] > img)
@@ -9515,8 +9518,6 @@ trashexpert.ru##div[class*="smi24"]
 trashexpert.ru##.ad-on-desktop
 moiprogrammy.com##div[style*="width:728px;height:90px;"]
 1progs.com##a[href^="https://tlmnt.com/"]
-lostfilm.space,lostfilm.tv##a[href^="/shmrowse.php"]
-lostfilm.space,lostfilm.tv##div[style*="width:537px;"][style*="height:302px;"]
 verstka.media##.verstka-telegram-link:has(> thetruestory-widget-top)
 portable-rus.ru##aside[id^="block-"]:has(> div[id^="yandex_rtb"])
 apteka.ru##.EshopShelf
@@ -19815,7 +19816,7 @@ cinetv.ru,vkpress.ru,inforeactor.ru,otzyvy.by,bombardir.ru,echosevera.ru,emls.ru
 novosti-n.org,coandroid.ru,soft-arhiv.com##a[target="_blank"][rel="nofollow"] > img
 demotivators.to,freezpic.ru##iframe
 ren.tv,tverigrad.ru##a[href^="http://smi2.net/"]
-devby.io,profile.ru,glavred.info,etextlib.ru,pushkino.tv,tglink.ru,mos.news,nvdaily.ru,objectiv.tv,warnet.ws##.partners
+itc.ua,devby.io,profile.ru,glavred.info,etextlib.ru,pushkino.tv,tglink.ru,mos.news,nvdaily.ru,objectiv.tv,warnet.ws##.partners
 filebase.ws,apachan.net,astromeridian.ru,forums.rusmedserv.com,gamemag.ru,hdkinomax.tv,igrigo.net,igru-xbox.net,itbukva.com,kino-go.co,kinokrad.co,miytvideo.ru,repackov.net,seeyoupage.ru,sitandwatch.org,torrentum.ru,tourister.ru,uzb-seks.ru,vsedoramy.ru,warfiles.ru##body > noindex
 !
 ! pikabu.ru
@@ -19955,10 +19956,12 @@ fastpic.org##div[class^="spinner"] > a[id="imglink"] ~ iframe[width="295"][heigh
 fastpic.org##main > div.row > div[class^="col-"] > div.spinner1 + div.rounded
 !
 ! lostfilm.tv + mirrors
-lostfilmtv5.site,lostfilm.pro,lostfilmtv.site,lostfilm.uno,lostfilm.run,lostfilm.today,lostfilm.tv##a[onclick^="backToCshponk"]
-lostfilmtv5.site,lostfilm.pro,lostfilmtv.site,lostfilm.uno,lostfilm.run,lostfilm.today,lostfilm.tv##.oi_papa_oi
-lostfilmtv5.site,lostfilm.pro,lostfilmtv.site,lostfilm.uno,lostfilm.run,lostfilm.today,lostfilm.tv##body > a[onclick]
-lostfilmtv5.site,lostfilm.pro,lostfilmtv.site,lostfilm.uno,lostfilm.run,lostfilm.today,lostfilm.tv##div[style="padding-top:240px;width: 100%;"]
+lostfilm.download,lostfilmtv5.site,lostfilm.pro,lostfilmtv.site,lostfilm.uno,lostfilm.run,lostfilm.today,lostfilm.tv##a[href^="/shmrowse.php"]
+lostfilm.download,lostfilmtv5.site,lostfilm.pro,lostfilmtv.site,lostfilm.uno,lostfilm.run,lostfilm.today,lostfilm.tv##div[style*="width:537px;"][style*="height:302px;"]
+lostfilm.download,lostfilmtv5.site,lostfilm.pro,lostfilmtv.site,lostfilm.uno,lostfilm.run,lostfilm.today,lostfilm.tv##a[onclick^="backToCshponk"]
+lostfilm.download,lostfilmtv5.site,lostfilm.pro,lostfilmtv.site,lostfilm.uno,lostfilm.run,lostfilm.today,lostfilm.tv##.oi_papa_oi
+lostfilm.download,lostfilmtv5.site,lostfilm.pro,lostfilmtv.site,lostfilm.uno,lostfilm.run,lostfilm.today,lostfilm.tv##body > a[onclick]
+lostfilm.download,lostfilmtv5.site,lostfilm.pro,lostfilmtv.site,lostfilm.uno,lostfilm.run,lostfilm.today,lostfilm.tv##div[style="padding-top:240px;width: 100%;"]
 ||lostfilm.tv/css*/b/
 ||lostfilm.tv/pereP/?a=
 ||lostfilm.tv/?a=$script
@@ -20777,10 +20780,6 @@ sports.ru##.news-item__content > strong > a[href^="https://trbna.co/"]
 sports.ru##div[class*="news-item__content"] > p > a[href^="https://trbna.co/"]
 sports.ru##.news-item__content > a[href^="https://trbna.co/"]
 ! VAST: https://uploads.adguard.com/up04_3dsdl_Sport_futbol_hokkei_basketbol_tennis_boks_biatlon_Formula-1__vse_novosti_sporta_na_Sports.ru.png
-||handiest-logic.com^
-||moist-thunderstorm.com^
-||licked-alphabet.eu^
-||befouled-fire.com^
 ||cdn.videonow.ru^$domain=ua.tribuna.com|by.tribuna.com
 ! END: sports.ru / ua.tribuna.com / by.tribuna.com
 !
