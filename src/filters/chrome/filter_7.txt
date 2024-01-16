@@ -1,9 +1,9 @@
-! Checksum: xeIFTaxibpzZzRQSGwiVnw
-! Diff-Path: ../patches/7/7-s-1705163773-3600.patch
+! Checksum: Mt7tcM908L67ffFmYUsmIA
+! Diff-Path: ../patches/7/7-s-1705383383-3600.patch
 ! Title: AdGuard Japanese filter
 ! Description: Filter that enables ad blocking on websites in Japanese language.
-! Version: 2.0.47.53
-! TimeUpdated: 2024-01-13T16:33:39+00:00
+! Version: 2.0.47.64
+! TimeUpdated: 2024-01-16T05:33:48+00:00
 ! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1148,7 +1148,7 @@ ryukyushimpo.jp#$?#main > .homepage:not(:matches-css(max-width: 1150px)) { margi
 ! placeholder
 vip-front.video.g.fc2.com,video.fc2.com#$#.main_ad_head_wide { padding-top: 0 !important; }
 video.fc2.com#$#.c-ad-103 { height: 0 !important; }
-map.yahoo.co.jp#$#.App__contentsMap { height: 100% !important; }
+map.yahoo.co.jp#$#.App__contentsMap[style="height: calc(100% - 50px);"] { height: 100% !important; }
 profile.ameba.jp#$#.big-footer-article__container { width: 656px !important; }
 umaroidblog.com#$##sidebar[style^="height:"] { height: auto !important; }
 maonline.jp#$#.media_article .articlegroups .d-block:not(:first-of-type) { border-top: none !important; padding-top: 0 !important; }
@@ -1575,7 +1575,7 @@ n.lat/login|$document
 /member/sendMail.php?direct_user_cd=*&direct_password=$document
 |http://*/j/mmenu.php$document
 .com/index/category?category_id=*&coll_id=$document
-.com/index/detail.html?sno=*&coll_id=$document
+.com/index/detail.html?sno=$document
 .online/a/eeeekayresrsammicraaajkaschhoilsebadhiyakuchtanahiaayaajturuionmeebbat/$document
 /?phone=(050)-$document
 ^phone=050-$document
@@ -1670,6 +1670,14 @@ gundamlog.com###more > iframe[src^="https://richlink.blogsys.jp"]
 !
 !
 !
+btnmaker.me##.ads-banner-fixed
+gogakuru.com##.ad_phrase
+g-soku.blog.jp#?##more > b:has(> a[href^="https://www.amazon.co.jp/"])
+g-soku.blog.jp#?##more > div.t_b:has(> div.ninja-recommend-block)
+tv-tokyo.co.jp###footerPcBanner
+famitsu.com#?#div[class] > div.l-contents-block:has(> div.heading > a[href="/ranking/amazon/"])
+lovemangaraw.net,mangaraw.asia###jp-smart-banner
+lovemangaraw.net,mangaraw.asia##.text-center[style^=" height: 300px; overflow: hidden; max-width: 100%;"]
 urapic.com##.entry-body > div[style="margin:0;padding:5px;font-size:12px;word-break: break-all;"]
 urapic.com#?#.side-body:has(> div.plugin-freearea > div[id^="im-"])
 urapic.com#?#.side-title:has(+ .side-body > div.plugin-freearea > div[id^="im-"])
@@ -1684,13 +1692,14 @@ nikkanerog.com#?##menuBlock-r > div.menuBlockBody:has(> .menuText2 > div[align="
 nikkanerog.com#?#.menuBlockBase:has(+ div.menuBlockBody > .menuText2 > div[align="center"] > div.pr_banner)
 javdougaero.xxxblog.jp###main > .column-inner > .column-inner-2 > a[href^="https://movie.eroterest.net/site/s/"][target="_blank"]
 javdougaero.xxxblog.jp###main > .column-inner > .column-inner-2 > a[href^="https://erokolky.com/"][target="_blank"]
-javdougaero.xxxblog.jp##.article-body-more > div[style="margin:0;padding:5px;font-size:14px;word-break: break-all;"]
+nijimoemoe.com,javdougaero.xxxblog.jp##div[class^="article-body"] > div[style="margin:0;padding:5px;font-size:14px;word-break: break-all;"]
 livedoor.blog#?#.plugin-memo:has(> div.side > div[style="margin:0;padding:5px;font-size:14px;word-break: break-all;"] > a[href^="https://al.dmm.co"][rel="nofollow"] > img)
 s2-log.com##.ad-wrap1
 blog.2nt.com##a[href^="https://www.e-nls.com/access.php"][target="_blank"] > img[width="250px"][height="250px"]
 ||blog.with2.net/ad_frame.php
 chakuero-jyo-ho-koukanjyo.cafeblog.jp###extra div.plugin-memo > div.plugin-memo
 blog.2nt.com#?#div.content:first-child:has(> div.entry_body > div[style="text-align:center;margin-bottom:10px;"] + div[style="font-size:8px;"])
+eow.alc.co.jp##.rectangle_right
 eow.alc.co.jp###eijiro_pc_top_01
 cyclesports.jp##.newsWrap > .banner
 nullpoantenna.com##.list > li:has(> script[src^="https://img.ad-nex.com/"])
@@ -2678,7 +2687,7 @@ book.asahi.com##.module-editors-picks .module-list-articles > .module-list-artic
 ||asahi.com/ad/esi/$xmlhttprequest
 asahi.com##div[x-component-name="AsahiDynamicInclude"][x-component-data]
 souzoku.asahi.com##div[class^="ad-"][class$="-footer"]
-panchiragazo.com###slide_wrap
+btnmaker.me,panchiragazo.com###slide_wrap
 ||wp.com/coincheck.com/images/affiliates/
 helohelion.net##.first-article div[style="”text-align:center;”"]
 itainews.com###poweredAdsBy
@@ -3827,7 +3836,7 @@ video.laxd.com##div[class^="u-hasAd"]
 lmaga.jp##body .contents_ad
 kakakumag.com##.side-pickup-wrap
 kakakumag.com##div[class^="main-ad"]
-kakakumag.com##div[class^="side-ad"]
+ddnavi.com,kakakumag.com##div[class^="side-ad"]
 ginnga.blog.jp###article-1003
 animemaruwakari.site###headerafficode
 rakuten-card.co.jp##.rc-cpn
@@ -4914,6 +4923,7 @@ excite.co.jp###ad300x250
 excite.co.jp###timesale
 excite.co.jp##.ec-ranking-article
 excite.co.jp##div[id^="exad"]
+newsoku.blog##.content_fixed_addsspot_300_600_pc
 newsoku.blog###simplicityclassictextwidget-35
 newsoku.blog###simplicityclassictextwidget-36
 newsoku.blog###simplicityclassictextwidget-37
@@ -5302,7 +5312,7 @@ androidjiten.com###surfing_adsense_widget-4
 teratail.com##div[class^="googlePublisherTags_ads"]
 teratail.com##div[class*="_questionBottomAdArea_"]
 suki-kira.com##.text-xs-center[style="min-height: 90px;width:100%;"]
-city.shinjuku.lg.jp,kodansha.co.jp,digiday.jp,whatext.com,psmk2.net,10mtv.jp##.advertisement
+teniteo.jp,city.shinjuku.lg.jp,kodansha.co.jp,digiday.jp,whatext.com,psmk2.net,10mtv.jp##.advertisement
 10mtv.jp##div[style^="width:610px; height:260px"]
 corriente.top##div[style="width: 970px; margin: 0 auto 30px;"]
 e-earphone.jp##.header-area-bn
@@ -5470,6 +5480,7 @@ news.gree.net###ad_four_sequence
 active.nikkeibp.co.jp,aria.nikkei.com,bio.nikkeibp.co.jp,doors.nikkei.com,dual.nikkei.com,nfm.nikkeibp.co.jp,woman.nikkei.com##.dag_banner
 active.nikkeibp.co.jp##.l-asideSection_featured
 bio.nikkeibp.co.jp##.p-articleTextad
+woman.nikkei.com##.ranking + div.dag_banner + section.l-asideSection
 woman.nikkei.com##.p-articleAdList
 kanaloco.jp###block-top-billboard-1st
 sagatv.co.jp##table[style="border:none;text-align:center;"][width="660"]
@@ -8142,6 +8153,7 @@ nikkei.com##.search__promo
 nikkei.com##[class*="adForLarge_"]:not([class^="anchor_"])
 news.jorudan.co.jp##div[class*="ad_index"]
 news.jorudan.co.jp##.ad_common_4_300x250
+jorudan.co.jp##div[style^="width:500px;min-height:280px"]
 jorudan.co.jp##.amazon_associate_banner
 jorudan.co.jp##.com_pr_rmads_right
 jorudan.co.jp##div[id^="Ads_google_"]
