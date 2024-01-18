@@ -1,9 +1,9 @@
-! Checksum: j2sOCxb4ZULQskifm+YBHw
-! Diff-Path: ../patches/9/9-s-1705336596-3600.patch
+! Checksum: PPX2ayAXLq1juwQ0ex96HA
+! Diff-Path: ../patches/9/9-s-1705498549-3600.patch
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish, Portuguese, and Brazilian Portuguese languages.
-! Version: 2.0.22.86
-! TimeUpdated: 2024-01-15T16:33:57+00:00
+! Version: 2.0.22.90
+! TimeUpdated: 2024-01-17T13:33:26+00:00
 ! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -2209,7 +2209,7 @@ http://adw.
 ! This section contains the list of domain-specific rules that block ads.
 !
 ! Good: example.org###rek; ||example.com/ads/
-! Bad: example.org#$##rek { display: none !important; } (for instance, should be in general_extensions.txt)
+! Bad: example.org#@##banner_ad (for instance, should be in allowlist.txt or in antiadblock.txt)
 !
 !
 ! For URL shorteners or simple sites with frequently changed ad servers.
@@ -2225,6 +2225,8 @@ gaz.com.br,placar.com.br,futebolinterior.com.br,tvhistoria.com.br,tribunapr.uol.
 ! ##body .banner
 ahoragranada.com,correio24horas.com.br,cnnespanol.cnn.com,motociclismo.es,sub100.com.br,theenemy.com.br,manhwas.net,rpp.pe,ambito.com,economipedia.com,informador.mx,elinformador.com.co,cronista.com,rionegro.com.ar,diariodecuyo.com.ar,voydeviaje.com.ar,guarda14.com,viapais.com.ar,agazeta.com.br,eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.*,mundotecnologias.com,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##body .banner
 !
+espaebook2.com##.perfbtn
+bandaancha.eu##.adMbBlTp
 mundoeducacao.uol.com.br#?#.main_home-right > div[style]:has(> div[style] > div[id^="banner-"])
 dgabc.com.br##div[class*="Banner_"]
 dgabc.com.br##div[class^="_arroba"]
@@ -3224,7 +3226,7 @@ aeiou.pt,noticiast.com##div[style="margin: 8px 0; clear: both;"]
 comidinhasdochef.com##.wrap-banner
 heraldo.es###top_ads_container
 worlwidestream.net##[id^="player"] ~ div[onclick*="remove"]
-sportsonline.so,sportzonline.co###html1
+sportzonline.co###html1
 vivoplay.sigue.la##div[class*="faux"]:not(.fauxborder-left):not(.fauxcolumns)
 calcular.onlinegratis.tv##td[class="style6"][style="height: 53px"]
 lawebdelprogramador.com##.publi_sky

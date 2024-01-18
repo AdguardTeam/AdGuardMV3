@@ -1,9 +1,9 @@
-! Checksum: j8LGkWw4WyDGONdFLmUY4w
-! Diff-Path: ../patches/6/6-s-1705250180-3600.patch
+! Checksum: FCezcVySidaQ3eQBi5nIgg
+! Diff-Path: ../patches/6/6-s-1705527347-3600.patch
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.39.97
-! TimeUpdated: 2024-01-14T16:33:38+00:00
+! Version: 2.0.40.2
+! TimeUpdated: 2024-01-17T21:33:05+00:00
 ! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1126,6 +1126,8 @@ plus.rtl.de#%#//scriptlet('trusted-replace-xhr-response', 'true', 'false', 'homa
 brigitte.de#%#//scriptlet('trusted-replace-xhr-response', 'true', 'false', 'global_config.json')
 plus.rtl.de#%#//scriptlet('abort-on-stack-trace', 'Object.prototype.adReinsertion', 'createSdk')
 !
+! jpgames.de - left-over at top
+jpgames.de#$##takeover { padding-top: unset!important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/166369
 ddl-warez.cc#%#//scriptlet('prevent-window-open', 'af.php')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/164427
@@ -1498,7 +1500,7 @@ freenet.de#$##frnMain { min-height: 0!important; }
 ! This section contains the list of domain-specific rules that block ads.
 !
 ! Good: example.org###rek; ||example.com/ads/
-! Bad: example.org#$##rek { display: none !important; } (for instance, should be in general_extensions.txt)
+! Bad: example.org#@##banner_ad (for instance, should be in allowlist.txt or in antiadblock.txt)
 !
 ! propeller-tracking.com for CB
 ! Requests lile https://almstda.tv/5/6202259
@@ -1603,11 +1605,13 @@ formel1.de,krautundrueben.de,motorsport-total.com,traktorpool.de,fnweb.de,laborj
 !
 !
 !
+trophies.de###ipsLayout_mainArea center:has(> div[class] > div[id^="nerdic_"])
+trophies.de##div[data-role="sidebarAd"]
 restegourmet.de#?#ion-col:has(> app-content-ad-grid)
 winfuture.de##a[title*="gesponsert"]
 nordbayern.de##article:has(> a > .modul__teaser > .modul__teaser__anzeige)
-chip.de##.Advanced-Boost-Widget-Block
-chip.de#?#li:has(> article > figure > figcaption > .fb-cell-footer > .meta:contains(Anzeige))
+chip.de##main > div > main[style^="min-height:"]:has(figure > img ~ noscript)
+chip.de##a > div:has(figure > img ~ noscript)
 hifi.de##.deal-single
 hifi.de##.deals-multi-wrap
 techbook.de##.af-wrapper
@@ -6007,7 +6011,6 @@ _woz_banner_vote.
 ##._werbung
 ##.ad_mitte
 ##.ad_platzhalter
-##.adguru-content-html
 ##.ads-anzeige
 ##.ads-artikel-contentAd-medium
 ##.ads-artikel-contentAd-top
@@ -9514,6 +9517,7 @@ chefkoch.de##.gujad-wrapper
 my-homo.net##.gxt_banner
 my-homo.net##.gxt_feed
 qiez.de##.h5v
+helpster.de##.h5v-ad
 news.de##.halfpage
 hallobuer.ruhr##.hallo-inhalt_2
 pornotim.com,xhammer.net##.happy-inside-player

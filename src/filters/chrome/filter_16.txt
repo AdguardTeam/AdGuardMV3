@@ -1,9 +1,9 @@
-! Checksum: CPMOJy+CQVbVmXAeFtNneg
-! Diff-Path: ../patches/16/16-s-1705030533-3600.patch
+! Checksum: Wbk1IffLABJNWzKLnbGeQQ
+! Diff-Path: ../patches/16/16-s-1705494947-3600.patch
 ! Title: AdGuard French filter
 ! Description: Liste FR + AdGuard French filter. Filter list that specifically removes ads on websites in French language.
-! Version: 2.0.42.83
-! TimeUpdated: 2024-01-12T03:31:41+00:00
+! Version: 2.0.42.87
+! TimeUpdated: 2024-01-17T12:31:50+00:00
 ! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -634,6 +634,9 @@ tf1.fr,tf1info.fr#%#//scriptlet('prevent-fetch', '/^https:\/\/ads\.stickyadstv\.
 !------- JS rules ---------------------!
 !--------------------------------------!
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/170646
+jeune-gay.fr#%#//scriptlet('prevent-setTimeout', 'randno', '25')
+jeune-gay.fr#%#//scriptlet('set-cookie', 'p_view', 'true')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/164927
 occasions.decathlon.fr#%#//scriptlet('set-constant', 'FastClick', 'noopFunc')
 occasions.decathlon.fr#%#//scriptlet('set-constant', 'FastClick.attach', 'noopFunc')
@@ -832,7 +835,7 @@ all-stadium.net#$##layer2 {top:50px!important; left:950px!important;}
 ! This section contains the list of domain-specific rules that block ads.
 !
 ! Good: example.org###rek; ||example.com/ads/
-! Bad: example.org#$##rek { display: none !important; } (for instance, should be in general_extensions.txt)
+! Bad: example.org#@##banner_ad (for instance, should be in allowlist.txt or in antiadblock.txt)
 !
 ! For URL shorteners or simple sites with frequently changed ad servers.
 ! Incorrectly blocked domains can be excluded using regex(synchronize this regexp in all filters)
@@ -842,6 +845,13 @@ $script,third-party,denyallow=fastly.net|statically.io|sharecast.ws|bunnycdn.ru|
 !
 !
 !
+jeune-gay.fr##.studio
+jeune-gay.fr##.beau
+jeune-gay.fr##.thumb-block[style="background: #229aed;"]
+jeune-gay.fr##.happy-sidebar
+jeune-gay.fr##.under-video-block > div:has( > div[class] > a[href][target="_blank"])
+jeune-gay.fr##.yellow
+jeune-gay.fr##.happy-mob
 commentcamarche.net##.sticky-zone
 commentcamarche.com,commentcamarche.net,journaldunet.com##div[id^="ctn_"]
 jeux-gratuits.com##div[class^="placeholder_"]
@@ -953,7 +963,6 @@ lenouvelliste.ch##.components-advertisement
 webchoc.com##.nav-item > a[href="https://membre.speedrencontre.com"]
 macg.co##body > a[href="/dolce"] > img
 macg.co##.sidebar-content > div[style="min-height: 326px"]
-fusevideo.io##body > a
 animecat.net##div[style^="height: 250px;"]
 lequipe.fr##body div[id^="AmPlaceholder-"]
 orange.fr##.media-advert-rm-center

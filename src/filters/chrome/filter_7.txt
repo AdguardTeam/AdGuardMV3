@@ -1,9 +1,9 @@
-! Checksum: Mt7tcM908L67ffFmYUsmIA
-! Diff-Path: ../patches/7/7-s-1705383383-3600.patch
+! Checksum: gS2lm6Z6bf9slyRahXE18g
+! Diff-Path: ../patches/7/7-s-1705484171-3600.patch
 ! Title: AdGuard Japanese filter
 ! Description: Filter that enables ad blocking on websites in Japanese language.
-! Version: 2.0.47.64
-! TimeUpdated: 2024-01-16T05:33:48+00:00
+! Version: 2.0.47.69
+! TimeUpdated: 2024-01-17T09:33:14+00:00
 ! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1271,8 +1271,8 @@ news-postseven.com#$#body[style^="overflow:"] { overflow: auto !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/119817
 minkabu.jp#$#.ly_content_wrapper { margin-bottom: 0!important; }
 ! overlay leftover
-pictab.art,b2.sakki2022.com,my-nikki.net,ero-gazou.jp#$#.pum-overlay { display: none !important; }
-pictab.art,b2.sakki2022.com,my-nikki.net,ero-gazou.jp#$#.pum-open { overflow: auto !important; }
+naitter.hippy.jp,pictab.art,b2.sakki2022.com,my-nikki.net,ero-gazou.jp#$#.pum-overlay { display: none !important; }
+naitter.hippy.jp,pictab.art,b2.sakki2022.com,my-nikki.net,ero-gazou.jp#$#.pum-open { overflow: auto !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/117400
 mapion.co.jp#$##map_yads { display: none !important; }
 mapion.co.jp#$##result_nav { bottom: 0 !important; }
@@ -1614,7 +1614,7 @@ _ap/signin*?_encoding=UTF8&openid.assoc_handle=jpflex&openid.claimed_id=&action=
 ! This section contains the list of domain-specific rules that block ads.
 !
 ! Good: example.org###rek; ||example.com/ads/
-! Bad: example.org#$##rek { display: none !important; } (for instance, should be in general_extensions.txt)
+! Bad: example.org#@##banner_ad (for instance, should be in allowlist.txt or in antiadblock.txt)
 !
 ! /banner/banner_ - if it is necessary, make this rule domain specific
 !
@@ -1670,6 +1670,11 @@ gundamlog.com###more > iframe[src^="https://richlink.blogsys.jp"]
 !
 !
 !
+zyuken.net##.SimpleBox > p[style^="padding-left:"] > a[href]:contains([PR])
+hadakanonude.com##.main-inner > center
+hadakanonude.com###onlineBanner
+kintore-style.com##div[id^="kinto-"]
+naitter.hippy.jp###secondary > .widget_sp_image
 btnmaker.me##.ads-banner-fixed
 gogakuru.com##.ad_phrase
 g-soku.blog.jp#?##more > b:has(> a[href^="https://www.amazon.co.jp/"])
@@ -2193,6 +2198,8 @@ hima-soku.doorblog.jp###sub div.plugin-memo:last-child
 hima-soku.doorblog.jp,kojimajan.com##.amzimg
 hotentry.hatenablog.jp###bottom-editarea
 jugem.jp###side > div.sideContents > div.amzimg
+ldblog.jp#?#.plugin-memo:has(> div.side > a[name="amazletlink"])
+ldblog.jp#?#.plugin-memo:has(> div.side > center > a[name="amazletlink"])
 ldblog.jp##.plugin-memo > div.side > div.amzimg
 h2ch.com##.text > div[style="padding:30px"]
 ||avtokutei.com/wp-content/uploads/fanza-
@@ -3739,7 +3746,7 @@ bantyou.livedoor.biz##table[bgcolor="#000000"]
 ldblog.jp###main_head_ad
 wara2ch.com##.article-outer .article-outer-3 > div[align="LEFT"]
 crepu.net##.sponsorship
-kitimama-matome.net,konoyubitomare.jp###extra div.plugin-memo:last-of-type
+koisoku.ldblog.jp,kitimama-matome.net,konoyubitomare.jp###extra div.plugin-memo:last-of-type
 fiveslot777.com##.pager ~ center > table
 fiveslot777.com###extra div.plugin-memo
 fiveslot777.com###sub div.plugin-memo:nth-last-of-type(-n+4)
@@ -5394,7 +5401,7 @@ xn--o9j0bk1914a8b2b.com,erokiwami.com,ikikatadatabase.com,japan-hentai.com,neo-b
 kome3blog.com,xn--o9j0bk1914a8b2b.com,vipcle2.com###text-23
 game16.net,dosukebe.site,eigo.plus,news.sod.co.jp###text-24
 otakaranet.com###text-25
-syukan.chinsiko.xyz,orenoraresne.com,gekikame.com,eigo.plus###text-26
+waral.club,syukan.chinsiko.xyz,orenoraresne.com,gekikame.com,eigo.plus###text-26
 game16.net,dosukebe.site,kome3blog.com,higashinada-journal.com,yamakamu.net,vapejp.net###text-27
 game16.net,manga-netabare-kanso.com,idiom-encyclopedia.com,me-her.com,hamlife.jp,bakufu.jp###text-28
 policysmtp.com,boshisoukan.net,idiom-encyclopedia.com,eigo.plus,jn1et.com###text-29
@@ -8548,7 +8555,7 @@ alba.co.jp###header_lower
 alba.co.jp##.ad-lb
 alba.co.jp##.left-column > div[style="width:200px; height:259px;"]
 mukulog.com###mybox > .ad
-tvbok.com##a[href^="https://rpx.a8.net"]
+animecomic-pass.com,tvbok.com##a[href^="https://rpx.a8.net"]
 tvbok.com###left_fix_out #left_box3
 tvbok.com###right_2nd > .right_box2
 bookbang.jp###footer_ban

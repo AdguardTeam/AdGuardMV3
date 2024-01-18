@@ -1,9 +1,9 @@
-! Checksum: AbovlhOX4TRq/cOSUS9EMA
-! Diff-Path: ../patches/3/3-s-1705379784-3600.patch
+! Checksum: W1+Tt6wXevF33qOGqvFr7A
+! Diff-Path: ../patches/3/3-s-1705563350-3600.patch
 ! Title: AdGuard Tracking Protection filter
 ! Description: The most comprehensive list of various online counters and web analytics tools. Use this filter if you do not want your actions on the Internet to be tracked.
-! Version: 2.0.65.67
-! TimeUpdated: 2024-01-16T04:33:23+00:00
+! Version: 2.0.65.83
+! TimeUpdated: 2024-01-18T07:32:47+00:00
 ! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -220,8 +220,8 @@ itmedia.co.jp#%#//scriptlet('set-cookie', 'cX_G', '1')
 itmedia.co.jp#$##ulCommentWidget[style*="display"] { display: block !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/142311
 ! Fixes comment section loading
-apkpure.com#%#//scriptlet('set-constant', '$$.analytics', 'emptyObj')
-apkpure.com#%#//scriptlet('set-constant', '$$.analytics.send', 'noopFunc')
+apkpure.*#%#//scriptlet('set-constant', '$$.analytics', 'emptyObj')
+apkpure.*#%#//scriptlet('set-constant', '$$.analytics.send', 'noopFunc')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/141714
 member.neofinancial.com#%#//scriptlet('set-constant', '__fpjs_p_l_b', 'emptyObj')
 member.neofinancial.com#%#//scriptlet('set-constant', '__fpjs_p_l_b.load', 'noopFunc')
@@ -592,6 +592,7 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ||emlsend.com^$third-party
 ||starszoom.re^
 ||lr-intake.com^
+||intake-lr.com^
 ||collector-api.frspecifics.com^
 ||carrick-ui.advoncommerce.com^
 ||smelel.icu^
@@ -4541,6 +4542,11 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ! Blocking piwik analytics subdomain(for DNS filtering)
 |piwik.
 !
+||wwwstat.rz.uni-leipzig.de^
+||analytics.fap.bar^
+||analytics-batch.blitz.gg^
+||tms-collect.sony.jp^
+||tms-visitor-service.sony.jp^
 ||clicks.hurriyet.com^
 ||analytics.maxroll.gg^
 ||log.kinolights.com^
@@ -4548,12 +4554,11 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ||metrics.viqeo.tv^
 ||rtb.videonow.ru^
 ||hn-ping*.hashnode.com^
-||o920916.ingest.sentry.io^
 ||ping.hashnode.com^
-||o1184810.ingest.sentry.io^
 ||t.la-croix.com^
 ||trk.tirto.id^
 ||prdwebcollector.ruetracking.com^
+||analytics-dataplane.invideo.io^
 ||analytics-api.invideo.io^
 ||tr.staff-start.com^
 ||rtnl.bxcl.de^
@@ -4620,7 +4625,6 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ||trace.rememberapp.co.kr^
 ||asv.transsion.com^
 ||f459fdc403a6.78a5254f.ap-northeast-1.token.awswaf.com^
-||o1000929.ingest.sentry.io^
 ||sta.tirexo.ink^
 ||pixel.aws.pfnetwork.net^
 ||stats.macg.io^
@@ -4687,7 +4691,6 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ||analytics.s3.amazonaws.com^
 ||analyticsengine.s3.amazonaws.com^
 ||tags.dxmdp.com^
-||dl.reg.163.com^
 ||adeventtrackermonitoring.spotify.com^
 ||pixel.ionos.com^
 ||d3p8zr0ffa9t17.cloudfront.net^
@@ -81047,7 +81050,7 @@ _tracking.php?b=
 ! This section contains the list of domain-specific rules that block analytics.
 !
 ! Good: example.org###counter; ||tracker.org/stats/
-! Bad: example.org#$##rek { display: none !important; } (for instance, should be in general_extensions.txt); ||tracker.org^$third-party (should be in tracking_servers.txt)
+! Bad: example.org#@##banner_ad (for instance, should be in allowlist.txt); ||tracker.org^$third-party (should be in tracking_servers.txt)
 !
 ! index.ru alternative way of loading (loads index.ru first, then /tnc.js from the same domain, see roem.ru for example)
 /tnc.js?h=
@@ -81099,8 +81102,10 @@ _tracking.php?b=
 ||googleadservices.com/pagead/conversion_async.js$redirect=noopjs,domain=ffm.to,important
 !
 /analytics.js$domain=tokyometro.jp|resumes.breakdownexpress.com|techcult.com|inbox.lv|kopeda.com|freexcafe.com|rusvideos.tv|nakubani.ru|lun.com|songsara.net|newsmax.com|bolgehastanesi.com|ewtc.de|newsdig.tbs.co.jp|imore.com|city.kushiro.lg.jp|emeraldbridal.com.au|emarat-news.ae|imobie.jp|tikla.com.tr|rusvideos.porn|jrkyushu.co.jp|amiunique.org|edit.ing|konami.com
-||assets.adobedtm.com^$domain=mcclatchydc.com|elnuevoherald.com|bellinghamherald.com|sacbee.com|charlotteobserver.com|newsobserver.com|miamiherald.com|ef.ru|algida.com.tr|bmw-motorrad.co.uk|cif.com.tr|clearhaircare.com|domestos.com|dove.com|elidor.com.tr|f1sport.autorevue.cz|geico.com|hellmanns.com.tr|herkessofraya.com|johnsonsbaby.com.tr|lipton.com|lnk.to|lux.com|magnumicecream.com|neutrogena.com.tr|omo.com|rexona.com|samsung.com|sap.com|schwarzkopf.com.tr|signalturkiye.com|msnbc.com|nbcnews.com|kbb.com|eurosport.ru|timgate.it|intermiles.com|oxfordmail.co.uk|spiegel.de|hp.com|deutschepost.de|thebay.com|s.shufoo.net|tsn.ca|tabelog.com|euronews.com|newshub.co.nz|fredmeyer.com|viabcp.com|carsales.com.au|falabella.com|aarp.org|thehill.com|realtor.com|nzherald.co.nz|aia.com.ph|baynews9.com
+||assets.adobedtm.com^$domain=mcclatchydc.com|elnuevoherald.com|bellinghamherald.com|sacbee.com|charlotteobserver.com|newsobserver.com|miamiherald.com|ef.ru|algida.com.tr|bmw-motorrad.co.uk|cif.com.tr|clearhaircare.com|domestos.com|dove.com|elidor.com.tr|f1sport.autorevue.cz|geico.com|hellmanns.com.tr|herkessofraya.com|johnsonsbaby.com.tr|lipton.com|lnk.to|lux.com|magnumicecream.com|neutrogena.com.tr|omo.com|rexona.com|samsung.com|sap.com|schwarzkopf.com.tr|signalturkiye.com|msnbc.com|nbcnews.com|kbb.com|eurosport.ru|timgate.it|intermiles.com|oxfordmail.co.uk|spiegel.de|hp.com|deutschepost.de|thebay.com|s.shufoo.net|tsn.ca|tabelog.com|euronews.com|newshub.co.nz|fredmeyer.com|viabcp.com|carsales.com.au|falabella.com|aarp.org|thehill.com|realtor.com|nzherald.co.nz|aia.com.ph|baynews9.com|thesaurus.com
 !
+||fap.bar/a.js
+||cue.search.naver.com/api/*/log/
 ||roadster.com/roadster_dealer_analytics
 ://coomer.su/$xmlhttprequest,method=patch|post
 ://kemono.su/$xmlhttprequest,method=patch|post
@@ -81526,7 +81531,8 @@ curazy.com##.sponsor-link-text
 brasil247.com###taboola-mid-article-leia-mais
 ||libcdnjs.com/api/event
 ||api.snapchat.com/web/metrics
-||web.snapchat.com/web-analytics-
+||snapchat.com/web-analytics
+||snapchat.com/report-metrics/
 ||accounts.snapchat.com/accounts/static/scripts/pixel.js
 ||snap-api.arkoselabs.com/metrics/
 ||zona.plus/ajax/visit-stats
@@ -85115,6 +85121,8 @@ nethunt.com/api/v1/track/email/$image
 ! Bad:  example.org#@##cookie
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/170920
+@@||endesaclientes.com^$cookie=dtCookie
 ! https://github.com/AdguardTeam/AdguardFilters/issues/164914
 @@||epuap.gov.pl^$cookie=dtCookie
 ! https://github.com/AdguardTeam/AdguardFilters/issues/164711
@@ -86453,6 +86461,7 @@ inapps.appsflyersdk.com^
 !
 ! NOTE: Regular rules
 !
+||sb.scorecard.research.com^
 ||zml-apm-prd.dbv4.noncd.db.de^
 ||api.bytebrew.io^
 ||lg-release-tracking-8080.gcld-line.com^
@@ -87199,7 +87208,19 @@ inapps.appsflyersdk.com^
 ! For platforms which do not support $redirect rules
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/170920
+@@||endesaclientes.com/*/ruxitagentjs_*.js$domain=endesaclientes.com
+! https://github.com/AdguardTeam/AdguardFilters/issues/170922
+@@||tag.aticdn.net/piano-analytics.js$domain=choisirleservicepublic.gouv.fr
+! https://github.com/AdguardTeam/AdguardFilters/issues/170839
+@@||cdn.tagcommander.com^$domain=secure.galerieslafayette.com
 ! https://github.com/easylist/easylist/issues/18275
+@@/^https:\/\/coomer\.su\/api\/v1\/(?:fansly|onlyfans)\/user\/[a-z]+\/post\/[0-9a-zA-Z]+\/flag$/$xmlhttprequest,~third-party,match-case,method=post
+@@/^https:\/\/coomer\.su\/api\/v1\/favorites\/creator\/(?:fansly|onlyfans)\/[a-z]+\/\d+$/$xmlhttprequest,~third-party,match-case,method=post
+@@/^https:\/\/coomer\.su\/api\/v1\/favorites\/post\/(?:fansly|onlyfans)\/[a-z]+\/\d+$/$xmlhttprequest,~third-party,match-case,method=post
+@@/^https:\/\/kemono\.su\/api\/v1\/(?:afdian|boosty|discord|dlsite|fan(?:box|tia)|gumroad|onlyfans|patreon|subscribestar)\/user\/\d+\/post\/[0-9a-zA-Z]+\/flag$/$xmlhttprequest,~third-party,match-case,method=post
+@@/^https:\/\/kemono\.su\/api\/v1\/favorites\/creator\/(?:afdian|boosty|discord|dlsite|fan(?:box|tia)|gumroad|onlyfans|patreon|subscribestar)\/\d+$/$xmlhttprequest,~third-party,match-case,method=post
+@@/^https:\/\/kemono\.su\/api\/v1\/favorites\/post\/(?:afdian|boosty|discord|dlsite|fan(?:box|tia)|gumroad|onlyfans|patreon|subscribestar)\/\d+\/[0-9a-zA-Z]+$/$xmlhttprequest,~third-party,match-case,method=post
 @@||coomer.su/.well-known/ddos-guard/mark/|
 @@||kemono.su/.well-known/ddos-guard/mark/|
 ! https://github.com/AdguardTeam/AdguardFilters/issues/170633
