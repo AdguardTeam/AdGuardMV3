@@ -1,9 +1,9 @@
-! Checksum: iTk+YfiKrBbwkNdWjgh+bw
-! Diff-Path: ../patches/13/13-s-1705516562-3600.patch
+! Checksum: ejgOBEdNshc/26Pxf4VNfg
+! Diff-Path: ../patches/13/13-s-1705674962-3600.patch
 ! Title: AdGuard Turkish filter
 ! Description: Filter list that specifically removes ads on websites in Turkish language.
-! Version: 2.0.49.51
-! TimeUpdated: 2024-01-17T18:31:32+00:00
+! Version: 2.0.49.58
+! TimeUpdated: 2024-01-19T14:31:35+00:00
 ! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1632,7 +1632,7 @@ muud.com.tr#$#div[class^="adv-"] { height: 0 !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/52247
 technopat.net#$#.x-root { background-image: none !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/98251
-ceptenmuzikindir.me,mp3indirhane.com,indirmp3mobil.com,tubazymp3.com,mp3indirelim.org#$#div > a[href][target="_blank"][style*="display: flex !important;"] { position: absolute !important; left: -3000px !important; }
+ceptenmuzikindir.me,mp3indirhane.com#$#div > a[href][target="_blank"][style*="display: flex !important;"] { position: absolute !important; left: -3000px !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/50206
 ! https://github.com/AdguardTeam/AdguardFilters/issues/50205
 ! https://github.com/AdguardTeam/AdguardFilters/issues/50203
@@ -2024,12 +2024,17 @@ $xmlhttprequest,third-party,denyallow=linkvertise.com|fastly.net|statically.io|s
 /service/advertchannels?$xmlhttprequest,redirect=nooptext,domain=mardinhaber.com.tr|gidahatti.com|bolugundem.com
 dirilispostasi.com,turkuazgazetesi.net,yenialanya.com,bugunkocaeli.com.tr,cagdaskocaeli.com.tr,mansetaydin.com,seskocaeli.com,kocaelibarisgazetesi.com,kocaelikoz.com,enkocaeli.com##.block-pano > div.us
 !
+forum.turkmmo.com##.special-days
+mmotutkunlari.com##.slickModal
+mmotutkunlari.com##.arkaplan-container
+mmotutkunlari.com##.tanitim_alani
+cumhuriyet.com.tr##div[class^="col-sm-"] > div.row:has(> div > div[id^="div-gpt-ad"])
 sozcu.com.tr##._sidebar-kesfet
 /image\.fanatik\.com\.tr\/i\/fanatik\/75\/770x0\/(6595061b6e3b9a5771e091b2|650e8aa980a0330f306cc17f|64c9319180a0323578c70c0e|657c5980df15856dfa0626de|65a4423ad75f861790da28ba)\.jpg/$domain=fanatik.com.tr
 fotomac.com.tr##.swiper-wrapper > div.swiper-slide:has(> a[href^="http://tinyurl.com/"])
 ||donailfoulardautore.com/dosyalar/
-/videojs8/nuevo.min.js$domain=etlorotogo.com|brusti.one
-/videojs/plugins/vastpro.js$domain=etlorotogo.com|brusti.one
+/videojs8/nuevo.min.js$domain=djsnke.one|etlorotogo.com|brusti.one
+/videojs/plugins/vastpro.js$domain=djsnke.one|etlorotogo.com|brusti.one
 ||etlorotogo.com/mobil/sitem.js
 mislink3.com###reklamlar center
 mgviagrtoomuch.com##div[style^="bottom:0;height:50px;"]
@@ -2062,7 +2067,7 @@ dizimom.de##.videoustuheader
 kocuce.com##body > center > a > img[style="max-width: 100%"]
 kocuce.com##.slickModal
 merlininkazani.com##.leader-board-row
-dizikorea.tv,dizimini.com###tv-spoox2 > .frontBgItem
+dizimini.com###tv-spoox2 > .frontBgItem
 ||sinema.cc/demo/prerollvid.php
 diziyou.co##.video > a
 manga-tr.com##.col-lg-4 > div.well3:has(> div.panel > center > a[href="https://medyabayim.com"])
@@ -2414,7 +2419,7 @@ dizikorea.*##.top-wcs
 yenisafak.com##.ys-popup-video-ad
 fullhdfilm.pro##.footerleft > a:not([href*="fullhdfilm.pro"])
 fullhdfilm.pro##.filmcontent > div[style^="margin:3px"]
-dizivex.com,dizimag.org###activeFrontVid
+dizikorea.*,dizivex.com,dizimag.org###activeFrontVid
 ||dizimag.org/uploads/1350x50.gif
 ||dizimag.org/uploads/1000x50.gif
 milliyet.com.tr##.main-card-ads
