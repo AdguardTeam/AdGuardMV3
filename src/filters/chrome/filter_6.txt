@@ -1,9 +1,9 @@
-! Checksum: qPgl4m0hW2lSokWsDKOcNA
-! Diff-Path: ../patches/6/6-s-1705757740-3600.patch
+! Checksum: LGf/e2efE7IQzUDGD1QBug
+! Diff-Path: ../patches/6/6-s-1705927222-3600.patch
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.40.7
-! TimeUpdated: 2024-01-20T13:33:02+00:00
+! Version: 2.0.40.10
+! TimeUpdated: 2024-01-22T12:36:55+00:00
 ! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1126,6 +1126,8 @@ plus.rtl.de#%#//scriptlet('trusted-replace-xhr-response', 'true', 'false', 'homa
 brigitte.de#%#//scriptlet('trusted-replace-xhr-response', 'true', 'false', 'global_config.json')
 plus.rtl.de#%#//scriptlet('abort-on-stack-trace', 'Object.prototype.adReinsertion', 'createSdk')
 !
+! https://github.com/uBlockOrigin/uAssets/issues/21862#issuecomment-1903805346
+restegourmet.de#%#//scriptlet("adjust-setInterval", "invoke", "1000", "0.01")
 ! jpgames.de - left-over at top
 jpgames.de#$##takeover { padding-top: unset!important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/166369
@@ -9038,7 +9040,7 @@ ak-kurier.de##.ad + #flashContent
 ak-kurier.de##.ad + .tdt
 ak-kurier.de##.ad + .uk-panel
 immobilienscout24.de##.ad-banner
-gebraucht-kaufen.de,mixed.de,raetsel-hilfe.de,sueddeutsche.de,swissmom.ch,tt.com,watchtime.net,zeit.de##.ad-container
+gebraucht-kaufen.de,it-daily.net,mixed.de,raetsel-hilfe.de,sueddeutsche.de,swissmom.ch,tt.com,watchtime.net,zeit.de##.ad-container
 hallo-minden.de##.ad-info
 xdate.ch##.ad-item
 diegrenzgaenger.lu##.ad-listing
@@ -9375,6 +9377,7 @@ help.ch##.content-teaser-tabs
 buffed.de,gamezone.de,pcgames.de,pcgameshardware.de##.contentFrameEddie
 koeln.de##.contentRect
 tourispo.de##.contentRefsAside
+windowspro.de##.content_before_3rd_para
 avguide.ch##.contest-frame
 mannheimer-morgen.de##.core-commercial
 finanzen.net##.cpg_incontent1-container
@@ -9581,6 +9584,7 @@ tri-mag.de##.irypolkj
 allround-pc.com##.is-fp-outer
 onvista.de##.isSponsored
 islamische-zeitung.de##.islam-widget
+it-daily.net##.itd-ad-sidebar
 buffed.de,pcgames.de##.item + .at_sponsored > .itemHeadline
 pragerzeitung.cz##.item-advert
 kleinanzeigen.de##.j-liberty-wrapper
