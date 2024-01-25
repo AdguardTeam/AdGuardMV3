@@ -1,9 +1,9 @@
-! Checksum: g61rwUoHpwjQl94iCPJ7bQ
-! Diff-Path: ../patches/7/7-s-1705995358-3600.patch
+! Checksum: QyGoqAjVB05gQXw0qjVd3A
+! Diff-Path: ../patches/7/7-s-1706160948-3600.patch
 ! Title: AdGuard Japanese filter
 ! Description: Filter that enables ad blocking on websites in Japanese language.
-! Version: 2.0.47.81
-! TimeUpdated: 2024-01-23T07:33:14+00:00
+! Version: 2.0.47.90
+! TimeUpdated: 2024-01-25T05:33:14+00:00
 ! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1494,7 +1494,7 @@ hostlove.com#$##index_nav > h1 { padding-top: 30px!important; }
 /wp-content/themes/CashLINESystem/js/modal.$script
 !
 ! Malware/Phishing
-://jp-hotlineinfoget-$document
+://jp-*-*.s3.ap-*.amazonaws.com/*-*-*-*-*-*-*/index.html$document
 /?start=(0101)-$document
 ://pub-*.r2.dev/$document
 ://amzone.co.jp.$document
@@ -1679,15 +1679,19 @@ gundamlog.com###more > iframe[src^="https://richlink.blogsys.jp"]
 !
 !
 !
-zelvia.co.jp##.p-sticky > div.container > div.p-sticky__wrap
-figureskatejapan.com#?#.article > div:last-child:not([class]):has(> ins.adsbygoogle)
-figureskatejapan.com#?#.article > p:has(> ins.adsbygoogle)
+matomelotte.com##.plugin-memo:has(> div.side > div > a[href^="https://amzn.to"][target="_blank"])
+nijie.info##a[ad_id]
+shinmai.co.jp#?#.items-center > .flex-col.pb-8:has(> h3:contains(あわせて読みたい))
+shinmai.co.jp##.items-center > .flex-col.pb-8:has(> h3 + .min-h-\[250px\] > div:only-child > div[id^="logly-lift-"])
+popnroll.tv###uzou-chat-ad + div[class^="sc-"]
+figureskatejapan.com##.article > div:last-child:not([class]):has(> ins.adsbygoogle)
+figureskatejapan.com##.article > p:has(> ins.adsbygoogle)
 koe-voice.jp##article[data-clarity-region="article"] > center
 ||img.cityheaven.net/youtube/thum/banner.png
 bossgoo.sakura.ne.jp###ffb_content
 ske48matome.net##.adbox2
-ske48matome.net#?#div[class^="article-body-"] > div[class^="article-body"] > div:not([class]):has(> div[align="center"] > ins.widget-banner)
-ske48matome.net#?#.plugin-memo:has(> div.side > div.cstmreba)
+ske48matome.net##div[class^="article-body-"] > div[class^="article-body"] > div:not([class]):has(> div[align="center"] > ins.widget-banner)
+ske48matome.net##.plugin-memo:has(> div.side > div.cstmreba)
 ||ec2.images-amazon.com/images/P/*._SCMZZZZZZZ_$domain=html.seo-search.com
 html.seo-search.com###baseBlock > hr[style="width:700px;"] + span[style="font-size:12px;"]
 html.seo-search.com###baseBlock > span[style="font-size:12px;"] + hr[style="width:700px;"]
@@ -2869,7 +2873,8 @@ city.mitaka.lg.jp###BannerArea
 sweetchocolate.blogterest.net##.blockAreaHeader
 ||townnews.co.jp/entry_ad.json
 ||koko-soccer.com/assets/img/base/side_title_contents.jpg
-wikiru.jp##.menubar > a[target="_blank"] > img[width="250"][height="250"]
+||bignox.com/moniqi-blog/$image,domain=wikiru.jp
+wikiru.jp##.menubar > a[target="_blank"] > img
 wikiru.jp##.menubar > a[target="_blank"] + br
 fu.minkabu.jp##div[class^="ad_hide"]
 adult-gazou.me,dougle.one,oppai-paipai.com##.head-pick
@@ -10231,7 +10236,6 @@ app-story.net#@##AdBlock
 @@||g.doubleclick.net/gampad/ads?$xmlhttprequest,domain=pointmall.rakuten.co.jp
 @@||pointmall.rakuten.co.jp/public/special/img/banners/*-300x250-$image,domain=pointmall.rakuten.co.jp
 @@||pointmall.rakuten.co.jp/public/special/img/banners/*_300x250.png$image,domain=pointmall.rakuten.co.jp
-pointmall.rakuten.co.jp#@#[id^="google_ads_iframe"]
 pointmall.rakuten.co.jp#@#.ad-space
 pointmall.rakuten.co.jp#@#.ad-unit
 pointmall.rakuten.co.jp#@#.ad-zone
@@ -10249,7 +10253,6 @@ asahi-net.jp,au.com,eowebmail.eonet.jp,hwm.hi-ho.ne.jp,icloud.com,mail.google.co
 @@||googlesyndication.com/safeframe/$domain=buhitter.com
 @@||googletagservices.com/tag/js/gpt.js$domain=buhitter.com
 @@||gsspcln.jp/w/ad_format/reward/gnsrwdmod.js$domain=buhitter.com
-buhitter.com#@#[id^="google_ads_iframe"]
 ! unhide popular articles (2nd rule: mobile)
 nijisenmon.work#@#.ad.widget
 nijisenmon.work#@#.st-h-ad
@@ -10263,7 +10266,6 @@ nijisenmon.work#@#.st-h-ad
 @@||googlesyndication.com/pagead/managed/js/adsense/*/show_ads_impl_$script,domain=nehannn.com|bihann.com
 @@||googlesyndication.com/safeframe/$subdocument,domain=nehannn.com|bihann.com
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$domain=nehannn.com|bihann.com
-bihann.com,nehannn.com#@#[id^="google_ads_iframe"]
 ! https://github.com/AdguardTeam/AdguardFilters/issues/134769
 @@||eisys-bcs.jp/data.json$domain=dlsite.com
 ! fix https://nanpre.adg5.com/reword_get.php?view=ok
@@ -10271,7 +10273,6 @@ bihann.com,nehannn.com#@#[id^="google_ads_iframe"]
 @@||g.doubleclick.net/gpt/pubads_impl_$script,domain=nanpre.adg5.com
 @@||g.doubleclick.net/gampad/ads?$xmlhttprequest,domain=nanpre.adg5.com
 @@||safeframe.googlesyndication.com/safeframe/$subdocument,domain=nanpre.adg5.com
-nanpre.adg5.com#@#[id^="google_ads_iframe"]
 ! https://github.com/AdguardTeam/AdguardFilters/issues/133206
 crefan.jp#@#.adspace
 ! https://github.com/AdguardTeam/AdguardFilters/issues/132324

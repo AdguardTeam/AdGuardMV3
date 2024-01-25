@@ -1,9 +1,9 @@
-! Checksum: ZUO3cO5U4aYR7Cqq/p6uYA
-! Diff-Path: ../patches/3/3-s-1705944957-3600.patch
+! Checksum: XDpua0eIhtgBOsTLLpQYyQ
+! Diff-Path: ../patches/3/3-s-1706160946-3600.patch
 ! Title: AdGuard Tracking Protection filter
 ! Description: The most comprehensive list of various online counters and web analytics tools. Use this filter if you do not want your actions on the Internet to be tracked.
-! Version: 2.0.65.91
-! TimeUpdated: 2024-01-22T17:32:54+00:00
+! Version: 2.0.65.97
+! TimeUpdated: 2024-01-25T05:32:52+00:00
 ! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -4543,6 +4543,7 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ! Blocking piwik analytics subdomain(for DNS filtering)
 |piwik.
 !
+||d9jj3mjthpub.cloudfront.net^
 ||wwwstat.rz.uni-leipzig.de^
 ||analytics.fap.bar^
 ||analytics-batch.blitz.gg^
@@ -82217,6 +82218,7 @@ _tracking.php?b=
 /analytics.js$domain=tokyometro.jp|resumes.breakdownexpress.com|techcult.com|inbox.lv|kopeda.com|freexcafe.com|rusvideos.tv|nakubani.ru|lun.com|songsara.net|newsmax.com|bolgehastanesi.com|ewtc.de|newsdig.tbs.co.jp|imore.com|city.kushiro.lg.jp|emeraldbridal.com.au|emarat-news.ae|imobie.jp|tikla.com.tr|rusvideos.porn|jrkyushu.co.jp|amiunique.org|edit.ing|konami.com
 ||assets.adobedtm.com^$domain=mcclatchydc.com|elnuevoherald.com|bellinghamherald.com|sacbee.com|charlotteobserver.com|newsobserver.com|miamiherald.com|ef.ru|algida.com.tr|bmw-motorrad.co.uk|cif.com.tr|clearhaircare.com|domestos.com|dove.com|elidor.com.tr|f1sport.autorevue.cz|geico.com|hellmanns.com.tr|herkessofraya.com|johnsonsbaby.com.tr|lipton.com|lnk.to|lux.com|magnumicecream.com|neutrogena.com.tr|omo.com|rexona.com|samsung.com|sap.com|schwarzkopf.com.tr|signalturkiye.com|msnbc.com|nbcnews.com|kbb.com|eurosport.ru|timgate.it|intermiles.com|oxfordmail.co.uk|spiegel.de|hp.com|deutschepost.de|thebay.com|s.shufoo.net|tsn.ca|tabelog.com|euronews.com|newshub.co.nz|fredmeyer.com|viabcp.com|carsales.com.au|falabella.com|aarp.org|thehill.com|realtor.com|nzherald.co.nz|aia.com.ph|baynews9.com|thesaurus.com
 !
+||dpg.danawa.com/*/rest/*getStampEvent
 ||www-direct.upgradedhome.com/eventStream
 ||fap.bar/a.js
 ||cue.search.naver.com/api/*/log/
@@ -86235,6 +86237,10 @@ nethunt.com/api/v1/track/email/$image
 ! Bad:  example.org#@##cookie
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/171285
+@@||godaddy.com^$cookie=_gid
+@@||godaddy.com^$cookie=/^_ga_/
+@@||godaddy.com^$cookie=_ga
 ! https://github.com/AdguardTeam/AdguardFilters/issues/170920
 @@||endesaclientes.com^$cookie=dtCookie
 ! https://github.com/AdguardTeam/AdguardFilters/issues/164914
@@ -86277,6 +86283,13 @@ nethunt.com/api/v1/track/email/$image
 ! Bad:  ||example.com^$cookie=flat_r_mb (should be in cookies_specific.txt)
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/171106
+$cookie=TMog
+$cookie=globalTI_SID
+! LiveIntent (liadm.com)
+$cookie=_li_dcdm_c
+$cookie=_lc2_fpi
+$cookie=_lc2_fpi_meta
 ! Contentsquare
 $cookie=_cs_cvars
 $cookie=_cs_id
@@ -86465,11 +86478,11 @@ $cookie=flocktory-uuid
 $cookie=/^wisepops/
 ! Demandware Analytics
 ! https://github.com/AdguardTeam/AdguardFilters/issues/169558
-$cookie=/dwanonymous_/,domain=~ec.nintendo.com|~store-jp.nintendo.com
+$cookie=/dwanonymous_/,domain=~nintendo.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/167333
-$cookie=cqcid,domain=~ec.nintendo.com|~store-jp.nintendo.com
+$cookie=cqcid,domain=~nintendo.com
 ! BUG: https://github.com/AdguardTeam/AdguardFilters/issues/164150
-$cookie=/dwac_/,domain=~ec.nintendo.com|~store-jp.nintendo.com
+$cookie=/dwac_/,domain=~nintendo.com
 ! retentionscience.com tracking
 $cookie=rsci_vid
 ! qualaroo.com tracking
@@ -86655,7 +86668,7 @@ $cookie=AMP_TOKEN
 $cookie=/^_gac_/
 ! Used to persist session state.
 ! BUG: https://github.com/AdguardTeam/AdguardFilters/issues/164150
-$cookie=/^_ga_/,domain=~ec.nintendo.com|~store-jp.nintendo.com
+$cookie=/^_ga_/,domain=~nintendo.com
 ! Used to throttle request rate.
 $cookie=/^_dc_gtm_UA-/
 ! ---
@@ -86694,7 +86707,7 @@ $cookie=_opt_expid
 $cookie=__gads
 ! This cookie enables experiments with advertisement efficiency across websites in the Google Ads network.
 ! https://github.com/AdguardTeam/AdguardFilters/issues/169558
-$cookie=_gcl_au,domain=~ec.nintendo.com|~store-jp.nintendo.com
+$cookie=_gcl_au,domain=~nintendo.com
 ! Used to track visitors on multiple websites, in order to present relevant advertisement based on the visitor's preferences.
 $cookie=_gcl_aw
 ! https://policies.google.com/technologies/cookies/embedded?hl=en-US
@@ -86891,7 +86904,7 @@ $cookie=SC_ANALYTICS_GLOBAL_COOKIE
 $cookie=ajs_anonymous_id
 ! Stores a visitor's unique Optimizely identifier.
 ! https://github.com/AdguardTeam/AdguardFilters/issues/169558
-$cookie=optimizelyEndUserId,domain=~ec.nintendo.com|~store-jp.nintendo.com
+$cookie=optimizelyEndUserId,domain=~nintendo.com
 ! Outbrain
 ! Collects data on the user’s navigation and behavior on the website.
 $cookie=outbrain_cid_fetch
@@ -87001,6 +87014,8 @@ $cookie=bf_visit
 ! Bad:  ||monerominer.rocks^$third-party (should be in adservers.txt)
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/171140
+xfree.com$cookie=anonymous
 ! https://github.com/AdguardTeam/AdguardFilters/issues/171231
 ||exame.com^$cookie=NID
 ! https://github.com/AdguardTeam/AdguardFilters/issues/170358
@@ -88330,6 +88345,8 @@ inapps.appsflyersdk.com^
 ! For platforms which do not support $redirect rules
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/171312
+@@||analytics-*.clickdimensions.com/*/pages/*.html$subdocument,domain=techuk.org
 ! https://github.com/AdguardTeam/AdguardFilters/issues/171217
 @@||googletagmanager.com/gtm.js$domain=journaldequebec.com
 @@||scdn.cxense.com/cx.js$domain=journaldequebec.com
