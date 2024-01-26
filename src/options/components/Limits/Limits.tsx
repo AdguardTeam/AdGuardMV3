@@ -10,7 +10,6 @@ import { RULE_SET_NAME_PREFIX } from '@adguard/tswebextension/mv3';
 
 import { theme } from 'Common/styles';
 import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
-import { FiltersGroupId } from 'Common/constants/common';
 import { reactTranslator } from 'Common/translators/reactTranslator';
 import { MV3 } from 'Common/constants/urls';
 import { IconId } from 'Common/components/ui';
@@ -63,12 +62,7 @@ export const Limits = observer(() => {
 
     const filtersNamesMap: Map<number, string> = new Map<number, string>();
     filters.forEach((f) => {
-        if (f.groupId === FiltersGroupId.LANGUAGES) {
-            filtersNamesMap.set(f.id, f.title);
-        } else {
-            const title = reactTranslator.getMessage(f.title) as string;
-            filtersNamesMap.set(f.id, title);
-        }
+        filtersNamesMap.set(f.id, f.title);
     });
 
     const { settings: { [SETTINGS_NAMES.FILTERS_CHANGED]: wasEnabledIds } } = settingsStore;
