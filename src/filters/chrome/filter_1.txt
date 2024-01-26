@@ -1,9 +1,9 @@
-! Checksum: AVkBvm4H/Wo+BoVvzBzOTA
-! Diff-Path: ../patches/1/1-s-1706110601-3600.patch
+! Checksum: IRvmMP+5Whz4z6mo6sB9XA
+! Diff-Path: ../patches/1/1-s-1706265348-3600.patch
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.88.8
-! TimeUpdated: 2024-01-24T15:32:29+00:00
+! Version: 2.0.88.11
+! TimeUpdated: 2024-01-26T10:32:07+00:00
 ! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -6060,7 +6060,7 @@ tragtorr.in#@#div[id^="yandex_rtb"]
 pikabu.ru#%#//scriptlet('abort-on-stack-trace', 'XMLHttpRequest', 'createAd')
 pikabu.ru#%#//scriptlet('prevent-setTimeout', '_sendAnalytics')
 pikabu.ru#%#//scriptlet('json-prune', 'data', 'errors')
-pikabu.ru#%#//scriptlet('remove-node-text', 'script', '/new \(?(this|document\.defaultView|window|top|XMLHttpRequest|true|false|[a-z]{8,})(\[[\"\s\'\+a-zA-Z]+\])?[\s\S]+Ad/')
+pikabu.ru#%#//scriptlet('remove-node-text', 'script', '/new \(?(this|document\.defaultView|window|top|XMLHttpRequest|true|false|[a-zA-Z]{9,10})(\[[\"\s\'\+a-zA-Z]+\])?[\s\S]+Ad/')
 ! sports.ru
 sports.ru#%#//scriptlet('json-prune', 'direct rtbAuctionInfo')
 sports.ru#%#//scriptlet('set-constant', 'Ya.adfoxCode.create', 'noopFunc')
@@ -9517,6 +9517,8 @@ gorodn.ru,bits.media,devyatka.ru,gazeta-n1.ru,gorod48.ru,hi-fi.ru,innov.ru,k1new
 !
 !
 !
+food.segodnya.ua##.branding-under-menu
+||s-cdn.sportbox.ru/i/wi-fi.ru/mtt_banners_libs_
 vsedoramy.*##.dc_container
 ||milfvideo.top/click_pr.js
 ||milfvideo.top/baner/
@@ -17570,7 +17572,7 @@ politonline.ru##div[id^="div_sf_"]
 hdserials.tv##div[id^="gkBanner"]
 anekdot.ru##div[id^="krt-"]
 mobiltelefon.ru##div[id^="lbanners"]
-nevskie-palaty.ru,tlt.ru,medialeaks.ru##div[id^="mtt-inread-"]
+matchtv.ru,nevskie-palaty.ru,tlt.ru,medialeaks.ru##div[id^="mtt-inread-"]
 ntv.ru##div[id^="nads_banner_"]
 nasotke.ru##div[id^="nasotke-fixed-"]
 agrimpasa.com,newformat.info,rusjev.net##div[id^="newPortal_informer_"]
