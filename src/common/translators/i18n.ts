@@ -18,6 +18,11 @@ type I18nInterfaceWithIgnore = I18nInterface & {
 };
 
 export const i18n: I18nInterfaceWithIgnore = {
+    /**
+     * For some cases when we have invalid plural form to some locale we should
+     * ignore this key for the next call of extracting message to force extract
+     * base message from the base locale.
+     */
     ignoreTranslatesForKeys: [],
 
     /**
