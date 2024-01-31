@@ -14,7 +14,7 @@ const BASE_LOCALE = 'en';
 const uiLanguage = chrome.i18n.getUILanguage();
 
 type I18nInterfaceWithIgnore = I18nInterface & {
-    ignoreTranslatesForKeys: string[];
+    invalidPluralFormsKey: string[];
 };
 
 export const i18n: I18nInterfaceWithIgnore = {
@@ -23,7 +23,7 @@ export const i18n: I18nInterfaceWithIgnore = {
      * ignore this key for the next call of extracting message to force extract
      * base message from the base locale.
      */
-    ignoreTranslatesForKeys: [],
+    invalidPluralFormsKey: [],
 
     /**
      * Retrieves the localized message for the given key.
@@ -33,7 +33,7 @@ export const i18n: I18nInterfaceWithIgnore = {
      * @throws {Error} If there is no such key in the messages.
      */
     getMessage: (key: string) => {
-        if (i18n.ignoreTranslatesForKeys.includes(key)) {
+        if (i18n.invalidPluralFormsKey.includes(key)) {
             return '';
         }
 
@@ -101,9 +101,8 @@ export function addWrapperForGetPlural<T = string | ReactNode>(t: Translator<T>)
             if (e instanceof Error && e.message.includes('Invalid plural string')) {
                 // eslint-disable-next-line no-console
                 console.debug('Possible invalid plural message for key: ', key);
-                i18n.ignoreTranslatesForKeys.push(key);
+                i18n.invalidPluralFormsKey.push(key);
                 const baseLanguagePluralMessage = originalGetPlural.call(t, key, count);
-                i18n.ignoreTranslatesForKeys = i18n.ignoreTranslatesForKeys.filter((s) => s !== key);
                 return baseLanguagePluralMessage;
             }
             throw e;
