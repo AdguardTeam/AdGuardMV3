@@ -6,7 +6,7 @@ plan:
   name: browser extension mv3 - auto-release
 variables:
   # playwright is needed for integration tests after build
-  dockerPlaywright: adguard/playwright-runner:1.27.1--1
+  dockerPlaywright: adguard/playwright-runner:1.39.0--0
 
 stages:
   - AutoBuild:
@@ -91,10 +91,9 @@ AutoBuild:
 
 # run release build at 11:00 every Tuesday, Thursday and Sunday
 # https://confluence.atlassian.com/bamboo/constructing-a-cron-expression-in-bamboo-289277372.html
-# TODO: Pause until we fix issue with scriptlets.
-# triggers:
-#   - cron:
-#       expression: 0 0 11 ? * TUE,THU,SUN
+triggers:
+  - cron:
+      expression: 0 0 11 ? * TUE,THU,SUN
 
 branches:
   create: manually
@@ -105,8 +104,7 @@ notifications:
   - recipients:
       - webhook:
           name: Build webhook
-          # send notification to the stand-up channel
-          url: http://prod.jirahub.service.eu.consul/v1/webhook/bamboo?channel=stand-up-extensions
+          url: http://prod.jirahub.service.eu.consul/v1/webhook/bamboo
     events:
       - plan-status-changed
 
