@@ -1,3 +1,5 @@
+import { CommonMessageType as TsWebExtensionMessageType } from '@adguard/tswebextension/mv3';
+
 import { SettingsType } from './settings-constants';
 import { IconId } from './icons';
 
@@ -58,7 +60,6 @@ export enum MESSAGE_TYPES {
     SET_SETTING = 'SET_SETTING',
     REPORT_SITE = 'REPORT_SITE',
     OPEN_ASSISTANT = 'OPEN_ASSISTANT',
-    START_ASSISTANT = 'START_ASSISTANT',
     ADD_USER_RULE = 'ADD_USER_RULE',
     RELOAD_ACTIVE_TAB = 'RELOAD_ACTIVE_TAB',
     TOGGLE_PROTECTION = 'TOGGLE_PROTECTION',
@@ -76,7 +77,6 @@ export enum MESSAGE_TYPES {
     GET_DYNAMIC_RULES_STATUS = 'GET_DYNAMIC_RULES_STATUS',
     RELAUNCH_FILTERING = 'RELAUNCH_FILTERING',
     TOGGLE_SITE_ALLOWLIST_STATUS = 'TOGGLE_SITE_ALLOWLIST_STATUS',
-    ADD_USER_RULE_FROM_ASSISTANT = 'ADD_USER_RULE_FROM_ASSISTANT',
     GET_FILTERS_NAMES = 'GET_FILTERS_NAMES',
     START_LOG = 'START_LOG',
     STOP_LOG = 'STOP_LOG',
@@ -91,7 +91,7 @@ export enum MESSAGE_TYPES {
 export type MessageType = keyof typeof MESSAGE_TYPES;
 
 export type Message = {
-    type: MessageType;
+    type: MessageType | TsWebExtensionMessageType;
     data?: any;
 };
 
@@ -148,3 +148,5 @@ export const REGEX_DOMAIN_IN_RULE = /(?<=\|\|)(.*?)(?=\^|\/|:|\$)/g;
 export const WEB_ACCESSIBLE_RESOURCES_PATH = '/web-accessible-resources/redirects';
 
 export const EXTENSION_INITIALIZED_EVENT = 'initialized';
+
+export const ASSISTANT_FILE_NAME = 'assistant';

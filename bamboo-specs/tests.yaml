@@ -5,7 +5,7 @@ plan:
   key: V3BETESTSPECS
   name: browser extension mv3 - tests
 variables:
-  dockerPlaywright: adguard/playwright-runner:1.27.1--1
+  dockerPlaywright: adguard/playwright-runner:1.39.0--0
 
 stages:
   - Test:
@@ -36,12 +36,17 @@ Test:
             ls -la
 
             yarn install ${bamboo.varsYarn}
+
             yarn lint
             yarn test
+            yarn locales validate
             yarn dev
             yarn integration-test dev
 
             rm -rf node_modules
+    - test-parser:
+        type: junit
+        test-results: '**/test-report.xml'
   artifacts:
     - name: build.txt
       location: build/dev

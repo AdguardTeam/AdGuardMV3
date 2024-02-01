@@ -1,10 +1,17 @@
 import chalk from 'chalk';
 
-export const colorizeStatusText = (status: string) => {
-    if (status === 'passed') {
+export const enum TestStatus {
+    Passed = 'passed',
+    Failed = 'failed',
+    Skipped = 'skipped',
+    Timeout = 'timeout',
+}
+
+export const colorizeStatusText = (status: TestStatus) => {
+    if (status === TestStatus.Passed) {
         return chalk.green(status);
     }
-    if (status === 'skipped') {
+    if (status === TestStatus.Skipped) {
         // some tests may be skipped due to exceptions
         return chalk.yellow(status);
     }

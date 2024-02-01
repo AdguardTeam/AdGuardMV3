@@ -1,4 +1,6 @@
-import type { I18nInterface, Locale } from '@adguard/translate';
+import type { I18nInterface } from '@adguard/translate';
+
+import { normalizeLanguageCode } from '../../../scripts/locales/normalize-language-code';
 
 /** Represents an individual message entry */
 type MessageEntry = { message: string };
@@ -47,7 +49,7 @@ export const i18n: I18nInterface = {
      * @returns The 2-letter UI language code.
      */
     getUILanguage: () => {
-        return uiLanguage.substring(0, 2) as Locale;
+        return normalizeLanguageCode(uiLanguage);
     },
     getBaseMessage: (key: string) => {
         // thus we can test the base messages with keys without translations

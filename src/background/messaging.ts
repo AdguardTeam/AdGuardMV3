@@ -4,7 +4,6 @@ import {
     MESSAGE_TYPES,
     OptionsData,
     Message,
-    NOTIFIER_EVENTS,
     PROTECTION_PAUSE_TIMEOUT_MS,
     PopupData,
     EXTENSION_INITIALIZED_EVENT,
@@ -15,7 +14,6 @@ import { tabUtils } from 'Common/tab-utils';
 import FiltersUtils from 'Common/utils/filters';
 
 import { settings } from './settings';
-import { notifier } from './notifier';
 import { protectionPause } from './protectionPause';
 import { filters } from './filters';
 import { backend } from './backend';
@@ -86,17 +84,6 @@ export const extensionMessageHandler = async (
             const { ruleText } = data;
             await userRules.addRule(ruleText);
             await tsWebExtensionWrapper.configure();
-
-            break;
-        }
-        case MESSAGE_TYPES.ADD_USER_RULE_FROM_ASSISTANT: {
-            const { ruleText } = data;
-            await userRules.addRule(ruleText);
-            await tsWebExtensionWrapper.configure();
-
-            const updatedRules = await userRules.getRules();
-            // Notify UI about changes
-            notifier.notify(NOTIFIER_EVENTS.SET_RULES, { value: updatedRules });
 
             break;
         }

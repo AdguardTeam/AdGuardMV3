@@ -19,11 +19,14 @@ export const DEFAULT_EXTENSION_CONFIG: Configuration = {
     ruleSetsPath: 'filters/declarative',
     filteringLogEnabled: false,
     settings: {
+        // Url can be empty because it is not using during tests.
+        assistantUrl: '',
         collectStats: true,
         allowlistEnabled: true,
         allowlistInverted: false,
         stealthModeEnabled: true,
         filteringEnabled: true,
+        debugScriptlets: false,
         stealth: {
             blockChromeClientData: true,
             hideReferrer: true,

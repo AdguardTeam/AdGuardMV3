@@ -1,13 +1,3 @@
-import { assistant } from './assistant';
-
-interface CustomNodeJsGlobal extends NodeJS.Global {
-    isAssistantInitiated: boolean;
-}
-
-declare const global: CustomNodeJsGlobal;
-
-// Init assistant only once
-if (!global.isAssistantInitiated) {
-    assistant.init();
-    global.isAssistantInitiated = true;
-}
+// In this file we doing only lazy-load assistant and place it to global scope
+// of the current content-script.
+import '@adguard/tswebextension/assistant-inject';

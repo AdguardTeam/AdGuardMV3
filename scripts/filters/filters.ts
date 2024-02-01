@@ -49,7 +49,7 @@ const startConvert = async (browser: string) => {
         filtersDir,
         WEB_ACCESSIBLE_RESOURCES_PATH,
         declarativeFiltersDir,
-        false,
+        true,
     );
 };
 

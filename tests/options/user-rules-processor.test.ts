@@ -7,7 +7,6 @@ describe('user rules processor', () => {
 @@||google.com$domain=adguard.com
 ||google.com^$domain=baddomain.com
 ||google.com^
-||example.com^$webrtc,domain=example.org
 ||example.com/ads/*
 @@||lenta.ru$document
 ~domain.com###banner
@@ -19,92 +18,80 @@ example.com#@$#.textad { visibility: hidden; }
         const userRulesProcessor = new UserRulesProcessor(userRulesString);
         const userRulesData = userRulesProcessor.getData();
 
-        expect(userRulesData).toEqual([
+        const expectedData = [
             {
-                id: 0,
                 ruleText: 'example.org##h1',
                 domain: 'example.org',
                 enabled: true,
                 type: UserRuleType.ELEMENT_BLOCKED,
             },
             {
-                id: 1,
                 ruleText: '@@||google.com$domain=adguard.com',
                 domain: 'adguard.com',
                 enabled: true,
                 type: UserRuleType.SITE_ALLOWED,
             },
             {
-                id: 2,
                 ruleText: '||google.com^$domain=baddomain.com',
                 domain: 'baddomain.com',
                 enabled: true,
                 type: UserRuleType.SITE_BLOCKED,
             },
             {
-                id: 3,
                 ruleText: '||google.com^',
                 domain: 'google.com',
                 enabled: true,
                 type: UserRuleType.SITE_BLOCKED,
             },
             {
-                id: 4,
-                ruleText: '||example.com^$webrtc,domain=example.org',
-                domain: 'example.org',
-                enabled: true,
-                type: UserRuleType.SITE_BLOCKED,
-            },
-            {
-                id: 5,
                 ruleText: '||example.com/ads/*',
                 domain: 'example.com',
                 enabled: true,
                 type: UserRuleType.SITE_BLOCKED,
             },
             {
-                id: 6,
                 ruleText: '@@||lenta.ru$document',
                 domain: 'lenta.ru',
                 enabled: true,
                 type: UserRuleType.SITE_ALLOWED,
             },
             {
-                id: 7,
                 ruleText: '~domain.com###banner',
                 domain: null,
                 enabled: true,
                 type: UserRuleType.ELEMENT_BLOCKED,
             },
             {
-                id: 8,
                 ruleText: '||domain.com^$domain=~example.com',
                 domain: 'domain.com',
                 enabled: true,
                 type: UserRuleType.SITE_BLOCKED,
             },
             {
-                id: 9,
                 ruleText: 'meduza.io##div.textad',
                 domain: 'meduza.io',
                 enabled: true,
                 type: UserRuleType.ELEMENT_BLOCKED,
             },
             {
-                id: 10,
                 ruleText: 'example.org$$script[data-src="banner"]',
                 domain: 'example.org',
                 enabled: true,
                 type: UserRuleType.ELEMENT_BLOCKED,
             },
             {
-                id: 11,
                 ruleText: 'example.com#@$#.textad { visibility: hidden; }',
                 domain: 'example.com',
                 enabled: true,
                 type: UserRuleType.CUSTOM,
             },
-        ]);
+        ];
+
+        const expectedDataWithIds = expectedData.map((item, idx) => {
+            return Object.assign(item, { id: idx });
+        });
+
+        expect(userRulesData).toEqual(expectedDataWithIds);
     });
     it('ignores comments', () => {
         const userRulesString = `example.org##h1

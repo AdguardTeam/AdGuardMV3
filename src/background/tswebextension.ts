@@ -7,7 +7,13 @@ import {
     TooManyRegexpRulesError,
 } from '@adguard/tswebextension/mv3';
 
-import { FiltersGroupId, RuleSetCounters, WEB_ACCESSIBLE_RESOURCES_PATH } from 'Common/constants/common';
+import {
+    ASSISTANT_FILE_NAME,
+    FiltersGroupId,
+    NOTIFIER_EVENTS,
+    RuleSetCounters,
+    WEB_ACCESSIBLE_RESOURCES_PATH,
+} from 'Common/constants/common';
 import { SETTINGS_NAMES } from 'Common/constants/settings-constants';
 import { log } from 'Common/logger';
 
@@ -15,6 +21,7 @@ import { DEFAULT_FILTERS, filters } from './filters';
 import { settings } from './settings';
 import { userRules } from './userRules';
 import { browserActions } from './browser-actions';
+import { notifier } from './notifier';
 
 const {
     MAX_NUMBER_OF_REGEX_RULES,
@@ -40,11 +47,21 @@ class TsWebExtensionWrapper {
 
     constructor() {
         this.tsWebExtension = new TsWebExtension(WEB_ACCESSIBLE_RESOURCES_PATH);
+
         // adguard.configure() is needed for integration tests
         // eslint-disable-next-line no-restricted-globals
         self.adguard = {
             configure: this.tsWebExtension.configure.bind(this.tsWebExtension),
         };
+
+        this.tsWebExtension.onAssistantCreateRule.subscribe(async (rule) => {
+            await userRules.addRule(rule);
+            await this.configure();
+
+            const updatedRules = await userRules.getRules();
+            // Notify UI about changes
+            notifier.notify(NOTIFIER_EVENTS.SET_RULES, { value: updatedRules });
+        });
     }
 
     public get ruleSetsCounters(): RuleSetCounters[] {
@@ -80,10 +97,10 @@ class TsWebExtensionWrapper {
     }
 
     static async saveDynamicRulesInfo({ dynamicRules }: ConfigurationResult) {
-        const { ruleSets: [ruleset], limitations } = dynamicRules;
+        const { ruleSet, limitations } = dynamicRules;
 
-        const declarativeRulesCount = ruleset.getRulesCount();
-        const regexpsCount = ruleset.getRegexpRulesCount();
+        const declarativeRulesCount = ruleSet.getRulesCount();
+        const regexpsCount = ruleSet.getRegexpRulesCount();
 
         const rulesLimitExceedErr = limitations
             .find((e) => e instanceof TooManyRulesError);
@@ -169,11 +186,13 @@ class TsWebExtensionWrapper {
 
         return {
             settings: {
+                assistantUrl: chrome.runtime.getURL(`${ASSISTANT_FILE_NAME}.js`),
                 allowlistEnabled: false,
                 allowlistInverted: false,
                 collectStats: true,
                 stealthModeEnabled: false,
                 filteringEnabled: false,
+                debugScriptlets: false,
                 // TODO: check fields needed in the mv3
                 stealth: {
                     blockChromeClientData: false,

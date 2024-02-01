@@ -37,6 +37,11 @@ export type TranslationResultType = {
     untranslatedStrings: string[],
 
     /**
+     * List of untranslated plural strings.
+     */
+    untranslatedPluralStrings: string[],
+
+    /**
      * List of invalid translations.
      */
     invalidTranslations: MessageValidationResult[],

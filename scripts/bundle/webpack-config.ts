@@ -10,6 +10,7 @@ import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import _ from 'lodash';
 import fse from 'fs-extra';
 
+import { ASSISTANT_FILE_NAME } from '../../src/common/constants/common';
 import { FILTER_RULESET, RulesetType } from '../../src/common/constants/filters';
 import {
     Browser,
@@ -84,7 +85,7 @@ export const getWebpackConfig = (
     const DEVTOOLS_PATH = path.resolve(__dirname, SRC_PATH, 'devtools');
     const DEBUGGING_PATH = path.resolve(__dirname, SRC_PATH, 'debugging');
     const CONTENT_SCRIPTS_PATH = path.resolve(__dirname, SRC_PATH, 'content-scripts');
-    const ASSISTANT_PATH = path.resolve(CONTENT_SCRIPTS_PATH, 'assistant');
+    const ASSISTANT_PATH = path.resolve(CONTENT_SCRIPTS_PATH, ASSISTANT_FILE_NAME);
     const OUTPUT_DIR = path.resolve(__dirname, BUILD_PATH, OUTPUT_PATH, browser);
     const FILTERS_DECLARATIVE_DIR = path.resolve(__dirname, SRC_PATH, FILTERS_PATH, 'declarative/');
 
@@ -149,7 +150,6 @@ export const getWebpackConfig = (
             chunks: ['debugging'],
         }),
 
-        // @ts-ignore
         new MiniCssExtractPlugin(),
     ];
 

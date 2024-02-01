@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-globals */
 import { Configuration, ConfigurationResult } from '@adguard/tswebextension/mv3';
 
-import { LogDetails } from './logger';
+import { type TestDetails } from './logger';
 
 declare global {
     interface Window {
@@ -11,7 +11,7 @@ declare global {
     }
 }
 
-export const addQunitListeners = (logResultFnName: string) => {
+export const addQunitListeners = () => {
     let qUnit: any;
 
     Object.defineProperty(window, 'QUnit', {
@@ -19,13 +19,13 @@ export const addQunitListeners = (logResultFnName: string) => {
         set: (value) => {
             qUnit = value;
 
-            // https://github.com/js-reporters/js-reporters
-            qUnit.on('runEnd', (details: LogDetails) => {
+            // https://api.qunitjs.com/callbacks/QUnit.on/#the-runend-event
+            qUnit.on('runEnd', (details: TestDetails) => {
                 const name = document.getElementById('qunit-header')?.textContent;
 
-                (<any>window)[logResultFnName](Object.assign(details, { name }));
+                const testDetails = Object.assign(details, { name });
 
-                (<any>window).testsCompleted = true;
+                (<any>window).testDetails = testDetails;
             });
         },
         configurable: true,
@@ -48,8 +48,4 @@ export const waitUntilExtensionInitialized = async (eventName: string): Promise<
     return new Promise((resolve: () => void) => {
         addEventListener(eventName, resolve, { once: true });
     });
-};
-
-export const waitUntilTestsCompleted = () => {
-    return (<any>window).testsCompleted;
 };

@@ -1,1 +1,0 @@
-export { alertPopup } from './alertPopup';

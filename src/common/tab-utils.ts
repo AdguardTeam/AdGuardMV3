@@ -1,4 +1,6 @@
-import { MESSAGE_TYPES, Message, MessageType } from 'Common/constants/common';
+import { CommonMessageType as TsWebExtensionMessageType } from '@adguard/tswebextension/mv3';
+
+import { ASSISTANT_FILE_NAME, Message, MessageType } from 'Common/constants/common';
 import { REPORT_SITE_BASE } from 'Common/constants/urls';
 import { log } from 'Common/logger';
 import { prefs } from 'Common/prefs';
@@ -23,7 +25,7 @@ class TabUtils {
         });
     };
 
-    sendMessageToTab = (tabId: number, type: MessageType, data?: any) => {
+    sendMessageToTab = (tabId: number, type: MessageType | TsWebExtensionMessageType, data?: any) => {
         const message: Message = { type };
         if (data) {
             message.data = data;
@@ -80,11 +82,11 @@ class TabUtils {
      */
     openAssistantWithInject = async (tabId: number) => {
         try {
-            await this.sendMessageToTab(tabId, MESSAGE_TYPES.START_ASSISTANT);
+            await this.sendMessageToTab(tabId, TsWebExtensionMessageType.InitAssistant);
         } catch (e) {
             // if assistant wasn't injected yet sendMessageToTab will throw an error
-            await scripting.executeScript(tabId, { file: 'assistant.js' });
-            await this.sendMessageToTab(tabId, MESSAGE_TYPES.START_ASSISTANT);
+            await scripting.executeScript(tabId, { file: `${ASSISTANT_FILE_NAME}.js` });
+            await this.sendMessageToTab(tabId, TsWebExtensionMessageType.InitAssistant);
         }
     };
 

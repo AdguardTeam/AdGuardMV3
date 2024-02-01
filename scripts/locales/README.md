@@ -2,7 +2,7 @@
 
 ### Synopsis
 ```
-yarn locales:[download | upload | renew | validate | info]
+yarn locales [download | upload | renew | validate | info]
 ```
 
 - `download` — download and save translations; defaults to **all** locales but can be specified

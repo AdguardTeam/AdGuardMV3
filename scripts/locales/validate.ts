@@ -6,13 +6,13 @@ import { getErrorMessage } from '../../src/common/error';
 import { cliLog } from '../cli-log';
 import { areArraysEqual, getLocaleTranslations } from '../helpers';
 
+import { normalizeLanguageCode } from './normalize-language-code';
 import {
     BASE_LOCALE,
     LANGUAGES,
     LOCALE_DATA_FILENAME,
     LOCALES_RELATIVE_PATH,
     REQUIRED_LOCALES,
-    THRESHOLD_PERCENTAGE,
     type TranslationResultType,
     type MessageValidationResult,
 } from './locales-constants';
@@ -26,25 +26,32 @@ const LOCALES_DIR = path.resolve(__dirname, LOCALES_RELATIVE_PATH);
  * @param results List of translations readiness results.
  * @param isMinimum Flag for minimum locales to check, limited to the required locales.
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const printTranslationsResults = (results: TranslationResultType[], isMinimum = false): void => {
     cliLog.info('Translations readiness:');
     results.forEach((r) => {
         const record = `${r.locale} -- ${r.level}%`;
-        if (r.level < THRESHOLD_PERCENTAGE) {
+
+        const {
+            untranslatedPluralStrings,
+            invalidTranslations,
+        } = r;
+
+        if (untranslatedPluralStrings.length > 0 || invalidTranslations.length > 0) {
             cliLog.warningRed(record);
-            if (r.untranslatedStrings.length > 0) {
+
+            if (untranslatedPluralStrings.length > 0) {
                 cliLog.warning('  untranslated:');
-                r.untranslatedStrings.forEach((str) => {
+                untranslatedPluralStrings.forEach((str) => {
                     cliLog.warning(`    - ${str}`);
                 });
             }
-            if (!isMinimum) {
-                if (r.invalidTranslations.length > 0) {
-                    cliLog.warning('  invalid:');
-                    r.invalidTranslations.forEach((obj) => {
-                        cliLog.warning(`    - ${obj.key} -- ${obj.error}`);
-                    });
-                }
+
+            if (invalidTranslations.length > 0) {
+                cliLog.warning('  invalid:');
+                invalidTranslations.forEach((obj) => {
+                    cliLog.warning(`    - ${obj.key} -- ${obj.error}`);
+                });
             }
         } else {
             cliLog.success(record);
@@ -71,7 +78,7 @@ const validateMessage = (
     const baseMessageValue = baseLocaleTranslations[baseKey].message;
     const localeMessageValue = localeTranslations[baseKey].message;
     // locale should be lowercase, e.g. 'pt_br', not 'pt_BR'
-    const locale: Locale = rawLocale.toLowerCase() as Locale;
+    const locale: Locale = normalizeLanguageCode(rawLocale);
 
     let validation: MessageValidationResult | undefined;
     try {
@@ -110,13 +117,18 @@ export const checkTranslations = async (
         const localeMessagesCount = localeMessages.length;
 
         const untranslatedStrings: string[] = [];
+        const untranslatedPluralStrings: string[] = [];
         const invalidTranslations: { key: string, error: any }[] = [];
 
-        baseMessages.forEach((baseStr) => {
-            if (!localeMessages.includes(baseStr)) {
-                untranslatedStrings.push(baseStr);
+        baseMessages.forEach((baseStrKey: string) => {
+            if (!localeMessages.includes(baseStrKey)) {
+                if (baseLocaleTranslations[baseStrKey].message.includes('|')) {
+                    untranslatedPluralStrings.push(baseStrKey);
+                } else {
+                    untranslatedStrings.push(baseStrKey);
+                }
             } else {
-                const validationError = validateMessage(baseStr, baseLocaleTranslations, locale, localeTranslations);
+                const validationError = validateMessage(baseStrKey, baseLocaleTranslations, locale, localeTranslations);
                 if (validationError) {
                     invalidTranslations.push(validationError);
                 }
@@ -129,12 +141,16 @@ export const checkTranslations = async (
         const level = Math.round((strictLevel + Number.EPSILON) * 100) / 100;
 
         return {
-            locale, level, untranslatedStrings, invalidTranslations,
+            locale,
+            level,
+            untranslatedPluralStrings,
+            untranslatedStrings,
+            invalidTranslations,
         };
     }));
 
     const filteredResults = results.filter((result) => {
-        return result.level < THRESHOLD_PERCENTAGE;
+        return result.untranslatedPluralStrings.length > 0 || result.invalidTranslations.length > 0;
     });
 
     if (isInfo) {
@@ -149,7 +165,14 @@ export const checkTranslations = async (
         cliLog.success(message);
     } else {
         printTranslationsResults(filteredResults);
-        throw new Error('Locales above should be done for 100%');
+        // We should detect untranslated strings because they can throw an error
+        // in runtime, because translator cannot validate plural form of base
+        // 'en' message for different locale, e.g. 'ru'.
+        if (filteredResults.some((r) => r.untranslatedStrings.some((s) => s.includes('|')))) {
+            throw new Error('Locales above should be done for 100%');
+        } else {
+            throw new Error('Locales above should be fixed');
+        }
     }
 
     return results;

@@ -1,23 +1,39 @@
 /* eslint-disable no-console */
-import { colorizeDurationTime, colorizeStatusText, colorizeTitleText } from './text-color';
+import {
+    TestStatus,
+    colorizeDurationTime,
+    colorizeStatusText,
+    colorizeTitleText,
+} from './text-color';
 
-export interface LogDetails {
+export interface TestDetails {
     name: string,
     tests: {
         name: string,
-        status: string,
+        status: TestStatus,
+        /**
+         * Time in MS.
+         */
+        runtime: number,
+        errors: {
+            message: string,
+            stack: string,
+        }[]
     }[],
-    status: string,
+    status: TestStatus,
     testCounts: {
         passed: number,
         failed: number,
         skipped: number,
         total: number
     },
+    /**
+     * Time in MS.
+     */
     runtime: number
 }
 
-export const logTestResult = (details: LogDetails) => {
+export const logTestResult = (details: TestDetails) => {
     const counts = details.testCounts;
 
     console.log(colorizeTitleText(details.name));
@@ -45,7 +61,7 @@ export const logTestResult = (details: LogDetails) => {
 export const logTestTimeout = (testName: string, timeoutMs: number) => {
     console.log(colorizeTitleText(testName));
 
-    console.log('Status:', colorizeStatusText('TIMEOUT'));
+    console.log('Status:', colorizeStatusText(TestStatus.Timeout));
     console.log(`After waited ${colorizeDurationTime(timeoutMs)}ms test was skipped\n`);
 
     console.log('\n');
