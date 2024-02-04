@@ -1,9 +1,9 @@
-! Checksum: PaEnj6DjXteKzlpQfJVOgA
-! Diff-Path: ../patches/13/13-s-1706787484-3600.patch
+! Checksum: GIEeoPQ7xi3j2O5l3mNumg
+! Diff-Path: ../patches/13/13-s-1706866553-3600.patch
 ! Title: AdGuard Turkish filter
 ! Description: Filter list that specifically removes ads on websites in Turkish language.
-! Version: 2.0.49.80
-! TimeUpdated: 2024-02-01T11:31:33+00:00
+! Version: 2.0.49.82
+! TimeUpdated: 2024-02-02T09:31:40+00:00
 ! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -86,10 +86,10 @@
 ! Bad: ||adssubdomain.legitwebsite.com^ (should be in adservers_firstparty.txt)
 !
 !
+||pixad.com.tr^$third-party
 ||srvd2204.com^
 ||cryptosmoke.care^$third-party
 ||intermediaworks.com^$third-party
-||rtb.pixad.com.tr^
 ||finvest.care^$third-party
 ||winaffiliates1.com^$third-party
 ||flarby.com^
@@ -255,7 +255,7 @@
 ||numarabiz.com/scr^$third-party
 ||numarapaneli.com^$third-party
 ||nutga.com^$third-party
-||partner.superbahisaffiliates248.com^
+||partner.superbahisaffiliates*.com^
 ||partners.betbooaffiliates.com^
 ||partnerx.bethub.io^$all
 ||performancenative.com^$third-party
@@ -298,7 +298,6 @@
 ||theadx.com^$third-party
 ||threedrive.su^$third-party
 ||tidint.pro^$third-party
-||tr.bannersdf.com^$third-party
 ||trackocean.com^$third-party
 ||uzmanreklam.com^$third-party
 ||vegabet.net^$third-party
@@ -347,7 +346,6 @@
 ||ads.gercekgundem.com^
 ||ads.inegolonline.com^
 ||ads.macsonuclari.mobi^
-||ads.modabetaff.com^
 ||ads.nexage.com^
 ||ads.o-networkaffiliates.com^
 ||ads.oyungemisi.com^
@@ -373,7 +371,6 @@
 ||reklam.mynet.com^
 ||reklam.softreklam.com^
 ||reklam.star.com.tr^
-||reklam.vogel.com.tr^
 ||reklam.yonlendir.com^
 ||reklam1.akhisar.bel.tr^
 ||sam.setimedia.com^
@@ -696,8 +693,6 @@ kasvekuvvet.net##body > div[id][class][style*="z-index: 9999"]
 baho.com.tr#$#.adsmd { height: 1px!important; }
 ! https://forum.adguard.com/index.php?threads/27255/
 ! https://github.com/AdguardTeam/AdguardFilters/issues/7738
-! https://github.com/AdguardTeam/AdguardFilters/issues/7777
-@@||kamudestek.com/wp-content/themes/jannah/js/advertisement.js
 ! https://github.com/AdguardTeam/AdguardFilters/issues/7775
 @@||ggmyfriend.com^$generichide
 ! https://github.com/AdguardTeam/AdguardFilters/issues/7554
@@ -2322,7 +2317,6 @@ sinemalar.com##.left-column > div > a[target="_blank"] > img
 ||imgsinemalar.com/img/cerezza_film_sayfasi_banner.png
 tarotscans.com##footer > p > span[style]
 ||i.hizliresim.com/pftjokl.gif
-||luvibetgiris.xyz/suv.js
 ||storj-cloud.cdn.ampproject.org/*/bahsegel
 ||storj-cloud.cdn.ampproject.org/*/bettilt
 ||hdfilmhit.org/wp-content/uploads/*/input.jpg
@@ -2371,7 +2365,6 @@ buyuksivas.com##.dikReklam160
 buyuksivas.com,mansetmalatya.com##.yatayReklam
 ||mansetmalatya.com/wp-content/uploads/*/*-Banner-2.gif
 ||viagraeci.com/selcuksports/imgs/
-||viagraeci.cfd/selcuksports//imgs/
 filmizlekral.com###wpfooter
 ||sinema.cc/rek/
 ekonomist.com.tr##.masthead
@@ -2433,7 +2426,6 @@ hacoos.com##.yazicireklam
 fullhdfilmizle5.*##footer > div.top.text
 puffytr.com,anizle.com,puffytr.com,anizm.net##.animeUrunleriBanner
 ||tasarimcim.net/bannersetleri/
-||dipfilmizle.net/wp-content/uploads/*/turkbet.gif
 fullhdfilm.pro##div[style="margin:8px 0px;"]
 yeniasir.com.tr,ahaber.com.tr,apara.com.tr,aspor.com.tr,takvim.com.tr##.sub-board-frame
 ||cdn.discordapp.com/attachments/*/mario.mp4
@@ -2544,7 +2536,6 @@ golftutkusu.com##.deskad
 724dinle.com##.moveItem
 internethaber.com,fanatik.com.tr##a[href^="http://pubads.g.doubleclick.net/gampad/"]
 posta.com.tr,fanatik.com.tr##.main-card-ads-vertical
-||jetcdn.top/rabona.gif
 turkiyegazetesi.com.tr##.masthead-main-ad
 dafflix.net##.footer-bottom > p[style] ~ *
 milliyet.com.tr##div[class^="milliyet_below_article_"]
@@ -2636,7 +2627,6 @@ ye-mek.net##.addForMainPage
 donanimhaber.com##.giydirme-container
 4kfilmizlesene.xyz##div[class^="vpre"]
 gartic.io###videoContainer
-||cdnx.assetstmedia.net/cdn/$third-party,media,image
 netspor1.live,netspor6.live,netspor16.live,netsportv166.com,netsportv158.com##.banner_area
 tarotscans.com##body > div#footer + p[style="text-align: center;"]
 trwebtoon.com##.page-content > a.links[href]
@@ -2645,9 +2635,7 @@ fullhdfilmizlett1.com##body > div[id^="filmcidayi"]
 ||cdn.discordapp.com/attachments/*/turkanime_animemmorpg_2022_playforfree3.png
 ||mangacim.com/wp-content/uploads/*/20221207_193639_0000.png
 diziyou.co##.diziyouFooter
-||diskstore.xyz/*.mp4$domain=diziyou.co
 milliyet.com.tr##a[href^="https://www.misli.com?ref="]
-||trgoalshosting.cf/trgoals/pop/*.js
 ||tranimeizle.co/js/trapop2.js
 tranimeizle.co##.page-left-ad
 tranimeizle.co##.page-right-ad
@@ -2929,9 +2917,6 @@ wmaraci.com##.bHead
 ||filmmodu*.com/bg/ps2006.png
 aydinpost.com##a[href^="https://www.aydinpost.com/advert/"]
 aydinpost.com##a[title^="Advert "]
-||vast.utube-cdn.com/*.php?id=
-||src.d4d.lol/*.js
-||src.d4d.lol/*.xml
 ||handlers.karnaval.com/*/*.functions.php?callback=*&command=get_preroll_
 nefisyemektarifleri.com###full-width-seperator-ad
 nefisyemektarifleri.com###arsiv-native
@@ -2940,8 +2925,6 @@ patronlardunyasi.com###outer_banners
 ||patronlardunyasi.com/images/image/*-banner-*-120x600px.jpg
 jetfilmizle.*##.col-12 > a[target="_blank"] > img
 ||blogger.googleusercontent.com/img/*/superbetin.gif$domain=jetfilmizle.*
-||src.massaka.cloud/*.js
-||src.massaka.cloud/*.xml
 1000kitap.com##div[align="center"] > div[style="display:flex;min-height:250px;min-width:300px"]
 1000kitap.com##div[align="center"] > div[style="display: flex; min-height: 250px; min-width: 300px;"]
 ||fikriyat.com/js/advertisements
@@ -3017,14 +3000,12 @@ bolgegundem.com,yenihaberden.com##.fixed-pub
 yeniakit.com.tr##.sticky-ads
 dizipal650.com,yvt2bm7hzgtt.cloud,movietube32.xyz,sinema.cc##.pppx
 [$path=|/video/]buzz##body > .play-button-outer ~ .pppx
-||player.filmizle.vip/js/script-
 burdenfly.com###block-38
 haberturk.com##.zone-area
 mavikadin.com,turkiyegazetesi.com.tr,tgrthaber.com.tr##.masthead-main
 ||ciceksepeti.com/Catalog/GetAdsList?
 mc-tr.com##.reklam-kutu
 /rklm/*$domain=dizirix.net|bolusporluyuz.com|selcukhaber.com|dizikorea.*
-||cdnmoly.cc/t2.js
 trhaber.com##div[class^="text-center"][style^="height"]
 altyazi.net##.thb_before_header
 altyazi.net##.ReklamInnerRow
@@ -3093,12 +3074,10 @@ tozlumagazin.net##body > section#primary[style^="width:"][style*="height:"]
 fullhdfilmizlesenebox.org,sinepal.*###reki
 sinepal.*##body .ads-skin
 ||filmmoduu.com/wp-content/uploads/*/*/supertotobet.gif
-||morethanpost.com/wp-content/uploads/2022/01/mrtryl.mp4$media,redirect=noopmp3-0.1s
 galeri.uludagsozluk.com##.adulu_col-main-ulu
 galeri.uludagsozluk.com##body > div[style="display: flex; justify-content:center"]
 kamubulten.com##header > div[style="height: 300px;"]
 buyurindir.org##center a[onclick^="window.open("]
-||adownload9.online//style.css
 ||fullhd720pizle.live/f7/f7.php
 ||filmkuzusu1.com/pops5.js
 mynet.com##.ad-home-masthead-wrapper
@@ -3244,7 +3223,6 @@ kocatepegazetesi.com,cumrapostasi.com##.lholder
 onedio.com##.article-oads
 onedio.com###masthead-container
 onedio.com##div[unit-name^="icerik"]
-||pnd.tl/b/
 anlikaltinfiyatlari.com##div[style^="width:60%;float:left;"]
 anlikaltinfiyatlari.com##div[style="clear:both;margin:10px 0; height: 250px;"]
 anlikaltinfiyatlari.com##div[style="max-width:328px;margin:10px 0;"]
@@ -4092,7 +4070,6 @@ olayrize.com##.advert > p
 ||donanimarsivi.com/AMD_RadeonRX
 ||donanimarsivi.com/itopya
 wmaraci.com##a[href][rel="sponsored"][target="_blank"] > img
-||enerjiportali.com/wp-content/uploads/*/Kontrolmatik-banner-*final.gif
 gazetevatan.com###_bottom_content_bottom a[href^="https://ykl.co/"][target="_blank"] > img
 ||gazetevatan.com/d/i/yenibirisbanner_*.jpg
 kriptoarena.com,kointimes.net,nereye.com.tr##.adcontainer
@@ -4628,7 +4605,6 @@ bartinolay.com,gercekfethiye.com##.container > div[class^="ana-sayfa-"][class*="
 sanalbasin.com##.ad-970x250
 sanalbasin.com##.page > section.manset-wrap > a[href][target="_blank"] > img
 paratic.com##.pageSkinOrta
-||cdn.jetcdn.co/bah*.mp4
 nereye.com.tr,basedistanbul.com##img[width="300"][height="600"]
 ||medyaayvalik.com/wp-content/uploads/2019/08/WhatsApp-
 ||medyaayvalik.com/wp-content/uploads/2019/08/hasyilmaz-
@@ -4693,7 +4669,6 @@ yesiltopuklar.com##.home-adbox
 yesiltopuklar.com##div[class^="corpad-"]
 yeniasya.com.tr##.bik-ad
 milliyet.com.tr##.smart-ads
-||danimarkakonsoloslugu.com/asset/*/*-banner-*
 turkrus.com##body > form > div[align="center"] table > tbody > tr > td > div[style="text-align:right; float:left;margin:0 5px"]
 altyazi.net##div[class$="-banner"]
 ||altyazi.net/wp-content/uploads/*/*banner
@@ -6171,7 +6146,6 @@ kopekturleri.org#@#.td-a-rec
 @@||images-eu.ssl-images-amazon.com/images/$domain=amazon.com.tr
 ! https://github.com/AdguardTeam/AdguardFilters/issues/69059
 ! https://github.com/AdguardTeam/AdguardFilters/issues/68646
-@@||rangetravel.com.tr/images/adv/
 ! https://github.com/AdguardTeam/AdguardFilters/issues/68622
 themagger.com#@#.post-sponsored
 ! https://github.com/AdguardTeam/AdguardFilters/issues/68085
@@ -6245,7 +6219,5 @@ festtravel.com#@##top-banner
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=beinsports.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/7919
 tvtime.com,tvshowtime.com#@##top-banner
-! 46haber.com - fixing logo
-@@||46haber.com/images/banner/46haber
 ! https://github.com/uBlockOrigin/uAssets/issues/12955
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=videonuz.ensonhaber.com

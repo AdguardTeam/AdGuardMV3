@@ -1,9 +1,9 @@
-! Checksum: AhFh7/wniCbACAw3Djemcw
-! Diff-Path: ../patches/1/1-s-1706794686-3600.patch
+! Checksum: TeuiDSmpIwXPQ1bf4b/jYQ
+! Diff-Path: ../patches/1/1-s-1706888406-3600.patch
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.88.28
-! TimeUpdated: 2024-02-01T13:32:20+00:00
+! Version: 2.0.88.34
+! TimeUpdated: 2024-02-02T15:32:10+00:00
 ! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -4404,6 +4404,8 @@ modsforwot.ru,helpsetup.ru,vargr.ru,trialkeys.ru#%#//scriptlet("abort-on-propert
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/171998
+tragtorr.in#%#//scriptlet('trusted-replace-node-text', 'script', 'adBlockFunction', '/if\(style == \'none\' \|\| control_block\.length == 0\)/', 'if(!style)')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/170949
 @@||textovod.com/images/728x90.png
 @@||textovod.com/images/ads.png
@@ -4411,8 +4413,6 @@ modsforwot.ru,helpsetup.ru,vargr.ru,trialkeys.ru#%#//scriptlet("abort-on-propert
 torlook.in#%#//scriptlet("set-constant", "adBlockFunction", "noopFunc")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/168249
 positiverecords.ru#%#//scriptlet("abort-current-inline-script", "$", "Adblock")
-! https://github.com/AdguardTeam/AdguardFilters/issues/167379
-tragtorr.in#@#div[id^="yandex_rtb"]
 ! https://github.com/AdguardTeam/AdguardFilters/issues/167304
 ||tests24.su^$cookie=/^ai/
 ! pikabu.ru
@@ -5750,6 +5750,9 @@ sinoptik.com.ru#$#iframe[bb] { visibility: hidden!important; }
 !------- JS ------------
 !-----------------------
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/171941
+kinoteatr.ru#%#//scriptlet('abort-on-property-read', 'initBanner')
+kinoteatr.ru#%#//scriptlet('set-constant', 'app.ad', 'undefined')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/171823
 sex-studentki.*#%#//scriptlet('remove-node-text', 'script', '/renderInPage|script\.charset/')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/169980
@@ -6153,6 +6156,9 @@ disk.yandex.*#%#//scriptlet('remove-class', 'has-fullscreen-banner','.public__ro
 !------- CSS -----------
 !-----------------------
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/171941
+kinoteatr.ru#$#.the_best_header { top: 0px !important; }
+kinoteatr.ru#$#.mt-branding { margin-top: 100px !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/170182
 soccer365.ru#$#body > div[style^="position:"][style*="z-index:"]:has(> a[rel="nofollow"][target="_blank"]) { display: none !important; }
 soccer365.ru#$#.header_top { margin-top: 0 !important;}
@@ -7666,6 +7672,8 @@ gorodn.ru,bits.media,devyatka.ru,gazeta-n1.ru,gorod48.ru,hi-fi.ru,innov.ru,k1new
 !
 !
 !
+click-or-die.ru##.click-content
+vokrug.tv##.hide_640
 comss.ru##div[style="margin-top:20px;"]
 re.animemoonx.org##.side-block--sticky
 monkrus.ws###HTML4
@@ -10349,7 +10357,7 @@ neizvestniy-geniy.ru##.bottom_bn
 kinonews.ru##.under_shapka
 kinonews.ru###rightcolumn > div.blockdiv[style^="text-align:"]
 au.ru,krsk.au.ru##.au-candy
-sxspy.com,epornoonlain.tv,pornomoll.net,pornozhuk.com,zalupok.net##.bigClickTeasersBlock
+ebalka.nl,sxspy.com,epornoonlain.tv,pornomoll.net,pornozhuk.com,zalupok.net##.bigClickTeasersBlock
 prosportua.com###bg-page-link
 mobyware.ru##div[style="height: 90px; margin:4px 0 6px 0;"]
 mobyware.ru##div[class="menu_main"][style="background:#ededed; height:14px;"]
@@ -15939,7 +15947,7 @@ naruto-brand.ru##tr[style^="background:url(/img/fsd.jpg)"]
 bugaga.ru##ul.lx_adslist
 ria-m.tv##ul[class="slider_top"]
 zerocoolpro.biz##ul[data-pos^="ad_"]
-||relap.io^$domain=74.ru|zr.ru|ngs.ru|msk1.ru|russian.rt.com|rg.ru|animedub.ru|risk.ru|kaluga-poisk.ru|echo.msk.ru|ilenta.com|life.ru|lifenews78.ru|mk.ru|narod-novosti.com|nv.ua|yablyk.com|kulturologia.ru|fb2-epub.ru|gilc.ru|prophotos.ru|avtovzglyad.ru|knijky.ru|zadereyko.info|ranobe.me|5ka-sale.ru|egesdamlegko.ru
+||relap.io^$domain=74.ru|zr.ru|ngs.ru|msk1.ru|russian.rt.com|rg.ru|animedub.ru|risk.ru|kaluga-poisk.ru|echo.msk.ru|ilenta.com|life.ru|lifenews78.ru|mk.ru|narod-novosti.com|nv.ua|yablyk.com|kulturologia.ru|fb2-epub.ru|gilc.ru|prophotos.ru|avtovzglyad.ru|knijky.ru|zadereyko.info|ranobe.me|5ka-sale.ru|egesdamlegko.ru|rabochaya-tetrad-i-uchebnik.com
 webware.ru/*/clients/
 |ws*://*.trialeset.org:8041
 ||012345.ru/upload/
@@ -17627,6 +17635,8 @@ ozon.ru##div[data-widget="advVideoBanner"]
 ozon.ru##img[elementtiming*="Banner"]
 ! 2gis
 ||2gis.*/ads/advise/
+2gis.*##._3hmsj
+2gis.*##span[class]:contains(/[Рр]еклама/)
 ! pikabu.ru
 pikabu.ru#?#.stories-feed__container > article.story:has(> div.story__main a[href^="/information/specials"])
 pikabu.ru#?#.stories-feed__container > article:has(> div.story__placeholder)
@@ -18450,6 +18460,19 @@ weekend.rambler.ru##.b-reklama-superfooter
 weekend.rambler.ru##div[id^="ban_240x400"]
 !
 ||images.rambler.ru/upl/$domain=~nova.rambler.ru
+!
+! leftovers
+weekend.rambler.ru,auto.rambler.ru,kino.rambler.ru,weather.rambler.ru,doctor.rambler.ru,travel.rambler.ru,sport.rambler.ru,woman.rambler.ru,news.rambler.ru,finance.rambler.ru##div[class*="banner-"]
+weekend.rambler.ru,auto.rambler.ru,kino.rambler.ru,doctor.rambler.ru,travel.rambler.ru,sport.rambler.ru,woman.rambler.ru,news.rambler.ru,finance.rambler.ru##div[style^="order:"][style*="-1"]
+weekend.rambler.ru,auto.rambler.ru,kino.rambler.ru,doctor.rambler.ru,travel.rambler.ru,sport.rambler.ru,woman.rambler.ru,news.rambler.ru,finance.rambler.ru##div[style^="min-height:"]:has(> div[id^="adfox-"])
+weekend.rambler.ru,auto.rambler.ru,kino.rambler.ru,doctor.rambler.ru,travel.rambler.ru,sport.rambler.ru,woman.rambler.ru,news.rambler.ru,finance.rambler.ru##div[data-index] > div[class]:has(> div > div[data-rnet])
+weekend.rambler.ru,auto.rambler.ru,kino.rambler.ru,doctor.rambler.ru,travel.rambler.ru,sport.rambler.ru,woman.rambler.ru,news.rambler.ru,finance.rambler.ru#$?#script + div[class] > div[class]:has(> div[class^="banner-"]) { min-height: 0 !important; }
+weather.rambler.ru##div[data-block="seo"]
+weather.rambler.ru##.commercial-branding div[class]:has(> div[class] > div > div > div[id^="fabex-"])
+tv.rambler.ru##body > div:has(> div[class] > div[id^="lex"])
+tv.rambler.ru##div[style^="min-height:"][style*="250px"]
+tv.rambler.ru##div[style^="min-height:"][style*="600px"]
+r0.ru##div[class^="News__adv"]
 ! END: rambler.ru
 !
 ! START: gazeta.ru

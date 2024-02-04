@@ -1,9 +1,9 @@
-! Checksum: ArYeZuWEnHWXxFokNCMt2w
-! Diff-Path: ../patches/7/7-s-1706758543-3600.patch
+! Checksum: eFdyrX8d8PmsxZi+eT6HcA
+! Diff-Path: ../patches/7/7-s-1706938676-3600.patch
 ! Title: AdGuard Japanese filter
 ! Description: Filter that enables ad blocking on websites in Japanese language.
-! Version: 2.0.48.13
-! TimeUpdated: 2024-02-01T03:33:04+00:00
+! Version: 2.0.48.20
+! TimeUpdated: 2024-02-03T05:33:16+00:00
 ! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1514,6 +1514,7 @@ hostlove.com#$##index_nav > h1 { padding-top: 30px!important; }
 /?type=lp001&afl=$document
 /?wt=*&adv=$document
 /^https:\/\/\d*juniorlak[0-9a-z]+\.[a-z]{2}\.com\//$document,domain=sa.com|ru.com|za.com
+://www.smtd.jp.*.com/$document
 ://amazon-co-jp.*.com/$document
 ://smfg-card.com.$document
 ://www.mynumberpoint.*.com/$document
@@ -1623,7 +1624,7 @@ cyclesports.jp,precious.jp,creatorzine.jp,pointi.jp,townnews.co.jp,point-game.jp
 ! ##.bnr
 e-mansion.co.jp,baby-calendar.jp,npn.co.jp,afpbb.com,hamakei.com,keizai.biz,minkei.net,shibukei.com##.bnr
 ! ###ad
-h2ch.com,pref.hokkaido.lg.jp,booksprivilege.com,repsoku.net,atrain3d.com,dq5clear.com,wpclear.com,city.shinagawa.tokyo.jp,html-css-javascript.com,pref.nagasaki.jp,okinawaokuyami.com,illust-ai.com,ntv.co.jp,my-terrace.com,travel.rakuten.co.jp,conciergedesk.jp,anal-love.net###ad
+virgintriumph.com,h2ch.com,pref.hokkaido.lg.jp,booksprivilege.com,repsoku.net,atrain3d.com,dq5clear.com,wpclear.com,city.shinagawa.tokyo.jp,html-css-javascript.com,pref.nagasaki.jp,okinawaokuyami.com,illust-ai.com,ntv.co.jp,my-terrace.com,travel.rakuten.co.jp,conciergedesk.jp,anal-love.net###ad
 ! ###ads
 city.imizu.toyama.jp,research-er.jp,city.kakegawa.shizuoka.jp,yuuu-nii.com,kachimai.jp,atwiki.jp###ads
 ! ##.rectangle
@@ -1666,10 +1667,9 @@ gundamlog.com###more > iframe[src^="https://richlink.blogsys.jp"]
 !
 !
 !
-pathee.com##header ~ div > div[class] > div[class] > div[id^="spot_"] ~ div[class^="cu"]
-pathee.com##div[class]:has(> div[class][style*="min-height"]:only-child > div[id^="div-gpt"])
-pathee.com##div[class]:has(> div[class][style*="min-height"]:first-child + div[class][style*="min-height"]:last-child  > div[id^="div-gpt"])
-pathee.com##div[style^="min-height:"][style*="250px"]
+||mygame8.jp/assets/originals/vtubers_
+pathee.com##header ~ div[class^="sc-"]:not([id]) > div[class^="sc-"]:not([id]) > div[class^="sc-"]:not([id]) > div[class^="sc-"]:not([id]):has(> div[style="min-height:250px"])
+pathee.com##div[style="min-height:250px"]
 ||jbr-cs.com/af/$third-party
 adultgeek.net##div[style="padding:20px 0;text-align:center;font-size:20px;background-color:#FFF;max-width:1202px;line-height:180%;"]
 h-douga.xyz##.contents-width > span > a[href^="https://www.sokmil.com/av/"][target="_blank"][rel]
@@ -1679,7 +1679,7 @@ starworldtrend.com##div[id^="starw-"]
 kunimachi.jp###postAds_Wrap
 ||hattatu-matome.ldblog.jp/ad.js
 hattatu-matome.ldblog.jp##.salebox
-gata21.jp##.adsW
+toyamadays.com,gata21.jp##.adsW
 ||fujitv.co.jp/banner/otn/
 ||otn.fujitv.co.jp/common/*/html/*_banner
 cg-hentai.com##.shared_content_container
@@ -2417,7 +2417,6 @@ erodoujinjohoukan.com##iframe[src^="https://ad-cheers.com/"]
 hhmanga.com##header > div.post-meta > div[style="padding:30px 0px 30px;"]
 hhmanga.com##.post-meta > div[style="margin-bottom:30px;"] > div.button
 receive.shamimomo.net##.convert-ads
-itest.5ch.net###subback > li[id][class*="_"]
 good-summary.com###inner-footer .last .widget_custom_html
 gadget.phileweb.com##.b--header
 usedoor.jp##.R_Adv
@@ -9198,7 +9197,6 @@ re-file.com#?##mainWrap > center:has(div[id^="div_fam8"]) + br
 re-file.com#?#.sideWrapFrame > ul > li ~ center:has(> a[href^="http://smalog.jp/"])
 w.atwiki.jp#?##wikibody > div:not([id], [class]):nth-last-of-type(2):has(> a):contains(<PR>)
 yakuji.co.jp#?#.aside > div.category-list > span.ad-text03:upward(2)
-video.fc2.com#?#.main-body > div.content-wrap:has(> div.content > img[src^="https://media.fc2.com/counter_img.php"])
 hamlife.jp#?#.widget-right.widget_text:has(a[href^="https://www.amazon.co.jp"])
 cookpad.com#?#ul > li > ul[data-ad-slot^="spweb-search-infeed"]:upward(1)
 cookpad.com#?#ul > li:has(> div[data-ad-slot^="spweb-"])
@@ -9979,6 +9977,7 @@ blog.livedoor.jp##a[href*="ad-feed.com/link/click"]
 ||video.laxd.com/a/pagead/
 ||video.laxd.com/static/video/js/plr/tg/
 ||video.fc2.com/static/video/js/plr/tg/
+vip-front.video.g.fc2.com,video.fc2.com##.main-body > div.content-wrap[aria-hidden][data-hidden-on-tab]
 vip-front.video.g.fc2.com,video.fc2.com##.ad_panelAR
 video.fc2.com##.list-subCont > li[style$="height: 98px;"]
 vip-front.video.g.fc2.com,video.fc2.com##.ads-container
@@ -9990,6 +9989,8 @@ vip-front.video.g.fc2.com,video.laxd.com,video.fc2.com##[class^="c-ad"]:not(.c-a
 !
 ! itest.5ch.net,itest.bbspink.com
 ||itest.5ch.net/assets/img/*-300x250.png
+itest.5ch.net##div[id^="topAdheader-"]
+itest.5ch.net###subback > li[id][class*="_"]
 itest.5ch.net,itest.bbspink.com###js-imageview-ad
 itest.5ch.net##div[id$="-300x250"]
 itest.5ch.net###js-thread-subback-top-ad
