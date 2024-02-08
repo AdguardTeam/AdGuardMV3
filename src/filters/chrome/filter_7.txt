@@ -1,10 +1,10 @@
-! Checksum: Qf3/ZAvL0L/Z0GKS3WRZCg
-! Diff-Path: ../patches/7/7-s-1707143782-3600.patch
+! Checksum: q/+96IgrLwWmlvS+7s9QGw
+! Diff-Path: ../patches/7/7-s-1707320156-3600.patch
 ! Title: AdGuard Japanese filter
 ! Description: Filter that enables ad blocking on websites in Japanese language.
-! Version: 2.0.48.26
-! TimeUpdated: 2024-02-05T14:33:21+00:00
-! Expires: 5 days (update frequency)
+! Version: 2.0.48.31
+! TimeUpdated: 2024-02-07T15:33:18+00:00
+! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
 !
@@ -517,10 +517,6 @@ jukenbbs.com#%#//scriptlet('prevent-addEventListener', 'load', 'delayCheckAdBloc
 ! https://github.com/uBlockOrigin/uAssets/issues/20629
 @@||shindanmaker.com^$generichide
 shindanmaker.com#$#div[id^="div-gpt-"] { min-height: 1px !important; }
-! https://github.com/AdguardTeam/AdguardFilters/issues/161822
-!#safari_cb_affinity(privacy)
-@@||clarity.ms^$domain=ganohr.net
-!#safari_cb_affinity
 ! https://github.com/AdguardTeam/AdguardFilters/issues/160241
 ! https://github.com/AdguardTeam/AdguardFilters/issues/159769
 @@||freepdfcomic.com^$generichide
@@ -967,6 +963,8 @@ nasubiblog.com,kyukyoku-matome.com##.widget_pc_ad
 !-------JS----------
 !-------------------
 !
+! ad-leftover on click
+twidouga.net#%#//scriptlet('prevent-addEventListener', '', 'setTrigger')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/166651
 ! https://github.com/AdguardTeam/AdguardFilters/issues/166658
 pictab.art,onagazou.info#%#//scriptlet('set-constant', 'pum_vars', 'undefined')
@@ -1662,6 +1660,8 @@ gundamlog.com###more > iframe[src^="https://richlink.blogsys.jp"]
 !
 !
 !
+twi-videos.net##iframe[width="300"][height="250"]
+ch.nicovideo.jp##.ads_nicovideo
 tumadouga.jp##.index_banner_space > div[class^="ad-"]
 tuma.jp##.wrapper > div.shadow-box:has(> div.ad_sfr)
 lettuceclub.net###lcn-s_list_infeed1_gam
@@ -1819,8 +1819,10 @@ discoveryjapan.jp##.interstitial_ad
 freem.ne.jp##.game-ad-bottom
 nikkan-spa.jp##.tag-box > div.series-img
 game16.net##.g-txt
-pvpoke-re.com###nitro-header-mobile
-pvpoke-re.com###nitro-top
+||pvpoke-re.com/ads-main.min.js
+||pvpoke-re.com/ads-base.min.js
+||pvpoke-re.com/nitro.js
+pvpoke-re.com##div[id^="nitro"]
 yjgames.gamedistribution.com#?#.MuiPaper-elevation.MuiPaper-rounded:has(> div[class^="css-"] > div[id^="idhb-"])
 kantan.game##.c-modal-light-score__ad-frame
 ||dabun.net/js/addAmz.js
@@ -2389,8 +2391,8 @@ lifematome.blog##.amagetti-tabs-container
 yuchrszk.blogspot.com###HTML7
 yuchrszk.blogspot.com###HTML8
 yuchrszk.blogspot.com##span[style="color:#666;margin-bottom:1px;"]
-jmanga.net###vi-smartbanner
-jmanga.net##div[style=" height: 300px; overflow: hidden; max-width: 100%; "]
+jmanga.*###vi-smartbanner
+jmanga.*##div[style=" height: 300px; overflow: hidden; max-width: 100%; "]
 ||suruga-ya.jp/pics_light/banner/kaitori300x250.jpg
 brightdays.jp##.rkLink
 brightdays.jp###secondary > aside.widget_text:not(#twitterLine)
@@ -2591,7 +2593,7 @@ saku-city.mamafre.jp###bottomBanner
 sakukankou.jp##.footerBnr
 ||city.saku.nagano.jp/banner/
 city.saku.nagano.jp##div[class^="top_kokoku_"]
-jmanga.net##div[style^="max-width:700px"]
+jmanga.*##div[style^="max-width:700px"]
 xbooks.one###container > div[class$="_area"]
 city.urasoe.lg.jp##.class_area18.ng-tns-c168-0
 ||prdurbanosursapp1.blob.core.windows.net/common-bannerlogo/$domain=city.urasoe.lg.jp
@@ -8218,6 +8220,7 @@ picrew.me##.imagemaker_ad_wrapper
 picrew.me##.search-Sidebar
 picrew.me##.c_related_section:first-of-type
 poipiku.com##.SideBarMid
+seiga.nicovideo.jp###top_ads_box_middle
 seiga.nicovideo.jp###float-bnr-container
 seiga.nicovideo.jp###ads_pc_seiga_illust_watch_east
 seiga.nicovideo.jp##.level_ad

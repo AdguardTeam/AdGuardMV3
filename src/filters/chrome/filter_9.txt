@@ -1,10 +1,10 @@
-! Checksum: BWGwjJRi1x4RdLtmZQcHKg
-! Diff-Path: ../patches/9/9-s-1707132963-3600.patch
+! Checksum: PrFFIFNb6Mx2cpQff478KQ
+! Diff-Path: ../patches/9/9-s-1707377744-3600.patch
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish, Portuguese, and Brazilian Portuguese languages.
-! Version: 2.0.23.19
-! TimeUpdated: 2024-02-05T11:33:28+00:00
-! Expires: 5 days (update frequency)
+! Version: 2.0.23.26
+! TimeUpdated: 2024-02-08T07:33:17+00:00
+! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
 !
@@ -271,6 +271,9 @@
 !
 !
 !
+! canal12.com.sv
+canal12.com.sv#%#//scriptlet('prevent-addEventListener', 'adBlockerOn')
+||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima3,domain=canal12.com.sv
 ! https://github.com/uBlockOrigin/uAssets/issues/22053
 ! Fixes video player
 ! Similar script is used on other websites, perhaps scriptlet/redirect resources could be added, so it wouldn't be required to unblock ad requests
@@ -363,6 +366,8 @@ guiacripto.online#%#//scriptlet('prevent-setTimeout', '/adBlock|\.height\(\)/')
 guiacripto.online#%#//scriptlet('adjust-setTimeout', 'playFunction', '*', '0.001')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/164466
 ! https://github.com/AdguardTeam/AdguardFilters/issues/160806
+! TODO: use redirect resource when it will be added - https://github.com/AdguardTeam/Scriptlets/issues/401
+southparkstudios.com.br,southpark.lat#%#(()=>{const e=new Map,t=function(){},o=t;o.prototype.dispose=t,o.prototype.setNetwork=t,o.prototype.resize=t,o.prototype.setServer=t,o.prototype.setLogLevel=t,o.prototype.newContext=function(){return this},o.prototype.setParameter=t,o.prototype.addEventListener=function(t,o){t&&(console.debug(`Type: ${t}, callback: ${o}`),e.set(t,o))},o.prototype.removeEventListener=t,o.prototype.setProfile=t,o.prototype.setCapability=t,o.prototype.setVideoAsset=t,o.prototype.setSiteSection=t,o.prototype.addKeyValue=t,o.prototype.addTemporalSlot=t,o.prototype.registerCustomPlayer=t,o.prototype.setVideoDisplaySize=t,o.prototype.setContentVideoElement=t,o.prototype.registerVideoDisplayBase=t,o.prototype.submitRequest=function(){const t={type:tv.freewheel.SDK.EVENT_SLOT_ENDED},o=e.get("EVENT_SLOT_ENDED");o&&setTimeout((()=>{try{o(t)}catch(e){console.error(e)}}),1)},window.tv={freewheel:{SDK:{Ad:t,AdManager:o,AdListener:t,_instanceQueue:{},setLogLevel:t,EVENT_SLOT_ENDED:"EVENT_SLOT_ENDED"}}}})();
 southparkstudios.com.br,southpark.lat#%#//scriptlet('prevent-fetch', 'imasdk.googleapis.com')
 ||imasdk.googleapis.com/pal/sdkloader/pal.js$script,redirect=noopjs,domain=southparkstudios.com.br|southpark.lat
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima3,domain=southparkstudios.com.br|southpark.lat
@@ -2014,6 +2019,10 @@ gaz.com.br,placar.com.br,futebolinterior.com.br,tvhistoria.com.br,tribunapr.uol.
 ! ##body .banner
 laprensagrafica.com,ahoragranada.com,correio24horas.com.br,cnnespanol.cnn.com,motociclismo.es,sub100.com.br,theenemy.com.br,manhwas.net,rpp.pe,ambito.com,economipedia.com,informador.mx,elinformador.com.co,cronista.com,rionegro.com.ar,diariodecuyo.com.ar,voydeviaje.com.ar,guarda14.com,viapais.com.ar,agazeta.com.br,eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.*,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##body .banner
 !
+band.uol.com.br##.item--ad
+jn.pt##.pub-wrapper
+canal12.com.sv##.layout-rev--leaderboard
+canal12.com.sv##.layout-rev
 manhwaweb.com##.bg-gray-400:has(> #juicyads-container)
 manhwaweb.com##.bg-gray-400:has(> div[id^="exo-container"])
 manhwaweb.com##.bg-gray-400:has(> .md\:flex > #juicyads-container)
@@ -2054,8 +2063,10 @@ clickpb.com.br#?#body > div[style]:has(> a[href^="https://record.nsxafiliados.co
 clickpb.com.br##.adsHorizontal
 depor.com##div[class^="showTds"]
 ||visortmo.com/images/series.gif
-visortmo.com#?##pills-populars > div.row > div.element:has(> a[href^="https://visortmo.com/library/"] > .thumbnail > span:contains(/promo|netflix|oferta/i))
+visortmo.com#?##pills-populars > div.row > div.element:has(> a[href^="https://visortmo.com/library/"] > .thumbnail > span:contains(/promo|netflix|ofert|deal/i))
+visortmo.com##a[href^="https://visortmo.com/library/"]> img:not([class])
 visortmo.com##a[href^="https://visortmo.com/library/"] > img[src^="/"]
+visortmo.com##a[href^="https://visortmo.com/library/"] > img[src^="https://visortmo.com/"]
 visortmo.com##a[href="https://series.ly"] > img[src*=".gif"]
 yugenmangas.net.br##.ads-flot
 gartic.com.br###shopIntUm
@@ -2436,7 +2447,7 @@ colombia.com##.alto
 gamestorrents.fm##a[href^="https://sTartGAMIng.net/"] > img
 kienyke.com##.contendo-relacionado-por-columnas
 ccma.cat###contenidor_megabanner
-ccma.cat##[data-ad-type]
+infomoney.com.br,ccma.cat##[data-ad-type]
 principal.cat##.publi-principal
 estandarte.com##.ad-p
 elrellano.com##.inside-right-sidebar
@@ -2540,7 +2551,7 @@ sogatinhas.net##.catfish
 acordacidade.com.br##.publi-base
 revistacromos.com.co,lasestrellas.tv##.Ads
 consultaremedios.com.br,elcomercio.com##.banner-wrapper
-elcomercio.com##ned-ad
+canal12.com.sv,elcomercio.com##ned-ad
 ||streamtheworld.com/ondemand/ars?type=preroll$domain=cadenaser.com
 ||geeknetic.es/ajax/renderads.asp
 ||hardmob.com.br/clientscript/init.js
@@ -4986,12 +4997,12 @@ correiobraziliense.com.br#?#div[data-tb-region-item]:has(> div.news-box > a > sp
 correiobraziliense.com.br#?#div[class="row mb-25"] > div.col-md-12:has(> header.pb-15 > h3 > a[href="https://www.correiobraziliense.com.br/especiais/"])
 atresplayer.com#?##root main[class] > div[class] > section[class] + aside[class]:has(> div[class] > p[class]:contains(PUBLICIDAD))
 bcnoticias.com.br#?#.theiaStickySidebar > div.widget:has(> div.textwidget > div[align="center"] a[href])
-seriesdonghua.com,mundodonghua.com#?#.container > .col-md-3 > .row.mt-10:has(> .adsbygoogle)
-seriesdonghua.com,mundodonghua.com#?#.content-player > .mb-10:has(> .adsbygoogle)
-seriesdonghua.com,mundodonghua.com#?#.container > .col-md-9 > .mt-10:has(> .adsbygoogle)
-seriesdonghua.com,mundodonghua.com#?#.container > .col-md-9 > .mb-10:has(> .adsbygoogle)
-seriesdonghua.com,mundodonghua.com#?#.container > .row > .col-md-8 > .mb-10:has(> .adsbygoogle)
-seriesdonghua.com,mundodonghua.com#?#.container > .row > .col-md-4 > .row.mt-10:has(> center > .adsbygoogle)
+mundodonghua.com,seriesdonghua.com,mundodonghua.com##.container > .col-md-3 > .row.mt-10:has(> h4 > i.fa-ad)
+mundodonghua.com,seriesdonghua.com,mundodonghua.com##.content-player > .mb-10:has(> .adsbygoogle)
+mundodonghua.com,seriesdonghua.com,mundodonghua.com##.container > .col-md-9 > .mt-10:has(> .adsbygoogle)
+mundodonghua.com,seriesdonghua.com,mundodonghua.com##.container > .col-md-9 > .mb-10:has(> .adsbygoogle)
+mundodonghua.com,seriesdonghua.com,mundodonghua.com##.container > .row > .col-md-8 > .mb-10:has(> .adsbygoogle)
+mundodonghua.com,seriesdonghua.com,mundodonghua.com##.container > .row > .col-md-4 > .row.mt-10:has(> center > .adsbygoogle)
 dol.com.br#?#.mw-flex:has(> div[id^="id_ad_"])
 cokitos.com#?#.theiaStickySidebar > div.widget_text:has(> div.textwidget ins.adsbygoogle)
 foro.elhacker.net#?#body > table:has(> tbody > tr > td > div.publi_sponsor)
