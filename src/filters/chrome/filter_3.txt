@@ -1,9 +1,9 @@
-! Checksum: G5MOLlOKjKW2FWR3ksFq6Q
-! Diff-Path: ../patches/3/3-s-1707330960-3600.patch
+! Checksum: BPzY2S1tbk1ySc3m+4xxMg
+! Diff-Path: ../patches/3/3-s-1707503759-3600.patch
 ! Title: AdGuard Tracking Protection filter
 ! Description: The most comprehensive list of various online counters and web analytics tools. Use this filter if you do not want your actions on the Internet to be tracked.
-! Version: 2.0.66.51
-! TimeUpdated: 2024-02-07T18:32:54+00:00
+! Version: 2.0.66.57
+! TimeUpdated: 2024-02-09T18:32:58+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -547,6 +547,7 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 !
 !
 !
+||pubperf.com^$third-party
 ||stats.getaim.org^
 ||analytics-cf.bigcrunch.com^
 ||trackerapi.ebxcdn.com^
@@ -4350,6 +4351,8 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ! Blocking piwik analytics subdomain(for DNS filtering)
 |piwik.
 !
+||noa.yahoo.com^
+||mdstats.info^
 ||tcx-beacon.docs.aws.dev^
 ||analytics.githubassets.com^
 ||hkrpg-log-upload.mihoyo.com^
@@ -55012,6 +55015,8 @@ charlestownwyllie.oaklawnnonantum.com^
 !       - @@||example.org^$stealth (should be in AdGuard Base - allowlist_stealth.txt)
 !
 !
+! https://github.com/AdguardTeam/AdGuardSDNSFilter/issues/1631
+||tms.capitalone.com^$badfilter
 ! https://github.com/AdguardTeam/AdguardFilters/issues/166702
 ||omns.americanexpress.com^$badfilter
 ! Used in shopping emails
@@ -87035,6 +87040,11 @@ _tracking.php?b=
 /analytics.js$domain=tokyometro.jp|resumes.breakdownexpress.com|techcult.com|inbox.lv|kopeda.com|freexcafe.com|rusvideos.tv|nakubani.ru|lun.com|songsara.net|newsmax.com|bolgehastanesi.com|ewtc.de|newsdig.tbs.co.jp|imore.com|city.kushiro.lg.jp|emeraldbridal.com.au|emarat-news.ae|imobie.jp|tikla.com.tr|rusvideos.porn|jrkyushu.co.jp|amiunique.org|edit.ing|konami.com
 ||assets.adobedtm.com^$domain=mcclatchydc.com|elnuevoherald.com|bellinghamherald.com|sacbee.com|charlotteobserver.com|newsobserver.com|miamiherald.com|ef.ru|algida.com.tr|bmw-motorrad.co.uk|cif.com.tr|clearhaircare.com|domestos.com|dove.com|elidor.com.tr|f1sport.autorevue.cz|geico.com|hellmanns.com.tr|herkessofraya.com|johnsonsbaby.com.tr|lipton.com|lnk.to|lux.com|magnumicecream.com|neutrogena.com.tr|omo.com|rexona.com|samsung.com|sap.com|schwarzkopf.com.tr|signalturkiye.com|msnbc.com|nbcnews.com|kbb.com|eurosport.ru|timgate.it|intermiles.com|oxfordmail.co.uk|spiegel.de|hp.com|deutschepost.de|thebay.com|s.shufoo.net|tsn.ca|tabelog.com|euronews.com|newshub.co.nz|fredmeyer.com|viabcp.com|carsales.com.au|falabella.com|aarp.org|thehill.com|realtor.com|nzherald.co.nz|aia.com.ph|baynews9.com|thesaurus.com|dhc.co.jp
 !
+||ip-approval.com/*/ip-checker-js$script,domain=amiga.sk
+||wc.yahoodns.net^$image
+||cerebro.edna.yahoo.net^$image
+||hosteagle.club/t.js
+||hosteagle.club/t/$image
 ||studyflix.de/video_stats_views
 thehindu.com###sectiondivicymi
 ||pac.talk.tv/track?
@@ -91083,6 +91093,9 @@ nethunt.com/api/v1/track/email/$image
 ! Bad:  ||example.com^$cookie=flat_r_mb (should be in cookies_specific.txt)
 !
 !
+! Reddit
+! Used to build ads profile
+$cookie=_rdt_uuid
 ! https://github.com/AdguardTeam/AdguardFilters/issues/171106
 $cookie=TMog
 $cookie=globalTI_SID
@@ -91794,6 +91807,7 @@ $cookie=cto_bidid
 !
 ! Prebid PubCid
 ! Analytics, targeting
+$cookie=_ncg_id_
 $cookie=sharedid
 $cookie=sharedId
 $cookie=_pubcid
@@ -91814,6 +91828,9 @@ $cookie=bf_visit
 ! Bad:  ||monerominer.rocks^$third-party (should be in adservers.txt)
 !
 !
+! pixiv.net
+||pixiv.net^$cookie=first_visit_datetime_pc
+||pixiv.net^$cookie=first_visit_datetime
 ! https://github.com/AdguardTeam/AdguardFilters/issues/171140
 xfree.com$cookie=anonymous
 ! https://github.com/AdguardTeam/AdguardFilters/issues/171231
