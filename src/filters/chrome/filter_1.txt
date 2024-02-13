@@ -1,9 +1,9 @@
-! Checksum: lMjZ7l2n6+MIHjEyh30QDQ
-! Diff-Path: ../patches/1/1-s-1707493023-3600.patch
+! Checksum: pvV7W9y8DIYRldPei/h2sw
+! Diff-Path: ../patches/1/1-s-1707755762-3600.patch
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.88.51
-! TimeUpdated: 2024-02-09T15:32:45+00:00
+! Version: 2.0.88.55
+! TimeUpdated: 2024-02-12T16:32:19+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1482,6 +1482,7 @@ ucoz.ru/informer/
 ! Bad: /banner.jpg (should be in general_url.txt)
 ! Bad: ||adssubdomain.legitwebsite.com^ (should be in adservers_firstparty.txt)
 !
+||bcdjcjjhgfiejgfjhah.world^
 ||proppellerads.ru^
 ||usesentry.com^
 ||fzgrpqktmq.com^
@@ -6173,6 +6174,8 @@ disk.yandex.*#%#//scriptlet('remove-class', 'has-fullscreen-banner','.public__ro
 !------- CSS -----------
 !-----------------------
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/172614
+the-wire-fox.net#$##wrapper { margin-top: 0 !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/171941
 kinoteatr.ru#$#.the_best_header { top: 0px !important; }
 kinoteatr.ru#$#.mt-branding { margin-top: 100px !important; }
@@ -7690,7 +7693,9 @@ gorodn.ru,bits.media,devyatka.ru,gazeta-n1.ru,gorod48.ru,hi-fi.ru,innov.ru,k1new
 !
 !
 !
-/content/stargate/$image,domain=otfilm.ru|bossfilm.ru
+tass.ru##div[class^="AdRotation"]
+wildberries.ru##.footer__banner
+/content/stargate/*$image,domain=otfilm.ru|bossfilm.ru
 pogovorim.by##div[id^="unit_"]
 pogovorim.by##div[style="min-height:280px; width:100%;"]
 citilink.ru##header > div[class^="css"]:has(> a[href^="https://www.citilink.ru/promo/"])

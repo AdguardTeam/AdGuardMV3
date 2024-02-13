@@ -1,9 +1,9 @@
-! Checksum: DJvcu6EFYBtOxC615a6iqw
-! Diff-Path: ../patches/13/13-s-1707413741-3600.patch
+! Checksum: TffT5j4zTnDRUlWfbASocQ
+! Diff-Path: ../patches/13/13-s-1707806149-3600.patch
 ! Title: AdGuard Turkish filter
 ! Description: Filter list that specifically removes ads on websites in Turkish language.
-! Version: 2.0.49.92
-! TimeUpdated: 2024-02-08T17:31:30+00:00
+! Version: 2.0.49.95
+! TimeUpdated: 2024-02-13T06:31:37+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -395,6 +395,10 @@ zamaninvarken.com,kredi.biz.tr,kriptoradar.com,bakimlikadin.net,korsanedebiyat.c
 iyibeslenme.net,teknop.net,kirtkirtla.com,buneymis.net,ozgunbilgi.com#%#//scriptlet("set-constant", "adblock.check", "noopFunc")
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/172680
+! https://github.com/AdguardTeam/AdguardFilters/issues/172595
+akillikafa.com,kazanimtestleri.com.tr#@#.adsbygoogle-noablate
+akillikafa.com,kazanimtestleri.com.tr#$#body #oden.adsbygoogle-noablate { display: block !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/169961
 dentalilan.com#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
 ! https://github.com/uBlockOrigin/uAssets/issues/21665
@@ -1775,7 +1779,7 @@ turkcealtyazi.org#$#body { background-image: none !important; }
 ! Bad: .org/ads/$domain=example.org (for instance, should be in speficic.txt)
 !
 !
-/reklam-$image,script
+/reklam-$image,script,domain=~donanimhaber.com
 /reklamresimleri/*
 /728x90reklam.
 .cfd/banner/
