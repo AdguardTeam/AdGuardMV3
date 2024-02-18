@@ -1,9 +1,9 @@
-! Checksum: JQmkJi6I5eqVFYwx0veFBw
-! Diff-Path: ../patches/6/6-s-1707942950-3600.patch
+! Checksum: Qk3mdSku6QI4vv6lQijoRA
+! Diff-Path: ../patches/6/6-s-1708191343-3600.patch
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.40.48
-! TimeUpdated: 2024-02-14T20:33:13+00:00
+! Version: 2.0.40.53
+! TimeUpdated: 2024-02-17T17:33:10+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1619,6 +1619,10 @@ formel1.de,krautundrueben.de,motorsport-total.com,traktorpool.de,fnweb.de,laborj
 !
 !
 !
+giga.de#$#div[class*="ad--top"] { min-height: 40px !important; }
+giga.de##.alice-root-container > div.row:has(> div[class^="col-"] > section > div.section-header > h2 > a[href="/sparen/deals/"])
+giga.de##.alice-teaser-list-item:has(> div[id="giga.de_tech_startseite_teaser1"])
+giga.de#%#//scriptlet('remove-class', 'show-teaserheld-header', 'body')
 delamar.de#%#//scriptlet('prevent-setTimeout', '#modal_livestream')
 krone.at#$#body .ad-container { display: block !important; }
 datenbanken-verstehen.de##div[class^="ad-block-"]:not(.ad-block-text)
@@ -7060,7 +7064,6 @@ $stylesheet,subdocument,third-party,xmlhttprequest,domain=canna-power.to|canna.t
 ||belgieninfo.net/wp-content/uploads/*/IDSB-Unser-Partner.jpg
 ||belgieninfo.net/wp-content/uploads/*/Verhellen.jpg
 ||beobachter-online.de^*/banner/
-||bergdamm.de^$domain=chip.de
 ||berlinertageszeitung.de/images/banners/
 ||bhc06.de/getattachment/*/becker.jpg
 ||bhc06.de/getattachment/*/forst.jpg
@@ -7324,7 +7327,6 @@ $stylesheet,subdocument,third-party,xmlhttprequest,domain=canna-power.to|canna.t
 ||germanscooterforum.de/bannermanagement/
 ||glarus24.ch/uploads/tx_xeiroads/
 ||gn-online.de/ad/
-||gn-online.de/ad/ads/
 ||goastro.de/wp-content/uploads/*/250x250-
 ||godmode-trader.de/img/partner/
 ||gofeminin.de/home4/skin/*_*/home.css|
@@ -9137,6 +9139,7 @@ willhaben.at##.apn-leaderboard-wrapper
 oefb.at##.app-foesvAdSpace
 blick.ch##.appnexus-container
 arbeits-abc.de##.arbei-widget
+lokalmatador.de##.article-adbanner
 heise.de##.article-layout__header-wrbng
 onlinehaendler-news.de##.article-rectangle
 computerbase.de##.article-view__rectangle
