@@ -1,9 +1,9 @@
-! Checksum: Qk3mdSku6QI4vv6lQijoRA
-! Diff-Path: ../patches/6/6-s-1708191343-3600.patch
+! Checksum: +/0Y6T6eP2GIpJeTQCqpmA
+! Diff-Path: ../patches/6/6-s-1708367759-3600.patch
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.40.53
-! TimeUpdated: 2024-02-17T17:33:10+00:00
+! Version: 2.0.40.56
+! TimeUpdated: 2024-02-19T18:33:16+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1156,6 +1156,7 @@ data-load.in#%#//scriptlet('set-cookie', '_xflora', '1')
 ! gmx.net,gmx.at,web.de#%#//scriptlet('inject-css-in-shadow-dom', '.list-programmatic-ad-item--multi-line, .list-inbox-ad-item--multi-line { display: none !important; }')
 gmx.net,gmx.at,web.de#%#(()=>{const a=(a,b,c)=>{const d=Reflect.apply(a,b,c),e=".list-programmatic-ad-item--multi-line, .list-inbox-ad-item--multi-line { display: none !important; }";if("adoptedStyleSheets"in document){const a=new CSSStyleSheet;a.replaceSync(e),d.adoptedStyleSheets=[a]}else{const a=document.createElement("style");a.innerText=e,d.appendChild(a)}return d};window.Element.prototype.attachShadow=new Proxy(window.Element.prototype.attachShadow,{apply:a})})();
 ! https://github.com/AdguardTeam/AdguardFilters/issues/158944
+chip.de#%#//scriptlet('abort-current-inline-script', 'document.querySelector', 'DisplayAcceptableAdIfAdblocked')
 chip.de#%#//scriptlet('trusted-replace-node-text', 'style', '/a [\s\S]* padding-top[\s\S]*aspect-ratio/', '/.*(\..*?) [\s\S]*padding-top[\s\S]*aspect-ratio[\s\S]*/', '$1 { display: none !important; }')
 chip.de#%#AG_onLoad((function(){const o=[];[...document.scripts].forEach((c=>{const n=c.innerText,t=/window\..*\["(.*)"]/;if(n.includes('"impr":')){const c=n.match(t)[1];o.push(c)}})),o.forEach((o=>{const c=document.querySelector(`.${o}`);c&&c.remove()}))}));
 ! chip.de - ad popup when pressing download
@@ -1554,7 +1555,6 @@ lkz.de##.nfy-row-ad
 ! Blocked service worker to fix filtering in apps
 ||obi.de/wrapper-sw.js
 !https://github.com/AdguardTeam/AdguardFilters/issues/158944
-chip.de##.fb-col-sm-12 > ul > li > a[href*="chip.de/downloads/"] img[src*="hash"]
 chip.de##li > a[href*="chip.de/downloads/"][target="_blank"]:has(img[src*="hash"])
 chip.de#?#a[href*="chip.de/downloads/"]:has(img[src*="hash"]:not([class], [data-src]))
 chip.de##a[href*="chip.de/downloads/"] img[src*="hash"]:not([class], [data-src])
@@ -1644,7 +1644,6 @@ restegourmet.de#?#ion-col:has(> app-content-ad-grid)
 winfuture.de##a[title*="gesponsert"]
 nordbayern.de##article:has(> a > .modul__teaser > .modul__teaser__anzeige)
 chip.de##main > div > main[style^="min-height:"]:has(figure > img ~ noscript)
-chip.de##a > div:has(figure > img ~ noscript)
 hifi.de##.deal-single
 hifi.de##.deals-multi-wrap
 techbook.de##.af-wrapper
@@ -6051,6 +6050,7 @@ _woz_banner_vote.
 ##.ads_rechts
 ##.adsense-ArtikelOben
 ##.adzeiger
+##.alice-root-header-ads__ad--top
 ##.anzeigenwerbung
 ##.article-werb
 ##.artikelinlinead
@@ -9109,7 +9109,6 @@ blitzrechner.de##.ai_widget
 nextpit.de##.al-amazon
 ligaportal.at##.alert
 desired.de,familie.de,giga.de,kino.de,spielaffe.de##.alice-adslot
-spielaffe.de##.alice-root-header-ads__ad--top
 notebookcheck.com##.am_el
 indirekter-freistoss.de##.amalink
 plattentests.de##.amazon
@@ -10778,6 +10777,7 @@ photographie.de##.post.type-post.status-publish:has(.anzeige-box)
 dashcamtest.de##.previewtile.swiper-slide:has(a[href^="https://amzn.to/"])
 kaufland.de##.product:has(div.product__sponsored-ad-label)
 guenstiger.de##.productCard:has(div.premiumProductCaption)
+kaufland.de##.rd-recommender:has(div.rd-product-tile__badge--ad)
 kaufland.de##.rd-recommender__tile:has(div.rd-product-tile__badge--ad)
 metager.de##.result:has(a[href^="https://metager.de/partner/r?"])
 metager.de##.result:has(a[href^="https://r.search.yahoo.com/"])

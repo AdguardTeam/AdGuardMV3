@@ -1,9 +1,9 @@
-! Checksum: PwkjrtqlHbOazxEJhCPMRQ
-! Diff-Path: ../patches/1/1-s-1708090567-3600.patch
+! Checksum: sdtTud03fupfHKZPrE57rg
+! Diff-Path: ../patches/1/1-s-1708335378-3600.patch
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.88.63
-! TimeUpdated: 2024-02-16T13:32:11+00:00
+! Version: 2.0.88.65
+! TimeUpdated: 2024-02-19T09:32:15+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -5222,6 +5222,17 @@ kino.mail.ru##button[class*="adv-marker"] + div.text
 ! probably obsolete:
 !
 ! ok.ru
+! брендинг страницы авторизации
+ok.ru##.anonym_login_w+div.prl_txt
+||st.mycdn.me/res/css/prod/login/login_megafon.*.css
+!
+! ads in the feed
+ok.ru#%#//scriptlet('set-constant', 'Object.prototype.obfuscateParams', 'undefined')
+ok.ru#?#.feed-list > div.feed-w:has(> div.feed div.feed-info-label:contains(Реклама))
+!
+ok.ru###hook_Block_AnonymMainRightColumnAd
+ok.ru##.browser-banner
+ok.ru##.exit-popup > *
 ! https://github.com/AdguardTeam/AdguardFilters/issues/43985
 @@||ad.mail.ru/adq/?callback=mailruEnabled$domain=ok.ru
 ! https://github.com/AdguardTeam/AdguardFilters/issues/19112
@@ -5534,6 +5545,7 @@ echo.msk.ru,kakprosto.ru#%#//scriptlet('abort-on-property-read', 'Object.prototy
 ya.ru,yandex.com##.banner
 !
 ! Yandex.Search
+[$path=/search]ya.ru,yandex.*##.content__right div.serp-item:has(> div[data-vnl*='"nonceId"'])
 ya.ru##.Skeleton_type_ad_search
 [$path=/search]ya.ru,yandex.*##.AdvMedia
 ya.ru,yandex.*##li.mini-suggest__item > a[href^="http://yabs."][href*="/count/"]
@@ -18328,17 +18340,6 @@ tv.mail.ru##div[data-module="SlotModel"][data-adq-id]
 ||r.mail.ru/b$subdocument
 ||r.mail.ru/cgi-bin/banners/
 ||r.mradx.net/*/banner.js
-!
-! ok.ru
-! брендинг страницы авторизации
-ok.ru##.anonym_login_w+div.prl_txt
-||st.mycdn.me/res/css/prod/login/login_megafon.*.css
-!
-ok.ru#?#.feed-list > div.feed-w:has(> div.feed div.feed-info-label:contains(Реклама))
-! ok.ru#$?#.feed-list > div.feed-w:has(> div.feed div.feed_ava ~ div > div[class]:matches-property(innerText=/^Реклама$/)) { remove: true; }
-ok.ru###hook_Block_AnonymMainRightColumnAd
-ok.ru##.browser-banner
-ok.ru##.exit-popup > *
 !
 youla.ru##div[data-test-component="ProductOrAdCard"]:empty
 youla.ru##div[data-test-block="IndexContainer"] > section > div:first-child:empty
