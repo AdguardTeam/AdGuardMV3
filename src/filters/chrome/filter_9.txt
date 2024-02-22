@@ -1,9 +1,9 @@
-! Checksum: xXB0kGtL/S8lGs+a2G/PzA
-! Diff-Path: ../patches/9/9-s-1708353384-3600.patch
+! Checksum: Im5y6Lt9cHTjtlMjhoQfgA
+! Diff-Path: ../patches/9/9-s-1708439785-3600.patch
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish, Portuguese, and Brazilian Portuguese languages.
-! Version: 2.0.23.38
-! TimeUpdated: 2024-02-19T14:33:28+00:00
+! Version: 2.0.23.42
+! TimeUpdated: 2024-02-20T14:33:33+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1370,7 +1370,7 @@ peru21.pe#@#.adstop
 !
 ! This section contains the list of ad blocking rules that fall under "advanced" category.
 !
-! Good: example.org#$##rek { display: none !important; }; example.org#%#//scriptlet('set-cookie', 'ad', '0'); example.org#%#document.cookie = "ad =0"; ; example.org$$script[tag-content="ad"][max-length="3000"].
+! Good: example.org#$##rek { display: none !important; }; example.org#%#//scriptlet('set-cookie', 'ad', '0'); example.org$$script[tag-content="ad"][max-length="3000"].
 ! Bad: example.org###rek (should be in specific.txt)
 !
 !--------------------------------------!
@@ -1439,9 +1439,11 @@ niusdiario.es#%#//scriptlet('set-constant', 'google.ima.OmidVerificationVendor',
 ! https://github.com/AdguardTeam/AdguardFilters/issues/145476
 superhq.net#%#//scriptlet('abort-on-property-write', 'exopop')
 hentaikai.com,superhq.net#%#//scriptlet('abort-on-property-write', 'protData')
+! https://github.com/AdguardTeam/AdguardFilters/issues/173197
 ! https://github.com/AdguardTeam/AdguardFilters/issues/142854
-cuevana.biz,cuevana.run#%#//scriptlet('prevent-window-open')
-cuevana.biz,cuevana.run#%#//scriptlet('abort-on-property-read', 'cJsEdge')
+cuevana.*#%#//scriptlet('prevent-window-open')
+cuevana.*#%#//scriptlet('abort-on-property-read', 'cJsEdge')
+player.cuevana.*#%#//scriptlet('trusted-replace-node-text', 'script', 'loadRedirect', '/vastPlayer\.runAds\(\);/g', 'vastPlayer.adsCompleted();')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/142855
 ! commented out by dead-domains-linter: repelispluss.tv#%#//scriptlet('abort-on-property-read', '_pop')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/140890
@@ -2018,7 +2020,9 @@ gaz.com.br,placar.com.br,futebolinterior.com.br,tvhistoria.com.br,tribunapr.uol.
 ! ##body .banner
 laprensagrafica.com,ahoragranada.com,correio24horas.com.br,cnnespanol.cnn.com,motociclismo.es,sub100.com.br,theenemy.com.br,manhwas.net,rpp.pe,ambito.com,economipedia.com,informador.mx,elinformador.com.co,cronista.com,rionegro.com.ar,diariodecuyo.com.ar,voydeviaje.com.ar,guarda14.com,viapais.com.ar,agazeta.com.br,eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.*,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##body .banner
 !
-focus.it##.foc-adv-slot
+estadao.com.br###home-agora-carousel-ads
+estadao.com.br##div[class^="area-publicidade-"]
+lance.com.br##main .flex-col.justify-start > .w-full.mx-auto:has(img[alt="Lance! Indica"])
 ig.com.br###ad_inimage
 ig.com.br##.ig-taboola
 promobit.com.br##.grid > div[class^="col-start"]:has(div.bg-neutral-high-100)
@@ -2387,7 +2391,9 @@ gasteizhoy.com##.macrobanblock
 universohq.com##.barAds
 istoe.com.br##div[style^="width: 100%; min-height: 250px;"]
 laopinion.com.co##div[class^="pauta"]
-/edgeSystem*.js$domain=cuevana.biz|cuevana.run
+||player.cuevana.*/assets/vast_*.xml
+cuevana.*##a[rel*="sponsored"] img
+/edgeSystem*.js$domain=cuevana.*
 ffcv.es##.hidden-xs.zn_section
 dw-anime.net###custom_html-60
 autoscout24.es##.hf-top-old

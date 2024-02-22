@@ -1,9 +1,9 @@
-! Checksum: JIGgzOyXEBPq/58WjE8hTg
-! Diff-Path: ../patches/7/7-s-1708357075-3600.patch
+! Checksum: Mwwpn+T7nQHLIJLsuHEWPQ
+! Diff-Path: ../patches/7/7-s-1708576575-3600.patch
 ! Title: AdGuard Japanese filter
 ! Description: Filter that enables ad blocking on websites in Japanese language.
-! Version: 2.0.48.78
-! TimeUpdated: 2024-02-19T15:34:16+00:00
+! Version: 2.0.48.84
+! TimeUpdated: 2024-02-22T04:33:36+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -552,9 +552,9 @@ lemino.docomo.ne.jp#%#//scriptlet('prevent-xhr', 'doubleclick.net')
 @@||g.doubleclick.net/gampad/ads?$xmlhttprequest,domain=lemino.docomo.ne.jp
 ! densetsuav.blog.2nt.com,gjdsk2012.blog.2nt.com etc. anti-adb
 blog.2nt.com#@#.adspace
-! https://twitter.com/CASI_TOSHI/status/1638937652375490561
-bridalgown.work,contents-group.work,heisei-housewarming.work,liquidfoundation.work,nailcolor.work,studioglass.work,tapestry.work,teaceremony.work,weddinghall.work#%#//scriptlet("set-constant", "blockId", "0")
-$script,third-party,redirect-rule=noopjs,domain=bridalgown.work|contents-group.work|heisei-housewarming.work|liquidfoundation.work|nailcolor.work|studioglass.work|tapestry.work|teaceremony.work|weddinghall.work
+! https://github.com/AdguardTeam/AdguardFilters/issues/173271
+inkbrushpainting.work,bridalgown.work,contents-group.work,heisei-housewarming.work,liquidfoundation.work,nailcolor.work,studioglass.work,tapestry.work,teaceremony.work,weddinghall.work#%#//scriptlet("set-constant", "blockId", "0")
+$script,third-party,redirect-rule=noopjs,domain=inkbrushpainting.work|bridalgown.work|contents-group.work|heisei-housewarming.work|liquidfoundation.work|nailcolor.work|studioglass.work|tapestry.work|teaceremony.work|weddinghall.work
 ||ad-stir.com/js/adstir.js$script,redirect-rule=noopjs
 ||adingo.jp/p.js$script,redirect-rule=noopjs
 ||criteo.net/js/ld/publishertag.js$script,redirect-rule=noopjs
@@ -640,13 +640,17 @@ blog-and-destroy.com#%#//scriptlet("abort-current-inline-script", "onload", "ads
 !+ PLATFORM(windows, mac, android, ext_chromium, ext_ublock)
 musenboya.com#%#//scriptlet("abort-current-inline-script", "navigator.brave")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/131648
+||fc2.com/g/a/m/gamemod/z-$script,domain=gamemod.blog.fc2.com
+||fc2.com/g/a/m/gamemod/min-toc.js$domain=gamemod.blog.fc2.com
+||fc2.com/g/a/m/gamemod/min-twitter.js$domain=gamemod.blog.fc2.com
 ||fc2.com/h/e/l/helpsupport/x-$script,domain=helpsupport.blog.fc2.com
-||fc2.com/h/e/l/helpsupport/min-toc.js$script,domain=helpsupport.blog.fc2.com
-||fc2.com/h/e/l/helpsupport/min-twitter.js$script,domain=helpsupport.blog.fc2.com
-helpsupport.blog.fc2.com###load:empty
-helpsupport.blog.fc2.com#@#.AdContainer
-||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,redirect=googlesyndication-adsbygoogle,domain=helpsupport.blog.fc2.com,important
-@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$domain=helpsupport.blog.fc2.com
+||fc2.com/h/e/l/helpsupport/min-toc.js$domain=helpsupport.blog.fc2.com
+||fc2.com/h/e/l/helpsupport/min-twitter.js$domain=helpsupport.blog.fc2.com
+gamemod.blog.fc2.com,helpsupport.blog.fc2.com###load:empty
+gamemod.blog.fc2.com,helpsupport.blog.fc2.com#@#.AdContainer
+||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,redirect=googlesyndication-adsbygoogle,domain=helpsupport.blog.fc2.com|gamemod.blog.fc2.com,important
+@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$domain=helpsupport.blog.fc2.com|gamemod.blog.fc2.com
+@@||gamemod.blog.fc2.com^$generichide
 @@||helpsupport.blog.fc2.com^$generichide
 ! https://github.com/AdguardTeam/AdguardFilters/issues/137131
 ! https://github.com/uBlockOrigin/uAssets/issues/15126
@@ -961,7 +965,7 @@ nasubiblog.com,kyukyoku-matome.com##.widget_pc_ad
 !
 ! This section contains the list of ad blocking rules that fall under "advanced" category.
 !
-! Good: example.org#$##rek { display: none !important; }; example.org#%#//scriptlet('set-cookie', 'ad', '0'); example.org#%#document.cookie = "ad =0"; ; example.org$$script[tag-content="ad"][max-length="3000"].
+! Good: example.org#$##rek { display: none !important; }; example.org#%#//scriptlet('set-cookie', 'ad', '0'); example.org$$script[tag-content="ad"][max-length="3000"].
 ! Bad: example.org###rek (should be in specific.txt)
 !
 !-------------------
@@ -1666,6 +1670,12 @@ gundamlog.com###more > iframe[src^="https://richlink.blogsys.jp"]
 !
 !
 !
+||cdn.contentful.com/spaces/*/environments/master/entries?content_type=ad&$domain=tokyoartbeat.com
+tokyoartbeat.com##.yadsBanner
+shokuhin.net##.custom-html-widget > a:not([href^="https://shokuhin"])
+shokuhin.net##a[id$="api-click"]
+ysyoken.hikaku.minkabu.jp##.comarea
+||livedoor.blogimg.jp/ld_manga/imgs/
 gametohkenranbu.sakuraweb.com###content div[align="center"]:has(> ins.adsbygoogle)
 rakumachi.jp###js-ad_news_relational_post_top
 rakumachi.jp##.AdSide
@@ -2963,9 +2973,6 @@ city.mitaka.lg.jp###BannerArea
 sweetchocolate.blogterest.net##.blockAreaHeader
 ||townnews.co.jp/entry_ad.json
 ||koko-soccer.com/assets/img/base/side_title_contents.jpg
-||bignox.com/moniqi-blog/$image,domain=wikiru.jp
-wikiru.jp##.menubar > a[target="_blank"] > img
-wikiru.jp##.menubar > a[target="_blank"] + br
 fu.minkabu.jp##div[class^="ad_hide"]
 adult-gazou.me,dougle.one,oppai-paipai.com##.head-pick
 ||oppai-paipai.com/out-link/
@@ -7087,7 +7094,6 @@ soco-st.com,mangahack.com##.ad_01
 mangahack.com##.ad_affiliate
 mangahack.com##.ad_affiliate_common_footer
 mangahack.com##.nbrArea
-comic-walker.com###right_top_banner
 mangaz.com###scroll-adv
 mangaz.com##.amazonLinkMod
 playlearnlife.com##.theiaStickySidebar > .widget_text

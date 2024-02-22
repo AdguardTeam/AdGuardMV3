@@ -1,9 +1,9 @@
-! Checksum: +/0Y6T6eP2GIpJeTQCqpmA
-! Diff-Path: ../patches/6/6-s-1708367759-3600.patch
+! Checksum: mdEQd2ktPPL+pq+sUvUpAQ
+! Diff-Path: ../patches/6/6-s-1708544179-3600.patch
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.40.56
-! TimeUpdated: 2024-02-19T18:33:16+00:00
+! Version: 2.0.40.62
+! TimeUpdated: 2024-02-21T19:33:34+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -532,8 +532,6 @@ schnittmuster-datenbank.de#%#//scriptlet("abort-on-property-read", "adsBlocked")
 !
 ! https://github.com/AdguardTeam/AdguardFilters/issues/172735
 @@||static.kleinanzeigen.de/static/js/belen/tracking/adblock-detection
-! https://github.com/AdguardTeam/AdguardFilters/issues/172385
-aktion-holz.de#%#//scriptlet("abort-current-inline-script", "document.addEventListener", "/abisuq/")
 ! https://github.com/uBlockOrigin/uAssets/issues/21862
 restegourmet.de#@##AdHeader
 restegourmet.de#@##AD_Top
@@ -1116,7 +1114,7 @@ teleboy.ch#@#.adWrapper
 !
 ! This section contains the list of ad blocking rules that fall under "advanced" category.
 !
-! Good: example.org#$##rek { display: none !important; }; example.org#%#//scriptlet('set-cookie', 'ad', '0'); example.org#%#document.cookie = "ad =0"; ; example.org$$script[tag-content="ad"][max-length="3000"].
+! Good: example.org#$##rek { display: none !important; }; example.org#%#//scriptlet('set-cookie', 'ad', '0'); example.org$$script[tag-content="ad"][max-length="3000"].
 ! Bad: example.org###rek (should be in specific.txt)
 !
 !--------------------------------------!
@@ -1619,6 +1617,8 @@ formel1.de,krautundrueben.de,motorsport-total.com,traktorpool.de,fnweb.de,laborj
 !
 !
 !
+sueddeutsche.de##main > div[class^="css-"]:has(> ins.asm_async_creative)
+chip.de##section.TopList--Count
 giga.de#$#div[class*="ad--top"] { min-height: 40px !important; }
 giga.de##.alice-root-container > div.row:has(> div[class^="col-"] > section > div.section-header > h2 > a[href="/sparen/deals/"])
 giga.de##.alice-teaser-list-item:has(> div[id="giga.de_tech_startseite_teaser1"])
@@ -8331,6 +8331,8 @@ skiinfo.de###Mid
 bauexpertenforum.de,elektrikforen.de,megane-board.de,windows-7-forum.net###MidRectangle
 seo-suedwest.de###Mod373
 seo-suedwest.de###Mod416
+netmoms.de###R1C2
+netmoms.de###R1C3
 onvista.de###SMART_BILLBOARD
 wiesbaden.de###SP-commercials
 fussballn.de###SPMADS_fussballn_HOME_MEDREC_1
@@ -8604,6 +8606,9 @@ winfuture.de###g_content_recommendation
 tschechien-online.org###gad-sky
 tschechien-online.org###gads-leaderboard
 hierspielen.com###gamelead
+mein-schoener-garten.de###gen_inside_mobile_wrapper
+mein-schoener-garten.de###gen_inside_wrapper
+mein-schoener-garten.de###gen_top_wrapper
 frag-mutti.de###gf-superbanner
 kartfahrer-forum.de###globalAnnouncement
 cz.de,goettinger-tageblatt.de,haz.de,kn-online.de,ln-online.de,lvz.de,maz-online.de,neuepresse.de,op-marburg.de,ostsee-zeitung.de,paz-online.de,waz-online.de###gpt_superbanner
@@ -8703,6 +8708,7 @@ wallstreet-online.de###mooTickerContainerMobile
 gamereactor.de###mpu
 bild.de,bz-berlin.de,finanzen.net###mrec
 hoerzu.de###mrec-wrapper
+mein-schoener-garten.de###msg_leaderboard_1_mobile_wrapper
 rezeptwelt.de###mso-dplusc-banner_1
 rezeptwelt.de###mso-dplusc-banner_2
 rezeptwelt.de###mso-dplusc-banner_5
@@ -8710,6 +8716,8 @@ meetingpoint-brandenburg.de###myspacerinner
 meetingpoint-brandenburg.de###myspacerright
 wissens-quiz.de###naMediaAd_MR_WRAPPER
 fupa.net###nab_container
+mein-schoener-garten.de###native_desktop_wrapper
+mein-schoener-garten.de###native_mobile_wrapper
 balaton-zeitung.info###nav_menu-2
 dvd-forum.at###nerdic_header
 wallstreet-online.de###newsDesktopFlag
@@ -8997,7 +9005,7 @@ swoodoo.com##.Common-Kn-Rp-Inline
 mactechnews.de##.Content_1-minheight
 mactechnews.de##.Content_3-minheight
 chip.de##.FC.mt-md-so[role="complementary"]
-praxistipps.focus.de##.FC__Ad
+netmoms.de,praxistipps.focus.de##.FC__Ad
 swoodoo.com##.Flights-Results-FlightRightRail
 perspektive-mittelstand.de##.Laddbox
 perspektive-mittelstand.de##.Laddbox300
@@ -9559,7 +9567,7 @@ homeandsmart.de##.hs_anbieter_box_block
 boerse-online.de##.hsbc_homepage_topflop
 news.de##.ialayerContainer
 gmx.net,web.de##.iba-variant-test
-24auto.de,24garten.de,24rhein.de,24royal.de,24vita.de,az-online.de,bgland24.de,buzzfeed.at,buzzfeed.de,bw24.de,chiemgau24.de,come-on.de,costanachrichten.com,fnp.de,fr.de,hallo-muenchen.de,hna.de,ingame.de,innsalzach24.de,kreiszeitung.de,mangfall24.de,merkur.de,rosenheim24.de,sauerlandkurier.de,soester-anzeiger.de,tz.de,wa.de,wasserburg24.de##.id-TBeepSlot
+24auto.de,24garten.de,24rhein.de,24royal.de,24vita.de,az-online.de,bgland24.de,buzzfeed.at,buzzfeed.de,bw24.de,chiemgau24.de,come-on.de,costanachrichten.com,fnp.de,fr.de,giessener-anzeiger.de,hallo-muenchen.de,hna.de,ingame.de,innsalzach24.de,kreis-anzeiger.de,kreiszeitung.de,lauterbacher-anzeiger.de,mangfall24.de,merkur.de,rosenheim24.de,sauerlandkurier.de,schwaebische-post.de,soester-anzeiger.de,tz.de,usinger-anzeiger.de,wa.de,wasserburg24.de##.id-TBeepSlot
 pcwelt.de##.idgAmazonTextV2
 computerwoche.de,tecchannel.de##.idgLeaderBoard
 channelpartner.de##.idgWebcastsCarousel
