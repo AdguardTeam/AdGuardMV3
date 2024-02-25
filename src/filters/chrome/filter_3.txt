@@ -1,9 +1,9 @@
-! Checksum: JKrj0HAC10Kmve8h2jAMag
-! Diff-Path: ../patches/3/3-s-1708580207-3600.patch
+! Checksum: yrxaBusLcFmUjgqSNungRA
+! Diff-Path: ../patches/3/3-s-1708781773-3600.patch
 ! Title: AdGuard Tracking Protection filter
 ! Description: The most comprehensive list of various online counters and web analytics tools. Use this filter if you do not want your actions on the Internet to be tracked.
-! Version: 2.0.66.99
-! TimeUpdated: 2024-02-22T05:33:47+00:00
+! Version: 2.0.67.9
+! TimeUpdated: 2024-02-24T13:33:09+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -313,8 +313,6 @@ athabascau.ca#%#//scriptlet("set-constant", "WURFL", "emptyObj")
 tarnkappe.info#%#//scriptlet('abort-on-property-read', 'Matomo')
 ! https://github.com/AdguardTeam/AdguardForWindows/issues/4138
 careermap.co.uk#%#//scriptlet("set-constant", "trackEvent", "noopFunc")
-! https://github.com/AdguardTeam/AdguardFilters/pull/115192
-gmarket.co.kr#%#//scriptlet("set-constant", "pvprofiler.sendEvt", "noopFunc")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/114901
 popin.cc#%#//scriptlet('set-local-storage-item', '_ss_pp_id', '')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/114227
@@ -550,7 +548,7 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 !
 !
 !
-||analytics.b2.ai^
+||adx.promo^
 ||trk.decido.io^
 ||tracker.oval.id^
 ||event.lib.visumo.io^
@@ -4366,6 +4364,10 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ! Blocking piwik analytics subdomain(for DNS filtering)
 |piwik.
 !
+||events.caffeine.tv^
+||analytics.totalprosports.com^
+||analytics-conomi.line.me^
+||sopr-api.cian.ru^
 ||analytics.b2.ai^
 ||tracking.ai.rakuten.co.jp^
 ||supportmetrics.apple.com^
@@ -104466,7 +104468,6 @@ _analytics.js?
 /tracking/pixels.
 /tracking/tag_commander.php?
 /tracking/track.jsp?
-/tracking/track.php?
 /tracking/tracking_
 /tracking_pixel
 /trackIt.js
@@ -104552,6 +104553,7 @@ _tracking.php?b=
 /analytics.js$domain=tokyometro.jp|resumes.breakdownexpress.com|techcult.com|inbox.lv|kopeda.com|freexcafe.com|rusvideos.tv|nakubani.ru|lun.com|songsara.net|newsmax.com|bolgehastanesi.com|ewtc.de|newsdig.tbs.co.jp|imore.com|city.kushiro.lg.jp|emeraldbridal.com.au|emarat-news.ae|imobie.jp|tikla.com.tr|rusvideos.porn|jrkyushu.co.jp|amiunique.org|edit.ing|konami.com
 ||assets.adobedtm.com^$domain=mcclatchydc.com|elnuevoherald.com|bellinghamherald.com|sacbee.com|charlotteobserver.com|newsobserver.com|miamiherald.com|ef.ru|algida.com.tr|bmw-motorrad.co.uk|cif.com.tr|clearhaircare.com|domestos.com|dove.com|elidor.com.tr|f1sport.autorevue.cz|geico.com|hellmanns.com.tr|herkessofraya.com|johnsonsbaby.com.tr|lipton.com|lnk.to|lux.com|magnumicecream.com|neutrogena.com.tr|omo.com|rexona.com|samsung.com|sap.com|schwarzkopf.com.tr|signalturkiye.com|msnbc.com|nbcnews.com|kbb.com|eurosport.ru|timgate.it|intermiles.com|oxfordmail.co.uk|spiegel.de|hp.com|deutschepost.de|thebay.com|s.shufoo.net|tsn.ca|tabelog.com|euronews.com|newshub.co.nz|fredmeyer.com|viabcp.com|carsales.com.au|falabella.com|aarp.org|thehill.com|realtor.com|nzherald.co.nz|aia.com.ph|baynews9.com|thesaurus.com|dhc.co.jp|0101.co.jp
 !
+||static.cdn-cian.ru/frontend/ca/ca.js
 ||analytics.*.ru/*/hits/event/?
 ||top.elec.ru/cnt?id=
 ||wa.slideshare.net/api/v1/events
@@ -109972,6 +109974,8 @@ inapps.appsflyersdk.com^
 !
 ! NOTE: Regular rules
 !
+||analytics.starmakerstudios.com^
+||track.starmakerstudios.com^
 ||volceapplog.com^
 ||toblog.tobsnssdk.com^
 ||tobapplog.tobsnssdk.com^
@@ -110731,6 +110735,12 @@ inapps.appsflyersdk.com^
 ! For platforms which do not support $redirect rules
 !
 !
+! https://github.com/uBlockOrigin/uAssets/issues/22628
+@@||googletagmanager.com/gtm.js$domain=iamgujarat.com|eisamay.com|samayam.com|vijaykarnataka.com|indiatimes.com
+! https://github.com/AdguardTeam/AdguardFilters/issues/173368
+||openfpcdn.io/fingerprintjs/v$script,redirect=fingerprintjs3,domain=pdfextra.com
+! If DNS filtering blocks openfpcdn.io
+pdfextra.com#%#//scriptlet('trusted-set-cookie', 'ms::pdf-extra-web::pushtkn', '1')
 ! fix videos
 @@||tru.am/scripts/custom/reuters.js$domain=reuters.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/172693
