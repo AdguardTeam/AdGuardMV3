@@ -1,9 +1,9 @@
-! Checksum: 07HOzI6QBwGGgn9lAL/d9g
-! Diff-Path: ../patches/1/1-s-1709192161-3600.patch
+! Checksum: cl8dbGkSbFYHt1a16YzBXw
+! Diff-Path: ../patches/1/1-s-1709307384-3600.patch
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.88.90
-! TimeUpdated: 2024-02-29T07:32:23+00:00
+! Version: 2.0.88.97
+! TimeUpdated: 2024-03-01T15:32:44+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1482,6 +1482,7 @@ ucoz.ru/informer/
 ! Bad: /banner.jpg (should be in general_url.txt)
 ! Bad: ||adssubdomain.legitwebsite.com^ (should be in adservers_firstparty.txt)
 !
+||gainifyads.com^$popup,third-party
 ||qkyspzfxnc.ru^$third-party
 ||monetizer.guru^$third-party
 ||1wiipr.xyz^$document
@@ -5487,11 +5488,11 @@ ya.ru,yandex.com##.banner
 [$path=/search]ya.ru,yandex.*##.content__right div.serp-item:has(> div[data-vnl*='"nonceId"'])
 ya.ru##.Skeleton_type_ad_search
 [$path=/search]ya.ru,yandex.*##.AdvMedia
-ya.ru,yandex.*##li.mini-suggest__item > a[href^="http://yabs."][href*="/count/"]
-ya.ru,yandex.*##li.mini-suggest__item > a[href^="https://yabs."][href*="/count/"]
-ya.ru,yandex.*##li.mini-suggest__item > a[href^="http://yandex"][href*="/clck/"]
+ya.ru,yandex.*##li[class*="mini-suggest__item"] > a[href^="http://yabs."][href*="/count/"]
+ya.ru,yandex.*##li[class*="mini-suggest__item"] > a[href^="https://yabs."][href*="/count/"]
+ya.ru,yandex.*##li[class*="mini-suggest__item"] > a[href^="http://yandex"][href*="/clck/"]
 yandex.*##body:not([data-bem*="pogoda"]) .mini-suggest__popup-content > li[data-type="nav"]
-[$path=/search]yandex.*#?#.serp-list > li.serp-item:has(> div[data-bem*="organic"] > div.organic__title-wrapper > a[href][data-event-required])
+[$path=/search]ya.ru,yandex.*##.serp-item:has(> div[data-bem*="organic"] > div a[href][data-event-required])
 ! Right side, where usually shown useful content
 ya.ru,yandex.*###search-result-aside > div[class*="_right_yes"] > div[data-cid] div[data-vnl*="R-I-"]
 ! Breaks useful content
@@ -7618,7 +7619,16 @@ gorodn.ru,bits.media,devyatka.ru,gazeta-n1.ru,gorod48.ru,hi-fi.ru,innov.ru,k1new
 !
 !
 !
-afisha.ru#?#div[data-test="PAGE-BLOCK"] > div > section[role="section"]:has(> div[data-test="SECTION-CONTENT"] > div > a[href^="https://okko.tv/"])
+tengrisport.kz##.header_adv
+tengrisport.kz##.banner-tn_left
+||asiaplustj.info/adfiles
+asiaplustj.info##.newsbox-outer-banner
+yablyk.com##.yandex-ad
+forbes.ru##div[data-title-deleted="Реклама на Forbes"]
+forbes.ru##div[data-article] > div[class] > div[class] > div[class] > div[class] > div[style^="min-height:"]:has(div[class^="infox_"])
+forbes.ru##div[data-article] > div[class] > div[class] > div:has(> div > div > div > header > svg[width="67"])
+forbes.ru##main div[class] > div[class]:has(> div[class] > aside > div[id^="adfox_"]):not(:has(h1))
+afisha.ru##div[data-test="PAGE-BLOCK"] > div > section[role="section"]:has(> div[data-test="SECTION-CONTENT"] > div > a[href^="https://okko.tv/"])
 ||forum.cxem.net/adv/
 cxem.net##.rek_plashka
 3dnews.ru##.sqdad
@@ -7846,7 +7856,6 @@ iguides.ru##.i-box-ads
 imya.com##a[href="https://ral.ru/classic_russian"]
 ||officelife.media/upload/iblock/fec/$image
 monna2.top#?#center > center:has(> div > a[rel="nofollow"][href] > img)
-forbes.ru#?#main div[class] > div[class]:has(> div[class] > aside > div[id^="adfox_"])
 ||yastatic.net/vas-bundles/
 kino-teatr.ru#?#.content_block:has(> div.block_okkko)
 aptekirls.ru###top-b
@@ -10599,7 +10608,7 @@ helpsetup.ru##center > div[class^="outline"]
 android.inform.click##a[href^="https://rusvpn.com/"] > img
 svpressa.ru##.b-content__section_teasers
 svpressa.ru##.b-content__section_partners
-tengrinews.kz##div[class$="-banner"]
+tengrisport.kz,tengrinews.kz##div[class$="-banner"]
 rcity.by##.hbaner
 rcity.by###media_image-21
 rcity.by###media_image-27
@@ -18360,16 +18369,16 @@ weekend.rambler.ru##div[id^="ban_240x400"]
 ||images.rambler.ru/upl/$domain=~nova.rambler.ru
 !
 ! leftovers
+rambler.ru##div[class*="xmr"][style^="min-height:"]
 weekend.rambler.ru,auto.rambler.ru,kino.rambler.ru,weather.rambler.ru,doctor.rambler.ru,travel.rambler.ru,sport.rambler.ru,woman.rambler.ru,news.rambler.ru,finance.rambler.ru##div[class*="banner-"]
 weekend.rambler.ru,auto.rambler.ru,kino.rambler.ru,doctor.rambler.ru,travel.rambler.ru,sport.rambler.ru,woman.rambler.ru,news.rambler.ru,finance.rambler.ru##div[style^="order:"][style*="-1"]
-weekend.rambler.ru,auto.rambler.ru,kino.rambler.ru,doctor.rambler.ru,travel.rambler.ru,sport.rambler.ru,woman.rambler.ru,news.rambler.ru,finance.rambler.ru##div[style^="min-height:"]:has(> div[id^="adfox-"])
+weekend.rambler.ru,auto.rambler.ru,kino.rambler.ru,doctor.rambler.ru,travel.rambler.ru,sport.rambler.ru,woman.rambler.ru,news.rambler.ru,finance.rambler.ru##div[class]:has(> div[id^="adfox-"])
 weekend.rambler.ru,auto.rambler.ru,kino.rambler.ru,doctor.rambler.ru,travel.rambler.ru,sport.rambler.ru,woman.rambler.ru,news.rambler.ru,finance.rambler.ru##div[data-index] > div[class]:has(> div > div[data-rnet])
 weekend.rambler.ru,auto.rambler.ru,kino.rambler.ru,doctor.rambler.ru,travel.rambler.ru,sport.rambler.ru,woman.rambler.ru,news.rambler.ru,finance.rambler.ru#$?#script + div[class] > div[class]:has(> div[class^="banner-"]) { min-height: 0 !important; }
 weather.rambler.ru##div[data-block="seo"]
 weather.rambler.ru##.commercial-branding div[class]:has(> div[class] > div > div > div[id^="fabex-"])
+tv.rambler.ru##div[style^="min-height:"][style*="px"]
 tv.rambler.ru##body > div:has(> div[class] > div[id^="lex"])
-tv.rambler.ru##div[style^="min-height:"][style*="250px"]
-tv.rambler.ru##div[style^="min-height:"][style*="600px"]
 r0.ru##div[class^="News__adv"]
 ! END: rambler.ru
 !
@@ -18556,6 +18565,7 @@ adme.media##div[data-test-id="article-content"] > div[class*=" "]:not([tabindex]
 adme.media#?#div[data-test-id="article-bottom-recommended"] > div > div > div[style="position:relative"] > div > div:has(div:empty + div:empty + div:empty)
 !
 ! Start: vc.ru, dtf.ru, spark.ru
+dtf.ru##.propaganda
 dtf.ru#?#.content-list > div[class]:has(> div > div:contains(реклама))
 dtf.ru##.rotator
 dtf.ru##div.subsite-header > div.subsite-header__cover > a.subsite-branding
