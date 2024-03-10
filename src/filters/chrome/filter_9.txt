@@ -1,9 +1,9 @@
-! Checksum: jWz+VYVXXMWGqIrUFy5veA
-! Diff-Path: ../patches/9/9-s-1709796969-3600.patch
+! Checksum: cETaxTzxH0lAIHT4dJGNbw
+! Diff-Path: ../patches/9/9-s-1709919362-3600.patch
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish, Portuguese, and Brazilian Portuguese languages.
-! Version: 2.0.23.69
-! TimeUpdated: 2024-03-07T07:33:30+00:00
+! Version: 2.0.23.75
+! TimeUpdated: 2024-03-08T17:33:27+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -269,6 +269,11 @@
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/174418
+megacurioso.net#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
+! https://github.com/AdguardTeam/AdguardFilters/issues/174379
+tudonoticiasbr.com###cleitao
+tudonoticiasbr.com#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
 ! canal12.com.sv
 canal12.com.sv#%#//scriptlet('prevent-addEventListener', 'adBlockerOn')
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima3,domain=canal12.com.sv
@@ -1353,6 +1358,9 @@ peru21.pe#@#.adstop
 !------- JS rules ---------------------!
 !--------------------------------------!
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/174378
+pobreflix.vc#%#//scriptlet('remove-attr', 'href', 'a[href]#clickfakeplayer')
+pobreflix.vc#%#//scriptlet('trusted-set-constant', 'dtGonza.playeradstime', '"-1"')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/159573
 uol.com.br#%#//scriptlet('set-constant', '__configuredDFPTags', 'emptyObj')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/171264
@@ -1371,14 +1379,17 @@ movidy.lat#%#//scriptlet('prevent-window-open')
 guiasaude.info#%#//scriptlet('set-cookie', 'Ads', '2')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/165934
 warezstream.net#%#//scriptlet("prevent-window-open")
+! https://github.com/AdguardTeam/AdguardFilters/issues/174381
 ! https://github.com/AdguardTeam/AdguardFilters/issues/165638
+embedder.net#%#//scriptlet('prevent-window-open')
+embedder.net#%#//scriptlet('abort-current-inline-script', 'EventTarget.prototype.addEventListener', 'window.open')
 embedder.net#%#//scriptlet('abort-on-property-read', 'initPu')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/164868
 forodecostarica.com#%#//scriptlet('prevent-setTimeout', 'adJsView')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/162520
 beautyskincarebrasil.com#%#//scriptlet('prevent-window-open')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/161356
-receitasdafazenda.com#%#//scriptlet('set-local-storage-item', 'last_ads', 'yes')
+gastroponto.com,nossoprato.online,receitasdafazenda.com#%#//scriptlet('set-local-storage-item', 'last_ads', 'yes')
 modsimuladores.com,assistirfilmesdaluna.com,vejaideias.com.br,jogoscompleto.xyz#%#//scriptlet('adjust-setTimeout', 'atualizar', '*', '0.02')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/161249
 fazercurriculo.online,usandoapp.com#%#//scriptlet('adjust-setTimeout', '.delay', '*', '0.001')
@@ -1393,8 +1404,6 @@ assistirfilmeshdgratis.*#%#//scriptlet('remove-attr', 'href', 'a[href]#clickfake
 assistirfilmeshdgratis.*#%#//scriptlet('trusted-click-element', 'a#clickfakeplayer:not([href])', '', '1500')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/157557
 sub100.com.br#%#//scriptlet('json-prune', '*', '*.media.*.advertisement_id')
-! https://github.com/uBlockOrigin/uAssets/issues/18828#issuecomment-1639561464
-suaurl.com#%#//scriptlet("prevent-window-open")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/156217
 megafire.net#%#//scriptlet('set-constant', 'contadorClics', '1')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/155430
@@ -1428,7 +1437,7 @@ player.poseidonhd2.co,player.cuevana2espanol.*,player.cuevana.*#%#//scriptlet('t
 ! https://github.com/AdguardTeam/AdguardFilters/issues/140890
 pobre.wtf#%#//scriptlet('set-constant', 'ads', 'false')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/139850
-suaurl.com#%#//scriptlet('set-constant', 'acdl', 'undefined')
+suaurl.com,reidoplacar.com#%#//scriptlet('set-constant', 'acdl', 'noopFunc')
 suaurl.com#%#//scriptlet('prevent-setTimeout', 'window.location.href')
 suaurl.com#%#//scriptlet('abort-current-inline-script', '$', 'notficationAd')
 suaurl.com#%#//scriptlet('abort-current-inline-script', 'open', 'document.getElementById')
@@ -1502,7 +1511,7 @@ descargarhentaimf.xyz#%#//scriptlet("prevent-addEventListener", "click", "loadXM
 ! https://github.com/AdguardTeam/AdguardFilters/issues/116218
 mundotec.pro#%#//scriptlet("adjust-setInterval", "player", "", "0.02")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/116088
-receitasoncaseiras.online#%#//scriptlet('set-cookie', 'visited', 'yes')
+megacurioso.net,receitasoncaseiras.online#%#//scriptlet('set-cookie', 'visited', 'yes')
 receitasoncaseiras.online#%#//scriptlet("adjust-setTimeout", "PLAYER", "*", "0.02")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/116087
 automotivocarros.com,portecnologia.com,cartaocreditoplatinum.org#%#//scriptlet('set-cookie', 'CLI_02_Dxxxxxxxxxxxxxxx', '1')
@@ -1682,6 +1691,9 @@ newpct1.com#%#window.atob = function() { };
 !------- CSS fixes --------------------!
 !--------------------------------------!
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/174379
+tudonoticiasbr.com#$##neoni_mutiny { display: block !important; }
+tudonoticiasbr.com#$#.tres_mosqueteiros { display: none !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/171311
 donghuas.top#$#body > #content { padding-bottom: 0 !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/166777
@@ -1693,7 +1705,7 @@ guiasaude.info#$##colunas { display: block !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/165640
 receitasdodia.fun#$#.hided { display: block !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/165264
-receitasdochico.life,dicasdefinancas.net,dicasfinanceirasbr.com,dicasdevalor.net#$##player { display: block !important; }
+megacurioso.net,gastroponto.com,nossoprato.online,receitasdochico.life,dicasdefinancas.net,dicasfinanceirasbr.com,dicasdevalor.net#$##player { display: block !important; }
 dicasvalores.com#$#.content-box { display: block !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/165265
 ldicas.com.br#$##colunas { display: block !important; }
@@ -1992,12 +2004,14 @@ http://adw.
 $script,third-party,denyallow=fastly.net|statically.io|sharecast.ws|bunnycdn.ru|bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|cdn.staticfile.org|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yastatic.net|ytimg.com|zencdn.net|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com|fastcomments.com|plyr.io,_____,domain=anroll.net|monoschinos2.com|animeyt.es|leercapitulo.com|pelisflix2.green|darkmahou.org|comandotorrents.to|comandoplay.com
 !
 ! ##.ad
-elcorreogallego.es,3djuegos.lat,xatakandroid.com,nsctotal.com.br,noticiasdenavarra.com,informacion.es,applesfera.com,xatakamovil.com,espinof.com,mundoxiaomi.com,vidaextra.com,mediotiempo.com,elpais.com,olhardigital.com.br,atribuna.com.br,jovemnerd.com.br,laopiniondemurcia.es,larazon.es,dicio.com.br,band.uol.com.br,xataka.com,onyxplay.com,genbeta.com,vagalume.com.br,xatakandroid.com,abril.com.br##.ad
+meups.com.br,elcorreogallego.es,3djuegos.lat,xatakandroid.com,nsctotal.com.br,noticiasdenavarra.com,informacion.es,applesfera.com,xatakamovil.com,espinof.com,mundoxiaomi.com,vidaextra.com,mediotiempo.com,elpais.com,olhardigital.com.br,atribuna.com.br,jovemnerd.com.br,laopiniondemurcia.es,larazon.es,dicio.com.br,band.uol.com.br,xataka.com,onyxplay.com,genbeta.com,vagalume.com.br,xatakandroid.com,abril.com.br##.ad
 ! ##.ads
 cifras.com.br,gaz.com.br,placar.com.br,futebolinterior.com.br,tvhistoria.com.br,tribunapr.uol.com.br,diariodonordeste.verdesmares.com.br,sbt.com.br,link.estadao.com.br,atomixhq.*,jc.ne10.uol.com.br,internetpasoapaso.com,acidadeon.com,leouve.com.br,larazon.es,infoescola.com,cbn.globoradio.globo.com,maxitorrent.com,abril.com.br,odia.ig.com.br,especiais.g1.globo.com,tribunapr.com.br,novelasd.com,anime-tube.tv##.ads
 ! ##body .banner
 laprensagrafica.com,ahoragranada.com,correio24horas.com.br,cnnespanol.cnn.com,motociclismo.es,sub100.com.br,theenemy.com.br,manhwas.net,rpp.pe,ambito.com,economipedia.com,informador.mx,elinformador.com.co,cronista.com,rionegro.com.ar,diariodecuyo.com.ar,voydeviaje.com.ar,guarda14.com,viapais.com.ar,agazeta.com.br,eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.*,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##body .banner
 !
+||monoschinos2.com/public/img/baner*.jpg
+monoschinos2.com##.container > a[target="_blank"] > img
 ominho.pt###wpgtr_stickyads_textcss_container
 forobeta.com##div[id^="_xfUid"][style^="text-align:"]
 clarin.com##div[class*="column"] > div[class] > div[class]:has(> div.sticky > div.bannerSRA)
@@ -2081,8 +2095,9 @@ clickpb.com.br#?#body > div[style]:has(> a[href^="https://record.nsxafiliados.co
 clickpb.com.br##.adsHorizontal
 depor.com##div[class^="showTds"]
 ||visortmo.com/images/series.gif
+visortmo.com#?#div[id^="pills-populars"] > div.row > div.element:has(> a[href^="https://visortmo.com/library/"] > .thumbnail > style:contains(/\/images\/.*_push/))
 visortmo.com#?#div[id^="pills-populars"] > div.row > div.element:has(> a[href^="https://visortmo.com/library/"] > .thumbnail > :is(span, .thumbnail-title):contains(/promo|netflix|ofert|deal|pack/i))
-visortmo.com##a[href^="https://visortmo.com/library/"] > img:not(.thumbnail)
+visortmo.com##a[href^="https://visortmo.com/library/"] > img:not([src*="/cover/"])
 visortmo.com##a[href^="https://visortmo.com/library/"] > img[src^="/"]
 visortmo.com##a[href^="https://visortmo.com/library/"] > img[src^="https://visortmo.com/"]
 visortmo.com##a[href="https://series.ly"] > img[src*=".gif"]

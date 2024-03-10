@@ -1,9 +1,9 @@
-! Checksum: 0MaEOM0vJsM7vt8OyZbN5Q
-! Diff-Path: ../patches/6/6-s-1709761339-3600.patch
+! Checksum: ees399cr/ECvXDLT96m4yw
+! Diff-Path: ../patches/6/6-s-1709991350-3600.patch
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.40.80
-! TimeUpdated: 2024-03-06T21:39:37+00:00
+! Version: 2.0.40.85
+! TimeUpdated: 2024-03-09T13:33:12+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -86,6 +86,7 @@
 ! Bad: ||adssubdomain.legitwebsite.com^ (should be in adservers_firstparty.txt)
 !
 !
+||comparison.financeads.net^$third-party
 ||lehrer-finden.de^
 ||lokalwerben.t-online.de^
 ||quartermedia-ad-service.net^
@@ -1499,6 +1500,9 @@ spiegel.de###Inhalt .relative > .relative > div[class] > section[class="clear-bo
 ! http://forum.adguard.com/showthread.php?8979 (#17)
 ||static.p7s1.com/vendor/webtrekk
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/174274
+!+ NOT_OPTIMIZED
+giga.de,kino.de,watson.de###teaserheld-header
 ! https://github.com/AdguardTeam/AdguardFilters/issues/148571
 ! https://github.com/AdguardTeam/AdguardFilters/issues/124356
 ! https://github.com/AdguardTeam/AdguardFilters/issues/107055
@@ -1587,6 +1591,12 @@ formel1.de,krautundrueben.de,motorsport-total.com,traktorpool.de,fnweb.de,laborj
 !
 !
 !
+winfuture.de###news_content > #vergleich
+winfuture.de###news_content > #vergleich + iframe
+fraenkische-rezepte.de##.banner-desktop
+fraenkische-rezepte.de##.code-block:has(> div[id^="div-gpt-ad"]:only-child)
+fraenkische-rezepte.de##.code-block:has(> .OUTBRAIN)
+giga.de##.alice-teaser-list-item:has(> article[style="display: none !important;"]:only-child)
 ip-phone-forum.de##.xcx-ad
 ||ip-phone-forum.de/styles/ads/
 mobile.de##div[class]:has(> div[data-testid="SRP_BILLBOARD-container"]:only-child)
@@ -7059,7 +7069,6 @@ $stylesheet,subdocument,third-party,xmlhttprequest,domain=canna-power.to|canna.t
 ||casinowelt.com/images/spinit.jpg
 ||cathkathcatt.ch^*/banner-
 ||cathkathcatt.ch^*/banner_
-||ccstatic.toggo.de/cc-static-files/bumper-video/Toggolino_WT_$media
 ||chartsurfer.de/getthead.php?
 ||cherry.ch/images/banner/
 ||chip-secured-download.de/tmp/free-service-hotline.png$domain=chip.de
@@ -7998,6 +8007,7 @@ $stylesheet,subdocument,third-party,xmlhttprequest,domain=canna-power.to|canna.t
 ||unterwasserwelt.de/wp-content/uploads/*/Footer-Premiumsite-
 ||unterwasserwelt.de/wp-content/uploads/*/hamatamangroves-banner_footer-premiumsite-
 ||uscene.net/src/so/so.js
+||utopix.net/utopia_de/js/loader.js
 ||va-music-hits.one/images/banners/
 ||velomotion.de^*/featured-ad.js
 ||vfb.de/?proxy=img/hauptsponsor_
@@ -8245,6 +8255,11 @@ connextra.com##iframe[src^="https://ssl.connextra.com"]
 ||tpc.googlesyndication.com^$domain=autobild.de
 ||track.webgains.com/link.html?wglinkid=$script,domain=autobild.de
 ||yieldlab.net^$domain=autobild.de
+||ccstatic.toggo.de/cc-static-files/bumper-video/$redirect=noopmp4-1s,domain=toggo.de
+||flashtalking.com^$~media,domain=toggo.de
+||flashtalking.com^*.mp4$redirect=noopmp4-1s,domain=toggo.de
+||smartclip.net/creatives/uploads/*.mp4$redirect=noopmp4-1s,domain=toggo.de
+||smartclip.net^$~media,domain=toggo.de
 /^https?:\/\/.*\.(jpg|jpeg|gif|png|php|svg|ico|js|txt|css)/$popup,domain=190.115.18.20|aniworld.to|canna-power.to|canna.to|kinoger.com|kinoger.to|kinoonline.net|s.to|serien.cam|serienstream.to
 /lp/chip-$popup,domain=chip.de
 ^utm_medium=popunder^$popup,domain=hilfreich.de
