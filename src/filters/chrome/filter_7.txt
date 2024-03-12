@@ -1,9 +1,9 @@
-! Checksum: kwqfCLMRVbfSD/5FLTRKtQ
-! Diff-Path: ../patches/7/7-s-1709987757-3600.patch
+! Checksum: 4wy/4qQZV9vtM1clMb+nTQ
+! Diff-Path: ../patches/7/7-s-1710174976-3600.patch
 ! Title: AdGuard Japanese filter
 ! Description: Filter that enables ad blocking on websites in Japanese language.
-! Version: 2.0.49.23
-! TimeUpdated: 2024-03-09T12:33:19+00:00
+! Version: 2.0.49.27
+! TimeUpdated: 2024-03-11T16:33:26+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1623,7 +1623,7 @@ _ap/signin*?_encoding=UTF8&openid.assoc_handle=jpflex&openid.claimed_id=&action=
 !
 ! For URL shorteners or simple sites with frequently changed ad servers.
 ! Incorrectly blocked domains can be excluded using regex(synchronize this regexp in all filters)
-/^(?!.*(statically.io|sharecast.ws|bunnycdn.ru|bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|cdn.staticfile.org|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yandex.|yastatic.net|ytimg.com|zencdn.net|player|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com|imgsmail.ru)).*$/$third-party,script,_____,domain=viki.ja-jp.nina.az|uraaka-joshi.com
+/^(?!.*(statically.io|sharecast.ws|b-cdn.net|bunnycdn.ru|bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|cdn.staticfile.org|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yandex.|yastatic.net|ytimg.com|zencdn.net|player|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com|imgsmail.ru)).*$/$third-party,script,_____,domain=viki.ja-jp.nina.az|uraaka-joshi.com
 !
 ! ###banner
 city.hirosaki.aomori.jp,iyasiya.com,adacomi.com,pref.shimane.lg.jp,pref.osaka.lg.jp,illust-ai.com,nan-net.com,radiolife.com,keimei.ne.jp,5ch.net,bbspink.com,crank-in.net###banner
@@ -1675,6 +1675,7 @@ gundamlog.com###more > iframe[src^="https://richlink.blogsys.jp"]
 !
 !
 !
+mangaraw.onl##.w-full.text-center.h-auto > p.p-2.text-sm.text-gray-500
 xn--icktho51ho02a0dc.com##.l-sidebar > aside[class="widget"]:has(> div.execphpwidget a[href^="https://www.sokmil.com/"][href*="affi="])
 ameblo.jp###entryBody > div:not([class]):empty ~ div:not([class]) > .pickCreative_root
 akabane-shinbun.com##.cps-post-main > p:has(> ins.adsbygoogle)
@@ -2889,7 +2890,6 @@ ge-soku.com##.single-related-area
 nanasepn.com###sidebar > div.widget_custom_html
 pr-park.com,xn--zcka7aza6gyb9jd.net###notfix > div.widget_custom_html
 twtimez.net##.adWideDown
-twiman.net##div[class*="my-"][class*="px\]"]
 twiman.net##div[style="margin:auto;max-width:1400px;"]
 ||uub.jp/opm/pnlbanner_
 uub.jp##a[rel="nofollow"] > img[style="width:100%"]
@@ -3531,7 +3531,7 @@ warau.jp##div[class^="ad-"][class*="_Square-"]
 sugoroku.nerliasaga.jp##.battleResultAD
 sugoroku.nerliasaga.jp##.resultADFrame
 sugoroku.nerliasaga.jp##div[class^="adContainer"]
-game.goo.ne.jp,kantangame.com##.ad_rectangle
+kantangame.com##.ad_rectangle
 yahoo.co.jp###ad-new-ysp
 h-pon.doorblog.jp##div[id^="imobile_ad_"]
 misskey.io##div[class][style*=" "] div[class]:not([style]) ~ div[class] a[href^="https://go.misskey.io/"] > img[class]:not([src]) ~ button
@@ -6524,7 +6524,7 @@ crank-in.net##.ad-area-list
 crank-in.net##.head-banner
 crank-in.net##.ad-list-m
 mizu-trouble.jp##p[style="”font-size:5pt;"] + center
-game.hiroba.dpoint.docomo.ne.jp,game.goo.ne.jp,kantangame.com,kantan.game,yomipo.yomiuri.co.jp,gesoten.com##.ad_super
+game.hiroba.dpoint.docomo.ne.jp,kantangame.com,kantan.game,yomipo.yomiuri.co.jp,gesoten.com##.ad_super
 traicy.com##.pc-ad-wide
 traicy.com##.sp-header-ad
 hochi.news##.ad[style^="min-width: 300px"]
@@ -9113,7 +9113,6 @@ peepxx.com#?#.widget:has(> a[href^="https://subyshare.com/affiliate/"])
 cocokara-next.com#?#.txtBox > p:has(> ins.adsbygoogle)
 bannerkoubou.com#?#body > div.container-fluid:has(> div.row > div.adsense-photoeditor-header-wrapper)
 bannerkoubou.com#?#main > div.row:has(> div[id] > script[src^="//ads.themoneytizer.com/"])
-game.goo.ne.jp#?#.adsbygoogle:has(> span[class$="rail-edge"])
 matomeantena.com#?#.list-group > .list-group-item:has(a[href*="&utm_medium=affiliate&utm_campaign=affiliate"])
 coordisnap.com#?#.post-loop-wrap:has(> div[id^="div-gpt-"])
 cinema.ne.jp#?#.sticky-height > section.article-list:contains(SPONSORD)
@@ -9153,7 +9152,6 @@ peta2.jp#?#.col-xs-3[class$="tColumn"] > ul > li > div.panel-default:has(> div.p
 peta2.jp#?#.col-xs-3[class$="tColumn"] > ul > li:has(> div.panel-default > div > center > table td > a[href^="http://www.dmm.co.jp/"] > img)
 peta2.jp#?#.col-xs-3[class$="tColumn"] > ul > li > div.panel-default > div.panel-heading:contains(スポンサードリンク)
 screen-multimedia.com#?##main > aside:has(> div.ads-flexbox)
-game.goo.ne.jp#?#.adsbygoogle:has(> .grippy-host)
 life-gogo.com#?#table[cellpadding="3"]:contains([PR])
 life-gogo.com#?#table[width="100%"][cellpadding="0"][cellspacing="8"]:contains(出会い特集)
 life-gogo.com,zatsubitown.com#?#body > font[color="green"]:contains(/初心者|セフレ|出会い|女装子|ニューハーフと遊/)
@@ -10426,11 +10424,6 @@ osusume.mynavi.jp#@#.ad-widget
 ! https://github.com/AdguardTeam/AdguardFilters/issues/78094
 real-sports.jp#%#//scriptlet('prevent-element-src-loading', 'script', 'adsbygoogle')
 ||googlesyndication.com/pagead/js/adsbygoogle.js$script,redirect=googlesyndication-adsbygoogle,important,domain=real-sports.jp
-! unbreak games on game.goo.ne.jp
-@@||googletagservices.com/tag/js/gpt.js$domain=game.goo.ne.jp
-@@||securepubads.g.doubleclick.net/gpt/pubads_impl_$domain=game.goo.ne.jp
-@@||securepubads.g.doubleclick.net/tag/js/gpt.js$domain=game.goo.ne.jp
-@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,domain=game.goo.ne.jp
 ! https://jbbs.shitaraba.net/bbs/read.cgi/internet/25463/1598352715/232
 !+ NOT_PLATFORM(windows, mac)
 @@||adcdn.goo.ne.jp/images/pix/2dwkwwau99.js$domain=news.goo.ne.jp
