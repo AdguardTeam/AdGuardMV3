@@ -1,9 +1,9 @@
-! Checksum: 8+W3HEtQBJVGighC5Pog4A
-! Diff-Path: ../patches/16/16-s-1710210942-3600.patch
+! Checksum: GViVuP0YTwy/h3Gip/JO5A
+! Diff-Path: ../patches/16/16-s-1710358551-3600.patch
 ! Title: AdGuard French filter
 ! Description: Liste FR + AdGuard French filter. Filter list that specifically removes ads on websites in French language.
-! Version: 2.0.43.99
-! TimeUpdated: 2024-03-12T02:31:56+00:00
+! Version: 2.0.44.3
+! TimeUpdated: 2024-03-13T19:32:00+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -138,8 +138,9 @@ systemed.fr#%#//scriptlet('prevent-xhr', 'pagead2.googlesyndication.com')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/169025
 cyclismactu.net#%#//scriptlet('prevent-addEventListener', 'load', 'isAdblock')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/168555
-rmcbfmplay.com#%#//scriptlet('prevent-fetch', '/www3\.doubleclick\.net|tagger\.opecloud\.com/')
+rmcbfmplay.com#%#//scriptlet('prevent-fetch', '/www3\.doubleclick\.net|tagger\.opecloud\.com|fwmrm\.net/')
 !#safari_cb_affinity(general,privacy)
+@@||js.estat.com/js/mu-7.0.min.js$domain=rmcbfmplay.com
 !#safari_cb_affinity
 ! https://github.com/AdguardTeam/AdguardFilters/issues/168112
 super-ethanol.com#%#//scriptlet('abort-current-inline-script', 'chp_ads_blocker_detector')
@@ -659,8 +660,9 @@ maxisciences.com,gentside.com,femmeactuelle.fr,geo.fr,voici.fr,programme-tv.net,
 allocine.fr#%#//scriptlet("set-constant", "AC.config.ads", "emptyObj")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/118970
 funradio.fr,rtl2.fr,rtl.fr#%#//scriptlet("set-constant", "getAudioAdUrl", "noopFunc")
+! https://github.com/AdguardTeam/AdguardFilters/issues/174692
 ! https://github.com/AdguardTeam/AdguardFilters/issues/146471
-ozap.com#%#(function(){var a={cmd:[],public:{getVideoAdUrl:function(){},createNewPosition:function(){},refreshAds:function(){},setTargetingOnPosition:function(){},getDailymotionAdsParamsForScript:function(c,a){if("function"==typeof a)try{if(1===a.length){a({})}}catch(a){}}}};a.cmd.push=function(b){let a=function(){try{"function"==typeof b&&b()}catch(a){}};"complete"===document.readyState?a():window.addEventListener("load",()=>{a()})},window.jad=a})();
+le10sport.com,ozap.com#%#(function(){var a={cmd:[],public:{getVideoAdUrl:function(){},createNewPosition:function(){},refreshAds:function(){},setTargetingOnPosition:function(){},getDailymotionAdsParamsForScript:function(c,a){if("function"==typeof a)try{if(1===a.length){a({})}}catch(a){}}}};a.cmd.push=function(b){let a=function(){try{"function"==typeof b&&b()}catch(a){}};"complete"===document.readyState?a():window.addEventListener("load",()=>{a()})},window.jad=a})();
 ! https://github.com/AdguardTeam/AdguardFilters/issues/116378
 ! Fixing delay in the video player
 purepeople.com#%#(function(){var a={cmd:[],public:{getVideoAdUrl:function(){},createNewPosition:function(){},refreshAds:function(){},setTargetingOnPosition:function(){},getDailymotionAdsParamsForScript:function(c,a){if("function"==typeof a)try{if(1===a.length){a({})}}catch(a){}}}};a.cmd.push=function(b){let a=function(){try{"function"==typeof b&&b()}catch(a){}};"complete"===document.readyState?a():window.addEventListener("load",()=>{a()})},window.jad=a})();
@@ -1663,6 +1665,7 @@ geo.fr#@#[data-ads-core]
 ||googletagmanager.com/gtm.js$script,redirect=googletagmanager-gtm,domain=geo.fr
 ||securepubads.g.doubleclick.net/tag/js/gpt.js$script,redirect=googletagservices-gpt,domain=geo.fr
 ||prismamedia-com.videoplayerhub.com/galleryplayer.js$script,redirect=noopjs,domain=geo.fr
+! https://github.com/AdguardTeam/AdguardFilters/issues/174692
 ! https://github.com/AdguardTeam/AdguardFilters/issues/146471
 ! https://github.com/AdguardTeam/AdguardFilters/issues/145593
 @@||asusrouter.com/popup.js
@@ -6058,7 +6061,6 @@ _siteunder/$popup
 ||explorads^$third-party
 ||expressusenet.site^$third-party
 ||extensionfactory.com^$third-party
-||ezojs.com^$third-party
 ||ezpopups.com^$third-party
 ||ezstatic.com^$third-party
 ||f5biz.biz^$third-party
@@ -12955,6 +12957,7 @@ $stylesheet,third-party,domain=1fichier.com|7-up.net|9xupload.me|adshr.ink|adshr
 ||exoner.com^$subdocument,third-party
 ||extrasurf.fr/promo/
 ||extremeporn.info/images/misc/$third-party
+||ezojs.com/ezoic/
 ||f00.psgsm.net/p/891014/sigma-forum.gif
 ||faireunlien.com^$image,third-party
 ||fanslave.com/images/stories/*/banner-$third-party
@@ -14700,6 +14703,7 @@ $stylesheet,third-party,domain=1fichier.com|7-up.net|9xupload.me|adshr.ink|adshr
 ||distrowatch.com/images/k/
 ||djelfa.info/logo/
 ||dknews-dz.com/themes/frontend/images/desigual.jpg
+||dl-protect.link/assets/images/dd
 ||dl-protect.link/assets/images/dl
 ||dl-protect.link/assets/images/st
 ||dlive.pagesjaunes.fr^
@@ -19154,6 +19158,7 @@ $stylesheet,third-party,domain=1fichier.com|7-up.net|9xupload.me|adshr.ink|adshr
 ##a[href^="https://click.hooligapps.com/?pid="]
 ##a[href^="https://clickadilla.com/?"]
 ##a[href^="https://clk.pvnsolutions.com/"]
+##a[href^="https://dl-protect.link/request-access-url?"]
 ##a[href^="https://dl-protect.link/request-direct-url?"]
 ##a[href^="https://dl11a.club/"]
 ##a[href^="https://download.uphost.click/?"]
@@ -20324,7 +20329,6 @@ meteofrance.com##.mod-publiinfos
 etudiant.lefigaro.fr##.mod.breve.pave-bg
 formation-dz.com##.mod_banners
 le-buzz.fr##.modal-backdrop
-techno-science.net##.module.moduleBoutiqueEncart
 aujourdhui-en-france.fr,leparisien.fr##.moduleNew300
 lanutrition.fr##.moduletable-banner
 rtl.fr##.money-talks
@@ -20445,7 +20449,7 @@ meteosun.com##.promote_large
 expressio.fr##.promoted-vcontainer
 tf1.fr##.promoted_image
 channelbiz.fr,itespresso.fr,silicon.fr##.promotion-box
-ados.fr,afrik-cuisine.com,afrik-foot.com,afrik.com,afrikeco.com,agoravox.fr,agoravox.tv,annuaire-streaming.com,bhmag.fr,bienpublic.com,cciaf.org,centerblog.net,cio-online.com,commentreparer.com,construiresamaison.com,cuisineactuelle.fr,dictionnaire-synonymes.com,docteurclic.com,educatout.com,elbotola.com,elheddaf.com,elitepresse.com,ennaharonline.com,europages.ma,fan-de-cinema.com,femmeactuelle.fr,foot01.com,franceinfo.fr,franceinter.fr,gratuiciel.com,hellokids.com,ici.tou.tv,igen.fr,infoconcert.com,internetparsatellite.net,iphonesoft.fr,iphonetweak.fr,jeux-hentai.com,jeux-mmorpg.com,ktotv.com,lacapitale.be,lacentrale.fr,ladepeche.fr,lameuse.be,lanouvellegazette.be,laprovince.be,larousse.fr,lefigaro.fr,lemonde.fr,leprogres.fr,lesdebiles.com,lesechos.fr,lesoir.be,lexpress.fr,logicielmac.com,logitheque.com,loractu.fr,macg.co,macommune.info,mapiaule.com,maximiles.com,meilleurtaux.com,menara.ma,midilibre.fr,montelimar-news.fr,mots-croises.ch,nextinpact.com,nintendo-master.com,nordeclair.be,orange.fr,orange.mu,ouest-france.fr,over-blog.com,programme.tv,radio-monaco.com,radioclassique.fr,remede.org,sfr.fr,skirandomag.com,slate.fr,sofoot.com,soonnight.com,telemb.be,telequebec.tv,tf1.fr,tsa-algerie.com,turbo.fr,vipsg.fr,watchgeneration.fr,yabiladi.com,yatahonga.com,zupimages.net##.pub
+ados.fr,afrik-cuisine.com,afrik-foot.com,afrik.com,afrikeco.com,agoravox.fr,agoravox.tv,annuaire-streaming.com,bhmag.fr,bienpublic.com,cciaf.org,centerblog.net,cio-online.com,commentreparer.com,construiresamaison.com,cuisineactuelle.fr,dictionnaire-synonymes.com,docteurclic.com,educatout.com,elbotola.com,elheddaf.com,elitepresse.com,ennaharonline.com,europages.ma,fan-de-cinema.com,femmeactuelle.fr,foot01.com,franceinfo.fr,franceinter.fr,gratuiciel.com,hellokids.com,ici.tou.tv,igen.fr,infoconcert.com,internetparsatellite.net,iphonesoft.fr,iphonetweak.fr,jeux-hentai.com,jeux-mmorpg.com,ktotv.com,lacapitale.be,lacentrale.fr,ladepeche.fr,lameuse.be,lanouvellegazette.be,laprovince.be,larousse.fr,lefigaro.fr,lemonde.fr,leprogres.fr,lesdebiles.com,lesechos.fr,lesoir.be,lexpress.fr,logicielmac.com,logitheque.com,loractu.fr,macg.co,macommune.info,mapiaule.com,maximiles.com,meilleurtaux.com,menara.ma,midilibre.fr,montelimar-news.fr,mots-croises.ch,nextinpact.com,nintendo-master.com,nordeclair.be,orange.fr,orange.mu,ouest-france.fr,over-blog.com,programme.tv,radio-monaco.com,radioclassique.fr,remede.org,sfr.fr,skirandomag.com,slate.fr,sofoot.com,soonnight.com,techno-science.net,telemb.be,telequebec.tv,tf1.fr,tsa-algerie.com,turbo.fr,vipsg.fr,watchgeneration.fr,yabiladi.com,yatahonga.com,zupimages.net##.pub
 yggtorrent.ch,yggtorrent.do,yggtorrent.fi,yggtorrent.is,yggtorrent.la,yggtorrent.li,yggtorrent.lol,yggtorrent.nz,yggtorrent.re,yggtorrent.se,yggtorrent.si,yggtorrent.to,yggtorrent.wtf##.pub-box
 lefigaro.fr##.pub-carrousel-mini
 constructeurdemaison.net##.pub-content
@@ -21126,7 +21130,7 @@ dzgeek.com#?#li + .postbit:-abp-has(img[src$="/avatars/partenaire.png"])
 ebay.fr#?#.sresult:-abp-has(.promoted-lv)
 ebay.fr#?#[id^="nume_html_"]:-abp-has(.mfe-card-group:-abp-has(.mfe-card-group-title:-abp-contains(sponsorisées)))
 ebay.fr#?#[id^="nume_html_"]:-abp-has(.mfe-header:-abp-has(.mfe-pull-left:-abp-contains(sponsorisés)))
-extreme-down.art,extreme-down.moe,extreme-down.site,free-telecharger.lol,gktorrents.org,t911.tv,torrent9.cm,torrent9.fm,torrent911.ws#?#a:-abp-contains(/ANONYME|Anonyme|anonyme|PREMIUM|Premium|RAPIDE|Rapide|Usenet|VPN|Vpn/)
+extreme-down.art,extreme-down.moe,free-telecharger.lol,gktorrents.org,t911.tv,torrent9.cm,torrent9.fm,torrent911.ws#?#a:-abp-contains(/ANONYME|Anonyme|anonyme|PREMIUM|Premium|RAPIDE|Rapide|Usenet|VPN|Vpn/)
 femmeactuelle.fr#?#.specialCard:-abp-has(a[href^="https://cosmoeus.fr/"])
 flaticon.com#?#.soul-p:-abp-has(.footer-sponsor)
 forumconstruire.com#?#.post_simple:-abp-has(.postsimple_pseudo:-abp-contains(/Auto-promo|Autopromo/))

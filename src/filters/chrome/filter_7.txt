@@ -1,9 +1,9 @@
-! Checksum: 4wy/4qQZV9vtM1clMb+nTQ
-! Diff-Path: ../patches/7/7-s-1710174976-3600.patch
+! Checksum: WDF8qmzxtkeE0dxAPi9q0Q
+! Diff-Path: ../patches/7/7-s-1710336974-3600.patch
 ! Title: AdGuard Japanese filter
 ! Description: Filter that enables ad blocking on websites in Japanese language.
-! Version: 2.0.49.27
-! TimeUpdated: 2024-03-11T16:33:26+00:00
+! Version: 2.0.49.36
+! TimeUpdated: 2024-03-13T13:33:38+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1675,6 +1675,13 @@ gundamlog.com###more > iframe[src^="https://richlink.blogsys.jp"]
 !
 !
 !
+pref.ehime.jp##.top_banner_7
+erogazo-ngo.com###content_top_ad
+search.yahoo.co.jp#%#//scriptlet('json-prune', 'props.initialProps.pageProps.pageData.brandingAds')
+search.yahoo.co.jp##.AdBannerCarousel
+milk-key.com##.item-list > li.item:has(> div[class^="iads_"])
+numa2.jp##.partner_button
+purple-novel.com##div[class^="iads_"]
 mangaraw.onl##.w-full.text-center.h-auto > p.p-2.text-sm.text-gray-500
 xn--icktho51ho02a0dc.com##.l-sidebar > aside[class="widget"]:has(> div.execphpwidget a[href^="https://www.sokmil.com/"][href*="affi="])
 ameblo.jp###entryBody > div:not([class]):empty ~ div:not([class]) > .pickCreative_root
@@ -5681,6 +5688,7 @@ keimusho.net,billionwallet.com##.adsense_center
 mbs.jp,eroelog.com,ushigyu.net##div[class^="ad-"]
 news.biglobe.ne.jp##.news-cpl
 biglobe.ne.jp###join-bnr
+kai-you.net##div[id^="ad_area"]
 kai-you.net##.l-pc_resp_all_inhouse_1st
 kai-you.net##div[class*="-ad"]
 chugoku-np.co.jp,niigata-nippo.co.jp##div[class^="m-ad"]
@@ -5912,6 +5920,8 @@ h1g.jp##.mainbody-ad-top
 mindhack-media.jp##.articleRankingBlock__link[href^="https://k.zucks.net/"]
 ||toycod.com/cdn/shop/$domain=leaked.jp
 leaked.jp##.age
+leaked.jp#?#.kanren > dl.clearfix:contains(【PR】)
+leaked.jp##.kanren > dl.clearfix:has(a[href^="https://leaked.jp/k"])
 leaked.jp##.kanren > dl.clearfix:has(a[href^="https://leaked.jp/1"])
 leaked.jp##.kanren > dl.clearfix:has(a[href^="https://leaked.jp/d"])
 leaked.jp##.kanren > dl.clearfix:has(a[href^="https://leaked.jp/f"])
@@ -6683,8 +6693,8 @@ morekorea.net##.contents_ad_wrap_center
 craftbeer-tokyo.info###execphp-39
 craftbeer-tokyo.info###execphp-40
 pixiv.kurocore.com,wws-channel.com,craftbeer-tokyo.info###top-banner
-waifu2x.udp.jp##.all-page > div[style="min-height: 270px; margin: 1em"]
-waifu2x.udp.jp##.dmm-games
+waifu2x.net,waifu2x.udp.jp##.all-page > div[style="min-height: 270px; margin: 1em"]
+waifu2x.net,waifu2x.udp.jp##.dmm-games
 h-ken.net##.mainColumn > div > .sidebarList
 h-ken.net##.mainColumn > div > p.midashiPink
 rakko.tools##.pr_link
@@ -6709,6 +6719,7 @@ kissfx.com##.c-sponsor-bnr
 fxshihyo.com##.notice_waku
 ||honyakunoizumi.info/js/ads2.js
 doorblog.jp,dupcar-event.com###adsense-kijishita
+sukupara.jp###contents > center:has(> div[id^="div-gpt-"])
 sukupara.jp###foot-bnr
 sukupara.jp###webmag > .nodisplay
 mirrorz.jp###_popIn_recommend + #related2
@@ -10292,18 +10303,15 @@ app-story.net#@##AdBlock
 @@||runnet.jp/ad/image/$~third-party
 ! advertimes.com logo
 @@||advertimes.com/wp-content/themes/advertimes-theme/images/logo-ad.svg
-! fix https://pointmall.rakuten.co.jp/gacha
+! https://github.com/AdguardTeam/AdguardFilters/issues/174368
+@@||pointmall.rakuten.co.jp/public/special/img/banners/*_300x250.$image,domain=pointmall.rakuten.co.jp
+@@||g.doubleclick.net/*/pubads_impl$script,domain=pointmall.rakuten.co.jp
 @@||googlesyndication.com/safeframe/$subdocument,domain=pointmall.rakuten.co.jp
 @@||g.doubleclick.net/tag/js/gpt.js$domain=pointmall.rakuten.co.jp
-@@||g.doubleclick.net/gpt/pubads_impl_$script,domain=pointmall.rakuten.co.jp
 @@||g.doubleclick.net/gampad/ads?$xmlhttprequest,domain=pointmall.rakuten.co.jp
 @@||pointmall.rakuten.co.jp/public/special/img/banners/*-300x250-$image,domain=pointmall.rakuten.co.jp
 @@||pointmall.rakuten.co.jp/public/special/img/banners/*_300x250.png$image,domain=pointmall.rakuten.co.jp
-pointmall.rakuten.co.jp#@#.ad-space
-pointmall.rakuten.co.jp#@#.ad-unit
-pointmall.rakuten.co.jp#@#.ad-zone
-pointmall.rakuten.co.jp#@#.banner-ads
-pointmall.rakuten.co.jp#@#.banner_ads
+@@||pointmall.rakuten.co.jp^$generichide
 ! https://github.com/AdguardTeam/AdguardFilters/issues/140301
 news.merumo.ne.jp#@#.adBox
 ! https://twitter.com/aala3201/status/1610986842958200832
