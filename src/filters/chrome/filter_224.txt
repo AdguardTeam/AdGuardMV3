@@ -1,9 +1,9 @@
-! Checksum: ldddl0jNU2j+Q+rftKDjhA
-! Diff-Path: ../patches/224/224-s-1710394724-3600.patch
+! Checksum: mx18YTv2ghtizgRyHqNElw
+! Diff-Path: ../patches/224/224-s-1710660983-3600.patch
 ! Title: AdGuard Chinese filter
 ! Description: EasyList China + AdGuard Chinese filter. Filter list that specifically removes ads on websites in Chinese language.
-! Version: 2.1.12.50
-! TimeUpdated: 2024-03-14T05:35:06+00:00
+! Version: 2.1.12.63
+! TimeUpdated: 2024-03-17T07:32:33+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1103,6 +1103,7 @@ $script,third-party,denyallow=fastly.net|statically.io|sharecast.ws|b-cdn.net|bu
 !
 !
 !
+search.bilibili.com##.video-list > div.col_3:has(> div.bili-video-card > div.bili-video-card__wrap > a[href*="&csource="])
 creaders.net##div[style="float:left;padding-right:.3em;width:300px;height:250px"]
 iyf.tv##vg-player div.vg-bg
 clickhole.com,lifehacker.com,splinternews.com,avclub.com,deadspin.com,gizmodo.com,jalopnik.com,jezebel.com,kotaku.com,qz.com,theinventory.com,theonion.com,theroot.com,thetakeout.com##div[class]:has(> div[data-ad-unit]:only-child)
@@ -1416,10 +1417,6 @@ miaoshangmanhua.com##.cy_menuright
 ettoday.net##.adHint
 duangks.com###a_d_sidebar
 yzzk.com##.promo
-netfly.fun,netfly.tv##.player-box > div.player-tt-rmm
-netfly.fun,netfly.tv##.module-tg-box
-netfly.fun,netfly.tv##div[class*="tt-"] > a[target="_blank"] > img
-netfly.fun,netfly.tv##div[class*="tt-"] > a[target="_blank"] + span.tt-icon-close
 today.line.me##div[id^="ad-module-"]
 gameapps.hk##.adClick
 gameapps.hk##a[class^="top-ad-"]
@@ -2619,6 +2616,13 @@ csdn.net###footerRightAds
 ||c.mipcdn.com/static/*/mip-ad/mip-ad.js
 ||mycodes.net/js/*.js
 !
+! Netfly
+netfly.fun,netfly.tv##.content > div > [style="display: flex; flex-direction: column;width: 100%;"]
+netfly.fun,netfly.tv##.container-slide
+netfly.fun,netfly.tv##.player-box > div.player-tt-rmm
+netfly.fun,netfly.tv##.module-tg-box
+netfly.fun,netfly.tv##div[class*="tt-"] > a[target="_blank"] > img
+netfly.fun,netfly.tv##div[class*="tt-"] > a[target="_blank"] + span.tt-icon-close
 ! https://github.com/AdguardTeam/AdguardFilters/issues/134240
 ! Do not hide .bili-video-card container to not mess up content, related - https://github.com/AdguardTeam/AdguardFilters/issues/147194#issuecomment-1500803042
 ! https://user-images.githubusercontent.com/3976203/273172163-25ff30a0-c988-4ec3-9e51-cf4722a90976.jpg
@@ -3879,7 +3883,7 @@ newduba.cn###jq_youxi
 ###player_banner[style*="fixed;"]
 ###player_pause > .tip + a[target="_blank"]
 ###player_pause[style^="position"] > a[target="_blank"]
-###playlistbtn > a[href="/h0312.html"]
+###playlistbtn > a[href$=".html"]
 ###popadv_popmask
 ###popadv_popmenu
 ###popup.t
@@ -4554,12 +4558,15 @@ newduba.cn###jq_youxi
 ##a[href*=".bvftxy.com/"]
 ##a[href*=".imiwang.com/"]
 ##a[href*=".ipndyn.com/"]
+##a[href*=".mbrnf.com/"]
 ##a[href*=".mjjji.com/"]
 ##a[href*=".mp388.com/"]
 ##a[href*=".xwrfr.com/"]
 ##a[href*="/dsf71.cc"]
 ||0940088.com^
 ||0j775d.cn^
+||0op8kh.cn^
+||0oqt9i.cn^
 ||0r3tyg.cn^
 ||0tq6ub.cn^
 ||0uvt8b.cn^
@@ -4628,17 +4635,20 @@ newduba.cn###jq_youxi
 ||cqisam.xyz^
 ||crjeymh.cn^
 ||ctlrarz.xyz^
+||ctmrso.xyz^
 ||cvbjctqs.xyz^
 ||cvgrszkg.xyz^
 ||cvnxetmq.xyz^
 ||cvudqzoa.xyz^
 ||cwssfg632.shop^
 ||cxlvlbx.xyz^
+||damiul.icu^
 ||dawdlealmonry.com^
 ||ddielv.cn^
 ||delhirs.com^
 ||diccsbhij.com^
 ||difmnd.xyz^
+||djxpnuo.xyz^
 ||dkjwbv.xyz^
 ||dqhxmbx.cn^
 ||dsbqvj.xyz^
@@ -4685,6 +4695,7 @@ newduba.cn###jq_youxi
 ||hhffks967.shop^
 ||hhffnu135.shop^
 ||hjshal.com^
+||hkbumv.icu^
 ||hmrwkcx.cn^
 ||hnifdlau.top^
 ||hozatr.xyz^
@@ -4694,6 +4705,7 @@ newduba.cn###jq_youxi
 ||imevzbn.cn^
 ||inifdlao.top^
 ||inworket.com^
+||irayedo.cn^
 ||ivbgpax.cn^
 ||jbmfldt.cn^
 ||jflwhf.xyz^
@@ -4710,11 +4722,13 @@ newduba.cn###jq_youxi
 ||kfdrc.cyou^
 ||kksjsa.top^
 ||knifdlad.top^
+||kssolo.com^
 ||ktoioo.xyz^
 ||ktvjpmi.xyz^
 ||l5kt1.icu^
 ||lafirx.xyz^
 ||lardmoni.com^
+||ldgjwdohqbi.xyz^
 ||lenvvb.xyz^
 ||lewiooz.cn^
 ||lfffzv.xyz^
@@ -4727,6 +4741,7 @@ newduba.cn###jq_youxi
 ||misjgy.xyz^
 ||mlhtr.cn^
 ||mondigo.cn^
+||mrtxtrq.xyz^
 ||mthhhuq.cn^
 ||mtwmuy.xyz^
 ||mxeq.cn^
@@ -4741,8 +4756,10 @@ newduba.cn###jq_youxi
 ||nsjnmx.icu^
 ||nvdtdsd.xyz^
 ||nyt5j.cyou^
+||o1b04.cyou^
 ||obturex.com^
 ||ocggec.xyz^
+||ofkcww.xyz^
 ||ogznfgl.cn^
 ||ok8867s.com^
 ||okwkaa.xyz^
@@ -4755,16 +4772,20 @@ newduba.cn###jq_youxi
 ||p04qzl.cn^
 ||p0v2ni.cn^
 ||p45m0.icu^
+||pbbhhxm.xyz^
 ||phvfevk.xyz^
 ||pidzlp.xyz^
 ||pjzxdl.xyz^
 ||pnxtnp.xyz^
 ||przbzr.xyz^
 ||pwhtip.icu^
+||pxzrlf.xyz^
 ||qbhzghb.xyz^
 ||qcohkm.xyz^
 ||qhocciks.com^
+||qhodog.xyz^
 ||qlbbowx.xyz^
+||qnifdlay.top^
 ||qqkkpos.com^
 ||qrkhwe.xyz^
 ||qrttfmo.cn^
@@ -4823,15 +4844,18 @@ newduba.cn###jq_youxi
 ||tjfbh.icu^
 ||tlfvj.cyou^
 ||tmjetb.xyz^
+||tnifdlai.top^
 ||tsrvrr.xyz^
 ||tu2024020388.com^
 ||tyodot.icu^
 ||u7u9.com^$third-party
 ||uctutu3789.xyz^
+||udykkl.cn^
 ||uiqcf.cn^
 ||ulwfys.xyz^
 ||usltmus.cn^
 ||uu22662.com^
+||uuvzmba.cn^
 ||uxlvk.cn^
 ||uxrdg.cn^
 ||vdvcjlp.cn^
@@ -4842,9 +4866,11 @@ newduba.cn###jq_youxi
 ||vxfdepn.cn^
 ||wbubgob.cn^
 ||wbvfj.xyz^
+||wefihob.cn^
 ||wisealty.com^
 ||wjwod.cyou^
 ||wkywrc.cn^
+||wnifdlae.top^
 ||wnmaoc.xyz^
 ||wopvmmy.cn^
 ||wqcfg.cn^
@@ -4854,6 +4880,7 @@ newduba.cn###jq_youxi
 ||xdmnlxtu.xyz^
 ||xdrvkdni.xyz^
 ||xdybwjpa.xyz^
+||xhbshv.xyz^
 ||xhfxtqt.xyz^
 ||xklofoz.cn^
 ||xklrsj.icu^
@@ -4861,6 +4888,7 @@ newduba.cn###jq_youxi
 ||xliffnsc.xyz^
 ||xn--wgvp78a61swpe6zdozj.cn^
 ||xnpuw.cn^
+||xrdqdd.xyz^
 ||xsfajf.xyz^
 ||xszw0.icu^
 ||xudarl.xyz^
@@ -4887,19 +4915,24 @@ newduba.cn###jq_youxi
 ||zhihucloud.xyz^
 ||zjrtxt.xyz^
 ||znhlxvb.xyz^
-||qhodog.xyz^
-||uuvzmba.cn^
-||zwxxcb.icu^
-||mrtxtrq.xyz^
-||wnifdlae.top^
-||pxzrlf.xyz^
-||wefihob.cn^
 ||zojyob.icu^
+||hendehy.com^
+||unifdlat.top^
+||ariqye.xyz^
+||fbfrbt.xyz^
+||dzfzak.cn^
+||dryden.cn^
+||btfzbak.xyz^
+||pa4ye.cyou^
+||lulgef.icu^
+||fhtfnb.xyz^
+||drummers.cn^
 ||zopuqv.icu^
 ||zsjpi.cn^
 ||zttuvj.xyz^
 ||ztxjutz.xyz^
 ||zuvbzl.xyz^
+||zwxxcb.icu^
 ##[style*="sotv.me"]
 ##a[href$="/lm2p2.com"]
 ##a[href$="/lm39h.com"]
@@ -9583,7 +9616,7 @@ $popup,third-party,domain=76fengyun.com|avsdown.com|downdv.com|downdvs.com|downh
 $image,third-party,domain=lady1.top
 $script,third-party,domain=52movieba.com|audio699.com|kan-tv.com|m.supfree.net|movieffm.net|xiaoxintv.net
 $script,third-party,websocket,domain=52codes.net
-$third-party,xmlhttprequest,domain=subhd.tv|subhdtw.com|xyg688.com|zzzzz688.com
+$third-party,xmlhttprequest,domain=cocolamanhua.com|subhd.tv|subhdtw.com|xyg688.com|zzzzz688.com
 .194007.com/4058.gif
 .gif|$domain=7mshipin.org|viidii.info
 .html|$domain=www.gamer.com.tw
@@ -15966,6 +15999,7 @@ jinhua.com.cn##.banner935
 iqiyi.com##.banner980
 niutuku.com,sina.cn##.bannerAD
 afzhan.com##.bannerAdv
+netfly.fun,netfly.tv##.banner[href^="http"]
 jiegeng.com,qq.com##.banner_1111
 jiegeng.com##.banner_1212
 aipai.com##.banner_90
@@ -18382,7 +18416,7 @@ liaocao.tv,nicotv.me##[onclick]
 nfmovies.com##[onclick^="openurl()"]
 duonaolive.com##[onclick^="track"]
 iplaysoft.com##[style*="width:3"][style*="height:2"]
-netfly.fun,netfly.tv##[style^="display: flex; justify-content:"]
+netfly.fun,netfly.tv##[style^="display: flex;"]
 axutongxue.com,axutongxue.net##[style^="height:58px;"]
 fffdm.com##[style^="width"][style*="height"]
 kisssub.org##a > img[src*=".0o0.ooo/"]
@@ -18660,6 +18694,7 @@ howbuy.com##a[href^="https://www.howbuy.com/advertisement/"]
 kelatv.com##a[href^="https://www.kelatv.com/api/go."]
 sojson.com##a[href^="https://www.sojson.com/ad/"]
 iqiyi.com##a[id^="100000"]
+supercloudsms.com##a[id^="ad_"]
 mse.360.cn##a[id^="banner"]
 moxing.net##a[marked][href*=".taobao.com"]
 frdic.com,godic.net##a[onclick*="/ads/"]
@@ -20157,7 +20192,7 @@ android-doc.com,apk.tw,chaojizhibo.net,chtoen.com,dizhishengcheng.com,doitwell.t
 @@||studioclassroom.com/ad/
 @@||sudupan.com^*/*.gif
 @@||suning.cn/project/msIndex/js/??
-@@||supercloudsms.com/static/js/taboola_ads.js
+@@||supercloudsms.com/static/ad/ads.js
 @@||swsc.com.cn/download/ad_images/
 @@||sxjbjt.com^*/ad
 @@||szhr.com.cn^$generichide
