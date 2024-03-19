@@ -1,9 +1,9 @@
-! Checksum: rwrFue+cBt9GkrD3/BhkqA
-! Diff-Path: ../patches/1/1-s-1710524219-3600.patch
+! Checksum: Ch11iC2WdnQLn66BfpOa+Q
+! Diff-Path: ../patches/1/1-s-1710787028-3600.patch
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.89.31
-! TimeUpdated: 2024-03-15T17:32:46+00:00
+! Version: 2.0.89.37
+! TimeUpdated: 2024-03-18T18:32:52+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -4386,7 +4386,7 @@ positiverecords.ru#@#.ad-google
 pikabu.ru#%#//scriptlet('abort-on-stack-trace', 'XMLHttpRequest', 'createAd')
 pikabu.ru#%#//scriptlet('prevent-setTimeout', '_sendAnalytics')
 pikabu.ru#%#//scriptlet('json-prune', 'data', 'errors')
-pikabu.ru#%#//scriptlet('remove-node-text', 'script', 'addTracker')
+pikabu.ru#%#//scriptlet("remove-node-text", "script", "/let [a-zA-Z0-9]{5,10} = 'https:\/\/pikabu\.ru\/[a-zA-Z0-9]{5,10}\/[a-zA-Z0-9]{5,10}\//")
 ! sports.ru
 sports.ru#%#//scriptlet('json-prune', 'direct rtbAuctionInfo')
 sports.ru#%#//scriptlet('set-constant', 'Ya.adfoxCode.create', 'noopFunc')
@@ -5213,6 +5213,8 @@ apad2.top,games-pc.top,rustorka.com,rustorka.net,rustorkacom.lib,naylo.top,zannn
 apad2.top,games-pc.top,rustorka.com,rustorka.net,rustorkacom.lib,naylo.top,zannn.top,innal.top#$##e7af0de8b4 { height: 16px !important; }
 !
 ! rustorka.com
+@@/punder-rotate.$~third-party,domain=games-pc.top|rustorka.com|rustorka.net|rustorkacom.lib|naylo.top|monna2.top|zannn.top|innal.top|apad2.top
+@@/pushdownAd.$~third-party,domain=games-pc.top|rustorka.com|rustorka.net|rustorkacom.lib|naylo.top|monna2.top|zannn.top|innal.top|apad2.top
 @@/pubads.js$~third-party,domain=games-pc.top|rustorka.com|rustorka.net|rustorkacom.lib|naylo.top|monna2.top|zannn.top|innal.top|apad2.top
 @@/newad.js$~third-party,domain=games-pc.top|rustorka.com|rustorka.net|rustorkacom.lib|naylo.top|monna2.top|zannn.top|innal.top|apad2.top
 @@/nativead.js$~third-party,domain=games-pc.top|rustorka.com|rustorka.net|rustorkacom.lib|naylo.top|monna2.top|zannn.top|innal.top|apad2.top
@@ -7299,7 +7301,6 @@ www.kinopoisk.ru##div[class*="styles_height250__"]
 ! rutracker.org - addition for apps only
 ! Yandex.Video
 yandex-video.naydex.net#%#//scriptlet('trusted-replace-xhr-response', '/(<VAST[\s\S]*?>)[\s\S]*<\/VAST>/', '\$1<\/VAST>', 'strm.yandex.ru')
-! https://github.com/AdguardTeam/AdguardFilters/issues/58647
 ! https://github.com/AdguardTeam/AdguardFilters/issues/58617
 ! https://github.com/AdguardTeam/AdguardFilters/issues/50723
 ! For Ukrainian users of Yandex.Browser(ads are loaded using proxy)
@@ -7626,6 +7627,9 @@ ivanovonews.ru,gorodn.ru,bits.media,devyatka.ru,gazeta-n1.ru,gorod48.ru,hi-fi.ru
 !
 !
 !
+iz.ru##.aside-advertising
+comandir.com##noindex > div.hblock:has(> div[id*="ScriptRoot"])
+vk-smi.ru##.p-news
 enthub.it##article > section > a[target="_blank"] > img
 sravni.ru##a[href^="https://sravni.go2cloud.org/"]
 sravni.ru#$#div[class*="_wrapper"][style^="--branding-"] {  --branding-container-height: 20px !important; visibility: hidden !important; }
@@ -17749,7 +17753,7 @@ nnmclub.to##center > noindex img
 nnmclub.to##div[style="width: 240px; height: 400px;"]
 nnmclub.to###logo > center > a[rel="nofollow"] > img
 nnmclub.to##.btTbl > tbody > tr.row1 > td.genmed[align="center"] noindex
-nnmclub.to##.forumline > tbody > tr > td.spaceRow > center > a:not([href*="nnm"]) > img
+nnmclub.to##.forumline > tbody > tr > td.spaceRow > center > a:not([href*="nnmclub."]) > img
 /forum/images/*_banner_$domain=nnmclub.to
 !
 forums.overclockers.ru#?##pagecontent > table.tablebg:has(> tbody > tr > td.profile_username > b.postauthor:contains(Реклама)):has(> tbody > tr > td.profile:contains(Партнер))
@@ -18669,7 +18673,6 @@ adguard.info,adguard.com,adguard.app##.hello_from_adguard_russian
 ! anidub.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/39998
 ! https://github.com/AdguardTeam/AdguardFilters/issues/29629
-! https://github.com/AdguardTeam/AdguardFilters/issues/25040
 ! https://github.com/AdguardTeam/AdguardFilters/issues/27033
 ! https://forum.adguard.com/index.php?threads/28997/
 ! https://github.com/AdguardTeam/AdguardFilters/issues/15537
