@@ -1,9 +1,9 @@
-! Checksum: 0T0DOWsVT6tmZ/6TSAVLnw
-! Diff-Path: ../patches/7/7-s-1710826582-3600.patch
+! Checksum: ENnvbYGyCo7UWokRLD08EQ
+! Diff-Path: ../patches/7/7-s-1710953027-3600.patch
 ! Title: AdGuard Japanese filter
 ! Description: Filter that enables ad blocking on websites in Japanese language.
-! Version: 2.0.49.54
-! TimeUpdated: 2024-03-19T05:33:34+00:00
+! Version: 2.0.49.65
+! TimeUpdated: 2024-03-20T16:37:31+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -571,7 +571,6 @@ cad-data.com#@#.adspace
 520call.me,520cc.cc#%#//scriptlet('set-constant', 'all520dddaaa2022ccc', 'true')
 @@||520cc.cc^*/ad.php
 @@||video.520cc.cc/ad/ads.php
-@@||520click.com/ad.php
 ! https://github.com/AdguardTeam/AdguardFilters/issues/143424
 tokyo-sports.co.jp#@#.ad-text
 tokyo-sports.co.jp#@#.adBlock
@@ -1601,8 +1600,8 @@ _ap/signin*?_encoding=UTF8&openid.assoc_handle=jpflex&openid.claimed_id=&action=
 .com/regist.php?*/1|$document
 /ap/signin/openid.pape.max_auth_age=0&openid.return_to=https%3A%2F%2Fwww.amazon.co.jp$document,domain=cn|top|xyz
 /index.php?route=product/product&product_id=$document,domain=cyou|life|live|shop|xyz|~ocam.live
-/index.php?main_page=product_info*&cPath=$document,domain=asia|bar|beauty|best|bond|buzz|cam|cfd|cloud|cyou|fit|fun|homes|icu|ink|life|live|ltd|monster|online|pics|sa.com|sbs|shop|site|space|store|tokyo|top|website|work|xyz|za.com
-/index.php?main_page=product_info&products_id=$document,domain=asia|bar|beauty|best|bond|buzz|cam|cfd|cloud|cyou|fit|fun|homes|icu|ink|life|live|ltd|monster|online|pics|sa.com|sbs|shop|site|space|store|tokyo|top|website|work|xyz|za.com
+/index.php?main_page=product_info*&cPath=$document,domain=asia|bar|beauty|best|bond|buzz|cam|cfd|cloud|cyou|fit|fun|homes|icu|ink|life|live|ltd|monster|online|pics|quest|sa.com|sbs|shop|site|space|store|tokyo|top|website|work|xyz|za.com
+/index.php?main_page=product_info&products_id=$document,domain=asia|bar|beauty|best|bond|buzz|cam|cfd|cloud|cyou|fit|fun|homes|icu|ink|life|live|ltd|monster|online|pics|quest|sa.com|sbs|shop|site|space|store|tokyo|top|website|work|xyz|za.com
 ://eki*.*.com/Personal/member/Login/index.php?oneTimeAccessID=$document
 /\.(?:cn|icu|top|pro)\/Personal\/member\/Login\/index\.php\?oneTimeAccessID=/$document
 !
@@ -1673,9 +1672,19 @@ gundamlog.com###more > iframe[src^="https://richlink.blogsys.jp"]
 !
 !
 !
+jisin.jp##footer ~ div[style*="background-color: #f1f1f1;"][style*="z-index"][style*="padding"]:not([class],[id])
+hentaicovid.com##.banner-header-location
+hentaicovid.com##.banner-body
+||hon-hikidashi.jp/wp-content/themes/hon-hikidashi-theme/assets/images/common/banner04.webp
+hon-hikidashi.jp##.article__contents > p:last-child:has(> .adsbygoogle)
+hon-hikidashi.jp##.sideCustomBlock__inr > .sideChoiceBlock:has(> .sideChoiceBlock__inr > .sideChoiceBlock__list > a.banner__link)
+famitsu.com##.article-body__contents > a.btn-deep-orange[href*="?"][target="_blank"][rel="nofollow noopener"]:has(~ div#art-toc)
+ac-illust.com##.container figure ~ div[class^="col-"]:has(> .bg-light [id^="div-gpt-ad"])
+ac-illust.com##.flux-all-footer.ac-z-index-999.position-fixed.bg-light.w-100[style]
+freebie-ac.jp##div[class^="col-"][style^="margin-bottom:60px;"]
+freebie-ac.jp##.w-AdSense[style^="max-width: 860px;"]
 photo-ac.com##.w-100.my-3.bg-light[style="min-height: 306px;"]
 photo-ac.com##.bg-light.ac-p-2.overflow-hidden[style="min-height: 120px;"]
-etude000.com##div[class^="extendedwopts-"]
 city.tsuyama.lg.jp###sponsor_banner
 peacedoorball.blog##.sidebar__right a[target="_blank"] > img
 buywrite.jp##.c-infoBar
@@ -3787,7 +3796,7 @@ okinny.heypo.net###images > div[style="text-align:center;margin-bottom:50px;"]
 okinny.heypo.net##div[style$="overflow:hidden;"] > table[width="1050"][bgcolor="#000000"]
 sportiva.shueisha.co.jp###Sportiva_pc_article_UnderTitle
 mamastar.jp##.adarea01
-city.funabashi.lg.jp##.p-topAd
+city.saitama.lg.jp,city.funabashi.lg.jp##.p-topAd
 refind2ch.org##.flux_ad_overlay
 takenokosokuhou.com##.module--rss_affiliate
 vague.style##.side-column > .add-container
@@ -7690,7 +7699,6 @@ clutch-s.jp##.reccomendArc
 anniversarys-mag.jp###gowp-native
 famitsu.com##.banner-pc
 famitsu.com##.banner-top-header
-||eromovie-s.com/feed/
 eromovie-s.com##.adcontent
 eromovie-s.com##.native
 ||eromovie-s.com/fanza/
@@ -9527,7 +9535,6 @@ hochi.news#?#.newslist__item > div[id^="div-gpt-"]:upward(1)
 anicobin.ldblog.jp#?#.related-wadai:contains(ベストセラー)
 qiita.com#?#div[class^="style"] > div[class^="style"] > div[class^="style"] > div[data-testid$="AdUnit"]:upward(1)
 qiita.com#?#.p-items_main > div > div[class^="style-"] > div[class^="style-"] > div[id^="logly-"]:upward(2)
-hon-hikidashi.jp#?##contents_body_main > p:has(> .adsbygoogle)
 hiroburo.com#?#.module--free > center:has(> a[href] + br + iframe[src^="https://www.youtube.com"])
 slotlog.net#?#.plugin-memo:has(> div.side > div > ins.adsbygoogle)
 zch-vip.com#?#.plugin-memo > div.side > div > script[src^="http://spdeliver.i-mobile.co.jp/script/ads.js"]:upward(3)
