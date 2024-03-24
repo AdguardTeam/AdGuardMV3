@@ -1,9 +1,9 @@
-! Checksum: xyNHek+K/XU4lrphhyl+jg
-! Diff-Path: ../patches/3/3-s-1710968086-3600.patch
+! Checksum: 38taFm5zAwgYQ4L0I/Q9dg
+! Diff-Path: ../patches/3/3-s-1711208201-3600.patch
 ! Title: AdGuard Tracking Protection filter
 ! Description: The most comprehensive list of various online counters and web analytics tools. Use this filter if you do not want your actions on the Internet to be tracked.
-! Version: 2.0.67.98
-! TimeUpdated: 2024-03-20T20:36:31+00:00
+! Version: 2.0.68.5
+! TimeUpdated: 2024-03-23T15:33:11+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -105,6 +105,8 @@ spletnik.ru#%#//scriptlet('set-local-storage-item', 'adrcid', '$remove$')
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/175476
+pullandbear.com#%#//scriptlet('prevent-element-src-loading', 'script', 'widget.fitanalytics.com/widget.js')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/174672
 ofiii.com#%#//scriptlet('set-constant', 'COMSCORE', 'emptyObj')
 ofiii.com#%#//scriptlet('set-constant', 'COMSCORE.beacon', 'noopFunc')
@@ -565,6 +567,7 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 !
 !
 !
+||jcpclick.com^
 ||analytics-sm.com^
 ||adxcel-ec2.com^
 ||cdn.ad-platform.jmty.jp^
@@ -830,7 +833,7 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ||px*.mediahills.ru^
 ||sdk.conscent.in^$third-party
 ||tpstelemetry.tencent.com^
-||posthog.com^$third-party
+||app.posthog.com^$third-party
 ||crossees.com^
 ||plausiblecdn.co^
 ||humanz.com^$third-party
@@ -4383,11 +4386,11 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ! Blocking piwik analytics subdomain(for DNS filtering)
 |piwik.
 !
+||taplytics-umami.grubhub.com
 ||s.wayfair.com^
 ||imk.neweggimages.com^
 ||grgnsht.nzxt.com^
 ||h031.familydollar.com^
-||api-gtm.grubhub.com^
 ||event.havasedge.com^
 ||tag.havasedge.com^
 ||d401.dollartree.com^
@@ -92897,6 +92900,15 @@ _tracking.php?b=
 /analytics.js$domain=tokyometro.jp|resumes.breakdownexpress.com|techcult.com|inbox.lv|kopeda.com|freexcafe.com|rusvideos.tv|nakubani.ru|lun.com|songsara.net|newsmax.com|bolgehastanesi.com|ewtc.de|newsdig.tbs.co.jp|imore.com|city.kushiro.lg.jp|emeraldbridal.com.au|emarat-news.ae|imobie.jp|tikla.com.tr|rusvideos.porn|jrkyushu.co.jp|amiunique.org|edit.ing|konami.com
 ||assets.adobedtm.com^$domain=mcclatchydc.com|elnuevoherald.com|bellinghamherald.com|sacbee.com|charlotteobserver.com|newsobserver.com|miamiherald.com|ef.ru|algida.com.tr|bmw-motorrad.co.uk|cif.com.tr|clearhaircare.com|domestos.com|dove.com|elidor.com.tr|f1sport.autorevue.cz|geico.com|hellmanns.com.tr|herkessofraya.com|johnsonsbaby.com.tr|lipton.com|lnk.to|lux.com|magnumicecream.com|neutrogena.com.tr|omo.com|rexona.com|samsung.com|sap.com|schwarzkopf.com.tr|signalturkiye.com|msnbc.com|nbcnews.com|kbb.com|eurosport.ru|timgate.it|intermiles.com|oxfordmail.co.uk|spiegel.de|hp.com|deutschepost.de|thebay.com|s.shufoo.net|tsn.ca|tabelog.com|euronews.com|newshub.co.nz|fredmeyer.com|viabcp.com|carsales.com.au|falabella.com|aarp.org|thehill.com|realtor.com|nzherald.co.nz|aia.com.ph|baynews9.com|thesaurus.com|dhc.co.jp|0101.co.jp|staples.com
 !
+nekochan.jp###main > aside:has(> div.OUTBRAIN)
+wanchan.jp##.recommend_header
+wanchan.jp##.recommend_header + div[style^="aspect-ratio:"]
+||production-bq-lambda-stack.production.yummly.com/event
+||vergic.com/api/*/Batch/
+||chewy.com/api/event/
+||gianteagle.com/webevents/
+||sensor.grubhub.com/*/xhr/api/*/collector|
+||assets.grubhub.com/libs/*/clickstream2.min.js
 ||assets.alicdn.com/g/*/affiliate-tracker.js$domain=aliexpress.com|aliexpress.us
 ||oraclecloud.com/static/jslib/apmrum.min.js
 ||wayfair.com/a/campaign_management/tag/get_tracking_tags
@@ -97000,8 +97012,10 @@ nethunt.com/api/v1/track/email/$image
 @@||godaddy.com^$cookie=_ga
 ! https://github.com/AdguardTeam/AdguardFilters/issues/170920
 @@||endesaclientes.com^$cookie=dtCookie
+! https://github.com/AdguardTeam/AdguardFilters/issues/175430
 ! https://github.com/AdguardTeam/AdguardFilters/issues/164914
-@@||epuap.gov.pl^$cookie=dtCookie
+! TODO: Uncomment the exception rule once the issue is fixed - https://github.com/AdguardTeam/AdguardBrowserExtension/issues/2552
+! @@||epuap.gov.pl^$cookie=dtCookie
 ! https://github.com/AdguardTeam/AdguardFilters/issues/164711
 ! https://github.com/AdguardTeam/AdguardFilters/issues/160319
 ||maccabi4u.co.il^$cookie=DSID
@@ -97280,7 +97294,11 @@ $cookie=rxVisitor
 ! Required to identify proper endpoints for beacon transmission
 $cookie=dtPC
 ! Tracks a visit across multiple requests
-$cookie=dtCookie
+! https://github.com/AdguardTeam/AdguardFilters/issues/175430
+! https://github.com/AdguardTeam/AdguardFilters/issues/164914
+! TODO: use exception rule (it's already added, but should be uncommented)
+! once the issue is fixed - https://github.com/AdguardTeam/AdguardBrowserExtension/issues/2552
+$cookie=dtCookie,domain=~gov.pl
 !
 ! spot.im
 $cookie=spotim_visitId
@@ -99161,6 +99179,8 @@ inapps.appsflyersdk.com^
 ! For platforms which do not support $redirect rules
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/175476
+||widget.fitanalytics.com/widget.js$script,redirect=noopjs,domain=pullandbear.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/175359
 @@||googletagmanager.com/gtag/js$domain=kaft.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/175259
