@@ -1,9 +1,9 @@
-! Checksum: ZBd91LjYVIb1xOz+v+J0rg
-! Diff-Path: ../patches/13/13-s-1711363077-3600.patch
+! Checksum: UVOsYp8gavn+nxFanup1ng
+! Diff-Path: ../patches/13/13-s-1711553802-3600.patch
 ! Title: AdGuard Turkish filter
 ! Description: Filter list that specifically removes ads on websites in Turkish language.
-! Version: 2.0.50.77
-! TimeUpdated: 2024-03-25T10:31:49+00:00
+! Version: 2.0.50.80
+! TimeUpdated: 2024-03-27T15:31:51+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -86,6 +86,7 @@
 ! Bad: ||adssubdomain.legitwebsite.com^ (should be in adservers_firstparty.txt)
 !
 !
+||kriptoparahaber.care^
 ||alty.fun^
 ||hemenindir.to^
 ||pixad.com.tr^$third-party
@@ -388,6 +389,8 @@ zamaninvarken.com,kredi.biz.tr,kriptoradar.com,bakimlikadin.net,korsanedebiyat.c
 iyibeslenme.net,teknop.net,kirtkirtla.com,buneymis.net,ozgunbilgi.com#%#//scriptlet("set-constant", "adblock.check", "noopFunc")
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/175794
+inceleriz.com#%#//scriptlet('prevent-setTimeout', 'adblockalert')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/146814
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima3,domain=tv8bucuk.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/172680
@@ -832,7 +835,6 @@ dizipal700.com,dizipal701.com,dizipal702.com,dizipal703.com,dizipal704.com,dizip
 ##div.koddostu-splash.reklam-s-koddostu#amans
 ##a[href*="/earn.php?zone"][target="_blank"] > img
 ##a[href*="sporx.com/rdrct.php"][target="_blank"]
-##a[href^="http://sicakarkadas.org"] > img
 ###video_player + #after-video
 ##a[target="_blank"] > img[alt^="banner"][src*=".gif"]
 ##a[href*="dotabet"][href*=".com"] > img
@@ -845,7 +847,6 @@ dizipal700.com,dizipal701.com,dizipal702.com,dizipal703.com,dizipal704.com,dizip
 ##a[href*="seriouslove.club"] > img
 ##a[href*="penisbuyutucu"] > img
 ##a[href*="canlisexsohbeti.org"] > img
-##a[href^="http://partneriste.net/"] > img
 ##img[alt="seks shop"]
 ##.reklam-alani
 ##a[href^="tel:00"][style*="color:"][rel="nofollow"]
@@ -856,11 +857,6 @@ dizipal700.com,dizipal701.com,dizipal702.com,dizipal703.com,dizipal704.com,dizip
 ##.ivr-reklam
 ##.reklam_a
 ##a[href^="tel:00"] > img
-##a[href*="realistikmankensatisi"] > img
-##a[href*="penisserumuanabayi"] > img
-##a[href^="http://peniserumbuyutucu"] > img
-##a[href^="http://myjigolo."] > img
-##a[href^="http://realistikmanken"] > img
 ##.watch_video > center > a[rel="nofollow"] > img
 ##.reklam-alt-sabit
 ##.reklam-645x90
@@ -1747,8 +1743,6 @@ turkcealtyazi.org#$#body { background-image: none !important; }
 /antalya.gif
 /arasana.gif
 /sohbet^$image,~third-party
-/pnsbyk.gif
-/pnsbyk2.gif
 /yenibyk.gif
 /yenibyk2.gif
 /sekssohbet.png
