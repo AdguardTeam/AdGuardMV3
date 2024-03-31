@@ -1,9 +1,9 @@
-! Checksum: DlV/+t3MoR9Tabi6hDDtAQ
-! Diff-Path: ../patches/6/6-s-1711578999-3600.patch
+! Checksum: kegmvy57XC5ILPySiQyFrQ
+! Diff-Path: ../patches/6/6-s-1711740989-3600.patch
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.41.14
-! TimeUpdated: 2024-03-27T22:33:30+00:00
+! Version: 2.0.41.18
+! TimeUpdated: 2024-03-29T19:33:27+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1595,6 +1595,11 @@ formel1.de,krautundrueben.de,motorsport-total.com,traktorpool.de,fnweb.de,laborj
 !
 !
 !
+holidaycheck.de###ad-pubperform
+holidaycheck.de###HotelContact ~ div[class]:has(> div[class] > svg > path[fill="currentColor"])
+holidaycheck.de##.hotel-carousel-ad
+emergency-live.com##div[class*="mstyrdnog"]
+sueddeutsche.de##div[data-hydration-component-name="VoucherWidgetToken"]
 familie.de#%#//scriptlet('remove-class', 'show-teaserheld-header', 'body')
 familie.de#$#body { margin-top: 0 !important; }
 holidaycheck.de##body .adslot
@@ -1616,6 +1621,7 @@ ip-phone-forum.de##.xcx-ad
 ||ip-phone-forum.de/styles/ads/
 mobile.de##div[class]:has(> div[data-testid="SRP_BILLBOARD-container"]:only-child)
 suchen.mobile.de##div[class]:has(> a:only-child > div[class] > div[class] > span[data-testid="sponsored-badge"])
+suchen.mobile.de##span[data-testid^="result-listing"]:has( span[data-testid="sponsored-badge"])
 winfuture.de###wfv4_bb2_lazyload
 sueddeutsche.de##main > div[class^="css-"]:has(> ins.asm_async_creative)
 chip.de##section.TopList--Count
@@ -9588,6 +9594,7 @@ lippe-news.de##.inline_wrapper
 erotikinserate.ch##.inner
 heise.de##.inread-cls-reduc
 blitzrechner.de##.inserter-5
+blitzrechner.de##.inserter[data-ai]
 sueddeutsche.de##.iqad
 saechsische.de##.iqadtile-wrapper
 tri-mag.de##.irypolkj
@@ -10442,6 +10449,7 @@ sportbild.bild.de##div[data-tr-doc-type="dt=InlineAd|st=BTOAdTag"]
 giga.de##div[data-trigger="sourcepoint-ad"]
 prosiebengames.de##div[data-url-link^="https://track-adspree.com/"]
 gesundheit.de,onmeda.de##div[id$="SparkWrapper"]
+aerzteblatt.de##div[id^="Ads_BA_"]
 teltarif.de##div[id^="LxIdealo"]
 t-online.de,www-t--online-de.cdn.ampproject.org##div[id^="T-"].Tmm.Tltb.Tts.Tmc1.Tww1.Thh3[onfocus^="A('zid="] > .Ttsc.Ttsv169
 t-online.de,www-t--online-de.cdn.ampproject.org##div[id^="T-"][oncontextmenu="return false"]

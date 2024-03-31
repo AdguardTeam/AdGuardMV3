@@ -1,9 +1,9 @@
-! Checksum: hYY0PK6M7nSmvZz8oqk4PQ
-! Diff-Path: ../patches/9/9-s-1711532212-3600.patch
+! Checksum: 0RdjQCU3ZvAlxw686Nx6Vg
+! Diff-Path: ../patches/9/9-s-1711636662-3600.patch
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish, Portuguese, and Brazilian Portuguese languages.
-! Version: 2.0.23.89
-! TimeUpdated: 2024-03-27T09:33:50+00:00
+! Version: 2.0.23.91
+! TimeUpdated: 2024-03-28T14:34:13+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -388,7 +388,7 @@ megacanaisonline.me#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.co
 todoandroid.live,gadgetzona.net,qwanturankpro.com,desbloquea.me,mega-enlace.com#%#//scriptlet('prevent-fetch', 'method:HEAD')
 ! https://github.com/uBlockOrigin/uAssets/issues/19312
 softwareany.net#%#//scriptlet('prevent-addEventListener', 'load', 'detect-modal')
-softwareany.net#@#ins.adsbygoogle
+softwareany.net#@#ins.adsbygoogle[data-ad-slot]
 softwareany.net##ins.adsbygoogle:not(.ad-slot)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/160783
 ! https://github.com/AdguardTeam/AdguardFilters/issues/158732
@@ -1670,25 +1670,19 @@ repelisplus.vip#%#//scriptlet("abort-on-property-read", "adbClick")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/45492
 descargaranimehentai.com#%#//scriptlet("abort-on-property-read", "pub")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/44237
-redirdx.in#%#document.cookie = "tronador=aproved; path=/";
 redirdx.in#%#//scriptlet("prevent-window-open", "redirdx.in/go/")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/41643
 hentai-id.tv#%#AG_onLoad(function(){var a=document.querySelectorAll('a[href*="://ouo.io/"][href*="=http"],a[href*="://ouo.io/"][href*="= http"]');for(var b,c=0;c<a.length;c++)b=a[c].getAttribute("href"),(b=b.split(/^https?:\/\/ouo\.io\/[\S]*?\?.=/))&&a[c].setAttribute("href",b[1])});
 ! https://github.com/AdguardTeam/AdguardFilters/issues/42381
 playpaste.com#%#//scriptlet("prevent-window-open")
-playpaste.com#%#document.cookie = "viewedad=true; path=/;";
 ! https://github.com/AdguardTeam/AdguardFilters/issues/40879
 tuhentaionline.com#%#//scriptlet("abort-on-property-read", "Pub2")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/33854
 zonammorpg.com#%#AG_onLoad(function() { setTimeout(function() { $('body').unbind('click'); }, 300); });
-! https://github.com/AdguardTeam/AdguardFilters/issues/33092
-cablegratis.tv#%#document.cookie = "impresion=true; path=/";
 ! https://github.com/AdguardTeam/AdguardFilters/issues/22053
 futeboltvgratis.com#%#window.open = function() {};
 ! https://github.com/AdguardTeam/AdguardFilters/issues/21977
 gnula.nu#%#(function(){var b=window.setTimeout;window.setTimeout=function(a,c){if(!/\(\)>0x0\)\{fA=setTimeout\(/.test(a.toString()))return b(a,c)};})();
-! https://github.com/AdguardTeam/AdguardFilters/issues/15842
-peliculas-mp4.com#%#document.cookie = "unlocked=1";
 ! https://github.com/AdguardTeam/AdguardFilters/issues/7559
 !+ NOT_PLATFORM(windows, mac, android)
 animalog.biz#%#window.open = function() {};
@@ -4939,8 +4933,6 @@ marca.com#?#main > div.ue-l-article:has(> div.ue-l-article__inner > div.ue-l-art
 marca.com#?#main > div.ue-l-article:has(> div.ue-l-article__inner > div.ue-l-article__row > div.ue-l-article__main-column-extra div[id^="taboola"])
 marca.com#?#main > div.ue-l-cover-grid[data-flex-name="row_headline"]:has(> div.ue-l-cover-grid__inner > div.ue-l-cover-grid__body > div.ue-l-cover-grid__block > div.ue-l-cover-grid__row > div.ue-l-cover-grid__unit:only-child > div.ue-c-ad)
 vagalume.com.br#?#.newsList > li:has(> div.OUTBRAIN)
-clubedohardware.com.br#?##ipsLayout_contentArea ins.adsbygoogle:upward(1)
-clubedohardware.com.br#?#.ipsBox:has(> center > ins.adsbygoogle)
 minhaconexao.com.br#?#section > div > div> div[class] > div[class][id] > div[id^="div-gpt-"]:upward(2)
 inforchannel.com.br#?#.col-md-4 > .height-item:has(> .img-fluid > iframe[src^="https://banners.inforchannel.com.br/"])
 inforchannel.com.br#?#.sidebar-secondary > .height-item:has(> .img-fluid > iframe[src^="https://banners.inforchannel.com.br/"])
