@@ -1,9 +1,9 @@
-! Checksum: larl8iV88xuAnOMJSD4fKQ
-! Diff-Path: ../patches/1/1-s-1711726626-3600.patch
+! Checksum: zBvjmuaty/PcexAWrxm8pQ
+! Diff-Path: ../patches/1/1-s-1711982249-3600.patch
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.89.73
-! TimeUpdated: 2024-03-29T15:32:36+00:00
+! Version: 2.0.89.78
+! TimeUpdated: 2024-04-01T14:32:41+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1486,6 +1486,7 @@ ucoz.ru/informer/
 ! Bad: /banner.jpg (should be in general_url.txt)
 ! Bad: ||adssubdomain.legitwebsite.com^ (should be in adservers_firstparty.txt)
 !
+||luxcdn.com^$third-party
 ||vqhrqt.com^
 ||marketer.lv^$third-party
 ||programmatica.com^$third-party
@@ -4397,7 +4398,7 @@ positiverecords.ru#@#.ad-google
 pikabu.ru#%#//scriptlet('abort-on-stack-trace', 'XMLHttpRequest', 'createAd')
 pikabu.ru#%#//scriptlet('prevent-setTimeout', '_sendAnalytics')
 pikabu.ru#%#//scriptlet('json-prune', 'data', 'errors')
-pikabu.ru#%#//scriptlet("remove-node-text", "script", "/let [a-zA-Z0-9]{3,10} = 'https:\/\/pikabu\.ru\/[a-zA-Z0-9]{5,10}\/[a-zA-Z0-9]{5,10}\//")
+pikabu.ru#%#//scriptlet("remove-node-text", "script", "/let [a-zA-Z0-9]{2,10} = 'https:\/\/pikabu\.ru\/[a-zA-Z0-9]{5,10}\/[a-zA-Z0-9]{5,10}\//")
 ! sports.ru
 sports.ru#%#//scriptlet('json-prune', 'direct rtbAuctionInfo')
 sports.ru#%#//scriptlet('set-constant', 'Ya.adfoxCode.create', 'noopFunc')
@@ -6120,6 +6121,8 @@ disk.yandex.*#%#//scriptlet('remove-class', 'has-fullscreen-banner','.public__ro
 !------- CSS -----------
 !-----------------------
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/176035
+autosport.com.ru#$#body { padding-top: 0 !important; background-color: white !important;}
 ! https://github.com/AdguardTeam/AdguardFilters/issues/172614
 the-wire-fox.net#$##wrapper { margin-top: 0 !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/171941
@@ -7443,7 +7446,7 @@ nur.kz##.js-commercial-menu
 nur.kz##.widget-1xbet
 nur.kz###js-widget-pm
 ||cdn-b.notsy.io^$domain=obozrevatel.com
-obozrevatel.com##.videoOfDay
+life.uaportal.com,obozrevatel.com##.videoOfDay
 obozrevatel.com##.headerBiding
 obozrevatel.com#?#.splide__list > div.splide__slide:has(> article > div.banner)
 obozrevatel.com##.banner
@@ -7621,6 +7624,10 @@ ivanovonews.ru,gorodn.ru,bits.media,devyatka.ru,gazeta-n1.ru,gorod48.ru,hi-fi.ru
 !
 !
 !
+||autosport.com.ru/files/partners/
+autosport.com.ru##.partner-content
+autosport.com.ru##a[href^="https://betonmobile.ru/"]
+salonsecret.ru##a[href^="https://lorealprofessionnel.ru/"] > *
 uznayvse.ru##.iku_loaded
 happycoin.club##div[class*="clickout-banner"]
 happycoin.club##a[href][target="_blank"][rel="noopener"] > img[width][height]
@@ -8250,7 +8257,6 @@ new-science.ru###text-html-widget-6
 ||investfuture.ru/source/partner
 thegirl.ru##div[data-creative-container="hb-top"]
 thegirl.ru#$?#.swiper-wrapper > div.swiper-slide:has(> div.album-slider-swiper__creative-container > div.album-slider-swiper__creative-notification) { remove: true; }
-||s.luxcdn.com/t/*/360_light.js
 multitran.com##.getty
 multitran.com##.pic
 ||embed-cdn.gettyimages.com^$domain=multitran.com
@@ -18652,6 +18658,9 @@ rg.ru##div[class^="NewsFeedList_banner"]
 !
 !+ NOT_OPTIMIZED
 adguard.info,adguard.com,adguard.app##.hello_from_adguard_russian
+! Detect of using AdGuard products
+!+ NOT_PLATFORM(windows, mac, android, ios, ext_ublock) NOT_OPTIMIZED
+adguard.info,adguard.com,adguard.app##.hello_from_adguard_ext
 !
 !-------------------------------------------------------------------------------!
 !------------------ Content replacement rules ----------------------------------!
