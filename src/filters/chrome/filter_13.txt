@@ -1,9 +1,9 @@
-! Checksum: dwsX8VricWMu0RIOWipuYA
-! Diff-Path: ../patches/13/13-s-1712331435-3600.patch
+! Checksum: tCAPY0+WUvmuKrCnNbgjVg
+! Diff-Path: ../patches/13/13-s-1712644597-3600.patch
 ! Title: AdGuard Turkish filter
 ! Description: Filter list that specifically removes ads on websites in Turkish language.
-! Version: 2.0.51.0
-! TimeUpdated: 2024-04-05T15:31:52+00:00
+! Version: 2.0.51.4
+! TimeUpdated: 2024-04-09T06:32:59+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1839,6 +1839,8 @@ $xmlhttprequest,third-party,denyallow=linkvertise.com|fastly.net|statically.io|s
 /service/advertchannels?$xmlhttprequest,redirect=nooptext,domain=mardinhaber.com.tr|gidahatti.com|bolugundem.com
 dirilispostasi.com,turkuazgazetesi.net,yenialanya.com,bugunkocaeli.com.tr,cagdaskocaeli.com.tr,mansetaydin.com,seskocaeli.com,kocaelibarisgazetesi.com,kocaelikoz.com,enkocaeli.com##.block-pano > div.us
 !
+patronlardunyasi.com##.Ads
+patronlardunyasi.com##div[id*="-div-gpt-ad-"]
 kanald.com.tr##.pauseroll-adv-container
 ||kutahyaninsesi.com/service/advertchannels
 ||play-dizigom*-tv.cdn.ampproject.org/i/play.dizigom*.tv/640x360.
@@ -2485,7 +2487,6 @@ mynet.com##div[issponsored]
 ||vkfilmizle.net/mostbet-vid.webp
 dizifilmbox.*,fullhdfilmizlesenebox.org##.biflm
 fullhdfilmizlesenebox.org##.bihdr
-||ampseo.net/hit/pop.js
 ||filmmoduu.com/Kazan-betexperle-1920-1080.mp4
 simulasyonturk.com###text-138
 simulasyonturk.com###text-147
@@ -2792,8 +2793,6 @@ aydinpost.com##a[title^="Advert "]
 nefisyemektarifleri.com###full-width-seperator-ad
 nefisyemektarifleri.com###arsiv-native
 tgrthaber.com.tr###dfp-masthead-2
-patronlardunyasi.com###outer_banners
-||patronlardunyasi.com/images/image/*-banner-*-120x600px.jpg
 jetfilmizle.*##.col-12 > a[target="_blank"] > img
 ||blogger.googleusercontent.com/img/*/superbetin.gif$domain=jetfilmizle.*
 1000kitap.com##div[align="center"] > div[style="display:flex;min-height:250px;min-width:300px"]
@@ -2858,7 +2857,6 @@ timeturk.com##div[class*="reklam-"]
 wv2.net###content > a[rel="dofollow"]
 marketingturkiye.com.tr##div[class^="b2b-marketing-"] > a[target="_blank"]
 ||eskisehirhaber26.com/images/upload/620x150-
-odatv4.com##.masthead-big-ad
 ordugazete.com,imaret.com.tr,afyonhaber.com##.img_position_left
 altyazilifilmizle3.com,evrenselfilm1.com,seyredeger.com,indirmedenfilmizle.vip##.zfc-ads
 jetfilmizle.*###movie-sidebar > a[target="_blank"]
@@ -2893,7 +2891,7 @@ havadurumu15gunluk.xyz,havadurumu15gunluk.org##.ads_row
 havadiskibris.com###tie-block_2579
 havadiskibris.com###tie-block_1497
 ||exsvc.nesine.com/*/coupon/MostPlayedCoupons
-paradurumu.com,f5haber.com##.adpro
+odatv.com,paradurumu.com,f5haber.com##.adpro
 tarifikolay.com##.adcontent
 trivago.com.tr##ol[data-testid="accommodation-list"] > li[data-testid="accommodation-list-element"] ~ li[class="flex items-center justify-center"]
 trivago.com.tr##div[class^="SkyscraperAd_"]
@@ -3101,7 +3099,6 @@ filmizletv.*##iframe[src*="filmizletv."][src*="/sidrek.htm"]
 ||filmizletv.*/wp-content/uploads/*.png
 kizlarsoruyor.com###brand-skinundernav
 ||images.kizlarsoruyor.com/custom/Brands/
-odatv4.com##.visible-desktop
 cozumpark.com##.stream-item-top > div[data-advadstrackid]
 emlaktasondakika.com##.add-section
 insaatnoktasi.com##.ads-full-banner
@@ -3136,7 +3133,6 @@ yemek.com##.nokta-ad
 yemek.com##.noktaAdRight
 videovak.com###main_content > div[style^="height:"] + center
 yesilist.com##div[style="width:970px; height:250px; margin: 0 auto;"]
-patronlardunyasi.com##div[style="width:100%; text-align:center; margin-top:10px; display:block;"]
 ||alanyaadres.com/images/banner/
 turkhacks.com##.ths-head-ad
 bulurum.com##div[id^="Banner"]
@@ -3178,7 +3174,6 @@ mackolik.com,sahadan.com##.PKBanner
 ||mackolik.com/Forum/Advertorial.aspx
 altyazi.net###BuyukUstReklam
 ||paraanaliz.com/wp-content/uploads/*/gedik_gif_banner_youtube.gif
-odatv4.com###menu-icon ~ div[style^="margin-top: "]
 alemfm.com,alem.com.tr###tepebanner
 petroturk.com##.ag-head-author
 ||dyg-ads-cdn.s3-*.amazonaws.com^$domain=puhutv.com
@@ -3483,8 +3478,6 @@ bbnhaber.com.tr##.yatay-banner
 forumatmosfer.com###wrapperindex > div[style*="text-align: center;"]:not([style*="background: #666666;"])
 /Banner-header-*.gif$domain=artigercek.com
 find.com.tr##.ads-height-250
-patronlardunyasi.com##.mfp-bg
-patronlardunyasi.com##.mfp-wrap
 sozcu.com.tr##.bitci-bar
 fontyukle.net##div[class^="sag-ust"]
 forum.sordum.net,lezizci.com,bilgidem.com##div[data-zone]
@@ -3669,7 +3662,6 @@ hurhaber.com##.mobilgoster > a[href] > img[src^="/reklamlar/"]
 ||cdn.r10.net/mg/ticimaxd.gif
 haberler.com##img[src^="/mstatic/reklam/"]
 memurlar.net##.PageWidth .default-widget > a[href][rel="nofollow"]
-patronlardunyasi.com##div[style="width:1200px;"] > div[style="float:right; width:324px;"] > div[style="padding:11px; border:1px solid #ddd;"]
 enerjigazetesi.ist##div[style*="width:991px;"][style*="height:135px;"]
 enerjigazetesi.ist##div[style*="width:678px;"][style*="height:90px;"]
 yemek-ye.net##.spu-box[data-test-mode]
@@ -4587,8 +4579,6 @@ denizlihaber.com##.ap-940x100
 denizlihaber.com##.ap-928X96
 denizlihaber.com##.ap-450x400
 azbuz.org,siberkalem.com,fosforludusunceler.com##.geoit_popup_ade
-patronlardunyasi.com###contextual + div[style="margin:10px 0; width:640px; height:250px; overflow:hidden;"]
-patronlardunyasi.com###contextual > div[style="float:left; margin:10px 15px 10px 0; border:1px solid #ccc; width:300px; height:250px;"]
 star.com.tr##a[href*="//apps.star.com.tr/advredir"]
 pembeoje.com##center > a[href="https://www.dekolte.net"] > img
 ||dekolte.net/resim/dekolte336.gif
@@ -5219,7 +5209,6 @@ gezginler.net###iceriksol > div#indralt > div#prioyun
 haberler.com###iframe_partner
 oyungemisi.com###info > .baguette
 afyonhaber.com###kutu
-odatv4.com###leftbans
 fotomac.com.tr###lightBox
 bilisimcafe.net###main > aside > div.sidebarWidget.nativeWidget
 sakaryagazetesi.com.tr###main > div[class^="satir satir"] > center > img
@@ -5247,7 +5236,6 @@ oyungemisi.com###reviews > aside > .boule
 suffagah.com###secondary > aside[id^="text-"]
 baslattusu.com###sgcboxOverlay
 baslattusu.com###sgcolorbox
-tv.sozcu.com.tr###sozcu_tv_300250
 ekippolishaber.com,abamedya.com,olay.com.tr###splash
 blog.namazsitesi.com###text-6
 formatatmak.com###text-html-widget-6
@@ -5454,8 +5442,6 @@ blackorwhitedergi.com,oyungemisi.net,oyunkuzusu.com,bursaspor.org.tr,haberler.co
 fethiyehaber.com,umraniyegundemi.com,listelist.com,yerelgazete.com.tr##div[id^="reklam-"]
 ordugazete.com##div[id^="simplemodal-"]
 sporx.com##div[style$="position: relative; margin-top: 10px; min-height: 350px;"]
-patronlardunyasi.com##div[style*="margin-left: 20px;"] > div[style*="300px; height:"]
-patronlardunyasi.com##div[style*="margin-left: 20px;"] > div[style*="300px; height:"] + div[style*="clear:"][style*="20px;"]
 canakkaleolay.com##div[style="margin-top:20px;"] > div.container > div.col-md-4 > p img.img-responsive
 webaslan.com##div[style="min-height: 255px; width: 300px; margin-left: auto; margin-right: auto;"]
 magazin.com.tr##div[style="position:relative;float:left;width:492px;"] > a > img
@@ -5535,7 +5521,6 @@ isguc.org##td[width="200"] a[target="_blank"] img[width="200"][alt]
 ||objektifhaber.com/dosyalar/ads-img/
 ||objektifhaber.com/static/fancybox/jquery.fancybox.js
 ||olaymedya.com/_img_/_ads_/
-||patronlardunyasi.com/banner/
 ||tarsushaber.com/banner/
 ||petroturk.com/uploads/dragon_banner.gif
 ||pivolcdn.trafficmanager.net/assets/premium/*/ad/
