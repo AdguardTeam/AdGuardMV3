@@ -1,9 +1,9 @@
-! Checksum: pdsJfmKTRk9Rwxnv1L2w5w
-! Diff-Path: ../patches/16/16-s-1712615804-3600.patch
+! Checksum: E9NQvGhrpG0o8F4nyiMPeg
+! Diff-Path: ../patches/16/16-s-1712821633-3600.patch
 ! Title: AdGuard French filter
 ! Description: Liste FR + AdGuard French filter. Filter list that specifically removes ads on websites in French language.
-! Version: 2.0.44.47
-! TimeUpdated: 2024-04-08T22:33:22+00:00
+! Version: 2.0.44.51
+! TimeUpdated: 2024-04-11T07:43:33+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1551,6 +1551,10 @@ app.molotov.tv#%#//scriptlet('prevent-xhr', '/ping?token=')
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/176828
+$script,third-party,domain=cam4.com,badfilter
+! https://github.com/AdguardTeam/AdguardFilters/issues/176408
+$script,third-party,domain=kinogo.cc,badfilter
 ! https://github.com/AdguardTeam/AdguardFilters/issues/176031
 $script,third-party,domain=simkl.com,badfilter
 ! https://github.com/AdguardTeam/AdguardFilters/issues/175307
@@ -1935,9 +1939,6 @@ programme-tv.net#@#[data-ads-core]
 kiosque.canardpc.com#@#.pub468
 ! https://github.com/AdguardTeam/AdguardFilters/issues/102873
 @@||olx.pl/api/v*/*/?ad_id=$xmlhttprequest
-! https://github.com/uBlockOrigin/uAssets/issues/10628#issuecomment-980589304
-@@||accounts.google.com/gsi/client$domain=live.lequipe.fr
-@@||accounts.google.com/o/oauth2/iframe$domain=live.lequipe.fr
 ! https://github.com/AdguardTeam/AdguardFilters/issues/100793
 $subdocument,third-party,domain=filmstreamy.com,badfilter
 ! https://github.com/AdguardTeam/AdguardFilters/issues/99951
@@ -22685,6 +22686,7 @@ voyageforum.com#?#div[style*="width: 300px"]:-abp-has(.adsbygoogle)
 voyageforum.com#?#table[class="post"]:-abp-has(tbody:-abp-contains(/annonces|annonceurs/))
 voyageforum.com#?#table[style="width: 300px;"]:-abp-has(a)
 zataz.com#?#.custom-sidebar:-abp-has(h3:-abp-contains(/Partenaires|Publicité/))
+krefel.be#?#div[class^="Flex-styled__StyledFlex-"]:has(h3:-abp-contains(Produits sponsorisés))
 ||facebook.com/ajax/qm/
 ||facebook.com/tr/
 ||facebook.com/tr?

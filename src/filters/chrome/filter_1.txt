@@ -1,9 +1,9 @@
-! Checksum: bGdjlpW1hfJu/TdSE0U8yg
-! Diff-Path: ../patches/1/1-s-1712594222-3600.patch
+! Checksum: zQOkNCjkap7kRZ7BceLBwg
+! Diff-Path: ../patches/1/1-s-1712788610-3600.patch
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.89.98
-! TimeUpdated: 2024-04-08T16:31:57+00:00
+! Version: 2.0.90.6
+! TimeUpdated: 2024-04-10T22:31:44+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -4392,7 +4392,7 @@ positiverecords.ru#@#.ad-google
 pikabu.ru#%#//scriptlet('abort-on-stack-trace', 'XMLHttpRequest', 'createAd')
 pikabu.ru#%#//scriptlet('prevent-setTimeout', '_sendAnalytics')
 pikabu.ru#%#//scriptlet('json-prune', 'data', 'errors')
-pikabu.ru#%#//scriptlet("remove-node-text", "script", "/let \s?[a-zA-Z0-9_]{2,10}\s{1,3}? = 'https:\/\/pikabu\.ru\/[a-zA-Z0-9]{5,10}\/[a-zA-Z0-9]{5,10}\//")
+pikabu.ru#%#//scriptlet("remove-node-text", "script", "/let \s{1,3}?[a-zA-Z0-9_]{2,10}\s{1,3}? = 'https:\/\/pikabu\.ru\/[a-zA-Z0-9]{5,10}\/[a-zA-Z0-9]{5,10}\//")
 ! sports.ru
 sports.ru#%#//scriptlet('json-prune', 'direct rtbAuctionInfo')
 sports.ru#%#//scriptlet('set-constant', 'Ya.adfoxCode.create', 'noopFunc')
@@ -5241,6 +5241,7 @@ apad2.top,games-pc.top,rustorka.com,rustorka.net,rustorkacom.lib,naylo.top,zannn
 @@/footerads.js$~third-party,domain=games-pc.top|rustorka.com|rustorka.net|rustorkacom.lib|naylo.top|monna2.top|zannn.top|innal.top|apad2.top
 @@/nativeads.js$~third-party,domain=games-pc.top|rustorka.com|rustorka.net|rustorkacom.lib|naylo.top|monna2.top|zannn.top|innal.top|apad2.top
 @@/side-ad.js$~third-party,domain=games-pc.top|rustorka.com|rustorka.net|rustorkacom.lib|naylo.top|monna2.top|zannn.top|innal.top|apad2.top
+@@/SidebarAds.js$~third-party,domain=games-pc.top|rustorka.com|rustorka.net|rustorkacom.lib|naylo.top|monna2.top|zannn.top|innal.top|apad2.top
 /rustorka.\w+\/forum\/(?!login.php)/$removeheader=location
 /naylo.top\/forum\/(?!login.php)/$removeheader=location
 /games-pc.top\/forum\/(?!login.php)/$removeheader=location
@@ -7420,7 +7421,7 @@ news.meta.ua##small[style^="display:block;"]
 gordonua.com##div[data-action="banners"]
 gordonua.com##a[class^="branding-link-"]
 rbc.ua##.vidverto-wrapper
-itc.ua##body > div[style="text-align:center;background: #000;"]
+itc.ua##body > div[class*="-sm"][style^="text-align:center;"]
 dev.ua##.container > div.island.card
 dev.ua##.island.d-none_mobile
 new-rutor.org,xrutor.org,123rutor.su##iframe[height="265px"][width="732px"]
@@ -7621,6 +7622,19 @@ ivanovonews.ru,gorodn.ru,bits.media,devyatka.ru,gazeta-n1.ru,gorod48.ru,hi-fi.ru
 !
 !
 !
+gamenewsblog.ru##.mh-sidebar > div.widget_custom_html:has(div[id^="yandex_rtb"])
+newsru.co.il##.article_top1
+newsru.co.il##div[id$="_ads"]
+newsru.co.il##.main--single--article--content div:has(> div[data-adpath])
+newsru.co.il##aside div[id^="article_right"]:has(div[data-adpath])
+newsru.co.il##article div#article_inf:has(div[data-adpath])
+newsru.co.il##.content > div[class]:not([id^="content_news"]):has(div[data-adpath])
+newsru.co.il##.home-layout--container > div[id][class]:has(div[data-adpath])
+||fishnet.ru/_/fb/
+||fishnet.ru/images/banners/
+fishnet.ru##.banner_top_bracing
+fishnet.ru##.fishblock:has(> div.fishvew_carousel div.fishview_item_content_info_wrap > div.fishview_item_content img[src^="/_/fb/"])
+fishnet.ru##.fishblock:has(> div.fishvew_carousel div.fishview_item_content_info_wrap > div.fishview_f > iframe[src^="/_/fb/"])
 habr.com##.tm-article-presenter__banner
 ||allbasketball.org/*/pari*/index.
 ||allbasketball.org/*/pari-*.jpeg
@@ -7640,7 +7654,7 @@ happycoin.club#?#.theiaStickySidebar > div.widget_text:has(> div.widget-title-co
 novate.ru#?##right > h2:contains(Рекомендуем)
 ||myfanstv.net/uploads/*/baner/
 fanserials.vip##div[data-dlebclicks]
-animeonline.cc##div[id^="adfox_"]
+iz.ru,fantworld.org,myfin.by,animeonline.cc##div[id^="adfox_"]
 animeonline.cc###rkl-left
 myslo.ru##div[class^="myslo-banner-"]
 kinoafisha.info##.okko2024Btn
@@ -8034,7 +8048,6 @@ torrent5.net###torent_val > h2
 kubnews.ru##.simular-smi2
 vladday.ru#?#aside > .border-b:has(> h5:contains(Реклама))
 iguides.ru##.huawei-link
-iz.ru,fantworld.org##div[id^="adfox_"]
 ||aflt.travel.ya.ru/widgets/api.js$third-party
 football.by###fonbet
 football.by##a[href="https://betonmobile.by/betera-android-app"]
@@ -18108,6 +18121,7 @@ pornolab-zerkalo.appspot.com,pornolab.biz,pornolab.cc,pornolab.lib,pornolab.net#
 !
 !
 ! START: mail.ru
+finance.mail.ru,news.mail.ru##aside div[style^="min-height:"]:has(> div[data-rb-slot])
 lady.mail.ru##.ph-whiteline ~ div#portal-menu ~ span > div
 otvet.mail.ru##div[class*="adv-slot-"]
 mail.ru##div[data-testid="grid-header"] > div.toolbar
@@ -18667,6 +18681,8 @@ adguard.info,adguard.com,adguard.app##.hello_from_adguard_ext
 !
 ! Bad:  ||example.org/video-links (should be in specific.txt)
 !
+! https://github.com/AdguardTeam/CoreLibs/issues/1720
+! https://github.com/AdguardTeam/AdguardFilters/issues/176738
 ! https://github.com/AdguardTeam/AdguardFilters/issues/66827
 ! Block vk ads(they are hidden, but visible in some reports)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/57021

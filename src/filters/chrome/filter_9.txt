@@ -1,9 +1,9 @@
-! Checksum: 69uCgxHUt0bCECqW6IdDsA
-! Diff-Path: ../patches/9/9-s-1712644603-3600.patch
+! Checksum: feO00g6gxrlq4zY1DfahiA
+! Diff-Path: ../patches/9/9-s-1712821637-3600.patch
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish, Portuguese, and Brazilian Portuguese languages.
-! Version: 2.0.24.1
-! TimeUpdated: 2024-04-09T06:32:50+00:00
+! Version: 2.0.24.8
+! TimeUpdated: 2024-04-11T07:42:58+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -269,6 +269,12 @@
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/176820
+luratoon.com#%#//scriptlet('prevent-element-src-loading', 'script', 'pagead2.googlesyndication.com')
+!+ NOT_PLATFORM(windows, mac, android)
+||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,redirect=googlesyndication-adsbygoogle,domain=luratoon.com
+! https://github.com/AdguardTeam/AdguardFilters/issues/176638
+playertv.org#%#//scriptlet('abort-current-inline-script', 'document.createElement', 'adsbygoogle.js')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/176576
 tvembed.net,tv0800.zip#%#//scriptlet('abort-current-inline-script', 'document.createElement', 'adsbygoogle.js')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/174418
@@ -394,13 +400,19 @@ todoandroid.live,gadgetzona.net,qwanturankpro.com,desbloquea.me,mega-enlace.com#
 softwareany.net#%#//scriptlet('prevent-addEventListener', 'load', 'detect-modal')
 softwareany.net#@#ins.adsbygoogle[data-ad-slot]
 softwareany.net##ins.adsbygoogle:not(.ad-slot)
+! https://github.com/AdguardTeam/AdguardFilters/issues/176660
+! https://github.com/AdguardTeam/AdguardFilters/issues/176661
+! https://github.com/AdguardTeam/AdguardFilters/issues/176662
+! https://github.com/AdguardTeam/AdguardFilters/issues/176663
 ! https://github.com/AdguardTeam/AdguardFilters/issues/160783
 ! https://github.com/AdguardTeam/AdguardFilters/issues/158732
-repretel.com,redbolivision.tv.bo#%#//scriptlet('set-constant', 'googletag._loaded_', 'true')
-repretel.com,redbolivision.tv.bo#%#//scriptlet('prevent-fetch', 'securepubads.g.doubleclick.net/pagead/ppub_config')
-repretel.com,redbolivision.tv.bo#%#//scriptlet('prevent-element-src-loading', 'script', 'securepubads.g.doubleclick.net/tag/js/gpt.js')
-||securepubads.g.doubleclick.net/tag/js/gpt.js$script,redirect-rule=noopjs,domain=redbolivision.tv.bo|repretel.com
-||securepubads.g.doubleclick.net/pagead/ppub_config$xmlhttprequest,redirect-rule=nooptext,domain=redbolivision.tv.bo|repretel.com
+antena7.com.do,rqp.com.bo,canal12.com.sv,chapintv.com,vtv.com.hn,tn23.tv,canal13mexico.com,c9n.com.py,repretel.com,redbolivision.tv.bo#%#//scriptlet('set-constant', 'googletag', 'emptyObj')
+antena7.com.do,rqp.com.bo,canal12.com.sv,chapintv.com,vtv.com.hn,tn23.tv,canal13mexico.com,c9n.com.py,repretel.com,redbolivision.tv.bo#%#//scriptlet('set-constant', 'googletag._loaded_', 'true')
+antena7.com.do,rqp.com.bo,canal12.com.sv,chapintv.com,vtv.com.hn,tn23.tv,canal13mexico.com,c9n.com.py,repretel.com,redbolivision.tv.bo#%#//scriptlet('prevent-fetch', 'securepubads.g.doubleclick.net/pagead/ppub_config')
+antena7.com.do,rqp.com.bo,canal12.com.sv,chapintv.com,vtv.com.hn,tn23.tv,canal13mexico.com,c9n.com.py,repretel.com,redbolivision.tv.bo#%#//scriptlet('prevent-element-src-loading', 'script', 'securepubads.g.doubleclick.net/tag/js/gpt.js')
+||securepubads.g.doubleclick.net/tag/js/gpt.js$script,redirect-rule=noopjs,domain=redbolivision.tv.bo|repretel.com|c9n.com.py|tn23.tv|canal13mexico.com|vtv.com.hn|chapintv.com|canal12.com.sv|rqp.com.bo|antena7.com.do
+||securepubads.g.doubleclick.net/pagead/ppub_config$xmlhttprequest,redirect-rule=nooptext,domain=redbolivision.tv.bo|repretel.com|c9n.com.py|tn23.tv|canal13mexico.com|vtv.com.hn|chapintv.com|canal12.com.sv|rqp.com.bo|antena7.com.do
+||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima3,domain=redbolivision.tv.bo|repretel.com|c9n.com.py|tn23.tv|canal13mexico.com|vtv.com.hn|chapintv.com|canal12.com.sv|rqp.com.bo|antena7.com.do
 ! https://github.com/AdguardTeam/AdguardFilters/issues/159624
 animesonline.nz##.detectadb
 animesonline.nz##.cleitao
@@ -2017,6 +2029,8 @@ cifras.com.br,gaz.com.br,placar.com.br,futebolinterior.com.br,tvhistoria.com.br,
 ! ##body .banner
 laprensagrafica.com,ahoragranada.com,correio24horas.com.br,cnnespanol.cnn.com,motociclismo.es,sub100.com.br,theenemy.com.br,manhwas.net,rpp.pe,ambito.com,economipedia.com,informador.mx,elinformador.com.co,cronista.com,rionegro.com.ar,diariodecuyo.com.ar,voydeviaje.com.ar,guarda14.com,viapais.com.ar,agazeta.com.br,eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.*,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##body .banner
 !
+avpasion.com##.avp-block-label
+||futemax.mx/_images/personalizacao_site/BannerGif.webp
 httpmangacrab2.com##.main-col > ul[id^="manga-content-navs"]:has(> li > a[href="#tab-ads"])
 olhardigital.com.br##section.homeV2-ofertas
 elrincondecabra.com###block-61
@@ -2245,8 +2259,8 @@ futecell.com###HTML27
 felizemforma.com##.ad970x250
 genbeta.com###editorialRecommendedPosts
 ||recantodasletras.com.br/vitrine/vitrine.php
-repretel.com,redbolivision.tv.bo##html ned-ad
-repretel.com,redbolivision.tv.bo##body .layout-rev
+antena7.com.do,rqp.com.bo,canal12.com.sv,chapintv.com,vtv.com.hn,tn23.tv,canal13mexico.com,c9n.com.py,repretel.com,redbolivision.tv.bo##html ned-ad
+antena7.com.do,rqp.com.bo,canal12.com.sv,chapintv.com,vtv.com.hn,tn23.tv,canal13mexico.com,c9n.com.py,repretel.com,redbolivision.tv.bo##body .layout-rev
 metsul.com##.ad-wide-antes
 metsul.com##.metsu-adlabel
 metsul.com###header2_alright
@@ -2912,7 +2926,7 @@ puraciudad.com.ar###sidebar-primary-sidebar > .primary-sidebar-widget
 boainformacao.com.br##div[class*="sidebar"] .textwidget > p > a[href]:not([href*="boainformacao.com.br"]) > img
 boainformacao.com.br##div[class*="sidebar"] .textwidget > p ~ a[href]:not([href*="boainformacao.com.br"]) > img
 eldesmarque.com,jornaldeitapetininga.com.br##div[id^="banner_"]
-minutouno.com,yapo.cl,ratingcero.com,ambito.com##.banner-container
+futemax.mx,minutouno.com,yapo.cl,ratingcero.com,ambito.com##.banner-container
 tupornogratis.xxx##.lst_ft_bn
 globo.com##div[id^="banner_home"]
 globo.com###banner_vitrine_container
@@ -3076,7 +3090,7 @@ ahount.com##.inside-right-sidebar > aside[id^="custom_html-"]
 ||plantaomaringa.com/fotos/anuncios
 elpais.com###paywallOfferSmall
 elpais.com###cta-button-container
-comandoplay.com,comandotorrents.to,adrenaline.com.br,ncultura.pt,animesdigital.org,wwwhatsnew.com,descargaseriestv.com,lifeder.com,elrellano.com,elintransigente.com,comando.la,remender.pe,noticiasautomotivas.com.br,idinheiro.com.br,diariodocomercio.com.br##body .code-block
+sport.es,comandoplay.com,comandotorrents.to,adrenaline.com.br,ncultura.pt,animesdigital.org,wwwhatsnew.com,descargaseriestv.com,lifeder.com,elrellano.com,elintransigente.com,comando.la,remender.pe,noticiasautomotivas.com.br,idinheiro.com.br,diariodocomercio.com.br##body .code-block
 g37.com.br,anitube.biz,otvfoco.com.br##div[class^="code-block code-block-"][style^="margin: 8px"]
 bracontece.com.br##.testad
 aeiou.pt,noticiast.com##div[style="margin: 8px 0; clear: both;"]
@@ -3194,7 +3208,9 @@ lapoliticaonline.*###header-banner-wrapper
 onepieceex.net##.banner-resposivo
 tecmundo.com.br##p > a[href^="https://bit.ly/"][target="_blank"] > span > img
 ||img.ibxk.com.br/*/banner-*.png$domain=tecmundo.com.br
-eldiario.es,tuasaude.com,yugenmangas.org,yugenmangas.net.br,globo.com,eltiempo.com,gauchazh.clicrbs.com.br,hobbyconsolas.com,larepublica.pe,vozpopuli.com##.ad-container
+levelup.com,eldiario.es,tuasaude.com,yugenmangas.org,yugenmangas.net.br,globo.com,eltiempo.com,gauchazh.clicrbs.com.br,hobbyconsolas.com,larepublica.pe,vozpopuli.com##.ad-container
+hobbyconsolas.com##div[class^="ad-slot_"]
+hobbyconsolas.com##div[class^="placeholder_placeholder"]
 vozpopuli.com##.home_1_ad
 infobae.com##.d23-navbar-ad-container
 infobae.com##.navbar-ad-container
@@ -5235,7 +5251,7 @@ nebrija.com#@##publicidad
 ! https://github.com/AdguardTeam/AdguardFilters/issues/131251
 elsuperfullhd.com#@#.vertical-ads
 ! https://github.com/AdguardTeam/AdguardFilters/issues/117538
-||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=noopjs,domain=r7.com
+||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima3,domain=r7.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/116121
 flatout.com.br#@#.penci-google-adsense
 flatout.com.br#@#.penci_single_ad_before_content

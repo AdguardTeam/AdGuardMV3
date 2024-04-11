@@ -1,9 +1,9 @@
-! Checksum: KhxNkQOBIXbXObqnsXJZjw
-! Diff-Path: ../patches/3/3-s-1712623023-3600.patch
+! Checksum: IFv9wiktlbu6ZlOOnAaYnw
+! Diff-Path: ../patches/3/3-s-1712772685-3600.patch
 ! Title: AdGuard Tracking Protection filter
 ! Description: The most comprehensive list of various online counters and web analytics tools. Use this filter if you do not want your actions on the Internet to be tracked.
-! Version: 2.0.68.60
-! TimeUpdated: 2024-04-09T00:32:24+00:00
+! Version: 2.0.68.69
+! TimeUpdated: 2024-04-10T18:06:44+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -102,7 +102,6 @@ thesaurus.net,topstarnews.net,interfootball.heraldcorp.com,alle-tests.nl,issuya.
 spletnik.ru#%#//scriptlet('set-local-storage-item', '/^_ym/', '$remove$')
 ! AdRiver
 spletnik.ru#%#//scriptlet('set-local-storage-item', 'adrcid', '$remove$')
-!
 !
 !
 ! https://github.com/AdguardTeam/AdguardFilters/issues/175476
@@ -567,6 +566,7 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 !
 !
 !
+||tags.qortex.ai^$third-party
 ||analytics-ingestion.pbpms.de^
 ||fpad.jp^$third-party
 ||palibzh.tech^
@@ -733,7 +733,6 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ||colossusssp.com^
 ||consentag.eu^$third-party
 ||collect-v*.51.la^
-||cmp.datasign.co^
 ||ip.momentummedia.com.au^
 ||adrange.net^$third-party
 ||dmtag.jp^$third-party
@@ -4393,6 +4392,8 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ! Blocking piwik analytics subdomain(for DNS filtering)
 |piwik.
 !
+||metrics.baitoru.com^
+||log.dpa.com^
 ||metrics.thefeed.com^
 ||gtm.thefeed.com^
 ||collector.xhaccess.com^
@@ -5010,7 +5011,6 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ||client-metrics.chess.com^
 ||stat.kwikmotion.com^
 ||analytics.vpplayer.tech^
-||h.seznam.cz^
 ||stat.cncenter.cz^
 ||metrics.roblox.com^
 ||t.xoom.com^
@@ -5248,6 +5248,7 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ||apv-launcher.minute.ly^
 ||ariane.abtasty.com^
 ||astat.nikkei.co.jp^
+||astral.nicovideo.jp^
 ||asumi.shinobi.jp^
 ||atax.teamxbox.com^
 ||atlas1.krone.at^
@@ -96739,6 +96740,22 @@ _tracking.php?b=
 /analytics.js$domain=tokyometro.jp|resumes.breakdownexpress.com|techcult.com|inbox.lv|kopeda.com|freexcafe.com|rusvideos.tv|nakubani.ru|lun.com|songsara.net|newsmax.com|bolgehastanesi.com|ewtc.de|newsdig.tbs.co.jp|imore.com|city.kushiro.lg.jp|emeraldbridal.com.au|emarat-news.ae|imobie.jp|tikla.com.tr|rusvideos.porn|jrkyushu.co.jp|amiunique.org|edit.ing|konami.com
 ||assets.adobedtm.com^$domain=mcclatchydc.com|elnuevoherald.com|bellinghamherald.com|sacbee.com|charlotteobserver.com|newsobserver.com|miamiherald.com|ef.ru|algida.com.tr|bmw-motorrad.co.uk|cif.com.tr|clearhaircare.com|domestos.com|dove.com|elidor.com.tr|f1sport.autorevue.cz|geico.com|hellmanns.com.tr|herkessofraya.com|johnsonsbaby.com.tr|lipton.com|lnk.to|lux.com|magnumicecream.com|neutrogena.com.tr|omo.com|rexona.com|samsung.com|sap.com|schwarzkopf.com.tr|signalturkiye.com|msnbc.com|nbcnews.com|kbb.com|eurosport.ru|timgate.it|intermiles.com|oxfordmail.co.uk|spiegel.de|hp.com|deutschepost.de|thebay.com|s.shufoo.net|tsn.ca|tabelog.com|euronews.com|newshub.co.nz|fredmeyer.com|viabcp.com|carsales.com.au|falabella.com|aarp.org|thehill.com|realtor.com|nzherald.co.nz|aia.com.ph|baynews9.com|thesaurus.com|dhc.co.jp|0101.co.jp|staples.com
 !
+/hitcount.js$domain=kurier.de|np-coburg.de|frankenpost.de
+||idowa.de/build/js/snowplow-tracker.tatest.js
+||open.spotifycdn.com/cdn/js/retargeting-pixels.*.js
+||client-log.box.com/analytics-events/
+||np-coburg.de/cms/hitcount
+||cdn.tickaroo.com/api/collect/
+||sso.meine-vrm.de/api/tracking-cue
+||api3.wetter.de/s/web.png
+||cas-live.das-onlinespiel.de/gateway?
+||stats.mopo.de/cntcc
+||assets.rndtech.de/web-vitals/
+||mst.*.de/g/collect
+||silo47.p7cloud.net/p.png
+||taz.de/count/
+||pt.dwcdn.net/*/datawrapper.gif
+||service.webgoto.net/*?wAnalytics
 ||nicoad.nicovideo.jp/*/instream/tracking/
 ||mylocal.co.uk/api/trpc/analytics.
 ||svc.eu01.miro.com/api/stream/
@@ -96988,7 +97005,6 @@ thehindu.com###sectiondivicymi
 ||tower.jp/beacon.gif?
 ||tower.jp/bundle/beacon
 ||tsukuba.ac.jp/assets/js/ga4.js
-||sp.live.nicovideo.jp/api/logger?
 ||nicolive.cdn.nimg.jp/relive/sp/browser-logs.*.js
 ||nicolive.cdn.nimg.jp/relive/sp/trackingService.*.js
 ||a-mpd.com/pixel.png
@@ -103067,6 +103083,9 @@ inapps.appsflyersdk.com^
 ! For platforms which do not support $redirect rules
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/176429
+newton.by#%#//scriptlet('set-constant', 'yaCounter22339861.reachGoal', 'noopFunc')
+newton.by#%#//scriptlet('set-constant', 'ga', 'noopFunc')
 ! broken notificatoin
 @@||rtoaster.jp^$script,domain=cecile.co.jp
 ! https://github.com/AdguardTeam/AdguardFilters/issues/176193

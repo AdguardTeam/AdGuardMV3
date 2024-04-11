@@ -1,9 +1,9 @@
-! Checksum: GLqGSYyj8/DPnmv2bcLDRA
-! Diff-Path: ../patches/6/6-s-1712594229-3600.patch
+! Checksum: Jyne4AS5DG9OAy+k6RDXag
+! Diff-Path: ../patches/6/6-s-1712821637-3600.patch
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.41.31
-! TimeUpdated: 2024-04-08T16:32:53+00:00
+! Version: 2.0.41.37
+! TimeUpdated: 2024-04-11T07:42:45+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -86,6 +86,7 @@
 ! Bad: ||adssubdomain.legitwebsite.com^ (should be in adservers_firstparty.txt)
 !
 !
+||mitself.net^
 ||jubbie.de^
 ||comparison.financeads.net^$third-party
 ||lehrer-finden.de^
@@ -347,6 +348,10 @@ n-tv.de#%#//scriptlet("set-constant", "embedAddefend", "noopFunc")
 @@||p*.focus.de/img/
 !+ NOT_OPTIMIZED
 @@||sueddeutsche.de/image/
+!+ NOT_OPTIMIZED
+@@||stuttgarter-zeitung.de/*/*$image
+!+ NOT_OPTIMIZED
+@@||allgemeine-zeitung.de/incoming
 ! JS rules
 ! #%#window.uabInject = function() {};
 ! #%#window.uabpInject = function() {};
@@ -1575,6 +1580,9 @@ welt.de##.c-inline-element--has-commercials
 welt.de##.c-page-container--has-commercials
 !+ NOT_OPTIMIZED
 bild.de##.outstreamAd
+! https://github.com/AdguardTeam/AdguardFilters/issues/176792
+!+ NOT_PLATFORM(android, ios, ext_android_cb)
+giga.de#$#div[class*="ad--top"] { display: block !important; min-height: 40px !important; }
 ! Scripts not accessible via debugging tools
 ||cluster-*.cdnjquery.com^$domain=woxikon.de|notebookcheck.com|dict.cc
 ||*snigelweb-com.videoplayerhub.com^$domain=tellows.de|woxikon.de|notebookcheck.com|dict.cc
@@ -1601,6 +1609,14 @@ formel1.de,krautundrueben.de,motorsport-total.com,traktorpool.de,fnweb.de,laborj
 !
 !
 !
+schreiben.net##.codeee-block:has(> div[data-ai-tracking] > a[href*="/link/"])
+chip.de##.Ad-Slot
+chip.de##p:has(> .aff-link)
+benzinpreis.de##.start-teaser-banner
+benzinpreis.de##.multi-content:has(> .right-content-content:only-child > .start-teaser-banner:only-child)
+benzinpreis.de##.HYPE_document
+benzinpreis.de##li:has(> .html-content:only-child > .left_navi_block:only-child > .HYPE_document:only-child)
+fussballfieber.de##div[data-ads-slot]
 noz.de##.grid > div.grid-cell--m-12:has(> div.grid--column > div.ad_label)
 ||noz.de/static/adframework/
 stylebook.de###superbanner
@@ -1641,7 +1657,6 @@ suchen.mobile.de##span[data-testid^="result-listing"]:has( span[data-testid="spo
 winfuture.de###wfv4_bb2_lazyload
 sueddeutsche.de##main > div[class^="css-"]:has(> ins.asm_async_creative)
 chip.de##section.TopList--Count
-giga.de#$#div[class*="ad--top"] { min-height: 40px !important; }
 giga.de##.alice-root-container > div.row:has(> div[class^="col-"] > section > div.section-header > h2 > a[href="/sparen/deals/"])
 giga.de##.alice-teaser-list-item:has(> div[id="giga.de_tech_startseite_teaser1"])
 giga.de#%#//scriptlet('remove-class', 'show-teaserheld-header', 'body')
@@ -2025,6 +2040,7 @@ kurier.de,np-coburg.de,frankenpost.de,all-in.de##.werb
 kurier.de,np-coburg.de,frankenpost.de##.werb4
 kurier.de,np-coburg.de,frankenpost.de##div[data-b-title*="Nativendo"]
 kurier.de,np-coburg.de,frankenpost.de##div[data-b-title*="sponsor"]
+kurier.de,np-coburg.de,frankenpost.de##div[data-upscore-zone="Breadcrumbs"] > iframe
 ratgeber-muskeln-gelenke-knochen.de##section[data-pos="imgright"]
 parkerlebnis.de##.a-bb
 parkerlebnis.de###footer ~ div[style="text-align: center; width: 100%;"]
@@ -2911,8 +2927,6 @@ golem.de##a[href^="https://www.golem.de/news/anzeige-"]
 golem.de##a[href^="https://www.golem.de/news/anzeige-"] + .cluster-header
 golem.de##a[href^="https://www.golem.de/news/anzeige-"] + .cluster-header + p
 tff-forum.de###subheader-inner > div[id^="banner-"]
-mtb-news.de##div[class^="mtbnews-ad-"]
-mtb-news.de##.mtbnewsAdBillboardContainer
 ga.de##div[data-host="general-anzeiger-bonn.weekli.de"]
 ga.de##.park-portal-marker::before
 unsere-helden.com,forum.golem.de##img[referrerpolicy="unsafe-url"]
@@ -2922,7 +2936,8 @@ administrator.de##.ads-300x600-wrapper
 administrator.de##.snhb-ads
 willhaben.at##.apn-leaderboard-wrapper
 golem.de##.kpomubeaetv
-emtb-news.de,rennrad-news.de##.mtbnewsAdBillboardContainer
+mtb-news.de##div[class^="mtbnews-ad-"]
+emtb-news.de,mtb-news.de,rennrad-news.de##.mtbnewsAdBillboardContainer
 emtb-news.de,rennrad-news.de##div[class^="mtbnews-ad-container"]
 emtb-news.de##.message[data-author="eMTB-News.de"]
 rennrad-news.de##.message[data-author="Rennrad-News.de"]
@@ -3222,8 +3237,6 @@ blick.ch##a[href^="https://jackpot.onelink.me"]
 magdeburger-news.de##.element-container > a[href*="redirect"]
 cosmopolitan.de##.amazon-bundle-product
 vogue.de##div[data-test-id="AdBannerWrapper"]
-brigitte.de##section[data-name*="Veeseo"]
-brigitte.de##.vergleichsinfo
 bunte.de##.fe-channel-item--promo
 elle.de,instyle.de,freundin.de##.item-paragraph--advertising-products-paragraph
 elle.de,instyle.de##.ecommerce-slider
@@ -3405,7 +3418,8 @@ netdoktor.ch,netdoktor.de###header-ad-slot
 waz.de##.block-header--banner > a:not([href*="waz.de"])
 ||compact-online.de/wp-content/uploads/*/-anzeige-300x250
 wiwo.de##.c-teasergallery--ressort
-stern.de##.vergleichsinfo
+brigitte.de##section[data-name*="Veeseo"]
+brigitte.de,stern.de##.vergleichsinfo
 stern.de##section[data-name^="Vermarktung"]
 stern.de##section[data-name^="Homepage_3er-Kachel-Reisewelten"]
 welt.de##section[data-tb-region="sponsored"]
@@ -5392,6 +5406,8 @@ amateurbusters.com#?#.sb_area > .sb_area_headline:contains(Urlaub)
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/6745
+@@||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=noz.de
 ! https://github.com/AdguardTeam/AdguardFilters/issues/176561
 @@||t.cpdsrv.de/cpt.js$domain=noz.de
 ! https://github.com/AdguardTeam/AdguardFilters/issues/175205
@@ -10693,6 +10709,7 @@ gmx.ch,gmx.net,web.de##list-inbox-pga-ad-item
 gmx.ch,gmx.net,web.de##list-programmatic-inbox-ad-item
 nau.ch##nau-external-content-lazy
 areadvd.de##onehr
+windowspro.de##section#block-viewscontent-block
 chip.de##span.Button--Clickout[data-submit]
 ariva.de##span[onpointerdown^="countClickOnGAorEs("]
 ariva.de##span[onpointerup*="prgAnalyticsEvent("]
