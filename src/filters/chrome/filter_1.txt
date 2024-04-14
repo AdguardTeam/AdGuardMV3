@@ -1,9 +1,9 @@
-! Checksum: zQOkNCjkap7kRZ7BceLBwg
-! Diff-Path: ../patches/1/1-s-1712788610-3600.patch
+! Checksum: D67/9zLReDKzkHEhVlG7OQ
+! Diff-Path: ../patches/1/1-s-1712932628-3600.patch
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.90.6
-! TimeUpdated: 2024-04-10T22:31:44+00:00
+! Version: 2.0.90.10
+! TimeUpdated: 2024-04-12T14:31:53+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -2329,7 +2329,6 @@ ucoz.ru/informer/
 ||69v.club^$third-party
 ||content.mql5.com^$third-party
 ||kymirasite.pro^$third-party
-||krotovroman.ru^$third-party
 ||mibmcbm.com^$third-party
 ||cdn.movieads.ru^$third-party
 ||devtizer.ru^$third-party
@@ -5133,7 +5132,6 @@ dzen.ru##.ad-split-embed
 dzen.ru##.zen-page div[class^="loading-boundary-stacked-layout__content"] > div:not([class])
 !
 ! Dzen feed
-dzen.ru#?#.feed__item article:matches-attr("/data[a-z-]+/"="/^card-[a-zA-Z]{3,}/")
 dzen.ru##.card-rtb-one-column-stub
 [$path=/media]dzen.ru##div[class$="__ad-content"]
 !
@@ -7399,6 +7397,7 @@ $script,third-party,denyallow=linkvertise.com|fastly.net|statically.io|sharecast
 !
 !
 !
+||krotovroman.ru/robanner/
 itc.ua##body > div[style^="text-align"][style*="bgcolor: #000000;"]
 itc.ua##.post-txt > p.intro:has(> a[href^="https://fav.bet/"])
 mmo13.ru##.mrg-tag
@@ -7622,6 +7621,8 @@ ivanovonews.ru,gorodn.ru,bits.media,devyatka.ru,gazeta-n1.ru,gorod48.ru,hi-fi.ru
 !
 !
 !
+sport24.ru##div[style^="margin-bottom:"]:has(> div > div > div > svg >path[d^="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16Zm0-1.454A6.545 6.545"])
+sport24.ru##div[style^="margin-bottom:"]:has(> div > div a[href^="https://clicks.affijet.com/"])
 gamenewsblog.ru##.mh-sidebar > div.widget_custom_html:has(div[id^="yandex_rtb"])
 newsru.co.il##.article_top1
 newsru.co.il##div[id$="_ads"]
@@ -7693,7 +7694,6 @@ ivanovonews.ru##div[data-block-text="Здесь могла быть Ваша р�
 ivanovonews.ru##div[data-banner-id]
 sport-express.ru##.se-translation-scoreboard-event-bets
 allboxing.ru##.last-news
-sport24.ru##.right-scroll-bar-position
 sport24.ru##div[style="margin-bottom:1.5rem"] > div > div > div > a[target="_blank"]:has(> img)
 3mod.ru##.reklamafull
 tengrisport.kz##.header_adv
