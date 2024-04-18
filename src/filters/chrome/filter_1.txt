@@ -1,9 +1,9 @@
-! Checksum: dNI/Gup0uCUOQyLekhKFuw
-! Diff-Path: ../patches/1/1-s-1713216806-3600.patch
+! Checksum: xdRE0KSWz5uwWf0rEwulUA
+! Diff-Path: ../patches/1/1-s-1713357215-3600.patch
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.90.16
-! TimeUpdated: 2024-04-15T21:31:01+00:00
+! Version: 2.0.90.23
+! TimeUpdated: 2024-04-17T12:31:04+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1486,6 +1486,7 @@ ucoz.ru/informer/
 ! Bad: /banner.jpg (should be in general_url.txt)
 ! Bad: ||adssubdomain.legitwebsite.com^ (should be in adservers_firstparty.txt)
 !
+||ads.people-group.net^
 ||cdn.sov.stream^
 ||adiam.tech^
 ||bidster.net^
@@ -5961,8 +5962,6 @@ tele.ru#%#//scriptlet("abort-current-inline-script", "String.fromCharCode", "/su
 sportbar.biz,sportbox.ws,goool7.ws,sport-24tv.ru,sportboom.pro#%#//scriptlet("prevent-window-open")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/44512
 porno-incest.net#%#//scriptlet("prevent-window-open")
-! https://github.com/AdguardTeam/AdguardFilters/issues/44514
-fapality.com#%#//scriptlet("prevent-window-open")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/43382
 moresisek.net#%#//scriptlet("abort-current-inline-script", "document.addEventListener", "/asg_mixed_tabs/")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/43503
@@ -6136,8 +6135,6 @@ lostfilm.space#$#.lstfml { background: #00003c !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/169241
 yp.ru#$#.main-wrapper { padding-top: 0 !important; }
 yp.ru#$##content { margin-top: 50px !important; }
-! https://github.com/AdguardTeam/AdguardFilters/issues/167617
-flicksbar.fun#$#body > .wrapper { height: 100% !important; }
 ! abw.by
 abw.by#$#.news-main__grid { min-height: auto !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/165998
@@ -7619,6 +7616,10 @@ ivanovonews.ru,gorodn.ru,bits.media,devyatka.ru,gazeta-n1.ru,gorod48.ru,hi-fi.ru
 !
 !
 !
+flicksbar.*##.topAdPad
+||apitelesputnik.ru/storage/images/ads/
+media-polesye.com##.sidebar-mostread
+mat6tube.com##.container > div[style^="width:"]
 ||d.kinokordonchat.webp^$image,third-party
 sport24.ru##div[style^="margin-bottom:"]:has(> div > div > div > svg >path[d^="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16Zm0-1.454A6.545 6.545"])
 sport24.ru##div[style^="margin-bottom:"]:has(> div > div a[href^="https://clicks.affijet.com/"])
@@ -7709,7 +7710,6 @@ afisha.ru##div[data-test="PAGE-BLOCK"] > div > section[role="section"]:has(> div
 cxem.net##.rek_plashka
 3dnews.ru##.sqdad
 slimboxtv.ru###block-55
-reform.by###custom_html-8
 ||postium.ru/wp-content/uploads/2024/02/VK*-1.jpg
 postium.ru##.hype-ad:has(> noindex > span.hype-ad__title)
 geekjob.ru##article > section.m12 > div.message.light-blue.icon
@@ -8816,7 +8816,6 @@ windwix.ru#?##post_body > div[class]:has(> ins.adsbygoogle)
 budzma.org#?#.sidebar > div.banner-sidebar:not(:has(> a[href="https://t.me/budzmaby"]))
 allkey.org#?#.sidebar__right > aside[class]:not(:has(> h3.widget-title))
 7days.ru#?#.b-stripe + div[class] > div[style]:has(> div[id^="crt-"])
-fapality.com#?#.wrapper > div[class]:has(> div.page_second_title:contains(Реклама))
 cosmosplanet.ru#?#.widget_text > div.widget-header:contains(Реклама)
 korabelov.info#?#div[class^="stream-item"]:has(> span.stream-title:contains(Реклама))
 ru.onlinemschool.com#?#body div[id^="oms_"] > div[id]:has(> a[href] > img[onerror])
@@ -9188,7 +9187,7 @@ habr.com##.tm-company-card__branding
 ||officelife.media/*/rk/
 officelife.media##.a-brand
 myip.ru##.copy
-thereminder.ru,fishki.net,kinomonitor.ru,pics-money.ru,webmasters.ru,myip.ru##.promo
+telesputnik.ru,thereminder.ru,fishki.net,kinomonitor.ru,pics-money.ru,webmasters.ru,myip.ru##.promo
 ||img.viewevo.net/advert/
 animedub.ru##.rolicve
 balator.info##td > center > a[href] > img
@@ -9668,7 +9667,6 @@ nsp.ru##app-article-banner
 lennytab.com##label[style^="color:white;position:fixed;"]
 popcornnews.ru##div[style="padding: 20px 0; background-color: #f4f4f4;"]
 ||the-hole.tv/ads?
-flicksbar.info,flicksbar.fun,flicksbar.top##.topAdPad
 ||torrent-mass.ru/dow.png
 torontovka.com##.header-partnership
 torontovka.com##tor-banner-block
@@ -11236,7 +11234,6 @@ cadelta.ru,zaxid.net##[class^="adv-"]
 7days.ru##div[id^="float_video_"]
 ||cdn.7days.ru/*/meladze_*.mp4
 kokobums.com,kokobumbum.com##td[width="360"]
-||fapality.com/assets/script.js
 360tv.ru##.line_item__commercial
 360tv.ru##body .commercial_wrapper
 diletant.media##.sidebar-banner-wrap
@@ -12086,7 +12083,6 @@ rick-and-morty.online##.td-all-devices
 magcity74.ru##a[href^="/go/?bid="] > img
 femmie.ru##.td-crumb-container
 poli-vsp.ru##div.pum[id^="pum-"]
-fapality.com##.fluid-b
 ||yastatic.net/taxi-widget/
 ||kursovik.kz^$domain=uniongang.org
 basicweb.ru##.g_advert
@@ -12218,8 +12214,6 @@ charivne.info##aside > div[style="margin-bottom:20px;"] > a[target="_blank"] > i
 charivne.info##.main-content > div[class] > div[style="margin-bottom:20px;"] > img
 kickz4u.ru##.footer-link-ban
 anilibria.org.ru,iss.ink,anilib.one,anilib.moe,anilibria.iss.one,anilibria.cf,anilib.top,anilibria.tv,komkur.info###adv_block
-||media-polesye.by/banners/
-media-polesye.by##div#block-block-15
 maximonline.ru##div.creative-wrapper
 ||volyn.tabloyid.com/upload/other/$image
 ||ecigtalk.ru/api/in.php?js
@@ -17595,6 +17589,7 @@ ozon.ru##img[elementtiming*="Banner"]
 ||2gis.*/ads/advise/
 2gis.*##span[class]:contains(/[Рр]еклама/)
 ! pikabu.ru
+pikabu.ru##.b-page-story__bf-cmments > header.story__header + div.story__user
 pikabu.ru#?#.stories-feed__container > article.story:has(> div.story__main a[href^="/information/specials"])
 pikabu.ru#?#.stories-feed__container > article:has(> div.story__placeholder)
 pikabu.ru#?#aside > div.sidebar-block:has(> :not(div):not(a):not(script)[id])

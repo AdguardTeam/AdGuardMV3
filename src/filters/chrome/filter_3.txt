@@ -1,9 +1,9 @@
-! Checksum: kc1vydCLhmjHqMb7zGmGtQ
-! Diff-Path: ../patches/3/3-s-1713191633-3600.patch
+! Checksum: mev3kgKPIUNzPidek4XsYw
+! Diff-Path: ../patches/3/3-s-1713386008-3600.patch
 ! Title: AdGuard Tracking Protection filter
 ! Description: The most comprehensive list of various online counters and web analytics tools. Use this filter if you do not want your actions on the Internet to be tracked.
-! Version: 2.0.68.79
-! TimeUpdated: 2024-04-15T14:31:28+00:00
+! Version: 2.0.68.88
+! TimeUpdated: 2024-04-17T20:31:20+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -104,6 +104,9 @@ spletnik.ru#%#//scriptlet('set-local-storage-item', '/^_ym/', '$remove$')
 spletnik.ru#%#//scriptlet('set-local-storage-item', 'adrcid', '$remove$')
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/150584
+nicovideo.jp#%#//scriptlet('prevent-fetch', 'stella.nicovideo.jp')
+nicovideo.jp#%#//scriptlet('prevent-xhr', 'stella.nicovideo.jp')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/175476
 pullandbear.com#%#//scriptlet('prevent-element-src-loading', 'script', 'widget.fitanalytics.com/widget.js')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/174672
@@ -566,6 +569,10 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 !
 !
 !
+||ebxcdn.com^$third-party
+||prod.uidapi.com^$third-party
+||fp-cdn.azureedge.net^
+||cdn.mircheigeshoa.com^
 ||analytics.oceanengine.com^
 ||tags.qortex.ai^$third-party
 ||analytics-ingestion.pbpms.de^
@@ -4392,6 +4399,7 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ! Blocking piwik analytics subdomain(for DNS filtering)
 |piwik.
 !
+||log.jd.com^
 ||tracker.myth.dev^
 ||metrics.baitoru.com^
 ||log.dpa.com^
@@ -79809,12 +79817,15 @@ zmail.neolab.ubilab.me$image
 !
 /track.gif?t=
 /track/impressions?
+/dfm/fp.min.js
 /smi/fp.min.js
 /wp-content/plugins/google-analytics-for-wordpress/*
 /px.gif?
 /com.snowplowanalytics.$domain=~snowplowanalytics.com
 .com.br/tracking.set^|
 .com.br/cliente/trackRemote^|
+! G2Analytics
+/prod/dfm/g2i.min.js
 ! BlueConic
 ||blue.*.com/script.js|$~third-party
 ! jentis.com tracker
@@ -80423,6 +80434,11 @@ _tracking.php?b=
 /analytics.js$domain=tokyometro.jp|resumes.breakdownexpress.com|techcult.com|inbox.lv|kopeda.com|freexcafe.com|rusvideos.tv|nakubani.ru|lun.com|songsara.net|newsmax.com|bolgehastanesi.com|ewtc.de|newsdig.tbs.co.jp|imore.com|city.kushiro.lg.jp|emeraldbridal.com.au|emarat-news.ae|imobie.jp|tikla.com.tr|rusvideos.porn|jrkyushu.co.jp|amiunique.org|edit.ing|konami.com
 ||assets.adobedtm.com^$domain=mcclatchydc.com|elnuevoherald.com|bellinghamherald.com|sacbee.com|charlotteobserver.com|newsobserver.com|miamiherald.com|ef.ru|algida.com.tr|bmw-motorrad.co.uk|cif.com.tr|clearhaircare.com|domestos.com|dove.com|elidor.com.tr|f1sport.autorevue.cz|geico.com|hellmanns.com.tr|herkessofraya.com|johnsonsbaby.com.tr|lipton.com|lnk.to|lux.com|magnumicecream.com|neutrogena.com.tr|omo.com|rexona.com|samsung.com|sap.com|schwarzkopf.com.tr|signalturkiye.com|msnbc.com|nbcnews.com|kbb.com|eurosport.ru|timgate.it|intermiles.com|oxfordmail.co.uk|spiegel.de|hp.com|deutschepost.de|thebay.com|s.shufoo.net|tsn.ca|tabelog.com|euronews.com|newshub.co.nz|fredmeyer.com|viabcp.com|carsales.com.au|falabella.com|aarp.org|thehill.com|realtor.com|nzherald.co.nz|aia.com.ph|baynews9.com|thesaurus.com|dhc.co.jp|0101.co.jp|staples.com
 !
+||mercury.jd.com/log.gif
+||classy-online.jp/wp-content/plugins/wp-associate-post-r2/js/click-tracking.js
+||api.everyeye.it/endpoint/stats.php
+||api.watcher.guru/ads/trackClickout
+||withnews.jp/assets/js/bcon.js
 ||eropuru.com/plugin/tracking/
 tv2.no##.article-recommended
 ||vipbox.*/pge=
@@ -80674,6 +80690,7 @@ thehindu.com###sectiondivicymi
 ||p.typekit.net/p.gif
 ||merkur.de/bi/dev/
 ||merkur.de/bi/doop/
+||hna.de/bi/doop/
 ||game-i.daa.jp/skin/analytics.php
 ||game-i.daa.jp/skin/jquery.iframetracker.min.js
 ||dropbox.com/pithos/*ux_analytics$script
@@ -86003,6 +86020,7 @@ inapps.appsflyersdk.com^
 !
 ! NOTE: Regular rules
 !
+||app-analytics-services.com^
 ||sg.log.ulivetv.net^
 ||kr-col-ext.nelo.navercorp.com^
 ||events.funnelish.com^
@@ -86763,6 +86781,8 @@ inapps.appsflyersdk.com^
 ! For platforms which do not support $redirect rules
 !
 !
+! https://twitter.com/nanikanokami/status/1780539987752264039
+@@||googletagmanager.com/gtm.js$domain=nanikanokami.github.io
 ! https://github.com/easylist/easylist/commit/0fb837521ba8042c4635d9cbe2aff2c1293eafb6
 @@||cxense.com/cx.js$domain=str.toyokeizai.net
 @@||cxpublic.com/ToyoKeizai.js$domain=str.toyokeizai.net
