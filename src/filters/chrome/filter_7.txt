@@ -1,9 +1,9 @@
-! Checksum: OI97ygkqKpOw9FLApMb9JA
-! Diff-Path: ../patches/7/7-s-1713414821-3600.patch
+! Checksum: u3fG2kX31MsSM8JnnX9/vg
+! Diff-Path: ../patches/7/7-s-1713684803-3600.patch
 ! Title: AdGuard Japanese filter
 ! Description: Filter that enables ad blocking on websites in Japanese language.
-! Version: 2.0.50.64
-! TimeUpdated: 2024-04-18T04:31:32+00:00
+! Version: 2.0.50.73
+! TimeUpdated: 2024-04-21T07:31:30+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -92,6 +92,8 @@
 ! not for DNS
 ||ias.rakuten.co.jp^$third-party,domain=~rakuten-co.jp
 !
+||bance.jp^
+||appdraft.link^$third-party
 ||ad.adpon-affi.net^$third-party
 ||lmadps.jp^$third-party
 ||bibincom.com^$third-party
@@ -1501,6 +1503,7 @@ hostlove.com#$##index_nav > h1 { padding-top: 30px!important; }
 /wp-content/themes/CashLINESystem/js/modal.$script
 !
 ! Malware/Phishing
+://www.smbc-card-co.jp.*.com/reg/login$document
 .life/shopping/item/m*/$document
 ||amazonaws.com/*.denied/%*/index*.html$document
 .php?nbVVVsa^$document
@@ -1690,6 +1693,11 @@ gundamlog.com###more > iframe[src^="https://richlink.blogsys.jp"]
 !
 !
 !
+fanblogs.jp##div[class$="ody"] > div.text > table[cellpadding="0"][cellspacing="0"][border="0"][style=" border:1px solid #ccc; width:300px;"]:not([class])
+famitsu.com##.banner-center
+famitsu.com##div[class^="ArticleDetailBanner_container_"]
+famitsu.com##div[class^="HalfPageBottomOrLargeRectangle_container_"]
+famitsu.com##div[class^="TopHeaderBanner_wrapper_"]
 adacomi.com##div[style^="margin-top:50px;background-color:#FFF;padding:20px;"]
 ||10s.link/iframe/
 uchubiz.com###RECT
@@ -1704,6 +1712,7 @@ bipblog.com##.main_center_body_text div[align="center"]:has(> a[href^="https://a
 j-baseball.club##.ad-space-top-footer
 j-baseball.club##.ad-space-top-header
 blog.janjan.net##.entry-content > p.has-text-align-center
+nan-net.com##.thread_body > div[style^="margin-top:50px;background-color:#FFF;"]
 nan-net.com##iframe[id^="bottomad"]
 nan-net.com###middleadv-nex
 nan-net.com##a[href^="https://nosports-nofoul.tokyo/"]
@@ -1723,7 +1732,7 @@ toririnon.com##.box2:has(> p > a[href^="https://hb.afl.rakuten.co.jp/"])
 ichi-oshi.jp##.adsence_sp
 maikuranikki.jp##.more-ad-title
 maikuranikki.jp##.kanren-under-ad-title
-nan-net.com##iframe[src*="/inc/footadv_s_in/"]
+nan-net.com##iframe[src*="/bbs/inc/"]
 nan-net.com##.bottom_aff
 nan-net.com###b_frame > #bottom_neta_list + a > div[style]
 ||1rankup.jp/floating-ads.js
@@ -1898,7 +1907,7 @@ mysterynavi.com,puzzcore.com###main-content > p.semihide
 puzzcore.com###navi-r > div[style="margin-left:15px;"]:not([class])
 puzzcore.com###relatedItem
 puzzcore.com##.TRelatedItem
-||nan-net.com/show/bbs/inc/$subdocument
+||nan-net.com/*/bbs/inc/$subdocument
 nan-net.com##iframe[src="/show/bbs/s/inc/footadv_s_in/"]
 erodoganomori.net##.entry-content > div[style="margin-bottom:10px"] > a[href^="https://al.dmm.co.jp"]
 erodoganomori.net##.entry-content > h2:has(+ p + div[style="margin-bottom:10px"])
@@ -5280,6 +5289,7 @@ i-bbs.sijex.net##span[style="display:block;margin:5px 0 0 0;padding:0;text-align
 ||caribbeancom.com^$domain=mozakin.com
 ||heyzo.com^$domain=mozakin.com
 ||pacopacomama.com^$domain=mozakin.com
+||mozakin.com/v4/data/pcad.js
 ||mozakin.com/ad/
 ||mozakin.com/auto_updater/nls/
 ||mozakin.com/js/movie.js
@@ -5293,6 +5303,9 @@ mozakin.com###dti_movie
 mozakin.com##.adbd[style^="background-color: rgb(255, 0, 96); color: white; text-align: center"]
 mozakin.com##div[style="height: 300px;"]
 mozakin.com##div[style="height: 840px; padding: 6px; margin: 0px 0px 16px;"]
+bbs4.mozakin.com##div[style="margin-left: -1px; font-size: 0px; overflow: hidden; width: 200px; border: 1px solid gray; height: 64px;"]
+bbs4.mozakin.com##div[style="width: 400px; height: 720px; margin-top: 30px;"]
+bbs4.mozakin.com##.hey_video
 bbs4.mozakin.com###dtiovervideo
 bbs4.mozakin.com###left_ad_body
 bbs4.mozakin.com###thread_index_adb > div[style]:not(.btn)
@@ -5300,7 +5313,7 @@ bbs4.mozakin.com###thread_index_adt > div[style]:not(.btn)
 bbs4.mozakin.com###trend_pain
 bbs4.mozakin.com##.trend_body > div:first-child
 bbs4.mozakin.com##.trend_body div[style^="background-color: black; overflow: hidden; color: white"]
-bbs4.mozakin.com##.txtad
+nagasaki-np.co.jp,bbs4.mozakin.com##.txtad
 bbs4.mozakin.com##body > div[style^="z-index: 105; position: fixed"]
 sasatto.jp##.rectangle300
 sasatto.jp##div[style="font-size: 0.4em;background: repeating-linear-gradient(57deg, #fff, #fff 4px, #f5f5f5 5px, #f5f5f5 8px);color: #666666"]
@@ -5524,7 +5537,6 @@ theav.xyz##.c307ad
 .gif$domain=theav.xyz,third-party
 zabuu.site##.ads_za
 seikyouiku-illust.com##.c-sponsorbanner
-||s.famitsu.com/ssi/*/amazon_ranking/amp-iframe/top_selling_product.html
 famitsu.com##amp-iframe[width="382"][height="700"]
 famitsu.com##.article-ads__heading
 ero-kawa.com###main2_footer-ad-bottom
@@ -7508,6 +7520,7 @@ tvlife.jp##.ad > ul[style="list-style:none;font-size:12px"]
 tvlife.jp##.for-pc[style="text-align: center;margin: 10px auto 20px;"]
 tvlife.jp###tvl_pc_article_footer[style="width: 728px; height: 90px;"]
 tvlife.jp##div[id^="tvl_pc_all_"]
+dengekionline.com##div[class^="TopHeaderBanner_wrapper_"]
 dengekionline.com##.gBody_col-right > div.gMovBox
 dengekionline.com##.gAdBanner:not(.gSideSticky > div.gAdBanner)
 dengekionline.com##div[id^="dol_all_"]
@@ -10311,6 +10324,8 @@ adguard.info,adguard.com,adguard.app##.hello_from_adguard_ext
 !
 !
 !
+! unable to move
+@@||impact-ad.jp/fh/showad_$script,domain=famitsu.com
 ! https://twitter.com/_webgoto/status/1779190832840753612
 [$path=/amafav/]service.webgoto.net#@$#.image_box[style*="amazon.co"] { background: none !important; }
 [$path=/amafav/]service.webgoto.net#@#a[href^="https://www.amazon.co.jp"][target="_blank"]
@@ -10712,8 +10727,11 @@ netmile.co.jp#@#.ad-txt
 @@||afi-b.com/assets/dist/img/general/top/img/ad/$image,~third-party
 @@||afi-b.com/assets/img/general/common/$image,domain=affiliate-b.com
 ! FP by EasyList generic cosmetic rules
+1sshindo.com,akashi-kodomo-zaidan.jp,alps-beauty-salon.com,art-green.co.jp,ascon-blast.co.jp,bees-garden.jp,bellys.jp,betsukawa.co.jp,chuo-hp.jp,courier.co.jp,e-shinwa.com,echo-gr.co.jp,echo-kensetu.jp,ecsatonoie.jp,edel-support.com,ex-daito.jp,familykanko.co.jp,friends-animal.com,fuji-sho.jp,fukukanren.jp,fujiidera-gojokai.or.jp,ganeza-toyama.jp,ginga-clinic.com,ginganosato.com,gms.or.jp,guidepost.co.jp,hairplace-patio.com,hairsalon-duo.com,hakuaikai-kitakami.or.jp,hanamaki-fureai.jp,handinhandjp.com,harayamadai-kg.jp,heiseidensetsu.co.jp,hello-work.co.jp,hogaraka.gr.jp,hongakuji.jp,icd-connect.co.jp,ichinohe-hp.com,ikiiki.toyama.jp,ims-kt.co.jp,isawa-hp.com,isawabunso.com,kaigowakouwa.jp,kekkangeka.com,ken6-fudousan.co.jp,kennan-crane.co.jp,kitakami-node.co.jp,kitakamicity.jp,kk-haruna.co.jp,kogane.or.jp,kumedakango.jp,kuramoto-sekizai.com,kyoyu-k.co.jp,marineworld-tanabe.com,maxelevator.com,mcp79.com,media-pc.co.jp,mfutaba.jp,mitosan.co.jp,mizusawarikuso.com,modern-h.jp,momiki-express.co.jp,momokuri.co.jp,nisseijushi.co.jp,nittofunka.co.jp,okameshouten.jp,olliemagic.com,osanais.co.jp,porco-blu.com,rfj.co.jp,rokuhara.co.jp,sakitamas.com,sento-sakai.co.jp,sfv.co.jp,shikokuyanehan.sakura.ne.jp,shimura-geo.co.jp,shinko.main.jp,sinkyu-c.jp,site-jobyellnet.main.jp,skn-fc.jp,spec-com.co.jp,stove-chijo.com,sugawa-mokko.jp,suzukireform.jp,syahokyo-saga.or.jp,t-suiko.jp,taiyo-valve.co.jp,takaidahoikuen.jp,takasaki-shika.com,takatagumi.co.jp,technobell.co.jp,tenmashatai.com,tiara-y.jp,tohoku-juken.co.jp,tohokuseimitsu.co.jp,totalsupport-kitakami.com,tsc.co.jp,twinklesnow.com,umenohisagi.jp,urban-karuizawa.co.jp,yagate1.co.jp,yamashitajari.com,yokosawa.jp,yonoyouchien.jp,yuhki-elec.co.jp,yuimarl-kids.jp,yumekoumuten.com#@##footer_ad
+3faithsdjschool.com,3plmnt.co.jp,abuto-kankou.co.jp,aigato.jp,akihabara-eye.com,alpenhaime.gr.jp,alpha-eng.jp,andocl.jp,anshinhome.co.jp,aoclinic.jp,appreco.com,biz-point.jp,btktool.co.jp,bodymake-onix.co.jp,carrier-agency.com,ch-matsumoto.jp,chikushi-410.com,co-nagayama.co.jp,cohaco.jp,dai2aikoen.jp,dw-clinic.jp,enemix.jp,enomoto-c.com,finns.jp,flair.co.jp,flexs.co.jp,foresight-1998.co.jp,fujimidai-hifuka.jp,fukamachitakkyu.com,goro-bei.com,gozamisaki.com,herb-teien.com,higashin-ls.co.jp,himawari-clinic.com,hkcg.co.jp,hokkaido-nomad.co.jp,htk-kobechuo.jp,iida-dent.jp,integration.ne.jp,ishikawa-doc.com,itawarinoyu.jp,iwasaki-clinic.jp,izumi3.com,j-sonic.co.jp,japan-quartzclub.com,jashoteltakayama.jp,jdc-kaigyousien.jp,kaidentalclinic.jp,kakiemon.co.jp,kameman.co.jp,katekin.com,kenbunkai-yamaguchi.jp,kitaoku.jp,kiyotaclinic.or.jp,kobayashi-eyeclinic.jp,kotoridc.jp,kouden-s.jp,kusatsu-law.jp,kyoai.or.jp,kyowa-tekko.jp,lanai-beauty.com,lightup-garage.com,m-publicgolf.com,m-shika.jp,maff.go.jp,magome-eye.jp,manaao-kitchen.but.jp,manaao-kitchen.com,manabe-ortho.or.jp,marineplaza.co.jp,marushime21.jp,me-cell.jp,megumi-jyosanin.com,metal-model.com,mikawapropeller.co.jp,mikielectric.co.jp,minami-ise.jp,miyazu-matsukaze.jp,mizuiwa-un.co.jp,mj-pro.jp,mkc6.com,mohara-clinic.jp,nakaod.com,nakase-dc.jp,nanjyoen.com,nikunotoriko.co.jp,nnbs.co.jp,nousui-shop.com,okamoto-fdc.jp,okayamanavi.jp,okudaganka.jp,omoiyari-edu.jp,onsinkai.jp,picring.co.jp,plateck.jp,rikkyo-dps.com,rousai-kenkyujyo.co.jp,ruhe-mental.jp,s-gp.co.jp,s-shizai.jp,saipri.com,saizenji.or.jp,sakataengei.jp,sakoken.co.jp,sanadayamashika.jp,sanchang.co.jp,sapporocity-law.jp,satsumacon.co.jp,sec-architects.com,seinankaihatsu.co.jp,shibusaki.co.jp,shineiengineer.co.jp,shinritsu.com,shizuokakenro.jp,sosus.jp,southluck.co.jp,sweet-nurse.ne.jp,t-mclinic.jp,t-u-advance.jp,tairyouen.com,takara-pd.co.jp,takei-kogyo.jp,talknet.jp,tnk-koei.co.jp,tokyowest-ah.jp,tonakbuque.co.jp,tousyo-k.co.jp,tsurukawadai.jp,ug-home.co.jp,vario.jp,volleyball-u.jp,w-dc.jp,wazumi.jp,wic-life.com,yamadakaki.jp,yamahana-ds.com,yamanogaku.com,yokohama-kenshu.jp,yokoyamaseikotsuin.jp,yotsuba-sapporo.com,yuukaen.jp#@#.footer_ad
+takaidahoikuen.jp#@##top_ad
 kininaru-geinou-m.blog.jp#@#.ads01
-fet.co.jp,takken-k.co.jp,zanmai.co.jp#@#.ad_box
+echo-gr.co.jp,echo-kensetu.jp,fujiidera-gojokai.or.jp,fet.co.jp,takken-k.co.jp,zanmai.co.jp#@#.ad_box
 pcinformation.info#@#a[href^="https://click.linksynergy.com/fs-bin/"]
 mamastar.jp#@#.adstop
 ironsaga-msoku.xyz,takushoku.info#@#.ad.widget

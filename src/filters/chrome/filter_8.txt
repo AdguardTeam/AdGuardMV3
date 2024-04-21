@@ -1,9 +1,9 @@
-! Checksum: ZVMKgQDWbbfZ2J6Y11R04A
-! Diff-Path: ../patches/8/8-s-1713375215-3600.patch
+! Checksum: 4rtD5VCtkzGFerqxrfQFQQ
+! Diff-Path: ../patches/8/8-s-1713515647-3600.patch
 ! Title: AdGuard Dutch filter
 ! Description: EasyList Dutch + AdGuard Dutch filter. Filter list that specifically removes ads on websites in Dutch language.
-! Version: 2.0.6.57
-! TimeUpdated: 2024-04-17T17:31:35+00:00
+! Version: 2.0.6.60
+! TimeUpdated: 2024-04-19T08:31:44+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1049,6 +1049,7 @@ twentefans.nl##.powered-by-footer
 fhm500.nl##.powered_by_page
 fhm500.nl##.powered_by_profile
 marktplaats.nl##.premium-content
+blokker.nl##.product-tile__column--criteo
 fhm500.nl##.profileh_tabac
 dtvnieuws.nl,omroephorstaandemaas.nl,omroepvenlo.nl,roulettefm.nl,rtvstichtsevecht.nl,wos.nl##.prom
 openingsurengids.be##.promSB
@@ -1317,6 +1318,8 @@ feijenoordnieuws.nl##.cv-table-left > a:not([target="_blank"]):not([rel="nofollo
 autobahn.eu#?#.d-none.d-md-block.mb-3:-abp-has(a[target="_blank"][rel="noopener"])
 buienradar.nl#?#.linklist:-abp-has(h1:-abp-contains(Lekker Dichtbij Deals))
 businessinsider.nl#?#.widget_custom_html:-abp-has(h2:-abp-contains(Beter Beleggen))
+fonq.nl#?#[data-cy="plp-tile-container"]:-abp-contains(Gesponsord)
+fonq.nl#?#li:-abp-contains(Gesponsord)
 geenstijl.nl#?#.article.row.no-image:-abp-has(.row.compost-warn:-abp-contains(- ingezonden mededeling -))
 linda.nl#?#.article-column_article:-abp-has(.category-label_label:-abp-contains(Advertorial))
 linda.nl#?#.article-row_article:-abp-has(.article-row_category.category-label_label:-abp-contains(Advertorial))
@@ -1550,6 +1553,8 @@ omroepwest.nl#$#.adcontainer-Rectangle { position: absolute!important; left: -40
 ! Good: example.org###rek; ||example.com/ads/
 ! Bad: example.org#@##banner_ad (for instance, should be in allowlist.txt or in antiadblock.txt)
 !
+||cdn.aa.onstuimig.nl/mega-publishers/nieuwspaal.nl.js
+nieuwspaal.nl###abovecontent-widget-area
 wielerrevue.nl###WB_VIDEO_PLAYER_TARGET
 wielerrevue.nl###WB_VIDEO_PLAYER_TARGET + p > em
 iphoned.nl##div[data-name="dynamic-content-injected"][data-campaign]
@@ -1765,6 +1770,8 @@ adguard.info,adguard.com,adguard.app##.hello_from_adguard_ext
 ! Good: example.org#@#.ad
 ! Bad:  @@||example.org^$stealth (should be in AdGuard Base - allowlist_stealth.txt)
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/177361
+marktnet.nl#@#.ad-description
 ! https://github.com/AdguardTeam/AdguardFilters/issues/165229
 @@||mmcdn.nl/tags/vkmag.com/
 ! https://github.com/AdguardTeam/AdguardFilters/issues/131712

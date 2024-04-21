@@ -1,9 +1,9 @@
-! Checksum: xdRE0KSWz5uwWf0rEwulUA
-! Diff-Path: ../patches/1/1-s-1713357215-3600.patch
+! Checksum: Xtg2Tzy9amCspykxumEloA
+! Diff-Path: ../patches/1/1-s-1713616423-3600.patch
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.90.23
-! TimeUpdated: 2024-04-17T12:31:04+00:00
+! Version: 2.0.90.27
+! TimeUpdated: 2024-04-20T12:31:00+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1539,7 +1539,7 @@ ucoz.ru/informer/
 ||dpjrba.com^
 ||appcodedark.com^
 ||appcodepnik^
-||flyroll.ru^
+||flyroll.ru^$third-party
 ||adstreamer.ru^$third-party
 ||videohead.tech^
 ||openssp.ru^
@@ -5692,6 +5692,8 @@ liveinternet.ru#%#Element.prototype.attachShadow = function(){};
 !-------JS----------
 !-------------------
 !
+! prevent ad requests
+aniqit.com#%#//scriptlet('json-prune', 'vast')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/154442
 ain.ua#%#//scriptlet('abort-current-inline-script', 'jQuery', 'link_br')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/96330
@@ -6118,6 +6120,8 @@ disk.yandex.*#%#//scriptlet('remove-class', 'has-fullscreen-banner','.public__ro
 !------- CSS -----------
 !-----------------------
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/177346
+seasonvar.one#$#.wrapper { margin-top: 0 !important; }
 ! top padding
 cyber.sports.ru#$##branding-layout { padding-top: 0 !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/176035
@@ -7392,6 +7396,7 @@ $script,third-party,denyallow=rsc.cdn77.org|linkvertise.com|fastly.net|staticall
 !
 !
 !
+reform.news###custom_html-8
 ||krotovroman.ru/robanner/
 itc.ua##body > div[style^="text-align"][style*="bgcolor: #000000;"]
 itc.ua##.post-txt > p.intro:has(> a[href^="https://fav.bet/"])
@@ -18611,6 +18616,7 @@ adme.media##div[data-test-id="article-content"] > div[class*=" "]:not([tabindex]
 adme.media#?#div[data-test-id="article-bottom-recommended"] > div > div > div[style="position:relative"] > div > div:has(div:empty + div:empty + div:empty)
 !
 ! Start: vc.ru, dtf.ru, spark.ru
+vc.ru##.entry-rotator
 vc.ru##.dstr-fl
 dtf.ru##.supbar--top
 dtf.ru,vc.ru##.propaganda
