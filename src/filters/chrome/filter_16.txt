@@ -1,9 +1,9 @@
-! Checksum: 8gYabJWJvPAJk8ay//+x+Q
-! Diff-Path: ../patches/16/16-s-1713857626-3600.patch
+! Checksum: Phh45W+q1UPubgdsHrdPRg
+! Diff-Path: ../patches/16/16-s-1714026805-3600.patch
 ! Title: AdGuard French filter
 ! Description: Liste FR + AdGuard French filter. Filter list that specifically removes ads on websites in French language.
-! Version: 2.0.44.60
-! TimeUpdated: 2024-04-23T07:31:54+00:00
+! Version: 2.0.44.64
+! TimeUpdated: 2024-04-25T06:31:53+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -619,6 +619,8 @@ tf1.fr,tf1info.fr#%#//scriptlet('prevent-fetch', '/^https:\/\/ads\.stickyadstv\.
 !------- JS rules ---------------------!
 !--------------------------------------!
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/177510
+justarrived.lu#%#//scriptlet('set-constant', 'advanced_ads_ready', 'noopFunc')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/172432
 magicmaman.com#%#//scriptlet('adjust-setTimeout', 'userConsentProcessEnded', '*', '0.001')
 ! https://github.com/uBlockOrigin/uAssets/issues/22307
@@ -834,6 +836,9 @@ $script,third-party,denyallow=rsc.cdn77.org|linkvertise.com|fastly.net|staticall
 !
 !
 !
+justarrived.lu##div[id^="laure-"]
+numerama.com##.is-capitalist-tyrannosaurus
+eurosport.fr##div[data-testid="ad-organism"]
 radio-canada.ca##div[class*="bg-gray"]:has(> div[class*=" "]:only-child > div[data-adtype])
 lesmoutonsrebelles.com##div[class^="code-block code-block-"][style^="margin: 8px 0;"]
 750g.com##.ads-pholder
@@ -1552,6 +1557,9 @@ app.molotov.tv#%#//scriptlet('prevent-xhr', '/ping?token=')
 !
 !
 !
+! vtbe.to - incorrect blocking, video player is broken
+$script,third-party,domain=vtbe.to,badfilter
+$third-party,xmlhttprequest,domain=vtbe.to,badfilter
 ! https://github.com/AdguardTeam/AdguardFilters/issues/176828
 $script,third-party,domain=cam4.com,badfilter
 ! https://github.com/AdguardTeam/AdguardFilters/issues/176408

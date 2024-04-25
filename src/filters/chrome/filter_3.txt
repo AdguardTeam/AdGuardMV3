@@ -1,9 +1,9 @@
-! Checksum: hGCNNC1MF3jvhqEddQavmg
-! Diff-Path: ../patches/3/3-s-1713807229-3600.patch
+! Checksum: 1IjwwjESpTTiwmvJyM39Gg
+! Diff-Path: ../patches/3/3-s-1714023212-3600.patch
 ! Title: AdGuard Tracking Protection filter
 ! Description: The most comprehensive list of various online counters and web analytics tools. Use this filter if you do not want your actions on the Internet to be tracked.
-! Version: 2.0.69.3
-! TimeUpdated: 2024-04-22T17:31:21+00:00
+! Version: 2.0.69.11
+! TimeUpdated: 2024-04-25T05:31:18+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -104,6 +104,8 @@ spletnik.ru#%#//scriptlet('set-local-storage-item', '/^_ym/', '$remove$')
 spletnik.ru#%#//scriptlet('set-local-storage-item', 'adrcid', '$remove$')
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/177870
+mwed.jp#%#//scriptlet('abort-current-inline-script', 'document.createElement', 'keen-tracking')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/150584
 nicovideo.jp#%#//scriptlet('prevent-fetch', 'stella.nicovideo.jp')
 nicovideo.jp#%#//scriptlet('prevent-xhr', 'stella.nicovideo.jp')
@@ -566,6 +568,7 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 !
 !
 !
+||collector*.ex.co^
 ||cdn.sov.stream^
 ||programmatica.com^$third-party
 ||stats.rip^
@@ -606,7 +609,6 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ||botfaqtor.ru^$third-party
 ||leady.com^$third-party
 ||hscollectedforms.net^
-||m.stripe.com^$third-party
 ||log.dance^
 ||adx.promo^
 ||trk.decido.io^
@@ -4426,6 +4428,10 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ! Blocking piwik analytics subdomain(for DNS filtering)
 |piwik.
 !
+||c615.denverpost.com^
+||newsstat.dallasnews.com^
+||e.channelexco.com^
+||y.one.impact-ad.jp^
 ||analytics.languagetoolplus.com^
 ||ubt.tracking.shopee.
 ||log.classting.com^
@@ -72142,8 +72148,10 @@ zmail.neolab.ubilab.me$image
 .com.br/tracking.set^|
 .com.br/cliente/trackRemote^|
 ! G2Analytics
+/prod/dfm/t8y9347t.min.js
 /prod/dfm/g2i.min.js
 ! BlueConic
+/DG/DEFAULT/rest/rpc/
 ||blue.*.com/script.js|$~third-party
 ! jentis.com tracker
 /get/*/live/_/jts.js
@@ -72751,6 +72759,12 @@ _tracking.php?b=
 /analytics.js$domain=tokyometro.jp|resumes.breakdownexpress.com|techcult.com|inbox.lv|kopeda.com|freexcafe.com|rusvideos.tv|nakubani.ru|lun.com|songsara.net|newsmax.com|bolgehastanesi.com|ewtc.de|newsdig.tbs.co.jp|imore.com|city.kushiro.lg.jp|emeraldbridal.com.au|emarat-news.ae|imobie.jp|tikla.com.tr|rusvideos.porn|jrkyushu.co.jp|amiunique.org|edit.ing|konami.com
 ||assets.adobedtm.com^$domain=mcclatchydc.com|elnuevoherald.com|bellinghamherald.com|sacbee.com|charlotteobserver.com|newsobserver.com|miamiherald.com|ef.ru|algida.com.tr|bmw-motorrad.co.uk|cif.com.tr|clearhaircare.com|domestos.com|dove.com|elidor.com.tr|f1sport.autorevue.cz|geico.com|hellmanns.com.tr|herkessofraya.com|johnsonsbaby.com.tr|lipton.com|lnk.to|lux.com|magnumicecream.com|neutrogena.com.tr|omo.com|rexona.com|samsung.com|sap.com|schwarzkopf.com.tr|signalturkiye.com|msnbc.com|nbcnews.com|kbb.com|eurosport.ru|timgate.it|intermiles.com|oxfordmail.co.uk|spiegel.de|hp.com|deutschepost.de|thebay.com|s.shufoo.net|tsn.ca|tabelog.com|euronews.com|newshub.co.nz|fredmeyer.com|viabcp.com|carsales.com.au|falabella.com|aarp.org|thehill.com|realtor.com|nzherald.co.nz|aia.com.ph|baynews9.com|thesaurus.com|dhc.co.jp|0101.co.jp|staples.com
 !
+||mwed.jp/assets/packs/js/measurements/
+||numerama.com/plsbl/api/event
+||video-player.arcpublishing.com/beacon|
+||cbs12.com/api/rest/analytics/
+||myfinance.com/api/au/v*?imre=
+||unleash-proxy.wow.wrtn.ai/proxy/client/metrics
 ||show.revico.jp/api/reviewclick/add
 ||bitrix.info/bx_stat
 ||rd.com/wp-content/plugins/pup-comscore/
@@ -73797,7 +73811,6 @@ androplus.org##a[href^="https://px.a8.net/"]
 ||super.cz/*/track?
 ||super.cz/*/jquery?$image
 ||mozilla.org/media/js/firefox_new_pixel.
-||bc.thestreet.com/DG/DEFAULT/rest/
 ||tiebac.baidu.com/*/log/
 ||sopoe.cn/index.php/user/ajax_ulog/
 ||businessmirror.com.ph/wp-content/plugins/wp-analytify
@@ -75883,6 +75896,7 @@ znak.com##.relap
 ||doublepimp.com/Scripts/Analytics/
 ||hmma.baidu.com/app.gif
 ||common.duapps.com/appLock/getConf?tk*&vendor=
+||mypalmshop.de/website/stats.php
 dvdrev.com#?#.side_menu:has(> div > div.plugin-freearea > div.ninja-recommend-block)
 vivi.tv#?#.section__inner:has(> #recommended-posts-result)
 full-count.jp#?#.s-entry > section > div.c-heading:has(> div#taboola-below-article-thumbnails-desktop)
@@ -79109,6 +79123,8 @@ inapps.appsflyersdk.com^
 ! For platforms which do not support $redirect rules
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/177689
+@@||js.appboycdn.com/web-sdk/*/braze.min.js$domain=animates.co.nz
 ! https://service.smt.docomo.ne.jp/portal/fortune/src/column_list.html
 @@||googletagmanager.com/gtm.js$domain=service.smt.docomo.ne.jp
 @@||google-analytics.com/analytics.js$domain=service.smt.docomo.ne.jp
@@ -79337,6 +79353,8 @@ alternativeto.net#%#//scriptlet('prevent-element-src-loading', 'script', 'double
 @@||cdn.cxense.com/cx.cce.js$domain=lopinion.fr
 @@||cdn.cxense.com/cx.js$domain=lopinion.fr
 @@||api.cxense.com/public/widget/data?$domain=lopinion.fr
+! https://github.com/AdguardTeam/AdguardFilters/issues/177332
+@@||cdn.cxense.com/cx.js$domain=nikkansports.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/163143
 @@||googletagmanager.com/gtm.js$domain=store-jp.nintendo.com
 @@||cdn.optimizely.com/js/$script,domain=store-jp.nintendo.com
@@ -80048,10 +80066,13 @@ goodwillfinds.com#%#//scriptlet("set-constant", "_etmc", "emptyArr")
 @@||sephora-track.inside-graph.com/ig.js$domain=sephora.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/140678
 ! https://github.com/AdguardTeam/AdguardFilters/issues/117423
-@@||csm.cxpublic.com/Shueisha.js$domain=wpb.shueisha.co.jp
-@@||scdn.cxense.com/cx.cce.js$domain=wpb.shueisha.co.jp
+@@||csm.cxpublic.com/Shueisha.js$domain=wpb.shueisha.co.jp|sportiva.shueisha.co.jp
+@@||scdn.cxense.com/cx.cce.js$domain=wpb.shueisha.co.jp|sportiva.shueisha.co.jp
 @@||cxense.com/cx.js$domain=shueisha.co.jp
 @@||api.cxense.com/public/widget/data?json=$domain=shueisha.co.jp
+! https://github.com/AdguardTeam/AdguardFilters/issues/177378
+@@||googletagmanager.com/gtm.js$domain=sportiva.shueisha.co.jp
+@@||csm.cxpublic.com/Shueisha/domain/sportiva.shueisha.co.jp.js$domain=sportiva.shueisha.co.jp
 ! https://github.com/AdguardTeam/AdguardFilters/issues/117297
 @@||api.ipify.org/?format=jsonp&callback=getIP$domain=embedflix.net
 ! https://github.com/AdguardTeam/AdguardFilters/issues/116955
