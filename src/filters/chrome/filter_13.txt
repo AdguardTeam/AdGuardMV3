@@ -1,9 +1,9 @@
-! Checksum: FKqnxO+OYpepYZYcy7gpdQ
-! Diff-Path: ../patches/13/13-s-1713969236-3600.patch
+! Checksum: wSZ0oNvuEhyJFuQaMYCoRA
+! Diff-Path: ../patches/13/13-s-1714246424-3600.patch
 ! Title: AdGuard Turkish filter
 ! Description: Filter list that specifically removes ads on websites in Turkish language.
-! Version: 2.0.51.39
-! TimeUpdated: 2024-04-24T14:32:00+00:00
+! Version: 2.0.51.44
+! TimeUpdated: 2024-04-27T19:31:43+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -86,6 +86,7 @@
 ! Bad: ||adssubdomain.legitwebsite.com^ (should be in adservers_firstparty.txt)
 !
 !
+||gamescdnfor.com^
 ||sobreatsesuyp.com^
 ||kriptoparahaber.care^
 ||alty.fun^
@@ -551,6 +552,7 @@ otopark.com#%#//scriptlet("abort-current-inline-script", "$", "!document.getElem
 ! https://github.com/AdguardTeam/AdguardFilters/issues/159453
 ! https://github.com/AdguardTeam/AdguardFilters/issues/142450
 ! https://github.com/AdguardTeam/AdguardFilters/issues/88310
+@@||puhutv.com/banner-ad.png
 puhutv.com#%#//scriptlet("set-constant", "adBlockEnabled", "false")
 ||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,xmlhttprequest,redirect=googlesyndication-adsbygoogle,domain=puhutv.com
 ! TODO: remove hint when app for iOS/Safari extension will use scriptlets library version 1.9.57 or newer
@@ -1852,6 +1854,17 @@ $xmlhttprequest,third-party,denyallow=rsc.cdn77.org|linkvertise.com|fastly.net|s
 /service/advertchannels?$xmlhttprequest,redirect=nooptext,domain=mardinhaber.com.tr|gidahatti.com|bolugundem.com
 dirilispostasi.com,turkuazgazetesi.net,yenialanya.com,bugunkocaeli.com.tr,cagdaskocaeli.com.tr,mansetaydin.com,seskocaeli.com,kocaelibarisgazetesi.com,kocaelikoz.com,enkocaeli.com##.block-pano > div.us
 !
+justintvizlehd.xyz###ad-container
+justintvizlehd.xyz##a[href^="https://heylink.me/"]
+||bizlergeldikk.babalargeldii1.workers.dev/*/pop.js
+||bizlergeldikk.babalargeldii1.workers.dev/*/betmatik.mp4$redirect=noopmp4-1s
+justintvizlehd.xyz,bizlergeldikk.babalargeldii1.workers.dev##div[data-adv-link]
+justintvizlehd.xyz,bizlergeldikk.babalargeldii1.workers.dev##div[data-adv]
+||dizipal.org/wp-content/uploads/*/grand
+izlekolik.org#$?##preRollBd { remove: true; }
+izlekolik.org#%#//scriptlet('remove-attr', 'data-front', '#tv-spoox2')
+atarita.com###tdi_3
+atarita.com###tdi_31
 kultfilmler.com#%#//scriptlet('prevent-addEventListener', 'click', 'adLink')
 .mp4$media,redirect=noopmp4-1s,domain=kultfilmler.com
 kultfilmler.com###countdown
@@ -2409,7 +2422,7 @@ biliyo.org##div[style^="float:left;"][style$="min-width:336px;min-height:250px;"
 afroditscans.com###footer > p > span[style]
 ||trplayer.site/vast.php
 jetfilmizle.*##body > div[id] > [style^="position:fixed;inset:"][style*="z-index:"][style*="height:100%;width:100%"]
-hdfilmcehennemi2.de,720pizle.ai,diziroll.club,roketdizi.co,dizilla.club,yabancidizi.io,birasyadizi.com,goodfilmizle.com,zitinger11.cfd,zitinger5.cfd##a[href^="https://cutt.ly/"]
+justintvizlehd.xyz,hdfilmcehennemi2.de,720pizle.ai,diziroll.club,roketdizi.co,dizilla.club,yabancidizi.io,birasyadizi.com,goodfilmizle.com,zitinger11.cfd,zitinger5.cfd##a[href^="https://cutt.ly/"]
 anizm.net##div[style^="text-align: center;"] > a[target="_blank"]:not([href="https://anizm.net/"])
 tgrthaber.com.tr##div[id^="dfp-sidebar-"]
 tgrthaber.com.tr##div[style*="min-width: 300px;"][style*="min-height: 250px;"]
@@ -2573,7 +2586,7 @@ pusulagazetesi.com.tr###tdsAdContainer
 forum.donanimarsivi.com##.p-body-content > a[target="_blank"] > img
 forum.donanimarsivi.com##.p-body-sideNavContent > a[target="_blank"] > img
 ||donanimarsivi.com/wp-content/uploads/2022/12/da-forum-amd-banner-3.jpg
-indirmedenfilmizle.vip##center > a[target="_blank"]
+fullprogramlarindir.net,indirmedenfilmizle.vip##center > a[target="_blank"]
 ||cosmomedya.com/addserver/banners/
 cosmoturk.com##.rightBanners
 t24.com.tr##._3amny
@@ -2959,7 +2972,7 @@ sinepal.*##body .ads-skin
 galeri.uludagsozluk.com##.adulu_col-main-ulu
 galeri.uludagsozluk.com##body > div[style="display: flex; justify-content:center"]
 kamubulten.com##header > div[style="height: 300px;"]
-buyurindir.org##center a[onclick^="window.open("]
+fullprogramlarindir.net,buyurindir.org##center a[onclick*="window.open("]
 ||fullhd720pizle.live/f7/f7.php
 ||filmkuzusu1.com/pops5.js
 mynet.com##.ad-home-masthead-wrapper
