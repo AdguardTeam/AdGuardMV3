@@ -1,9 +1,9 @@
-! Checksum: d/2DAqGfx8+Nf9eUKmJJLQ
-! Diff-Path: ../patches/8/8-s-1714152811-3600.patch
+! Checksum: Tn04yPwVB2r7Sa/03GIDSg
+! Diff-Path: ../patches/8/8-s-1714404835-3600.patch
 ! Title: AdGuard Dutch filter
 ! Description: EasyList Dutch + AdGuard Dutch filter. Filter list that specifically removes ads on websites in Dutch language.
-! Version: 2.0.6.65
-! TimeUpdated: 2024-04-26T17:31:39+00:00
+! Version: 2.0.6.67
+! TimeUpdated: 2024-04-29T15:31:38+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -574,7 +574,7 @@ rtveen.nl###advertenties
 omroeppenm.nl,rickfm.nl###advertisement
 alle-tests.nl,bloovi.be###advertising
 agconnect.nl###ag_article_related_partner_logos
-volkskrant.nl###article_paragraph_3
+demorgen.be,parool.nl,trouw.nl,volkskrant.nl###article_paragraph_3
 ciaotutti.nl###b_searchboxInc
 belgiancycling.be,zoekhulp.nl###banner
 autowereld.nl###banner-detail-top
@@ -771,6 +771,7 @@ buzzbie.nl##.TS_Banner_Spot
 telegraaf.nl##.TextArticlePage__bannerWrapper
 telegraaf.nl##.VideoArticlePage__banner
 telegraaf.nl##.VideoPage__banner
+deondernemer.nl##.\-mb-10.box-content.flex.hidden.items-center.p-4.md\:mb-0.md\:flex.md\:min-h-25
 dartfreakz.nl,thehike.nl,zozwanger.nl##.a-single
 rtveen.nl##.aas_zone
 autozine.nl,beleggersbelangen.nl,besteproduct.nl,bright.nl,dumpert.nl,eurosport.nl,hetnieuwsvandaag.be,indebuurt.nl,koopplein.nl,letsgodigital.org,limburger.nl,persinfo.org,sport.be,tellows.nl,tradeidee.nl,tripadvisor.nl,voetbalnieuws.nl,voetbalprimeur.nl,wijlimburg.nl,xgn.nl##.ad
@@ -815,6 +816,7 @@ afkortingen.nu,agf.nl,bpnieuws.nl,dutchitchannel.nl,executive-people.nl,filmladd
 nieuwsuitnijmegen.nl##.banner-box-1
 speeleiland.nl##.banner-btf-side-rectangle
 feyenoord.nl##.banner-carousel
+sportnieuws.nl##.banner-centered
 deliciousmagazine.nl,fiets.nl,fietsactief.nl,knipmode.nl,rootsmagazine.nl,seasons.nl,truckstar.nl,vorsten.nl,zin.nl##.banner-container
 tvblik.nl##.banner-fluid
 prewarcar.nl##.banner-holder
@@ -1011,7 +1013,7 @@ nieuweoogst.nl##.logolinks-wrapper
 live-voetbal.com##.match-bet
 ga-eagles.nl##.match-sponsor
 mediacourant.nl##.mc-adv
-volkskrant.nl##.mid1-container
+demorgen.be,parool.nl,trouw.nl,volkskrant.nl##.mid1-container
 mijn-tv-gids.be##.midzone
 scholieren.com##.min-h-90
 wegdamnieuws.nl##.mk-sponsorlink
@@ -1145,6 +1147,7 @@ nu.nl##.tealium
 demorgen.be,volkskrant.nl##.teaser-branded
 nos.nl##.teletekst__banner
 startpagina.nl##.template-redesign-5-column-top-3-center-banner-outer
+deondernemer.nl##.text-center > .mt-2.box-content.flex.min-h-25.max-w-full.overflow-x-hidden.bg-background-1.p-4.md\:min-h-10
 netonline.be##.text_12_jobs_only
 meerdangewenst.nl##.tg-site-footer-section-1
 topgear.nl##.theme-advertorial
@@ -1154,7 +1157,7 @@ startpagina.nl##.top-banner
 willem-ii.nl##.top-bar-logos
 wijwedden.net##.top-bookmaker-widget
 live-voetbal.com##.top-match
-volkskrant.nl##.top1-container
+demorgen.be,parool.nl,trouw.nl,volkskrant.nl##.top1-container
 negerin.nl##.topban
 feyenoord.nl##.totoOdds
 chatmetvreemden.be,chatmetvreemden.nl##.trackerclick
@@ -1245,6 +1248,7 @@ hartvannederland.nl,shownieuws.nl,vandaaginside.nl##div[class*="-bannerTopWrappe
 hartvannederland.nl,shownieuws.nl,vandaaginside.nl##div[class*="-bannerWrapper-"]
 meteovista.be##div[class*="AdWrapper"]
 omroepbrabant.nl##div[class^="ad-"]
+deondernemer.nl##div[class^="adBlock_"]
 omroepbrabant.nl,reclamefolder.nl##div[class^="ad_"]
 zoom.nl##div[class^="display-ad_container"]
 klimaatinfo.nl##div[class^="space_"]
@@ -1405,6 +1409,8 @@ vakantieplaats.nl#@#.topAds
 @@||content.hwigroup.net/images^$domain=hardware.info
 hardware.info,tweakers.net#@#.AdBar
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/178088
+topkleurplaat.nl#%#//scriptlet('prevent-setTimeout', '.height() === 0')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/177923
 filmvandaag.nl#%#//scriptlet('prevent-fetch', 'securepubads.g.doubleclick.net')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/163031
@@ -1561,6 +1567,7 @@ omroepwest.nl#$#.adcontainer-Rectangle { position: absolute!important; left: -40
 ! Good: example.org###rek; ||example.com/ads/
 ! Bad: example.org#@##banner_ad (for instance, should be in allowlist.txt or in antiadblock.txt)
 !
+topkleurplaat.nl##a[href^="https://partner.bol.com/click/click"] > img
 ||cdn.aa.onstuimig.nl/mega-publishers/nieuwspaal.nl.js
 nieuwspaal.nl###abovecontent-widget-area
 wielerrevue.nl###WB_VIDEO_PLAYER_TARGET
