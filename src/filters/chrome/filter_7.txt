@@ -1,9 +1,9 @@
-! Checksum: Z8tj5JfR9MSz6VbbF4pDkw
-! Diff-Path: ../patches/7/7-s-1714412007-3600.patch
+! Checksum: ViXNfutcZ79ePZhxIm+JNw
+! Diff-Path: ../patches/7/7-s-1714635230-3600.patch
 ! Title: AdGuard Japanese filter
 ! Description: Filter that enables ad blocking on websites in Japanese language.
-! Version: 2.0.51.17
-! TimeUpdated: 2024-04-29T17:31:32+00:00
+! Version: 2.0.51.23
+! TimeUpdated: 2024-05-02T07:31:37+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -791,11 +791,7 @@ h-ken.net#%#//scriptlet('set-constant', 'adBlockDetected', 'noopFunc')
 coron.tech#%#//scriptlet('remove-attr', 'class', '[id][role] > [id] > [class] > section')
 connect.coron.tech#%#//scriptlet('abort-current-inline-script', 'jQuery', 'decodeURIComponent')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/52566
-ad-contents.jp#%#//scriptlet("prevent-addEventListener", "load", "ad blocker")
-!+ NOT_PLATFORM(ext_safari)
-ad-contents.jp#$#.ui-wrapper { display: block !important; }
-!+ NOT_PLATFORM(ext_safari)
-ad-contents.jp#$#.mid-rectangle { display: none !important; }
+@@||ad-contents.jp^$generichide
 ! https://github.com/AdguardTeam/AdguardFilters/issues/51076
 ||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,redirect=googlesyndication-adsbygoogle,domain=ap-siken.com|db-siken.com|fe-siken.com|itpassportsiken.com|nw-siken.com|pm-siken.com|sc-siken.com|sg-siken.com|fp1-siken.com|fp2-siken.com|fp3-siken.com
 fp1-siken.com,fp2-siken.com,fp3-siken.com,ap-siken.com,db-siken.com,fe-siken.com,itpassportsiken.com,nw-siken.com,pm-siken.com,sc-siken.com,sg-siken.com#%#//scriptlet('prevent-element-src-loading', 'script', 'adsbygoogle')
@@ -1705,6 +1701,8 @@ gundamlog.com###more > iframe[src^="https://richlink.blogsys.jp"]
 !
 !
 !
+mangarawjp.onl##.w-full > .text-center:has(ins.adsbygoogle)
+zaitaku100.kokuyo.co.jp##.l_floatingbanner
 gakkykun-game.com##div[id^="gakky-"]
 trendka.jp##div[id^=trend-]
 pachinkopachisro.com##.plugin-memo:has(> div.side > div[align="center"] > a[href^="https://hb.afl.rakuten.co.jp"][target="_blank"])
@@ -1824,6 +1822,7 @@ funny-ai.com##.main-frp-ads
 ||korewaeroi.com/i2i.html
 korewaeroi.com##.l-sidebar > aside.widget_custom_html
 moeasia.net###pickup > a ~ .bam-card:has(a[href*=".amazon.co.jp/dp/"])
+nekochan.jp##.detail_footer_ad
 nekochan.jp##.detail_header_ad
 wanchan.jp##.detail_header__ad
 wanchan.jp##.detail_footer__ad
@@ -1962,7 +1961,6 @@ erodoganomori.net##.entry-content > div[style="margin-bottom:10px"] > a[href^="h
 erodoganomori.net##.entry-content > h2:has(+ p + div[style="margin-bottom:10px"])
 48idol.tv##.blog-wrapper > center:has(> div#div-desktop > div[id^="div-gpt-ad-"])
 otakei.otakuma.net###banner-article
-twi-videos.net##iframe[width="300"][height="250"]
 ch.nicovideo.jp##.ads_nicovideo
 tumadouga.jp##.index_banner_space > div[class^="ad-"]
 tuma.jp##.wrapper > div.shadow-box:has(> div.ad_sfr)
@@ -5150,7 +5148,7 @@ huffingtonpost.jp##.leaderboard-flex-placeholder
 macaro-ni.jp##.articleShow__nativeAd
 macaro-ni.jp##.yadsOverlay
 ac-illust.com,photo-ac.com,mitok.info,entamega.com,getnews.jp,webcartop.jp##div[style="min-height: 250px;"]
-response.jp,getnews.jp,withonline.jp,jprime.jp##div[style="min-height:250px;"]
+juken.oricon.co.jp,response.jp,getnews.jp,withonline.jp,jprime.jp##div[style="min-height:250px;"]
 otajo.jp##iframe[src^="https://rcm-jp.amazon.co.jp/e/cm?"]
 2chmatome2.jp###gn_overlay_wrapper
 2ch.logpo.jp##.AdsWidth
@@ -5735,7 +5733,7 @@ reiwa-kawaraban.com,syukan.chinsiko.xyz,4610.adultav55.com,tentacles.biz,kankore
 sossy-blog.com,game16.net,mimiblo.com,videogakuen.com,yamakamu.net,minaminumaebi.blogmimi.com,hana3939.com,baseballchannel.jp###text-13
 bl-archive.net,anichoice.com,sgamesreview.com,shico.xyz,oreteki-design.com###text-14
 sossy-blog.com,lefty322.com,av-baron.com,ikikatadatabase.com,videogakuen.com,yasasiikurasi.com,mhmatome.com,sundaygamer.net###text-15
-mangagift.com,videogakuen.com,newageinglog.com,imashun-navi.com,jumpmatome2ch.biz,news.sod.co.jp###text-16
+ero-gazou.jp,mangagift.com,videogakuen.com,newageinglog.com,imashun-navi.com,jumpmatome2ch.biz,news.sod.co.jp###text-16
 xn--eckl0bk7f7cc4od8az005k0ssb.xyz,nemotohiroyuki.jp,sexyvoice.org###text-17
 himmel-ellipse.com,orenoraresne.com,xn--zckm5bnq2mpa6a1fz490bkx4ayzmvi9g.com,oreteki-design.com,kaiten-heiten.com,inshokuten.com###text-18
 j-oosk.com###text-19
@@ -6655,6 +6653,7 @@ tsurimatome.com,keyboard-dojo.net,number-place-puzzle.net,2ch-c.net##a[href^="ht
 ||beauty-navi.com/javascripts/violet/sp/ldh_ad.js
 beauty-navi.com##.p-headerBnr
 ||bookbang.jp/common/js/ad.js
+altema.jp,twi-videos.net##iframe[width="300"][height="250"]
 altema.jp##.adsInterstitial-modal
 altema.jp###\30 2.exclude-h2-cnt
 altema.jp##.PRrank-icon2
@@ -7505,6 +7504,7 @@ naming-dic.com##.ad-posi1
 kanjitisiki.com##.category-ue:first-child
 pulpxstyle.com##.add_main
 pulpxstyle.com##.add_post_sidebar
+zekamashi.net###JP_ZKN_pc_all_billboard
 zekamashi.net###secondary > div.widget_execphp
 zekamashi.net##.free-area_after-cont > div.widget_custom_html
 zekamashi.net##.free-area_before-title > div.widget_execphp
@@ -8557,7 +8557,7 @@ weblio.jp##.rectangle-ads-frame-www
 weblio.jp##.adBannerHdWrp
 weblio.jp##.adSmpBnrFtBtSp
 weblio.jp##.adBkOverlayClr
-ad-contents.jp##.large-banner
+ad-contents.jp##.ui-main-body > div.large-banner
 ad-contents.jp##.regular-banner
 ad-contents.jp##.overlay-item
 ad-contents.jp##.overlay-mask
@@ -8604,6 +8604,7 @@ hayamimi-hobby.com##.p-1.position-relative[style="width: 50%"]
 ||kt.wowkorea.jp/abematv/abematv.js
 sp-mobile-blog.com##.baseSection > aside.widget_text
 ||gamer.ne.jp/img/banner/bannerS_figgy.jpg
+gamer.ne.jp##.ad-jack-adn
 gamer.ne.jp##div[class^="adMiddleRectangle"]
 gamer.ne.jp##div[class^="adInfeed"]
 gamer.ne.jp##div[class^="adRecommend_"]
@@ -8644,7 +8645,7 @@ n-seikei.jp,blogmura.com##div[class^="ad"]
 gameranbu.jp##.taboola-recommend-span
 gameranbu.jp##.side_recomend_trac
 comic-pureri.jp,manga-comisol.jp,gameranbu.jp,blogmura.com,mainichi.jp##.ad-list
-mainichi.jp##.ad-infeed
+mainichi.jp,gamer.ne.jp##.ad-infeed
 mainichi.jp##.title-ad-sp
 mainichi.jp##.ad-bnr-w300h250
 mantan-web.jp##div[style="width:300px;height:600px;"]
@@ -9088,6 +9089,7 @@ charmer-media.com,elife-media.jp,frequ.jp,miima.jp,platabi.com,vivre-media.jp#?#
 charmer-media.com,elife-media.jp,frequ.jp,miima.jp,platabi.com,vivre-media.jp#?#.related-post-item > ins.adsbygoogle:upward(1)
 utamap.com#?#center > table[width="85%"]:first-child > tbody > tr > td[align=center] > script[src^="//pagead2"]:upward(1)
 kanjitisiki.com#?##main > p > ins.adsbygoogle:upward(1)
+zekamashi.net#?##secondary > div.widget_text a[href^="https://al.dmm.com/"]:upward(1)
 zekamashi.net#?##secondary > div.widget_text a[href^="https://amzn"]:upward(1)
 d.hatena.ne.jp#?#div[class^="sc-"]:only-child > div:first-child > div[id^="rectangle_main_"]:upward(2)
 clublucifer.net#?#.blockWrapper div[id^="mhub-"]:upward(.blockWrapper)

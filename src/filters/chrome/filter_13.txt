@@ -1,9 +1,9 @@
-! Checksum: wSZ0oNvuEhyJFuQaMYCoRA
-! Diff-Path: ../patches/13/13-s-1714246424-3600.patch
+! Checksum: 1cAIe3pZpvjg+eHWsri5ug
+! Diff-Path: ../patches/13/13-s-1714635227-3600.patch
 ! Title: AdGuard Turkish filter
 ! Description: Filter list that specifically removes ads on websites in Turkish language.
-! Version: 2.0.51.44
-! TimeUpdated: 2024-04-27T19:31:43+00:00
+! Version: 2.0.51.47
+! TimeUpdated: 2024-05-02T07:31:46+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -87,7 +87,6 @@
 !
 !
 ||gamescdnfor.com^
-||sobreatsesuyp.com^
 ||kriptoparahaber.care^
 ||alty.fun^
 ||hemenindir.to^
@@ -552,7 +551,8 @@ otopark.com#%#//scriptlet("abort-current-inline-script", "$", "!document.getElem
 ! https://github.com/AdguardTeam/AdguardFilters/issues/159453
 ! https://github.com/AdguardTeam/AdguardFilters/issues/142450
 ! https://github.com/AdguardTeam/AdguardFilters/issues/88310
-@@||puhutv.com/banner-ad.png
+$image,redirect-rule=1x1-transparent.gif,domain=puhutv.com
+@@||puhutv.com/banner-ad*.png
 puhutv.com#%#//scriptlet("set-constant", "adBlockEnabled", "false")
 ||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$script,xmlhttprequest,redirect=googlesyndication-adsbygoogle,domain=puhutv.com
 ! TODO: remove hint when app for iOS/Safari extension will use scriptlets library version 1.9.57 or newer
@@ -1222,6 +1222,7 @@ duzcetv.com#%#//scriptlet("abort-current-inline-script", "sessionStorage.getItem
 ! https://github.com/AdguardTeam/AdguardFilters/issues/54604
 eskisehirekspres.net#%#document.cookie="modalads=yes; path=/;";
 ! https://github.com/AdguardTeam/AdguardFilters/issues/53753
+belgeselizlesene.com#%#//scriptlet('set-constant', 'Object.prototype.video_ads', 'noopFunc')
 belgeselizlesene.com#%#//scriptlet("set-constant", "Object.prototype.ads_enable", "false")
 ! https://github.com/uBlockOrigin/uAssets/issues/10735
 ! https://github.com/AdguardTeam/AdguardFilters/issues/52247

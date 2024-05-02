@@ -1,9 +1,9 @@
-! Checksum: 9SUcjffXl1UQe/q1978E3g
-! Diff-Path: ../patches/9/9-s-1714458816-3600.patch
+! Checksum: vXm24+kegs31d2eO5RMuVQ
+! Diff-Path: ../patches/9/9-s-1714631631-3600.patch
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish, Portuguese, and Brazilian Portuguese languages.
-! Version: 2.0.24.45
-! TimeUpdated: 2024-04-30T06:31:39+00:00
+! Version: 2.0.24.50
+! TimeUpdated: 2024-05-02T06:31:44+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -90,6 +90,7 @@
 ! https://forum.adguard.com/index.php?threads/ivoox-com-podcasts-issues.29530/
 ! ||addevweb.com^$third-party
 !
+||oilierelixir.com^
 ||adzonestatic.com^
 ||adzep.com.br^$third-party
 ||nobeta.com.br^$third-party
@@ -2057,6 +2058,9 @@ amomeupet.org,cifras.com.br,gaz.com.br,placar.com.br,futebolinterior.com.br,tvhi
 ! ##body .banner
 tvonline.fan,laprensagrafica.com,ahoragranada.com,correio24horas.com.br,cnnespanol.cnn.com,motociclismo.es,sub100.com.br,theenemy.com.br,manhwas.net,rpp.pe,ambito.com,economipedia.com,informador.mx,elinformador.com.co,cronista.com,rionegro.com.ar,diariodecuyo.com.ar,voydeviaje.com.ar,guarda14.com,viapais.com.ar,agazeta.com.br,eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.*,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##body .banner
 !
+canaltech.com.br##div[class^="flex h-[100px]"][class*="items-center"][class*=":h-[250px]"]
+periodicocorreo.com.mx##div[style*="bottom: 0px !important; width: 100% !important; max-height: 100px !important;"]
+abola.pt#?#.content-box:has(> div.news-item > div.info:contains(/Notícia Patrocinada/i))
 canalrural.com.br##.spaa-container
 fdr.com.br##.code-block[data-amp-original-style^="margin: 8px auto; text-align: center;"]
 abril.com.br##.ads-infinite-list
@@ -4539,7 +4543,7 @@ vanguardia.com##.moduletable_pubtexto
 marca.com##.modulo_orbyt
 aeiou.pt##.mon_td_glb
 elcomercio.com##.mp_publiContenedor
-caras.pt,exameinformatica.pt,xl.pt##.mrec
+abola.pt,caras.pt,exameinformatica.pt,xl.pt##.mrec
 torrentazos.com##.mybanner
 infocoches.com##.navi_right
 clicrbs.com.br##.nivelA-tipo6
@@ -5257,6 +5261,9 @@ adguard.info,adguard.com,adguard.app##.hello_from_adguard_ext
 ! Bad:  @@||example.org^$stealth (should be in AdGuard Base - allowlist_stealth.txt)
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/159573
+@@||googleads.github.io/videojs-ima/node_modules/video.js/dist/video.min.js$domain=cultura.uol.com.br
+@@||googleads.github.io/videojs-ima/node_modules/video.js/dist/video-js.min.css$domain=cultura.uol.com.br
 ! https://github.com/AdguardTeam/AdguardFilters/issues/175517
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima3,domain=terra.com.br
 ! dimed.com.br - broken own images
