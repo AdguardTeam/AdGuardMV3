@@ -1,9 +1,9 @@
-! Checksum: zlH6Ut6FPfDFBDJwcKhY7Q
-! Diff-Path: ../patches/8/8-s-1714494826-3600.patch
+! Checksum: dII+mdawhonmvY9NrBZZ6w
+! Diff-Path: ../patches/8/8-s-1714728828-3600.patch
 ! Title: AdGuard Dutch filter
 ! Description: EasyList Dutch + AdGuard Dutch filter. Filter list that specifically removes ads on websites in Dutch language.
-! Version: 2.0.6.68
-! TimeUpdated: 2024-04-30T16:31:36+00:00
+! Version: 2.0.6.70
+! TimeUpdated: 2024-05-03T09:31:41+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1567,6 +1567,7 @@ omroepwest.nl#$#.adcontainer-Rectangle { position: absolute!important; left: -40
 ! Good: example.org###rek; ||example.com/ads/
 ! Bad: example.org#@##banner_ad (for instance, should be in allowlist.txt or in antiadblock.txt)
 !
+oozo.nl###MainContent_ccMenu_pnlHdrAd
 topkleurplaat.nl##a[href^="https://partner.bol.com/click/click"] > img
 ||cdn.aa.onstuimig.nl/mega-publishers/nieuwspaal.nl.js
 nieuwspaal.nl###abovecontent-widget-area
@@ -1775,6 +1776,8 @@ adguard.info,adguard.com,adguard.app##.hello_from_adguard_dutch
 ! Detect of using AdGuard products
 !+ NOT_PLATFORM(windows, mac, android, ios, ext_ublock) NOT_OPTIMIZED
 adguard.info,adguard.com,adguard.app##.hello_from_adguard_ext
+! Detect HTTPS filtering
+! Detect Advanced Protection of AdGuard for iOS
 !
 !---------------------------------------------------------------------------!
 !-------------- Fixing filtration errors (false-positive) ------------------!
