@@ -1,9 +1,9 @@
-! Checksum: JEZ9hO+yb5h8v8TRsqG5UA
-! Diff-Path: ../patches/6/6-s-1714757619-3600.patch
+! Checksum: DU7cfzmCPqkkBQL52bEE8A
+! Diff-Path: ../patches/6/6-s-1715063644-3600.patch
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.41.82
-! TimeUpdated: 2024-05-03T17:31:33+00:00
+! Version: 2.0.41.88
+! TimeUpdated: 2024-05-07T06:31:45+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -544,7 +544,7 @@ restegourmet.de#@##ad-lead
 ! https://github.com/AdguardTeam/AdguardFilters/issues/168137
 sportbild.bild.de#$#.tea-rectangle { position: absolute!important; left: -3000px!important; display: block !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/167763
-screenflash.io#@#.ad-box:not(#ad-banner)
+screenflash.io#@#.ad-box:not(#ad-banner):not(:empty)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/164648
 @@||st.wetteronline.de/*/js/showAds.js
 ! https://github.com/AdguardTeam/AdguardFilters/issues/164437
@@ -1617,6 +1617,10 @@ formel1.de,krautundrueben.de,motorsport-total.com,traktorpool.de,fnweb.de,laborj
 !
 !
 !
+marktspiegel.de##.bannerslot-centered
+marktspiegel.de##div[id^="highfivve-ad-"]
+handelsblatt.com#$?#article > app-storyline-element:has(> app-storyline-advertisement:only-child) { remove: true; }
+handelsblatt.com##article > app-storyline-element:has(> app-storyline-advertisement:only-child)
 merkur.de##.wv_story_el_cxo:has(> #ECR-IN_ARTICLE > div > div > .animate-in > div[class*="AdIndicator"])
 ||images.t-online.de/*/*/*/*.png$script,important
 wortwuchs.net##.breitop
@@ -9869,6 +9873,7 @@ blick.ch##.placement-rectangle
 englisch-lernen-online.de##.plainContentCollection
 zuckerporno.com##.pornofilme_recht
 reise-preise.de##.port.hi
+wz.de##.portal-slot
 ga.de##.portal-top
 iphone-tricks.de##.post div[style="float:none;margin:0px 0 0px 0;text-align:center;"]
 hartware.de##.postanzeige
@@ -10052,6 +10057,7 @@ asv-hamm-westfalen.de##.sponsor_col
 eisbaeren.de##.sponsor_wrapper
 ariva.de,otto.de,tips.at,toolbox.webediagaming.de,zdnet.de##.sponsored
 caravaning.de,menshealth.de,motorradonline.de,runnersworld.de##.sponsored--container
+kaufland.de##.sponsored-brand-products-container
 heise.de##.sponsored-placement
 arminia.de,budapester.hu,rot-weiss-erfurt.de,seo-united.de,vfb.de##.sponsoren
 hc-erlangen-ev.de##.sponsoren-right
@@ -10180,8 +10186,6 @@ radsport-seite.de##.trikots
 tritime-magazin.de##.tritime-ads-middle
 pnn.de,tagesspiegel.de##.ts-sptag
 biallo.de##.tso-pub
-dastelefonbuch.de##.tt-dataset-entryads
-dastelefonbuch.de##.tt_dataset_entryads
 tvsportguide.de##.tvg-manager-box
 lolabrause.ch##.tx-admanager
 hamburg-pride.de##.tx-imagecycle-pi1
@@ -10834,6 +10838,7 @@ t-online.de##.css-1lb3bt5
 t-online.de##.css-2k2lok
 n-tv.de##.ems-slot
 focus.de##.fol_mew-flying-carpet-wrapper
+sueddeutsche.de##.iqdcontainer
 focus.de##.ob-ad-carousel-layout
 jetzt.de,prosieben.de,transfermarkt.de,tvspielfilm.de##.plistaList > .itemLinkPET
 plista.com##.plistaList > .plista_widget_belowArticle_item[data-type="pet"]
@@ -10920,6 +10925,7 @@ dashcamtest.de##.previewtile.swiper-slide:has(a[href^="https://amzn.to/"])
 intersport.de##.product--box:has(.rm-sponso)
 kaufland.de##.product:has(div.product__sponsored-ad-label)
 guenstiger.de##.productCard:has(div.premiumProductCaption)
+kaufland.de##.rd-recommender:has(button.advertiser-info__button)
 kaufland.de##.rd-recommender:has(div.rd-product-tile__badge--ad)
 kaufland.de##.rd-recommender__tile:has(div.rd-product-tile__badge--ad)
 kaufland.de##.recommender-min-height:has(div.rd-product-tile__badge--ad)
