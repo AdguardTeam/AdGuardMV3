@@ -1,9 +1,9 @@
-! Checksum: s9osiDKDVraY1xmcDOOIyQ
-! Diff-Path: ../patches/13/13-s-1715067219-3600.patch
+! Checksum: 0E1UEZFBIMnBnAYhok22xQ
+! Diff-Path: ../patches/13/13-s-1715178845-3600.patch
 ! Title: AdGuard Turkish filter
 ! Description: Filter list that specifically removes ads on websites in Turkish language.
-! Version: 2.0.51.52
-! TimeUpdated: 2024-05-07T07:31:44+00:00
+! Version: 2.0.51.57
+! TimeUpdated: 2024-05-08T14:31:54+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -86,6 +86,7 @@
 ! Bad: ||adssubdomain.legitwebsite.com^ (should be in adservers_firstparty.txt)
 !
 !
+||yonderdim.com^
 ||gr.hdream.cfd^
 ||gamescdnfor.com^
 ||kriptoparahaber.care^
@@ -1001,7 +1002,7 @@ guneykoresinemasi.com,jetfilmizletv.net,dizimax2.com,yenierotikfilm.xyz,breaking
 vkfilmizlet.com,supernaturalizle.com,sinemakolik.net,hdsinemax.com,diziyo.*,fullhdabifilm.com,bettercallsaulizle.com,superfilmgeldi.net,fullhdfilmizlett1.com,fullhdfilmcibaba2.com,filmsezonu.com,fullhdfilmizleabi.com,hdfreeizle.com,hdmixfilim.com,fullhdfilmizlepala.com#%#//scriptlet('abort-on-property-read', 'initAd')
 !
 720pfilmizleme1.com,720pfilmizletir.com,1080pfilmizletir.com,720pfilmizlesene.com,filmmakinesi1.*,diziwatch.net,fullhd720pizle.live,filmizlemax.*,videoseyred.in,hdfilmcehennem.live#%#//scriptlet("prevent-addEventListener", "click", "checkTarget")
-dizivex.com,yabancidiziizlesene.*,roketdizi.co,1080hdfilmizle.com#%#//scriptlet("abort-on-property-read", "initPop")
+filmizlehdizle.com,dizivex.com,yabancidiziizlesene.*,roketdizi.co,1080hdfilmizle.com#%#//scriptlet("abort-on-property-read", "initPop")
 shirl.club,altporno.xyz#%#//scriptlet("abort-on-property-read", "oV1")
 agarz.com#%#(function(){var b=window.setTimeout;window.setTimeout=function(a,c){if(!/RTCPeerConnection[\s\S]*?new MouseEvent\("click"/.test(a.toString()))return b(a,c)};})();
 technopat.net#%#(function() { var w_open = window.open, regex = /goo.gl/; window.open = function(a, b) { if (typeof a !== 'string' || !regex.test(a)) { w_open(a, b); } }; })();
@@ -1018,8 +1019,9 @@ webteizle2.com#%#//scriptlet('trusted-replace-node-text', 'script', 'money_curre
 filmizletv.*,filmizlehdfilm.com,hdfilmcehennemi.*,hdfilmizlesene.org#%#//scriptlet('set-constant', 'reklamsayisi', '1')
 filmizletv.*,filmizlehdfilm.com,hdfilmcehennemi.*,hdfilmizlesene.org#%#//scriptlet('adjust-setInterval', 'sec--', '*', '0.001')
 filmizletv.*,filmizlehdfilm.com,hdfilmcehennemi.*,hdfilmizlesene.org#%#//scriptlet('trusted-replace-node-text', 'script', 'var checkReady', 'var checkReady', 'try{window.parent.ilk_part_getir();}catch(ex){};var checkReady')
+! https://github.com/AdguardTeam/AdguardFilters/issues/178808
 ! https://github.com/AdguardTeam/AdguardFilters/issues/171861
-fullfilmizlesene.net#%#//scriptlet('set-constant', 'app.ads', 'emptyObj')
+filmizlehdizle.com,fullfilmizlesene.net#%#//scriptlet('set-constant', 'app.ads', 'emptyObj')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/172168
 ! https://github.com/AdguardTeam/AdguardFilters/issues/170123
 xyzsprtsfrmr1.site#%#//scriptlet('set-constant', 'adsConfigs.0.enabled', '0')
@@ -1856,6 +1858,9 @@ $xmlhttprequest,third-party,denyallow=rsc.cdn77.org|linkvertise.com|fastly.net|s
 /service/advertchannels?$xmlhttprequest,redirect=nooptext,domain=mardinhaber.com.tr|gidahatti.com|bolugundem.com
 dirilispostasi.com,turkuazgazetesi.net,yenialanya.com,bugunkocaeli.com.tr,cagdaskocaeli.com.tr,mansetaydin.com,seskocaeli.com,kocaelibarisgazetesi.com,kocaelikoz.com,enkocaeli.com##.block-pano > div.us
 !
+dizigom1.tv###header ~ div[class][style*="margin:"]
+||dizigom1.tv/optimize-*.gif$image
+||dizigom1.tv/*-optimize.gif
 ||dizigom1.tv/wp-content/uploads/*/*.gif
 justintvizlehd.xyz###ad-container
 justintvizlehd.xyz##a[href^="https://heylink.me/"]
@@ -1929,8 +1934,12 @@ cumhuriyet.com.tr##.row[style^="width:100%;"]
 ||egeninsesi.com/system/ads/
 sondakika.com###video_befor
 ||labmedya.com/*/bannerlar/
-fullfilmizlesene.net##.frek
-fullfilmizlesene.net##.full-page-advertising
+||i.ibb.co/hLY8Wrf/betwinner2.gif
+||fullfilmizlesene.net/melbet.gif
+||fullfilmizlesene.net/betwinner.gif
+||fullfilmizlesene.net/film2.js
+filmizlehdizle.com,fullfilmizlesene.net##.frek
+filmizlehdizle.com,fullfilmizlesene.net##.full-page-advertising
 yabancidizi.pro##div[data-type^="v"][data-gets]
 beinsports.com.tr##div[class^="header-firstAd_"]
 beinsports.com.tr#?#.row > div[style]:has(> div[style^="min-height"] > div.dfp-wrapper)
@@ -5636,19 +5645,21 @@ macvar1056.live,macvar1057.live,macvar1058.live,macvar1059.live,macvar1060.live,
 ||golvartv*.xyz/wp-content/uploads/
 golvartv596.xyz,golvartv597.xyz,golvartv598.xyz,golvartv599.xyz,golvartv600.xyz,golvartv601.xyz,golvartv602.xyz,golvartv603.xyz,golvartv604.xyz,golvartv605.xyz,golvartv606.xyz,golvartv607.xyz,golvartv608.xyz,golvartv609.xyz,golvartv610.xyz,golvartv611.xyz,golvartv612.xyz,golvartv613.xyz,golvartv614.xyz,golvartv615.xyz,golvartv616.xyz##.pageskin
 ! https://github.com/AdguardTeam/AdguardFilters/issues/77520
-! 78 is source of an actual aomain
-selcuksportshd78.com#$?#body { background-image: none !important; }
+! 78 is source of an actual domain
+! amp5 is source of a domain for mobile
+selcuksportshdamp5.xyz,selcuksportshd78.com#$?#body { background-image: none !important; }
 ||selcuksportshd78.com/images/meritroyal/selcuk-merit2-min.jpg
 ||selcuksportshd78.com/images/meritroyal/selcuk-bg-2-*-min.jpg
 ||selcuksportshd78.com/images/meritroyal/selcuk-mobil1-min.jpg
 ! selcuksportshd*.xyz - frequently changed domains
 ||selcuksportshd*.xyz/img/madrid-wp*.jpg
 ||selcuksportshd*.xyz/img/*.gif
+||selcuksportshd*.xyz/img/m-ad-*.gif
 [$domain=/(^\|.+\.)selcuksportshd\d+\.xyz/]##.footer
 [$domain=/(^\|.+\.)selcuksportshd\d+\.xyz/]##.socials a:is(.meritroyal, .iptv, .streamradar)
-selcuksportshd1195.xyz,selcuksportshd891.xyz,selcuksportshd856.xyz,selcuksportshd857.xyz,selcuksportshd858.xyz,selcuksportshd859.xyz,selcuksportshd860.xyz,selcuksportshd861.xyz,selcuksportshd862.xyz,selcuksportshd863.xyz,selcuksportshd864.xyz,selcuksportshd865.xyz,selcuksportshd866.xyz,selcuksportshd867.xyz,selcuksportshd868.xyz,selcuksportshd869.xyz,selcuksportshd870.xyz,selcuksportshd871.xyz##.container > aside.sidebar:has(> .banner)
-selcuksportshd1195.xyz,selcuksportshd891.xyz,selcuksportshd856.xyz,selcuksportshd857.xyz,selcuksportshd858.xyz,selcuksportshd859.xyz,selcuksportshd860.xyz,selcuksportshd861.xyz,selcuksportshd862.xyz,selcuksportshd863.xyz,selcuksportshd864.xyz,selcuksportshd865.xyz,selcuksportshd866.xyz,selcuksportshd867.xyz,selcuksportshd868.xyz,selcuksportshd869.xyz,selcuksportshd870.xyz,selcuksportshd871.xyz##.footer
-selcuksportshd1195.xyz,selcuksportshd891.xyz,selcuksportshd856.xyz,selcuksportshd857.xyz,selcuksportshd858.xyz,selcuksportshd859.xyz,selcuksportshd860.xyz,selcuksportshd861.xyz,selcuksportshd862.xyz,selcuksportshd863.xyz,selcuksportshd864.xyz,selcuksportshd865.xyz,selcuksportshd866.xyz,selcuksportshd867.xyz,selcuksportshd868.xyz,selcuksportshd869.xyz,selcuksportshd870.xyz,selcuksportshd871.xyz##.socials a:is(.meritroyal, .iptv, .streamradar)
+selcuksportshd1219.xyz,selcuksportshd1220.xyz,selcuksportshd1221.xyz,selcuksportshd1222.xyz,selcuksportshd1223.xyz,selcuksportshd1224.xyz,selcuksportshd1225.xyz,selcuksportshd1226.xyz,selcuksportshd1227.xyz,selcuksportshd1228.xyz,selcuksportshd1229.xyz,selcuksportshd1230.xyz,selcuksportshd1231.xyz,selcuksportshd1232.xyz,selcuksportshd1233.xyz,selcuksportshd1234.xyz,selcuksportshd1235.xyz,selcuksportshd1236.xyz,selcuksportshd1237.xyz,selcuksportshd1238.xyz,selcuksportshd1239.xyz,selcuksportshd1240.xyz,selcuksportshd1241.xyz,selcuksportshd1195.xyz,selcuksportshd891.xyz,selcuksportshd856.xyz,selcuksportshd857.xyz,selcuksportshd858.xyz,selcuksportshd859.xyz,selcuksportshd860.xyz,selcuksportshd861.xyz,selcuksportshd862.xyz,selcuksportshd863.xyz,selcuksportshd864.xyz,selcuksportshd865.xyz,selcuksportshd866.xyz,selcuksportshd867.xyz,selcuksportshd868.xyz,selcuksportshd869.xyz,selcuksportshd870.xyz,selcuksportshd871.xyz##.container > aside.sidebar:has(> .banner)
+selcuksportshd1219.xyz,selcuksportshd1220.xyz,selcuksportshd1221.xyz,selcuksportshd1222.xyz,selcuksportshd1223.xyz,selcuksportshd1224.xyz,selcuksportshd1225.xyz,selcuksportshd1226.xyz,selcuksportshd1227.xyz,selcuksportshd1228.xyz,selcuksportshd1229.xyz,selcuksportshd1230.xyz,selcuksportshd1231.xyz,selcuksportshd1232.xyz,selcuksportshd1233.xyz,selcuksportshd1234.xyz,selcuksportshd1235.xyz,selcuksportshd1236.xyz,selcuksportshd1237.xyz,selcuksportshd1238.xyz,selcuksportshd1239.xyz,selcuksportshd1240.xyz,selcuksportshd1241.xyz,selcuksportshd1195.xyz,selcuksportshd891.xyz,selcuksportshd856.xyz,selcuksportshd857.xyz,selcuksportshd858.xyz,selcuksportshd859.xyz,selcuksportshd860.xyz,selcuksportshd861.xyz,selcuksportshd862.xyz,selcuksportshd863.xyz,selcuksportshd864.xyz,selcuksportshd865.xyz,selcuksportshd866.xyz,selcuksportshd867.xyz,selcuksportshd868.xyz,selcuksportshd869.xyz,selcuksportshd870.xyz,selcuksportshd871.xyz##.footer
+selcuksportshd1219.xyz,selcuksportshd1220.xyz,selcuksportshd1221.xyz,selcuksportshd1222.xyz,selcuksportshd1223.xyz,selcuksportshd1224.xyz,selcuksportshd1225.xyz,selcuksportshd1226.xyz,selcuksportshd1227.xyz,selcuksportshd1228.xyz,selcuksportshd1229.xyz,selcuksportshd1230.xyz,selcuksportshd1231.xyz,selcuksportshd1232.xyz,selcuksportshd1233.xyz,selcuksportshd1234.xyz,selcuksportshd1235.xyz,selcuksportshd1236.xyz,selcuksportshd1237.xyz,selcuksportshd1238.xyz,selcuksportshd1239.xyz,selcuksportshd1240.xyz,selcuksportshd1241.xyz,selcuksportshd1195.xyz,selcuksportshd891.xyz,selcuksportshd856.xyz,selcuksportshd857.xyz,selcuksportshd858.xyz,selcuksportshd859.xyz,selcuksportshd860.xyz,selcuksportshd861.xyz,selcuksportshd862.xyz,selcuksportshd863.xyz,selcuksportshd864.xyz,selcuksportshd865.xyz,selcuksportshd866.xyz,selcuksportshd867.xyz,selcuksportshd868.xyz,selcuksportshd869.xyz,selcuksportshd870.xyz,selcuksportshd871.xyz##.socials a:is(.meritroyal, .iptv, .streamradar)
 !
 ! tipobettv*.com - frequently changed domains
 ||tipobettv*.com/Uploads/*_pgskn.jpg

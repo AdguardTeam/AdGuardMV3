@@ -1,9 +1,9 @@
-! Checksum: 1xro3p8pp8X86+hOUTE4aA
-! Diff-Path: ../patches/8/8-s-1714919626-3600.patch
+! Checksum: +6ZghL7Rdv6YPkxm9vI6kA
+! Diff-Path: ../patches/8/8-s-1715157225-3600.patch
 ! Title: AdGuard Dutch filter
 ! Description: EasyList Dutch + AdGuard Dutch filter. Filter list that specifically removes ads on websites in Dutch language.
-! Version: 2.0.6.71
-! TimeUpdated: 2024-05-05T14:31:34+00:00
+! Version: 2.0.6.73
+! TimeUpdated: 2024-05-08T08:31:39+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1507,6 +1507,8 @@ icttipsandtricks.nl##body #adblock_screen
 !--------------------------------------!
 ! SECTION: Dutch - JS
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/178794
+datumprikker.nl#%#//scriptlet('remove-class', 'takeover', 'html.takeover')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/166205
 npo.nl#%#//scriptlet('json-prune', 'assets.preroll')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/131530
@@ -1519,6 +1521,8 @@ hardware.info#%#//scriptlet("set-constant", "BannerManager", "undefined")
 !--------------------------------------!
 ! SECTION: Dutch - CSS
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/178794
+datumprikker.nl#$#.takeover #main #maincontainer { margin-top: 15px !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/172847
 ! https://github.com/AdguardTeam/AdguardFilters/issues/143168
 rtlnieuws.nl#$#.article-sidebar__ad { visibility: hidden !important; }
@@ -1568,6 +1572,11 @@ omroepwest.nl#$#.adcontainer-Rectangle { position: absolute!important; left: -40
 ! Good: example.org###rek; ||example.com/ads/
 ! Bad: example.org#@##banner_ad (for instance, should be in allowlist.txt or in antiadblock.txt)
 !
+||biernet.nl/site/plugins/bja_new/redirect.php
+biernet.nl##.bja-cont
+biernet.nl###ban_blok
+biernet.nl##.fixed-bja-height
+datumprikker.nl###main > div[class^="takeover-"]
 oozo.nl###MainContent_ccMenu_pnlHdrAd
 topkleurplaat.nl##a[href^="https://partner.bol.com/click/click"] > img
 ||cdn.aa.onstuimig.nl/mega-publishers/nieuwspaal.nl.js
