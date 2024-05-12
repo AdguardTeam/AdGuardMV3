@@ -1,9 +1,9 @@
-! Checksum: nj0ZRXJfan3IwZRoif1V1w
-! Diff-Path: ../patches/9/9-s-1715171633-3600.patch
+! Checksum: YlFovTSO4F7U8Ds75QNEiA
+! Diff-Path: ../patches/9/9-s-1715330037-3600.patch
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish, Portuguese, and Brazilian Portuguese languages.
-! Version: 2.0.24.70
-! TimeUpdated: 2024-05-08T12:31:40+00:00
+! Version: 2.0.24.74
+! TimeUpdated: 2024-05-10T08:31:41+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1497,12 +1497,14 @@ estacio.br#%#//scriptlet('set-cookie', 'modal_promo', '1')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/177234
 mwpaste.com#%#(()=>{try{const o=location.href.split("go?u=");if(o[1]){let t=o[1];for(let o=0;o<10;o++)try{t=atob(t)}catch(o){break}const c=decodeURIComponent(t);c&&location.assign(c)}}catch(o){console.error(o)}})();
 tuserie.net#%#(()=>{window.addEventListener("message",(e=>{e?.data?.includes("tmp")&&e?.data?.length<15&&Object.defineProperty(e,"origin",{value:""})}),!0);const e=new MutationObserver((function(){const t=document.querySelector("button.linkhidder");t&&(e.disconnect(),t.addEventListener("click",(function(){setTimeout((function(){postMessage('{"tmp":""}')}),1e3)})))}));e.observe(document,{childList:!0,subtree:!0})})();
+! https://github.com/AdguardTeam/AdguardFilters/issues/178920
 ! https://github.com/AdguardTeam/AdguardFilters/issues/171873
 ! https://github.com/AdguardTeam/AdguardFilters/issues/167657
 ! https://github.com/AdguardTeam/AdguardFilters/issues/159461
-mundopolo.net,jurisfera.com,adclicker.info,adclicker.io#%#//scriptlet('set-constant', 'global.noobMaxTry', '0')
-mundopolo.net,jurisfera.com,adclicker.info,adclicker.io#%#AG_onLoad(function(){try{"function"==typeof window.noobBypass&&noobBypass()}catch(b){}});
+adclic.es,adclic.org,mundopolo.net,jurisfera.com,adclicker.info,adclicker.io#%#//scriptlet('set-constant', 'global.noobMaxTry', '0')
+adclic.es,adclic.org,mundopolo.net,jurisfera.com,adclicker.info,adclicker.io#%#AG_onLoad(function(){try{"function"==typeof window.noobBypass&&noobBypass()}catch(b){}});
 mundopolo.net,jurisfera.com,adclicker.info,adclicker.io#%#(function(){if(-1<window.location.href.indexOf("/#")){var b=location.href.split("/#");if(b&&b[1]){b=b[1];for(var f=0;10>f;f++)try{b=atob(b)}catch(a){var g=decodeURIComponent(b);g=g.split("&url=")[1];try{new URL(g);var h=!0}catch(a){h=!1}if(h){location.assign(g);break}}}}})();
+adclic.es,adclic.org#%#(function(){if(-1<window.location.href.indexOf("/#!")){var b=location.href.split("/#!");if(b&&b[1]){b=b[1];for(var f=0;10>f;f++)try{b=atob(b)}catch(a){var g=decodeURIComponent(b);try{new URL(g);var h=!0}catch(a){h=!1}if(h){location.assign(g);break}}}}})();
 ! https://github.com/AdguardTeam/AdguardFilters/issues/159665
 ! https://github.com/AdguardTeam/AdguardFilters/issues/159538
 ! https://github.com/AdguardTeam/AdguardFilters/issues/159034
@@ -2070,6 +2072,8 @@ amomeupet.org,cifras.com.br,gaz.com.br,placar.com.br,futebolinterior.com.br,tvhi
 ! ##body .banner
 tvonline.fan,laprensagrafica.com,ahoragranada.com,correio24horas.com.br,cnnespanol.cnn.com,motociclismo.es,sub100.com.br,theenemy.com.br,manhwas.net,rpp.pe,ambito.com,economipedia.com,informador.mx,elinformador.com.co,cronista.com,rionegro.com.ar,diariodecuyo.com.ar,voydeviaje.com.ar,guarda14.com,viapais.com.ar,agazeta.com.br,eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.*,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##body .banner
 !
+tntsports.com.br##.banners-cta__content
+tntsports.com.br###__next > div[class^="jsx-"]:not([class*=" "]):has(> .widget > a[href*="&utm_campaign="])
 itatiaia.com.br##.brius-ad-scope
 elcomercio.com##.layout-rev
 elcomercio.com##.front-splash__sidebar
@@ -2207,12 +2211,15 @@ clickpb.com.br##.adsHorizontal
 depor.com##div[class^="showTds"]
 ||visortmo.com/images/series.gif
 ||viralize.tv^$domain=visortmo.com
+visortmo.com#?#div[id^="pills-populars"] > div.row > div.element:has(> a[href^="https://visortmo.com/library/"] > .thumbnail:matches-css(before, background-image: /\/images\/.*_push|\/n.?f.?_|_ex/))
 visortmo.com#?#div[id^="pills-populars"] > div.row > div.element:has(> a[href^="https://visortmo.com/library/"] > .thumbnail > style:contains(/\/images\/.*_push|\/ne?f_|_ext/))
 visortmo.com#?#div[id^="pills-populars"] > div.row > div.element:has(> a[href^="https://visortmo.com/library/"] > .thumbnail > :is(span, .thumbnail-title):contains(/promo|netflix|ofert|deal|pack|\d+(\.|,)?\d+\$/i))
 visortmo.com##:not(div[class="col-4 mx-0 px-0"]:not([style])) > a[href^="https://visortmo.com/library/"] > img
+visortmo.com##a[href="https://series.ly"] > img[src*=".gif"]
 visortmo.com##a[href^="https://visortmo.com/library/"] > img[src^="/"]
 visortmo.com##a[href^="https://visortmo.com/library/"] > img[src^="https://visortmo.com/"]
-visortmo.com##a[href="https://series.ly"] > img[src*=".gif"]
+visortmo.com##:not(div[class="col-4 mx-0 px-0"]:not([style])) > a[href^="https://visortmo.com/library/"][target="_blank"]
+visortmo.com#$?#body style:contains(/position[\s\S]*?::before[\s\S]*?background-image[\s\S]*?width[\s\S]*?height/):has(+ a[href^="https://visortmo.com/library/"]) { remove: true; }
 yugenmangas.net.br##.ads-flot
 gartic.com.br###shopIntUm
 vrum.com.br##.ad-banner
