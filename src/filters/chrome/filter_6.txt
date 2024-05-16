@@ -1,9 +1,9 @@
-! Checksum: //bZPS0oPwePmgd2vqkBBw
-! Diff-Path: ../patches/6/6-s-1715618041-3600.patch
+! Checksum: nbmhiZn9psrd0w3FFsr0lQ
+! Diff-Path: ../patches/6/6-s-1715844871-3600.patch
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.41.97
-! TimeUpdated: 2024-05-13T16:31:31+00:00
+! Version: 2.0.42.3
+! TimeUpdated: 2024-05-16T07:31:55+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1525,9 +1525,9 @@ spiegel.de###Inhalt .relative > .relative > div[class] > section[class="clear-bo
 ! http://forum.adguard.com/showthread.php?8979 (#17)
 ||static.p7s1.com/vendor/webtrekk
 !
-! https://github.com/AdguardTeam/AdguardFilters/issues/174274
+! https://github.com/AdguardTeam/AdguardFilters/issues/178886
 !+ NOT_OPTIMIZED
-giga.de,kino.de,watson.de###teaserheld-header
+giga.de,kino.de,watson.de##body #teaserheld-header
 ! https://github.com/AdguardTeam/AdguardFilters/issues/148571
 ! https://github.com/AdguardTeam/AdguardFilters/issues/124356
 ! https://github.com/AdguardTeam/AdguardFilters/issues/107055
@@ -1619,6 +1619,11 @@ formel1.de,krautundrueben.de,motorsport-total.com,traktorpool.de,fnweb.de,laborj
 !
 !
 !
+jetzt.de##div[data-placement]
+watson.de##.desktopnavi > div[class]:has( > .watson-teaserheld:only-child)
+ip-phone-forum.de##.xcx-cta-download-form-wrapper
+giga.de##li:has(> div[data-role="alice-nativendo"]:only-child)
+giga.de##li:has(> article[style="display: none !important;"])
 onlinekorrektor.de###footer
 merkur.de##div[data-k5a-pos^="produkt_"]
 mainfranken24.de##.module:has(> .wrap:only-child > .row:only-child > .text-center:only-child > .ad:only-child)
@@ -3872,7 +3877,6 @@ auto-motor-und-sport.de##.b1 > div[is-element][element-teaser-aez*="variousSidec
 computerwoche.de###lepBanner
 winfuture.de,auto-motor-und-sport.de,java-forum.org##div[id^="div-gpt-ad"]
 ||vornamen-liste.de/javapop.js
-giga.de###teaserheld-header
 giga.de##a[href="http://po.st/bartschneider"]
 giga.de##a[href="http://po.st/bartschneider"] + .cd_holder
 ||regionalwolfsburg.de/ndnd/
@@ -5639,7 +5643,6 @@ spieletipps.de#@##leaderboard
 @@||ad-ipd.sxp.smartclip.net/select$domain=tele5.de
 ! rheinischepostmediengruppe.de - broken banner at top
 rheinischepostmediengruppe.de#@##banner_carousel
-! https://github.com/AdguardTeam/AdguardFilters/issues/22185
 ! https://github.com/AdguardTeam/AdguardFilters/issues/22404
 @@||catalog.mann-filter.com/media/werbebanner^
 ! https://github.com/AdguardTeam/AdguardFilters/issues/21934
@@ -5841,6 +5844,7 @@ rtl.de#@#.rtlde-medium-rectangle
 /werbungsky.
 /werbungsr3.
 /Widgets/Werbung/*
+/wp-content/plugins/vxcash/*
 /wpbanner/*$script
 /wrbg.js?
 /zzz/init.php?$script
@@ -6317,6 +6321,7 @@ wetter.com#@#div[id^="div-gpt-"]
 ||bd742.com^
 ||cdu-offline.de^
 ||dierussensindschuld.de^
+||fantecio.com^
 ||gayads.biz^
 ||gema-online.de^
 ||holyjesus.de^
@@ -6324,6 +6329,7 @@ wetter.com#@#div[id^="div-gpt-"]
 ||swissadserver.ch^
 ||wirverkaufennichts.de^
 ||wixnm.com^
+||zazufi.com^
 ||4rm.de^$third-party
 ||4strokemedia.com^$third-party
 ||85.114.133.62^$third-party
@@ -6588,7 +6594,6 @@ wetter.com#@#div[id^="div-gpt-"]
 ||youspacko.com^$third-party
 ||z0a.de^$third-party
 ||za-ads.de^$third-party
-||zazufi.com^
 ||zieltracker.de^$third-party
 ||zuppelzockt.com^$third-party
 ||zyxwvutsrqponmlkjihgfedcbazyxwvutsrqponmlkjihgfedcbazyxwvutsrqp.de^$third-party
@@ -6872,6 +6877,7 @@ wetter.com#@#div[id^="div-gpt-"]
 ||suedtirol.live/delivery.js
 ||sunpepper.de/shop/banner/$third-party
 ||tdn.da-services.ch^
+||telefon-sex-luder.com/banner/
 ||telsso.de/dnwe//gallery/*-800x250-billboard-$domain=biallo.de
 ||tennis.de/dtbdst/$domain=dtb-tennis.de
 ||tnt-game.com^*/banner/$third-party
@@ -8249,6 +8255,9 @@ $stylesheet,subdocument,third-party,xmlhttprequest,domain=canna-power.to|canna.t
 ||xn--zri6-0ra.ch/banner/
 ||xnxx-porno.com/img/linklist2/
 ||xup.in/com/pop.
+||xxx-amateur.eu/banner/
+||xxx-amateur.eu/werbung.php
+||xxx-amateur.eu/wordpress/wp-content/plugins/rnotify1.5.4_fullversion/
 ||yoga-aktuell.de/wp-content/uploads/*_wide-banner-
 ||yoga-aktuell.de/wp-content/uploads/*_Wide-Banner_
 ||zebradem.com^*/banner/
@@ -10263,7 +10272,7 @@ gearnews.de##.widget_adtag_rectangle
 usa-info.net##.widget_atkp_widget
 zueri6.ch##.widget_banner
 diesachsen.de##.widget_commerce
-autogazette.de,cyclingmagazine.de,schmunzelseite.de,signal-online.de,solaranlage-ratgeber.de##.widget_custom_html
+autogazette.de,cyclingmagazine.de,schmunzelseite.de,signal-online.de,solaranlage-ratgeber.de,xxx-amateur.eu##.widget_custom_html
 nibelungen-kurier.de##.widget_dkge_wrapper
 freiluft-blog.de##.widget_links
 hebelschein-spekulant.de,werbestandard.de##.widget_media_image

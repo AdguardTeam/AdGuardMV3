@@ -1,9 +1,9 @@
-! Checksum: FUmwI4XeR6KVD+58uRg6eQ
-! Diff-Path: ../patches/16/16-s-1715553221-3600.patch
+! Checksum: FrhrhNiuAXfw92SxPEP+Iw
+! Diff-Path: ../patches/16/16-s-1715819623-3600.patch
 ! Title: AdGuard French filter
 ! Description: Liste FR + AdGuard French filter. Filter list that specifically removes ads on websites in French language.
-! Version: 2.0.44.78
-! TimeUpdated: 2024-05-12T22:31:51+00:00
+! Version: 2.0.44.81
+! TimeUpdated: 2024-05-16T00:31:56+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -621,6 +621,9 @@ tf1.fr,tf1info.fr#%#//scriptlet('prevent-fetch', '/^https:\/\/ads\.stickyadstv\.
 !------- JS rules ---------------------!
 !--------------------------------------!
 !
+! https://github.com/uBlockOrigin/uAssets/issues/23689
+1jour1film.homes#%#//scriptlet('remove-attr', 'href', 'a[href]#clickfakeplayer')
+player.melaniezettofrais.online#%#//scriptlet('prevent-addEventListener', 'click', 'Popup')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/178842
 cinemaclock.com#%#//scriptlet('trusted-set-constant', 'PreRollBannerId', 'undefined')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/177510
@@ -840,6 +843,7 @@ $script,third-party,denyallow=rsc.cdn77.org|linkvertise.com|fastly.net|staticall
 !
 !
 !
+player.melaniezettofrais.online##body > div[id]:not(#video_player)
 japscan.lol#%#//scriptlet('remove-node-text', 'script', 'https://www.aozoiekopoaka.shop/')
 justarrived.lu##div[id^="laure-"]
 numerama.com##.is-capitalist-tyrannosaurus
@@ -5124,6 +5128,7 @@ digitalocean.gif|
 /wp-content/plugins/mts-wp-in-post-ads/*
 /wp-content/plugins/progressads/*
 /wp-content/plugins/quick-adsense-reloaded/*
+/wp-content/plugins/rnotify1.*/assets/public/custom.js
 /wp-content/plugins/wp-adsense-guard/*
 /wp-content/plugins/wp-banners/*
 /wp-content/themes/*/ads/*
@@ -21740,6 +21745,7 @@ jardiner-malin.fr##.boutiqueAd
 franceculture.fr##.box-partner-link
 challenges.fr,nouvelobs.com##.box-simulation-immo
 banques-en-ligne.fr##.boxEliracashLNA
+techniques-ingenieur.fr##.boxPub
 aujardin.info,telerama.fr##.boxpub
 lepoint.fr##.branding
 voyageforum.com##.breadcrumb
