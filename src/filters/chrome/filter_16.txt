@@ -1,9 +1,9 @@
-! Checksum: FrhrhNiuAXfw92SxPEP+Iw
-! Diff-Path: ../patches/16/16-s-1715819623-3600.patch
+! Checksum: 3TN8bC7JTWGkVRipGsmTRg
+! Diff-Path: ../patches/16/16-s-1715978018-3600.patch
 ! Title: AdGuard French filter
 ! Description: Liste FR + AdGuard French filter. Filter list that specifically removes ads on websites in French language.
-! Version: 2.0.44.81
-! TimeUpdated: 2024-05-16T00:31:56+00:00
+! Version: 2.0.44.86
+! TimeUpdated: 2024-05-17T20:32:02+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -134,8 +134,10 @@ journaldesfemmes.fr#%#//scriptlet('set-constant', 'integrityObserver.corrupted',
 rustica.fr#%#//scriptlet('set-constant', 'checkAdsBlocked', 'noopFunc')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/172868
 ||imasdk.googleapis.com/js/sdkloader/ima3.js$script,redirect=google-ima3,domain=oqee.tv
+! https://github.com/AdguardTeam/AdguardFilters/issues/179285
 ! https://github.com/uBlockOrigin/uAssets/issues/22363
-cookomix.com#%#//scriptlet('prevent-setTimeout', 'detected', '5000')
+cookomix.com#%#//scriptlet('set-constant', 'dAp', 'true')
+cookomix.com#%#//scriptlet('prevent-setTimeout', 'detected')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/171636
 air-journal.fr###adblock-popup
 air-journal.fr#%#//scriptlet('prevent-xhr', 'pagead2.googlesyndication.com')
@@ -144,7 +146,7 @@ systemed.fr#%#//scriptlet('prevent-xhr', 'pagead2.googlesyndication.com')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/169025
 cyclismactu.net#%#//scriptlet('prevent-addEventListener', 'load', 'isAdblock')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/168555
-rmcbfmplay.com#%#//scriptlet('prevent-fetch', '/www3\.doubleclick\.net|tagger\.opecloud\.com|fwmrm\.net/')
+rmcbfmplay.com#%#//scriptlet('prevent-fetch', '/www3\.doubleclick\.net|tagger\.opecloud\.com|fwmrm\.net/', 'emptyArr')
 !#safari_cb_affinity(general,privacy)
 @@||js.estat.com/js/mu-7.0.min.js$domain=rmcbfmplay.com
 !#safari_cb_affinity
@@ -837,12 +839,13 @@ igen.fr#$##motherboard { top: 30px!important; }
 !
 ! For URL shorteners or simple sites with frequently changed ad servers.
 ! Incorrectly blocked domains can be excluded using regex(synchronize this regexp in all filters)
-/^(?!.*(rsc.cdn77.org|linkvertise.com|fastly.net|statically.io|sharecast.ws|b-cdn.net|bunnycdn.ru|bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|cdn.staticfile.org|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yandex.|yastatic.net|ytimg.com|zencdn.net|player|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com|imgsmail.ru|cdn.cloudflare.net)).*$/$third-party,script,_____,domain=scan-fr.cc
+/^(?!.*(rsc.cdn77.org|linkvertise.com|fastly.net|statically.io|sharecast.ws|b-cdn.net|bunnycdn.ru|bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|cdn.staticfile.org|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|(\/\/|\.)vk\.com|yandex.|yastatic.net|ytimg.com|zencdn.net|player|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com|imgsmail.ru|cdn.cloudflare.net|(\/\/|\.)x\.com)).*$/$third-party,script,_____,domain=scan-fr.cc
 ! Similar to regexp above, but using the denyallow modifier
-$script,third-party,denyallow=rsc.cdn77.org|linkvertise.com|fastly.net|statically.io|sharecast.ws|b-cdn.net|bunnycdn.ru|bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|cdn.staticfile.org|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yastatic.net|ytimg.com|zencdn.net|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com|fastcomments.com|plyr.io,_____,domain=extreme-down.moe|dl-protect.link|tirexo.ink
+$script,third-party,denyallow=rsc.cdn77.org|linkvertise.com|fastly.net|statically.io|sharecast.ws|b-cdn.net|bunnycdn.ru|bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|cdn.staticfile.org|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|polyfill.io|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yastatic.net|ytimg.com|zencdn.net|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|raincaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com|fastcomments.com|plyr.io|x.com,_____,domain=extreme-down.moe|dl-protect.link|tirexo.ink
 !
 !
 !
+futura-sciences.com##div[class*="ad-parent"]
 player.melaniezettofrais.online##body > div[id]:not(#video_player)
 japscan.lol#%#//scriptlet('remove-node-text', 'script', 'https://www.aozoiekopoaka.shop/')
 justarrived.lu##div[id^="laure-"]

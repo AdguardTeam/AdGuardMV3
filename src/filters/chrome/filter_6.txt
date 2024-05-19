@@ -1,9 +1,9 @@
-! Checksum: nbmhiZn9psrd0w3FFsr0lQ
-! Diff-Path: ../patches/6/6-s-1715844871-3600.patch
+! Checksum: 7Nmh9bqbAjhZNtqUuy6/RQ
+! Diff-Path: ../patches/6/6-s-1715992444-3600.patch
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.42.3
-! TimeUpdated: 2024-05-16T07:31:55+00:00
+! Version: 2.0.42.11
+! TimeUpdated: 2024-05-18T00:31:48+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1128,6 +1128,10 @@ plus.rtl.de#%#//scriptlet('trusted-replace-xhr-response', 'true', 'false', 'homa
 brigitte.de#%#//scriptlet('trusted-replace-xhr-response', 'true', 'false', 'global_config.json')
 plus.rtl.de#%#//scriptlet('abort-on-stack-trace', 'Object.prototype.adReinsertion', 'createSdk')
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/179303
+tvspielfilm.de#%#//scriptlet('set-constant', 'DL8_GLOBALS.enableAdSupport', 'false')
+tvspielfilm.de#%#//scriptlet('set-constant', 'DL8_GLOBALS.useHomad', 'false')
+tvspielfilm.de#%#//scriptlet('set-constant', 'DL8_GLOBALS.enableHomadDesktop', 'false')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/178312
 stern.de#%#(()=>{Object.defineProperty=new Proxy(Object.defineProperty,{apply:(a,b,c)=>{const[d,e,f]=c;return"createAdPlayer"===e&&"function"==typeof c[2]?.get&&(c[2].get=()=>{}),Reflect.apply(a,b,c)}})})();
 ! https://github.com/uBlockOrigin/uAssets/issues/22883
@@ -1619,6 +1623,11 @@ formel1.de,krautundrueben.de,motorsport-total.com,traktorpool.de,fnweb.de,laborj
 !
 !
 !
+wienerin.at##.card:has( > .card__imgContainer > .card__ad)
+wienerin.at##.ad__article_billboard_container
+freundin.de##.ab-content_teaser-entityType_not_set > div[class] > div[class]:has(> div[class] > div[class] > div[class] > .adv)
+metal-hammer.de###article-content > .affiliate
+metal-hammer.de###content > .widgets_above_single_content
 jetzt.de##div[data-placement]
 watson.de##.desktopnavi > div[class]:has( > .watson-teaserheld:only-child)
 ip-phone-forum.de##.xcx-cta-download-form-wrapper
@@ -1716,7 +1725,10 @@ jungefreiheit.de##.elementor-shortcode > div > a[target="_blank"][onclick] > img
 jungefreiheit.de#?#.elementor-shortcode:has(> small[style*="color"]:contains(/^Anzeige$/))
 blick.ch##.sc-2e3042c-0
 winfuture.de##div[id^="taboola-"][id*="thumbnails-"]
+techbook.de,myhomebook.de,petbook.de,fitbook.de,bild.de,travelbook.de##.entry-content > a[href*="bit.ly"]
+techbook.de,myhomebook.de,petbook.de,fitbook.de,bild.de,travelbook.de##section[data-type="sticky-bar"][data-view-track][data-event-view-track="true"]
 techbook.de,myhomebook.de,petbook.de,fitbook.de,bild.de,travelbook.de##.has-mark
+techbook.de,myhomebook.de,petbook.de,fitbook.de,bild.de,travelbook.de##.is-style-advertisement-mark
 trophies.de###ipsLayout_mainArea center:has(> div[class] > div[id^="nerdic_"])
 trophies.de##div[data-role="sidebarAd"]
 restegourmet.de#?#ion-col:has(> app-content-ad-grid)
@@ -6670,6 +6682,7 @@ wetter.com#@#div[id^="div-gpt-"]
 ||cect-shop.com/CMBannerCECT-SHOP.gif
 ||ced.sascdn.com^
 ||china-gadgets.de^$subdocument,third-party
+||com-porn-free.com/banner/
 ||communicationads.net/tb.php
 ||crawler.pearl.de/pearl-crawler/banner?
 ||cript.to/plopscript.php
@@ -7117,6 +7130,8 @@ $stylesheet,subdocument,third-party,xmlhttprequest,domain=canna-power.to|canna.t
 ||blockbuster.to/img/8a844213f1ae29efaf836ffe63805fe618.jpg
 ||blog-der-republik.de/wp-content/uploads/*/square.png
 ||blog-der-republik.de/wp-content/uploads/*/trinkwasser_umfrage_square.jpg
+||blog4you.biz/banner/
+||blog4you.biz/wp-content/plugins/rnotify1.5.4_fullversion/
 ||blogprojekt.de/Bilder/affiliate-banner/
 ||blogprojekt.de/Bilder/Profi/
 ||blogspot.com^*/bet.gif$domain=fussball-livestream.info
@@ -7714,6 +7729,7 @@ $stylesheet,subdocument,third-party,xmlhttprequest,domain=canna-power.to|canna.t
 ||okey-online.com/prg/daten/datenbanken/banner
 ||oktoberfestportal.de/pics_banner/
 ||omano.de/AdServer/
+||omasex.cc/wp-content/*/wp-content/plugins/rnotify1.3.9/
 ||onepiece-tube.com/templates/caprica/amzl2/
 ||onepiece-tube.com/templates/Grafiken/amazon.svg
 ||onepiece-tube.com^*/amzb/
@@ -9655,7 +9671,7 @@ homeandsmart.de##.hs_anbieter_box_block
 boerse-online.de##.hsbc_homepage_topflop
 news.de##.ialayerContainer
 gmx.net,web.de##.iba-variant-test
-24auto.de,24garten.de,24rhein.de,24royal.de,24vita.de,az-online.de,bgland24.de,buzzfeed.at,buzzfeed.de,bw24.de,chiemgau24.de,come-on.de,costanachrichten.com,einfach-tasty.de,fnp.de,fr.de,giessener-anzeiger.de,hallo-muenchen.de,hna.de,ingame.de,innsalzach24.de,kreis-anzeiger.de,kreiszeitung.de,lauterbacher-anzeiger.de,mangfall24.de,merkur.de,rosenheim24.de,sauerlandkurier.de,schwaebische-post.de,soester-anzeiger.de,tz.de,usinger-anzeiger.de,wa.de,wasserburg24.de##.id-TBeepSlot
+24auto.de,24books.de,24garten.de,24rhein.de,24royal.de,24vita.de,az-online.de,bgland24.de,buzzfeed.at,buzzfeed.de,bw24.de,chiemgau24.de,come-on.de,costanachrichten.com,einfach-tasty.de,fnp.de,fr.de,giessener-anzeiger.de,hallo-muenchen.de,hna.de,ingame.de,innsalzach24.de,kreis-anzeiger.de,kreiszeitung.de,landtiere.de,lauterbacher-anzeiger.de,mangfall24.de,merkur.de,rosenheim24.de,sauerlandkurier.de,schwaebische-post.de,soester-anzeiger.de,tz.de,usinger-anzeiger.de,wa.de,wasserburg24.de##.id-TBeepSlot
 pcwelt.de##.idgAmazonTextV2
 computerwoche.de,tecchannel.de##.idgLeaderBoard
 channelpartner.de##.idgWebcastsCarousel
@@ -10308,6 +10324,7 @@ german-bash.org##.zitat > div[style="width:300px;"]
 3drei3.de##.zona_publi
 lifeverde.de##.zusatz_billboard
 heise.de##A-PATERNOSTER
+mediamarkt.de##[data-test="mms-search-showcase"]
 pornhutdeutsch.com##[href^="https://start.amateurcommunity.com/"]
 pornhutdeutsch.com##[href^="https://susi.live/"]
 pornhutdeutsch.com##[href^="https://www.zubivu.com/"]
@@ -11061,6 +11078,7 @@ lessentiel.lu#?#div:-abp-has(+ span:-abp-contains(Werbung))
 linkedin.com#?#.core-rail > div > div[id^="ember"]:-abp-has(span:-abp-contains(Gesponsert))
 marbacher-zeitung.de#?#.appetizer:-abp-contains(Anzeige)
 mediamarkt.at,mediamarkt.de,saturn.de#?#li:-abp-has(div[data-test="mms-product-card"]:-abp-has(span:-abp-contains(Gesponsert)))
+mediamarkt.de#?#[data-test="mms-search-showcase"] + div:-abp-contains(Gesponsert)
 meissen-fernsehen.de#?#.text-center:-abp-contains(- Werbung -)
 metro.de#?#.mfcss_card-article-2--grid-container-flex > span:-abp-contains(WERBUNG)
 metro.de#?#.product-teaser-container:-abp-contains(WERBUNG)

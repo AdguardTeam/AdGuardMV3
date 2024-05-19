@@ -1,9 +1,9 @@
-! Checksum: i6izLX+KsF/Y1RlOZSBEtg
-! Diff-Path: ../patches/3/3-s-1715787241-3600.patch
+! Checksum: Sb7gxlqOHOfLk9waUutj/w
+! Diff-Path: ../patches/3/3-s-1715992443-3600.patch
 ! Title: AdGuard Tracking Protection filter
 ! Description: The most comprehensive list of various online counters and web analytics tools. Use this filter if you do not want your actions on the Internet to be tracked.
-! Version: 2.0.69.92
-! TimeUpdated: 2024-05-15T15:31:25+00:00
+! Version: 2.0.70.0
+! TimeUpdated: 2024-05-18T00:31:37+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -573,6 +573,9 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 !
 !
 !
+||sentinelbi.com^$third-party
+||count.sibbo.net^
+||umami.is^$third-party
 ||logger.torimochi-ad.net^
 ||mainting-minues.xyz^
 ||europe-west1-sonorous-dragon-276210.cloudfunctions.net^
@@ -4441,6 +4444,11 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ! Blocking piwik analytics subdomain(for DNS filtering)
 |piwik.
 !
+||matomo.motorpresse.de^
+||matomo.menshealth.de^
+||analytics.denimdream.com^
+||ny77jj.washingtonpost.com^
+||spoor-api.ft.com^
 ||temp.twicomi.com^
 ||tracking.carsales.com.au^
 ||beacon.nc-net.or.jp^
@@ -75853,6 +75861,7 @@ _tracking.php?b=
 /analytics.js$domain=tokyometro.jp|resumes.breakdownexpress.com|techcult.com|inbox.lv|kopeda.com|freexcafe.com|rusvideos.tv|nakubani.ru|lun.com|songsara.net|newsmax.com|bolgehastanesi.com|ewtc.de|newsdig.tbs.co.jp|imore.com|city.kushiro.lg.jp|emeraldbridal.com.au|emarat-news.ae|imobie.jp|tikla.com.tr|rusvideos.porn|jrkyushu.co.jp|amiunique.org|edit.ing|konami.com
 ||assets.adobedtm.com^$domain=mcclatchydc.com|elnuevoherald.com|bellinghamherald.com|sacbee.com|charlotteobserver.com|newsobserver.com|miamiherald.com|ef.ru|algida.com.tr|bmw-motorrad.co.uk|cif.com.tr|clearhaircare.com|domestos.com|dove.com|elidor.com.tr|f1sport.autorevue.cz|geico.com|hellmanns.com.tr|herkessofraya.com|johnsonsbaby.com.tr|lipton.com|lnk.to|lux.com|magnumicecream.com|neutrogena.com.tr|omo.com|rexona.com|samsung.com|sap.com|schwarzkopf.com.tr|signalturkiye.com|msnbc.com|nbcnews.com|kbb.com|eurosport.ru|timgate.it|intermiles.com|oxfordmail.co.uk|spiegel.de|hp.com|deutschepost.de|thebay.com|s.shufoo.net|tsn.ca|tabelog.com|euronews.com|newshub.co.nz|fredmeyer.com|viabcp.com|carsales.com.au|falabella.com|aarp.org|thehill.com|realtor.com|nzherald.co.nz|aia.com.ph|baynews9.com|thesaurus.com|dhc.co.jp|0101.co.jp|staples.com|rikunabi.com|directscout.recruit.co.jp|r-agent.com|sephora.com
 !
+||smartplugin.youbora.com/*/js/lib/*/npawlib.min.js$domain=go3.lv
 ||sleeknotestaticcontent.sleeknote.com/production/package-tracker.js
 ||img.hmv.co.jp/hybridrecommend/tlab-recommend.js
 ||zendesk.com/frontendevents/$xmlhttprequest
@@ -77159,6 +77168,7 @@ weekly-economist.mainichi.jp##iframe[id^="cxWidget_"]
 ||xaas3.jp/tracking/$third-party
 ||virtualcarshop.jp/js/ga.js
 ||info.biz.nuro.jp/analytics?
+||x.com/i/api/1.1/jot/client_event.json
 ||twitter.com/1.1/jot/client_event.json
 ||cdn.attn.tv/*/dtag.js
 ||google.*/maps/*/log
@@ -82261,6 +82271,7 @@ inapps.appsflyersdk.com^
 ! For platforms which do not support $redirect rules
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/179394
 ! https://github.com/uBlockOrigin/uAssets/issues/23695
 anikore.jp#$#html[class^="loading"] { visibility: visible !important; }
 ! https://www.kfc.co.jp/account broken unsubscribe
