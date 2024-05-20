@@ -35,6 +35,7 @@ export const i18n: I18nInterface = {
             // Without this, browser.i18n.getMessage returns the base locale message and the wrong UI language,
             // and @adguard/translator fails on plural forms validations.
             if (receivedMessage === baseMessage) {
+                // eslint-disable-next-line no-console
                 console.debug('Possible error with plural form:', receivedMessage, key);
                 return '';
             }
