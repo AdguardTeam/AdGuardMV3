@@ -1,9 +1,9 @@
-! Checksum: 9n/deWLfMTBhB34YF5jtrw
-! Diff-Path: ../patches/9/9-s-1715956433-3600.patch
+! Checksum: aQtxDdMftHJcJWh+sfBWJQ
+! Diff-Path: ../patches/9/9-s-1716230040-3600.patch
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish, Portuguese, and Brazilian Portuguese languages.
-! Version: 2.0.24.87
-! TimeUpdated: 2024-05-17T14:31:41+00:00
+! Version: 2.0.24.97
+! TimeUpdated: 2024-05-20T18:31:58+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -276,6 +276,8 @@
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/179545
+descargas2024gratis.blogspot.com#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
 ! https://github.com/uBlockOrigin/uAssets/issues/23606
 sinensistoon.com#%#//scriptlet('prevent-fetch', 'adskeeper.com')
 @@||jsc.adskeeper.com/site/$xmlhttprequest,domain=sinensistoon.com
@@ -291,10 +293,10 @@ novatecnology.com,tipsdesalud.tips#$#body > ins.adsbygoogle { display: block !im
 novatecnology.com,tipsdesalud.tips#$#body > .textads.banner-ads { display: block !important; }
 novatecnology.com,tipsdesalud.tips#$#body > div[id^="div-gpt-ad-"] { display: block !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/176820
-$script,xmlhttprequest,redirect-rule=nooptext,domain=luratoon.com
-luratoon.com#%#//scriptlet('abort-on-property-read', 'block_ads')
-luratoon.com#%#//scriptlet('abort-current-inline-script', 'fetch', '/alert|bloqueador|\.catch|\.type/')
-luratoon.com#%#//scriptlet('prevent-element-src-loading', 'script', 'pagead2.googlesyndication.com')
+$script,xmlhttprequest,redirect-rule=nooptext,domain=lura-toons.com
+lura-toons.com#%#//scriptlet('abort-on-property-read', 'block_ads')
+lura-toons.com#%#//scriptlet('abort-current-inline-script', 'fetch', '/alert|bloqueador|\.catch|\.type/')
+lura-toons.com#%#//scriptlet('prevent-element-src-loading', 'script', 'pagead2.googlesyndication.com')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/176638
 playertv.org#%#//scriptlet('abort-current-inline-script', 'document.createElement', 'adsbygoogle.js')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/176576
@@ -390,6 +392,7 @@ modescanlator.com#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com'
 ! https://github.com/AdguardTeam/AdguardFilters/issues/161608
 ||bluf.online/js/adblock
 ! https://github.com/AdguardTeam/AdguardFilters/issues/161248
+ricasdelicias.online,sabornutritivo.com#%#//scriptlet('prevent-setTimeout', 'hasAdblock')
 sabornutritivo.com#%#//scriptlet('set-cookie', 'visited', '1')
 sabornutritivo.com#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
 sabornutritivo.com#%#//scriptlet('adjust-setTimeout', '.html(', '*', '0.001')
@@ -1771,7 +1774,8 @@ receitasdodia.fun#$#.hided { display: block !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/177537
 ! https://github.com/AdguardTeam/AdguardFilters/issues/177524
 ! https://github.com/AdguardTeam/AdguardFilters/issues/165264
-receitasvegana.com,megacurioso.online,megacurioso.net,gastroponto.com,nossoprato.online,receitasdochico.life,dicasdefinancas.net,dicasfinanceirasbr.com,dicasdevalor.net#$##player { display: block !important; }
+! https://github.com/AdguardTeam/AdguardFilters/issues/161248
+ricasdelicias.online,receitasvegana.com,megacurioso.online,megacurioso.net,gastroponto.com,nossoprato.online,receitasdochico.life,dicasdefinancas.net,dicasfinanceirasbr.com,dicasdevalor.net#$##player { display: block !important; }
 dicasvalores.com#$#.content-box { display: block !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/165265
 ldicas.com.br#$##colunas { display: block !important; }
@@ -2074,6 +2078,18 @@ amomeupet.org,cifras.com.br,gaz.com.br,placar.com.br,futebolinterior.com.br,tvhi
 ! ##body .banner
 tvonline.fan,laprensagrafica.com,ahoragranada.com,correio24horas.com.br,cnnespanol.cnn.com,motociclismo.es,sub100.com.br,theenemy.com.br,manhwas.net,rpp.pe,ambito.com,economipedia.com,informador.mx,elinformador.com.co,cronista.com,rionegro.com.ar,diariodecuyo.com.ar,voydeviaje.com.ar,guarda14.com,viapais.com.ar,agazeta.com.br,eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.*,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##body .banner
 !
+4br.me##a[href^="https://ads.mundotutors.net/"]
+4br.me#%#//scriptlet('prevent-refresh')
+metroworldnews.com.br##div[id^="arcad-"]
+coisasdaroca.com##div[style*="text-align"].code-block
+flash.pt###BTFInContent
+flash.pt##div[id^="mrec"]
+flash.pt##.m-rec
+flash.pt##.leaderBoard
+revistabula.com##.entry-content-ads
+tvguia.pt##.pub_block
+tvguia.pt##.partilhas
+tvguia.pt##.engageya
 g24.gal##.noticia-by-category-content > div.noticia-by-category-item:has(> div.journal-content-article > div.crtvg-ads)
 g24.gal##.t4-ads
 chollometro.com##.cept-banner-id-398
@@ -2202,8 +2218,8 @@ donghuas.top#?##sidebar > .section:has(> .releases > h3:only-child:contains(/^Ad
 manhwas.net##aside.principal > .info-episode:has(> .row:only-child > .col-12[style*="height:"]:only-child > .adsbyexoclick)
 futbollibre.pe##div[class^="publicidad-"]
 globo.com###taboola-mid-article-saiba-mais
-exame.com##main > section.grid > section.hidden:has(> object[class^="ad-pos"])
-exame.com##main > section.grid > section.relative.col-span-12:not([id]):has(.adsTextBetweenLines)
+exame.com##body > section.grid > section.hidden:has(> object[class^="ad-pos"])
+exame.com##body > section.grid > section.relative.col-span-12:not([id]):has(.adsTextBetweenLines)
 exame.com##section#publications > .grid > object[id^="native-home"]
 exame.com###highlights > section[class^="col-"] + section[class^="col-"] > section[class^="col-"]:has(> object[id^="native-home"])
 exame.com##main section[class^="sc-"]:has(> div[class^="sc-"] > div[class*="ad-pos"])
@@ -2228,7 +2244,7 @@ clickpb.com.br##.adsHorizontal
 depor.com##div[class^="showTds"]
 ||visortmo.com/images/series.gif
 ||viralize.tv^$domain=visortmo.com
-visortmo.com#?#div[id^="pills-populars"] > div.row > div.element:has(> a[href^="https://visortmo.com/library/"] > .thumbnail:matches-css(before, background-image: /\/images\/.*_push|\/n.?f.?_|_ex/))
+visortmo.com#?#div[id^="pills-populars"] > div.row > div.element:has(> a[href^="https://visortmo.com/library/"] > .thumbnail:matches-css(before, background-image: /\/images\/.*_push|pplr\d+_|n.?..?_|_ex/))
 visortmo.com#?#div[id^="pills-populars"] > div.row > div.element:has(> a[href^="https://visortmo.com/library/"] > .thumbnail > style:contains(/\/images\/.*_push|\/ne?f_|_ext/))
 visortmo.com#?#div[id^="pills-populars"] > div.row > div.element:has(> a[href^="https://visortmo.com/library/"] > .thumbnail > :is(span, .thumbnail-title):contains(/promo|netflix|ofert|deal|pack|\d+(\.|,)?\d+\$/i))
 visortmo.com##:not(div[class="col-4 mx-0 px-0"]:not([style])) > a[href^="https://visortmo.com/library/"] > img
@@ -2236,6 +2252,7 @@ visortmo.com##a[href="https://series.ly"] > img[src*=".gif"]
 visortmo.com##a[href^="https://visortmo.com/library/"] > img[src^="/"]
 visortmo.com##a[href^="https://visortmo.com/library/"] > img[src^="https://visortmo.com/"]
 visortmo.com##:not(div[class="col-4 mx-0 px-0"]:not([style])) > a[href^="https://visortmo.com/library/"][target*="_blank"]
+visortmo.com#?#:not(div[class="col-4 mx-0 px-0"]:not([style])) > a[href^="https://visortmo.com/library/"]:has(> .thumbnail > style:contains(/pplr\d+_|n.?..?_/))
 visortmo.com#$?#body style:contains(/position[\s\S]*?::before[\s\S]*?background-image[\s\S]*?width[\s\S]*?height/):has(+ a[href^="https://visortmo.com/library/"]) { remove: true; }
 yugenmangas.net.br##.ads-flot
 gartic.com.br###shopIntUm
@@ -2539,9 +2556,9 @@ spdiario.com.br###interna_banner_side
 spdiario.com.br##div[id$="_banner_quadrado"]
 jbox.com.br##.jbox-publi-fullwidth
 independentespanol.com###top-banner-wrapper
-metroworldnews.com,metroecuador.com.ec,fayerwayer.com##.b-ads-block-custom
-metroworldnews.com,metroecuador.com.ec,fayerwayer.com##.arcad-container
-metroworldnews.com,metroecuador.com.ec,fayerwayer.com##div[id^="arcad-feature-"][class^="default__StyledAdUnit-"]
+novamulher.com,comutricolor.com,sagrosso.com,showyfama.com,nuevamujer.com,metroworldnews.com,metroecuador.com.ec,fayerwayer.com##.b-ads-block-custom
+nuevamujer.com,metroworldnews.com,metroecuador.com.ec,fayerwayer.com##.arcad-container
+nuevamujer.com,metroworldnews.com,metroecuador.com.ec,fayerwayer.com##div[id^="arcad-feature-"][class^="default__StyledAdUnit-"]
 gasteizhoy.com##.banclick
 gasteizhoy.com##.macrobanblock
 universohq.com##.barAds
@@ -3691,7 +3708,7 @@ superflix.net##aside.widget-area > #custom_html-16
 mastercuriosidadesbr.com##.conteudo[id^="adx"]
 ||ticotimes.net/*/*Banner*
 ticotimes.net##a[href^="https://ticotimes.net/linkout/"]
-recipestravelworld.com,recetasviaje.com,recetascuriosas.com,cocinaconlupita.com,worldrecipesu.com,planetaneperiano.com,chefac.com,recipesandcooker.com,recipeski.com,recipesnk.com,motornk.com,worldmangas.com,mangalong.com,mistermanga.com,anitoc.com,enginepassion.com,otakuteca.com##.pbl
+planetaneperian.com,recipestravelworld.com,recetasviaje.com,recetascuriosas.com,cocinaconlupita.com,worldrecipesu.com,planetaneperiano.com,chefac.com,recipesandcooker.com,recipeski.com,recipesnk.com,motornk.com,worldmangas.com,mangalong.com,mistermanga.com,anitoc.com,enginepassion.com,otakuteca.com##.pbl
 lavoz.com.ar##.bloque-ads
 lavoz.com.ar##.block-banner
 pivigames.blog##a[href="https://pivigames.blog/descargar.php"]
