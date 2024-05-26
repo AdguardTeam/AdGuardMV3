@@ -1,9 +1,9 @@
-! Checksum: aQtxDdMftHJcJWh+sfBWJQ
-! Diff-Path: ../patches/9/9-s-1716230040-3600.patch
+! Checksum: ItqfjfABd81AZL76PQyFAA
+! Diff-Path: ../patches/9/9-s-1716683672-3600.patch
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish, Portuguese, and Brazilian Portuguese languages.
-! Version: 2.0.24.97
-! TimeUpdated: 2024-05-20T18:31:58+00:00
+! Version: 2.0.25.4
+! TimeUpdated: 2024-05-26T00:32:25+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -2076,10 +2076,17 @@ conjur.com.br,meups.com.br,elcorreogallego.es,3djuegos.lat,xatakandroid.com,nsct
 ! ##.ads
 amomeupet.org,cifras.com.br,gaz.com.br,placar.com.br,futebolinterior.com.br,tvhistoria.com.br,tribunapr.uol.com.br,diariodonordeste.verdesmares.com.br,sbt.com.br,link.estadao.com.br,atomixhq.*,jc.ne10.uol.com.br,internetpasoapaso.com,acidadeon.com,leouve.com.br,larazon.es,infoescola.com,cbn.globoradio.globo.com,maxitorrent.com,abril.com.br,odia.ig.com.br,especiais.g1.globo.com,tribunapr.com.br,novelasd.com,anime-tube.tv##.ads
 ! ##body .banner
-tvonline.fan,laprensagrafica.com,ahoragranada.com,correio24horas.com.br,cnnespanol.cnn.com,motociclismo.es,sub100.com.br,theenemy.com.br,manhwas.net,rpp.pe,ambito.com,economipedia.com,informador.mx,elinformador.com.co,cronista.com,rionegro.com.ar,diariodecuyo.com.ar,voydeviaje.com.ar,guarda14.com,viapais.com.ar,agazeta.com.br,eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.*,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##body .banner
+brasilparalelo.com.br,tvonline.fan,laprensagrafica.com,ahoragranada.com,correio24horas.com.br,cnnespanol.cnn.com,motociclismo.es,sub100.com.br,theenemy.com.br,manhwas.net,rpp.pe,ambito.com,economipedia.com,informador.mx,elinformador.com.co,cronista.com,rionegro.com.ar,diariodecuyo.com.ar,voydeviaje.com.ar,guarda14.com,viapais.com.ar,agazeta.com.br,eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.*,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##body .banner
 !
-4br.me##a[href^="https://ads.mundotutors.net/"]
-4br.me#%#//scriptlet('prevent-refresh')
+blogs.correiobraziliense.com.br###adtopo
+correiobraziliense.com.br##.publicidade-ancorads
+correiobraziliense.com.br##.sidebar > section:has(> div[class^="pub-"])
+grupoahora.net.br##.swiper-home
+grupoahora.net.br##.swiper-materia-interna
+grupoahora.net.br##.banner-horizontal
+brasilparalelo.com.br##.lateral-list
+cl1ca.com,4br.me,fir3.net,seulink.*,encurtalink.*##a[href^="https://ads.mundotutors.net/"]
+cl1ca.com,4br.me,fir3.net,seulink.*,encurtalink.*#%#//scriptlet('prevent-refresh')
 metroworldnews.com.br##div[id^="arcad-"]
 coisasdaroca.com##div[style*="text-align"].code-block
 flash.pt###BTFInContent
@@ -2245,14 +2252,14 @@ depor.com##div[class^="showTds"]
 ||visortmo.com/images/series.gif
 ||viralize.tv^$domain=visortmo.com
 visortmo.com#?#div[id^="pills-populars"] > div.row > div.element:has(> a[href^="https://visortmo.com/library/"] > .thumbnail:matches-css(before, background-image: /\/images\/.*_push|pplr\d+_|n.?..?_|_ex/))
-visortmo.com#?#div[id^="pills-populars"] > div.row > div.element:has(> a[href^="https://visortmo.com/library/"] > .thumbnail > style:contains(/\/images\/.*_push|\/ne?f_|_ext/))
+visortmo.com#?#div[id^="pills-populars"] > div.row > div.element:has(> a[href^="https://visortmo.com/library/"] > .thumbnail > style:contains(/\/images\/.*_push|\/ne?f_|_ext|::before[\s\S]*?background-image/))
 visortmo.com#?#div[id^="pills-populars"] > div.row > div.element:has(> a[href^="https://visortmo.com/library/"] > .thumbnail > :is(span, .thumbnail-title):contains(/promo|netflix|ofert|deal|pack|\d+(\.|,)?\d+\$/i))
 visortmo.com##:not(div[class="col-4 mx-0 px-0"]:not([style])) > a[href^="https://visortmo.com/library/"] > img
 visortmo.com##a[href="https://series.ly"] > img[src*=".gif"]
 visortmo.com##a[href^="https://visortmo.com/library/"] > img[src^="/"]
 visortmo.com##a[href^="https://visortmo.com/library/"] > img[src^="https://visortmo.com/"]
 visortmo.com##:not(div[class="col-4 mx-0 px-0"]:not([style])) > a[href^="https://visortmo.com/library/"][target*="_blank"]
-visortmo.com#?#:not(div[class="col-4 mx-0 px-0"]:not([style])) > a[href^="https://visortmo.com/library/"]:has(> .thumbnail > style:contains(/pplr\d+_|n.?..?_/))
+visortmo.com#?#:not(div[class="col-4 mx-0 px-0"]:not([style])) > a[href^="https://visortmo.com/library/"]:has(> .thumbnail > style:contains(/pplr\d+_|n.?..?_|height[\s\S]*?opacity[\s\S]*?background-image/))
 visortmo.com#$?#body style:contains(/position[\s\S]*?::before[\s\S]*?background-image[\s\S]*?width[\s\S]*?height/):has(+ a[href^="https://visortmo.com/library/"]) { remove: true; }
 yugenmangas.net.br##.ads-flot
 gartic.com.br###shopIntUm
@@ -2556,7 +2563,7 @@ spdiario.com.br###interna_banner_side
 spdiario.com.br##div[id$="_banner_quadrado"]
 jbox.com.br##.jbox-publi-fullwidth
 independentespanol.com###top-banner-wrapper
-novamulher.com,comutricolor.com,sagrosso.com,showyfama.com,nuevamujer.com,metroworldnews.com,metroecuador.com.ec,fayerwayer.com##.b-ads-block-custom
+elcalce.com,sabrosia.pr,activopr.com,novamulher.com,comutricolor.com,sagrosso.com,showyfama.com,nuevamujer.com,metroworldnews.com,metroecuador.com.ec,fayerwayer.com##.b-ads-block-custom
 nuevamujer.com,metroworldnews.com,metroecuador.com.ec,fayerwayer.com##.arcad-container
 nuevamujer.com,metroworldnews.com,metroecuador.com.ec,fayerwayer.com##div[id^="arcad-feature-"][class^="default__StyledAdUnit-"]
 gasteizhoy.com##.banclick
@@ -2776,7 +2783,7 @@ milanuncios.com##.has-advertisement
 telecinco.es###megaSuperior_multisite
 telecinco.es##div[class^="ads__"]
 elconfidencial.com##.articleAside__module--isSticky
-20minutos.es##.banner-header
+concerto.com.br,20minutos.es##.banner-header
 elespanol.com##.article-adv__content
 elespanol.com##.container__outbrain
 eltiempo.es##.cls-publi-height
@@ -3451,7 +3458,7 @@ mrpiracy.top##a[class^="reserve-button"][target="_blank"] > img
 mangamovil.net##.publi_arriba
 jkhentai.net,tuhentaionline.com,mangamovil.net###banner_deslizante
 ||mangamovil.net/publi/
-d.arede.info##div[id^="publicidade-"]
+grupoahora.net.br,d.arede.info##div[id^="publicidade-"]
 d.arede.info##.cont-publicidade-cat
 d.arede.info##.container-autosImoveis
 d.arede.info##.container-editoria-maisLidas
@@ -4641,7 +4648,7 @@ iol.pt##.pub_full
 iol.pt##.pub_half
 yucatan.com.mx##.pubcuad
 abril.com.br##.publSquare
-eldesmarque.com,impactoespananoticias.com,meteorologiaenred.com,desdelinux.net,lawebdelprogramador.com,soydemac.com,as.com,cadenaser.com,cincodias.com,destinia.com,elpais.com,lavozlibre.com,marca.com##.publi
+correiobraziliense.com.br,eldesmarque.com,impactoespananoticias.com,meteorologiaenred.com,desdelinux.net,lawebdelprogramador.com,soydemac.com,as.com,cadenaser.com,cincodias.com,destinia.com,elpais.com,lavozlibre.com,marca.com##.publi
 infochannel.com.mx##.publi-int-cuadro
 marca.com##.publi-resultados
 jornalagora.com.br##.publi178_2
