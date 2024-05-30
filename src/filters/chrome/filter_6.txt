@@ -1,9 +1,9 @@
-! Checksum: KKJuZWrfcUFPah5jSKa6eQ
-! Diff-Path: ../patches/6/6-s-1716831267-3600.patch
+! Checksum: X0YhAwNddZVYzYeSqwFEbw
+! Diff-Path: ../patches/6/6-s-1716978928-3600.patch
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.42.18
-! TimeUpdated: 2024-05-27T17:32:14+00:00
+! Version: 2.0.42.22
+! TimeUpdated: 2024-05-29T10:33:07+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1559,6 +1559,9 @@ lkz.de##.nfy-row-ad
 chip.de##li > a[href*="chip.de/downloads/"][target="_blank"]:has(img[src*="hash"])
 chip.de#?#a[href*="chip.de/downloads/"]:has(img[src*="hash"]:not([class], [data-src]))
 chip.de##a[href*="chip.de/downloads/"] img[src*="hash"]:not([class], [data-src])
+! https://github.com/AdguardTeam/AdguardFilters/issues/180261
+!+ NOT_OPTIMIZED
+forum.golem.de##.list-comments > li:has(> div[style])
 ! https://github.com/AdguardTeam/AdguardFilters/issues/61907
 ||chip.de/*.php*&$~third-party,script
 chip.de##.js_download_button > a[href^="https://x.chip.de/intern/dl/?url="][href*="&pageLayout=withinstaller|"]
@@ -1623,6 +1626,10 @@ formel1.de,krautundrueben.de,motorsport-total.com,traktorpool.de,fnweb.de,laborj
 !
 !
 !
+weltwoche.de##div[id^="werbung"]
+weltwoche.de##div[class^="werbung"]
+forum.pcgames.de###bannerWrap
+forum.pcgames.de##.rectangleWrap
 ||travemuende-aktuell.de/wbg/alle/
 travemuende-aktuell.de##.col-rechts > div[class]:has( img[src*="wbg/alle"])
 wienerin.at##.card:has( > .card__imgContainer > .card__ad)
@@ -2945,7 +2952,6 @@ mathebibel.de###banner-bottom
 amazon.de##span[class*="widget=loom-desktop-inline-slot"]
 amazon.de###productAlert_feature_div
 tutonaut.de##a[title="Anzeige"]
-tutonaut.de##.widget-ad-image
 ortsdienst.de###ad-MR1-l0
 ortsdienst.de###ad-MR2-l0
 synology-forum.de##div[data-xf-init="sam-unit"]
@@ -5256,7 +5262,6 @@ chip.de#?#.List > li:has(> article > a:contains(Anzeige))
 chip.de#?#.fb > article:has(> a .Badge > .Badge__Content:contains(/gesponsert|anzeige/))
 golem.de#?#.list-articles > li[class]:has(> a[href^="https://www.golem.de/news/anzeige-"])
 golem.de#$?#.list-articles > li[class]:has(> a[href^="https://www.golem.de/news/anzeige-"]) + li { border-top: solid 1px #EEE !important; }
-forum.golem.de#?#.list-comments > li:has(> div[style])
 photovoltaikforum.com#?#ul.wbbThreadPostList  > li:not([class]):has(> .wcfAdLocation)
 myheimat.de#?#.categoryTeaserBox > .documentTeaser:has(> .adDocument)
 myheimat.de#?#.categoryTeaserBox > .documentList > ul > li:has(> .adDocument)
