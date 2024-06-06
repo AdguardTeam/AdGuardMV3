@@ -1,9 +1,9 @@
-! Checksum: LMcH84OlpLSX2Gq5FBVoLg
-! Diff-Path: ../patches/1/1-s-1717421800-3600.patch
+! Checksum: i9FaJUUltIXMMwsShDnaBA
+! Diff-Path: ../patches/1/1-s-1717587307-3600.patch
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.91.23
-! TimeUpdated: 2024-06-03T13:31:23+00:00
+! Version: 2.0.91.28
+! TimeUpdated: 2024-06-05T11:31:20+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -5549,6 +5549,7 @@ ya.ru,yandex.*##li[class*="mini-suggest__item"] > a[href^="http://yandex"][href*
 yandex.*##body:not([data-bem*="pogoda"]) .mini-suggest__popup-content > li[data-type="nav"]
 yandex.*#?#.content__left > ul#search-result > li:has(> div[data-bem*="organic"] > div.organic__title-wrapper > a[href][data-event-required])
 ! the ad is on the right side, which is mostly non-reproducible
+[$path=/search]ya.ru,yandex.*##.content__right div[class][data-bem]:has(> div[class] div[class] > button[data-maukl*="advertiser"])
 [$path=/search]ya.ru,yandex.*##.content__right div[class][data-cid]:has(> div[data-vnl*='"renderTo"'])
 [$path=/search]ya.ru,yandex.*##.content__right div.serp-item:has(> div[data-state-id] span.LabelDirect)
 [$path=/search]ya.ru,yandex.*##.content__right div.serp-item:has(> div[data-vnl*='"nonceId"'])
@@ -6162,6 +6163,10 @@ disk.yandex.*#%#//scriptlet('remove-class', 'has-fullscreen-banner','.public__ro
 !------- CSS -----------
 !-----------------------
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/180740
+domovita.by#$##reklamnaya-modalka { display: none !important; }
+domovita.by#$#.c-modal-overlay { display: none !important; }
+domovita.by#$#body { overflow: auto !important; padding-right: 0 !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/177871
 blackserie.ru#$#body { background-image: none !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/177346
@@ -7440,6 +7445,7 @@ $script,third-party,denyallow=rsc.cdn77.org|linkvertise.com|fastly.net|staticall
 !
 !
 !
+inkorr.com##.tg-box
 fakty.ua##.FKY_VIDEO
 24tv.ua###idealMediaWrapper
 chita.ru##a[data-test="news-feed-record"] > div[class]:has(> svg > use[data-test="adv-mark"])
@@ -7681,6 +7687,12 @@ ivanovonews.ru,gorodn.ru,bits.media,devyatka.ru,gazeta-n1.ru,gorod48.ru,hi-fi.ru
 !
 !
 !
+myfootball.top##.sidebar--right > div.block_full:has(> div.block_cont a[href^="https://ggbetuapromo.com/"])
+myfootball.top##.sidebar--right > div.block_full:has(> div.block_cont table.mf-bk-table)
+losslessflac.ru##center > a[target="_blank"] > img
+retailer.ru##a[data-track] > img
+paperpaper.ru##div[data-elementor-type="wp-post"] > section[data-settings="{\"background_background\":\"classic\"}"]
+||domovita.by/helper/get-adfox
 sport24.ru###app div.right-scroll-bar-position:has(a[href^="https://clicks.affijet.com/"])
 sibreal.org##.media-block-wrap:has(> div.wsw > div.wsw__embed > div.infgraphicsAttach > script[src^="https://thetruestory.news/"])
 ||rusxporno.net/images/1win.jpg
