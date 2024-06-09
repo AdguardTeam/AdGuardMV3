@@ -1,9 +1,9 @@
-! Checksum: 3k2C8HRuJyIBD1lLnpbDGw
-! Diff-Path: ../patches/3/3-s-1717594519-3600.patch
+! Checksum: APAYyPwM5xZR3kyGK89fkQ
+! Diff-Path: ../patches/3/3-s-1717842902-3600.patch
 ! Title: AdGuard Tracking Protection filter
 ! Description: The most comprehensive list of various online counters and web analytics tools. Use this filter if you do not want your actions on the Internet to be tracked.
-! Version: 2.0.70.75
-! TimeUpdated: 2024-06-05T13:32:40+00:00
+! Version: 2.0.70.87
+! TimeUpdated: 2024-06-08T10:32:51+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -3857,6 +3857,9 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ||ib.snssdk.com^
 ||xlog.snssdk.com^
 ||log.snssdk.com^
+||pxl.knam.pro^
+||manalyticshub.com^
+||metrics.streaks.jp^
 ||track.mailerlite.com^
 ||a11ybar.com^
 ||trackszn.median.eu^
@@ -3901,7 +3904,6 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ||e.zg-api.com^
 ||fp.techinasia.com^
 ||cadmus.script.ac^
-||feliz.data.tm-awx.com^
 ||lz-pub-ads.com^
 ||w4h5ae.ru^
 ||hscollectedforms.net^
@@ -38804,6 +38806,10 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ! Blocking piwik analytics subdomain(for DNS filtering)
 |piwik.
 !
+||cdn.track.olx.com.br^
+||analytics.junia.ai^
+||ad.dl.mz.de^
+||topspin.npo.nl^
 ||collect.stepstone.co.uk^
 ||analytics.poferries.com^
 ||collector-*.px-cloud.net^
@@ -62601,6 +62607,14 @@ $cookie=_awl;maxAge=30,domain=nypost.com|al.com|9news.com
 /analytics.js$domain=tokyometro.jp|resumes.breakdownexpress.com|techcult.com|inbox.lv|kopeda.com|freexcafe.com|rusvideos.tv|nakubani.ru|lun.com|songsara.net|newsmax.com|bolgehastanesi.com|ewtc.de|newsdig.tbs.co.jp|imore.com|city.kushiro.lg.jp|emeraldbridal.com.au|emarat-news.ae|imobie.jp|tikla.com.tr|rusvideos.porn|jrkyushu.co.jp|amiunique.org|edit.ing|konami.com
 ||assets.adobedtm.com^$domain=mcclatchydc.com|elnuevoherald.com|bellinghamherald.com|sacbee.com|charlotteobserver.com|newsobserver.com|miamiherald.com|ef.ru|algida.com.tr|bmw-motorrad.co.uk|cif.com.tr|clearhaircare.com|domestos.com|dove.com|elidor.com.tr|f1sport.autorevue.cz|geico.com|hellmanns.com.tr|herkessofraya.com|johnsonsbaby.com.tr|lipton.com|lnk.to|lux.com|magnumicecream.com|neutrogena.com.tr|omo.com|rexona.com|samsung.com|sap.com|schwarzkopf.com.tr|signalturkiye.com|msnbc.com|nbcnews.com|kbb.com|eurosport.ru|timgate.it|intermiles.com|oxfordmail.co.uk|spiegel.de|hp.com|deutschepost.de|thebay.com|s.shufoo.net|tsn.ca|tabelog.com|euronews.com|newshub.co.nz|fredmeyer.com|viabcp.com|carsales.com.au|falabella.com|aarp.org|thehill.com|realtor.com|nzherald.co.nz|aia.com.ph|baynews9.com|thesaurus.com|dhc.co.jp|0101.co.jp|staples.com|rikunabi.com|directscout.recruit.co.jp|r-agent.com|sephora.com
 !
+||pubgifs.com/pixel.gif
+||24sata.hr/static/scripts/utils/tracking.min.js
+||catawiki.com/ab/s.js
+||cdn.lihkg.com/static/*/js/21.chunk.js
+||ssai.api.streaks.jp/*/ad_info?
+||api.target.com/consumers/*_debugEvent=
+||tagging.steelseries.com/g/collect
+||travelpayouts.com/whereami$domain=lapkins.ru
 pcmag.com##img[src^="https://t.myvisualiq.net/"]
 ||internet-technologies.ru/wp-content/assets/js/log.js
 ||totaljobs.com/analytics/api/v1/tracking
@@ -62650,7 +62664,6 @@ pcmag.com##img[src^="https://t.myvisualiq.net/"]
 ||shopify.com/__dux|
 ||shopify.com/__dux|$ping,redirect-rule=nooptext
 ||prettylittlething.us/api/*/event/
-||api.target.com/consumers/*/ingest/web/*_impression?
 /api/checkout/web/metrics|$domain=nordstrom.com|nordstromrack.com
 /api/cake/*$domain=nordstrom.com|nordstromrack.com
 ||propertyguru.com.my/api/consumer/vast-media/impression?
@@ -62764,7 +62777,6 @@ wanchan.jp##.recommend_header + div[style^="aspect-ratio:"]
 ||target.com/telemetry_data/
 ||api.target.com/rum_analytics/
 ||api.target.com/consumers/*/ttms/events
-||api.target.com/consumers/*/ingest/web/eventstream
 ||api.target.com/firefly_events/*/events/
 ||drugs.com/api/log/
 ||drugs.com/api/log/$xmlhttprequest,redirect-rule=noopjson
@@ -69037,6 +69049,9 @@ inapps.appsflyersdk.com^
 ! For platforms which do not support $redirect rules
 !
 !
+! https://x.com/m6827596773/status/1798427884186738954
+! https://github.com/AdguardTeam/AdguardFilters/issues/180920
+@@||feliz.data.tm-awx.com/smile-web-v2/rootEvent$domain=mirror.co.uk
 ! https://github.com/AdguardTeam/AdguardFilters/issues/180713
 @@||googletagmanager.com/gtm.js$domain=redwigwam.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/180702
