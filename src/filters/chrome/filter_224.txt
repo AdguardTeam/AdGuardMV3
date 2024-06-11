@@ -1,9 +1,9 @@
-! Checksum: TL97UWgyx4oVwJiVb/vzEg
-! Diff-Path: ../patches/224/224-s-1717904126-3600.patch
+! Checksum: 6Alo3vG2bXObBQpZH3iNyw
+! Diff-Path: ../patches/224/224-s-1718091308-3600.patch
 ! Title: AdGuard Chinese filter
 ! Description: EasyList China + AdGuard Chinese filter. Filter list that specifically removes ads on websites in Chinese language.
-! Version: 2.1.17.17
-! TimeUpdated: 2024-06-09T03:33:58+00:00
+! Version: 2.1.17.30
+! TimeUpdated: 2024-06-11T07:33:21+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1107,6 +1107,7 @@ $script,third-party,denyallow=fastly.net|statically.io|sharecast.ws|b-cdn.net|bu
 !
 !
 !
+720yun.com##div[class^="Ads_ads_"]
 omnitalk.com##tr[bgcolor="ffffc8"]
 omnitalk.com##td[bgcolor="#ffffc8"]
 yznnw.com##div[class^="hd_"]
@@ -1147,7 +1148,7 @@ ablesci.com##.able-container-body-right > div.fly-panel:has(> div[style="text-al
 rou.video##.grid > div[class^="col-span"]:has(> div[class] > ins)
 rou.video##.grid > div[class^="col-span"]:has(> div[class] > div[id^="ts_ad_native"])
 hmoeh.com##div[class] > div[class]:has(> a[href] > img[src^="https://ad."])
-elle.com.hk##article > div.block-default:has(> div.content-wrapper p > span:contains(Cosmart))
+elle.com.hk#?#article > div.block-default:has(> div.content-wrapper p > span:contains(Cosmart))
 elle.com.hk##.tpc-container
 xiazai.zol.com.cn##img[alt^="AiPPT"]
 new-reporter.com##div[id^="mdl-elmt-"]
@@ -4647,6 +4648,7 @@ newduba.cn###jq_youxi
 ##dl#listwoBox
 ##img#GGADIMG
 ##img#adv1
+##.yueduad1
 ##img[data-link][data-src*="/u/"]:not([data-link*="/i/"])
 ##img[data-src*=".alicdn.com/img/ibank/"][src="/static/images/loadingerror.gif"]
 ##img[onclick*=".qq.com/doc/"]
@@ -4665,6 +4667,8 @@ newduba.cn###jq_youxi
 ##img[src*=".sinaimg."][style="width:150px;height:300px"]
 ##script + #coupletBox
 ##script + #rbbox
+##.infomation + #notice_container > .event-notice
+##.gotoclick[adv_id]
 ##script + .header_rmb
 ##script + a[href] > img[src*="lbsugc.cdn.bcebos.com"]
 ##script + a[target="_bank"] > img[src*=".c-ctrip.com"][style="width:100%;height:auto;"]
@@ -4688,6 +4692,27 @@ newduba.cn###jq_youxi
 ||205.209.138.102^
 ||23.231.151.252^
 ||cupfox.app^$third-party
+||auislq.top^
+||taproximo.com^
+||twqtf.boats^
+||kjipko.xyz^
+||wfjslie.top^
+||pztezl.xyz^
+||rqnefp.xyz^
+||retrefsf.cn^
+||hsoubnp.icu^
+||binga03.shop^
+||jcfnbhqo.icu^
+||gfdfegg.cn^
+||bing009.shop^
+||rdnplpj.cn^
+||ligfdjnfd.cn^
+||ozykeor.icu^
+||yxkbgg.xyz^
+||davtvd.xyz^
+||efjsliw.top^
+||hkpeghqu.icu^
+||jglgjz.xyz^
 ||fczunn.xyz^
 ||mymqcy.xyz^
 ||roxfrv.xyz^
@@ -4699,6 +4724,9 @@ newduba.cn###jq_youxi
 ||hvzrrvj.cn^
 ||bing007.shop^
 ||thgthgfg.cn^
+||gfdgfhh.cn^
+||po2qgo.xyz^
+||kak17p.xyz^
 ||oaqrui.xyz^
 ||tcfgtd.xyz^
 ||jfjslia.top^
@@ -14296,7 +14324,14 @@ hxsame.hexun.com$domain=~quote.hexun.com
 ||zztongyun.com/static/js/sh.
 ||zzz4.com/JS_AD/
 ||zzzyk.com/js/
+||hb8g86k.mom/mz.js
 chongbuluo.com##.search > div[style="width: 607px;margin-top:30px;"]
+qciss.net##.d1
+qciss.net###lightbox
+qciss.net###lightbox1
+360kuai.com##.marketing-box
+mnews.tw##.ad-container-pc
+mnews.tw##.ad-container-pc-only
 szxx.com.cn###A0
 szxx.com.cn###A1
 szxx.com.cn###A2
@@ -14720,7 +14755,6 @@ hexieshe.cn###custom_html-2
 24kplus.com###custom_html-3
 tmioe.com###custom_html-4
 18avinin.com,27ka.cn,sunnylife.tw###custom_html-5
-vikacg.com###custom_html-9
 makaidong.com###cyWallsplugin
 eworldship.com###d1
 eworldship.com###d2
@@ -15024,7 +15058,6 @@ duote.com###hengfu
 hexun.com###hexunCouplet01
 eepw.com.cn###hiddenLayer
 yxdown.com###highdown
-vikacg.com###home-row-lunbo
 wacowla.com###home-top-narrow
 t.qq.com###homeBannerNew
 bjhockey.org###homeVideoModal
@@ -16843,7 +16876,6 @@ epinv.com##.epinv_f
 shulink.com##.er_g
 sinolub.com##.erjlogo > .fl + .fl
 bilibili.com##.eva-banner
-zztt11.com,zztt24.com##.event-notice
 2345.com##.event1-hasList
 58.com##.ewmAdNew
 8264.com##.ewmbox
@@ -17061,7 +17093,6 @@ jandan.net##.goods2-list
 kkbox.com##.google-ad-manager
 techbang.com##.google-dfp
 i-part.com.tw##.googleAD160x600
-zztt11.com,zztt24.com##.gotoclick
 cmhello.com##.gpost-above
 agentm.tw##.gpt-ad-slot
 cool3c.com##.gpt-new
@@ -17713,7 +17744,6 @@ mamecn.com##.njjGsxzLeft > dl > .cont1
 mamecn.com##.njjGsxzRight
 dyhjw.com##.nn_link
 pornbest.org,pornlulu.com,ptt.sex##.no-gutters
-zztt11.com,zztt24.com##.no-mask
 prts.wiki##.nomobile[style*="810px;height:240"]
 zhicheng.com##.normal-banner
 admin5.com##.notice
@@ -18958,7 +18988,7 @@ chinacsbs.com##a[href^="/plus/view.php?aid="]
 fx112.com##a[href^="/union."]
 jr22.xyz##a[href^="ad."]
 boniu123.cc##a[href^="http"] > img[src*="/bn_"]
-vikacg.com##a[href^="http"] > img[src^="/assets/main/"]
+vikacg.com,vikacg.xyz##a[href^="http"] > img[src^="/assets/main/"]
 yigujin.cn##a[href^="http"]:not([href$=".html"]) > img[src*="/tp/"]
 55188.com##a[href^="http"]:not([href*=".55188."]) > img[src*="/portal/"]
 90oo.com##a[href^="http"]:not([href*=".90oo."]) > img[src*="/tp/"]
@@ -19360,7 +19390,6 @@ bmcx.com##div[id^="ggwz"]
 fx110.com,fx110.uk##div[id^="ghz"]
 so.com##div[id^="guang-"]
 hinews.cn##div[id^="hi_gg_"]
-vikacg.com##div[id^="home-row-ads"]
 fx678.com##div[id^="hta_"]
 wenku.baidu.com##div[id^="html-reader-AD-"]
 wenku.baidu.com##div[id^="html-reader-banner-"]
@@ -19910,6 +19939,7 @@ gohome.com.hk#@#div[id^="div-gpt-ad"]
 android-doc.com,apk.tw,chaojizhibo.net,chtoen.com,dizhishengcheng.com,doitwell.tw,epinv.com,ff14angler.com,fxpan.com,haoweichi.com,logi.im,lspdfrcn.com,moa.tw,moe48.com,numberempire.com,playok.com,reh.tw,shenfendaquan.com,vaptcha.com#@#ins.adsbygoogle
 android-doc.com,apk.tw,chaojizhibo.net,chtoen.com,dizhishengcheng.com,doitwell.tw,epinv.com,ff14angler.com,fxpan.com,haoweichi.com,logi.im,lspdfrcn.com,moa.tw,moe48.com,numberempire.com,playok.com,reh.tw,shenfendaquan.com,vaptcha.com#@#ins.adsbygoogle[data-ad-slot]
 @@.adserver.$domain=litv.tv
+@@||sovrn.com^$domain=mens1069.com
 @@.com/adv/$domain=my.ctrip.com
 @@.gif#$domain=b168.net|cnprint.org|huhupan.com|tgfcer.com|wgun.net
 @@.jpg#$domain=huhupan.com

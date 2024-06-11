@@ -1,9 +1,9 @@
-! Checksum: KY+20V0jKVvQHkqpFdQrJA
-! Diff-Path: ../patches/16/16-s-1717886122-3600.patch
+! Checksum: 0zrqUqL9T+QKpTMTqd/rdA
+! Diff-Path: ../patches/16/16-s-1718033732-3600.patch
 ! Title: AdGuard French filter
 ! Description: Liste FR + AdGuard French filter. Filter list that specifically removes ads on websites in French language.
-! Version: 2.0.45.12
-! TimeUpdated: 2024-06-08T22:33:33+00:00
+! Version: 2.0.45.16
+! TimeUpdated: 2024-06-10T15:33:32+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -207,7 +207,7 @@ japscan.lol#@##banner-top-right
 japscan.lol##.blur-background
 japscan.lol##.notice-message
 japscan.lol###promo.sticky-top
-japscan.lol#%#//scriptlet('abort-current-inline-script', 'EventTarget.prototype.addEventListener', '/((ad-img|banner)-|interstitial|getComputedStyle|eval)[\s\S]{1,6000}$/')
+japscan.lol#%#//scriptlet('abort-current-inline-script', 'EventTarget.prototype.addEventListener', '/((ad-img|banner)-|interstitial|getComputedStyle|eval|new Function)[\s\S]{1,6000}$/')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/147701
 trustmyscience.com##.adb-border
 ! https://github.com/AdguardTeam/AdguardFilters/issues/146165
@@ -972,7 +972,7 @@ iphon.fr,presse-citron.net##.od-wrapper
 autoplus.fr,iphon.fr,presse-citron.net##.vsly-player
 melty.fr#?#.placeholder-pub_dfp
 closermag.fr#?##left_wrapper > aside#text-22:has(> div.textwidget > div.akcelo-wrapper)
-leboncoin.fr###mainContent > div > div#lht-space-ad:upward(1)
+leboncoin.fr#?##mainContent > div > div#lht-space-ad:upward(1)
 lpnt.fr,lepoint.fr##.slotadm
 lpnt.fr,lepoint.fr##div#CONT_WRAP_PAVE_ATF
 lpnt.fr,lepoint.fr###TABOOLA_D
@@ -1590,6 +1590,8 @@ app.molotov.tv#%#//scriptlet('prevent-xhr', '/ping?token=')
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/181173
+||web2.$subdocument,domain=0calc.com|0calc.es|0calc.fr|0calc.in|0calc.ru|0rechner.de,badfilter
 ! https://github.com/uBlockOrigin/uAssets/issues/23806
 @@||ko-fi.com/cdn/scripts/overlay-widget.js$domain=japscan.lol
 @@||bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js$domain=japscan.lol
@@ -10966,6 +10968,7 @@ _siteunder/$popup
 ||jultscax.xyz^
 ||julyhadchose.com^
 ||jumpers.mobi^
+||jumpsbais.top^
 ||junebudcincher.com^
 ||justpush.biz^
 ||jvobcajoi.com^
@@ -12576,6 +12579,7 @@ _siteunder/$popup
 ||shahszaman.digital^
 ||shaiksuk.net^
 ||shakeegi.com^
+||shakoknock.com^
 ||shakotheclan.com^
 ||shallowinsect.com^
 ||shalseey.com^
@@ -14024,6 +14028,7 @@ _siteunder/$popup
 ||buzzadexchange.com^$popup,third-party
 ||bwinpartypartners.com^$popup,third-party
 ||camsoda.com^$popup,third-party
+||candy.ai^$popup,third-party
 ||cardmrket.com^$popup,third-party
 ||cash-duck.com^$popup,third-party
 ||cbshift.com^$popup,third-party
@@ -18339,7 +18344,6 @@ $stylesheet,third-party,domain=1fichier.com|7-up.net|9xupload.me|adshr.ink|adshr
 ||guide-du-travail.com/popupaudio.php$popup
 ||histoires-de-sexe.net/histoires-sexe-videos.php$popup
 ||hotvideo.fr/popup.php$popup
-||japscan.lol/*=$popup
 ||jetanimes.com/wp-content/uploads/$popup
 ||liligo.*/compareSites/$popup
 ||links.fhsarl.com^$popup,third-party
