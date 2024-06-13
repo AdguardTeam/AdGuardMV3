@@ -1,9 +1,9 @@
-! Checksum: 0zrqUqL9T+QKpTMTqd/rdA
-! Diff-Path: ../patches/16/16-s-1718033732-3600.patch
+! Checksum: 6g2oZySWvRXkrtdIQpp+dw
+! Diff-Path: ../patches/16/16-s-1718192096-3600.patch
 ! Title: AdGuard French filter
 ! Description: Liste FR + AdGuard French filter. Filter list that specifically removes ads on websites in French language.
-! Version: 2.0.45.16
-! TimeUpdated: 2024-06-10T15:33:32+00:00
+! Version: 2.0.45.20
+! TimeUpdated: 2024-06-12T11:33:00+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -207,7 +207,7 @@ japscan.lol#@##banner-top-right
 japscan.lol##.blur-background
 japscan.lol##.notice-message
 japscan.lol###promo.sticky-top
-japscan.lol#%#//scriptlet('abort-current-inline-script', 'EventTarget.prototype.addEventListener', '/((ad-img|banner)-|interstitial|getComputedStyle|eval|new Function)[\s\S]{1,6000}$/')
+japscan.lol#%#//scriptlet("abort-current-inline-script", "EventTarget.prototype.addEventListener", "/((ad-img|banner)-|interstitial|getComputedStyle|eval|new Function|'load','set')[\s\S]{1,6000}$/")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/147701
 trustmyscience.com##.adb-border
 ! https://github.com/AdguardTeam/AdguardFilters/issues/146165
@@ -855,6 +855,8 @@ $script,third-party,denyallow=rsc.cdn77.org|linkvertise.com|fastly.net|staticall
 !
 !
 !
+lephoceen.fr##div[class^="ad_ad_"]
+lephoceen.fr##div[class^="layout_megabanTopContainer"]
 lesechos.fr#?#span[shape="circle"] + span:contains(Publicité):upward(2)
 japscan.lol##.copineess
 japscan.lol##.tangoai
@@ -1096,7 +1098,7 @@ programme-television.org##.content_right > div.p-sticky
 programme-television.org##div[class*="placeholder"]
 lalibre.be##iframe[src^="//immobox.logic-immo.be/logic_immo_be/widget/"]
 igen.fr,trustmyscience.com##div[data-hbdbrk-parent="true"]
-closermag.fr,igen.fr,trustmyscience.com##body .ads:not(#style_important)
+lephoceen.fr,closermag.fr,igen.fr,trustmyscience.com##body .ads:not(#style_important)
 lcd-compare.com##.page-head-ad
 blog-rct.com##body .code-block
 neko-sama.fr##a[href^="https://buqkrzbrucz.com/"]
@@ -1590,6 +1592,10 @@ app.molotov.tv#%#//scriptlet('prevent-xhr', '/ping?token=')
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/181098
+@@||4hu.tv/static/adScript.js$domain=4hu.tv
+! https://forums.lanik.us/viewtopic.php?p=167241
+||candy.ai^$popup,third-party,badfilter
 ! https://github.com/AdguardTeam/AdguardFilters/issues/181173
 ||web2.$subdocument,domain=0calc.com|0calc.es|0calc.fr|0calc.in|0calc.ru|0rechner.de,badfilter
 ! https://github.com/uBlockOrigin/uAssets/issues/23806

@@ -1,9 +1,9 @@
-! Checksum: qDXZLtbt80X3b29+ZXoPYg
-! Diff-Path: ../patches/9/9-s-1718037305-3600.patch
+! Checksum: J3x/gerPh6vAJwWBjBlx/Q
+! Diff-Path: ../patches/9/9-s-1718260566-3600.patch
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish, Portuguese, and Brazilian Portuguese languages.
-! Version: 2.0.25.34
-! TimeUpdated: 2024-06-10T16:32:48+00:00
+! Version: 2.0.25.41
+! TimeUpdated: 2024-06-13T06:33:37+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -277,6 +277,9 @@
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/181341
+descargaseriestv.com###adBlockModal
+descargaseriestv.com#%#//scriptlet('set-constant', 'detectedAdblock', 'noopFunc')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/180692
 sbt.com.br#%#//scriptlet('google-ima3')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/179545
@@ -1402,6 +1405,14 @@ peru21.pe#@#.adstop
 !------- JS rules ---------------------!
 !--------------------------------------!
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/181313
+paraveronline.org#%#//scriptlet('remove-attr', 'href', 'a[href]#clickfakeplayer')
+paraveronline.org#%#//scriptlet('trusted-set-constant', 'dtGonza.playeradstime', '"-1"')
+! https://github.com/AdguardTeam/AdguardFilters/issues/181061
+verpelis.gratis#%#//scriptlet('remove-attr', 'href', 'a[href]#clickfakeplayer')
+verpelis.gratis#%#//scriptlet('trusted-set-constant', 'dtGonza.playeradstime', '"-1"')
+! https://github.com/AdguardTeam/AdguardFilters/issues/181063
+seriesbanana.com#%#//scriptlet('set-cookie', 'player', '1')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/180905
 cineplus123.org#%#//scriptlet('remove-attr', 'href', 'a[href]#clickfakeplayer')
 cineplus123.org#%#//scriptlet('trusted-set-constant', 'dtGonza.playeradstime', '"-1"')
@@ -1758,6 +1769,9 @@ newpct1.com#%#window.atob = function() { };
 !------- CSS fixes --------------------!
 !--------------------------------------!
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/181063
+seriesbanana.com#$##playx { display: none !important; }
+seriesbanana.com#$##plays { display: block !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/177517
 elmueble.com#$#header { top: 0 !important; }
 elmueble.com#$#.admobile { display: none !important; }
@@ -2087,6 +2101,12 @@ globo.com,amomeupet.org,cifras.com.br,gaz.com.br,placar.com.br,futebolinterior.c
 ! ##body .banner
 meiobit.com,brasilparalelo.com.br,tvonline.fan,laprensagrafica.com,ahoragranada.com,correio24horas.com.br,cnnespanol.cnn.com,motociclismo.es,sub100.com.br,theenemy.com.br,manhwas.net,rpp.pe,ambito.com,economipedia.com,informador.mx,elinformador.com.co,cronista.com,rionegro.com.ar,diariodecuyo.com.ar,voydeviaje.com.ar,guarda14.com,viapais.com.ar,agazeta.com.br,eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.*,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##body .banner
 !
+bajalogratis.com##a[href*="/redirect?tid="]
+bajalogratis.com##.separator > a[target="_blank"] > img
+bajalogratis.com##.cols-9 > .iconb-movi:has(+ .separator > a[target="_blank"] > img)
+tubeonline.net##.content > center> span:has(> a[target="_blank"])
+tubeonline.net##.widget:has(center > a[target="_blank"]:not([href*="tubeonline.net"],[href^="/"]))
+verpelis.gratis##.content > div[style] > a[href]
 peliculasonlinegratishd.com##.movie-image > a[target="_blank"]
 peliculasonlinegratishd.com##div[style] > a[target="_blank"] > img
 cbn.globo.com,cbn.globoradio.globo.com###home > div.sticky-container:has(> div.sticky-banner > section#banner_mega)
@@ -2106,7 +2126,7 @@ mirandogratis.com##a[target="_blank"] > img
 pelispedia.io##a[rel="nofollow"][style]
 yaske.org,zpelis.com,locopelis.com##div[class^="adsbutt_"]
 hardwaresfera.com##.widget_aawp_widget_bestseller
-streamgratis.biz##.movie-xyz > a[rel]
+verseries.cc,streamgratis.biz##.movie-xyz > a[rel]
 r7.com##aside > section[role="contentinfo"]:has(li > a[href^="https://cupons.r7.com/"])
 noticias.r7.com##div[id^="taboola-"]
 blocktrends.com.br###out-of-page-ad
@@ -2144,7 +2164,6 @@ chollometro.com##.cept-banner-id-398
 chollometro.com##.cept-banner-id-400
 ouvirmusica.com.br##div[id^="pub_"]:has(> div[id$="_ad"])
 ouvirmusica.com.br##.disclaimer[class^="baseRegular"]
-visortmo.com##a[href^="https://visortmo.com/library/manhwa/"][target="_blank "]
 estadao.com.br##div[data-paywall-wrapper="true"] > div[class^="Wrapper__Container-"]:has(> div[direction="column"] div.slick-slide div.ads-container)
 diariodenavarra.es##div[id^="AdSlot"]
 diariodenavarra.es##div[style="height:193px;"]
@@ -2294,12 +2313,13 @@ depor.com##div[class^="showTds"]
 ||viralize.tv^$domain=visortmo.com
 visortmo.com#?#div[id^="pills-populars"] > div.row > div.element:has(> a[href^="https://visortmo.com/library/"] > .thumbnail:not(:has(> style)))
 visortmo.com#?#div[id^="pills-populars"] > div.row > div.element:has(> a[href^="https://visortmo.com/library/"] > .thumbnail:matches-css(before, background-image: /\/images\/.*_push|pplr\d+_|n.?..?_|_ex/))
-visortmo.com#?#div[id^="pills-populars"] > div.row > div.element:has(> a[href^="https://visortmo.com/library/"] > .thumbnail > :is(span, .thumbnail-title):contains(/stream|atención|promo|netflix|ofert|deal|pack|\d+(\.|,)?\d+\$/i))
+visortmo.com#?#div[id^="pills-populars"] > div.row > div.element:has(> a[href^="https://visortmo.com/library/"] > .thumbnail > :is(span, .thumbnail-title):contains(/cine|stream|atención|promo|netflix|ofert|deal|pack|\d+(\.|,)?\d+\$/i))
 visortmo.com##:not(div[class="col-4 mx-0 px-0"]:not([style])) > a[href^="https://visortmo.com/library/"] > img
 visortmo.com##a[href="https://series.ly"] > img[src*=".gif"]
 visortmo.com##a[href^="https://visortmo.com/library/"] > img[src^="/"]
 visortmo.com##a[href^="https://visortmo.com/library/"] > img[src^="https://visortmo.com/"]
 visortmo.com##body :not(div[class="col-4 mx-0 px-0"]:not([style])) > a[href^="https://visortmo.com/library/"][target*="_blank"]
+visortmo.com##body :not(div[class="col-4 mx-0 px-0"]:not([style])) > style:first-child + a[href^="https://visortmo.com/library/"]:last-child:has(> .thumbnail:only-child)
 visortmo.com##body :not(div[class="col-4 mx-0 px-0"]:not([style])) > a[href^="https://visortmo.com/library/"]:has(> .thumbnail:is([style*="height:"], [style*="width:"]))
 visortmo.com#?#body :not(div[class="col-4 mx-0 px-0"]:not([style])) > a[href^="https://visortmo.com/library/"]:has(> .thumbnail > style:contains(/pplr\d+_|n.?..?_|height[\s\S]*?opacity[\s\S]*?background-image/))
 visortmo.com#?#body :not(div[class="col-4 mx-0 px-0"]:not([style])) > a[href^="https://visortmo.com/library/"]:has(> style:contains(/pplr\d+_|n.?..?_|(height|background-size)[\s\S]*?background-image/))
@@ -3257,7 +3277,7 @@ ahount.com##.inside-right-sidebar > aside[id^="custom_html-"]
 ||plantaomaringa.com/fotos/anuncios
 elpais.com###paywallOfferSmall
 elpais.com###cta-button-container
-cineplus123.org,cinemitas.org,androidayuda.com,sport.es,comandoplay.com,comandotorrents.to,adrenaline.com.br,ncultura.pt,animesdigital.org,wwwhatsnew.com,descargaseriestv.com,lifeder.com,elrellano.com,elintransigente.com,comando.la,remender.pe,noticiasautomotivas.com.br,idinheiro.com.br,diariodocomercio.com.br##body .code-block
+paraveronline.org,sayrodigital.net,cineplus123.org,cinemitas.org,androidayuda.com,sport.es,comandoplay.com,comandotorrents.to,adrenaline.com.br,ncultura.pt,animesdigital.org,wwwhatsnew.com,descargaseriestv.com,lifeder.com,elrellano.com,elintransigente.com,comando.la,remender.pe,noticiasautomotivas.com.br,idinheiro.com.br,diariodocomercio.com.br##body .code-block
 g37.com.br,anitube.biz,otvfoco.com.br##div[class^="code-block code-block-"][style^="margin: 8px"]
 bracontece.com.br##.testad
 aeiou.pt,noticiast.com##div[style="margin: 8px 0; clear: both;"]
@@ -5373,6 +5393,8 @@ adguard.info,adguard.com,adguard.app##.hello_from_adguard_ext
 ! Bad:  @@||example.org^$stealth (should be in AdGuard Base - allowlist_stealth.txt)
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/181303
+visortmo.com#@#.book
 ! https://github.com/AdguardTeam/AdguardFilters/issues/159573
 @@||googleads.github.io/videojs-ima/node_modules/video.js/dist/video.min.js$domain=cultura.uol.com.br
 @@||googleads.github.io/videojs-ima/node_modules/video.js/dist/video-js.min.css$domain=cultura.uol.com.br
