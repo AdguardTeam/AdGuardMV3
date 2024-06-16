@@ -1,9 +1,9 @@
-! Checksum: RDP+//JJ3OuygiYCUtgl+Q
-! Diff-Path: ../patches/1/1-s-1718238900-3600.patch
+! Checksum: e8VkxzKSFcdfY5oHWe3qjA
+! Diff-Path: ../patches/1/1-s-1718368686-3600.patch
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.91.47
-! TimeUpdated: 2024-06-13T00:31:20+00:00
+! Version: 2.0.91.54
+! TimeUpdated: 2024-06-14T12:31:03+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -5193,8 +5193,22 @@ mail.ru##.mailru-visibility-check
 mail.ru##div[class*="rb-slot_plug"]
 mail.ru,sportmail.ru##div[class*="m-fixed-panel__box"]
 mail.ru,sportmail.ru,~e.mail.ru,~my.mail.ru,~touch.mail.ru#%#//scriptlet('set-constant', 'Object.prototype.mimic', 'null')
+! mail.ru main page - under the search
+mail.ru#?#div[slot="main-column"] > div:matches-css(height : /^90px/)
 ! ad on main page
 [$path=/^\/$|mail\.ru\/\?/]mail.ru##div[slot="main-column"] > div.tgb-wrapper
+!
+[$path]mail.ru#%#//scriptlet('json-prune', '[].slot')
+!
+my.mail.ru##.l-music__banner-728x90
+my.mail.ru##.sp-video__billboard
+my.mail.ru#%#//scriptlet('set-constant', 'Object.prototype.isAdblockEnable', 'noopFunc')
+!
+love.mail.ru#?##app-wrapper > div:has(> div[class] > div[class] > div[class] > a[href*="/tips/?tip=DisableAdblock"])
+love.mail.ru###adblock-in-browser
+!
+e.mail.ru,octavius.mail.ru#%#//scriptlet('prevent-setTimeout', 'SMOKESCREEN')
+e.mail.ru,octavius.mail.ru#%#//scriptlet('json-prune', '[].slot')
 ! kino.mail.ru
 kino.mail.ru##.block_ad-text
 kino.mail.ru##button[class*="adv-marker"]
@@ -5205,11 +5219,20 @@ kino.mail.ru##button[class*="adv-marker"] + div.text
 ! horo.mail.ru
 ||auto.mail.ru/sw-mobile.js
 ! minigames.mail.ru - ads replacement script
+minigames.mail.ru#%#//scriptlet("abort-current-inline-script", "$", "advBlock")
+minigames.mail.ru#%#//scriptlet("abort-current-inline-script", "$", "showAd")
+!
+otvet.mail.ru#%#//scriptlet('json-prune', 'baits css direct *.slot')
 !
 e.mail.ru,octavius.mail.ru#%#//scriptlet('prevent-setTimeout', '())),v.Z.themes.on("themes:')
+@@||e.mail.ru^$generichide
+@@||octavius.mail.ru^$generichide
 ! Fix for the mobile version, when used #%#//scriptlet('prevent-setTimeout', '())),v.Z.themes.on("themes:')
 !
 ! ok.ru
+ok.ru#%#//scriptlet('json-prune', 'result.body.direct')
+||ok.ru/res/js/app/RightColumn_*.js
+ok.ru##.dialogWrapperBanner
 ! брендинг страницы авторизации
 ok.ru##.anonym_login_w+div.prl_txt
 ||st.mycdn.me/res/css/prod/login/login_megafon.*.css
@@ -5550,7 +5573,9 @@ ya.ru,yandex.*##li[class*="mini-suggest__item"] > a[href^="http://yabs."][href*=
 ya.ru,yandex.*##li[class*="mini-suggest__item"] > a[href^="https://yabs."][href*="/count/"]
 ya.ru,yandex.*##li[class*="mini-suggest__item"] > a[href^="http://yandex"][href*="/clck/"]
 yandex.*##body:not([data-bem*="pogoda"]) .mini-suggest__popup-content > li[data-type="nav"]
-ya.ru,yandex.*#?#.content__left > ul#search-result > li:has(> div.Organic > div.VanillaReact > a[href][data-event-required])
+! inline search ads
+ya.ru,yandex.*###search-result > [class*="Gj_card"]:has(> div.Organic > div > a[href][data-event-required])
+ya.ru,yandex.*###search-result > .serp-item:has(> div.Organic > div.VanillaReact > a[href][data-event-required])
 ! the ad is on the right side, which is mostly non-reproducible
 [$path=/search]ya.ru,yandex.*##.content__right div[class][data-bem]:has(> div[class] div[class] > button[data-maukl*="advertiser"])
 [$path=/search]ya.ru,yandex.*##.content__right div[class][data-cid]:has(> div[data-vnl*='"renderTo"'])
@@ -5592,10 +5617,12 @@ yandex.*#?#.business-card-title-view__actions > div.business-card-title-view__ad
 ! Yandex.Market
 !
 ! Yandex.Video
+[$path=/video]ya.ru,yandex.*##.Viewer-Content div[class$="Block_bottomRounded"]
 ! Video ad
 ! ads near the player
+[$path=/video]ya.ru,yandex.*##.Viewer > div[style^="height:"]
+[$path=/video]ya.ru,yandex.*##.Viewer-ScrollContainer > div[class$="Block"] > div[class*="_placement_"]
 [$path=/video]ya.ru,yandex.*##.DirectStripe
-[$path=/video]ya.ru,yandex.*##div[class*="_placement_before-player"]
 !
 ! Yandex.Afisha
 afisha.yandex.*##div[style="width:100%;height:250px;display:block"]
@@ -5632,7 +5659,7 @@ rasp.yandex.*##.Direct
 rasp.yandex.ru##.ThreadLayout__topDirect
 !
 ! Yandex.TV
-! the rule also relates to Afisha and Realty
+! the rule also relates to Afisha, Realty, Video
 !
 ! Yandex.Realty
 realty.ya.*##div[class*="PostBlocks__ad"]
@@ -7452,6 +7479,7 @@ $script,third-party,denyallow=rsc.cdn77.org|linkvertise.com|fastly.net|staticall
 !
 !
 !
+newsarmenia.am##.partner
 inkorr.com##.tg-box
 fakty.ua##.FKY_VIDEO
 24tv.ua###idealMediaWrapper
@@ -9940,7 +9968,7 @@ appleinsider.ru##a[title="Ремонт Apple"]
 banki.ru##div[data-adfox-container]
 gorod214.by##div[style="height: 250px; width: 1160px; overflow: hidden;"]
 ||cdn.hsmedia.ru/scrooge-client/hsm-creative-manager*.js
-thegirl.ru,parents.ru,psychologies.ru##.creative-container
+mydecor.ru,thegirl.ru,parents.ru,psychologies.ru##.creative-container
 psychologies.ru##.articles-page__banners_wrapper
 skachatfb2.ru##a[href="/get2.html"]
 mignews.com##.custom-banner
@@ -18696,6 +18724,10 @@ forum.ixbt.com##.mainpage_table > tbody > tr > td[align="center"]
 ||ixbt.com/cgi-bin/banqs.cgi
 !
 ! sdamgia.ru
+sdamgia.ru##iframe[src*="sdamgia.ru/adv/"]
+sdamgia.ru##main > div:not([class]):has(> div > div > div[style] > iframe[src*="sdamgia.ru/adv/"])
+sdamgia.ru##main > div:not([class]):has(> div[class] > div > div > div[class^="r_"])
+sdamgia.ru##aside > div:not([class*=" "]):has(> div[style] > a[target="_blank"] > img)
 sdamgia.ru##a[target="_blank"] > img[src^="data:image"]
 sdamgia.ru#$?#main > div:has(> div > div > script:contains(window.yaContextCb)) { position: absolute !important; top: -9999px !important; }
 sdamgia.ru#$?#div > aside > div:has(script:contains(window.yaContextCb)) { position: absolute !important; top: -9999px !important; }
