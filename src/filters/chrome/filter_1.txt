@@ -1,9 +1,9 @@
-! Checksum: e8VkxzKSFcdfY5oHWe3qjA
-! Diff-Path: ../patches/1/1-s-1718368686-3600.patch
+! Checksum: YNb82Kyhsf/YViBodg3o8Q
+! Diff-Path: ../patches/1/1-s-1718634925-3600.patch
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.91.54
-! TimeUpdated: 2024-06-14T12:31:03+00:00
+! Version: 2.0.91.59
+! TimeUpdated: 2024-06-17T14:31:04+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1235,7 +1235,6 @@ ucoz.ru/informer/
 ##.advert-horizontal
 ##.advert__banner
 ~browsershots.org##.advert_list
-~inboxdollars.com,~gazeteyenigun.com.tr,~andkon.com,~masseurporn.com,~wired.com##.advertisement:not(body)
 ##.advertiser
 ~macwelt.de,~redmondpie.com##.advertisment
 ##.advertka
@@ -1490,6 +1489,7 @@ ucoz.ru/informer/
 ! Bad: /banner.jpg (should be in general_url.txt)
 ! Bad: ||adssubdomain.legitwebsite.com^ (should be in adservers_firstparty.txt)
 !
+||vidscriptshark.com^
 ||1qe.info^
 ||23oct2023.site^
 ||fcepahafyq.com^
@@ -5574,8 +5574,8 @@ ya.ru,yandex.*##li[class*="mini-suggest__item"] > a[href^="https://yabs."][href*
 ya.ru,yandex.*##li[class*="mini-suggest__item"] > a[href^="http://yandex"][href*="/clck/"]
 yandex.*##body:not([data-bem*="pogoda"]) .mini-suggest__popup-content > li[data-type="nav"]
 ! inline search ads
-ya.ru,yandex.*###search-result > [class*="Gj_card"]:has(> div.Organic > div > a[href][data-event-required])
-ya.ru,yandex.*###search-result > .serp-item:has(> div.Organic > div.VanillaReact > a[href][data-event-required])
+[$path=/search]ya.ru,yandex.*###search-result > [class][data-cid]:has(> div.Organic > div a[href][data-event-required])
+[$path=/search]ya.ru,yandex.*###search-result > .serp-item:has(> div.Organic > div.VanillaReact > a[href][data-event-required])
 ! the ad is on the right side, which is mostly non-reproducible
 [$path=/search]ya.ru,yandex.*##.content__right div[class][data-bem]:has(> div[class] div[class] > button[data-maukl*="advertiser"])
 [$path=/search]ya.ru,yandex.*##.content__right div[class][data-cid]:has(> div[data-vnl*='"renderTo"'])
@@ -7724,6 +7724,12 @@ ngs.ru,i38.ru,chita.ru,lenta.ru,motor.ru,progorod58.ru,74.ru,zab.ru,tulapressa.r
 !
 !
 !
+eemojis.ru###content > div[style^="min-height:"]
+eemojis.ru##.post > div[style^="min-height:"]
+pornoklad.ink##div[id^="adContainer_"]
+pornoklad.ink##.fp-player > div.fp-ui-block
+pornoklad.ink##.fp-player > div.fp-ui ~ div[style]
+pornoklad.ink###video-spot
 adme.media##div[style="min-height:167px"]
 radiorecord.ru##a[href^="https://ad.adriver.ru/"]
 i38.ru##a[href^="https://irktorgnewss.ru/"]
@@ -12654,7 +12660,7 @@ comss.ru###ctr > div[align="center"][style="margin:20px 0 10px 0;"]
 comss.ru###ctr > div[align="center"][style="margin:20px 0 20px 0;"]
 comss.ru###ctr > div[align="center"][style="margin:20px 0 20px 0;"] + div[class="box"][align="center"]
 wi-fi.ru###curtainBanner
-northern-newspaper.ru,android-robot.com,med-heal.ru,gepard-kovrov.com,pet7.ru,pyatilistnik.org,slavasozidatelyam.ru,bizua.org,vkurier.by,altyn-orda.kz,comp-profi.com,gamerant.ru,magictemple.ru###custom_html-2
+eemojis.ru,northern-newspaper.ru,android-robot.com,med-heal.ru,gepard-kovrov.com,pet7.ru,pyatilistnik.org,slavasozidatelyam.ru,bizua.org,vkurier.by,altyn-orda.kz,comp-profi.com,gamerant.ru,magictemple.ru###custom_html-2
 trashexpert.ru,nastroyvse.ru,donbasstoday.ru,gepard-kovrov.com,teleggid.com,footbnews.ru###custom_html-3
 nastroyvse.ru,techblog.sdstudio.top###custom_html-4
 tattoo-mall.ru,makeupkey.ru,cheb-live.ru,nachedeu.com###custom_html-5
@@ -18916,6 +18922,8 @@ player.ex.co#@##ad-container
 ! Good: example.org#@#.ad
 ! Bad:  @@||example.org^$stealth (should be in AdGuard Base - allowlist_stealth.txt)
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/181584
+@@||yandex.ru/ads/$domain=magnit.ru
 ! https://github.com/AdguardTeam/AdguardFilters/issues/178590
 medium.com#@#.adi
 ! https://github.com/AdguardTeam/AdguardFilters/issues/178768
@@ -18930,8 +18938,6 @@ re.animemoonx.org#@#.reclama
 letemps.ch#@#.topad
 ! https://github.com/AdguardTeam/AdguardFilters/issues/166369
 ddl-warez.cc#@#.affiliate
-! https://github.com/AdguardTeam/AdguardFilters/issues/162363
-flasharch.com#@#.advertisement:not(body)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/160226
 fanex.pro#@#.banners1
 fanex.pro#@#.banners2
@@ -18939,8 +18945,6 @@ fanex.pro#@#.banners2
 moboi.narod.ru#@#img[width="240"][height="400"]
 ! https://github.com/AdguardTeam/AdguardFilters/issues/154274
 siteripz.cc#@##teasers
-! https://github.com/AdguardTeam/AdguardFilters/issues/149668
-xcums.com#@#.advertisement:not(body)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/146899
 @@||s0.2mdn.net/ads/studio/Enabler.js$domain=taodv.ru
 ! https://github.com/AdguardTeam/AdguardFilters/issues/146125
@@ -19040,8 +19044,6 @@ forums.overclockers.ru#@#div[id^="yandex_ad"]
 ||pubads.g.doubleclick.net/gampad/live/ads?iu=*&url=https%3A%2F%2Folympics.1tv.ru$xmlhttprequest,redirect=noopvast-3.0,important,domain=imasdk.googleapis.com
 @@||redirector.gvt1.com/videoplayback/id/*/source/dclk_video_ads/*/file.webm$domain=olympics.1tv.ru
 @@||gvt1.com/videoplayback/id/*/source/dclk_video_ads/*/file.webm$domain=olympics.1tv.ru
-! https://github.com/AdguardTeam/AdguardFilters/issues/89047
-allescortsguide.com#@#.advertisement:not(body)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/85331
 finn.no#@##ad-content
 ! https://github.com/AdguardTeam/AdguardFilters/issues/81118#issuecomment-841863892
@@ -19251,8 +19253,6 @@ club.foto.ru#@#.adv_link
 @@||s0.rbk.ru/*/resized/300x150_
 ! https://github.com/AdguardTeam/AdguardFilters/issues/23988
 @@||api.yadoma.tv/ads_view.php^
-! https://github.com/AdguardTeam/AdguardFilters/issues/23827
-ur8lv.com#@#.advertisement:not(body)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/23603
 @@/(smi2.ru/data/js/|rackcdn.com/stf.js|mc.yandex.ru/metrika/watch.js|yastatic.net/share2/share.js|news.net.finam.ru/data/js/|yastatic.net/pcode/adfox/loader.js)/$domain=primamedia.ru
 ! Prevent new tab opening
