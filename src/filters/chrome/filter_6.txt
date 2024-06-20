@@ -1,9 +1,9 @@
-! Checksum: +RX/8g+KrTko3fPhZK/XFw
-! Diff-Path: ../patches/6/6-s-1718660090-3600.patch
+! Checksum: dcCfOIEgJlrRIzw40oGKSQ
+! Diff-Path: ../patches/6/6-s-1718807763-3600.patch
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.42.42
-! TimeUpdated: 2024-06-17T21:32:48+00:00
+! Version: 2.0.42.45
+! TimeUpdated: 2024-06-19T14:33:33+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1129,9 +1129,10 @@ brigitte.de#%#//scriptlet('trusted-replace-xhr-response', 'true', 'false', 'glob
 plus.rtl.de#%#//scriptlet('abort-on-stack-trace', 'Object.prototype.adReinsertion', 'createSdk')
 !
 ! https://github.com/AdguardTeam/AdguardFilters/issues/179303
-tvspielfilm.de#%#//scriptlet('set-constant', 'DL8_GLOBALS.enableAdSupport', 'false')
-tvspielfilm.de#%#//scriptlet('set-constant', 'DL8_GLOBALS.useHomad', 'false')
-tvspielfilm.de#%#//scriptlet('set-constant', 'DL8_GLOBALS.enableHomadDesktop', 'false')
+tvspielfilm.de,tvtoday.de,chip.de,focus.de#%#//scriptlet('set-constant', 'DL8_GLOBALS.enableAdSupport', 'false')
+tvspielfilm.de,tvtoday.de,chip.de,focus.de#%#//scriptlet('set-constant', 'DL8_GLOBALS.useHomad', 'false')
+tvspielfilm.de,tvtoday.de,chip.de,focus.de#%#//scriptlet('set-constant', 'DL8_GLOBALS.enableHomadDesktop', 'false')
+tvspielfilm.de,tvtoday.de,chip.de,focus.de#%#//scriptlet('set-constant', 'DL8_GLOBALS.enableHomadMobile', 'false')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/178312
 stern.de#%#(()=>{Object.defineProperty=new Proxy(Object.defineProperty,{apply:(a,b,c)=>{const[d,e,f]=c;return"createAdPlayer"===e&&"function"==typeof c[2]?.get&&(c[2].get=()=>{}),Reflect.apply(a,b,c)}})})();
 ! https://github.com/uBlockOrigin/uAssets/issues/22883
@@ -3945,6 +3946,8 @@ wiwo.de##.hcf-partner
 merkurist.de##shipment
 merkurist.de##shipment-premium
 merkurist.de##div[sponsored-article-impression]
+merkurist.de#$#div[sparticle-impression-article] { visibility: hidden !important; }
+merkurist.de#$#div[sparticle-impression] { visibility: hidden !important; }
 ||msecnd.net/endpoint/shipment/$domain=merkurist.de
 ||deutschetageszeitung.de/images/Banner
 handelsblatt.com##div[data-teasertracking*="FirmenABC Teaser"]
@@ -6182,6 +6185,7 @@ _woz_banner_vote.
 ##.undertitlewerbung
 ##.userfunc-ad
 ##.videowerbung
+##.wadtag
 ##.werb_container
 ##.werb_textlink
 ##.werbeadd_ueber
@@ -11043,9 +11047,9 @@ mediamarkt.at,mediamarkt.de,saturn.de##div[data-test="mms-product-card"]:has(div
 jungefreiheit.de##div[data-widget_type="shortcode.default"]:has(.adsbygoogle)
 mobile.de##div[style="min-height:250px"]:has(#SRP_BILLBOARD_ADSENSE)
 jungefreiheit.de##div[style="text-align: center;"]:has(.adsbygoogle)
-windowspro.de##div[style]:has(> a[onclick*="://www.windows-pro.net/a.php"])
+windowspro.de##div[style]:has(> a[onclick*="://www.windows-pro.net/"])
 windowspro.de##div[style]:has(a[onclick*="/pcs/click"])
-windowspro.de##div[style]:has(div[style] > p > a[onclick*="://www.windows-pro.net/a.php"])
+windowspro.de##div[style]:has(div[style] > p > a[onclick*="://www.windows-pro.net/"])
 mein-mmo.de##li.article:has([data-type="sponsored"])
 dogforum.de##li:has(.wbbXdLocationAfter1stPostAsPost)
 dogforum.de##li:has(.wbbXdLocationPostList)
@@ -11115,8 +11119,6 @@ marbacher-zeitung.de#?#.appetizer:-abp-contains(Anzeige)
 mediamarkt.at,mediamarkt.de,saturn.de#?#li:-abp-has(div[data-test="mms-product-card"]:-abp-has(span:-abp-contains(Gesponsert)))
 mediamarkt.de#?#[data-test="mms-search-showcase"] + div:-abp-contains(Gesponsert)
 meissen-fernsehen.de#?#.text-center:-abp-contains(- Werbung -)
-metro.de#?#.mfcss_card-article-2--grid-container-flex > span:-abp-contains(WERBUNG)
-metro.de#?#.product-teaser-container:-abp-contains(WERBUNG)
 mmnews.de#?#.sp-module:-abp-has(span:-abp-contains(Kleinanzeigen))
 motorsport-total.com#?#.teaser_container.teaser-htmlcode.relative.row:-abp-has(.f1de-container-title:-abp-contains(Die besten Leasing-Deals))
 notebookcheck.com#?#.introa_news:-abp-contains(Anzeige)

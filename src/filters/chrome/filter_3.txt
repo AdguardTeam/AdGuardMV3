@@ -1,9 +1,9 @@
-! Checksum: 59QiRGmH8Y7s4x7VL+Sfgw
-! Diff-Path: ../patches/3/3-s-1718645659-3600.patch
+! Checksum: 4j5/eaZ5mxQDv6DFLcIxog
+! Diff-Path: ../patches/3/3-s-1718868970-3600.patch
 ! Title: AdGuard Tracking Protection filter
 ! Description: The most comprehensive list of various online counters and web analytics tools. Use this filter if you do not want your actions on the Internet to be tracked.
-! Version: 2.0.71.13
-! TimeUpdated: 2024-06-17T17:32:04+00:00
+! Version: 2.0.71.17
+! TimeUpdated: 2024-06-20T07:33:03+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -3863,6 +3863,8 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ||ib.snssdk.com^
 ||xlog.snssdk.com^
 ||log.snssdk.com^
+||au1.qualtrics.com^
+||siteintercept.qualtrics.com^
 ||tjk-njk.com^
 ||tracker.insurads.com^
 ||cdn.pubnub.com^
@@ -37686,6 +37688,7 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ! Blocking piwik analytics subdomain(for DNS filtering)
 |piwik.
 !
+||status.techtarget.itmedia.co.jp^
 ||ephemeralcounters.api.roblox.com^
 ||px.adfulplatform.com^
 ||d9jj3mjthpub.cloudfront.net^
@@ -67376,6 +67379,12 @@ inapps.appsflyersdk.com^
 ! For platforms which do not support $redirect rules
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/181699
+@@||globo.com^$cookie=_ga
+@@||globo.com^$cookie=/^_ga_/
+globo.com#%#//scriptlet('trusted-set-cookie', '_ga', '1.1')
+globo.com#%#//scriptlet('trusted-set-constant', 'libAnalytics', '{"status":{"dataAvailable":false}}')
+globo.com#%#//scriptlet('trusted-set-constant', 'dataLayer', '[{"bd_suser_provider": "1", "bd_suser_code": "1"}]')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/181458
 @@||googletagmanager.com/gtm.js$domain=sonos.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/181268

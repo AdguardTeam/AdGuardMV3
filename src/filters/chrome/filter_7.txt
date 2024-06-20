@@ -1,9 +1,9 @@
-! Checksum: ZwP6sgFEXE4yTlgtqJaSPA
-! Diff-Path: ../patches/7/7-s-1718638518-3600.patch
+! Checksum: 2OnDNzMl5GTY9B6iWRWBsw
+! Diff-Path: ../patches/7/7-s-1718868971-3600.patch
 ! Title: AdGuard Japanese filter
 ! Description: Filter that enables ad blocking on websites in Japanese language.
-! Version: 2.0.52.84
-! TimeUpdated: 2024-06-17T15:32:50+00:00
+! Version: 2.0.52.93
+! TimeUpdated: 2024-06-20T07:33:18+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -92,6 +92,7 @@
 ! not for DNS
 ||ias.rakuten.co.jp^$third-party,domain=~rakuten-co.jp
 !
+||appropriate-bag.pro^
 ||adleap.jp^
 ||ad.unique1static.jp^
 ||appdraft.link^$third-party
@@ -1047,7 +1048,7 @@ nan-net.com#%#//scriptlet('prevent-setTimeout', 'movie_cnt', '300')
 ! popup
 kokeshi-doll.com#%#//scriptlet('prevent-window-open')
 ! popstate overlay
-realsound.jp,h1g.jp#%#//scriptlet('abort-current-inline-script', 'document.referrer', 'gmo_bb')
+encount.press,realsound.jp,h1g.jp#%#//scriptlet('abort-current-inline-script', 'document.referrer', 'gmo_bb')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/128686
 uraaka-joshi.com#%#//scriptlet('prevent-window-open')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/146129
@@ -1151,6 +1152,8 @@ avgle.com#%#//scriptlet('abort-current-inline-script', '__htapop')
 !-------CSS---------
 !-------------------
 !
+! https://github.com/tofukko/filter/issues/96
+nlab.itmedia.co.jp#$##globalHeader { min-height: 0 !important; margin: 0 !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/112640
 eromovie-s.com#$#.movie-watch { display: block !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/179821
@@ -1556,7 +1559,8 @@ count/login/?=id/log/*/login.asp$document,domain=cc|com
 /KDDI2024.apk^$document
 .top/nc/bbs22.php$document
 /mart/*.html?zenid=$document,domain=cfd|top
-/?bcda=*)-$document
+?bcda=($document
+/?bcda=+$document
 ||azurestaticapps.net/*=(0101)-$document
 /Softbank2024.apk$document
 .tk/windows~activation-error/$document
@@ -1730,6 +1734,7 @@ gundamlog.com###more > iframe[src^="https://richlink.blogsys.jp"]
 !
 !
 !
+filmarks.com##.c-heading-2--with-icon-s:has(+ div#taboola-below-article-thumbnails)
 oricon.co.jp##.affiliateLinks
 oricon.co.jp##.relatedLinksPhoto > div[style^="width:"][style$="float: left;"]
 oricon.co.jp#$#.relatedLinksPhoto > ul#orecView2 { margin-top: 0 !important; }
@@ -1740,6 +1745,7 @@ mainichi.jp##div[id^="ad-"]
 ||altema.jp/*/ad_random.js
 ||altema.jp/*/ads_interstitial.js
 ||altema.jp/*/ffbeadsjs.js
+altema.jp###adpcheader
 altema.jp##.ad_random_tag
 altema.jp##.all-center:has(> tbody > tr > td > a[href^="https://t.quoriza.net"] > img)
 altema.jp##.article > h2:has(+ p > a[href*="/?code="] > img)
@@ -1787,7 +1793,7 @@ akibablog.blog.jp##div[style^="top:0px;position:fixed;z-index:0;left:50%;"]
 iot-consulting.co.jp##.entry-content > div.sng-box:has(a[href^="//ck.jp.ap.valuecommerce.com/"])
 itachirin.com##p:has(> span > ins.adsbygoogle)
 chara.ge###cls-improvement
-kingsmor.com##div[class^="advads-"]
+ygkb.jp,kingsmor.com##div[class^="advads-"]
 hamakore.yokohama##.admess
 second-storage.com##article > div[id^="custom_html"]:has(> div.textwidget  > a[href^="https://affiliate.suruga-ya.jp/"])
 soccer-king.jp##.free-block
@@ -5650,6 +5656,7 @@ digimart.net##.adBnrList
 digimart.net##.addBadge
 digimart.net##.digimart_PC_resp01
 ||estar.jp/assets/js/ad/
+estar.jp##div[style$="min-width: 250px; min-height: 300px;"]
 estar.jp##iframe[title="Advertisement"]
 inacity.jp,kakomonn.com##div[class^="advertisement"]
 kakomonn.com##.ctr_ad
@@ -6773,7 +6780,6 @@ atmarkit.itmedia.co.jp###globalHeaderMiddle
 nlab.itmedia.co.jp##.contents_bannar
 nlab.itmedia.co.jp##.admsg
 nlab.itmedia.co.jp##.bannar
-nlab.itmedia.co.jp###globalHeader
 nlab.itmedia.co.jp##.headerbannar
 gamewith.jp##div[class$="adWrapper"]
 gamewith.jp##.review_amazon_ranking_container
@@ -7601,6 +7607,8 @@ fx-koryaku.com##.textwidget > center > a[target="_blank"]
 ||mainichikirei.jp/assets/kirei/css/*_ad.css
 ||dmm.co.jp^$domain=exploader.net
 ||exploader.net/d/ebook//digital/e-book/
+exploader.net###newfiles > ul.list > li[style*="height: 120px;"]
+exploader.net##div[style="width: 1120px;margin-left: -63px;margin-bottom: 5px;height: 450px;display: flex;align-items: center;"]
 exploader.net##[data-pr]
 exploader.net##a[href="#"]
 exploader.net##div[class^="d_"]
@@ -8386,7 +8394,8 @@ famitsu.com##.article-body__contents-pr-primary
 famitsu.com##.banner-footer-rect-container
 anonymous-post.mobi##ad.widget_custom_html
 ||popin.cc/popin_video6_ads-min.js
-syosetu.org##div[id^="\31"][style*="height"][style*="width"]
+syosetu.org##div[data-cptid][style]
+syosetu.org##div[style$="height:90px; width:728px;"]
 syosetu.org##div[style^="margin:0 auto;height:"][style$="px;"]
 ||syosetu.com/sub/yomouview/js/ad_scroll.js
 ||jartic.or.jp/d/banner/substitute/$subdocument
