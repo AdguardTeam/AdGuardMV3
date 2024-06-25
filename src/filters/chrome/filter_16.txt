@@ -1,9 +1,9 @@
-! Checksum: mv7KyGzdxwGGRbCnu74iYw
-! Diff-Path: ../patches/16/16-s-1719052503-3600.patch
+! Checksum: 1x7PtWmX+2qV3p5z49wPqQ
+! Diff-Path: ../patches/16/16-s-1719250484-3600.patch
 ! Title: AdGuard French filter
 ! Description: Liste FR + AdGuard French filter. Filter list that specifically removes ads on websites in French language.
-! Version: 2.0.45.30
-! TimeUpdated: 2024-06-22T10:33:13+00:00
+! Version: 2.0.45.34
+! TimeUpdated: 2024-06-24T17:32:55+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -207,7 +207,7 @@ japscan.lol#@##banner-top-right
 japscan.lol##.blur-background
 japscan.lol##.notice-message
 japscan.lol###promo.sticky-top
-japscan.lol#%#//scriptlet("remove-node-text", "script", "/ApoZow|'(ads?-350|ad-img-slot|ad_inview_area|div-leader-ad)|\['style'\]\['display'\]/")
+japscan.lol#%#//scriptlet("remove-node-text", "script", "/ApoZow|'(ads?-\d+|ad-img-slot|ad_inview_area|div-leader-ad)|\['style'\]\['display'\]/")
 japscan.lol#%#//scriptlet('abort-on-stack-trace', 'Array.prototype.filter', '/_1x|window\.<computed>[\s\S]*?at [a-zA-Z]{1,5}\d{1,7}/')
 japscan.lol#%#//scriptlet('abort-on-stack-trace', 'getComputedStyle', '_0x')
 japscan.lol#%#//scriptlet("abort-current-inline-script", "EventTarget.prototype.addEventListener", "/((ad-img|banner)-|interstitial|getComputedStyle|eval|new Function|'load','set')[\s\S]{1,6000}$/")
@@ -633,6 +633,8 @@ $script,redirect-rule=noopjs,domain=tf1info.fr
 !------- JS rules ---------------------!
 !--------------------------------------!
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/181954
+sudouest.fr#%#//scriptlet('adjust-setTimeout', 'return t()', '*', '0.001')
 ! https://github.com/uBlockOrigin/uAssets/issues/23806
 japscan.lol#%#//scriptlet('prevent-setTimeout', 'sessionStorage')
 ! https://github.com/uBlockOrigin/uAssets/issues/23802
@@ -1597,6 +1599,12 @@ app.molotov.tv#%#//scriptlet('prevent-xhr', '/ping?token=')
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/182156
+pisos.com#@#div[data-ad-id]
+! https://github.com/AdguardTeam/AdguardFilters/issues/181751
+#@#.croco_wrapper, [onclick*="_"], [onclick*="var"], [onmousedown*="\x"], [style*="height: 90px;"]
+! https://github.com/AdguardTeam/AdguardFilters/issues/181954
+@@||ultimedia.com/js/common/smart.js$domain=sudouest.fr
 ! https://github.com/AdguardTeam/AdguardFilters/issues/181098
 @@||4hu.tv/static/adScript.js$domain=4hu.tv
 ! https://forums.lanik.us/viewtopic.php?p=167241

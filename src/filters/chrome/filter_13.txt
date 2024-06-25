@@ -1,9 +1,9 @@
-! Checksum: qHl83GI11zopNcz4vAgAFA
-! Diff-Path: ../patches/13/13-s-1718976904-3600.patch
+! Checksum: q+sl8raEF/HM2RFt5mf/rQ
+! Diff-Path: ../patches/13/13-s-1719293666-3600.patch
 ! Title: AdGuard Turkish filter
 ! Description: Filter list that specifically removes ads on websites in Turkish language.
-! Version: 2.0.52.13
-! TimeUpdated: 2024-06-21T13:33:02+00:00
+! Version: 2.0.52.15
+! TimeUpdated: 2024-06-25T05:32:35+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1811,6 +1811,9 @@ rotaborsa.com#%#//scriptlet('trusted-replace-node-text', 'body', '-->', '/^-->$/
 .gif$~third-party,domain=giynikgazetesi.com
 hdfilmcehennemi.*##.money
 hdfilmcehennemi.*##.money-text
+hdfilmcehennemi.*##.money-wrapper
+hdfilmcehennemi.*##.money-child
+hdfilmcehennemi.*##.money-item
 hdfilmcehennemi.*##.ps-head-container
 hdfilmcehennemi.*##.col > .alert-danger-50.alert
 jetfilmizle.de##img[src^="reklam/"]
@@ -1851,9 +1854,6 @@ setfilmizleyin.com##.textreklam
 ||altaybetgir.cdn.ampproject.org/i/altaybetgir.com/*.gif
 ||filmizletv.*/*.mp4$~third-party
 oyungezer.com.tr##.inner-wrapper-sticky > div.featured-single:has(> .bannergroup-300)
-hdfilmcehennemi.us##.ps-head-container:empty
-||hdfilmcehennemi.us/rekla/$media
-hdfilmcehennemi.us##.card-money
 teknolojioku.com##body .adpro
 hdfilmcehennem.net##a[title="reklam_videoustu1"]
 ||filmizlehdfilm.com/*.mp4
@@ -1947,7 +1947,7 @@ fullhdfilm.pro##.hrklm_oblong
 yabancidizi.io#?#.poster > div:has(> div.bx-sidebar > div.flex > a[href^="https://kzn.pw/"])
 dizimom.*##.videoustuheader
 ||ssl.p.jwpcdn.com/player/*/vast.js
-||dizimom.de/wp-content/themes/dizimom/js/vastt.js
+||dizimom.*/wp-content/themes/dizimom/js/vastt.js
 merlininkazani.com##.leader-board-row
 dizimini.com###tv-spoox2 > .frontBgItem
 ||sinema.cc/demo/prerollvid.php
@@ -3546,8 +3546,8 @@ cosmoturk.com###bannerTop
 cosmoturk.com##.midiBanners
 ||erosfilmizle.*/mostbet.mp4
 ||erosfilmizle.*/gif.gif
-diziyoutv.com,erosfilmizle.*,dizipal.org,dizimom.pro,asyadiziizle.com,dizicaps.*,hdfilmizle.in,yabancidizilertv.*##.videoalt
-diziyoutv.com,erosfilmizle.*,dizipal.org,dizimom.pro,asyadiziizle.com,dizicaps.*,hdfilmizle.in,yabancidizilertv.*##.videoust
+diziyoutv.com,erosfilmizle.*,dizipal.org,dizimom.*,asyadiziizle.com,dizicaps.*,hdfilmizle.in,yabancidizilertv.*##.videoalt
+diziyoutv.com,erosfilmizle.*,dizipal.org,dizimom.*,asyadiziizle.com,dizicaps.*,hdfilmizle.in,yabancidizilertv.*##.videoust
 mengen.gen.tr##.slider3Widget
 memleketimbolu.com##.mansetyani
 ademyurt.com###alt > div.at

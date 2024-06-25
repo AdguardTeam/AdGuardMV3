@@ -1,9 +1,9 @@
-! Checksum: GqWWIxPJ1yPQUsYReSYKNg
-! Diff-Path: ../patches/6/6-s-1719088486-3600.patch
+! Checksum: eALTyVx9Eq9kFZhdrIdnTQ
+! Diff-Path: ../patches/6/6-s-1719246914-3600.patch
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.42.51
-! TimeUpdated: 2024-06-22T20:32:42+00:00
+! Version: 2.0.42.55
+! TimeUpdated: 2024-06-24T16:32:24+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1250,8 +1250,6 @@ ani-stream.com#%#AG_onLoad(function() { setTimeout(function() { if(typeof loadpl
 pornoente.tv#%#//scriptlet("set-constant", "vpUsePreRoll", "false")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/28804
 maniac.de#%#//scriptlet('set-constant', 'td_ad_background_click_link', '')
-! radio.at, radio.net, radio.de -- blocking PreRoll by faking user agent to Google bot
-radio.at,radio.net,radio.de#%#document.cookie = "google_nomod=547";
 ! https://github.com/AdguardTeam/AdguardFilters/issues/33849
 ! https://github.com/AdguardTeam/AdguardFilters/issues/30443
 ! https://github.com/AdguardTeam/AdguardFilters/issues/28684
@@ -1627,6 +1625,9 @@ formel1.de,krautundrueben.de,motorsport-total.com,traktorpool.de,fnweb.de,laborj
 !
 !
 !
+focus.de##div[id*="AdSlot"]
+focus.de##.Ad-Slot
+t-online.de#?#div[data-tb-region-item]:has(> article:only-child > .grid > span:contains(ANZEIGE))
 chip.de##aside[role="complementary"]:has(> .Ad:only-child)
 nordbayern.de##.modul--newsticker-more:has(> div[id^="traffective-ad-"]:first-child + div[id^="traffective-ad-"]:last-child)
 nordbayern.de###traffective-ad-Billboard
@@ -9585,7 +9586,6 @@ radioholiday.de##.elementor-element-f3e9036
 spielen-slots.at,spielen-slots.com,spielen-slots.de##.end-to-end-banner
 etcg.de##.eral_wrapper
 marina.ch##.et_pb_row_0_tb_header
-kaufland.de##.exp-vision
 immobilienscout24.de##.expose-ad-placeholder
 cannabis-medic.eu##.externalURL
 news.de##.extraContentContainer
