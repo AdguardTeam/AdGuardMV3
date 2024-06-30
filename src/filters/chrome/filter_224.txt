@@ -1,9 +1,9 @@
-! Checksum: 93z9RXtm/vyxBVwOiSp7dQ
-! Diff-Path: ../patches/224/224-s-1719473706-3600.patch
+! Checksum: BcqbeV0E7KmoNbOP7YRyQQ
+! Diff-Path: ../patches/224/224-s-1719725690-3600.patch
 ! Title: AdGuard Chinese filter
 ! Description: EasyList China + AdGuard Chinese filter. Filter list that specifically removes ads on websites in Chinese language.
-! Version: 2.1.18.8
-! TimeUpdated: 2024-06-27T07:33:08+00:00
+! Version: 2.1.18.24
+! TimeUpdated: 2024-06-30T05:33:06+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -330,6 +330,9 @@
 ! Bad: ||ad.doubleclick.net^ (should be in adservers.txt)
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/182114
+ftchinese.com#@#.AdsBox
+ftchinese.com#%#//scriptlet('prevent-setTimeout', '.offsetHeight')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/182204
 manwa.fun#%#//scriptlet("prevent-setTimeout", "/alert\('请关闭.*Chrome/")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/180010
@@ -1103,6 +1106,11 @@ $script,third-party,denyallow=authkong.com|rsc.cdn77.org|linkvertise.com|fastly.
 !
 !
 !
+baike.baidu.com###J-union-wrapper
+letsplay.tw##.entry-content > div[style="min-width: 300px; min-height:300px;"]
+yanaifei.net#$?#.swiper-wrapper > .swiper-slide:has(> .banner[href^="https://"][target="_blank"]) { remove: true; }
+health.tvbs.com.tw##.fromEditor > section.ed-px-5.ed-lg-hidden
+health.tvbs.com.tw##.h-full > div.flex-wrap > div.max-w-full > div.px-5.lg\:hidden:has(> div > div.flex.justify-center)
 dailygh.com###video_fade
 dailygh.com##.div_removeable
 xgcartoon.com,dailygh.com###video-top-ad
@@ -1878,7 +1886,6 @@ pixnet.net##div[class*="article-ad"]
 ptthito.com##.scupio-f
 ||img.scupio.com/js/ad.js
 ftvnews.com.tw##div[id^="div_gpt_"]
-||missav.com/static/img/partners/
 bjd.com.cn##.screenadButtom
 bjd.com.cn##.bjd-advertisement
 mydowndown.com##p[style="color:#ff0000;"] > a[target="_blank"]
@@ -2843,6 +2850,11 @@ adguard.info,adguard.com,adguard.app##.hello_from_adguard_ext
 ! Bad:  @@||example.org^$stealth (should be in AdGuard Base - allowlist_stealth.txt)
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/182017
+@@||republicbharat.com/_app/immutable/chunks/FloatAd.*.js$domain=republicbharat.com
+@@||republicbharat.com/_app/immutable/assets/FloatAd.*.css$domain=republicbharat.com
+! https://github.com/AdguardTeam/AdguardFilters/issues/182307
+app.n26.com#@#.bl > .gg
 ! https://github.com/AdguardTeam/AdguardFilters/issues/180027
 @@||research.hchs.hc.edu.tw/*/banner.php$domain=research.hchs.hc.edu.tw
 ! https://github.com/AdguardTeam/AdguardFilters/issues/178988
@@ -3048,6 +3060,7 @@ nfmovies.com#@?#div[id]:-abp-has(>img[onclick="openurl()"])
 -*-*-*-*.as^$script,third-party
 -*-*-*-*.panda^$script,third-party
 /smflow/get.*=gAdCallback_
+wss://*.xyz:*?x=$third-party
 -1316632262.cos.
 -1316899192.cos.
 -1688-wp-media/ads/
@@ -4722,6 +4735,34 @@ newduba.cn###jq_youxi
 ||67.21.92.*.gif
 ||107.167.16.*.gif
 ||cupfox.app^$third-party
+||mdoshbx.top^
+||gklox.cn^
+||rmioswx.icu^
+||trvxbd.xyz^
+||a1bw2cup.top^
+||uyislot.top^
+||555ppp777ppp.com^
+||666ppp222ppp.com^
+||sxlmggx12.com^
+||adhvz.cn^
+||qeedaa.xyz^
+||ldoshbl.top^
+||kfycmiu.icu^
+||xrmfjzqo.xyz^
+||bbxyxt.xyz^
+||5gxs.org^
+||vupsnx.xyz^
+||szddm.cn^
+||kopvx.cn^
+||n2wqmr4lmaummar.xyz^
+||bdoshbv.top^
+||bijmz.cn^
+||cqcrci.xyz^
+||jiusudie.com^
+||blzwvb.xyz^
+||ddomjhr.icu^
+||hgngrf.xyz^
+||666ppp888ppp.com^
 ||efhis.cn^
 ||udoshbt.top^
 ||lhtzfn.xyz^
@@ -4731,6 +4772,7 @@ newduba.cn###jq_youxi
 ||szdtf.cn^
 ||tyisloi.top^
 ||pjdthz.xyz^
+||vqlwoy.xyz^
 ||talyrt.xyz^
 ||okagcw.xyz^
 ||vtlyrj.xyz^
@@ -14534,7 +14576,7 @@ hxsame.hexun.com$domain=~quote.hexun.com
 ||ssp.moeli.net^
 ||jinman4.com/ad/
 moe-acg.com##A[href*=".x8o.de"]
-thwiki.cc###a-carousel
+dailygh.com###video_fade
 moe-acg.com##div[style="position: relative;width: 100%;height: 0;padding-bottom: 18%;"]
 szxx.com.cn###A0
 ijiandao.com,ijiandao.cn##.index-ad
@@ -22112,6 +22154,7 @@ bxwx888.org###bdstatic
 duanwenxue.com##.qgzdwx
 smjb.net##div[style*="height: 50%"]
 ||139xiaoshuo.com/css/js/tools.
+||fkxs.net/tops/
 ||13txt.net/js/ssgdd.
 ||1pwx.com/js/ck.js
 ||222xs.com/js/greentea.js
@@ -22236,6 +22279,7 @@ $image,third-party,domain=258zw.com
 /timer.aspx?719$script,~third-party
 /vbvb_*_pmpm.js
 /vjioew-1322507002.
+/tops/fmt.js?v=
 /xxgg/0dd*.js
 /xxgg/app.js
 /xxgg/book.js
