@@ -1,9 +1,9 @@
-! Checksum: wA/7MwDvjWsAi5JSvz+SOw
-! Diff-Path: ../patches/1/1-s-1719849973-3600.patch
+! Checksum: g6oKKEHF/B4YLViC4DJwKg
+! Diff-Path: ../patches/1/1-s-1720024508-3600.patch
 ! Title: AdGuard Russian filter
 ! Description: Filter that enables ad blocking on websites in Russian language.
-! Version: 2.0.91.96
-! TimeUpdated: 2024-07-01T15:59:30+00:00
+! Version: 2.0.92.1
+! TimeUpdated: 2024-07-03T16:31:09+00:00
 ! Expires: 10 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -5198,8 +5198,6 @@ mail.ru##.mailru-visibility-check
 mail.ru##div[class*="rb-slot_plug"]
 mail.ru,sportmail.ru##div[class*="m-fixed-panel__box"]
 mail.ru,sportmail.ru,~e.mail.ru,~my.mail.ru,~touch.mail.ru#%#//scriptlet('set-constant', 'Object.prototype.mimic', 'null')
-! mail.ru main page - under the search
-mail.ru#$?#div[slot="main-column"] > [class]:matches-css(height : /^89\..*px/) { remove: true; }
 ! ad on main page
 [$path=/^\/$|mail\.ru\/\?/]mail.ru##div[slot="main-column"] > div.tgb-wrapper
 !
@@ -5213,8 +5211,6 @@ love.mail.ru#?##app-wrapper > div:has(> div[class] > div[class] > div[class] > a
 love.mail.ru###adblock-in-browser
 !
 e.mail.ru##.layout__column_right:has(> div > div.advert-column)
-e.mail.ru,octavius.mail.ru#%#//scriptlet('prevent-setTimeout', 'SMOKESCREEN')
-e.mail.ru,octavius.mail.ru#%#//scriptlet('json-prune', '[].slot')
 ! kino.mail.ru
 kino.mail.ru##.block_ad-text
 kino.mail.ru##button[class*="adv-marker"]
@@ -5231,7 +5227,6 @@ minigames.mail.ru#%#//scriptlet("abort-current-inline-script", "$", "showAd")
 !
 otvet.mail.ru#%#//scriptlet('json-prune', 'baits css direct *.slot')
 !
-e.mail.ru,octavius.mail.ru#%#//scriptlet('prevent-setTimeout', '())),v.Z.themes.on("themes:')
 @@||e.mail.ru^$generichide
 @@||octavius.mail.ru^$generichide
 ! Fix for the mobile version, when used #%#//scriptlet('prevent-setTimeout', '())),v.Z.themes.on("themes:')
@@ -5868,9 +5863,6 @@ sdamgia.ru#%#//scriptlet('abort-on-property-read', 'new_rotator_changed')
 softslot.com,torrent-soft.pro#%#//scriptlet('set-cookie', 'sm-view', '1')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/148496
 viks.tv#%#//scriptlet('prevent-window-open')
-! https://github.com/AdguardTeam/AdguardFilters/issues/141785
-!+ NOT_PLATFORM(windows, mac, android)
-e.mail.ru,octavius.mail.ru#%#//scriptlet('trusted-replace-xhr-response', '/\[{"json":{"result":{"status":200\,"body":{"direct".+/', '/\[{"json":{"result":{"status":200\,"body":{"direct":{}}}}}\]/', '/api/v1')
 ! https://forum.adguard.com/index.php?threads/51458/
 ip.tivix.co#%#//scriptlet('prevent-window-open')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/140602
@@ -5957,8 +5949,6 @@ scrin.org#%#//scriptlet("abort-on-property-read", "windowprops")
 scrin.org#%#//scriptlet('remove-attr', 'onclick', '#view-full-image > a[target="_blank"][onclick]')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/65645
 4rl.ru#%#//scriptlet("prevent-window-open")
-! https://github.com/AdguardTeam/AdguardFilters/issues/65168
-e.mail.ru#%#//scriptlet('remove-class', 'b-viewer_advert-line')
 ! playground.ru - clickunder
 playground.ru#%#//scriptlet('remove-attr', 'data-settings', 'body[id="userNotAuthorized"]')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/64994
@@ -7735,7 +7725,9 @@ ivanovonews.ru,gorodn.ru,bits.media,devyatka.ru,gazeta-n1.ru,gorod48.ru,hi-fi.ru
 !
 !
 !
-||redheadsound.studio/templates/rhs_main_player_test_prod/images/pacany.jpg
+lostfilm.tv##.lstfml > a[style^="display:block;width:100%;padding-top:"]
+/\/images\/(hod|pacany)\.jpg/$domain=redheadsound.studio
+redheadsound.studio##div[class^="dle_b_"]
 5koleso.ru##.right-col:has(> div[class*="banner-"])
 ru.savefrom.net#%#//scriptlet('prevent-window-open')
 ru.savefrom.net#%#//scriptlet('set-constant', 'clickAds.init', 'noopFunc')
@@ -11126,7 +11118,7 @@ allbasketball.org##div[class^="block-catfish"]
 ||allbasketball.org/templates/AB2014/images/catfish/
 ||allbasketball.org/templates/AB2014/front/js/block-catfish*.js
 allmmorpg.ru##a[href^="https://allmmorpg.ru/index"][target="_blank"]
-tgstat.com,tgstat.ru##.mg-aors
+tgstat.com,tgstat.ru##.slick-slider
 avito.ru##.avito-ads-placeholder
 avito.ru##.item-price-banner
 lostpix.com##.infotext
@@ -18815,6 +18807,7 @@ adme.media##div[data-test-id="article-content"] > div[class*=" "]:not([tabindex]
 adme.media#?#div[data-test-id="article-bottom-recommended"] > div > div > div[style="position:relative"] > div > div:has(div:empty + div:empty + div:empty)
 !
 ! Start: vc.ru, dtf.ru, spark.ru
+vc.ru#?#.content-list > div.rotator:has(> div[class] > div[class] > a[href="/plus/Close%20Ad"])
 vc.ru##.entry-rotator
 vc.ru##.dstr-fl
 dtf.ru##.supbar--top
