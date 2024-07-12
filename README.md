@@ -1,4 +1,8 @@
-# AdGuard MV3 Extension
+*This prototype has been replaced with the beta version of MV3 extension in the Chrome Store and the repository has been archived. With the full release, the MV3 version will become the main one and replace our [main extension](https://chromewebstore.google.com/detail/adguard-adblocker/bgnkhhnnamicmpeenaelnjfhikgbkllg) in the Store. The old [beta extension](https://chromewebstore.google.com/detail/adguard-adblocker-beta/gfggjaccafhcbfogfkogggoepomehbjl) will be renamed to AdGuard Ad Blocker MV2. We will continue to support it until Google phases it out. Read more in our [blog](https://agrd.io/blogpost_mv3_beta). Please share your MV3 extension beta feedback [here](https://github.com/AdguardTeam/AdguardBrowserExtension/issues/new?assignees=&labels=Bug%2CMV3&projects=&template=04-bug-report-mv3.yaml).*
+
+---
+
+# AdGuard MV3 Extension Prototype (deprecated)
 &nbsp;
 <br>
 <p align="center">
